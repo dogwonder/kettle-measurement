@@ -74,6 +74,28 @@ wording had to be corrected by hand, and was. The checks above make
 that particular silence impossible now; they do not make wording
 review unnecessary.
 
+The other thing validation does not read is **whether a cited test
+passes**. It checks that the file exists and that the owning test's name
+is in it — that the claim points at the test which would catch the thing
+— and CI is what says whether that test is green today. So a claim can
+stand `proven` over a failing test, and on 17 August 2026 one did:
+`reference/design/tokens.css` was overwritten with a stale copy,
+`tokens-sync.test.ts` went red, and `report-keeps-its-stylesheet` went on
+rendering as proven until the frontend suite was read.
+
+Recorded rather than fixed, because the two jobs are worth keeping apart.
+A registry that re-ran the tests would be a second CI, slower and behind;
+a registry that read CI's last status would make a claim's meaning depend
+on which branch was built most recently. What the registry asserts is
+that a claim names the evidence that governs it. Whether the tree is
+currently green is a question with an existing, better answer.
+
+The gap it leaves is real and worth stating plainly: **the claims page
+can say "proven" while a cited test is failing on main.** If that becomes
+worth closing, the honest shape is a status the registry reports rather
+than derives — the run and conclusion, cited like any other evidence, not
+a verdict recomputed here.
+
 ## `published` is the publication boundary, and it has two readers
 
 The `published` array names the part of the tree that goes public

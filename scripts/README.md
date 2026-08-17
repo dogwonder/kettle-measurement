@@ -9,6 +9,11 @@ vendor-sidecar.sh   →   sign-macos.sh   →   tauri build   →   smoke-instal
    the engine            the signature       the bundle        does it stand up
 ```
 
+`reset-history.sh` belongs to a different job and is documented apart,
+in `PUBLISHING.md`: how the measurement layer reaches its two public
+repositories, and why their history starts at the flip rather than at
+the first commit.
+
 `vendor-sidecar.sh` prepares a runtime and `publish-sidecar.sh`
 validates it before replacing anything under `sidecars/`. The publisher
 is an internal, network-free seam exercised by the ordinary runner

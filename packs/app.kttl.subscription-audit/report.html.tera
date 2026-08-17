@@ -16,7 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ report.title }}</title>
 <style>
-/* Kettle design tokens — v2. One functional colour; cyan reserved for the privacy boundary. Fluid type and space scales by Utopia. Generated from app/src/styles — do not edit by hand. */
+/* Kettle design tokens — v2. One interactive colour; three status colours, used only where a claim states its status; cyan reserved for the privacy boundary. Fluid type and space scales by Utopia. Generated from app/src/styles — do not edit by hand. */
 :root {
   /* colour */
   --k-ground: #edf2f7;
@@ -31,6 +31,12 @@
   --k-boundary: #00e5e5;
   --k-ink-muted: #bfd2ea;
   --k-stripe: #dfe7f1;
+  /* status — the three states of an assurance claim, and nothing else.
+     Proven is Kettle's own success green; pending is govuk-frontend's
+     tag-orange pair (see _settings.scss); failed reuses the ink. */
+  --k-success: #1c7a4f;
+  --k-pending-ink: #7a3c1c;
+  --k-pending-tint: #fde4d7;
   /* type */
   --k-font: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --k-font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;

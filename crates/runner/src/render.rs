@@ -438,10 +438,12 @@ struct TotalsView {
 
 #[derive(Serialize)]
 struct ConfidenceView {
-    /// "HIGH" — the pill's text.
+    /// "SETTLED" or "UNSURE" — the pill's text, and the only two states
+    /// a reader is shown (#519). The model's graded confidence is what
+    /// derives them and stays in the run directory; it is not printed,
+    /// because #429 measured the grade as no signal on letters and
+    /// inverted on renewal.
     label: String,
-    /// "high" — for prose that quotes it back.
-    word: String,
     /// Tinted pill and a tick, rather than an outline and a wobble.
     settled: bool,
 }
@@ -671,15 +673,10 @@ impl NeedsReviewView {
 
 impl ConfidenceView {
     fn build(confidence: Confidence) -> ConfidenceView {
-        let word = match confidence {
-            Confidence::High => "high",
-            Confidence::Medium => "medium",
-            Confidence::Low => "low",
-        };
+        let settled = matches!(confidence, Confidence::High);
         ConfidenceView {
-            label: word.to_uppercase(),
-            word: word.to_owned(),
-            settled: matches!(confidence, Confidence::High),
+            label: if settled { "SETTLED" } else { "UNSURE" }.to_owned(),
+            settled,
         }
     }
 }

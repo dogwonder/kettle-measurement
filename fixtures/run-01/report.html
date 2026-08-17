@@ -1703,20 +1703,6 @@
   border: var(--k-border-thin);
 }
 
-.govuk-tag.k-tag--confidence {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--k-space-3xs);
-}
-
-.govuk-tag.k-tag--medium,
-.govuk-tag.k-tag--low {
-  color: var(--k-grey);
-  background-color: var(--k-paper);
-  border: var(--k-border-thin);
-  padding: 2px 9px;
-}
-
 .govuk-tag.k-tag--approved {
   color: var(--k-ground);
   background-color: var(--k-ink);
@@ -2152,7 +2138,7 @@ body {
             <td class="govuk-table__cell">quarter</td>
             <td class="govuk-table__cell govuk-table__cell--numeric">£88.00</td>
             <td class="govuk-table__cell govuk-table__cell--numeric k-num--bold">£352.00</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--unsure"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 7 C3.2 5.2 4.4 5.2 5.6 6.5 C6.8 7.8 8 7.8 9.8 5.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>MEDIUM</strong></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--unsure"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 7 C3.2 5.2 4.4 5.2 5.6 6.5 C6.8 7.8 8 7.8 9.8 5.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>UNSURE</strong></td>
           </tr>
           <tr class="govuk-table__row k-ledger__evidence">
             <td class="govuk-table__cell" colspan="5">
@@ -2160,7 +2146,7 @@ body {
                 <summary class="govuk-details__summary"><span class="govuk-details__summary-text">The payments behind British Gas</span></summary>
                 <div class="govuk-details__text">
                   <p class="k-detail-why"><strong>Why it's here:</strong> 4 payments, roughly 3 months apart.</p>
-                  <p class="k-detail-unsure"><strong>Why only "medium":</strong> Four payments three months apart looks quarterly, but some energy plans smooth payments differently across the year. Worth checking against your bill. See <a class="govuk-link" href="#check-yourself">Check these yourself</a>.</p>
+                  <p class="k-detail-unsure"><strong>Why this one is unsure:</strong> Four payments three months apart looks quarterly, but some energy plans smooth payments differently across the year. Worth checking against your bill. See <a class="govuk-link" href="#check-yourself">Check these yourself</a>.</p>
                   <div class="k-chips">
                     <span class="k-chip">15 Jan £88.00</span><span class="k-chip">15 Apr £88.00</span><span class="k-chip">15 Jul £88.00</span><span class="k-chip">15 Oct £88.00</span>
                   </div>
@@ -2173,7 +2159,7 @@ body {
             <td class="govuk-table__cell">month</td>
             <td class="govuk-table__cell govuk-table__cell--numeric">£24.99</td>
             <td class="govuk-table__cell govuk-table__cell--numeric k-num--bold">£299.88</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>HIGH</strong></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>SETTLED</strong></td>
           </tr>
           <tr class="govuk-table__row k-ledger__evidence">
             <td class="govuk-table__cell" colspan="5">
@@ -2191,7 +2177,7 @@ body {
             <td class="govuk-table__cell">month</td>
             <td class="govuk-table__cell govuk-table__cell--numeric">£12.99</td>
             <td class="govuk-table__cell govuk-table__cell--numeric k-num--bold">£155.88</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>HIGH</strong></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>SETTLED</strong></td>
           </tr>
           <tr class="govuk-table__row k-ledger__evidence">
             <td class="govuk-table__cell" colspan="5">
@@ -2212,7 +2198,7 @@ body {
             <td class="govuk-table__cell">month</td>
             <td class="govuk-table__cell govuk-table__cell--numeric">£11.99</td>
             <td class="govuk-table__cell govuk-table__cell--numeric k-num--bold">£143.88</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>HIGH</strong></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>SETTLED</strong></td>
           </tr>
           <tr class="govuk-table__row k-ledger__evidence">
             <td class="govuk-table__cell" colspan="5">
@@ -2230,7 +2216,7 @@ body {
             <td class="govuk-table__cell">year</td>
             <td class="govuk-table__cell govuk-table__cell--numeric">£95.00</td>
             <td class="govuk-table__cell govuk-table__cell--numeric k-num--bold">£95.00</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--unsure"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 7 C3.2 5.2 4.4 5.2 5.6 6.5 C6.8 7.8 8 7.8 9.8 5.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>MEDIUM</strong></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--unsure"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 7 C3.2 5.2 4.4 5.2 5.6 6.5 C6.8 7.8 8 7.8 9.8 5.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>UNSURE</strong></td>
           </tr>
           <tr class="govuk-table__row k-ledger__evidence">
             <td class="govuk-table__cell" colspan="5">
@@ -2238,7 +2224,7 @@ body {
                 <summary class="govuk-details__summary"><span class="govuk-details__summary-text">The payments behind Amazon Prime</span></summary>
                 <div class="govuk-details__text">
                   <p class="k-detail-why"><strong>Why it's here:</strong> 1 payment; the amount and merchant match a known yearly plan.</p>
-                  <p class="k-detail-unsure"><strong>Why only "medium":</strong> Yearly costs only appear once in a 12-month statement, so there&#39;s less evidence to go on. Check the renewal date — the next charge would land around 14 March 2027. See <a class="govuk-link" href="#check-yourself">Check these yourself</a>.</p>
+                  <p class="k-detail-unsure"><strong>Why this one is unsure:</strong> Yearly costs only appear once in a 12-month statement, so there&#39;s less evidence to go on. Check the renewal date — the next charge would land around 14 March 2027. See <a class="govuk-link" href="#check-yourself">Check these yourself</a>.</p>
                   <div class="k-chips">
                     <span class="k-chip">14 Mar £95.00</span>
                   </div>
@@ -2266,14 +2252,14 @@ body {
             <td class="govuk-table__cell">14 visits</td>
             <td class="govuk-table__cell govuk-table__cell--numeric">£43.75 typical</td>
             <td class="govuk-table__cell govuk-table__cell--numeric k-num--bold">£612.44 total</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>HIGH</strong></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>SETTLED</strong></td>
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell"><strong>Acme Payroll</strong> <span class="k-income-mark">(income)</span><span class="k-raw-merchant">ACME PAYROLL</span></td>
             <td class="govuk-table__cell">month</td>
             <td class="govuk-table__cell govuk-table__cell--numeric">£2,450.00</td>
             <td class="govuk-table__cell govuk-table__cell--numeric k-num--bold">£29,400.00</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>HIGH</strong></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag k-tag--settled"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.5 L5 9 L9.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>SETTLED</strong></td>
           </tr>
         </tbody>
       </table>

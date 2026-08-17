@@ -1703,20 +1703,6 @@
   border: var(--k-border-thin);
 }
 
-.govuk-tag.k-tag--confidence {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--k-space-3xs);
-}
-
-.govuk-tag.k-tag--medium,
-.govuk-tag.k-tag--low {
-  color: var(--k-grey);
-  background-color: var(--k-paper);
-  border: var(--k-border-thin);
-  padding: 2px 9px;
-}
-
 .govuk-tag.k-tag--approved {
   color: var(--k-ground);
   background-color: var(--k-ink);

@@ -274,6 +274,39 @@ fn low_confidence_items_listed_in_review_section() {
     }
 }
 
+/// #519. #429 measured the model's graded confidence and closed on it:
+/// no signal on letters, inverted on renewal. The registry carries that
+/// verdict as `confidence-predicts-correctness`, so a report that still
+/// prints HIGH / MEDIUM / LOW contradicts the measurement published
+/// beside it.
+///
+/// What stays is the two-state treatment: a settled row and an unsure
+/// one, the unsure one naming why and pointing at the checklist. What
+/// goes is the grade — the tag says which of the two states it is, and
+/// the disclosure asks its question without quoting a rank.
+#[test]
+fn the_report_names_its_two_states_and_never_grades_them() {
+    let html = rendered();
+
+    assert!(
+        html.contains("SETTLED</strong>") && html.contains("UNSURE</strong>"),
+        "the two states are still what the row is tagged with"
+    );
+    for graded in ["HIGH</strong>", "MEDIUM</strong>", "LOW</strong>"] {
+        assert!(
+            !html.contains(graded),
+            "the report still tags a row {graded:?}, a grade the registry \
+             says predicts nothing"
+        );
+    }
+
+    assert!(
+        !html.contains("Why only"),
+        "the disclosure still quotes the grade back at the reader"
+    );
+    assert!(html.contains("Why this one is unsure:"));
+}
+
 /// The evidence is Kettle's trust mechanism, so it opens wherever it
 /// changes a decision — a price rise, or a confidence below settled —
 /// and stays shut on rows that are simply true and unremarkable.

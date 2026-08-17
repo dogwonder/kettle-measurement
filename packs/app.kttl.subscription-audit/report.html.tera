@@ -1711,20 +1711,6 @@
   border: var(--k-border-thin);
 }
 
-.govuk-tag.k-tag--confidence {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--k-space-3xs);
-}
-
-.govuk-tag.k-tag--medium,
-.govuk-tag.k-tag--low {
-  color: var(--k-grey);
-  background-color: var(--k-paper);
-  border: var(--k-border-thin);
-  padding: 2px 9px;
-}
-
 .govuk-tag.k-tag--approved {
   color: var(--k-ground);
   background-color: var(--k-ink);
@@ -2169,7 +2155,7 @@ body {
                 <div class="govuk-details__text">
                   <p class="k-detail-why"><strong>Why it's here:</strong> {{ item.reason }}</p>
 {% if item.price_rise %}                  <p class="k-detail-rise"><strong>Price rise:</strong> {{ item.price_rise }}</p>
-{% endif %}{% if item.why_unsure %}                  <p class="k-detail-unsure"><strong>Why only "{{ item.confidence.word }}":</strong> {{ item.why_unsure }} See <a class="govuk-link" href="#check-yourself">Check these yourself</a>.</p>
+{% endif %}{% if item.why_unsure %}                  <p class="k-detail-unsure"><strong>Why this one is unsure:</strong> {{ item.why_unsure }} See <a class="govuk-link" href="#check-yourself">Check these yourself</a>.</p>
 {% endif %}{% if item.payments_line %}                  <p class="k-payments-line">{{ item.payments_line }}</p>
 {% else %}                  <div class="k-chips">
                     {% for payment in item.payments %}<span class="k-chip{% if payment.marked %} k-chip--marked{% endif %}">{{ payment.label }}</span>{% endfor %}

@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-premium_rose-rowan-03",
+  "inputs": {
+    "previous": "generated-exam-premium_rose-rowan-03-previous.txt",
+    "renewal": "generated-exam-premium_rose-rowan-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-premium_rose-rowan-03-previous-no-value-fff3b9",
+      "role": "previous",
+      "segment": "Schedule ROWAN-PR-414 of your buildings insurance cover with Brackenfield Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £1,341.00.",
+        "term": "premium",
+        "value": "£1,341.00"
+      },
+      "id": "exam-premium_rose-rowan-03-previous-premium-0e273b",
+      "role": "previous",
+      "segment": "The price for the year comes to £1,341.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £815.00.",
+        "term": "compulsory_excess",
+        "value": "£815.00"
+      },
+      "id": "exam-premium_rose-rowan-03-previous-compulsory-excess-b51448",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £815.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £3,730.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£3,730.00"
+      },
+      "id": "exam-premium_rose-rowan-03-previous-cover-limit-d515f0",
+      "role": "previous",
+      "segment": "We will pay up to £3,730.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-rowan-03-previous-no-value-4d2805",
+      "role": "previous",
+      "segment": "Please quote ROWAN-PR-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-rowan-03-previous-no-value-6d5944",
+      "role": "previous",
+      "segment": "Cover for buildings insurance under ROWAN-PR-414 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-rowan-03-renewal-no-value-24a3c1",
+      "role": "renewal",
+      "segment": "Your buildings insurance cover with Brackenfield Cover under ROWAN-PR-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £1,473.50.",
+        "term": "premium",
+        "value": "£1,473.50"
+      },
+      "id": "exam-premium_rose-rowan-03-renewal-premium-51245a",
+      "role": "renewal",
+      "segment": "The price for the year comes to £1,473.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £815.00.",
+        "term": "compulsory_excess",
+        "value": "£815.00"
+      },
+      "id": "exam-premium_rose-rowan-03-renewal-compulsory-excess-b51448",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £815.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £3,730.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£3,730.00"
+      },
+      "id": "exam-premium_rose-rowan-03-renewal-cover-limit-d515f0",
+      "role": "renewal",
+      "segment": "We will pay up to £3,730.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-rowan-03-renewal-no-value-6d5944",
+      "role": "renewal",
+      "segment": "Cover for buildings insurance under ROWAN-PR-414 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-rowan-03-renewal-no-value-4d2805",
+      "role": "renewal",
+      "segment": "Please quote ROWAN-PR-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

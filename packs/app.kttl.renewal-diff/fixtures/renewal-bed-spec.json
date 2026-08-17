@@ -1,0 +1,214 @@
+{
+  "provenance": {
+    "issue": 66,
+    "authored": "2026-08-03",
+    "why_invented": "Every insurer, product, reference and amount here is invented. This is not the #257 case: that amendment exists because inventing merchants removed the knowledge the subscription bed was measuring. This pack measures no knowledge — it measures whether a model can read a named value out of prose and quote where it read it — so an insurer's name carries nothing the bed needs, and inventing it is the safer answer at no cost.",
+    "held_out_on": "Wording of the values (#317). The axis this pack is on trial for is reading a named value out of prose, so that is what the two sets vary. Each voice states the same named values, with the same difficulties planted, in different words. Family names are spent by one set only.",
+    "sized_for": "2% on a missed value and 5% on an invented one, read by a Wilson upper bound. At 2% a class needs 189 distinct decisions with no errors, and at 5% it needs 73 — in each set separately. The shape counts below were chosen to clear those before a single fixture was generated.",
+    "structure": "Every shape but sections_repeat is a single-section personal policy, where each modelled term occurs once and (term, basis) is a sufficient key. sections_repeat (#378) is a commercial schedule stating three cover sections that each repeat the same headings, plus a total for the whole schedule and a policy period written where a monetary limit could sit. It exists because the pack met that shape on its first real document and was confidently wrong, and the bed as authored could not represent the document, let alone score it."
+  },
+  "insurers": [
+    {
+      "name": "Marlowe Mutual",
+      "product": "home insurance"
+    },
+    {
+      "name": "Kestrel Assurance",
+      "product": "car insurance"
+    },
+    {
+      "name": "Brackenfield Cover",
+      "product": "buildings insurance"
+    },
+    {
+      "name": "Haldon Insurance Services",
+      "product": "contents insurance"
+    },
+    {
+      "name": "Pennine Line Assurance",
+      "product": "travel insurance"
+    },
+    {
+      "name": "Corvin Mutual",
+      "product": "pet insurance"
+    },
+    {
+      "name": "Westmarch Cover",
+      "product": "landlord insurance"
+    }
+  ],
+  "sets": {
+    "development": {
+      "shapes": {
+        "excess_rose": [
+          "amber",
+          "birch",
+          "cedar",
+          "damson",
+          "elder",
+          "fennel"
+        ],
+        "premium_rose": [
+          "amber",
+          "birch",
+          "cedar",
+          "damson",
+          "elder",
+          "fennel"
+        ],
+        "two_excesses": [
+          "amber",
+          "birch",
+          "cedar",
+          "damson",
+          "elder",
+          "fennel"
+        ],
+        "nothing_moved": [
+          "amber",
+          "birch",
+          "cedar",
+          "damson"
+        ],
+        "term_added": [
+          "amber",
+          "birch",
+          "cedar",
+          "damson"
+        ],
+        "term_removed": [
+          "amber",
+          "birch",
+          "cedar",
+          "damson"
+        ],
+        "basis_changed": [
+          "amber",
+          "birch",
+          "cedar",
+          "damson"
+        ],
+        "cooling_off_changed": [
+          "amber",
+          "birch",
+          "cedar",
+          "damson"
+        ],
+        "unmodelled_term": [
+          "amber",
+          "birch",
+          "cedar"
+        ],
+        "nothing_stated": [
+          "amber",
+          "birch",
+          "cedar"
+        ],
+        "sections_repeat": [
+          "amber",
+          "birch",
+          "cedar",
+          "damson"
+        ],
+        "excess_unqualified": [
+          "garnet",
+          "hazel",
+          "iris",
+          "juniper"
+        ],
+        "excess_unqualified_residual": [
+          "kestrel",
+          "linden",
+          "mallow",
+          "nettle"
+        ]
+      }
+    },
+    "exam": {
+      "shapes": {
+        "excess_rose": [
+          "poplar",
+          "quince",
+          "rowan",
+          "sorrel",
+          "teasel",
+          "umber"
+        ],
+        "premium_rose": [
+          "poplar",
+          "quince",
+          "rowan",
+          "sorrel",
+          "teasel",
+          "umber"
+        ],
+        "two_excesses": [
+          "poplar",
+          "quince",
+          "rowan",
+          "sorrel",
+          "teasel",
+          "umber"
+        ],
+        "nothing_moved": [
+          "poplar",
+          "quince",
+          "rowan",
+          "sorrel"
+        ],
+        "term_added": [
+          "poplar",
+          "quince",
+          "rowan",
+          "sorrel"
+        ],
+        "term_removed": [
+          "poplar",
+          "quince",
+          "rowan",
+          "sorrel"
+        ],
+        "basis_changed": [
+          "poplar",
+          "quince",
+          "rowan",
+          "sorrel"
+        ],
+        "cooling_off_changed": [
+          "poplar",
+          "quince",
+          "rowan",
+          "sorrel"
+        ],
+        "unmodelled_term": [
+          "poplar",
+          "quince",
+          "rowan"
+        ],
+        "nothing_stated": [
+          "poplar",
+          "quince",
+          "rowan"
+        ],
+        "sections_repeat": [
+          "poplar",
+          "quince",
+          "rowan",
+          "sorrel"
+        ],
+        "excess_unqualified": [
+          "vetch",
+          "willow",
+          "yarrow",
+          "zinnia"
+        ],
+        "excess_unqualified_residual": [
+          "ochre",
+          "pewter",
+          "quartz",
+          "russet"
+        ]
+      }
+    }
+  }
+}

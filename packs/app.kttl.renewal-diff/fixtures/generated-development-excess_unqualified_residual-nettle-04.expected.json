@@ -1,0 +1,125 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_unqualified_residual-nettle-04",
+  "inputs": {
+    "previous": "generated-development-excess_unqualified_residual-nettle-04-previous.txt",
+    "renewal": "generated-development-excess_unqualified_residual-nettle-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-nettle-04-previous-no-value-9f0ad0",
+      "role": "previous",
+      "segment": "Westmarch Cover landlord insurance — policy schedule NETTLE-EUR-421 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £9,265.00.",
+        "term": "premium",
+        "value": "£9,265.00"
+      },
+      "id": "development-excess_unqualified_residual-nettle-04-previous-premium-3d58f1",
+      "role": "previous",
+      "segment": "Total annual premium: £9,265.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £6,475.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£6,475.00"
+      },
+      "id": "development-excess_unqualified_residual-nettle-04-previous-compulsory-excess-775aee",
+      "role": "previous",
+      "segment": "Compulsory excess: £6,475.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-nettle-04-previous-no-value-420d4d",
+      "role": "previous",
+      "segment": "Your reference is NETTLE-EUR-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-nettle-04-previous-no-value-8e1021",
+      "role": "previous",
+      "segment": "Westmarch Cover arranges landlord insurance cover under NETTLE-EUR-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-nettle-04-renewal-no-value-589454",
+      "role": "renewal",
+      "segment": "Westmarch Cover landlord insurance — renewal schedule NETTLE-EUR-421 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £9,265.00.",
+        "term": "premium",
+        "value": "£9,265.00"
+      },
+      "id": "development-excess_unqualified_residual-nettle-04-renewal-premium-3d58f1",
+      "role": "renewal",
+      "segment": "Total annual premium: £9,265.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-nettle-04-renewal-excess-unqualified-a42bd6",
+      "review": true,
+      "role": "renewal",
+      "segment": "Excess: £6,525.00 each and every claim.",
+      "strata": [
+        "excess-unqualified-residual"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-nettle-04-renewal-no-value-8e1021",
+      "role": "renewal",
+      "segment": "Westmarch Cover arranges landlord insurance cover under NETTLE-EUR-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-nettle-04-renewal-no-value-420d4d",
+      "role": "renewal",
+      "segment": "Your reference is NETTLE-EUR-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-passive_obligation-cobble-lane-03",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 35 days",
+        "due": "2026-09-12",
+        "kind": "response",
+        "party": "Cranleigh Energy"
+      },
+      "id": "passive_obligation-cobble-lane-03-response-01",
+      "segment": "A written response about the energy account is required within 35 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-cobble-lane-03-no-ask-02",
+      "segment": "The energy account will be reviewed by our assessment team, and a decision is to be issued within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-cobble-lane-03-no-ask-03",
+      "segment": "This notice is issued for information and no reply is needed to it.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-cobble-lane-03-no-ask-05",
+      "segment": "An inspection on 24 March identified nothing requiring your involvement.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

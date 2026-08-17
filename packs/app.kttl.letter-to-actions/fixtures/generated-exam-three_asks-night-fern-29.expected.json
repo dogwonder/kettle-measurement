@@ -1,0 +1,77 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-three_asks-night-fern-29",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-11-16",
+        "kind": "payment",
+        "party": "Eastvale Library Service"
+      },
+      "id": "three_asks-night-fern-29-payment-01",
+      "segment": "A payment of £12.00 towards your membership is due within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "20 May 2026",
+        "deadline": "on 20 May 2026",
+        "due": "2026-05-20",
+        "kind": "attendance",
+        "party": "Eastvale Library Service"
+      },
+      "id": "three_asks-night-fern-29-attendance-02",
+      "segment": "You are required to attend a case review at our offices on 20 May 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-10-31",
+        "kind": "response",
+        "party": "Eastvale Library Service"
+      },
+      "id": "three_asks-night-fern-29-response-03",
+      "segment": "Please confirm your attendance in writing by the end of the month.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-night-fern-29-no-ask-04",
+      "segment": "A copy of this letter has been placed on your file.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-night-fern-29-no-ask-06",
+      "segment": "Conduct of this matter passed to our Bristol office on 1 March under the same reference.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

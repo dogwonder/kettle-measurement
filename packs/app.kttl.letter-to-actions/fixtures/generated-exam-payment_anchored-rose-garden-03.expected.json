@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_anchored-rose-garden-03",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "5 June 2026",
+        "deadline": "within 45 days",
+        "due": "2026-07-20",
+        "kind": "payment",
+        "party": "Cranleigh Energy"
+      },
+      "id": "payment_anchored-rose-garden-03-payment-02",
+      "segment": "The sum of £142.75 falls due within 45 days of 5 June 2026. Please quote CE-40027 when you pay.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-rose-garden-03-no-ask-03",
+      "segment": "We are grateful for your attention to this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-rose-garden-03-no-ask-05",
+      "segment": "The reading taken on 27 April was used, so no estimate has been applied.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

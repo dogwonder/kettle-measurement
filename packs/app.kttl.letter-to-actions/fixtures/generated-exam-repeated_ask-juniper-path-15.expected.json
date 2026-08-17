@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-repeated_ask-juniper-path-15",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-09-02",
+        "kind": "payment",
+        "party": "Cranleigh Energy"
+      },
+      "id": "repeated_ask-juniper-path-15-payment-01",
+      "segment": "Payment of £142.75 towards your energy account is required within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-juniper-path-15-no-ask-03",
+      "segment": "Once the account is clear we will write to confirm it.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-juniper-path-15-no-ask-05",
+      "segment": "As at 1 August the account shows nothing due.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    }
+  ]
+}

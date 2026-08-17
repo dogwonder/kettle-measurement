@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-undated_relative-oat-24",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 35 days",
+        "due": null,
+        "kind": "response",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "undated_relative-oat-24-response-00",
+      "segment": "Please return the enclosed form about your case file within 35 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-oat-24-no-ask-01",
+      "segment": "A prepaid envelope is enclosed for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-oat-24-no-ask-03",
+      "segment": "We are told the works on your street will finish by 30 September; the contractor is handling it.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

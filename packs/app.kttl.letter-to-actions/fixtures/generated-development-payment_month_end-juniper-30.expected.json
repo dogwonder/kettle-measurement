@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_month_end-juniper-30",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-06-30",
+        "kind": "payment",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "payment_month_end-juniper-30-payment-01",
+      "segment": "The balance on your tenancy account is £310.00. Please settle it by the end of the month.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "month-end"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-juniper-30-no-ask-02",
+      "segment": "This letter is for your records and no reply is needed if you have already paid.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-juniper-30-no-ask-04",
+      "segment": "Your account has been in credit by £31.75 since 5 February.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    }
+  ]
+}

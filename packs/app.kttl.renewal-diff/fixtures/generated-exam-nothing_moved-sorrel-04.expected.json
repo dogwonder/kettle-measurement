@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-nothing_moved-sorrel-04",
+  "inputs": {
+    "previous": "generated-exam-nothing_moved-sorrel-04-previous.txt",
+    "renewal": "generated-exam-nothing_moved-sorrel-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-sorrel-04-previous-no-value-3c999a",
+      "role": "previous",
+      "segment": "Schedule SORREL-NM-421 of your contents insurance cover with Haldon Insurance Services, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £2,699.00.",
+        "term": "premium",
+        "value": "£2,699.00"
+      },
+      "id": "exam-nothing_moved-sorrel-04-previous-premium-19864b",
+      "role": "previous",
+      "segment": "The price for the year comes to £2,699.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £1,785.00.",
+        "term": "compulsory_excess",
+        "value": "£1,785.00"
+      },
+      "id": "exam-nothing_moved-sorrel-04-previous-compulsory-excess-091d12",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £1,785.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £5,670.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£5,670.00"
+      },
+      "id": "exam-nothing_moved-sorrel-04-previous-cover-limit-b5b095",
+      "role": "previous",
+      "segment": "We will pay up to £5,670.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-sorrel-04-previous-no-value-d48cb8",
+      "role": "previous",
+      "segment": "Please quote SORREL-NM-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-sorrel-04-previous-no-value-483173",
+      "role": "previous",
+      "segment": "Cover for contents insurance under SORREL-NM-421 is arranged by Haldon Insurance Services, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-sorrel-04-renewal-no-value-1d87ca",
+      "role": "renewal",
+      "segment": "Your contents insurance cover with Haldon Insurance Services under SORREL-NM-421 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £2,699.00.",
+        "term": "premium",
+        "value": "£2,699.00"
+      },
+      "id": "exam-nothing_moved-sorrel-04-renewal-premium-19864b",
+      "role": "renewal",
+      "segment": "The price for the year comes to £2,699.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £1,785.00.",
+        "term": "compulsory_excess",
+        "value": "£1,785.00"
+      },
+      "id": "exam-nothing_moved-sorrel-04-renewal-compulsory-excess-091d12",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £1,785.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £5,670.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£5,670.00"
+      },
+      "id": "exam-nothing_moved-sorrel-04-renewal-cover-limit-b5b095",
+      "role": "renewal",
+      "segment": "We will pay up to £5,670.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-sorrel-04-renewal-no-value-483173",
+      "role": "renewal",
+      "segment": "Cover for contents insurance under SORREL-NM-421 is arranged by Haldon Insurance Services, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-sorrel-04-renewal-no-value-d48cb8",
+      "role": "renewal",
+      "segment": "Please quote SORREL-NM-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-passive_obligation-kestrel-11",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-12-07",
+        "kind": "payment",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "passive_obligation-kestrel-11-payment-01",
+      "segment": "Payment of £68.50 must be received within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-kestrel-11-no-ask-02",
+      "segment": "The check-up is being checked by the department that holds it, and any correction is applied automatically within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-kestrel-11-no-ask-03",
+      "segment": "This part of the letter is sent for information only.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-kestrel-11-no-ask-05",
+      "segment": "The overpayment of £56.30 has been carried forward to your next bill.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

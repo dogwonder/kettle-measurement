@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-no-subscriptions-granite-orchard",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* THORNBURYLETTING",
+      "name": "Thornbury Letting"
+    },
+    {
+      "raw": "SQ *THORNBURYLETTING",
+      "name": "Thornbury Letting"
+    },
+    {
+      "raw": "PAYPAL *THORNBURYLETTING",
+      "name": "Thornbury Letting"
+    },
+    {
+      "raw": "TARLTON JOINERY PAYMENT",
+      "name": "Tarlton Joinery"
+    },
+    {
+      "raw": "STRIPE* AVANTIWESTCST",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "SQ *AVANTIWESTCST",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "PAYPAL *AVANTIWESTCST",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "STRIPE* DCHAUDHRY",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "SQ *DCHAUDHRY",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "PAYPAL *DCHAUDHRY",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "STRIPE* ASDASTORES",
+      "name": "Asda"
+    },
+    {
+      "raw": "SQ *ASDASTORES",
+      "name": "Asda"
+    },
+    {
+      "raw": "PAYPAL *ASDASTORES",
+      "name": "Asda"
+    },
+    {
+      "raw": "B&Q LTD PAYMENT",
+      "name": "B&Q"
+    },
+    {
+      "raw": "SO ENERGY PAYMENT",
+      "name": "So Energy"
+    },
+    {
+      "raw": "CARRICK KITCHENS PAYMENT",
+      "name": "Carrick Kitchens"
+    },
+    {
+      "raw": "STRIPE* HAYWARDMARKET",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "SQ *HAYWARDMARKET",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "PAYPAL *HAYWARDMARKET",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "WYNDHAM PASS PAYMENT",
+      "name": "Wyndham Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* THORNBURYLETTING",
+      "name": "Thornbury Letting",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "TARLTON JOINERY PAYMENT",
+      "name": "Tarlton Joinery",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* AVANTIWESTCST",
+      "name": "Avanti West Coast",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* DCHAUDHRY",
+      "name": "D Chaudhry",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ASDASTORES",
+      "name": "Asda",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "B&Q LTD PAYMENT",
+      "name": "B&Q",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "SO ENERGY PAYMENT",
+      "name": "So Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARRICK KITCHENS PAYMENT",
+      "name": "Carrick Kitchens",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* HAYWARDMARKET",
+      "name": "Hayward Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-granite-orchard-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "WYNDHAM PASS PAYMENT",
+      "name": "Wyndham Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Avanti West Coast",
+      "period": "yearly"
+    },
+    {
+      "merchant": "So Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

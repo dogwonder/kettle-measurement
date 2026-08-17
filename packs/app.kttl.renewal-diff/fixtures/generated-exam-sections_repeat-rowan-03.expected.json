@@ -1,0 +1,450 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-sections_repeat-rowan-03",
+  "inputs": {
+    "previous": "generated-exam-sections_repeat-rowan-03-previous.txt",
+    "renewal": "generated-exam-sections_repeat-rowan-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-previous-no-value-21b4e6",
+      "role": "previous",
+      "segment": "Schedule ROWAN-SR-414 of your travel insurance cover with Pennine Line Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-previous-no-value-66a59d",
+      "role": "previous",
+      "segment": "Cover under ROWAN-SR-414 runs from 1 September 2025 until 31 August 2026, both days included.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-previous-no-value-6ca81c",
+      "role": "previous",
+      "segment": "The next part of ROWAN-SR-414 covers professional indemnity.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £604,600.00 under it.",
+        "term": "cover_limit",
+        "value": "£604,600.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-cover-limit-4d5b26",
+      "role": "previous",
+      "segment": "We will pay up to £604,600.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,430.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,430.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-compulsory-excess-cff0c7",
+      "role": "previous",
+      "segment": "You pay the first £5,430.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,449.80 for the year.",
+        "term": "premium",
+        "value": "£1,449.80"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-premium-bd93ab",
+      "role": "previous",
+      "segment": "This part costs £1,449.80 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-previous-no-value-e8d62a",
+      "role": "previous",
+      "segment": "The next part of ROWAN-SR-414 covers legal expenses.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £854,600.00 under it.",
+        "term": "cover_limit",
+        "value": "£854,600.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-cover-limit-d092c1",
+      "role": "previous",
+      "segment": "We will pay up to £854,600.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,461.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,461.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-compulsory-excess-261a54",
+      "role": "previous",
+      "segment": "You pay the first £5,461.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,496.80 for the year.",
+        "term": "premium",
+        "value": "£1,496.80"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-premium-a90c41",
+      "role": "previous",
+      "segment": "This part costs £1,496.80 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-previous-no-value-f4b33a",
+      "role": "previous",
+      "segment": "The next part of ROWAN-SR-414 covers crisis containment.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £1,104,600.00 under it.",
+        "term": "cover_limit",
+        "value": "£1,104,600.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-cover-limit-a098f8",
+      "role": "previous",
+      "segment": "We will pay up to £1,104,600.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,492.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,492.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-compulsory-excess-87036f",
+      "role": "previous",
+      "segment": "You pay the first £5,492.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,543.80 for the year.",
+        "term": "premium",
+        "value": "£1,543.80"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-premium-c16a9d",
+      "role": "previous",
+      "segment": "This part costs £1,543.80 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Adding the parts together, the year costs £4,490.40.",
+        "term": "premium",
+        "value": "£4,490.40"
+      },
+      "id": "exam-sections_repeat-rowan-03-previous-premium-54b384",
+      "role": "previous",
+      "segment": "Adding the parts together, the year costs £4,490.40.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-previous-no-value-23d4c4",
+      "role": "previous",
+      "segment": "Please quote ROWAN-SR-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-previous-no-value-07cb90",
+      "role": "previous",
+      "segment": "Cover for travel insurance under ROWAN-SR-414 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-renewal-no-value-623c68",
+      "role": "renewal",
+      "segment": "Your travel insurance cover with Pennine Line Assurance under ROWAN-SR-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-renewal-no-value-d01be6",
+      "role": "renewal",
+      "segment": "Cover under ROWAN-SR-414 runs from 1 September 2026 until 31 August 2027, both days included.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-renewal-no-value-6ca81c",
+      "role": "renewal",
+      "segment": "The next part of ROWAN-SR-414 covers professional indemnity.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £604,600.00 under it.",
+        "term": "cover_limit",
+        "value": "£604,600.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-cover-limit-4d5b26",
+      "role": "renewal",
+      "segment": "We will pay up to £604,600.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,430.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,430.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-compulsory-excess-cff0c7",
+      "role": "renewal",
+      "segment": "You pay the first £5,430.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,464.80 for the year.",
+        "term": "premium",
+        "value": "£1,464.80"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-premium-17e275",
+      "role": "renewal",
+      "segment": "This part costs £1,464.80 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-renewal-no-value-e8d62a",
+      "role": "renewal",
+      "segment": "The next part of ROWAN-SR-414 covers legal expenses.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £854,600.00 under it.",
+        "term": "cover_limit",
+        "value": "£854,600.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-cover-limit-d092c1",
+      "role": "renewal",
+      "segment": "We will pay up to £854,600.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,461.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,461.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-compulsory-excess-261a54",
+      "role": "renewal",
+      "segment": "You pay the first £5,461.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,511.80 for the year.",
+        "term": "premium",
+        "value": "£1,511.80"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-premium-69ef37",
+      "role": "renewal",
+      "segment": "This part costs £1,511.80 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-renewal-no-value-f4b33a",
+      "role": "renewal",
+      "segment": "The next part of ROWAN-SR-414 covers crisis containment.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £1,104,600.00 under it.",
+        "term": "cover_limit",
+        "value": "£1,104,600.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-cover-limit-a098f8",
+      "role": "renewal",
+      "segment": "We will pay up to £1,104,600.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,492.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,492.00"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-compulsory-excess-87036f",
+      "role": "renewal",
+      "segment": "You pay the first £5,492.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,558.80 for the year.",
+        "term": "premium",
+        "value": "£1,558.80"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-premium-87edcb",
+      "role": "renewal",
+      "segment": "This part costs £1,558.80 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Adding the parts together, the year costs £4,535.40.",
+        "term": "premium",
+        "value": "£4,535.40"
+      },
+      "id": "exam-sections_repeat-rowan-03-renewal-premium-5e8082",
+      "role": "renewal",
+      "segment": "Adding the parts together, the year costs £4,535.40.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-renewal-no-value-07cb90",
+      "role": "renewal",
+      "segment": "Cover for travel insurance under ROWAN-SR-414 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-rowan-03-renewal-no-value-23d4c4",
+      "role": "renewal",
+      "segment": "Please quote ROWAN-SR-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

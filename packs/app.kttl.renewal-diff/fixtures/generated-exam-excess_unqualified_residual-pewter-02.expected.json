@@ -1,0 +1,125 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_unqualified_residual-pewter-02",
+  "inputs": {
+    "previous": "generated-exam-excess_unqualified_residual-pewter-02-previous.txt",
+    "renewal": "generated-exam-excess_unqualified_residual-pewter-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-pewter-02-previous-no-value-39a420",
+      "role": "previous",
+      "segment": "Schedule PEWTER-EUR-407 of your travel insurance cover with Pennine Line Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £9,251.00.",
+        "term": "premium",
+        "value": "£9,251.00"
+      },
+      "id": "exam-excess_unqualified_residual-pewter-02-previous-premium-f4bfa4",
+      "role": "previous",
+      "segment": "The price for the year comes to £9,251.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £6,465.00.",
+        "term": "compulsory_excess",
+        "value": "£6,465.00"
+      },
+      "id": "exam-excess_unqualified_residual-pewter-02-previous-compulsory-excess-0de8fa",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £6,465.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-pewter-02-previous-no-value-01add9",
+      "role": "previous",
+      "segment": "Please quote PEWTER-EUR-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-pewter-02-previous-no-value-5b22fa",
+      "role": "previous",
+      "segment": "Cover for travel insurance under PEWTER-EUR-407 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-pewter-02-renewal-no-value-27b942",
+      "role": "renewal",
+      "segment": "Your travel insurance cover with Pennine Line Assurance under PEWTER-EUR-407 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £9,251.00.",
+        "term": "premium",
+        "value": "£9,251.00"
+      },
+      "id": "exam-excess_unqualified_residual-pewter-02-renewal-premium-f4bfa4",
+      "role": "renewal",
+      "segment": "The price for the year comes to £9,251.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-pewter-02-renewal-excess-unqualified-e97b02",
+      "review": true,
+      "role": "renewal",
+      "segment": "An excess of £6,515.00 applies to each and every claim.",
+      "strata": [
+        "excess-unqualified-residual"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-pewter-02-renewal-no-value-5b22fa",
+      "role": "renewal",
+      "segment": "Cover for travel insurance under PEWTER-EUR-407 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-pewter-02-renewal-no-value-01add9",
+      "role": "renewal",
+      "segment": "Please quote PEWTER-EUR-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

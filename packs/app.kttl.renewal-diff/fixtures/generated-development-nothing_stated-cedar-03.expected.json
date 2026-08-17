@@ -1,0 +1,70 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-nothing_stated-cedar-03",
+  "inputs": {
+    "previous": "generated-development-nothing_stated-cedar-03-previous.txt",
+    "renewal": "generated-development-nothing_stated-cedar-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-nothing_stated-cedar-03-previous-no-value-c33e06",
+      "role": "previous",
+      "segment": "Westmarch Cover landlord insurance — policy schedule CEDAR-NS-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-cedar-03-previous-no-value-346ac6",
+      "role": "previous",
+      "segment": "Your reference is CEDAR-NS-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-cedar-03-previous-no-value-6a73a3",
+      "role": "previous",
+      "segment": "Westmarch Cover arranges landlord insurance cover under CEDAR-NS-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-cedar-03-renewal-no-value-3735cb",
+      "role": "renewal",
+      "segment": "Westmarch Cover landlord insurance — renewal schedule CEDAR-NS-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-cedar-03-renewal-no-value-6a73a3",
+      "role": "renewal",
+      "segment": "Westmarch Cover arranges landlord insurance cover under CEDAR-NS-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-cedar-03-renewal-no-value-346ac6",
+      "role": "renewal",
+      "segment": "Your reference is CEDAR-NS-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

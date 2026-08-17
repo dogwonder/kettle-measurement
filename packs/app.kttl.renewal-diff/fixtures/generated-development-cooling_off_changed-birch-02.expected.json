@@ -1,0 +1,130 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-cooling_off_changed-birch-02",
+  "inputs": {
+    "previous": "generated-development-cooling_off_changed-birch-02-previous.txt",
+    "renewal": "generated-development-cooling_off_changed-birch-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-birch-02-previous-no-value-f82504",
+      "role": "previous",
+      "segment": "Corvin Mutual pet insurance — policy schedule BIRCH-COC-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,415.00.",
+        "term": "premium",
+        "value": "£5,415.00"
+      },
+      "id": "development-cooling_off_changed-birch-02-previous-premium-231bab",
+      "role": "previous",
+      "segment": "Total annual premium: £5,415.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cooling-off period: 13 days.",
+        "term": "cooling_off_period",
+        "value": "13 days"
+      },
+      "id": "development-cooling_off_changed-birch-02-previous-cooling-off-period-f50fad",
+      "role": "previous",
+      "segment": "Cooling-off period: 13 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-birch-02-previous-no-value-fbdb9e",
+      "role": "previous",
+      "segment": "Your reference is BIRCH-COC-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-birch-02-previous-no-value-22bd31",
+      "role": "previous",
+      "segment": "Corvin Mutual arranges pet insurance cover under BIRCH-COC-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-birch-02-renewal-no-value-506870",
+      "role": "renewal",
+      "segment": "Corvin Mutual pet insurance — renewal schedule BIRCH-COC-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,415.00.",
+        "term": "premium",
+        "value": "£5,415.00"
+      },
+      "id": "development-cooling_off_changed-birch-02-renewal-premium-231bab",
+      "role": "renewal",
+      "segment": "Total annual premium: £5,415.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cooling-off period: 27 days.",
+        "term": "cooling_off_period",
+        "value": "27 days"
+      },
+      "id": "development-cooling_off_changed-birch-02-renewal-cooling-off-period-ae4dd5",
+      "role": "renewal",
+      "segment": "Cooling-off period: 27 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-birch-02-renewal-no-value-22bd31",
+      "role": "renewal",
+      "segment": "Corvin Mutual arranges pet insurance cover under BIRCH-COC-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-birch-02-renewal-no-value-fbdb9e",
+      "role": "renewal",
+      "segment": "Your reference is BIRCH-COC-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

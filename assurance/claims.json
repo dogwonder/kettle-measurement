@@ -1,0 +1,441 @@
+{
+  "published": [
+    "crates/",
+    "packs/",
+    "evals/",
+    "assurance/",
+    "fixtures/",
+    "scripts/",
+    "privacy-boundary.toml",
+    "Cargo.toml",
+    "Cargo.lock",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    ".gitignore",
+    "app/src-tauri/models.json",
+    "app/src-tauri/tauri.conf.json"
+  ],
+  "claims": [
+    {
+      "id": "renewal-v12-fail-verdict",
+      "wording": "Qwen3.5-4B fails the renewal pack's harm gates on the development bed.",
+      "status": "failed",
+      "scope": {
+        "pack": "app.kttl.renewal-diff",
+        "pack_version": "0.1.0",
+        "model": "qwen3.5-4b-q4_k_m.gguf",
+        "eval_set": "development"
+      },
+      "evidence": [
+        {
+          "kind": "baseline",
+          "path": "evals/history/baseline-v12-renewal.json"
+        },
+        {
+          "kind": "baseline",
+          "path": "evals/history/baseline-v13-renewal.json"
+        },
+        {
+          "kind": "issue",
+          "number": 457
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "scoring version change",
+        "pack or prompt version change",
+        "model or sidecar change",
+        "bed change"
+      ],
+      "surfaces": [],
+      "review_route": "re-measure under the #457 scoring and re-record: kettle eval app.kttl.renewal-diff --write-baseline",
+      "note": "Claim zero, arc complete. The 8 August v12 measurement returned FAIL, and that verdict was live and quotable for a day — then #457 showed it rested on the eval's own join (an expectation matched to the first term whose quote its passage contained), not on the model. Re-measured at v13, the harm ceilings pass with 0 confident-wrong in 302 gated decisions, so \"fails the harm gates\" is false of the model. What the verdict fails on instead is coverage, recorded as its own claim in renewal-development-verdict. This entry is the failure mode the registry exists to catch, now measured to its end."
+    },
+    {
+      "id": "renewal-development-verdict",
+      "wording": "Qwen3.5-4B clears the renewal pack's development gate: the schedule's cover-limit lines are read, and nothing wrong is asserted.",
+      "status": "proven",
+      "scope": {
+        "pack": "app.kttl.renewal-diff",
+        "pack_version": "0.1.0",
+        "model": "qwen3.5-4b-q4_k_m.gguf",
+        "eval_set": "development"
+      },
+      "evidence": [
+        {
+          "kind": "baseline",
+          "path": "evals/baseline-v14-renewal.json"
+        }
+      ],
+      "recorded_against": {
+        "bed": "blake3:5b52918ea896ba09d28b5e253043ffe85953e802fafb3fd9424138760e0d670e",
+        "sidecar": "10145 (ad256ded)"
+      },
+      "expects": {
+        "verdict": "pass"
+      },
+      "recorded": "2026-08-14",
+      "invalidation": [
+        "scoring version change",
+        "pack or prompt version change",
+        "model or sidecar change",
+        "bed change"
+      ],
+      "surfaces": [],
+      "review_route": "re-measure and re-record: kettle eval app.kttl.renewal-diff --baseline evals/baseline-v14-renewal.json --write-baseline",
+      "note": "Re-recorded 14 August at scoring 14 on a rented RTX 5090, 4m11s: verdict PASS, policy-terms pooled 0.98 over 362 decisions, e2e 0.96, review 1%, both harm gates clear (obligation 0.00 over 322 decisions, no_obligation 0.02 over 385), 11 items contained and 8 wrong assertions escaped of 1132 candidates, 5 relations held with 1 unjudgeable and none failed. Its predecessor: re-recorded 11 August against the settled Phase 2 bed (blake3:922f16d4…): step score 1.00 pooled over 330 decisions, e2e 1.00, review 1%, both harm gates 0.00 confident-wrong (302 and 329 gated decisions, above the 189 and 73 their ceilings need), the unmodelled-value control intact at recall 1.00, and 0 wrong assertions escaped from 1020 candidates. Supersedes the 9 August reading of this same claim, which was the opposite sentence: the model answered other for \"Insurance amount: £…\" and every cover-limit expectation landed in needs-review — a review-burden cost, never a harm. #468's vocabulary edit is what moved it, measured on the four sections_repeat fixtures (review 17.6% → 0%, step 0.93 → 1.00) before the bed settled. This run cannot itself attribute the movement: the bed digest changed in the same commits, so the harness refused the comparison (#320) and exits 2. The level is measured here; the delta is measured there."
+    },
+    {
+      "id": "letter-harm-ceilings",
+      "wording": "Qwen3.5-4B clears the letter pack's harm ceilings on the development bed, on passive obligations as well as imperatives.",
+      "status": "proven",
+      "scope": {
+        "pack": "app.kttl.letter-to-actions",
+        "pack_version": "0.2.0",
+        "model": "qwen3.5-4b-q4_k_m.gguf",
+        "eval_set": "development"
+      },
+      "evidence": [
+        {
+          "kind": "baseline",
+          "path": "evals/baseline-v14-letter.json"
+        }
+      ],
+      "recorded_against": {
+        "bed": "blake3:9877cdb5be1396123b172e38aa5519b2180ea3e606be526a3dc88b27f437166a",
+        "sidecar": "10145 (ad256ded)"
+      },
+      "expects": {
+        "verdict": "pass"
+      },
+      "recorded": "2026-08-14",
+      "invalidation": [
+        "scoring version change",
+        "pack or prompt version change",
+        "model or sidecar change",
+        "bed change"
+      ],
+      "surfaces": [],
+      "review_route": "re-measure and re-record: kettle eval app.kttl.letter-to-actions --write-baseline",
+      "note": "Re-recorded 14 August at scoring 14 on a rented RTX 5090, 12m47s: verdict PASS with 0 confident-wrong in 240 obligation and 101 no-obligation distinct decisions (Wilson upper 0.02 against the 0.02 ceiling and 0.04 against 0.05), pooled 0.98 over 509, e2e 0.97, review 0%, 14 relations held with 1 unjudgeable and none failed, and 24 wrong assertions escaped of 4035 candidates with 1 contained. The bed moved under it twice since the v13 record — #504's invoice shape and #508 taking that shape out of the gated stratum — so the digest is new (blake3:9877cdb5…) and the v13 comparison is refused by #320 regardless. Worth recording about the method rather than the model: every figure here was predicted exactly by replaying the 14 August exit run under the new bed, gates, denominators, containment and relation states alike, so the replay in PR #508 was not an approximation of this run but the same measurement. The one relation that is unjudgeable is controlled-must-to-may, and it reads that way because the claim it turned on was routed to a person by the #406 modality rule rather than asserted. Its predecessor: re-recorded 11 August against the bed #456 and #433 grew, on a rented RTX 5090: both gates clear with 0 confident-wrong in 237 obligation and 99 no-obligation distinct decisions (Wilson upper 0.0160 against the 0.02 ceiling, 0.0374 against 0.05), precision and recall 1.00 across 493 and 894 decisions, 3872 claim candidates with 0 escaped and no guardrail failure of any kind, and 12 relations held with none unjudgeable. What moved is what the claim covers, not the number: every ceiling this pack cleared before today was cleared on imperatives alone, because not one of its 462 expected obligations was passive. It now stands on 30 passive obligations per set and their 30 counter-cases, so #458's \"ask who is being told to act\" is measured against the construction it put at risk rather than assumed safe. The first run that day returned FAIL on one passive item and the defect was the bed's own, which the run recording records. Its v12 predecessor aged to unproven the moment SCORING_VERSION 13 landed, that downgrade firing on cue being the registry's first live test."
+    },
+    {
+      "id": "quote-existence-enforced",
+      "wording": "A quoted passage that cannot be found in the source never becomes a finding.",
+      "status": "proven",
+      "scope": {},
+      "evidence": [
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/comparison.rs",
+          "name": "a_quote_that_is_not_in_the_document_is_not_a_finding"
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "quote guardrail change",
+        "pipeline step change around term extraction"
+      ],
+      "surfaces": [],
+      "review_route": "the owning test; reopen #258 discussion if the guardrail moves"
+    },
+    {
+      "id": "quote-identifies-its-value",
+      "wording": "A quote is evidence only of a value it contains.",
+      "status": "proven",
+      "scope": {},
+      "evidence": [
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/extraction_terms.rs",
+          "name": "a_quote_that_does_not_contain_its_value_is_not_evidence"
+        },
+        {
+          "kind": "issue",
+          "number": 460
+        }
+      ],
+      "recorded": "2026-08-11",
+      "invalidation": [
+        "quote guardrail change",
+        "pipeline step change around term extraction"
+      ],
+      "surfaces": [],
+      "review_route": "the owning test; reopen #460 if the guardrail moves",
+      "note": "Measured false on the 8 August v12 renewal run: the model quoted the bare label 'Excess', verbatim in three sections, as evidence for three different amounts, and existence passed every time. Built as a refusal on 11 August behind SCORING_VERSION 14: a term whose quote does not contain its value is routed to review at the quote guardrail, in the runner and so for every pack that reads terms. Both packs were re-measured by replay over the 11 August recordings with zero delta — the 10 August quote-instruction prompt edit had already removed every bare-label quote, which is why the rule could land as a refusal without failing a verdict. Rule 2 of the same decision — the quote identifies its passage — warns in the claim trace and never refuses. This entry's failed record is the registry's second completed arc, after renewal-v12-fail-verdict."
+    },
+    {
+      "id": "ambiguous-term-referred",
+      "wording": "A modelled term whose label the document leaves ambiguous is referred to a person rather than labelled confidently.",
+      "status": "failed",
+      "scope": {
+        "pack": "app.kttl.renewal-diff"
+      },
+      "evidence": [
+        {
+          "kind": "issue",
+          "number": 461
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "extraction schema change",
+        "aggregator referral change"
+      ],
+      "surfaces": [],
+      "review_route": "#461 — the pack has nowhere to express the referral; decide schema answer vs Rust-derived disagreement",
+      "note": "A bare 'Excess:' under a section heading is a real commercial-schedule shape a person cannot label either. On the 8 August v12 measurement the model answered it compulsory_excess from one document and total_excess from the other — it told us it was unsure, and the pipeline threw that signal away and asserted a label. The honest answer is a referral, and the pack cannot express one."
+    },
+    {
+      "id": "no-non-loopback-network",
+      "wording": "Task execution makes no non-loopback connection.",
+      "status": "unproven",
+      "scope": {},
+      "evidence": [
+        {
+          "kind": "issue",
+          "number": 233
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "dependency or networking change",
+        "Tauri plugin change",
+        "packaging or platform change"
+      ],
+      "surfaces": [],
+      "review_route": "#233 — run the packaged-build capture; record it here as manual evidence with an expiry",
+      "note": "The build-time source scan exists (crates/privacy-audit fails the build on an undeclared network path), but the sentence claims runtime behaviour of the packaged app, and no packaged capture has been recorded. When one is, it enters as manual evidence with a date and an expiry — not automatable is allowed; not evidenced is what this status says."
+    },
+    {
+      "id": "reports-self-contained",
+      "wording": "A report is one self-contained HTML file: it references nothing outside itself and works with the network off.",
+      "status": "proven",
+      "scope": {},
+      "evidence": [
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/render.rs",
+          "name": "render_refuses_an_external_reference_before_returning_the_report"
+        },
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/render.rs",
+          "name": "contains_no_external_urls"
+        },
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/letter_actions.rs",
+          "name": "the_letter_report_says_what_needs_doing_and_never_mentions_subscriptions"
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "self-containment guardrail change",
+        "render pipeline change",
+        "a report element added to the supported subset"
+      ],
+      "surfaces": [
+        "README.md"
+      ],
+      "review_route": "the owning tests; a new report element enters the supported subset by extending the guardrail first, never around it",
+      "note": "Enforced before a report exists, not audited after: render refuses a template with an external reference rather than returning the page. Both shipped packs' rendered reports are held to the same guardrail, so this is the renderer's property, not one template's."
+    },
+    {
+      "id": "beyond-read-refused",
+      "wording": "A pack asking for any capability beyond read does not load.",
+      "status": "proven",
+      "scope": {},
+      "evidence": [
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/packs.rs",
+          "name": "capability_beyond_read_is_refused"
+        },
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/packs.rs",
+          "name": "unknown_capability_is_refused_not_ignored"
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "pack loader change",
+        "capability vocabulary change"
+      ],
+      "surfaces": [
+        "README.md",
+        "app/demo/LandingPage.svelte"
+      ],
+      "review_route": "the owning tests; a capability beyond read is a product decision — reopen #120's execution contract before teaching the loader one",
+      "note": "Refusal is the default and read is the exception: a capability this version does not recognise is refused too, never silently dropped, so a future pack cannot smuggle a power the loader has no name for."
+    },
+    {
+      "id": "actions-only-proposed",
+      "wording": "An action is only ever proposed: it carries copyable text and an .ics export for the person to use, and its copy never promises Kettle has acted.",
+      "status": "proven",
+      "scope": {},
+      "evidence": [
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/actions.rs",
+          "name": "every_action_is_only_ever_proposed"
+        },
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/actions.rs",
+          "name": "nothing_a_card_says_promises_to_act"
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "actions emitter change",
+        "action export shape change",
+        "action card copy change"
+      ],
+      "surfaces": [
+        "README.md",
+        "app/src/lib/components/ExportPanel.svelte"
+      ],
+      "review_route": "the owning tests; a new action kind must arrive with both exports filled and copy that proposes",
+      "note": "README used to make the stronger claim that Kettle never writes to a calendar. #393 narrowed that copy to what this evidence owns: every action leaves as a file or text a person carries, and no card claims Kettle has acted. The broader runtime negative remains the calendar-shaped sibling of the packaged network capture."
+    },
+    {
+      "id": "money-never-floated",
+      "wording": "An amount of money is never held as a float.",
+      "status": "unproven",
+      "scope": {},
+      "evidence": [
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/parse.rs",
+          "name": "amounts_survive_as_exact_decimals"
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "amount type change",
+        "a new parser or aggregation path"
+      ],
+      "surfaces": [],
+      "review_route": "make it provable: a build-time scan in crates/privacy-audit's spirit that refuses f32 and f64 in amount-carrying code; until then, review is by eye on every parser and aggregation change",
+      "note": "Enforced by type choice — every amount is rust_decimal::Decimal from the parser on, and the cited test pins a sum that would drift under floats — but no machine check owns the word never. Scores and timings float legitimately throughout the eval harness, so a blanket ban is not the proof; a scan scoped to money types would be. #393 changed README to distinguish that implemented design from this still-unproven whole-tree negative."
+    },
+    {
+      "id": "bad-batch-never-crashes-a-run",
+      "wording": "A model answer that fails validation is asked again once, with its own answer and the errors in front of it; a second failure routes the batch to needs-review, and a run never crashes on one bad batch.",
+      "status": "proven",
+      "scope": {},
+      "evidence": [
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/exec.rs",
+          "name": "twice_failed_batch_lands_in_needs_review"
+        },
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/exec.rs",
+          "name": "failed_batch_recovers_on_retry"
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "executor retry policy change",
+        "batch validation change"
+      ],
+      "surfaces": [],
+      "review_route": "the owning tests; the retry count is #23's contract — change it there, not in passing",
+      "note": "Both directions are pinned: a batch that fails twice lands whole in needs-review with its validation errors as the reason and both attempts kept as evidence, and a batch that recovers on the retry carries on as if nothing happened."
+    },
+    {
+      "id": "report-keeps-its-stylesheet",
+      "wording": "A rendered report keeps the stylesheet it was born with.",
+      "status": "proven",
+      "scope": {},
+      "evidence": [
+        {
+          "kind": "test",
+          "path": "app/src/tokens-sync.test.ts",
+          "name": "carries the compiled report stylesheet as %s's whole <style> block"
+        },
+        {
+          "kind": "test",
+          "path": "crates/runner/tests/render.rs",
+          "name": "contains_no_external_urls"
+        }
+      ],
+      "recorded": "2026-08-09",
+      "invalidation": [
+        "render pipeline change",
+        "tokens generator change",
+        "report template style block change"
+      ],
+      "surfaces": [
+        "README.md"
+      ],
+      "review_route": "the owning tests; to restyle an old run, re-render it — tokens:build only changes reports not yet made",
+      "note": "Two halves make it true: the whole compiled stylesheet travels inside each pack's template, so a report is born carrying its own CSS, and a rendered report references nothing outside itself, so no later stylesheet can reach it. tokens:build rewrites templates, never reports on disk — a record that restyled itself later would be a worse record."
+    },
+    {
+      "id": "mutation-survivors-enumerated",
+      "wording": "kettle mutate's exit code means something new survived: the renewal pack's expected survivors are declared with counts and reasons in packs/app.kttl.renewal-diff/expected-survivors.json, and an undeclared survivor family or a declared family over its count fails the run.",
+      "status": "proven",
+      "scope": {
+        "pack": "app.kttl.renewal-diff",
+        "pack_version": "0.1.0"
+      },
+      "evidence": [
+        {
+          "kind": "test",
+          "path": "crates/cli/tests/mutate_cli.rs",
+          "name": "an_undeclared_survivor_family_fails_even_when_the_declared_count_holds"
+        },
+        {
+          "kind": "test",
+          "path": "crates/cli/tests/mutate_cli.rs",
+          "name": "survivors_inside_the_declared_families_exit_zero"
+        },
+        {
+          "kind": "issue",
+          "number": 466
+        }
+      ],
+      "recorded": "2026-08-12",
+      "invalidation": [
+        "mutation operator or version change",
+        "scoring version change",
+        "bed change",
+        "oracle answering change",
+        "expected-survivors declaration change"
+      ],
+      "surfaces": [],
+      "review_route": "re-run kettle mutate app.kttl.renewal-diff and reconcile packs/app.kttl.renewal-diff/expected-survivors.json; the decision is #466",
+      "note": "The v14 census of 12 August 2026 is 349 survivors in the two declared families — 261 ceiling-tolerated single errors, 88 already-contained claims — with no remainder and no overlap; v13's was 261 (237 + 24), the growth tracking #493's referral fixtures and the oracle now answering them (#484). Killed keeps its strict meaning (gate failure, for scoring-contained operators), and item-level detection prints as a second, separate number, never a kill: wrong_value_from_multi_value_quote kills 0 of its 273 sites and has no gate path at all at these denominators. Two caveats travel with the declaration itself: force_confidence_high has no sites because the oracle answers all-high (a coverage gap, not a clean sweep), and family 1's Wilson headroom constant is #448-era arithmetic on a smaller bed — the mechanism is re-confirmed, the constants are not."
+    },
+    {
+      "id": "confidence-predicts-correctness",
+      "wording": "The confidence shown beside a finding predicts whether it is right: a finding marked settled is likelier to be correct than one marked unsure.",
+      "status": "unproven",
+      "scope": {
+        "pack": "app.kttl.subscription-audit"
+      },
+      "evidence": [
+        {
+          "kind": "issue",
+          "number": 429
+        }
+      ],
+      "recorded": "2026-08-14",
+      "invalidation": [
+        "a calibration measurement on this pack",
+        "confidence derivation change in render.rs",
+        "removal of the confidence tag from the report",
+        "extraction or classification schema change"
+      ],
+      "surfaces": [],
+      "review_route": "grow the bed until the medium bucket can carry a bound, then re-measure: kettle eval app.kttl.subscription-audit --model <weights>, reading the `confidence /` block (#429). The 14 August run is archived and replayable, so a scoring change costs no GPU.",
+      "note": "**Measured 14 August and still unproven — but no longer unmeasured, and the direction is the opposite of what the other packs show.** Replaying the rented-GPU subscription run of that afternoon through the per-question confidence split: high 0.10 error over 48 asserted decisions (95% CI 0.05–0.22), medium 0.43 over 14 (0.21–0.67), and low undefined because all 40 of its decisions were routed to review rather than asserted. High to medium points the right way — more confident, less wrong — and the intervals overlap, so this bed cannot establish it. Verdict UNPROVEN. The first reading of that same run said INVERTED, and the instrument was at fault: the error rate divided by *all* decisions including routed ones, so a wholly routed bucket scored a guaranteed 0.00 and everything ranked against it. #429 had already named the right denominator — error among automatically asserted items — and it had not been implemented. What would prove this claim is a bigger bed rather than a better model: 14 asserted medium decisions cannot carry a Wilson bound. Surfaces emptied 14 August, after the entry blocked the demo build — which is the mechanism working, not a fault in it: app/vite.demo.config.ts runs kettle claims at build time, so a public page cannot be published while its copy stands on an unproven claim. The landing page's \"Kettle marks what it is not sure enough to count\" was the general predictive claim and is gone; what the report is left doing is narrower and true, giving a reason about a finding's own evidence (\"Four payments three months apart looks quarterly, but some energy plans smooth payments differently\"). Displaying a declared level beside a stated reason is not the same assertion as this claim's sentence, so the report template and the demo fixture came off with it. What would put them back: any copy presenting the tag as a reliability signal rather than a label on a stated reason. The claim stays recorded and unproven — removing the copy is not evidence, and the measurement is still owed. Recorded because the surface exists and the claim did not. The subscription report renders a HIGH/MEDIUM/LOW tag taken straight from the model's declared level — render.rs derives `settled` as `matches!(confidence, Confidence::High)` — and adds a \"Why only 'medium'\" explanation beside it. fixtures/run-01/report.html carries five HIGH and two MEDIUM tags, and app/demo serves that file, so this is a public claim rather than an internal one. No assurance claim covered it, which meant no invalidation trigger could ever fire on it: it could not be downgraded because it had never been asserted. It is unproven rather than failed: nothing has measured it. There is no model-answer recording for this pack in kettle-runs or evals/runs — only --no-model runs — so it cannot be settled by replay and needs a GPU sitting. What is measured is the two neighbouring packs, on 14 August under scoring 14, and both came back negative: the letter pack declared `high` on all 476 decisions (NO RANKING SIGNAL, 24 of them wrong), and the renewal pack came back INVERTED — `high` carried all 8 errors across 342 decisions and `low` carried none across 339, so routing low-confidence decisions to review would spend 339 reviews and catch none of the errors. That separation is 0.0007 wide and one further error in `low` would withdraw it. Neither result transfers: they are different packs, different steps and different questions, and this entry must not be read as evidence against the sentence any more than for it. One corroborating detail from the mutation census: the `force_confidence_high` operator has no sites at all, because the oracle answers all-high — the harness cannot currently perturb this signal either."
+    }
+  ]
+}

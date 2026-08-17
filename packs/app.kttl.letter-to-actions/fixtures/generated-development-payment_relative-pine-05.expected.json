@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_relative-pine-05",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-06-04",
+        "kind": "payment",
+        "party": "Northgate Water"
+      },
+      "id": "payment_relative-pine-05-payment-01",
+      "segment": "Our records show that water account of £96.45 remains outstanding. Please pay £96.45 within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-pine-05-no-ask-02",
+      "segment": "We are sorry for any inconvenience this may have caused.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-pine-05-no-ask-04",
+      "segment": "This is the last letter you will receive about the works, which finished on 6 February.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

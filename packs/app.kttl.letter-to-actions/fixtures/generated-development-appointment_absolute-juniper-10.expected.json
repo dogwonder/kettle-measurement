@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-juniper-10",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "21 April 2026",
+        "deadline": "on 21 April 2026",
+        "due": "2026-04-21",
+        "kind": "attendance",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_absolute-juniper-10-attendance-01",
+      "segment": "You have an appointment about your membership at Eastvale Library Service on 21 April 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-juniper-10-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-juniper-10-no-ask-04",
+      "segment": "A credit of £9.99 will appear on your next statement, which we expect to issue in early August.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

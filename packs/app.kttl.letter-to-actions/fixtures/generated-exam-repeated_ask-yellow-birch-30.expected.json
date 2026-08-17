@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-repeated_ask-yellow-birch-30",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-11-24",
+        "kind": "payment",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "repeated_ask-yellow-birch-30-payment-01",
+      "segment": "Payment of £68.50 towards your check-up is required within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-yellow-birch-30-no-ask-03",
+      "segment": "Once the account is clear we will write to confirm it.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-yellow-birch-30-no-ask-05",
+      "segment": "The scheme is closed to entrants after 31 October and your entry predates this.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    }
+  ]
+}

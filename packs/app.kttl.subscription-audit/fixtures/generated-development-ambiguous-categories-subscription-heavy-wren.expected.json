@@ -1,0 +1,238 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-subscription-heavy-wren",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* BACKBLAZE",
+      "name": "Backblaze"
+    },
+    {
+      "raw": "SQ *BACKBLAZE",
+      "name": "Backblaze"
+    },
+    {
+      "raw": "PAYPAL *BACKBLAZE",
+      "name": "Backblaze"
+    },
+    {
+      "raw": "THE ECONOMIST PAYMENT",
+      "name": "The Economist"
+    },
+    {
+      "raw": "DUOLINGO PAYMENT",
+      "name": "Duolingo"
+    },
+    {
+      "raw": "PUREGYM LTD PAYMENT",
+      "name": "PureGym"
+    },
+    {
+      "raw": "NETFLIX.COM PAYMENT",
+      "name": "Netflix"
+    },
+    {
+      "raw": "SPOTIFY LTD PAYMENT",
+      "name": "Spotify"
+    },
+    {
+      "raw": "STRIPE* GOOGLEONE",
+      "name": "Google One"
+    },
+    {
+      "raw": "SQ *GOOGLEONE",
+      "name": "Google One"
+    },
+    {
+      "raw": "PAYPAL *GOOGLEONE",
+      "name": "Google One"
+    },
+    {
+      "raw": "THE GUARDIAN PAYMENT",
+      "name": "The Guardian"
+    },
+    {
+      "raw": "BRITISH GAS PAYMENT",
+      "name": "British Gas"
+    },
+    {
+      "raw": "BRIGHTWATER HOME PAYMENT",
+      "name": "Brightwater Home"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BACKBLAZE",
+      "name": "Backblaze",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "THE ECONOMIST PAYMENT",
+      "name": "The Economist",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "DUOLINGO PAYMENT",
+      "name": "Duolingo",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "PUREGYM LTD PAYMENT",
+      "name": "PureGym",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "NETFLIX.COM PAYMENT",
+      "name": "Netflix",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "SPOTIFY LTD PAYMENT",
+      "name": "Spotify",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* GOOGLEONE",
+      "name": "Google One",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE GUARDIAN PAYMENT",
+      "name": "The Guardian",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series"
+      ],
+      "raw": "BRITISH GAS PAYMENT",
+      "name": "British Gas",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-wren-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BRIGHTWATER HOME PAYMENT",
+      "name": "Brightwater Home",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Backblaze",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Economist",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Duolingo",
+      "period": "monthly"
+    },
+    {
+      "merchant": "PureGym",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Netflix",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Spotify",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Guardian",
+      "period": "monthly"
+    },
+    {
+      "merchant": "British Gas",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-subscription-heavy-dew-garden",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* TRESORIT",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "SQ *TRESORIT",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "PAYPAL *TRESORIT",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "HISTORY TODAY PAYMENT",
+      "name": "History Today"
+    },
+    {
+      "raw": "COURSERA PAYMENT",
+      "name": "Coursera"
+    },
+    {
+      "raw": "LES MILLS PLUS PAYMENT",
+      "name": "Les Mills+"
+    },
+    {
+      "raw": "BRITBOX PAYMENT",
+      "name": "BritBox"
+    },
+    {
+      "raw": "SOUNDCLOUD GO PAYMENT",
+      "name": "SoundCloud"
+    },
+    {
+      "raw": "STRIPE* BITWARDEN",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "SQ *BITWARDEN",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "PAYPAL *BITWARDEN",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "NYTIMES PAYMENT",
+      "name": "The New York Times"
+    },
+    {
+      "raw": "STRIPE* TOLLGATESTALL",
+      "name": "Tollgate Stall"
+    },
+    {
+      "raw": "SQ *TOLLGATESTALL",
+      "name": "Tollgate Stall"
+    },
+    {
+      "raw": "PAYPAL *TOLLGATESTALL",
+      "name": "Tollgate Stall"
+    },
+    {
+      "raw": "ALDERCOTE LEISURE PAYMENT",
+      "name": "Aldercote Leisure"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TRESORIT",
+      "name": "Tresorit",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "HISTORY TODAY PAYMENT",
+      "name": "History Today",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "COURSERA PAYMENT",
+      "name": "Coursera",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "LES MILLS PLUS PAYMENT",
+      "name": "Les Mills+",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "BRITBOX PAYMENT",
+      "name": "BritBox",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "SOUNDCLOUD GO PAYMENT",
+      "name": "SoundCloud",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BITWARDEN",
+      "name": "Bitwarden",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "NYTIMES PAYMENT",
+      "name": "The New York Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TOLLGATESTALL",
+      "name": "Tollgate Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-dew-garden-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "ALDERCOTE LEISURE PAYMENT",
+      "name": "Aldercote Leisure",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Tresorit",
+      "period": "yearly"
+    },
+    {
+      "merchant": "History Today",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Coursera",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Les Mills+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "BritBox",
+      "period": "monthly"
+    },
+    {
+      "merchant": "SoundCloud",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The New York Times",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

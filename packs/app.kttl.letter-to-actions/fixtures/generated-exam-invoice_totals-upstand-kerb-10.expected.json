@@ -1,0 +1,49 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-invoice_totals-upstand-kerb-10",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "invoice_totals-upstand-kerb-10-no-ask-01",
+      "segment": "Our invoice for the annual review is set out below. The amount shown as due should reach us by the date given against it.",
+      "strata": [
+        "invoice-totals",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "28 April 2026",
+        "deadline": "28 April 2026",
+        "due": "2026-04-28",
+        "kind": "payment",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "invoice_totals-upstand-kerb-10-payment-02",
+      "segment": "Due date 28 April 2026",
+      "strata": [
+        "invoice-totals",
+        "absolute-deadline",
+        "in-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-upstand-kerb-10-no-ask-03",
+      "segment": "Our accounts team can arrange instalments where that would help.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-upstand-kerb-10-no-ask-05",
+      "segment": "The residual sum of £8.40 has been written off.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    }
+  ]
+}

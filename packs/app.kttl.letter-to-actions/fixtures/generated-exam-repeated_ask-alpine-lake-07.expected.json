@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-repeated_ask-alpine-lake-07",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2027-01-18",
+        "kind": "payment",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "repeated_ask-alpine-lake-07-payment-01",
+      "segment": "Payment of £0.00 towards your case file is required within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-alpine-lake-07-no-ask-03",
+      "segment": "Once the account is clear we will write to confirm it.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-alpine-lake-07-no-ask-05",
+      "segment": "The reading taken on 27 April was used, so no estimate has been applied.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    }
+  ]
+}

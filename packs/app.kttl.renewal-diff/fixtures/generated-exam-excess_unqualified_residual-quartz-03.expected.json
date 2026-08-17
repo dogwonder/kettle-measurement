@@ -1,0 +1,125 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_unqualified_residual-quartz-03",
+  "inputs": {
+    "previous": "generated-exam-excess_unqualified_residual-quartz-03-previous.txt",
+    "renewal": "generated-exam-excess_unqualified_residual-quartz-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-quartz-03-previous-no-value-3d2cc4",
+      "role": "previous",
+      "segment": "Schedule QUARTZ-EUR-414 of your pet insurance cover with Corvin Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £9,258.00.",
+        "term": "premium",
+        "value": "£9,258.00"
+      },
+      "id": "exam-excess_unqualified_residual-quartz-03-previous-premium-141589",
+      "role": "previous",
+      "segment": "The price for the year comes to £9,258.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £6,470.00.",
+        "term": "compulsory_excess",
+        "value": "£6,470.00"
+      },
+      "id": "exam-excess_unqualified_residual-quartz-03-previous-compulsory-excess-77ab5e",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £6,470.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-quartz-03-previous-no-value-9c723e",
+      "role": "previous",
+      "segment": "Please quote QUARTZ-EUR-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-quartz-03-previous-no-value-725062",
+      "role": "previous",
+      "segment": "Cover for pet insurance under QUARTZ-EUR-414 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-quartz-03-renewal-no-value-62f84e",
+      "role": "renewal",
+      "segment": "Your pet insurance cover with Corvin Mutual under QUARTZ-EUR-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £9,258.00.",
+        "term": "premium",
+        "value": "£9,258.00"
+      },
+      "id": "exam-excess_unqualified_residual-quartz-03-renewal-premium-141589",
+      "role": "renewal",
+      "segment": "The price for the year comes to £9,258.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-quartz-03-renewal-excess-unqualified-6e84b3",
+      "review": true,
+      "role": "renewal",
+      "segment": "An excess of £6,520.00 applies to each and every claim.",
+      "strata": [
+        "excess-unqualified-residual"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-quartz-03-renewal-no-value-725062",
+      "role": "renewal",
+      "segment": "Cover for pet insurance under QUARTZ-EUR-414 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-quartz-03-renewal-no-value-9c723e",
+      "role": "renewal",
+      "segment": "Please quote QUARTZ-EUR-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

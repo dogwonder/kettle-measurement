@@ -1,0 +1,130 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-cooling_off_changed-damson-04",
+  "inputs": {
+    "previous": "generated-development-cooling_off_changed-damson-04-previous.txt",
+    "renewal": "generated-development-cooling_off_changed-damson-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-damson-04-previous-no-value-2b7ec4",
+      "role": "previous",
+      "segment": "Marlowe Mutual home insurance — policy schedule DAMSON-COC-421 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,429.00.",
+        "term": "premium",
+        "value": "£5,429.00"
+      },
+      "id": "development-cooling_off_changed-damson-04-previous-premium-d98e1e",
+      "role": "previous",
+      "segment": "Total annual premium: £5,429.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cooling-off period: 15 days.",
+        "term": "cooling_off_period",
+        "value": "15 days"
+      },
+      "id": "development-cooling_off_changed-damson-04-previous-cooling-off-period-d89cb2",
+      "role": "previous",
+      "segment": "Cooling-off period: 15 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-damson-04-previous-no-value-8bb34c",
+      "role": "previous",
+      "segment": "Your reference is DAMSON-COC-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-damson-04-previous-no-value-59772f",
+      "role": "previous",
+      "segment": "Marlowe Mutual arranges home insurance cover under DAMSON-COC-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-damson-04-renewal-no-value-9a78cb",
+      "role": "renewal",
+      "segment": "Marlowe Mutual home insurance — renewal schedule DAMSON-COC-421 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,429.00.",
+        "term": "premium",
+        "value": "£5,429.00"
+      },
+      "id": "development-cooling_off_changed-damson-04-renewal-premium-d98e1e",
+      "role": "renewal",
+      "segment": "Total annual premium: £5,429.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cooling-off period: 29 days.",
+        "term": "cooling_off_period",
+        "value": "29 days"
+      },
+      "id": "development-cooling_off_changed-damson-04-renewal-cooling-off-period-73c752",
+      "role": "renewal",
+      "segment": "Cooling-off period: 29 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-damson-04-renewal-no-value-59772f",
+      "role": "renewal",
+      "segment": "Marlowe Mutual arranges home insurance cover under DAMSON-COC-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-damson-04-renewal-no-value-8bb34c",
+      "role": "renewal",
+      "segment": "Your reference is DAMSON-COC-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

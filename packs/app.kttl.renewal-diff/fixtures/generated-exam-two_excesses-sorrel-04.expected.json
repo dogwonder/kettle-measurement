@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-two_excesses-sorrel-04",
+  "inputs": {
+    "previous": "generated-exam-two_excesses-sorrel-04-previous.txt",
+    "renewal": "generated-exam-two_excesses-sorrel-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-two_excesses-sorrel-04-previous-no-value-75d0ea",
+      "role": "previous",
+      "segment": "Schedule SORREL-TE-421 of your contents insurance cover with Haldon Insurance Services, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,390.00.",
+        "term": "compulsory_excess",
+        "value": "£4,390.00"
+      },
+      "id": "exam-two_excesses-sorrel-04-previous-compulsory-excess-5fa7e4",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £4,390.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £988.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£988.00"
+      },
+      "id": "exam-two_excesses-sorrel-04-previous-voluntary-excess-530753",
+      "role": "previous",
+      "segment": "You chose to carry a further £988.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,378.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,378.00"
+      },
+      "id": "exam-two_excesses-sorrel-04-previous-total-excess-e16f13",
+      "role": "previous",
+      "segment": "Altogether the excess comes to £5,378.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-sorrel-04-previous-no-value-c7cc8b",
+      "role": "previous",
+      "segment": "Please quote SORREL-TE-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-sorrel-04-previous-no-value-f68eef",
+      "role": "previous",
+      "segment": "Cover for contents insurance under SORREL-TE-421 is arranged by Haldon Insurance Services, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-sorrel-04-renewal-no-value-9ab530",
+      "role": "renewal",
+      "segment": "Your contents insurance cover with Haldon Insurance Services under SORREL-TE-421 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,440.00.",
+        "term": "compulsory_excess",
+        "value": "£4,440.00"
+      },
+      "id": "exam-two_excesses-sorrel-04-renewal-compulsory-excess-3678e3",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £4,440.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £988.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£988.00"
+      },
+      "id": "exam-two_excesses-sorrel-04-renewal-voluntary-excess-530753",
+      "role": "renewal",
+      "segment": "You chose to carry a further £988.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,428.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,428.00"
+      },
+      "id": "exam-two_excesses-sorrel-04-renewal-total-excess-c2abd3",
+      "role": "renewal",
+      "segment": "Altogether the excess comes to £5,428.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-sorrel-04-renewal-no-value-f68eef",
+      "role": "renewal",
+      "segment": "Cover for contents insurance under SORREL-TE-421 is arranged by Haldon Insurance Services, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-sorrel-04-renewal-no-value-c7cc8b",
+      "role": "renewal",
+      "segment": "Please quote SORREL-TE-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

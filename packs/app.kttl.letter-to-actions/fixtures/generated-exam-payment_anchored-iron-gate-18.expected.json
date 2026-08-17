@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_anchored-iron-gate-18",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "2 March 2026",
+        "deadline": "within 45 days",
+        "due": "2026-04-16",
+        "kind": "payment",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "payment_anchored-iron-gate-18-payment-02",
+      "segment": "The sum of £68.50 falls due within 45 days of 2 March 2026. Please quote FDP-8802 when you pay.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-iron-gate-18-no-ask-03",
+      "segment": "We are grateful for your attention to this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-iron-gate-18-no-ask-05",
+      "segment": "The appointment of 7 February was cancelled by this office.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

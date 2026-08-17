@@ -1,0 +1,258 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-subscription-heavy-pine",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "SQ *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PAYPAL *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PRIVATE EYE PAYMENT",
+      "name": "Private Eye"
+    },
+    {
+      "raw": "SKILLSHARE PAYMENT",
+      "name": "Skillshare"
+    },
+    {
+      "raw": "DAVID LLOYD PAYMENT",
+      "name": "David Lloyd"
+    },
+    {
+      "raw": "NOW TV PAYMENT",
+      "name": "NOW"
+    },
+    {
+      "raw": "TIDAL PAYMENT",
+      "name": "TIDAL"
+    },
+    {
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "SQ *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "PAYPAL *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "THE TELEGRAPH PAYMENT",
+      "name": "The Telegraph"
+    },
+    {
+      "raw": "STRIPE* SOUTHERNRAIL",
+      "name": "Southern"
+    },
+    {
+      "raw": "SQ *SOUTHERNRAIL",
+      "name": "Southern"
+    },
+    {
+      "raw": "PAYPAL *SOUTHERNRAIL",
+      "name": "Southern"
+    },
+    {
+      "raw": "STRIPE* RPATEL",
+      "name": "R Patel"
+    },
+    {
+      "raw": "SQ *RPATEL",
+      "name": "R Patel"
+    },
+    {
+      "raw": "PAYPAL *RPATEL",
+      "name": "R Patel"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "PRIVATE EYE PAYMENT",
+      "name": "Private Eye",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "SKILLSHARE PAYMENT",
+      "name": "Skillshare",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "DAVID LLOYD PAYMENT",
+      "name": "David Lloyd",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "NOW TV PAYMENT",
+      "name": "NOW",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "TIDAL PAYMENT",
+      "name": "TIDAL",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE TELEGRAPH PAYMENT",
+      "name": "The Telegraph",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SOUTHERNRAIL",
+      "name": "Southern",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-pine-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* RPATEL",
+      "name": "R Patel",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "pCloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Private Eye",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Skillshare",
+      "period": "monthly"
+    },
+    {
+      "merchant": "David Lloyd",
+      "period": "monthly"
+    },
+    {
+      "merchant": "NOW",
+      "period": "monthly"
+    },
+    {
+      "merchant": "TIDAL",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Telegraph",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Southern",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

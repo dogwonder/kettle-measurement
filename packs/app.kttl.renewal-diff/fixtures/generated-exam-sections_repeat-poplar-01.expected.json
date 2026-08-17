@@ -1,0 +1,450 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-sections_repeat-poplar-01",
+  "inputs": {
+    "previous": "generated-exam-sections_repeat-poplar-01-previous.txt",
+    "renewal": "generated-exam-sections_repeat-poplar-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-previous-no-value-27fec7",
+      "role": "previous",
+      "segment": "Schedule POPLAR-SR-400 of your buildings insurance cover with Brackenfield Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-previous-no-value-cd3cec",
+      "role": "previous",
+      "segment": "Cover under POPLAR-SR-400 runs from 1 September 2025 until 31 August 2026, both days included.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-previous-no-value-dcd787",
+      "role": "previous",
+      "segment": "The next part of POPLAR-SR-400 covers professional indemnity.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £604,400.00 under it.",
+        "term": "cover_limit",
+        "value": "£604,400.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-cover-limit-a98cc6",
+      "role": "previous",
+      "segment": "We will pay up to £604,400.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,420.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,420.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-compulsory-excess-6cec1c",
+      "role": "previous",
+      "segment": "You pay the first £5,420.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,447.20 for the year.",
+        "term": "premium",
+        "value": "£1,447.20"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-premium-fa2285",
+      "role": "previous",
+      "segment": "This part costs £1,447.20 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-previous-no-value-f912d3",
+      "role": "previous",
+      "segment": "The next part of POPLAR-SR-400 covers legal expenses.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £854,400.00 under it.",
+        "term": "cover_limit",
+        "value": "£854,400.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-cover-limit-2f7504",
+      "role": "previous",
+      "segment": "We will pay up to £854,400.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,451.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,451.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-compulsory-excess-38ebef",
+      "role": "previous",
+      "segment": "You pay the first £5,451.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,494.20 for the year.",
+        "term": "premium",
+        "value": "£1,494.20"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-premium-155fa1",
+      "role": "previous",
+      "segment": "This part costs £1,494.20 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-previous-no-value-07a5a3",
+      "role": "previous",
+      "segment": "The next part of POPLAR-SR-400 covers crisis containment.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £1,104,400.00 under it.",
+        "term": "cover_limit",
+        "value": "£1,104,400.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-cover-limit-090187",
+      "role": "previous",
+      "segment": "We will pay up to £1,104,400.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,482.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,482.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-compulsory-excess-973e22",
+      "role": "previous",
+      "segment": "You pay the first £5,482.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,541.20 for the year.",
+        "term": "premium",
+        "value": "£1,541.20"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-premium-0d0913",
+      "role": "previous",
+      "segment": "This part costs £1,541.20 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Adding the parts together, the year costs £4,482.60.",
+        "term": "premium",
+        "value": "£4,482.60"
+      },
+      "id": "exam-sections_repeat-poplar-01-previous-premium-9d8370",
+      "role": "previous",
+      "segment": "Adding the parts together, the year costs £4,482.60.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-previous-no-value-2e2a39",
+      "role": "previous",
+      "segment": "Please quote POPLAR-SR-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-previous-no-value-0e3ec4",
+      "role": "previous",
+      "segment": "Cover for buildings insurance under POPLAR-SR-400 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-renewal-no-value-b53503",
+      "role": "renewal",
+      "segment": "Your buildings insurance cover with Brackenfield Cover under POPLAR-SR-400 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-renewal-no-value-24c83f",
+      "role": "renewal",
+      "segment": "Cover under POPLAR-SR-400 runs from 1 September 2026 until 31 August 2027, both days included.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-renewal-no-value-dcd787",
+      "role": "renewal",
+      "segment": "The next part of POPLAR-SR-400 covers professional indemnity.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £604,400.00 under it.",
+        "term": "cover_limit",
+        "value": "£604,400.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-cover-limit-a98cc6",
+      "role": "renewal",
+      "segment": "We will pay up to £604,400.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,420.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,420.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-compulsory-excess-6cec1c",
+      "role": "renewal",
+      "segment": "You pay the first £5,420.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,462.20 for the year.",
+        "term": "premium",
+        "value": "£1,462.20"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-premium-c5e178",
+      "role": "renewal",
+      "segment": "This part costs £1,462.20 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-renewal-no-value-f912d3",
+      "role": "renewal",
+      "segment": "The next part of POPLAR-SR-400 covers legal expenses.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £854,400.00 under it.",
+        "term": "cover_limit",
+        "value": "£854,400.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-cover-limit-2f7504",
+      "role": "renewal",
+      "segment": "We will pay up to £854,400.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,451.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,451.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-compulsory-excess-38ebef",
+      "role": "renewal",
+      "segment": "You pay the first £5,451.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,509.20 for the year.",
+        "term": "premium",
+        "value": "£1,509.20"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-premium-09909f",
+      "role": "renewal",
+      "segment": "This part costs £1,509.20 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-renewal-no-value-07a5a3",
+      "role": "renewal",
+      "segment": "The next part of POPLAR-SR-400 covers crisis containment.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £1,104,400.00 under it.",
+        "term": "cover_limit",
+        "value": "£1,104,400.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-cover-limit-090187",
+      "role": "renewal",
+      "segment": "We will pay up to £1,104,400.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,482.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,482.00"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-compulsory-excess-973e22",
+      "role": "renewal",
+      "segment": "You pay the first £5,482.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,556.20 for the year.",
+        "term": "premium",
+        "value": "£1,556.20"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-premium-b6427f",
+      "role": "renewal",
+      "segment": "This part costs £1,556.20 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Adding the parts together, the year costs £4,527.60.",
+        "term": "premium",
+        "value": "£4,527.60"
+      },
+      "id": "exam-sections_repeat-poplar-01-renewal-premium-1fc482",
+      "role": "renewal",
+      "segment": "Adding the parts together, the year costs £4,527.60.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-renewal-no-value-0e3ec4",
+      "role": "renewal",
+      "segment": "Cover for buildings insurance under POPLAR-SR-400 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-poplar-01-renewal-no-value-2e2a39",
+      "role": "renewal",
+      "segment": "Please quote POPLAR-SR-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_unqualified_residual-kestrel-01",
+  "inputs": {
+    "previous": "generated-development-excess_unqualified_residual-kestrel-01-previous.txt",
+    "renewal": "generated-development-excess_unqualified_residual-kestrel-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-kestrel-01-previous-no-value-915d16",
+      "role": "previous",
+      "segment": "Haldon Insurance Services contents insurance — policy schedule KESTREL-EUR-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £9,244.00.",
+        "term": "premium",
+        "value": "£9,244.00"
+      },
+      "id": "development-excess_unqualified_residual-kestrel-01-previous-premium-4c8566",
+      "role": "previous",
+      "segment": "Total annual premium: £9,244.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £6,460.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£6,460.00"
+      },
+      "id": "development-excess_unqualified_residual-kestrel-01-previous-compulsory-excess-a714e7",
+      "role": "previous",
+      "segment": "Compulsory excess: £6,460.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-kestrel-01-previous-no-value-a410f3",
+      "role": "previous",
+      "segment": "Your reference is KESTREL-EUR-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-kestrel-01-previous-no-value-a15dcf",
+      "role": "previous",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under KESTREL-EUR-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-kestrel-01-renewal-no-value-1146f4",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services contents insurance — renewal schedule KESTREL-EUR-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £9,244.00.",
+        "term": "premium",
+        "value": "£9,244.00"
+      },
+      "id": "development-excess_unqualified_residual-kestrel-01-renewal-premium-4c8566",
+      "role": "renewal",
+      "segment": "Total annual premium: £9,244.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-kestrel-01-renewal-excess-unqualified-c0aa8c",
+      "review": true,
+      "role": "renewal",
+      "segment": "Excess: £6,510.00 each and every claim.",
+      "strata": [
+        "excess-unqualified-residual"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-kestrel-01-renewal-no-value-a15dcf",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under KESTREL-EUR-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-kestrel-01-renewal-no-value-a410f3",
+      "role": "renewal",
+      "segment": "Your reference is KESTREL-EUR-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-subscription-heavy-twilight-brook",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* KOOFR CARD 4821",
+      "name": "Koofr"
+    },
+    {
+      "raw": "SQ *KOOFR CARD 4821",
+      "name": "Koofr"
+    },
+    {
+      "raw": "PAYPAL *KOOFR CARD 4821",
+      "name": "Koofr"
+    },
+    {
+      "raw": "CARD 4821 TH WK GB",
+      "name": "The Week"
+    },
+    {
+      "raw": "CARD 4821 BS GB",
+      "name": "Busuu"
+    },
+    {
+      "raw": "CARD 4821 PLTN GB",
+      "name": "Peloton"
+    },
+    {
+      "raw": "CARD 4821 PRM VD GB",
+      "name": "Prime Video"
+    },
+    {
+      "raw": "CARD 4821 MZN MSC GB",
+      "name": "Amazon Music"
+    },
+    {
+      "raw": "STRIPE* ICLOUDPLUS CARD 4821",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "SQ *ICLOUDPLUS CARD 4821",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "PAYPAL *ICLOUDPLUS CARD 4821",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "CARD 4821 TH NDPNDNT GB",
+      "name": "The Independent"
+    },
+    {
+      "raw": "STRIPE* AVANTIWESTCST CARD 4821",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "SQ *AVANTIWESTCST CARD 4821",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "PAYPAL *AVANTIWESTCST CARD 4821",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "STRIPE* DCHAUDHRY CARD 4821",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "SQ *DCHAUDHRY CARD 4821",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "PAYPAL *DCHAUDHRY CARD 4821",
+      "name": "D Chaudhry"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* KOOFR CARD 4821",
+      "name": "Koofr",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 TH WK GB",
+      "name": "The Week",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 BS GB",
+      "name": "Busuu",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 PLTN GB",
+      "name": "Peloton",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 PRM VD GB",
+      "name": "Prime Video",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 MZN MSC GB",
+      "name": "Amazon Music",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ICLOUDPLUS CARD 4821",
+      "name": "iCloud+",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 TH NDPNDNT GB",
+      "name": "The Independent",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* AVANTIWESTCST CARD 4821",
+      "name": "Avanti West Coast",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-twilight-brook-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* DCHAUDHRY CARD 4821",
+      "name": "D Chaudhry",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Koofr",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Week",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Busuu",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Peloton",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Prime Video",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Amazon Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Independent",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Avanti West Coast",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

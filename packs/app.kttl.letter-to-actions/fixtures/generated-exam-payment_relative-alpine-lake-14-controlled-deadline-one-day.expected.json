@@ -1,0 +1,44 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_relative-alpine-lake-14-controlled-deadline-one-day",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 22 days",
+        "due": "2026-07-29",
+        "kind": "payment",
+        "party": "Belwood Insurance"
+      },
+      "id": "controlled-deadline-one-day-payment_relative-alpine-lake-14-payment-01",
+      "segment": "The sum of £188.20 for your policy renewal is now overdue. Payment must reach us within 22 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline",
+        "controlled-change",
+        "controlled-deadline-one-day"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "controlled-deadline-one-day-payment_relative-alpine-lake-14-no-ask-02",
+      "segment": "If you have already paid, please disregard this notice.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "controlled-deadline-one-day-payment_relative-alpine-lake-14-no-ask-04",
+      "segment": "The appointment of 7 February was cancelled by this office.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

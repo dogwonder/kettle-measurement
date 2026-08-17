@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_rose-birch-02",
+  "inputs": {
+    "previous": "generated-development-excess_rose-birch-02-previous.txt",
+    "renewal": "generated-development-excess_rose-birch-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_rose-birch-02-previous-no-value-d82333",
+      "role": "previous",
+      "segment": "Brackenfield Cover buildings insurance — policy schedule BIRCH-ER-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £245.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£245.00"
+      },
+      "id": "development-excess_rose-birch-02-previous-compulsory-excess-612f23",
+      "role": "previous",
+      "segment": "Compulsory excess: £245.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £543.00.",
+        "term": "premium",
+        "value": "£543.00"
+      },
+      "id": "development-excess_rose-birch-02-previous-premium-5cad68",
+      "role": "previous",
+      "segment": "Total annual premium: £543.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £2,590.00 per policy.",
+        "term": "cover_limit",
+        "value": "£2,590.00"
+      },
+      "id": "development-excess_rose-birch-02-previous-cover-limit-7e84f9",
+      "role": "previous",
+      "segment": "Cover limit: £2,590.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-birch-02-previous-no-value-487768",
+      "role": "previous",
+      "segment": "Your reference is BIRCH-ER-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-birch-02-previous-no-value-92bca0",
+      "role": "previous",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under BIRCH-ER-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-birch-02-renewal-no-value-f2005c",
+      "role": "renewal",
+      "segment": "Brackenfield Cover buildings insurance — renewal schedule BIRCH-ER-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £492.50 per claim.",
+        "term": "compulsory_excess",
+        "value": "£492.50"
+      },
+      "id": "development-excess_rose-birch-02-renewal-compulsory-excess-5e2c59",
+      "role": "renewal",
+      "segment": "Compulsory excess: £492.50 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £543.00.",
+        "term": "premium",
+        "value": "£543.00"
+      },
+      "id": "development-excess_rose-birch-02-renewal-premium-5cad68",
+      "role": "renewal",
+      "segment": "Total annual premium: £543.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £2,590.00 per policy.",
+        "term": "cover_limit",
+        "value": "£2,590.00"
+      },
+      "id": "development-excess_rose-birch-02-renewal-cover-limit-7e84f9",
+      "role": "renewal",
+      "segment": "Cover limit: £2,590.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-birch-02-renewal-no-value-92bca0",
+      "role": "renewal",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under BIRCH-ER-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-birch-02-renewal-no-value-487768",
+      "role": "renewal",
+      "segment": "Your reference is BIRCH-ER-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

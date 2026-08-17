@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-fern-06",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "27 December 2026",
+        "deadline": "on 27 December 2026",
+        "due": "2026-12-27",
+        "kind": "attendance",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "appointment_absolute-fern-06-attendance-01",
+      "segment": "You have an appointment about your tenancy account at Ashcombe Housing Trust on 27 December 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-fern-06-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-fern-06-no-ask-04",
+      "segment": "Your direct debit of £115.00 will continue to be collected on the 15th of each month as before.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

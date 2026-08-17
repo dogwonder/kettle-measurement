@@ -1,0 +1,45 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-dateless_anchor-heron-creek-01-controlled-anchor-substituted",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of the hearing",
+        "deadline": "within 21 days",
+        "due": null,
+        "kind": "response",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "controlled-anchor-substituted-dateless_anchor-heron-creek-01-response-00",
+      "segment": "We would ask you to send back the signed agreement for your tenancy account within 21 days of the date of the hearing.",
+      "strata": [
+        "any-letter",
+        "dateless-anchor",
+        "undated-letter",
+        "stated-anchor",
+        "controlled-change",
+        "controlled-anchor-substituted"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "controlled-anchor-substituted-dateless_anchor-heron-creek-01-no-ask-01",
+      "segment": "A duplicate copy can be issued on request at no charge.",
+      "strata": [
+        "any-letter",
+        "dateless-anchor",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "controlled-anchor-substituted-dateless_anchor-heron-creek-01-no-ask-03",
+      "segment": "Time has been extended to 4 August, although the original date was met.",
+      "strata": [
+        "any-letter",
+        "dateless-anchor",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id":         { "type": "integer" },
+          "raw":        { "type": "string" },
+          "name":       { "type": "string" },
+          "recognised": { "type": "boolean" }
+        },
+        "required": ["id", "raw", "name", "recognised"]
+      }
+    }
+  },
+  "required": ["results"]
+}

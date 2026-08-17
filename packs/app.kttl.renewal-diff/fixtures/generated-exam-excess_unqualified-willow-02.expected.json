@@ -1,0 +1,122 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_unqualified-willow-02",
+  "inputs": {
+    "previous": "generated-exam-excess_unqualified-willow-02-previous.txt",
+    "renewal": "generated-exam-excess_unqualified-willow-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-willow-02-previous-no-value-00c491",
+      "role": "previous",
+      "segment": "Schedule WILLOW-EU-407 of your home insurance cover with Marlowe Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £8,523.00.",
+        "term": "premium",
+        "value": "£8,523.00"
+      },
+      "id": "exam-excess_unqualified-willow-02-previous-premium-0a839d",
+      "role": "previous",
+      "segment": "The price for the year comes to £8,523.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-willow-02-previous-excess-unqualified-95bd21",
+      "review": true,
+      "role": "previous",
+      "segment": "An excess of £5,945.00 applies to each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-willow-02-previous-no-value-7eb15a",
+      "role": "previous",
+      "segment": "Please quote WILLOW-EU-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-willow-02-previous-no-value-38ae48",
+      "role": "previous",
+      "segment": "Cover for home insurance under WILLOW-EU-407 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-willow-02-renewal-no-value-d13c33",
+      "role": "renewal",
+      "segment": "Your home insurance cover with Marlowe Mutual under WILLOW-EU-407 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £8,523.00.",
+        "term": "premium",
+        "value": "£8,523.00"
+      },
+      "id": "exam-excess_unqualified-willow-02-renewal-premium-0a839d",
+      "role": "renewal",
+      "segment": "The price for the year comes to £8,523.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-willow-02-renewal-excess-unqualified-eb37f7",
+      "review": true,
+      "role": "renewal",
+      "segment": "An excess of £6,070.00 applies to each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-willow-02-renewal-no-value-38ae48",
+      "role": "renewal",
+      "segment": "Cover for home insurance under WILLOW-EU-407 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-willow-02-renewal-no-value-7eb15a",
+      "role": "renewal",
+      "segment": "Please quote WILLOW-EU-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

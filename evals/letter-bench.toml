@@ -1,0 +1,38 @@
+# The letter pack's bench (#415).
+#
+# Gemma 4 E4B was the presumptive ship model; Qwen3.5-4B is its size
+# peer, and was run to answer the question the first measurement could
+# not — whether inventing asks from silence was the model's habit or the
+# bed's evidence running out. It was the model's: 3 phantom obligations
+# against 28, on identical fixtures, and Qwen won every text axis.
+#
+# Paths are relative to the repository root, which is where `models/`
+# is expected — a symlink to wherever the weights actually live, since
+# they are gitignored and far too large to keep here. An absolute path
+# works too but puts somebody's home directory in a file we share.
+#
+#     cargo run -p kettle -- eval app.kttl.letter-to-actions --models evals/letter-bench.toml --resume
+#
+# Qwen3.5-9B is the size-up arm (7 August). The 4B beat its size peer on
+# every text axis, so the open question is whether more parameters buy
+# anything the 4B has not already got — and in particular whether the
+# no_obligation stratum moves at all, or stays pinned by its n of 76.
+#
+# `--resume` matters: the 4B runs are recorded, so the table reprints
+# them from what is already on disk rather than paying for 710 fixtures
+# again. Only the 9B's 355 are measured.
+
+[[model]]
+file = "models/gemma-4-E4B-it-Q4_K_M.gguf"
+params = "4B"
+quant = "Q4_K_M"
+
+[[model]]
+file = "models/qwen3.5-4b-q4_k_m.gguf"
+params = "4B"
+quant = "Q4_K_M"
+
+[[model]]
+file = "models/qwen3.5-9b-q4_k_m.gguf"
+params = "9B"
+quant = "Q4_K_M"

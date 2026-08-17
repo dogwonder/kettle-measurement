@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-repeated_ask-thistle-26",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-02-28",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "repeated_ask-thistle-26-payment-01",
+      "segment": "Please pay £214.60 for your council tax account within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-thistle-26-no-ask-03",
+      "segment": "No further action is needed once you have paid.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-thistle-26-no-ask-05",
+      "segment": "We stopped collecting the £18.00 subscription on 4 January as you asked.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-passive_obligation-larkspur-12",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2027-01-18",
+        "kind": "response",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "passive_obligation-larkspur-12-response-01",
+      "segment": "The enclosed declaration is to be returned within 21 days of the date of this letter, quoting reference GLA-5527.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-larkspur-12-no-ask-02",
+      "segment": "The case file is being checked by the department that holds it, and any correction is applied automatically within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-larkspur-12-no-ask-03",
+      "segment": "This part of the letter is sent for information only.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-larkspur-12-no-ask-05",
+      "segment": "Your file was transferred to our Leeds office on 28 February; the same reference applies.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

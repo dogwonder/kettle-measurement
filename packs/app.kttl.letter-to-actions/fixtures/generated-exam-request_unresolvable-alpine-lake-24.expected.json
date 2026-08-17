@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-request_unresolvable-alpine-lake-24",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "as soon as you are able",
+        "due": null,
+        "kind": "response",
+        "party": "Northgate Water"
+      },
+      "id": "request_unresolvable-alpine-lake-24-response-01",
+      "segment": "We would be grateful if you could send a meter reading for your water account as soon as you are able.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "unresolvable-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-alpine-lake-24-no-ask-02",
+      "segment": "We hold your account in good standing and no charge applies.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-alpine-lake-24-no-ask-04",
+      "segment": "The repair carried out on 16 January was signed off with no further works identified.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    }
+  ]
+}

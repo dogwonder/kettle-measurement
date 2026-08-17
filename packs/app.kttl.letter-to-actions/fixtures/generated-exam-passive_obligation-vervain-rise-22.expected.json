@@ -1,0 +1,53 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-passive_obligation-vervain-rise-22",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 28 days",
+        "due": "2026-04-16",
+        "kind": "response",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "passive_obligation-vervain-rise-22-response-01",
+      "segment": "The enclosed declaration is to be returned within 28 days of the date of this letter, quoting reference MRS-2207.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-vervain-rise-22-no-ask-02",
+      "segment": "The annual review will be reviewed by our assessment team, and a decision is to be issued within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-vervain-rise-22-no-ask-03",
+      "segment": "This notice is issued for information and no reply is needed to it.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-vervain-rise-22-no-ask-05",
+      "segment": "Collection of £210.00 by direct debit continues on the 1st of each month unchanged.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

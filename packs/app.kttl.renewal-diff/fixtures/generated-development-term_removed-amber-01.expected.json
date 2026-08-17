@@ -1,0 +1,145 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-term_removed-amber-01",
+  "inputs": {
+    "previous": "generated-development-term_removed-amber-01-previous.txt",
+    "renewal": "generated-development-term_removed-amber-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-term_removed-amber-01-previous-no-value-c9a3f6",
+      "role": "previous",
+      "segment": "Haldon Insurance Services contents insurance — policy schedule AMBER-TR-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,197.00.",
+        "term": "premium",
+        "value": "£4,197.00"
+      },
+      "id": "development-term_removed-amber-01-previous-premium-6e480f",
+      "role": "previous",
+      "segment": "Total annual premium: £4,197.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "No claims discount: 41%.",
+        "term": "no_claims_discount",
+        "value": "41%"
+      },
+      "id": "development-term_removed-amber-01-previous-no-claims-discount-390738",
+      "role": "previous",
+      "segment": "No claims discount: 41%.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,855.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,855.00"
+      },
+      "id": "development-term_removed-amber-01-previous-compulsory-excess-0d3893",
+      "role": "previous",
+      "segment": "Compulsory excess: £2,855.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-amber-01-previous-no-value-4f0067",
+      "role": "previous",
+      "segment": "Your reference is AMBER-TR-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-amber-01-previous-no-value-07df73",
+      "role": "previous",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under AMBER-TR-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-amber-01-renewal-no-value-f85186",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services contents insurance — renewal schedule AMBER-TR-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,197.00.",
+        "term": "premium",
+        "value": "£4,197.00"
+      },
+      "id": "development-term_removed-amber-01-renewal-premium-6e480f",
+      "role": "renewal",
+      "segment": "Total annual premium: £4,197.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,855.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,855.00"
+      },
+      "id": "development-term_removed-amber-01-renewal-compulsory-excess-0d3893",
+      "role": "renewal",
+      "segment": "Compulsory excess: £2,855.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-amber-01-renewal-no-value-07df73",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under AMBER-TR-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-amber-01-renewal-no-value-4f0067",
+      "role": "renewal",
+      "segment": "Your reference is AMBER-TR-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

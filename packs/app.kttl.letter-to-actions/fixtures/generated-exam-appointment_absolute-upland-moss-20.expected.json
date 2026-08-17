@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_absolute-upland-moss-20",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "18 January 2026",
+        "deadline": "on 18 January 2026",
+        "due": "2026-01-18",
+        "kind": "attendance",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_absolute-upland-moss-20-attendance-01",
+      "segment": "We have booked your parking charge appointment with Harborne Parking Services on 18 January 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-upland-moss-20-no-ask-02",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-upland-moss-20-no-ask-04",
+      "segment": "The reading taken on 27 April was used, so no estimate has been applied.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

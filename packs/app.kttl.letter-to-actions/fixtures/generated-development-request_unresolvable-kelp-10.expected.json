@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-request_unresolvable-kelp-10",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "at your earliest convenience",
+        "due": null,
+        "kind": "response",
+        "party": "Eastvale Library Service"
+      },
+      "id": "request_unresolvable-kelp-10-response-01",
+      "segment": "Please send us a meter reading for your membership at your earliest convenience.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "unresolvable-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-kelp-10-no-ask-02",
+      "segment": "Thank you for being a customer of ours.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-kelp-10-no-ask-04",
+      "segment": "This information is provided under our licence conditions and needs no reply.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    }
+  ]
+}

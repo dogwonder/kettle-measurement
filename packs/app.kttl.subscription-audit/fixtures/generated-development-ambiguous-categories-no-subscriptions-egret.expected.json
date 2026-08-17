@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-no-subscriptions-egret",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* STONEBRIDGEPROP",
+      "name": "Stonebridge Property"
+    },
+    {
+      "raw": "SQ *STONEBRIDGEPROP",
+      "name": "Stonebridge Property"
+    },
+    {
+      "raw": "PAYPAL *STONEBRIDGEPROP",
+      "name": "Stonebridge Property"
+    },
+    {
+      "raw": "BRAMFORD TEXTILES PAYMENT",
+      "name": "Bramford Textiles"
+    },
+    {
+      "raw": "STRIPE* GWR",
+      "name": "GWR"
+    },
+    {
+      "raw": "SQ *GWR",
+      "name": "GWR"
+    },
+    {
+      "raw": "PAYPAL *GWR",
+      "name": "GWR"
+    },
+    {
+      "raw": "STRIPE* ANOWAK",
+      "name": "A Nowak"
+    },
+    {
+      "raw": "SQ *ANOWAK",
+      "name": "A Nowak"
+    },
+    {
+      "raw": "PAYPAL *ANOWAK",
+      "name": "A Nowak"
+    },
+    {
+      "raw": "STRIPE* MORRISONS",
+      "name": "Morrisons"
+    },
+    {
+      "raw": "SQ *MORRISONS",
+      "name": "Morrisons"
+    },
+    {
+      "raw": "PAYPAL *MORRISONS",
+      "name": "Morrisons"
+    },
+    {
+      "raw": "THE RANGE PAYMENT",
+      "name": "The Range"
+    },
+    {
+      "raw": "OVO ENERGY PAYMENT",
+      "name": "OVO Energy"
+    },
+    {
+      "raw": "HARBOUR OUTDOORS PAYMENT",
+      "name": "Harbour Outdoors"
+    },
+    {
+      "raw": "STRIPE* CROSSKEYSSTALL",
+      "name": "Crosskeys Stall"
+    },
+    {
+      "raw": "SQ *CROSSKEYSSTALL",
+      "name": "Crosskeys Stall"
+    },
+    {
+      "raw": "PAYPAL *CROSSKEYSSTALL",
+      "name": "Crosskeys Stall"
+    },
+    {
+      "raw": "KESTREL VALLEY PAYMENT",
+      "name": "Kestrel Valley"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* STONEBRIDGEPROP",
+      "name": "Stonebridge Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "BRAMFORD TEXTILES PAYMENT",
+      "name": "Bramford Textiles",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* GWR",
+      "name": "GWR",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ANOWAK",
+      "name": "A Nowak",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MORRISONS",
+      "name": "Morrisons",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "THE RANGE PAYMENT",
+      "name": "The Range",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "OVO ENERGY PAYMENT",
+      "name": "OVO Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "HARBOUR OUTDOORS PAYMENT",
+      "name": "Harbour Outdoors",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* CROSSKEYSSTALL",
+      "name": "Crosskeys Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-egret-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "KESTREL VALLEY PAYMENT",
+      "name": "Kestrel Valley",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "GWR",
+      "period": "yearly"
+    },
+    {
+      "merchant": "OVO Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

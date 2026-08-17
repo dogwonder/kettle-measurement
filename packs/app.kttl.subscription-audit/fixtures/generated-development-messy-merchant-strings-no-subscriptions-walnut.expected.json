@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-no-subscriptions-walnut",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* HARTWELLLETTINGS CARD 4821",
+      "name": "Hartwell Lettings"
+    },
+    {
+      "raw": "SQ *HARTWELLLETTINGS CARD 4821",
+      "name": "Hartwell Lettings"
+    },
+    {
+      "raw": "PAYPAL *HARTWELLLETTINGS CARD 4821",
+      "name": "Hartwell Lettings"
+    },
+    {
+      "raw": "CARD 4821 CLDWLL LGSTCS GB",
+      "name": "Caldwell Logistics"
+    },
+    {
+      "raw": "STRIPE* TRAINLINE CARD 4821",
+      "name": "Trainline"
+    },
+    {
+      "raw": "SQ *TRAINLINE CARD 4821",
+      "name": "Trainline"
+    },
+    {
+      "raw": "PAYPAL *TRAINLINE CARD 4821",
+      "name": "Trainline"
+    },
+    {
+      "raw": "STRIPE* JHENDERSON CARD 4821",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "SQ *JHENDERSON CARD 4821",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "PAYPAL *JHENDERSON CARD 4821",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "STRIPE* TESCOSTORES CARD 4821",
+      "name": "Tesco"
+    },
+    {
+      "raw": "SQ *TESCOSTORES CARD 4821",
+      "name": "Tesco"
+    },
+    {
+      "raw": "PAYPAL *TESCOSTORES CARD 4821",
+      "name": "Tesco"
+    },
+    {
+      "raw": "CARD 4821 RGS GB",
+      "name": "Argos"
+    },
+    {
+      "raw": "CARD 4821 BRTSH GS GB",
+      "name": "British Gas"
+    },
+    {
+      "raw": "CARD 4821 BRGHTWTR HM GB",
+      "name": "Brightwater Home"
+    },
+    {
+      "raw": "STRIPE* FENWICKMARKET CARD 4821",
+      "name": "Fenwick Market"
+    },
+    {
+      "raw": "SQ *FENWICKMARKET CARD 4821",
+      "name": "Fenwick Market"
+    },
+    {
+      "raw": "PAYPAL *FENWICKMARKET CARD 4821",
+      "name": "Fenwick Market"
+    },
+    {
+      "raw": "CARD 4821 HLLNGWD PSS GB",
+      "name": "Hollingwood Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* HARTWELLLETTINGS CARD 4821",
+      "name": "Hartwell Lettings",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 CLDWLL LGSTCS GB",
+      "name": "Caldwell Logistics",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TRAINLINE CARD 4821",
+      "name": "Trainline",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* JHENDERSON CARD 4821",
+      "name": "J Henderson",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TESCOSTORES CARD 4821",
+      "name": "Tesco",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 RGS GB",
+      "name": "Argos",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 BRTSH GS GB",
+      "name": "British Gas",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 BRGHTWTR HM GB",
+      "name": "Brightwater Home",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* FENWICKMARKET CARD 4821",
+      "name": "Fenwick Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-walnut-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 HLLNGWD PSS GB",
+      "name": "Hollingwood Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Trainline",
+      "period": "yearly"
+    },
+    {
+      "merchant": "British Gas",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

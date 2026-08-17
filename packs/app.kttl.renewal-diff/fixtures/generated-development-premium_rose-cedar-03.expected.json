@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-premium_rose-cedar-03",
+  "inputs": {
+    "previous": "generated-development-premium_rose-cedar-03-previous.txt",
+    "renewal": "generated-development-premium_rose-cedar-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-premium_rose-cedar-03-previous-no-value-5af70a",
+      "role": "previous",
+      "segment": "Brackenfield Cover buildings insurance — policy schedule CEDAR-PR-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £1,341.00.",
+        "term": "premium",
+        "value": "£1,341.00"
+      },
+      "id": "development-premium_rose-cedar-03-previous-premium-7574cf",
+      "role": "previous",
+      "segment": "Total annual premium: £1,341.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £815.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£815.00"
+      },
+      "id": "development-premium_rose-cedar-03-previous-compulsory-excess-c0d5cf",
+      "role": "previous",
+      "segment": "Compulsory excess: £815.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £3,730.00 per policy.",
+        "term": "cover_limit",
+        "value": "£3,730.00"
+      },
+      "id": "development-premium_rose-cedar-03-previous-cover-limit-fca24a",
+      "role": "previous",
+      "segment": "Cover limit: £3,730.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-cedar-03-previous-no-value-6eb20c",
+      "role": "previous",
+      "segment": "Your reference is CEDAR-PR-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-cedar-03-previous-no-value-911c61",
+      "role": "previous",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under CEDAR-PR-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-cedar-03-renewal-no-value-d40f02",
+      "role": "renewal",
+      "segment": "Brackenfield Cover buildings insurance — renewal schedule CEDAR-PR-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £1,473.50.",
+        "term": "premium",
+        "value": "£1,473.50"
+      },
+      "id": "development-premium_rose-cedar-03-renewal-premium-1a948a",
+      "role": "renewal",
+      "segment": "Total annual premium: £1,473.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £815.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£815.00"
+      },
+      "id": "development-premium_rose-cedar-03-renewal-compulsory-excess-c0d5cf",
+      "role": "renewal",
+      "segment": "Compulsory excess: £815.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £3,730.00 per policy.",
+        "term": "cover_limit",
+        "value": "£3,730.00"
+      },
+      "id": "development-premium_rose-cedar-03-renewal-cover-limit-fca24a",
+      "role": "renewal",
+      "segment": "Cover limit: £3,730.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-cedar-03-renewal-no-value-911c61",
+      "role": "renewal",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under CEDAR-PR-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-cedar-03-renewal-no-value-6eb20c",
+      "role": "renewal",
+      "segment": "Your reference is CEDAR-PR-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-passive_obligation-alder-carr-26",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-08-01",
+        "kind": "payment",
+        "party": "Belwood Insurance"
+      },
+      "id": "passive_obligation-alder-carr-26-payment-01",
+      "segment": "Payment of £188.20 must be received within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-alder-carr-26-no-ask-02",
+      "segment": "The policy renewal will be reviewed by our assessment team, and a decision is to be issued within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-alder-carr-26-no-ask-03",
+      "segment": "This notice is issued for information and no reply is needed to it.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-alder-carr-26-no-ask-05",
+      "segment": "A credit of £14.50 will show on the statement issued in September.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

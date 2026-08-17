@@ -1,0 +1,243 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-subscription-heavy-cloud-meadow",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* KOOFR",
+      "name": "Koofr"
+    },
+    {
+      "raw": "SQ *KOOFR",
+      "name": "Koofr"
+    },
+    {
+      "raw": "PAYPAL *KOOFR",
+      "name": "Koofr"
+    },
+    {
+      "raw": "THE WEEK PAYMENT",
+      "name": "The Week"
+    },
+    {
+      "raw": "BUSUU PAYMENT",
+      "name": "Busuu"
+    },
+    {
+      "raw": "PELOTON PAYMENT",
+      "name": "Peloton"
+    },
+    {
+      "raw": "PRIME VIDEO PAYMENT",
+      "name": "Prime Video"
+    },
+    {
+      "raw": "AMAZON MUSIC PAYMENT",
+      "name": "Amazon Music"
+    },
+    {
+      "raw": "STRIPE* ICLOUDPLUS",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "SQ *ICLOUDPLUS",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "PAYPAL *ICLOUDPLUS",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "THE INDEPENDENT PAYMENT",
+      "name": "The Independent"
+    },
+    {
+      "raw": "STRIPE* HAYWARDMARKET",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "SQ *HAYWARDMARKET",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "PAYPAL *HAYWARDMARKET",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "WYNDHAM PASS PAYMENT",
+      "name": "Wyndham Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* KOOFR",
+      "name": "Koofr",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "THE WEEK PAYMENT",
+      "name": "The Week",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BUSUU PAYMENT",
+      "name": "Busuu",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "PELOTON PAYMENT",
+      "name": "Peloton",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "PRIME VIDEO PAYMENT",
+      "name": "Prime Video",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "AMAZON MUSIC PAYMENT",
+      "name": "Amazon Music",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ICLOUDPLUS",
+      "name": "iCloud+",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE INDEPENDENT PAYMENT",
+      "name": "The Independent",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* HAYWARDMARKET",
+      "name": "Hayward Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-cloud-meadow-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "WYNDHAM PASS PAYMENT",
+      "name": "Wyndham Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Koofr",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Week",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Busuu",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Peloton",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Prime Video",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Amazon Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Independent",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

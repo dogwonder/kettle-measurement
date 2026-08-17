@@ -1,0 +1,70 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-nothing_stated-poplar-01",
+  "inputs": {
+    "previous": "generated-exam-nothing_stated-poplar-01-previous.txt",
+    "renewal": "generated-exam-nothing_stated-poplar-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-poplar-01-previous-no-value-b0ff3a",
+      "role": "previous",
+      "segment": "Schedule POPLAR-NS-400 of your travel insurance cover with Pennine Line Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-poplar-01-previous-no-value-9806eb",
+      "role": "previous",
+      "segment": "Please quote POPLAR-NS-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-poplar-01-previous-no-value-7ec27d",
+      "role": "previous",
+      "segment": "Cover for travel insurance under POPLAR-NS-400 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-poplar-01-renewal-no-value-73695b",
+      "role": "renewal",
+      "segment": "Your travel insurance cover with Pennine Line Assurance under POPLAR-NS-400 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-poplar-01-renewal-no-value-7ec27d",
+      "role": "renewal",
+      "segment": "Cover for travel insurance under POPLAR-NS-400 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-poplar-01-renewal-no-value-9806eb",
+      "role": "renewal",
+      "segment": "Please quote POPLAR-NS-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

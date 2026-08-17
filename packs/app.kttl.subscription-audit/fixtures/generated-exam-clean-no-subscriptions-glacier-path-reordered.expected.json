@@ -1,0 +1,244 @@
+{
+  "classify": [
+    {
+      "category": "housing",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-monthly-rent",
+      "kind": "utility",
+      "name": "Thornbury Letting",
+      "raw": "STRIPE* THORNBURYLETTING",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ]
+    },
+    {
+      "category": "finance",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-monthly-salary",
+      "kind": "income",
+      "name": "Tarlton Joinery",
+      "raw": "TARLTON JOINERY",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ]
+    },
+    {
+      "category": "transport",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-annual-season-ticket",
+      "kind": "utility",
+      "name": "Avanti West Coast",
+      "raw": "STRIPE* AVANTIWESTCST",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ]
+    },
+    {
+      "category": "finance",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-standing-order-person",
+      "kind": "regular_spend",
+      "name": "D Chaudhry",
+      "raw": "STRIPE* DCHAUDHRY",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ]
+    },
+    {
+      "category": "food_drink",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-weekly-grocery",
+      "kind": "regular_spend",
+      "name": "Asda",
+      "raw": "STRIPE* ASDASTORES",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ]
+    },
+    {
+      "category": "retail",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-duplicate-retail-charge",
+      "kind": "one_off",
+      "name": "B&Q",
+      "raw": "B&Q LTD",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ]
+    },
+    {
+      "category": "energy",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-rising-energy-bill",
+      "kind": "utility",
+      "name": "So Energy",
+      "raw": "SO ENERGY",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ]
+    },
+    {
+      "category": "retail",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-refunded-card-purchase",
+      "kind": "one_off",
+      "name": "Carrick Kitchens",
+      "raw": "CARRICK KITCHENS",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ]
+    },
+    {
+      "category": "retail",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-processor-market-purchase",
+      "kind": "one_off",
+      "name": "Hayward Market",
+      "raw": "STRIPE* HAYWARDMARKET",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ]
+    },
+    {
+      "category": "transport",
+      "id": "reorder-exam-clean-no-subscriptions-glacier-path-duplicate-season-pass",
+      "kind": "one_off",
+      "name": "Wyndham Pass",
+      "raw": "WYNDHAM PASS",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ]
+    }
+  ],
+  "eval_set": "exam",
+  "fixture_id": "exam-generated-clean-no-subscriptions-glacier-path-reordered",
+  "normalise": [
+    {
+      "name": "Thornbury Letting",
+      "raw": "STRIPE* THORNBURYLETTING"
+    },
+    {
+      "name": "Thornbury Letting",
+      "raw": "SQ *THORNBURYLETTING"
+    },
+    {
+      "name": "Thornbury Letting",
+      "raw": "PAYPAL *THORNBURYLETTING"
+    },
+    {
+      "name": "Tarlton Joinery",
+      "raw": "TARLTON JOINERY"
+    },
+    {
+      "name": "Avanti West Coast",
+      "raw": "STRIPE* AVANTIWESTCST"
+    },
+    {
+      "name": "Avanti West Coast",
+      "raw": "SQ *AVANTIWESTCST"
+    },
+    {
+      "name": "Avanti West Coast",
+      "raw": "PAYPAL *AVANTIWESTCST"
+    },
+    {
+      "name": "D Chaudhry",
+      "raw": "STRIPE* DCHAUDHRY"
+    },
+    {
+      "name": "D Chaudhry",
+      "raw": "SQ *DCHAUDHRY"
+    },
+    {
+      "name": "D Chaudhry",
+      "raw": "PAYPAL *DCHAUDHRY"
+    },
+    {
+      "name": "Asda",
+      "raw": "STRIPE* ASDASTORES"
+    },
+    {
+      "name": "Asda",
+      "raw": "SQ *ASDASTORES"
+    },
+    {
+      "name": "Asda",
+      "raw": "PAYPAL *ASDASTORES"
+    },
+    {
+      "name": "B&Q",
+      "raw": "B&Q LTD"
+    },
+    {
+      "name": "So Energy",
+      "raw": "SO ENERGY"
+    },
+    {
+      "name": "Carrick Kitchens",
+      "raw": "CARRICK KITCHENS"
+    },
+    {
+      "name": "Hayward Market",
+      "raw": "STRIPE* HAYWARDMARKET"
+    },
+    {
+      "name": "Hayward Market",
+      "raw": "SQ *HAYWARDMARKET"
+    },
+    {
+      "name": "Hayward Market",
+      "raw": "PAYPAL *HAYWARDMARKET"
+    },
+    {
+      "name": "Wyndham Pass",
+      "raw": "WYNDHAM PASS"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Avanti West Coast",
+      "period": "yearly"
+    },
+    {
+      "merchant": "So Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "classify_category": "exact",
+    "classify_kind": "exact",
+    "normalise": "fuzzy:0.85",
+    "recurring": "exact"
+  }
+}

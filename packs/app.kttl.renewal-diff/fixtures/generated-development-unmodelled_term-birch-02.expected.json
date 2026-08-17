@@ -1,0 +1,132 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-unmodelled_term-birch-02",
+  "inputs": {
+    "previous": "generated-development-unmodelled_term-birch-02-previous.txt",
+    "renewal": "generated-development-unmodelled_term-birch-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-birch-02-previous-no-value-4472cc",
+      "role": "previous",
+      "segment": "Marlowe Mutual home insurance — policy schedule BIRCH-UT-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,974.00.",
+        "term": "premium",
+        "value": "£4,974.00"
+      },
+      "id": "development-unmodelled_term-birch-02-previous-premium-a7f6c3",
+      "role": "previous",
+      "segment": "Total annual premium: £4,974.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Windscreen repair contribution: £717.00 per claim.",
+        "term": "other",
+        "value": "£717.00"
+      },
+      "id": "development-unmodelled_term-birch-02-previous-other-4fafa7",
+      "review": true,
+      "role": "previous",
+      "segment": "Windscreen repair contribution: £717.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-birch-02-previous-no-value-1ea0aa",
+      "role": "previous",
+      "segment": "Your reference is BIRCH-UT-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-birch-02-previous-no-value-e2b5b1",
+      "role": "previous",
+      "segment": "Marlowe Mutual arranges home insurance cover under BIRCH-UT-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-birch-02-renewal-no-value-53c4e6",
+      "role": "renewal",
+      "segment": "Marlowe Mutual home insurance — renewal schedule BIRCH-UT-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,014.00.",
+        "term": "premium",
+        "value": "£5,014.00"
+      },
+      "id": "development-unmodelled_term-birch-02-renewal-premium-712ebb",
+      "role": "renewal",
+      "segment": "Total annual premium: £5,014.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Windscreen repair contribution: £717.00 per claim.",
+        "term": "other",
+        "value": "£717.00"
+      },
+      "id": "development-unmodelled_term-birch-02-renewal-other-4fafa7",
+      "review": true,
+      "role": "renewal",
+      "segment": "Windscreen repair contribution: £717.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-birch-02-renewal-no-value-e2b5b1",
+      "role": "renewal",
+      "segment": "Marlowe Mutual arranges home insurance cover under BIRCH-UT-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-birch-02-renewal-no-value-1ea0aa",
+      "role": "renewal",
+      "segment": "Your reference is BIRCH-UT-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

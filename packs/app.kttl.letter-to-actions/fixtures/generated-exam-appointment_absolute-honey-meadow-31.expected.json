@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_absolute-honey-meadow-31",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "21 June 2026",
+        "deadline": "on 21 June 2026",
+        "due": "2026-06-21",
+        "kind": "attendance",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_absolute-honey-meadow-31-attendance-01",
+      "segment": "We have booked your case file appointment with Grantley Legal Aid on 21 June 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-honey-meadow-31-no-ask-02",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-honey-meadow-31-no-ask-04",
+      "segment": "The contractor is programmed to complete by 15 September; no action falls to you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

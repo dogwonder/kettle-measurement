@@ -1,0 +1,243 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-subscription-heavy-honey-meadow",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* KOOFR CARD 4821",
+      "name": "Koofr"
+    },
+    {
+      "raw": "SQ *KOOFR CARD 4821",
+      "name": "Koofr"
+    },
+    {
+      "raw": "PAYPAL *KOOFR CARD 4821",
+      "name": "Koofr"
+    },
+    {
+      "raw": "CARD 4821 TH WK GB",
+      "name": "The Week"
+    },
+    {
+      "raw": "CARD 4821 BS GB",
+      "name": "Busuu"
+    },
+    {
+      "raw": "CARD 4821 PLTN GB",
+      "name": "Peloton"
+    },
+    {
+      "raw": "CARD 4821 PRM VD GB",
+      "name": "Prime Video"
+    },
+    {
+      "raw": "CARD 4821 MZN MSC GB",
+      "name": "Amazon Music"
+    },
+    {
+      "raw": "STRIPE* ICLOUDPLUS CARD 4821",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "SQ *ICLOUDPLUS CARD 4821",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "PAYPAL *ICLOUDPLUS CARD 4821",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "CARD 4821 TH NDPNDNT GB",
+      "name": "The Independent"
+    },
+    {
+      "raw": "STRIPE* HAYWARDMARKET CARD 4821",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "SQ *HAYWARDMARKET CARD 4821",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "PAYPAL *HAYWARDMARKET CARD 4821",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "CARD 4821 WYNDHM PSS GB",
+      "name": "Wyndham Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* KOOFR CARD 4821",
+      "name": "Koofr",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 TH WK GB",
+      "name": "The Week",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 BS GB",
+      "name": "Busuu",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 PLTN GB",
+      "name": "Peloton",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 PRM VD GB",
+      "name": "Prime Video",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 MZN MSC GB",
+      "name": "Amazon Music",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ICLOUDPLUS CARD 4821",
+      "name": "iCloud+",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 TH NDPNDNT GB",
+      "name": "The Independent",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* HAYWARDMARKET CARD 4821",
+      "name": "Hayward Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-honey-meadow-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 WYNDHM PSS GB",
+      "name": "Wyndham Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Koofr",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Week",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Busuu",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Peloton",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Prime Video",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Amazon Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Independent",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

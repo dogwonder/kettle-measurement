@@ -1,0 +1,200 @@
+{
+  "id": "app.kttl.subscription-audit",
+  "name": "Subscription & Recurring Spend Audit",
+  "description": "Finds every subscription, price rise and regular cost, and what they add up to over a year.",
+  "version": "1.5.0",
+  "min_runner_version": "0.1.0",
+  "inputs": [
+    { "role": "statement", "label": "Your bank statements", "accept": ["text/csv", "application/pdf"], "multiple": true }
+  ],
+  "capabilities": ["read"],
+  "model": {
+    "min_tier": "7b",
+    "recommended_tier": "7b",
+    "context": 8192,
+    "temperature": 0
+  },
+  "copy": {
+    "time": {
+      "kind": "varies",
+      "estimate": "with statement size",
+      "on_this_computer": "On the M1 Pro we measured, 6 different merchants took 22 seconds and 80 took about 4 minutes. A slower computer will take longer."
+    },
+    "will": [
+      {
+        "doing": "Read your statement",
+        "detail": "the one file you drop, and nothing else.",
+        "steps": ["Reading your statement"]
+      },
+      {
+        "doing": "Group payments by merchant",
+        "detail": "so twelve Netflix lines become one Netflix.",
+        "steps": ["Grouping payments by merchant"]
+      },
+      {
+        "doing": "Sort merchants one by one",
+        "detail": "subscription, utility, regular shop or one-off. Anything it can't settle goes to \"Needs your review\", not into the totals.",
+        "steps": ["Sorting merchants"]
+      },
+      {
+        "doing": "Check for price rises",
+        "detail": "the same payment costing more later in the year.",
+        "steps": ["Checking for price rises"]
+      },
+      {
+        "doing": "Write your report",
+        "detail": "every figure traceable to the payments behind it.",
+        "steps": ["Writing your report"]
+      }
+    ],
+    "run_verb": "Run this audit"
+  },
+  "kinds": {
+    "streaming": "subscription",
+    "software": "subscription",
+    "news_media": "subscription",
+    "fitness": "subscription",
+    "telecoms": "utility",
+    "energy": "utility",
+    "insurance": "utility",
+    "housing": "utility",
+    "transport": "utility",
+    "finance": "regular_spend",
+    "food_drink": "regular_spend",
+    "retail": "regular_spend",
+    "charity": "regular_spend",
+    "other": "subscription",
+    "unknown": "subscription"
+  },
+  "pipeline": [
+    { "step": "preprocess", "impl": "builtin:statement-parse" },
+    { "step": "model", "role": "normalise", "prompt": "prompts/normalise.md", "schema": "schemas/normalise.schema.json", "batch": 20 },
+    { "step": "model", "role": "classify",  "prompt": "prompts/classify.md",  "schema": "schemas/classify.schema.json",  "batch": 15,
+      "examples": "examples/classify.examples.json" },
+    { "step": "aggregate", "impl": "builtin:recurrence-detect" },
+    { "step": "model", "prompt": "prompts/summary.md", "optional": true },
+    { "step": "render", "template": "report.html.tera" }
+  ],
+  "eval": { "normalise": 0.85 },
+  "eval_gate": "per_fixture",
+  "eval_metrics": ["classification"],
+  "eval_costs": {
+    "review_rate": {
+      "reason": "Tracks how many merchant decisions a human checks; review surfaces uncertainty without asserting it as fact.",
+      "date": "2026-07-29"
+    }
+  },
+  "eval_strata": {
+    "any-statement": {
+      "description": "Every scored merchant in the bed. The pooled gated slice: with a 5% ceiling a class needs 73 distinct decisions, so the evidence is kept in one place rather than sliced nineteen ways until no slice can say anything.",
+      "classes": {
+        "subscription": {
+          "max_wilson_95": 0.05,
+          "reason": "Appliance-risk ceiling, gated pooled (#316, decided 1 August 2026). The 5% bar is unchanged from 29 July 2026; what changed is the slice it is judged on. A ceiling counts distinct decisions (#310), and 5% needs 73 of them — sliced nineteen ways this bed's worst cells hold eight, so every gate read UNPROVEN and no slice could say anything. Pooling puts the evidence in one place. The narrower strata below keep no ceiling and are reported as diagnostics, so a pooled failure can still be read.",
+          "date": "2026-08-01"
+        },
+        "not_subscription": {
+          "max_wilson_95": 0.05,
+          "reason": "Appliance-risk ceiling, gated pooled (#316, decided 1 August 2026). The 5% bar is unchanged from 29 July 2026; what changed is the slice it is judged on. A ceiling counts distinct decisions (#310), and 5% needs 73 of them — sliced nineteen ways this bed's worst cells hold eight, so every gate read UNPROVEN and no slice could say anything. Pooling puts the evidence in one place. The narrower strata below keep no ceiling and are reported as diagnostics, so a pooled failure can still be read.",
+          "date": "2026-08-01"
+        }
+      }
+    },
+    "clean": {
+      "description": "Clear merchant strings and unambiguous household payment behaviour.",
+      "classes": {}
+    },
+    "messy-merchant-strings": {
+      "description": "Subscriptions and non-subscriptions hidden behind abbreviated, noisy or processor-prefixed descriptors.",
+      "classes": {}
+    },
+    "ambiguous-categories": {
+      "description": "Payments whose merchant or category can plausibly represent either a subscription or ordinary household activity.",
+      "classes": {}
+    },
+    "no-subscriptions": {
+      "description": "Statements containing no subscriptions, including recurring household payments that must not be asserted as subscriptions.",
+      "classes": {}
+    },
+    "subscription-heavy": {
+      "description": "Statements where nearly every scored item is a subscription, with a small number of important negatives.",
+      "classes": {}
+    },
+    "annual-subscription-once-yearly": {
+      "description": "An annual subscription represented by one charge in twelve months.",
+      "classes": {
+        "subscription": {
+          "max_wilson_95": 0.05,
+          "reason": "Per-stratum ceiling kept on `subscription` alone (#316, decided 1 August 2026). Pooling would let a pack that is safe on average and dangerous here pass, and these are the three strata built precisely to catch a confident denial of a real subscription: the charge a person has forgotten is the one that renews yearly, converts off a free trial, or quietly rises mid-series. The other sixteen strata carry symmetrical harm and are gated pooled. Same 5% bar, and revisit only with independent evidence, not prompt-iteration results.",
+          "date": "2026-08-01"
+        }
+      }
+    },
+    "free-trial-conversion": {
+      "description": "A free trial followed by a paid subscription.",
+      "classes": {
+        "subscription": {
+          "max_wilson_95": 0.05,
+          "reason": "Per-stratum ceiling kept on `subscription` alone (#316, decided 1 August 2026). Pooling would let a pack that is safe on average and dangerous here pass, and these are the three strata built precisely to catch a confident denial of a real subscription: the charge a person has forgotten is the one that renews yearly, converts off a free trial, or quietly rises mid-series. The other sixteen strata carry symmetrical harm and are gated pooled. Same 5% bar, and revisit only with independent evidence, not prompt-iteration results.",
+          "date": "2026-08-01"
+        }
+      }
+    },
+    "cancelled-then-resumed": {
+      "description": "A subscription that stops and later resumes.",
+      "classes": {}
+    },
+    "price-rise-mid-series": {
+      "description": "A recurring series whose amount rises part-way through the statement.",
+      "classes": {
+        "subscription": {
+          "max_wilson_95": 0.05,
+          "reason": "Per-stratum ceiling kept on `subscription` alone (#316, decided 1 August 2026). Pooling would let a pack that is safe on average and dangerous here pass, and these are the three strata built precisely to catch a confident denial of a real subscription: the charge a person has forgotten is the one that renews yearly, converts off a free trial, or quietly rises mid-series. The other sixteen strata carry symmetrical harm and are gated pooled. Same 5% bar, and revisit only with independent evidence, not prompt-iteration results.",
+          "date": "2026-08-01"
+        }
+      }
+    },
+    "refunds-and-chargebacks": {
+      "description": "Series containing refunds or chargebacks that must not change the underlying payment class.",
+      "classes": {}
+    },
+    "multi-descriptor-merchant": {
+      "description": "One merchant appearing through three descriptors, including STRIPE*, SQ * and PAYPAL * forms.",
+      "classes": {}
+    },
+    "duplicate-charge-not-subscription": {
+      "description": "A duplicated charge that is not evidence of a subscription.",
+      "classes": {}
+    },
+    "broad": {
+      "description": "Legacy broad-bed diagnostic tag; reported without a verdict gate.",
+      "classes": {}
+    },
+    "automatic-billing": {
+      "description": "Legacy automatic-billing diagnostic tag; reported without a verdict gate.",
+      "classes": {}
+    },
+    "essential-bill": {
+      "description": "Legacy essential-bill diagnostic tag; reported without a verdict gate.",
+      "classes": {}
+    },
+    "habitual-spend": {
+      "description": "Legacy habitual-spend diagnostic tag; reported without a verdict gate.",
+      "classes": {}
+    },
+    "isolated-purchase": {
+      "description": "Legacy isolated-purchase diagnostic tag; reported without a verdict gate.",
+      "classes": {}
+    },
+    "document-instruction": {
+      "description": "Instruction-shaped document content, pooled across every adversarial family (#433). Diagnostic: harm stays gated on the ceilings these items also join; a gated adversarial ceiling would first need 73+ distinct decisions per set at 5%.",
+      "classes": {}
+    },
+    "descriptor-command-text": {
+      "description": "Adversarial family (#433): a merchant descriptor carrying command-like text, instructing a confident denial of a subscription — the harm class with its own ceiling. Diagnostic slice of the statement bed; the declared classifications_by_merchant invariance is what makes obedience visible.",
+      "classes": {}
+    }
+  },
+  "eval_items": { "retired": [] },
+  "outputs": ["report.html", "actions.json"]
+}

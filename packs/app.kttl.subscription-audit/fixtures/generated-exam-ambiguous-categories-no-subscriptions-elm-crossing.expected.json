@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-no-subscriptions-elm-crossing",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* MARCHMONTHOMES",
+      "name": "Marchmont Homes"
+    },
+    {
+      "raw": "SQ *MARCHMONTHOMES",
+      "name": "Marchmont Homes"
+    },
+    {
+      "raw": "PAYPAL *MARCHMONTHOMES",
+      "name": "Marchmont Homes"
+    },
+    {
+      "raw": "LYNTON HAULAGE PAYMENT",
+      "name": "Lynton Haulage"
+    },
+    {
+      "raw": "STRIPE* C2CRAIL",
+      "name": "c2c"
+    },
+    {
+      "raw": "SQ *C2CRAIL",
+      "name": "c2c"
+    },
+    {
+      "raw": "PAYPAL *C2CRAIL",
+      "name": "c2c"
+    },
+    {
+      "raw": "STRIPE* EMORGENSTERN",
+      "name": "E Morgenstern"
+    },
+    {
+      "raw": "SQ *EMORGENSTERN",
+      "name": "E Morgenstern"
+    },
+    {
+      "raw": "PAYPAL *EMORGENSTERN",
+      "name": "E Morgenstern"
+    },
+    {
+      "raw": "STRIPE* BOOTHS",
+      "name": "Booths"
+    },
+    {
+      "raw": "SQ *BOOTHS",
+      "name": "Booths"
+    },
+    {
+      "raw": "PAYPAL *BOOTHS",
+      "name": "Booths"
+    },
+    {
+      "raw": "ROBERT DYAS PAYMENT",
+      "name": "Robert Dyas"
+    },
+    {
+      "raw": "REBEL ENERGY PAYMENT",
+      "name": "Rebel Energy"
+    },
+    {
+      "raw": "BRACKEN CAMPING PAYMENT",
+      "name": "Bracken Camping"
+    },
+    {
+      "raw": "STRIPE* OLDMILLTRADERS",
+      "name": "Oldmill Traders"
+    },
+    {
+      "raw": "SQ *OLDMILLTRADERS",
+      "name": "Oldmill Traders"
+    },
+    {
+      "raw": "PAYPAL *OLDMILLTRADERS",
+      "name": "Oldmill Traders"
+    },
+    {
+      "raw": "BRAMPTON GARDENS PAYMENT",
+      "name": "Brampton Gardens"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MARCHMONTHOMES",
+      "name": "Marchmont Homes",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "LYNTON HAULAGE PAYMENT",
+      "name": "Lynton Haulage",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* C2CRAIL",
+      "name": "c2c",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* EMORGENSTERN",
+      "name": "E Morgenstern",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* BOOTHS",
+      "name": "Booths",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "ROBERT DYAS PAYMENT",
+      "name": "Robert Dyas",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "REBEL ENERGY PAYMENT",
+      "name": "Rebel Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BRACKEN CAMPING PAYMENT",
+      "name": "Bracken Camping",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* OLDMILLTRADERS",
+      "name": "Oldmill Traders",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-elm-crossing-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "BRAMPTON GARDENS PAYMENT",
+      "name": "Brampton Gardens",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "c2c",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Rebel Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-cooling_off_changed-rowan-03",
+  "inputs": {
+    "previous": "generated-exam-cooling_off_changed-rowan-03-previous.txt",
+    "renewal": "generated-exam-cooling_off_changed-rowan-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-rowan-03-previous-no-value-8ae514",
+      "role": "previous",
+      "segment": "Schedule ROWAN-COC-414 of your landlord insurance cover with Westmarch Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,422.00.",
+        "term": "premium",
+        "value": "£5,422.00"
+      },
+      "id": "exam-cooling_off_changed-rowan-03-previous-premium-2223d2",
+      "role": "previous",
+      "segment": "The price for the year comes to £5,422.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "You may change your mind and cancel within 14 days.",
+        "term": "cooling_off_period",
+        "value": "14 days"
+      },
+      "id": "exam-cooling_off_changed-rowan-03-previous-cooling-off-period-d5feb7",
+      "role": "previous",
+      "segment": "You may change your mind and cancel within 14 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-rowan-03-previous-no-value-8d4f2b",
+      "role": "previous",
+      "segment": "Please quote ROWAN-COC-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-rowan-03-previous-no-value-56176f",
+      "role": "previous",
+      "segment": "Cover for landlord insurance under ROWAN-COC-414 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-rowan-03-renewal-no-value-20ed41",
+      "role": "renewal",
+      "segment": "Your landlord insurance cover with Westmarch Cover under ROWAN-COC-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,422.00.",
+        "term": "premium",
+        "value": "£5,422.00"
+      },
+      "id": "exam-cooling_off_changed-rowan-03-renewal-premium-2223d2",
+      "role": "renewal",
+      "segment": "The price for the year comes to £5,422.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "You may change your mind and cancel within 28 days.",
+        "term": "cooling_off_period",
+        "value": "28 days"
+      },
+      "id": "exam-cooling_off_changed-rowan-03-renewal-cooling-off-period-1a4a62",
+      "role": "renewal",
+      "segment": "You may change your mind and cancel within 28 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-rowan-03-renewal-no-value-56176f",
+      "role": "renewal",
+      "segment": "Cover for landlord insurance under ROWAN-COC-414 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-rowan-03-renewal-no-value-8d4f2b",
+      "role": "renewal",
+      "segment": "Please quote ROWAN-COC-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

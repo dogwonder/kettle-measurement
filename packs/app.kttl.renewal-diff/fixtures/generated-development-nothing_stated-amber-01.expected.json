@@ -1,0 +1,70 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-nothing_stated-amber-01",
+  "inputs": {
+    "previous": "generated-development-nothing_stated-amber-01-previous.txt",
+    "renewal": "generated-development-nothing_stated-amber-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-nothing_stated-amber-01-previous-no-value-a74d80",
+      "role": "previous",
+      "segment": "Pennine Line Assurance travel insurance — policy schedule AMBER-NS-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-amber-01-previous-no-value-aeb01b",
+      "role": "previous",
+      "segment": "Your reference is AMBER-NS-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-amber-01-previous-no-value-617d50",
+      "role": "previous",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under AMBER-NS-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-amber-01-renewal-no-value-e28d19",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance travel insurance — renewal schedule AMBER-NS-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-amber-01-renewal-no-value-617d50",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under AMBER-NS-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_stated-amber-01-renewal-no-value-aeb01b",
+      "role": "renewal",
+      "segment": "Your reference is AMBER-NS-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

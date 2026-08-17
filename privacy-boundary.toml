@@ -1,0 +1,269 @@
+# Kettle's declared network boundary (#233).
+#
+# Every network path in source must appear here, with a reason and the
+# date it was added. `crates/privacy-audit` fails the build on one that
+# does not, and on an entry here that no longer exists — a boundary file
+# with stale entries reads as though Kettle reaches more of the network
+# than it does.
+#
+# Only two kinds are permitted, and `nothing_reaches_the_network_except_
+# loopback_and_an_explicit_download` is what holds that:
+#
+#   loopback                  127.0.0.1 only, runner <-> llama-server.
+#   explicit_model_download   external HTTPS, and only after a person
+#                             has chosen to download weights.
+#
+# Anything else — telemetry, usage analytics, Kettle-originated crash
+# reporting, automatic update checks, remote fonts, scripts, images or
+# report assets — is forbidden until separately designed, disclosed and
+# approved in its own issue. Adding a `kind` here is that conversation,
+# not a way to skip it.
+#
+# This file is checked against *source*. It cannot prove what a packaged
+# release does at runtime, and nothing here should be read as though it
+# could. The dynamic half of #233 — observing a packaged build from a
+# clean app-data directory with DNS and traffic monitored — is not
+# written yet, and `app/RELEASE-CHECKS.md` has no network section until
+# it is. Neither check substitutes for the other.
+#
+#
+# ---------------------------------------------------------------------
+# The inventory the scanner cannot see
+# ---------------------------------------------------------------------
+#
+# The entries at the bottom are call sites: lines of our own source.
+# They are only half of what #233 asks for, because a dependency
+# reaches the network from its own code, not ours. So the rest of the
+# inventory is recorded here in prose, and the rule for keeping it true
+# is at the end of this section.
+#
+# **Rust dependencies, and the features that decide this.** Networking
+# in the root workspace comes from exactly one crate:
+#
+#   ureq 3, default features off, `rustls` on. The model download (#49)
+#   and the loopback model calls both go through it. TLS is on
+#   deliberately: weights come from https, and a build without it
+#   downloads nothing real while every mock test — all http — passes.
+#
+# Everything else is a parser, a formatter or a hash: rust_decimal,
+# blake3, sha2, csv, serde, serde_json, semver, num_cpus, chrono
+# (default features off), strsim, toml, tera (default features off),
+# html5ever, cssparser, pdfium-render. `pdfium-render` binds a local
+# shared library and opens no socket.
+#
+# `jsonschema` is the one that had to change. Its default features
+# include `resolve-http`, which pulls in reqwest, hyper, tokio and
+# rustls and makes the validator fetch a remote `$ref` over HTTPS at
+# validation time — during a run, from a URL a pack's schema chose. No
+# schema Kettle loads uses `$ref` at all, so on 30 July 2026 the
+# workspace dependency became `default-features = false` and reqwest
+# left both dependency trees. `resolve-file` is off for the same reason
+# pointed the other way: it would resolve a `file://` ref out of a pack.
+# This is what an inventory is for — the crate was added to validate
+# model answers, and nobody read its feature list.
+#
+# **The Tauri shell.** `tauri` with the single feature `protocol-asset`
+# (it serves the run's report into the sandboxed iframe from
+# `$APPDATA/runs/**`). Plugins: `dialog` and `clipboard-manager`, with
+# `fs` arriving under dialog. There is no `tauri-plugin-updater`, no
+# `tauri-plugin-http`, no `updater` block in `tauri.conf.json` and no
+# `createUpdaterArtifacts` in the bundle config, so the shell performs
+# no update check. `sysinfo` is default features off with `system` only,
+# so its network component is never compiled. tokio is present, pulled
+# by tauri as its async runtime, not as a client.
+#
+# `app/src-tauri/Cargo.lock` still names reqwest, hyper and hyper-util,
+# and a reviewer who greps for them deserves the answer: tauri declares
+# reqwest under `cfg(any(target_os = "android", all(target_vendor =
+# "apple", not(target_os = "macos"))))`. A lock file records every
+# target; Kettle builds none of those, so on macOS, Linux and Windows
+# the crate is resolved and never compiled. `cargo tree -i reqwest` in
+# that directory prints nothing, which is the check to repeat rather
+# than trusting this paragraph.
+#
+# **Capabilities.** `capabilities/default.json` grants `core:default`
+# to the `main` window and nothing else. The webview has no HTTP
+# permission to ask for.
+#
+# **CSP.** `default-src 'self'; style-src 'self' 'unsafe-inline';
+# frame-src 'self' asset:`. There is no `connect-src` of its own, so
+# fetch, XHR, WebSocket and EventSource all inherit `'self'` — no remote
+# origin is reachable from the webview even if one were written. No
+# remote fonts: `_settings.scss` names a system stack, and govuk's
+# `@font-face` for GDS Transport drops out because we never name it.
+#
+# **The sidecar.** `Sidecar::spawn` runs llama-server with `--port <the
+# port the OS just handed us on 127.0.0.1>`, `-m` and `--threads`, and
+# nothing else. `Endpoint::local` is the only constructor of an
+# endpoint, `base_url` is private, and no environment variable or
+# setting reaches either — so the desktop app cannot be pointed at a
+# non-loopback model. What it does not do is pass `--host 127.0.0.1`:
+# the bind address is llama-server's default rather than our
+# instruction, which is a weaker guarantee than the rest of this file
+# offers and is raised with #233 rather than changed here (that argv is
+# under contract for #251).
+#
+# **Packaging.** `bundle.targets` is dmg and app; resources are
+# `packs/`, `models.json`, the macOS sidecar directory and libpdfium.
+# No crash reporter, no symbol upload, no post-install hook.
+#
+# **When this must be redone.** Any change to a networking dependency
+# or its features, any new Tauri plugin or capability, any change to
+# the CSP, to the sidecar's argv or to the bundle config. A dependency
+# bump that turns a default feature back on is the failure mode this
+# section exists to catch, and it will not announce itself.
+#
+#
+# ---------------------------------------------------------------------
+# What the scanner reads, and what it deliberately does not
+# ---------------------------------------------------------------------
+#
+# Not source: `target/`, `node_modules/`, `sidecars/`, `models/`,
+# `gen/` (tauri-build writes the capability schemas there, and their
+# documentation examples are full of `https://mydomain.dev`), `dist/`,
+# `runs/`, `crates/privacy-audit` itself, and `reference/` — design
+# mock-ups and learning guides, never built and never bundled, which
+# load React from a CDN on purpose. Everything on that list bar the
+# last two is gitignored: generated output, vendored binaries, scratch.
+#
+# Not shipped, so not scanned: test code. `#[cfg(test)]` items are
+# compiled out, `crates/*/tests` are separate Cargo targets, and
+# `*.test.ts` is vitest only. Kettle's tests bind loopback sockets
+# constantly to stand up mock model servers, and declaring each one
+# would bury the seven entries that describe the application under
+# dozens that describe its harness.
+#
+# Not scanned, and worth saying plainly: `scripts/*.sh`.
+# `vendor-sidecar.sh` downloads llama-server from GitHub releases, on a
+# developer's machine, and is never packaged. #233 puts development-only
+# tooling out of scope; that is the entry it would otherwise have.
+
+
+# ---------------------------------------------------------------------
+# Loopback: the model path
+# ---------------------------------------------------------------------
+
+[[path]]
+file = "crates/runner/src/exec.rs"
+calls = "http://127.0.0.1"
+kind = "loopback"
+reason = """
+`Endpoint::local` builds the only base URL the runner ever posts to,
+from a port the OS allocated on 127.0.0.1 at spawn. It is the only
+constructor, `base_url` is private, and nothing reads a host from
+configuration or the environment — so a run cannot be aimed elsewhere.
+"""
+added = "2026-07-30"
+
+[[path]]
+file = "crates/runner/src/exec.rs"
+calls = "ureq"
+kind = "loopback"
+reason = """
+The runner posts each batch of questions to llama-server on 127.0.0.1,
+on a port allocated at spawn. This is the model path itself: it never
+leaves the machine, and a run with no sidecar makes no request at all.
+"""
+added = "2026-07-30"
+
+[[path]]
+file = "crates/runner/src/sidecar.rs"
+calls = "TcpStream"
+kind = "loopback"
+reason = """
+`health_ok` connects to 127.0.0.1 on the sidecar's own port and writes
+a literal `GET /health`, once per poll, until the child answers 200. It
+is how a run knows the model is loaded rather than merely running.
+"""
+added = "2026-07-30"
+
+[[path]]
+file = "crates/runner/src/sidecar.rs"
+calls = "TcpListener"
+kind = "loopback"
+reason = """
+`free_port` binds 127.0.0.1:0 and drops the listener immediately, so
+the child can claim the port the OS just named. Binding is how you ask
+for one; nothing is served on it and nothing is accepted.
+"""
+added = "2026-07-30"
+
+[[path]]
+file = "app/src-tauri/tauri.conf.json"
+calls = "http://localhost:1420"
+kind = "loopback"
+reason = """
+`build.devUrl` — the Vite dev server the webview loads from under `bun
+run dev`. A packaged build has no dev server and loads `frontendDist`
+off disk, so this address exists only on a developer's machine.
+Declared rather than excluded because a boundary file that quietly
+skips a category is worth less than one that explains it.
+"""
+added = "2026-07-30"
+
+
+# ---------------------------------------------------------------------
+# Explicit model download: the one thing that leaves the machine
+# ---------------------------------------------------------------------
+
+[[path]]
+file = "app/src-tauri/models.json"
+calls = "https://huggingface.co"
+kind = "explicit_model_download"
+reason = """
+The pinned manifest: the three GGUF weights Kettle offers, and nothing
+else. Each entry carries the SHA-256 its publisher states, checked
+after the bytes arrive, so the URL chooses a host but not the file.
+Reaching huggingface.co discloses to that host what any download does —
+this machine's IP address, the headers ureq sends, a `Range` header
+when resuming, which file was asked for, and the timing and size of the
+transfer. None of it is task data: no statement, filename, path,
+prompt, model answer, report, action or hash is part of the request.
+"""
+added = "2026-07-30"
+
+[[path]]
+file = "crates/runner/src/download.rs"
+calls = "ureq"
+kind = "explicit_model_download"
+reason = """
+The download itself, and the only code in Kettle that opens a
+connection off this machine. It runs when a person picks a model on the
+model-manager screen — never on launch, never during a run, never on a
+schedule — and sends a plain GET, plus a `Range` header when resuming a
+part that is already half here.
+"""
+added = "2026-07-30"
+
+[[path]]
+file = "crates/runner/src/eval/oracle.rs"
+calls = "TcpListener, std::net"
+kind = "loopback"
+reason = """
+The mutation harness's oracle (#426) binds 127.0.0.1:0 and answers the
+eval's own completion requests from the bed's authored expectations, so
+a mutation run needs no model and no recording on disk. This is the
+module's `use` line; the sites below are the bind and the wake-up.
+"""
+added = "2026-08-07"
+
+[[path]]
+file = "crates/runner/src/eval/oracle.rs"
+calls = "TcpListener"
+kind = "loopback"
+reason = """
+The oracle's answering loop binds 127.0.0.1:0 for the duration of one
+call. Nothing external is reachable and nothing but this process ever
+connects.
+"""
+added = "2026-08-07"
+
+[[path]]
+file = "crates/runner/src/eval/oracle.rs"
+calls = "TcpStream, std::net"
+kind = "loopback"
+reason = """
+The drop handler connects once to the loop's own loopback port so the
+accept loop observes the stop flag and the thread exits with the call.
+"""
+added = "2026-08-07"

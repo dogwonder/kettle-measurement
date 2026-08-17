@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-undated_relative-winter-bay-07",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 28 days",
+        "due": null,
+        "kind": "response",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "undated_relative-winter-bay-07-response-00",
+      "segment": "The enclosed form about your case file should be completed and returned within 28 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-winter-bay-07-no-ask-01",
+      "segment": "Return postage has been paid for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-winter-bay-07-no-ask-03",
+      "segment": "The repair carried out on 16 January was signed off with no further works identified.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

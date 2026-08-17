@@ -1,0 +1,450 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-sections_repeat-sorrel-04",
+  "inputs": {
+    "previous": "generated-exam-sections_repeat-sorrel-04-previous.txt",
+    "renewal": "generated-exam-sections_repeat-sorrel-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-previous-no-value-8aee97",
+      "role": "previous",
+      "segment": "Schedule SORREL-SR-421 of your pet insurance cover with Corvin Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-previous-no-value-5f4a1d",
+      "role": "previous",
+      "segment": "Cover under SORREL-SR-421 runs from 1 September 2025 until 31 August 2026, both days included.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-previous-no-value-8313a1",
+      "role": "previous",
+      "segment": "The next part of SORREL-SR-421 covers professional indemnity.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £604,700.00 under it.",
+        "term": "cover_limit",
+        "value": "£604,700.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-cover-limit-18f5a7",
+      "role": "previous",
+      "segment": "We will pay up to £604,700.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,435.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,435.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-compulsory-excess-7e8989",
+      "role": "previous",
+      "segment": "You pay the first £5,435.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,451.10 for the year.",
+        "term": "premium",
+        "value": "£1,451.10"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-premium-3fb14f",
+      "role": "previous",
+      "segment": "This part costs £1,451.10 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-previous-no-value-ec3f52",
+      "role": "previous",
+      "segment": "The next part of SORREL-SR-421 covers legal expenses.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £854,700.00 under it.",
+        "term": "cover_limit",
+        "value": "£854,700.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-cover-limit-c3e3d3",
+      "role": "previous",
+      "segment": "We will pay up to £854,700.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,466.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,466.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-compulsory-excess-00af54",
+      "role": "previous",
+      "segment": "You pay the first £5,466.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,498.10 for the year.",
+        "term": "premium",
+        "value": "£1,498.10"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-premium-f45228",
+      "role": "previous",
+      "segment": "This part costs £1,498.10 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-previous-no-value-e6937f",
+      "role": "previous",
+      "segment": "The next part of SORREL-SR-421 covers crisis containment.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £1,104,700.00 under it.",
+        "term": "cover_limit",
+        "value": "£1,104,700.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-cover-limit-5d8179",
+      "role": "previous",
+      "segment": "We will pay up to £1,104,700.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,497.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,497.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-compulsory-excess-558bb8",
+      "role": "previous",
+      "segment": "You pay the first £5,497.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,545.10 for the year.",
+        "term": "premium",
+        "value": "£1,545.10"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-premium-f4ee6a",
+      "role": "previous",
+      "segment": "This part costs £1,545.10 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Adding the parts together, the year costs £4,494.30.",
+        "term": "premium",
+        "value": "£4,494.30"
+      },
+      "id": "exam-sections_repeat-sorrel-04-previous-premium-a10718",
+      "role": "previous",
+      "segment": "Adding the parts together, the year costs £4,494.30.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-previous-no-value-dc94c4",
+      "role": "previous",
+      "segment": "Please quote SORREL-SR-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-previous-no-value-24a223",
+      "role": "previous",
+      "segment": "Cover for pet insurance under SORREL-SR-421 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-renewal-no-value-0205f1",
+      "role": "renewal",
+      "segment": "Your pet insurance cover with Corvin Mutual under SORREL-SR-421 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-renewal-no-value-a980b4",
+      "role": "renewal",
+      "segment": "Cover under SORREL-SR-421 runs from 1 September 2026 until 31 August 2027, both days included.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-renewal-no-value-8313a1",
+      "role": "renewal",
+      "segment": "The next part of SORREL-SR-421 covers professional indemnity.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £604,700.00 under it.",
+        "term": "cover_limit",
+        "value": "£604,700.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-cover-limit-18f5a7",
+      "role": "renewal",
+      "segment": "We will pay up to £604,700.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,435.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,435.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-compulsory-excess-7e8989",
+      "role": "renewal",
+      "segment": "You pay the first £5,435.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,466.10 for the year.",
+        "term": "premium",
+        "value": "£1,466.10"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-premium-bec484",
+      "role": "renewal",
+      "segment": "This part costs £1,466.10 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-renewal-no-value-ec3f52",
+      "role": "renewal",
+      "segment": "The next part of SORREL-SR-421 covers legal expenses.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £854,700.00 under it.",
+        "term": "cover_limit",
+        "value": "£854,700.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-cover-limit-c3e3d3",
+      "role": "renewal",
+      "segment": "We will pay up to £854,700.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,466.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,466.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-compulsory-excess-00af54",
+      "role": "renewal",
+      "segment": "You pay the first £5,466.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,513.10 for the year.",
+        "term": "premium",
+        "value": "£1,513.10"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-premium-865c55",
+      "role": "renewal",
+      "segment": "This part costs £1,513.10 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-renewal-no-value-e6937f",
+      "role": "renewal",
+      "segment": "The next part of SORREL-SR-421 covers crisis containment.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £1,104,700.00 under it.",
+        "term": "cover_limit",
+        "value": "£1,104,700.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-cover-limit-5d8179",
+      "role": "renewal",
+      "segment": "We will pay up to £1,104,700.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,497.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,497.00"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-compulsory-excess-558bb8",
+      "role": "renewal",
+      "segment": "You pay the first £5,497.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,560.10 for the year.",
+        "term": "premium",
+        "value": "£1,560.10"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-premium-28f407",
+      "role": "renewal",
+      "segment": "This part costs £1,560.10 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Adding the parts together, the year costs £4,539.30.",
+        "term": "premium",
+        "value": "£4,539.30"
+      },
+      "id": "exam-sections_repeat-sorrel-04-renewal-premium-2325b6",
+      "role": "renewal",
+      "segment": "Adding the parts together, the year costs £4,539.30.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-renewal-no-value-24a223",
+      "role": "renewal",
+      "segment": "Cover for pet insurance under SORREL-SR-421 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-sorrel-04-renewal-no-value-dc94c4",
+      "role": "renewal",
+      "segment": "Please quote SORREL-SR-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-subscription-heavy-valley",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* PCLOUD CARD 4821",
+      "name": "pCloud"
+    },
+    {
+      "raw": "SQ *PCLOUD CARD 4821",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PAYPAL *PCLOUD CARD 4821",
+      "name": "pCloud"
+    },
+    {
+      "raw": "CARD 4821 PRVT Y GB",
+      "name": "Private Eye"
+    },
+    {
+      "raw": "CARD 4821 SKLLSHR GB",
+      "name": "Skillshare"
+    },
+    {
+      "raw": "CARD 4821 DVD LLYD GB",
+      "name": "David Lloyd"
+    },
+    {
+      "raw": "CARD 4821 NW TV GB",
+      "name": "NOW"
+    },
+    {
+      "raw": "CARD 4821 TDL GB",
+      "name": "TIDAL"
+    },
+    {
+      "raw": "STRIPE* ADOBE CARD 4821",
+      "name": "Adobe"
+    },
+    {
+      "raw": "SQ *ADOBE CARD 4821",
+      "name": "Adobe"
+    },
+    {
+      "raw": "PAYPAL *ADOBE CARD 4821",
+      "name": "Adobe"
+    },
+    {
+      "raw": "CARD 4821 TH TLGRPH GB",
+      "name": "The Telegraph"
+    },
+    {
+      "raw": "STRIPE* SOUTHERNRAIL CARD 4821",
+      "name": "Southern"
+    },
+    {
+      "raw": "SQ *SOUTHERNRAIL CARD 4821",
+      "name": "Southern"
+    },
+    {
+      "raw": "PAYPAL *SOUTHERNRAIL CARD 4821",
+      "name": "Southern"
+    },
+    {
+      "raw": "STRIPE* RPATEL CARD 4821",
+      "name": "R Patel"
+    },
+    {
+      "raw": "SQ *RPATEL CARD 4821",
+      "name": "R Patel"
+    },
+    {
+      "raw": "PAYPAL *RPATEL CARD 4821",
+      "name": "R Patel"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* PCLOUD CARD 4821",
+      "name": "pCloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 PRVT Y GB",
+      "name": "Private Eye",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 SKLLSHR GB",
+      "name": "Skillshare",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 DVD LLYD GB",
+      "name": "David Lloyd",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 NW TV GB",
+      "name": "NOW",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 TDL GB",
+      "name": "TIDAL",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ADOBE CARD 4821",
+      "name": "Adobe",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 TH TLGRPH GB",
+      "name": "The Telegraph",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SOUTHERNRAIL CARD 4821",
+      "name": "Southern",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-valley-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* RPATEL CARD 4821",
+      "name": "R Patel",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "pCloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Private Eye",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Skillshare",
+      "period": "monthly"
+    },
+    {
+      "merchant": "David Lloyd",
+      "period": "monthly"
+    },
+    {
+      "merchant": "NOW",
+      "period": "monthly"
+    },
+    {
+      "merchant": "TIDAL",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Telegraph",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Southern",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

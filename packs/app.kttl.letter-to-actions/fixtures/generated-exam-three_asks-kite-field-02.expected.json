@@ -1,0 +1,77 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-three_asks-kite-field-02",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-07-24",
+        "kind": "payment",
+        "party": "Belwood Insurance"
+      },
+      "id": "three_asks-kite-field-02-payment-01",
+      "segment": "A payment of £188.20 towards your policy renewal is due within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "15 August 2026",
+        "deadline": "on 15 August 2026",
+        "due": "2026-08-15",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "three_asks-kite-field-02-attendance-02",
+      "segment": "You are required to attend a case review at our offices on 15 August 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-07-31",
+        "kind": "response",
+        "party": "Belwood Insurance"
+      },
+      "id": "three_asks-kite-field-02-response-03",
+      "segment": "Please confirm your attendance in writing by the end of the month.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-kite-field-02-no-ask-04",
+      "segment": "A copy of this letter has been placed on your file.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-kite-field-02-no-ask-06",
+      "segment": "The most recent payment on this account is dated 30 May.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

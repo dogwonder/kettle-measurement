@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-two_excesses-elder-05",
+  "inputs": {
+    "previous": "generated-development-two_excesses-elder-05-previous.txt",
+    "renewal": "generated-development-two_excesses-elder-05-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-two_excesses-elder-05-previous-no-value-59f77f",
+      "role": "previous",
+      "segment": "Pennine Line Assurance travel insurance — policy schedule ELDER-TE-428 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,395.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,395.00"
+      },
+      "id": "development-two_excesses-elder-05-previous-compulsory-excess-d6fe0b",
+      "role": "previous",
+      "segment": "Compulsory excess: £4,395.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £989.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£989.00"
+      },
+      "id": "development-two_excesses-elder-05-previous-voluntary-excess-bfed23",
+      "role": "previous",
+      "segment": "Voluntary excess: £989.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,384.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,384.00"
+      },
+      "id": "development-two_excesses-elder-05-previous-total-excess-e62592",
+      "role": "previous",
+      "segment": "Total excess payable: £5,384.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-elder-05-previous-no-value-f825fc",
+      "role": "previous",
+      "segment": "Your reference is ELDER-TE-428. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-elder-05-previous-no-value-1e75bf",
+      "role": "previous",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under ELDER-TE-428 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-elder-05-renewal-no-value-b74423",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance travel insurance — renewal schedule ELDER-TE-428 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,445.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,445.00"
+      },
+      "id": "development-two_excesses-elder-05-renewal-compulsory-excess-0f4e5f",
+      "role": "renewal",
+      "segment": "Compulsory excess: £4,445.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £989.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£989.00"
+      },
+      "id": "development-two_excesses-elder-05-renewal-voluntary-excess-bfed23",
+      "role": "renewal",
+      "segment": "Voluntary excess: £989.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,434.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,434.00"
+      },
+      "id": "development-two_excesses-elder-05-renewal-total-excess-c6562a",
+      "role": "renewal",
+      "segment": "Total excess payable: £5,434.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-elder-05-renewal-no-value-1e75bf",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under ELDER-TE-428 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-elder-05-renewal-no-value-f825fc",
+      "role": "renewal",
+      "segment": "Your reference is ELDER-TE-428. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-no-subscriptions-dune",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* CALDERLETTINGS",
+      "name": "Calder Lettings"
+    },
+    {
+      "raw": "SQ *CALDERLETTINGS",
+      "name": "Calder Lettings"
+    },
+    {
+      "raw": "PAYPAL *CALDERLETTINGS",
+      "name": "Calder Lettings"
+    },
+    {
+      "raw": "KIRKLAND SUPPLIES PAYMENT",
+      "name": "Kirkland Supplies"
+    },
+    {
+      "raw": "STRIPE* NORTHERNRAIL",
+      "name": "Northern"
+    },
+    {
+      "raw": "SQ *NORTHERNRAIL",
+      "name": "Northern"
+    },
+    {
+      "raw": "PAYPAL *NORTHERNRAIL",
+      "name": "Northern"
+    },
+    {
+      "raw": "STRIPE* SMACLEOD",
+      "name": "S MacLeod"
+    },
+    {
+      "raw": "SQ *SMACLEOD",
+      "name": "S MacLeod"
+    },
+    {
+      "raw": "PAYPAL *SMACLEOD",
+      "name": "S MacLeod"
+    },
+    {
+      "raw": "STRIPE* LIDLGB",
+      "name": "Lidl"
+    },
+    {
+      "raw": "SQ *LIDLGB",
+      "name": "Lidl"
+    },
+    {
+      "raw": "PAYPAL *LIDLGB",
+      "name": "Lidl"
+    },
+    {
+      "raw": "WILKO PAYMENT",
+      "name": "Wilko"
+    },
+    {
+      "raw": "EON NEXT PAYMENT",
+      "name": "E.ON Next"
+    },
+    {
+      "raw": "TANNERY BOOKS PAYMENT",
+      "name": "Tannery Books"
+    },
+    {
+      "raw": "STRIPE* GRANARYMARKET",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "SQ *GRANARYMARKET",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "PAYPAL *GRANARYMARKET",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "BELLFORD PARKS PAYMENT",
+      "name": "Bellford Parks"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* CALDERLETTINGS",
+      "name": "Calder Lettings",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "KIRKLAND SUPPLIES PAYMENT",
+      "name": "Kirkland Supplies",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* NORTHERNRAIL",
+      "name": "Northern",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SMACLEOD",
+      "name": "S MacLeod",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LIDLGB",
+      "name": "Lidl",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "WILKO PAYMENT",
+      "name": "Wilko",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "EON NEXT PAYMENT",
+      "name": "E.ON Next",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "TANNERY BOOKS PAYMENT",
+      "name": "Tannery Books",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* GRANARYMARKET",
+      "name": "Granary Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-dune-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "BELLFORD PARKS PAYMENT",
+      "name": "Bellford Parks",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Northern",
+      "period": "yearly"
+    },
+    {
+      "merchant": "E.ON Next",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

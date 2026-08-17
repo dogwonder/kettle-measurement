@@ -1,0 +1,53 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-passive_obligation-nettle-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 35 days",
+        "due": "2026-03-17",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "passive_obligation-nettle-14-payment-01",
+      "segment": "Settlement of £214.60 must be received within 35 days of the date of this letter, or the matter is referred onward.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-nettle-14-no-ask-02",
+      "segment": "The council tax account is being checked by the department that holds it, and any correction is applied automatically within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-nettle-14-no-ask-03",
+      "segment": "This part of the letter is sent for information only.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-nettle-14-no-ask-05",
+      "segment": "The 14 days we mentioned in our previous letter no longer apply, as the matter is settled.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

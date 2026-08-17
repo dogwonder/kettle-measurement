@@ -1,0 +1,258 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-subscription-heavy-thistle",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* BACKBLAZE CARD 4821",
+      "name": "Backblaze"
+    },
+    {
+      "raw": "SQ *BACKBLAZE CARD 4821",
+      "name": "Backblaze"
+    },
+    {
+      "raw": "PAYPAL *BACKBLAZE CARD 4821",
+      "name": "Backblaze"
+    },
+    {
+      "raw": "CARD 4821 TH CNMST GB",
+      "name": "The Economist"
+    },
+    {
+      "raw": "CARD 4821 DLNG GB",
+      "name": "Duolingo"
+    },
+    {
+      "raw": "CARD 4821 PRGYM LTD GB",
+      "name": "PureGym"
+    },
+    {
+      "raw": "CARD 4821 NTFLX.CM GB",
+      "name": "Netflix"
+    },
+    {
+      "raw": "CARD 4821 SPTFY LTD GB",
+      "name": "Spotify"
+    },
+    {
+      "raw": "STRIPE* GOOGLEONE CARD 4821",
+      "name": "Google One"
+    },
+    {
+      "raw": "SQ *GOOGLEONE CARD 4821",
+      "name": "Google One"
+    },
+    {
+      "raw": "PAYPAL *GOOGLEONE CARD 4821",
+      "name": "Google One"
+    },
+    {
+      "raw": "CARD 4821 TH GRDN GB",
+      "name": "The Guardian"
+    },
+    {
+      "raw": "STRIPE* TRAINLINE CARD 4821",
+      "name": "Trainline"
+    },
+    {
+      "raw": "SQ *TRAINLINE CARD 4821",
+      "name": "Trainline"
+    },
+    {
+      "raw": "PAYPAL *TRAINLINE CARD 4821",
+      "name": "Trainline"
+    },
+    {
+      "raw": "STRIPE* JHENDERSON CARD 4821",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "SQ *JHENDERSON CARD 4821",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "PAYPAL *JHENDERSON CARD 4821",
+      "name": "J Henderson"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BACKBLAZE CARD 4821",
+      "name": "Backblaze",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 TH CNMST GB",
+      "name": "The Economist",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 DLNG GB",
+      "name": "Duolingo",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 PRGYM LTD GB",
+      "name": "PureGym",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 NTFLX.CM GB",
+      "name": "Netflix",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 SPTFY LTD GB",
+      "name": "Spotify",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* GOOGLEONE CARD 4821",
+      "name": "Google One",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 TH GRDN GB",
+      "name": "The Guardian",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TRAINLINE CARD 4821",
+      "name": "Trainline",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-thistle-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* JHENDERSON CARD 4821",
+      "name": "J Henderson",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Backblaze",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Economist",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Duolingo",
+      "period": "monthly"
+    },
+    {
+      "merchant": "PureGym",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Netflix",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Spotify",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Guardian",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Trainline",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

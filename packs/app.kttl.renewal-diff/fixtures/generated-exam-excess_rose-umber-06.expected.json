@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_rose-umber-06",
+  "inputs": {
+    "previous": "generated-exam-excess_rose-umber-06-previous.txt",
+    "renewal": "generated-exam-excess_rose-umber-06-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_rose-umber-06-previous-no-value-827a04",
+      "role": "previous",
+      "segment": "Schedule UMBER-ER-435 of your landlord insurance cover with Westmarch Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £265.00.",
+        "term": "compulsory_excess",
+        "value": "£265.00"
+      },
+      "id": "exam-excess_rose-umber-06-previous-compulsory-excess-43b812",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £265.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £571.00.",
+        "term": "premium",
+        "value": "£571.00"
+      },
+      "id": "exam-excess_rose-umber-06-previous-premium-dc1546",
+      "role": "previous",
+      "segment": "The price for the year comes to £571.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £2,630.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£2,630.00"
+      },
+      "id": "exam-excess_rose-umber-06-previous-cover-limit-fdda05",
+      "role": "previous",
+      "segment": "We will pay up to £2,630.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-umber-06-previous-no-value-21d388",
+      "role": "previous",
+      "segment": "Please quote UMBER-ER-435 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-umber-06-previous-no-value-f567bc",
+      "role": "previous",
+      "segment": "Cover for landlord insurance under UMBER-ER-435 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-umber-06-renewal-no-value-117fa5",
+      "role": "renewal",
+      "segment": "Your landlord insurance cover with Westmarch Cover under UMBER-ER-435 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £532.50.",
+        "term": "compulsory_excess",
+        "value": "£532.50"
+      },
+      "id": "exam-excess_rose-umber-06-renewal-compulsory-excess-f3f69b",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £532.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £571.00.",
+        "term": "premium",
+        "value": "£571.00"
+      },
+      "id": "exam-excess_rose-umber-06-renewal-premium-dc1546",
+      "role": "renewal",
+      "segment": "The price for the year comes to £571.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £2,630.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£2,630.00"
+      },
+      "id": "exam-excess_rose-umber-06-renewal-cover-limit-fdda05",
+      "role": "renewal",
+      "segment": "We will pay up to £2,630.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-umber-06-renewal-no-value-f567bc",
+      "role": "renewal",
+      "segment": "Cover for landlord insurance under UMBER-ER-435 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-umber-06-renewal-no-value-21d388",
+      "role": "renewal",
+      "segment": "Please quote UMBER-ER-435 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

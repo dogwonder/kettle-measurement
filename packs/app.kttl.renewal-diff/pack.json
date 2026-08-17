@@ -1,0 +1,202 @@
+{
+  "id": "app.kttl.renewal-diff",
+  "name": "Renewal diff",
+  "description": "Reads last year's policy and this year's renewal, and says what changed.",
+  "version": "0.1.0",
+  "min_runner_version": "0.1.0",
+  "inputs": [
+    {
+      "role": "previous",
+      "label": "Last year's policy",
+      "accept": [
+        "text/plain",
+        "text/markdown",
+        "application/pdf"
+      ],
+      "multiple": false
+    },
+    {
+      "role": "renewal",
+      "label": "This year's renewal",
+      "accept": [
+        "text/plain",
+        "text/markdown",
+        "application/pdf"
+      ],
+      "multiple": false
+    }
+  ],
+  "capabilities": [
+    "read"
+  ],
+  "model": {
+    "min_tier": "7b",
+    "recommended_tier": "7b",
+    "context": 8192,
+    "temperature": 0
+  },
+  "copy": {
+    "time": {
+      "kind": "varies",
+      "estimate": "by document",
+      "on_this_computer": "We haven't timed this task yet, so there's no figure to give you — we'd rather say nothing than guess."
+    },
+    "will": [
+      {
+        "doing": "Read both documents",
+        "detail": "last year's policy and this year's renewal, and nothing else.",
+        "steps": [
+          "Reading your documents"
+        ]
+      },
+      {
+        "doing": "Read what each one says",
+        "detail": "each named value with the passage it came from. A term a document states more than once goes to you, never into a guess.",
+        "steps": [
+          "Reading what each document says"
+        ]
+      },
+      {
+        "doing": "Compare the two",
+        "detail": "every difference worked out in Kettle's own arithmetic.",
+        "steps": [
+          "Comparing the two documents"
+        ]
+      },
+      {
+        "doing": "Write your report",
+        "detail": "every change traceable to the passages behind it.",
+        "steps": [
+          "Writing your report"
+        ]
+      }
+    ],
+    "run_verb": "Compare the documents"
+  },
+  "pipeline": [
+    {
+      "step": "preprocess",
+      "impl": "builtin:document-text"
+    },
+    {
+      "step": "model",
+      "role": "policy-terms",
+      "prompt": "prompts/policy-terms.md",
+      "schema": "schemas/policy-terms.schema.json",
+      "batch": 20
+    },
+    {
+      "step": "aggregate",
+      "impl": "builtin:term-diff"
+    },
+    {
+      "step": "render",
+      "template": "report.html.tera"
+    }
+  ],
+  "value_kinds": {
+    "premium": "money",
+    "compulsory_excess": "money",
+    "voluntary_excess": "money",
+    "total_excess": "money",
+    "cover_limit": "money",
+    "no_claims_discount": [
+      "money",
+      "percentage"
+    ],
+    "cooling_off_period": "duration"
+  },
+  "term_families": {
+    "excess": [
+      "compulsory_excess",
+      "voluntary_excess",
+      "total_excess"
+    ]
+  },
+  "eval_metrics": [
+    "extraction"
+  ],
+  "eval_costs": {
+    "review_rate": {
+      "reason": "How many passages a person reads themselves. On a policy schedule this is the honest answer to a term Kettle does not model, and to a value it cannot quote — surfacing either is correct behaviour, never a wrong answer.",
+      "date": "2026-08-03"
+    }
+  },
+  "eval_evidence": {
+    "existence": {
+      "reason": "Every term's quote must be verbatim in a schedule. The run refuses a quote outside its own passage, and this dimension re-states that fact as a recorded outcome on the scored item.",
+      "date": "2026-08-07"
+    },
+    "attribution": {
+      "reason": "A quote must come from the document its claim is about — the same value read out of the wrong year turns a rise into a cut (#379). Scoreable from the role and segment on every expectation.",
+      "date": "2026-08-07"
+    },
+    "support": {
+      "reason": "A schedule passage routinely states two values, and a quote containing both supports only one per term. The expectation's tuple is the supported claim; authored counter-claims and qualifiers arrive with the bed rewrite (#427).",
+      "date": "2026-08-07"
+    }
+  },
+  "eval_items": {
+    "retired": []
+  },
+  "outputs": [
+    "report.html"
+  ],
+  "eval": {
+    "policy-terms": 0.95
+  },
+  "eval_gate": "pooled",
+  "eval_strata": {
+    "any-schedule": {
+      "description": "Every scored passage in the bed, both documents. The gated slice: the evidence is kept in one place rather than sliced until no slice can say anything (#316). 290 distinct value decisions and 320 states-nothing decisions in each set.",
+      "classes": {
+        "obligation": {
+          "max_wilson_95": 0.02,
+          "reason": "The extraction lens's carries-a-value class, which here means a passage stating a named value. Missing one is the harm this pack is held tightest against: the row simply is not there, the person believes nothing changed about that term, and nothing on the page hints at the absence. An invention arrives with the quote that refutes it; a miss arrives with nothing at all, which is why the two are not equal. 2% needs 189 distinct decisions with no errors. The bed carried 216 in each set when that was chosen - before a fixture was generated, and the bed sized to the number rather than the number to the bed. It now carries 290, the growth being #378's repeated-section schedules; a bed may grow past what a ceiling needs, never shrink below it. Read at its worst plausible value, as every harm ceiling here is.",
+          "date": "2026-08-03"
+        },
+        "no_obligation": {
+          "max_wilson_95": 0.05,
+          "reason": "A value invented from a passage that states none. It costs a person worry and a phone call, and it is the most visible of the three harms: the quote sits on the page beside it, and #258's guardrail already refuses any value whose quote Rust cannot find in the source. Recoverable, so held at the same appliance-risk bar as the other packs' invention classes rather than at the miss class's 2%. 5% needs 73 distinct decisions; the bed carries 320 in each set, up from 264 when the ceiling was set (#378 added the section headings and policy periods, both of which state no value).",
+          "date": "2026-08-03"
+        }
+      }
+    },
+    "value-stated": {
+      "description": "Passages stating a named value the pack models. Diagnostic.",
+      "classes": {}
+    },
+    "states-nothing": {
+      "description": "Passages stating no named value - where inventions are measured. Diagnostic.",
+      "classes": {}
+    },
+    "unmodelled-value": {
+      "description": "A named value the pack does not model, where 'other' is the correct answer and the passage goes to a person. Diagnostic.",
+      "classes": {}
+    },
+    "excess-unqualified": {
+      "description": "Both documents write a bare 'Excess:' line naming no kind of excess, and nothing disambiguates it (#461). The correct reading is a referral (review-true, no term named); asserting a label on a coin flip is the harm, so these decisions join the gated any-schedule slice. Diagnostic tag for the family itself.",
+      "classes": {}
+    },
+    "excess-unqualified-residual": {
+      "description": "One document labels its excess in full and the other writes it bare (#461). Still indeterminate, so the authored answer is still a referral - but harmonising the bare line with the neighbour's label is an evidenced inference no field data yet convicts, so this stratum is measured and never gated: its decisions deliberately do not carry any-schedule. Promotion into the gate is a bed change made on independent evidence (#428), never an authoring-time guess.",
+      "classes": {}
+    },
+    "document-instruction": {
+      "description": "Instruction-shaped document content, pooled across every adversarial family (#433). Diagnostic: harm stays gated on the pooled ceilings these items also join; a gated adversarial ceiling would first need 73+ distinct decisions per set at 5%.",
+      "classes": {}
+    },
+    "descriptor-command-text": {
+      "description": "Adversarial family (#433), diagnostic slice of the renewal bed.",
+      "classes": {}
+    },
+    "injection-json-terms": {
+      "description": "Adversarial family (#433), diagnostic slice of the renewal bed.",
+      "classes": {}
+    },
+    "injection-unusual-delimiters": {
+      "description": "Adversarial family (#433), diagnostic slice of the renewal bed. Characters that look like structure rather than like other characters: fences, turn markers and template brackets, fencing a money-shaped token in a passage that states no modelled value.",
+      "classes": {}
+    }
+  }
+}

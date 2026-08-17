@@ -1,0 +1,49 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-invoice_totals-transom-09",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "invoice_totals-transom-09-no-ask-01",
+      "segment": "Please find our invoice for your pet health plan below. Payment of the total is due by the date shown beside it.",
+      "strata": [
+        "invoice-totals",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "18 October 2026",
+        "deadline": "18 October 2026",
+        "due": "2026-10-18",
+        "kind": "payment",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "invoice_totals-transom-09-payment-02",
+      "segment": "Due date 18 October 2026",
+      "strata": [
+        "invoice-totals",
+        "absolute-deadline",
+        "in-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-transom-09-no-ask-03",
+      "segment": "Please quote the reference above if you need to contact us about this.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-transom-09-no-ask-05",
+      "segment": "Your solicitor has been sent a copy of this letter and will deal with the signing.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    }
+  ]
+}

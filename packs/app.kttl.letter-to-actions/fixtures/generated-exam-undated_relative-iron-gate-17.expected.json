@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-undated_relative-iron-gate-17",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 28 days",
+        "due": null,
+        "kind": "response",
+        "party": "Eastvale Library Service"
+      },
+      "id": "undated_relative-iron-gate-17-response-00",
+      "segment": "The enclosed form about your membership should be completed and returned within 28 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-iron-gate-17-no-ask-01",
+      "segment": "Return postage has been paid for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-iron-gate-17-no-ask-03",
+      "segment": "Your appointed representative has been copied in and will attend to signature.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

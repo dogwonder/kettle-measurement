@@ -1,0 +1,258 @@
+{
+  "fixture_id": "exam-generated-clean-subscription-heavy-dragonfly-meadow",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* KOOFR",
+      "name": "Koofr"
+    },
+    {
+      "raw": "SQ *KOOFR",
+      "name": "Koofr"
+    },
+    {
+      "raw": "PAYPAL *KOOFR",
+      "name": "Koofr"
+    },
+    {
+      "raw": "THE WEEK",
+      "name": "The Week"
+    },
+    {
+      "raw": "BUSUU",
+      "name": "Busuu"
+    },
+    {
+      "raw": "PELOTON",
+      "name": "Peloton"
+    },
+    {
+      "raw": "PRIME VIDEO",
+      "name": "Prime Video"
+    },
+    {
+      "raw": "AMAZON MUSIC",
+      "name": "Amazon Music"
+    },
+    {
+      "raw": "STRIPE* ICLOUDPLUS",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "SQ *ICLOUDPLUS",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "PAYPAL *ICLOUDPLUS",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "THE INDEPENDENT",
+      "name": "The Independent"
+    },
+    {
+      "raw": "STRIPE* AVANTIWESTCST",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "SQ *AVANTIWESTCST",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "PAYPAL *AVANTIWESTCST",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "STRIPE* DCHAUDHRY",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "SQ *DCHAUDHRY",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "PAYPAL *DCHAUDHRY",
+      "name": "D Chaudhry"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* KOOFR",
+      "name": "Koofr",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "THE WEEK",
+      "name": "The Week",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BUSUU",
+      "name": "Busuu",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "PELOTON",
+      "name": "Peloton",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "PRIME VIDEO",
+      "name": "Prime Video",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "AMAZON MUSIC",
+      "name": "Amazon Music",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ICLOUDPLUS",
+      "name": "iCloud+",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE INDEPENDENT",
+      "name": "The Independent",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* AVANTIWESTCST",
+      "name": "Avanti West Coast",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-dragonfly-meadow-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* DCHAUDHRY",
+      "name": "D Chaudhry",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Koofr",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Week",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Busuu",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Peloton",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Prime Video",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Amazon Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Independent",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Avanti West Coast",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

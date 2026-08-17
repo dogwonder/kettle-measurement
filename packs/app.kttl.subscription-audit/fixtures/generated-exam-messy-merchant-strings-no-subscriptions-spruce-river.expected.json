@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-no-subscriptions-spruce-river",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* ABBEYGATEPROP CARD 4821",
+      "name": "Abbeygate Property"
+    },
+    {
+      "raw": "SQ *ABBEYGATEPROP CARD 4821",
+      "name": "Abbeygate Property"
+    },
+    {
+      "raw": "PAYPAL *ABBEYGATEPROP CARD 4821",
+      "name": "Abbeygate Property"
+    },
+    {
+      "raw": "CARD 4821 DNMR CTRNG GB",
+      "name": "Dunmore Catering"
+    },
+    {
+      "raw": "STRIPE* SCOTRAIL CARD 4821",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "SQ *SCOTRAIL CARD 4821",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "PAYPAL *SCOTRAIL CARD 4821",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "STRIPE* KADEYEMI CARD 4821",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "SQ *KADEYEMI CARD 4821",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "PAYPAL *KADEYEMI CARD 4821",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "STRIPE* ICELANDFOODS CARD 4821",
+      "name": "Iceland"
+    },
+    {
+      "raw": "SQ *ICELANDFOODS CARD 4821",
+      "name": "Iceland"
+    },
+    {
+      "raw": "PAYPAL *ICELANDFOODS CARD 4821",
+      "name": "Iceland"
+    },
+    {
+      "raw": "CARD 4821 SCRWFX GB",
+      "name": "Screwfix"
+    },
+    {
+      "raw": "CARD 4821 TFX TH MKT GB",
+      "name": "Outfox the Market"
+    },
+    {
+      "raw": "CARD 4821 SHWRTH D GB",
+      "name": "Ashworth Audio"
+    },
+    {
+      "raw": "STRIPE* WEAVERSMARKET CARD 4821",
+      "name": "Weavers Market"
+    },
+    {
+      "raw": "SQ *WEAVERSMARKET CARD 4821",
+      "name": "Weavers Market"
+    },
+    {
+      "raw": "PAYPAL *WEAVERSMARKET CARD 4821",
+      "name": "Weavers Market"
+    },
+    {
+      "raw": "CARD 4821 PNHL PRKS GB",
+      "name": "Penhale Parks"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ABBEYGATEPROP CARD 4821",
+      "name": "Abbeygate Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 DNMR CTRNG GB",
+      "name": "Dunmore Catering",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SCOTRAIL CARD 4821",
+      "name": "ScotRail",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* KADEYEMI CARD 4821",
+      "name": "K Adeyemi",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ICELANDFOODS CARD 4821",
+      "name": "Iceland",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 SCRWFX GB",
+      "name": "Screwfix",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 TFX TH MKT GB",
+      "name": "Outfox the Market",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 SHWRTH D GB",
+      "name": "Ashworth Audio",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* WEAVERSMARKET CARD 4821",
+      "name": "Weavers Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-spruce-river-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 PNHL PRKS GB",
+      "name": "Penhale Parks",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "ScotRail",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Outfox the Market",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

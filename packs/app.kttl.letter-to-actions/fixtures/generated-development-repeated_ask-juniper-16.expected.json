@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-repeated_ask-juniper-16",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-05-04",
+        "kind": "payment",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "repeated_ask-juniper-16-payment-01",
+      "segment": "Please pay £480.00 for your estate matter within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-juniper-16-no-ask-03",
+      "segment": "No further action is needed once you have paid.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-juniper-16-no-ask-05",
+      "segment": "Your details were updated on 15 March following your telephone call.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    }
+  ]
+}

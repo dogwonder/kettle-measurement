@@ -1,0 +1,216 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "run-01",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "0.1.0",
+      "title": "Subscription & recurring-spend audit"
+    },
+    "input": {
+      "file": "statement-01.csv",
+      "rows": 58,
+      "period": { "from": "2025-01-03", "to": "2025-12-28" },
+      "hash": "blake3:9f4c2a71e8b06d3f5c1a9e2b7d4f8a0c6e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f"
+    },
+    "model": { "tier": "Steady", "id": "qwen2.5-7b-instruct-q4_k_m" },
+    "started": "2026-07-19T14:02:11Z",
+    "finished": "2026-07-19T14:06:38Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 5,
+    "annualised_total": "1046.64",
+    "monthly_equivalent": "87.22",
+    "price_rises": 1,
+    "needs_review_count": 2,
+    "note": "Two payments need your eyes before they're counted — see 'Needs your review'."
+  },
+  "recurring": [
+    {
+      "merchant": "Netflix",
+      "raw_merchant": "NETFLIX.COM",
+      "kind": "subscription",
+      "category": "streaming",
+      "period": "monthly",
+      "amount_current": "12.99",
+      "annualised": "155.88",
+      "confidence": "high",
+      "price_rise": {
+        "from": "10.99",
+        "to": "12.99",
+        "month": "2025-05",
+        "extra_per_year": "24.00"
+      },
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 5th",
+        "interval_days": { "median": 30, "spread": 1 },
+        "transactions": [
+          { "date": "2025-01-05", "amount": "10.99" },
+          { "date": "2025-02-05", "amount": "10.99" },
+          { "date": "2025-03-05", "amount": "10.99" },
+          { "date": "2025-04-05", "amount": "10.99" },
+          { "date": "2025-05-05", "amount": "12.99" },
+          { "date": "2025-06-05", "amount": "12.99" },
+          { "date": "2025-07-05", "amount": "12.99" },
+          { "date": "2025-08-05", "amount": "12.99" },
+          { "date": "2025-09-05", "amount": "12.99" },
+          { "date": "2025-10-05", "amount": "12.99" },
+          { "date": "2025-11-05", "amount": "12.99" },
+          { "date": "2025-12-05", "amount": "12.99" }
+        ]
+      }
+    },
+    {
+      "merchant": "Spotify",
+      "raw_merchant": "SPOTIFY LTD",
+      "kind": "subscription",
+      "category": "streaming",
+      "period": "monthly",
+      "amount_current": "11.99",
+      "annualised": "143.88",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 12th",
+        "interval_days": { "median": 30, "spread": 1 },
+        "transactions": [
+          { "date": "2025-01-12", "amount": "11.99" },
+          { "date": "2025-02-12", "amount": "11.99" },
+          { "date": "2025-03-12", "amount": "11.99" },
+          { "date": "2025-04-12", "amount": "11.99" },
+          { "date": "2025-05-12", "amount": "11.99" },
+          { "date": "2025-06-12", "amount": "11.99" },
+          { "date": "2025-07-12", "amount": "11.99" },
+          { "date": "2025-08-12", "amount": "11.99" },
+          { "date": "2025-09-12", "amount": "11.99" },
+          { "date": "2025-10-12", "amount": "11.99" },
+          { "date": "2025-11-12", "amount": "11.99" },
+          { "date": "2025-12-12", "amount": "11.99" }
+        ]
+      }
+    },
+    {
+      "merchant": "PureGym",
+      "raw_merchant": "PUREGYM LTD",
+      "kind": "subscription",
+      "category": "fitness",
+      "period": "monthly",
+      "amount_current": "24.99",
+      "annualised": "299.88",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 3rd",
+        "interval_days": { "median": 30, "spread": 2 },
+        "transactions": [
+          { "date": "2025-01-03", "amount": "24.99" },
+          { "date": "2025-02-03", "amount": "24.99" },
+          { "date": "2025-03-03", "amount": "24.99" },
+          { "date": "2025-04-03", "amount": "24.99" },
+          { "date": "2025-05-03", "amount": "24.99" },
+          { "date": "2025-06-03", "amount": "24.99" },
+          { "date": "2025-07-03", "amount": "24.99" },
+          { "date": "2025-08-03", "amount": "24.99" },
+          { "date": "2025-09-03", "amount": "24.99" },
+          { "date": "2025-10-03", "amount": "24.99" },
+          { "date": "2025-11-03", "amount": "24.99" },
+          { "date": "2025-12-03", "amount": "24.99" }
+        ]
+      }
+    },
+    {
+      "merchant": "British Gas",
+      "raw_merchant": "BRITISH GAS",
+      "kind": "utility",
+      "category": "energy",
+      "period": "quarterly",
+      "amount_current": "88.00",
+      "annualised": "352.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "4 payments, roughly 3 months apart",
+        "interval_days": { "median": 91, "spread": 3 },
+        "transactions": [
+          { "date": "2025-01-15", "amount": "88.00" },
+          { "date": "2025-04-15", "amount": "88.00" },
+          { "date": "2025-07-15", "amount": "88.00" },
+          { "date": "2025-10-15", "amount": "88.00" }
+        ]
+      }
+    },
+    {
+      "merchant": "Amazon Prime",
+      "raw_merchant": "AMAZON PRIME",
+      "kind": "subscription",
+      "category": "streaming",
+      "period": "yearly",
+      "amount_current": "95.00",
+      "annualised": "95.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "1 payment; the amount and merchant match a known yearly plan",
+        "interval_days": null,
+        "transactions": [{ "date": "2025-03-14", "amount": "95.00" }]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "Tesco",
+      "raw_merchant": "TESCO STORES 3412",
+      "kind": "regular_spend",
+      "category": "food_drink",
+      "visits": 14,
+      "total": "612.44",
+      "typical_visit": "43.75",
+      "confidence": "high"
+    }
+  ],
+  "income": [
+    {
+      "merchant": "Acme Payroll",
+      "raw_merchant": "ACME PAYROLL",
+      "period": "monthly",
+      "amount": "2450.00",
+      "confidence": "high"
+    }
+  ],
+  "needs_review": [
+    {
+      "raw_merchant": "AMZN DIGITAL*8H2Q",
+      "reason": "Kettle got two different answers about what kind of payment this is (subscription or one-off), so it needs your eyes.",
+      "transactions": [
+        { "date": "2025-03-22", "amount": "8.99" },
+        { "date": "2025-06-22", "amount": "8.99" }
+      ],
+      "note": "Not counted in the totals until you confirm it."
+    },
+    {
+      "raw_merchant": "WWW-GIFFGAFF-COM",
+      "reason": "This looks like a monthly payment, but the answer about its category didn't match any allowed option, even after a second try.",
+      "transactions": [
+        { "date": "2025-02-09", "amount": "10.00" },
+        { "date": "2025-03-09", "amount": "10.00" },
+        { "date": "2025-04-09", "amount": "10.00" }
+      ],
+      "note": "Not counted in the totals until you confirm it."
+    }
+  ],
+  "check_yourself": [
+    {
+      "about": "Amazon Prime",
+      "why": "Yearly costs only appear once in a 12-month statement, so there's less evidence to go on. Check the renewal date — the next charge would land around 14 March 2027."
+    },
+    {
+      "about": "British Gas",
+      "why": "Four payments three months apart looks quarterly, but some energy plans smooth payments differently across the year. Worth checking against your bill."
+    },
+    {
+      "about": "PureGym",
+      "why": "Kettle can see what it costs (£299.88 a year) but not whether you still use it. Only you know that."
+    }
+  ]
+}

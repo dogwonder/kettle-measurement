@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-undated_relative-elder-ridge-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 42 days",
+        "due": null,
+        "kind": "response",
+        "party": "Belwood Insurance"
+      },
+      "id": "undated_relative-elder-ridge-14-response-00",
+      "segment": "The enclosed form about your policy renewal should be completed and returned within 42 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-elder-ridge-14-no-ask-01",
+      "segment": "Return postage has been paid for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-elder-ridge-14-no-ask-03",
+      "segment": "Settlement of £1,205.00 was received within the period allowed.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

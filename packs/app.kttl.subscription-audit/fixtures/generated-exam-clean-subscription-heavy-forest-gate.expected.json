@@ -1,0 +1,258 @@
+{
+  "fixture_id": "exam-generated-clean-subscription-heavy-forest-gate",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "SQ *BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "PAYPAL *BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "PROSPECT MAG",
+      "name": "Prospect"
+    },
+    {
+      "raw": "UDEMY",
+      "name": "Udemy"
+    },
+    {
+      "raw": "VIRGIN ACTIVE",
+      "name": "Virgin Active"
+    },
+    {
+      "raw": "SKY DIGITAL",
+      "name": "Sky"
+    },
+    {
+      "raw": "BANDCAMP",
+      "name": "Bandcamp"
+    },
+    {
+      "raw": "STRIPE* EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "SQ *EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "PAYPAL *EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "WASHINGTONPOST",
+      "name": "The Washington Post"
+    },
+    {
+      "raw": "STRIPE* SCOTRAIL",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "SQ *SCOTRAIL",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "PAYPAL *SCOTRAIL",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "STRIPE* KADEYEMI",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "SQ *KADEYEMI",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "PAYPAL *KADEYEMI",
+      "name": "K Adeyemi"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BOXCOM",
+      "name": "Box",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "PROSPECT MAG",
+      "name": "Prospect",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "UDEMY",
+      "name": "Udemy",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "VIRGIN ACTIVE",
+      "name": "Virgin Active",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "SKY DIGITAL",
+      "name": "Sky",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "BANDCAMP",
+      "name": "Bandcamp",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* EVERNOTE",
+      "name": "Evernote",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "WASHINGTONPOST",
+      "name": "The Washington Post",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SCOTRAIL",
+      "name": "ScotRail",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-forest-gate-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* KADEYEMI",
+      "name": "K Adeyemi",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Box",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Prospect",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Udemy",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Virgin Active",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Sky",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Bandcamp",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Washington Post",
+      "period": "monthly"
+    },
+    {
+      "merchant": "ScotRail",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

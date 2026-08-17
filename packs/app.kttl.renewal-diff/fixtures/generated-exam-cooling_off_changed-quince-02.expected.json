@@ -1,0 +1,130 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-cooling_off_changed-quince-02",
+  "inputs": {
+    "previous": "generated-exam-cooling_off_changed-quince-02-previous.txt",
+    "renewal": "generated-exam-cooling_off_changed-quince-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-quince-02-previous-no-value-4ed970",
+      "role": "previous",
+      "segment": "Schedule QUINCE-COC-407 of your pet insurance cover with Corvin Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,415.00.",
+        "term": "premium",
+        "value": "£5,415.00"
+      },
+      "id": "exam-cooling_off_changed-quince-02-previous-premium-bae639",
+      "role": "previous",
+      "segment": "The price for the year comes to £5,415.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "You may change your mind and cancel within 13 days.",
+        "term": "cooling_off_period",
+        "value": "13 days"
+      },
+      "id": "exam-cooling_off_changed-quince-02-previous-cooling-off-period-983ee0",
+      "role": "previous",
+      "segment": "You may change your mind and cancel within 13 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-quince-02-previous-no-value-d64320",
+      "role": "previous",
+      "segment": "Please quote QUINCE-COC-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-quince-02-previous-no-value-1d9183",
+      "role": "previous",
+      "segment": "Cover for pet insurance under QUINCE-COC-407 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-quince-02-renewal-no-value-54583b",
+      "role": "renewal",
+      "segment": "Your pet insurance cover with Corvin Mutual under QUINCE-COC-407 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,415.00.",
+        "term": "premium",
+        "value": "£5,415.00"
+      },
+      "id": "exam-cooling_off_changed-quince-02-renewal-premium-bae639",
+      "role": "renewal",
+      "segment": "The price for the year comes to £5,415.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "You may change your mind and cancel within 27 days.",
+        "term": "cooling_off_period",
+        "value": "27 days"
+      },
+      "id": "exam-cooling_off_changed-quince-02-renewal-cooling-off-period-62dd6a",
+      "role": "renewal",
+      "segment": "You may change your mind and cancel within 27 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-quince-02-renewal-no-value-1d9183",
+      "role": "renewal",
+      "segment": "Cover for pet insurance under QUINCE-COC-407 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-quince-02-renewal-no-value-d64320",
+      "role": "renewal",
+      "segment": "Please quote QUINCE-COC-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

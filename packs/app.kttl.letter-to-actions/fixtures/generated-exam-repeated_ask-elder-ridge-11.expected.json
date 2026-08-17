@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-repeated_ask-elder-ridge-11",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-05-11",
+        "kind": "payment",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "repeated_ask-elder-ridge-11-payment-01",
+      "segment": "Payment of £480.00 towards your estate matter is required within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-elder-ridge-11-no-ask-03",
+      "segment": "Once the account is clear we will write to confirm it.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-elder-ridge-11-no-ask-05",
+      "segment": "Your appointed representative has been copied in and will attend to signature.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    }
+  ]
+}

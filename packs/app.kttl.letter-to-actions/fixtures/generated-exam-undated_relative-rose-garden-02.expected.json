@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-undated_relative-rose-garden-02",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 28 days",
+        "due": null,
+        "kind": "response",
+        "party": "Belwood Insurance"
+      },
+      "id": "undated_relative-rose-garden-02-response-00",
+      "segment": "The enclosed form about your policy renewal should be completed and returned within 28 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-rose-garden-02-no-ask-01",
+      "segment": "Return postage has been paid for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-rose-garden-02-no-ask-03",
+      "segment": "Attendance on 21 June is recorded and the episode is now closed.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

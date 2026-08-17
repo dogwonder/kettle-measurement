@@ -1,0 +1,130 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-cooling_off_changed-cedar-03",
+  "inputs": {
+    "previous": "generated-development-cooling_off_changed-cedar-03-previous.txt",
+    "renewal": "generated-development-cooling_off_changed-cedar-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-cedar-03-previous-no-value-a155b5",
+      "role": "previous",
+      "segment": "Westmarch Cover landlord insurance — policy schedule CEDAR-COC-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,422.00.",
+        "term": "premium",
+        "value": "£5,422.00"
+      },
+      "id": "development-cooling_off_changed-cedar-03-previous-premium-1e0c89",
+      "role": "previous",
+      "segment": "Total annual premium: £5,422.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cooling-off period: 14 days.",
+        "term": "cooling_off_period",
+        "value": "14 days"
+      },
+      "id": "development-cooling_off_changed-cedar-03-previous-cooling-off-period-0535b7",
+      "role": "previous",
+      "segment": "Cooling-off period: 14 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-cedar-03-previous-no-value-1dbcf4",
+      "role": "previous",
+      "segment": "Your reference is CEDAR-COC-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-cedar-03-previous-no-value-befec7",
+      "role": "previous",
+      "segment": "Westmarch Cover arranges landlord insurance cover under CEDAR-COC-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-cedar-03-renewal-no-value-1dd8d1",
+      "role": "renewal",
+      "segment": "Westmarch Cover landlord insurance — renewal schedule CEDAR-COC-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,422.00.",
+        "term": "premium",
+        "value": "£5,422.00"
+      },
+      "id": "development-cooling_off_changed-cedar-03-renewal-premium-1e0c89",
+      "role": "renewal",
+      "segment": "Total annual premium: £5,422.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cooling-off period: 28 days.",
+        "term": "cooling_off_period",
+        "value": "28 days"
+      },
+      "id": "development-cooling_off_changed-cedar-03-renewal-cooling-off-period-8dfb61",
+      "role": "renewal",
+      "segment": "Cooling-off period: 28 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-cedar-03-renewal-no-value-befec7",
+      "role": "renewal",
+      "segment": "Westmarch Cover arranges landlord insurance cover under CEDAR-COC-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-cedar-03-renewal-no-value-1dbcf4",
+      "role": "renewal",
+      "segment": "Your reference is CEDAR-COC-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

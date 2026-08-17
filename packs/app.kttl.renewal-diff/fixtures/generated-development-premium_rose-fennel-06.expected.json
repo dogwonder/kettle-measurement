@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-premium_rose-fennel-06",
+  "inputs": {
+    "previous": "generated-development-premium_rose-fennel-06-previous.txt",
+    "renewal": "generated-development-premium_rose-fennel-06-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-premium_rose-fennel-06-previous-no-value-5119e8",
+      "role": "previous",
+      "segment": "Corvin Mutual pet insurance — policy schedule FENNEL-PR-435 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £1,362.00.",
+        "term": "premium",
+        "value": "£1,362.00"
+      },
+      "id": "development-premium_rose-fennel-06-previous-premium-871b30",
+      "role": "previous",
+      "segment": "Total annual premium: £1,362.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £830.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£830.00"
+      },
+      "id": "development-premium_rose-fennel-06-previous-compulsory-excess-f2f7bd",
+      "role": "previous",
+      "segment": "Compulsory excess: £830.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £3,760.00 per policy.",
+        "term": "cover_limit",
+        "value": "£3,760.00"
+      },
+      "id": "development-premium_rose-fennel-06-previous-cover-limit-612ea4",
+      "role": "previous",
+      "segment": "Cover limit: £3,760.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-fennel-06-previous-no-value-a4b088",
+      "role": "previous",
+      "segment": "Your reference is FENNEL-PR-435. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-fennel-06-previous-no-value-145aaf",
+      "role": "previous",
+      "segment": "Corvin Mutual arranges pet insurance cover under FENNEL-PR-435 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-fennel-06-renewal-no-value-1ae963",
+      "role": "renewal",
+      "segment": "Corvin Mutual pet insurance — renewal schedule FENNEL-PR-435 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £1,494.50.",
+        "term": "premium",
+        "value": "£1,494.50"
+      },
+      "id": "development-premium_rose-fennel-06-renewal-premium-cf655e",
+      "role": "renewal",
+      "segment": "Total annual premium: £1,494.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £830.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£830.00"
+      },
+      "id": "development-premium_rose-fennel-06-renewal-compulsory-excess-f2f7bd",
+      "role": "renewal",
+      "segment": "Compulsory excess: £830.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £3,760.00 per policy.",
+        "term": "cover_limit",
+        "value": "£3,760.00"
+      },
+      "id": "development-premium_rose-fennel-06-renewal-cover-limit-612ea4",
+      "role": "renewal",
+      "segment": "Cover limit: £3,760.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-fennel-06-renewal-no-value-145aaf",
+      "role": "renewal",
+      "segment": "Corvin Mutual arranges pet insurance cover under FENNEL-PR-435 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-fennel-06-renewal-no-value-a4b088",
+      "role": "renewal",
+      "segment": "Your reference is FENNEL-PR-435. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

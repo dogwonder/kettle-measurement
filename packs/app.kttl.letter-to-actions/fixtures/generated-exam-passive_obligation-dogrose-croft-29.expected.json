@@ -1,0 +1,53 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-passive_obligation-dogrose-croft-29",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 42 days",
+        "due": "2026-12-07",
+        "kind": "payment",
+        "party": "Eastvale Library Service"
+      },
+      "id": "passive_obligation-dogrose-croft-29-payment-01",
+      "segment": "Settlement of £12.00 must be received within 42 days of the date of this letter, or the matter is referred onward.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-dogrose-croft-29-no-ask-02",
+      "segment": "The membership will be reviewed by our assessment team, and a decision is to be issued within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-dogrose-croft-29-no-ask-03",
+      "segment": "This notice is issued for information and no reply is needed to it.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-dogrose-croft-29-no-ask-05",
+      "segment": "Cover runs to 30 November and continues automatically thereafter.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

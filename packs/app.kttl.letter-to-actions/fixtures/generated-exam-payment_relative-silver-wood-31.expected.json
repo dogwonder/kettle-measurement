@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_relative-silver-wood-31",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-12-29",
+        "kind": "payment",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "payment_relative-silver-wood-31-payment-01",
+      "segment": "The sum of £0.00 for your case file is now overdue. Payment must reach us within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-silver-wood-31-no-ask-02",
+      "segment": "If you have already paid, please disregard this notice.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-silver-wood-31-no-ask-04",
+      "segment": "The reservation held for 9 September was cancelled by us and refunded.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

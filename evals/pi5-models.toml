@@ -1,0 +1,26 @@
+# Models to measure on a Raspberry Pi 5 (#97).
+#
+# Two sizes, because the question is where the floor is, not whether one
+# particular model clears it. The pack declares min_tier "3b", so 3B is
+# the sanctioned answer and 1.5B is the interesting one: if enum-
+# constrained JSON Schema output at temperature 0 holds at 1.5B, the
+# floor is lower than the brief assumes.
+#
+# Fill in the paths for whatever you downloaded — the file names below
+# are the Qwen2.5 instruct GGUFs that match the 7B this project has
+# already measured, but any instruct-tuned model of the same size is a
+# fair test. The pack constrains the output with a schema, so what is
+# being measured is grammar-following, not world knowledge.
+#
+#   cargo run --release -p kettle -- eval app.kttl.subscription-audit \
+#     --models evals/pi5-models.toml --runs 3 --write-tiers
+
+[[model]]
+file = "models/qwen2.5-3b-instruct-q4_k_m.gguf"
+params = "3B"
+quant = "Q4_K_M"
+
+[[model]]
+file = "models/qwen2.5-1.5b-instruct-q4_k_m.gguf"
+params = "1.5B"
+quant = "Q4_K_M"

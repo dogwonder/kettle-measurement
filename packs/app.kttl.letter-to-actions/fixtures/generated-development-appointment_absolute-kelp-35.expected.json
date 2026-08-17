@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-kelp-35",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "16 November 2026",
+        "deadline": "on 16 November 2026",
+        "due": "2026-11-16",
+        "kind": "attendance",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_absolute-kelp-35-attendance-01",
+      "segment": "You have an appointment about your check-up at Fenwick Dental Practice on 16 November 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-kelp-35-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-kelp-35-no-ask-04",
+      "segment": "We have already cancelled the appointment you could not attend on 18 February.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

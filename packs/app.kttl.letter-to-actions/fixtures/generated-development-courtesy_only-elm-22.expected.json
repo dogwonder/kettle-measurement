@@ -1,0 +1,46 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-courtesy_only-elm-22",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "courtesy_only-elm-22-no-ask-01",
+      "segment": "We are writing to confirm that your membership has been updated on our records. You do not need to do anything.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "courtesy_only-elm-22-no-ask-02",
+      "segment": "We are grateful for your patience while we made these changes.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "courtesy_only-elm-22-no-ask-03",
+      "segment": "If anything in this letter is unclear, our team is happy to explain it.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "courtesy_only-elm-22-no-ask-05",
+      "segment": "Your appointment on 12 May was attended and the notes have been added to your record.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    }
+  ]
+}

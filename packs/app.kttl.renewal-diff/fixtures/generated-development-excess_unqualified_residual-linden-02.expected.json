@@ -1,0 +1,125 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_unqualified_residual-linden-02",
+  "inputs": {
+    "previous": "generated-development-excess_unqualified_residual-linden-02-previous.txt",
+    "renewal": "generated-development-excess_unqualified_residual-linden-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-linden-02-previous-no-value-edb4b1",
+      "role": "previous",
+      "segment": "Pennine Line Assurance travel insurance — policy schedule LINDEN-EUR-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £9,251.00.",
+        "term": "premium",
+        "value": "£9,251.00"
+      },
+      "id": "development-excess_unqualified_residual-linden-02-previous-premium-f301e3",
+      "role": "previous",
+      "segment": "Total annual premium: £9,251.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £6,465.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£6,465.00"
+      },
+      "id": "development-excess_unqualified_residual-linden-02-previous-compulsory-excess-788dcb",
+      "role": "previous",
+      "segment": "Compulsory excess: £6,465.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-linden-02-previous-no-value-82c36e",
+      "role": "previous",
+      "segment": "Your reference is LINDEN-EUR-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-linden-02-previous-no-value-b0e69e",
+      "role": "previous",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under LINDEN-EUR-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-linden-02-renewal-no-value-30ce02",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance travel insurance — renewal schedule LINDEN-EUR-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £9,251.00.",
+        "term": "premium",
+        "value": "£9,251.00"
+      },
+      "id": "development-excess_unqualified_residual-linden-02-renewal-premium-f301e3",
+      "role": "renewal",
+      "segment": "Total annual premium: £9,251.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-linden-02-renewal-excess-unqualified-9cc8f0",
+      "review": true,
+      "role": "renewal",
+      "segment": "Excess: £6,515.00 each and every claim.",
+      "strata": [
+        "excess-unqualified-residual"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-linden-02-renewal-no-value-b0e69e",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under LINDEN-EUR-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-linden-02-renewal-no-value-82c36e",
+      "role": "renewal",
+      "segment": "Your reference is LINDEN-EUR-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

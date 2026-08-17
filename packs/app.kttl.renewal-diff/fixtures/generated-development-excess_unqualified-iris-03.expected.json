@@ -1,0 +1,122 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_unqualified-iris-03",
+  "inputs": {
+    "previous": "generated-development-excess_unqualified-iris-03-previous.txt",
+    "renewal": "generated-development-excess_unqualified-iris-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-iris-03-previous-no-value-72f8b0",
+      "role": "previous",
+      "segment": "Kestrel Assurance car insurance — policy schedule IRIS-EU-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £8,530.00.",
+        "term": "premium",
+        "value": "£8,530.00"
+      },
+      "id": "development-excess_unqualified-iris-03-previous-premium-336e89",
+      "role": "previous",
+      "segment": "Total annual premium: £8,530.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-iris-03-previous-excess-unqualified-4a4aad",
+      "review": true,
+      "role": "previous",
+      "segment": "Excess: £5,950.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-iris-03-previous-no-value-42e963",
+      "role": "previous",
+      "segment": "Your reference is IRIS-EU-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-iris-03-previous-no-value-01f0eb",
+      "role": "previous",
+      "segment": "Kestrel Assurance arranges car insurance cover under IRIS-EU-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-iris-03-renewal-no-value-7ac75a",
+      "role": "renewal",
+      "segment": "Kestrel Assurance car insurance — renewal schedule IRIS-EU-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £8,530.00.",
+        "term": "premium",
+        "value": "£8,530.00"
+      },
+      "id": "development-excess_unqualified-iris-03-renewal-premium-336e89",
+      "role": "renewal",
+      "segment": "Total annual premium: £8,530.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-iris-03-renewal-excess-unqualified-c8859f",
+      "review": true,
+      "role": "renewal",
+      "segment": "Excess: £6,075.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-iris-03-renewal-no-value-01f0eb",
+      "role": "renewal",
+      "segment": "Kestrel Assurance arranges car insurance cover under IRIS-EU-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-iris-03-renewal-no-value-42e963",
+      "role": "renewal",
+      "segment": "Your reference is IRIS-EU-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

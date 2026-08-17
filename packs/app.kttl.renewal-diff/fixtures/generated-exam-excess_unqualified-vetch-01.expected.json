@@ -1,0 +1,122 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_unqualified-vetch-01",
+  "inputs": {
+    "previous": "generated-exam-excess_unqualified-vetch-01-previous.txt",
+    "renewal": "generated-exam-excess_unqualified-vetch-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-vetch-01-previous-no-value-339805",
+      "role": "previous",
+      "segment": "Schedule VETCH-EU-400 of your landlord insurance cover with Westmarch Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £8,516.00.",
+        "term": "premium",
+        "value": "£8,516.00"
+      },
+      "id": "exam-excess_unqualified-vetch-01-previous-premium-8fdf55",
+      "role": "previous",
+      "segment": "The price for the year comes to £8,516.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-vetch-01-previous-excess-unqualified-6dd69e",
+      "review": true,
+      "role": "previous",
+      "segment": "An excess of £5,940.00 applies to each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-vetch-01-previous-no-value-e6a8a7",
+      "role": "previous",
+      "segment": "Please quote VETCH-EU-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-vetch-01-previous-no-value-6a130f",
+      "role": "previous",
+      "segment": "Cover for landlord insurance under VETCH-EU-400 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-vetch-01-renewal-no-value-a31bb7",
+      "role": "renewal",
+      "segment": "Your landlord insurance cover with Westmarch Cover under VETCH-EU-400 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £8,516.00.",
+        "term": "premium",
+        "value": "£8,516.00"
+      },
+      "id": "exam-excess_unqualified-vetch-01-renewal-premium-8fdf55",
+      "role": "renewal",
+      "segment": "The price for the year comes to £8,516.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-vetch-01-renewal-excess-unqualified-796b66",
+      "review": true,
+      "role": "renewal",
+      "segment": "An excess of £6,065.00 applies to each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-vetch-01-renewal-no-value-6a130f",
+      "role": "renewal",
+      "segment": "Cover for landlord insurance under VETCH-EU-400 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-vetch-01-renewal-no-value-e6a8a7",
+      "role": "renewal",
+      "segment": "Please quote VETCH-EU-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

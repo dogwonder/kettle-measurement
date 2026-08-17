@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-repeated_ask-pine-cottage-21",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-03-07",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "repeated_ask-pine-cottage-21-payment-01",
+      "segment": "Payment of £214.60 towards your council tax account is required within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-pine-cottage-21-no-ask-03",
+      "segment": "Once the account is clear we will write to confirm it.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-pine-cottage-21-no-ask-05",
+      "segment": "The responsible team has been instructed to reply within 5 days.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    }
+  ]
+}

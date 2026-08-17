@@ -1,0 +1,53 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-passive_obligation-oakhurst-15",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 42 days",
+        "due": "2026-04-26",
+        "kind": "response",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "passive_obligation-oakhurst-15-response-01",
+      "segment": "Confirmation that the annual review details are correct must be returned within 42 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-oakhurst-15-no-ask-02",
+      "segment": "The annual review is being checked by the department that holds it, and any correction is applied automatically within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-oakhurst-15-no-ask-03",
+      "segment": "This part of the letter is sent for information only.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-oakhurst-15-no-ask-05",
+      "segment": "Your booking on 3 September was cancelled by us and refunded in full.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

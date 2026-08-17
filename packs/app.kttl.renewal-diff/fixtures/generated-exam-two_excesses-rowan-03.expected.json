@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-two_excesses-rowan-03",
+  "inputs": {
+    "previous": "generated-exam-two_excesses-rowan-03-previous.txt",
+    "renewal": "generated-exam-two_excesses-rowan-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-two_excesses-rowan-03-previous-no-value-196204",
+      "role": "previous",
+      "segment": "Schedule ROWAN-TE-414 of your buildings insurance cover with Brackenfield Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,385.00.",
+        "term": "compulsory_excess",
+        "value": "£4,385.00"
+      },
+      "id": "exam-two_excesses-rowan-03-previous-compulsory-excess-66bc73",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £4,385.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £987.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£987.00"
+      },
+      "id": "exam-two_excesses-rowan-03-previous-voluntary-excess-89aca6",
+      "role": "previous",
+      "segment": "You chose to carry a further £987.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,372.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,372.00"
+      },
+      "id": "exam-two_excesses-rowan-03-previous-total-excess-7c7321",
+      "role": "previous",
+      "segment": "Altogether the excess comes to £5,372.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-rowan-03-previous-no-value-c2f777",
+      "role": "previous",
+      "segment": "Please quote ROWAN-TE-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-rowan-03-previous-no-value-a6e7d1",
+      "role": "previous",
+      "segment": "Cover for buildings insurance under ROWAN-TE-414 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-rowan-03-renewal-no-value-397072",
+      "role": "renewal",
+      "segment": "Your buildings insurance cover with Brackenfield Cover under ROWAN-TE-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,435.00.",
+        "term": "compulsory_excess",
+        "value": "£4,435.00"
+      },
+      "id": "exam-two_excesses-rowan-03-renewal-compulsory-excess-6d316a",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £4,435.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £987.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£987.00"
+      },
+      "id": "exam-two_excesses-rowan-03-renewal-voluntary-excess-89aca6",
+      "role": "renewal",
+      "segment": "You chose to carry a further £987.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,422.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,422.00"
+      },
+      "id": "exam-two_excesses-rowan-03-renewal-total-excess-87501a",
+      "role": "renewal",
+      "segment": "Altogether the excess comes to £5,422.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-rowan-03-renewal-no-value-a6e7d1",
+      "role": "renewal",
+      "segment": "Cover for buildings insurance under ROWAN-TE-414 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-rowan-03-renewal-no-value-c2f777",
+      "role": "renewal",
+      "segment": "Please quote ROWAN-TE-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

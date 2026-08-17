@@ -1,0 +1,130 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-basis_changed-cedar-03",
+  "inputs": {
+    "previous": "generated-development-basis_changed-cedar-03-previous.txt",
+    "renewal": "generated-development-basis_changed-cedar-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-basis_changed-cedar-03-previous-no-value-b9f4bc",
+      "role": "previous",
+      "segment": "Brackenfield Cover buildings insurance — policy schedule CEDAR-BC-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £1,894.00.",
+        "term": "premium",
+        "value": "£1,894.00"
+      },
+      "id": "development-basis_changed-cedar-03-previous-premium-0b79b3",
+      "role": "previous",
+      "segment": "Total annual premium: £1,894.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,210.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,210.00"
+      },
+      "id": "development-basis_changed-cedar-03-previous-compulsory-excess-a09658",
+      "role": "previous",
+      "segment": "Compulsory excess: £1,210.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-cedar-03-previous-no-value-3732de",
+      "role": "previous",
+      "segment": "Your reference is CEDAR-BC-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-cedar-03-previous-no-value-3c9d75",
+      "role": "previous",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under CEDAR-BC-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-cedar-03-renewal-no-value-38fa24",
+      "role": "renewal",
+      "segment": "Brackenfield Cover buildings insurance — renewal schedule CEDAR-BC-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "monthly",
+        "quote": "Payable by twelve monthly instalments of £157.83.",
+        "term": "premium",
+        "value": "£157.83"
+      },
+      "id": "development-basis_changed-cedar-03-renewal-premium-822b55",
+      "role": "renewal",
+      "segment": "Payable by twelve monthly instalments of £157.83.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,210.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,210.00"
+      },
+      "id": "development-basis_changed-cedar-03-renewal-compulsory-excess-a09658",
+      "role": "renewal",
+      "segment": "Compulsory excess: £1,210.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-cedar-03-renewal-no-value-3c9d75",
+      "role": "renewal",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under CEDAR-BC-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-cedar-03-renewal-no-value-3732de",
+      "role": "renewal",
+      "segment": "Your reference is CEDAR-BC-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

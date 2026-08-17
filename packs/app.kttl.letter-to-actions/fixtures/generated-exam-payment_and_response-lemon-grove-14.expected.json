@@ -1,0 +1,60 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_and_response-lemon-grove-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-07-28",
+        "kind": "payment",
+        "party": "Belwood Insurance"
+      },
+      "id": "payment_and_response-lemon-grove-14-payment-01",
+      "segment": "Please settle £188.20 for your policy renewal within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 35 days",
+        "due": "2026-08-11",
+        "kind": "response",
+        "party": "Belwood Insurance"
+      },
+      "id": "payment_and_response-lemon-grove-14-response-02",
+      "segment": "You must also write to confirm that payment has been made, within 35 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_and_response-lemon-grove-14-no-ask-03",
+      "segment": "Your co-operation saves us both a further exchange of letters.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_and_response-lemon-grove-14-no-ask-05",
+      "segment": "Cover runs to 30 November and continues automatically thereafter.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "no-obligation"
+      ]
+    }
+  ]
+}

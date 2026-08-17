@@ -1,0 +1,53 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-passive_obligation-oak-hurst-15",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 49 days",
+        "due": "2026-09-30",
+        "kind": "response",
+        "party": "Cranleigh Energy"
+      },
+      "id": "passive_obligation-oak-hurst-15-response-01",
+      "segment": "Confirmation that the energy account details are correct must be returned within 49 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-oak-hurst-15-no-ask-02",
+      "segment": "The energy account will be reviewed by our assessment team, and a decision is to be issued within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-oak-hurst-15-no-ask-03",
+      "segment": "This notice is issued for information and no reply is needed to it.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-oak-hurst-15-no-ask-05",
+      "segment": "The reservation held for 9 September was cancelled by us and refunded.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

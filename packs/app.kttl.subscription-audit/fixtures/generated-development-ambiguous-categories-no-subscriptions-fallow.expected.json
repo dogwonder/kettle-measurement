@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-no-subscriptions-fallow",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* WESTMARSHLETTING",
+      "name": "Westmarsh Letting"
+    },
+    {
+      "raw": "SQ *WESTMARSHLETTING",
+      "name": "Westmarsh Letting"
+    },
+    {
+      "raw": "PAYPAL *WESTMARSHLETTING",
+      "name": "Westmarsh Letting"
+    },
+    {
+      "raw": "HOLLOWAY PRINTERS PAYMENT",
+      "name": "Holloway Printers"
+    },
+    {
+      "raw": "STRIPE* TFLTRAVEL",
+      "name": "TfL"
+    },
+    {
+      "raw": "SQ *TFLTRAVEL",
+      "name": "TfL"
+    },
+    {
+      "raw": "PAYPAL *TFLTRAVEL",
+      "name": "TfL"
+    },
+    {
+      "raw": "STRIPE* TFARRELL",
+      "name": "T Farrell"
+    },
+    {
+      "raw": "SQ *TFARRELL",
+      "name": "T Farrell"
+    },
+    {
+      "raw": "PAYPAL *TFARRELL",
+      "name": "T Farrell"
+    },
+    {
+      "raw": "STRIPE* WAITROSE",
+      "name": "Waitrose"
+    },
+    {
+      "raw": "SQ *WAITROSE",
+      "name": "Waitrose"
+    },
+    {
+      "raw": "PAYPAL *WAITROSE",
+      "name": "Waitrose"
+    },
+    {
+      "raw": "HOMEBASE PAYMENT",
+      "name": "Homebase"
+    },
+    {
+      "raw": "SCOTTISH POWER PAYMENT",
+      "name": "ScottishPower"
+    },
+    {
+      "raw": "MILLGATE TOOLS PAYMENT",
+      "name": "Millgate Tools"
+    },
+    {
+      "raw": "STRIPE* BRINDLEMARKET",
+      "name": "Brindle Market"
+    },
+    {
+      "raw": "SQ *BRINDLEMARKET",
+      "name": "Brindle Market"
+    },
+    {
+      "raw": "PAYPAL *BRINDLEMARKET",
+      "name": "Brindle Market"
+    },
+    {
+      "raw": "MARLOW GARDENS PAYMENT",
+      "name": "Marlow Gardens"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* WESTMARSHLETTING",
+      "name": "Westmarsh Letting",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "HOLLOWAY PRINTERS PAYMENT",
+      "name": "Holloway Printers",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TFLTRAVEL",
+      "name": "TfL",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TFARRELL",
+      "name": "T Farrell",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* WAITROSE",
+      "name": "Waitrose",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "HOMEBASE PAYMENT",
+      "name": "Homebase",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "SCOTTISH POWER PAYMENT",
+      "name": "ScottishPower",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "MILLGATE TOOLS PAYMENT",
+      "name": "Millgate Tools",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BRINDLEMARKET",
+      "name": "Brindle Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-fallow-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "MARLOW GARDENS PAYMENT",
+      "name": "Marlow Gardens",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "TfL",
+      "period": "yearly"
+    },
+    {
+      "merchant": "ScottishPower",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

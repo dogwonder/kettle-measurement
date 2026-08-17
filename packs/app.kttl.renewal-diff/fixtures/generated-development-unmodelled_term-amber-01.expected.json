@@ -1,0 +1,132 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-unmodelled_term-amber-01",
+  "inputs": {
+    "previous": "generated-development-unmodelled_term-amber-01-previous.txt",
+    "renewal": "generated-development-unmodelled_term-amber-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-amber-01-previous-no-value-58d1f9",
+      "role": "previous",
+      "segment": "Westmarch Cover landlord insurance — policy schedule AMBER-UT-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,967.00.",
+        "term": "premium",
+        "value": "£4,967.00"
+      },
+      "id": "development-unmodelled_term-amber-01-previous-premium-57cb33",
+      "role": "previous",
+      "segment": "Total annual premium: £4,967.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Windscreen repair contribution: £716.00 per claim.",
+        "term": "other",
+        "value": "£716.00"
+      },
+      "id": "development-unmodelled_term-amber-01-previous-other-020f36",
+      "review": true,
+      "role": "previous",
+      "segment": "Windscreen repair contribution: £716.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-amber-01-previous-no-value-c84d91",
+      "role": "previous",
+      "segment": "Your reference is AMBER-UT-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-amber-01-previous-no-value-ad0a7d",
+      "role": "previous",
+      "segment": "Westmarch Cover arranges landlord insurance cover under AMBER-UT-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-amber-01-renewal-no-value-ce0524",
+      "role": "renewal",
+      "segment": "Westmarch Cover landlord insurance — renewal schedule AMBER-UT-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,007.00.",
+        "term": "premium",
+        "value": "£5,007.00"
+      },
+      "id": "development-unmodelled_term-amber-01-renewal-premium-45988a",
+      "role": "renewal",
+      "segment": "Total annual premium: £5,007.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Windscreen repair contribution: £716.00 per claim.",
+        "term": "other",
+        "value": "£716.00"
+      },
+      "id": "development-unmodelled_term-amber-01-renewal-other-020f36",
+      "review": true,
+      "role": "renewal",
+      "segment": "Windscreen repair contribution: £716.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-amber-01-renewal-no-value-ad0a7d",
+      "role": "renewal",
+      "segment": "Westmarch Cover arranges landlord insurance cover under AMBER-UT-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-amber-01-renewal-no-value-c84d91",
+      "role": "renewal",
+      "segment": "Your reference is AMBER-UT-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

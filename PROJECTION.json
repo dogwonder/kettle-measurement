@@ -1,0 +1,24 @@
+{
+  "files": 2565,
+  "generated": "2026-08-17",
+  "published": [
+    "crates/",
+    "packs/",
+    "evals/",
+    "assurance/",
+    "fixtures/",
+    "scripts/",
+    "privacy-boundary.toml",
+    "Cargo.toml",
+    "Cargo.lock",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    ".gitignore",
+    "app/src-tauri/models.json",
+    "app/src-tauri/tauri.conf.json"
+  ],
+  "revision": "23219d4",
+  "schema": "kettle/projection@0",
+  "source": "dogwonder/kettle"
+}

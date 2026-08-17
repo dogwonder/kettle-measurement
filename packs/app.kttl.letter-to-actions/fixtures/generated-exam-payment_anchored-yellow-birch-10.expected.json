@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_anchored-yellow-birch-10",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "14 July 2026",
+        "deadline": "within 45 days",
+        "due": "2026-08-28",
+        "kind": "payment",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "payment_anchored-yellow-birch-10-payment-02",
+      "segment": "The sum of £0.00 falls due within 45 days of 14 July 2026. Please quote MRS-2207 when you pay.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-yellow-birch-10-no-ask-03",
+      "segment": "We are grateful for your attention to this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-yellow-birch-10-no-ask-05",
+      "segment": "The certificate dated 2 October remains in force for a further 12 months.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

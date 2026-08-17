@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_month_end-pine-cottage-11",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-04-30",
+        "kind": "payment",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "payment_month_end-pine-cottage-11-payment-01",
+      "segment": "Your estate matter stands at £480.00. We ask that this is cleared by the end of the month.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "month-end"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-pine-cottage-11-no-ask-02",
+      "segment": "Where payment has already been sent, this notice can be ignored.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-pine-cottage-11-no-ask-04",
+      "segment": "Notification is given that the terms were varied on 1 January.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    }
+  ]
+}

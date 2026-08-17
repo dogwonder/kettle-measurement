@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-no-subscriptions-wheat-meadow",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* THORNBURYLETTING CARD 4821",
+      "name": "Thornbury Letting"
+    },
+    {
+      "raw": "SQ *THORNBURYLETTING CARD 4821",
+      "name": "Thornbury Letting"
+    },
+    {
+      "raw": "PAYPAL *THORNBURYLETTING CARD 4821",
+      "name": "Thornbury Letting"
+    },
+    {
+      "raw": "CARD 4821 TRLTN JNRY GB",
+      "name": "Tarlton Joinery"
+    },
+    {
+      "raw": "STRIPE* AVANTIWESTCST CARD 4821",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "SQ *AVANTIWESTCST CARD 4821",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "PAYPAL *AVANTIWESTCST CARD 4821",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "STRIPE* DCHAUDHRY CARD 4821",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "SQ *DCHAUDHRY CARD 4821",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "PAYPAL *DCHAUDHRY CARD 4821",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "STRIPE* ASDASTORES CARD 4821",
+      "name": "Asda"
+    },
+    {
+      "raw": "SQ *ASDASTORES CARD 4821",
+      "name": "Asda"
+    },
+    {
+      "raw": "PAYPAL *ASDASTORES CARD 4821",
+      "name": "Asda"
+    },
+    {
+      "raw": "CARD 4821 B&Q LTD GB",
+      "name": "B&Q"
+    },
+    {
+      "raw": "CARD 4821 S NRGY GB",
+      "name": "So Energy"
+    },
+    {
+      "raw": "CARD 4821 CRRCK KTCHNS GB",
+      "name": "Carrick Kitchens"
+    },
+    {
+      "raw": "STRIPE* HAYWARDMARKET CARD 4821",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "SQ *HAYWARDMARKET CARD 4821",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "PAYPAL *HAYWARDMARKET CARD 4821",
+      "name": "Hayward Market"
+    },
+    {
+      "raw": "CARD 4821 WYNDHM PSS GB",
+      "name": "Wyndham Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* THORNBURYLETTING CARD 4821",
+      "name": "Thornbury Letting",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 TRLTN JNRY GB",
+      "name": "Tarlton Joinery",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* AVANTIWESTCST CARD 4821",
+      "name": "Avanti West Coast",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* DCHAUDHRY CARD 4821",
+      "name": "D Chaudhry",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ASDASTORES CARD 4821",
+      "name": "Asda",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 B&Q LTD GB",
+      "name": "B&Q",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 S NRGY GB",
+      "name": "So Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 CRRCK KTCHNS GB",
+      "name": "Carrick Kitchens",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* HAYWARDMARKET CARD 4821",
+      "name": "Hayward Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-wheat-meadow-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 WYNDHM PSS GB",
+      "name": "Wyndham Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Avanti West Coast",
+      "period": "yearly"
+    },
+    {
+      "merchant": "So Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

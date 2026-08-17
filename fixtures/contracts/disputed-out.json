@@ -1,0 +1,6 @@
+{
+  "read": "Please pay £120.00 by 28 April 2026.",
+  "also_read": "Please pay £120.00 by 28 April 2028.",
+  "message": "Read a second time, this came out as “Please pay £120.00 by 28 April 2028.”",
+  "instruction": "Kettle used the first reading. Check this against the letter before you rely on the date."
+}

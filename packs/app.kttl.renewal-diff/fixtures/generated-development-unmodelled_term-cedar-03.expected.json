@@ -1,0 +1,132 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-unmodelled_term-cedar-03",
+  "inputs": {
+    "previous": "generated-development-unmodelled_term-cedar-03-previous.txt",
+    "renewal": "generated-development-unmodelled_term-cedar-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-cedar-03-previous-no-value-cfda35",
+      "role": "previous",
+      "segment": "Kestrel Assurance car insurance — policy schedule CEDAR-UT-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,981.00.",
+        "term": "premium",
+        "value": "£4,981.00"
+      },
+      "id": "development-unmodelled_term-cedar-03-previous-premium-494897",
+      "role": "previous",
+      "segment": "Total annual premium: £4,981.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Windscreen repair contribution: £718.00 per claim.",
+        "term": "other",
+        "value": "£718.00"
+      },
+      "id": "development-unmodelled_term-cedar-03-previous-other-0502f0",
+      "review": true,
+      "role": "previous",
+      "segment": "Windscreen repair contribution: £718.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-cedar-03-previous-no-value-460f3c",
+      "role": "previous",
+      "segment": "Your reference is CEDAR-UT-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-cedar-03-previous-no-value-f2a0d3",
+      "role": "previous",
+      "segment": "Kestrel Assurance arranges car insurance cover under CEDAR-UT-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-cedar-03-renewal-no-value-983f65",
+      "role": "renewal",
+      "segment": "Kestrel Assurance car insurance — renewal schedule CEDAR-UT-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,021.00.",
+        "term": "premium",
+        "value": "£5,021.00"
+      },
+      "id": "development-unmodelled_term-cedar-03-renewal-premium-1373ed",
+      "role": "renewal",
+      "segment": "Total annual premium: £5,021.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Windscreen repair contribution: £718.00 per claim.",
+        "term": "other",
+        "value": "£718.00"
+      },
+      "id": "development-unmodelled_term-cedar-03-renewal-other-0502f0",
+      "review": true,
+      "role": "renewal",
+      "segment": "Windscreen repair contribution: £718.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-cedar-03-renewal-no-value-f2a0d3",
+      "role": "renewal",
+      "segment": "Kestrel Assurance arranges car insurance cover under CEDAR-UT-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-unmodelled_term-cedar-03-renewal-no-value-460f3c",
+      "role": "renewal",
+      "segment": "Your reference is CEDAR-UT-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

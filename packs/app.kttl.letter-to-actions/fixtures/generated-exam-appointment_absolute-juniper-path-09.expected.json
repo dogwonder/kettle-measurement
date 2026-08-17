@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_absolute-juniper-path-09",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "15 August 2026",
+        "deadline": "on 15 August 2026",
+        "due": "2026-08-15",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_absolute-juniper-path-09-attendance-01",
+      "segment": "We have booked your council tax account appointment with Kelsford Borough Council on 15 August 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-juniper-path-09-no-ask-02",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-juniper-path-09-no-ask-04",
+      "segment": "Attendance on 21 June is recorded and the episode is now closed.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

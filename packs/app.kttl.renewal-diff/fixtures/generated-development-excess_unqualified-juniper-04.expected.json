@@ -1,0 +1,122 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_unqualified-juniper-04",
+  "inputs": {
+    "previous": "generated-development-excess_unqualified-juniper-04-previous.txt",
+    "renewal": "generated-development-excess_unqualified-juniper-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-juniper-04-previous-no-value-faec7e",
+      "role": "previous",
+      "segment": "Brackenfield Cover buildings insurance — policy schedule JUNIPER-EU-421 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £8,537.00.",
+        "term": "premium",
+        "value": "£8,537.00"
+      },
+      "id": "development-excess_unqualified-juniper-04-previous-premium-7355ed",
+      "role": "previous",
+      "segment": "Total annual premium: £8,537.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-juniper-04-previous-excess-unqualified-4a97b7",
+      "review": true,
+      "role": "previous",
+      "segment": "Excess: £5,955.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-juniper-04-previous-no-value-423d69",
+      "role": "previous",
+      "segment": "Your reference is JUNIPER-EU-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-juniper-04-previous-no-value-8b40cc",
+      "role": "previous",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under JUNIPER-EU-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-juniper-04-renewal-no-value-7d0303",
+      "role": "renewal",
+      "segment": "Brackenfield Cover buildings insurance — renewal schedule JUNIPER-EU-421 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £8,537.00.",
+        "term": "premium",
+        "value": "£8,537.00"
+      },
+      "id": "development-excess_unqualified-juniper-04-renewal-premium-7355ed",
+      "role": "renewal",
+      "segment": "Total annual premium: £8,537.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-juniper-04-renewal-excess-unqualified-15707f",
+      "review": true,
+      "role": "renewal",
+      "segment": "Excess: £6,080.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-juniper-04-renewal-no-value-8b40cc",
+      "role": "renewal",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under JUNIPER-EU-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-juniper-04-renewal-no-value-423d69",
+      "role": "renewal",
+      "segment": "Your reference is JUNIPER-EU-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

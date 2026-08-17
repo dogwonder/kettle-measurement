@@ -1,0 +1,30 @@
+{
+  "families": [
+    {
+      "name": "ceiling-tolerated single errors",
+      "count": 261,
+      "operators": ["wrong_value_from_multi_value_quote"],
+      "moved": "one_item",
+      "reason": "A wrong value read out of a multi-figure quote visibly moves exactly one scored item, and the 2% confident-wrong ceiling at these denominators honestly absorbs a single error — the gates tolerate it at the declared risk appetite. The operator kills 0 of its sites: it has no gate path at all at these denominators. #448 recorded the mechanism and #466 re-confirmed it at v13; the Wilson headroom constant behind it (upper 0.019 at n=296) is #448-era arithmetic on a smaller bed, not a current figure."
+    },
+    {
+      "name": "already-contained claims",
+      "count": 88,
+      "operators": [
+        "wrong_document_quote",
+        "unmodelled_term",
+        "value_shape_break",
+        "force_confidence_low",
+        "wrong_value_from_multi_value_quote",
+        "swap_roles"
+      ],
+      "moved": "nothing",
+      "reason": "The mutated claim is already routed to review in the unmutated baseline — the windscreen unmodelled terms (#445) and the bare-excess referral answers (#461, #493) — so the mutant changes nothing observable: a survivor label on a mutant that never escaped anything."
+    }
+  ],
+  "notes": [
+    "Declared against the census of 12 August 2026: mutation v1, scoring v14, 4527 mutants, 349 survivors, no remainder and no overlap. The v13 census (#466) was 261 in the same two families, 237 + 24: family 1 grew with #493's referral-shape fixtures, family 2 with the twelve review-routed referral answers the oracle now gives them (#484).",
+    "force_confidence_high has no sites in this recording, because the oracle answers all-high. That operator stays unexercised until the harness runs over real model recordings — a gap in coverage, not a clean sweep.",
+    "drop_obligation, invent_obligation, deadline_digit and invent_date have no sites either: this pack extracts terms, not obligations, so those operators are exercised on the letter pack's bed."
+  ]
+}

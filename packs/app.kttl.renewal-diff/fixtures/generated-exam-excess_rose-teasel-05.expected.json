@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_rose-teasel-05",
+  "inputs": {
+    "previous": "generated-exam-excess_rose-teasel-05-previous.txt",
+    "renewal": "generated-exam-excess_rose-teasel-05-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_rose-teasel-05-previous-no-value-0f12f0",
+      "role": "previous",
+      "segment": "Schedule TEASEL-ER-428 of your pet insurance cover with Corvin Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £260.00.",
+        "term": "compulsory_excess",
+        "value": "£260.00"
+      },
+      "id": "exam-excess_rose-teasel-05-previous-compulsory-excess-710afd",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £260.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £564.00.",
+        "term": "premium",
+        "value": "£564.00"
+      },
+      "id": "exam-excess_rose-teasel-05-previous-premium-675b39",
+      "role": "previous",
+      "segment": "The price for the year comes to £564.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £2,620.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£2,620.00"
+      },
+      "id": "exam-excess_rose-teasel-05-previous-cover-limit-04ae38",
+      "role": "previous",
+      "segment": "We will pay up to £2,620.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-teasel-05-previous-no-value-c3cb8b",
+      "role": "previous",
+      "segment": "Please quote TEASEL-ER-428 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-teasel-05-previous-no-value-510f32",
+      "role": "previous",
+      "segment": "Cover for pet insurance under TEASEL-ER-428 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-teasel-05-renewal-no-value-d32778",
+      "role": "renewal",
+      "segment": "Your pet insurance cover with Corvin Mutual under TEASEL-ER-428 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £522.50.",
+        "term": "compulsory_excess",
+        "value": "£522.50"
+      },
+      "id": "exam-excess_rose-teasel-05-renewal-compulsory-excess-994711",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £522.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £564.00.",
+        "term": "premium",
+        "value": "£564.00"
+      },
+      "id": "exam-excess_rose-teasel-05-renewal-premium-675b39",
+      "role": "renewal",
+      "segment": "The price for the year comes to £564.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £2,620.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£2,620.00"
+      },
+      "id": "exam-excess_rose-teasel-05-renewal-cover-limit-04ae38",
+      "role": "renewal",
+      "segment": "We will pay up to £2,620.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-teasel-05-renewal-no-value-510f32",
+      "role": "renewal",
+      "segment": "Cover for pet insurance under TEASEL-ER-428 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-teasel-05-renewal-no-value-c3cb8b",
+      "role": "renewal",
+      "segment": "Please quote TEASEL-ER-428 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

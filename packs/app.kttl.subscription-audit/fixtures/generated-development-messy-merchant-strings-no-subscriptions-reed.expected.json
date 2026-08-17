@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-no-subscriptions-reed",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* MERIDIANPROPERTY CARD 4821",
+      "name": "Meridian Property"
+    },
+    {
+      "raw": "SQ *MERIDIANPROPERTY CARD 4821",
+      "name": "Meridian Property"
+    },
+    {
+      "raw": "PAYPAL *MERIDIANPROPERTY CARD 4821",
+      "name": "Meridian Property"
+    },
+    {
+      "raw": "CARD 4821 PNRS HLTHCR GB",
+      "name": "Penrose Healthcare"
+    },
+    {
+      "raw": "STRIPE* LNER CARD 4821",
+      "name": "LNER"
+    },
+    {
+      "raw": "SQ *LNER CARD 4821",
+      "name": "LNER"
+    },
+    {
+      "raw": "PAYPAL *LNER CARD 4821",
+      "name": "LNER"
+    },
+    {
+      "raw": "STRIPE* MOKONKWO CARD 4821",
+      "name": "M Okonkwo"
+    },
+    {
+      "raw": "SQ *MOKONKWO CARD 4821",
+      "name": "M Okonkwo"
+    },
+    {
+      "raw": "PAYPAL *MOKONKWO CARD 4821",
+      "name": "M Okonkwo"
+    },
+    {
+      "raw": "STRIPE* SAINSBURYS CARD 4821",
+      "name": "Sainsbury's"
+    },
+    {
+      "raw": "SQ *SAINSBURYS CARD 4821",
+      "name": "Sainsbury's"
+    },
+    {
+      "raw": "PAYPAL *SAINSBURYS CARD 4821",
+      "name": "Sainsbury's"
+    },
+    {
+      "raw": "CARD 4821 DNLM GB",
+      "name": "Dunelm"
+    },
+    {
+      "raw": "CARD 4821 CTPS NRGY GB",
+      "name": "Octopus Energy"
+    },
+    {
+      "raw": "CARD 4821 QYSD HRDWR GB",
+      "name": "Quayside Hardware"
+    },
+    {
+      "raw": "STRIPE* LOWTHERTRADERS CARD 4821",
+      "name": "Lowther Traders"
+    },
+    {
+      "raw": "SQ *LOWTHERTRADERS CARD 4821",
+      "name": "Lowther Traders"
+    },
+    {
+      "raw": "PAYPAL *LOWTHERTRADERS CARD 4821",
+      "name": "Lowther Traders"
+    },
+    {
+      "raw": "CARD 4821 RDCLFF TTRCT GB",
+      "name": "Redcliff Attractions"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MERIDIANPROPERTY CARD 4821",
+      "name": "Meridian Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 PNRS HLTHCR GB",
+      "name": "Penrose Healthcare",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LNER CARD 4821",
+      "name": "LNER",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MOKONKWO CARD 4821",
+      "name": "M Okonkwo",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SAINSBURYS CARD 4821",
+      "name": "Sainsbury's",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 DNLM GB",
+      "name": "Dunelm",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 CTPS NRGY GB",
+      "name": "Octopus Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 QYSD HRDWR GB",
+      "name": "Quayside Hardware",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* LOWTHERTRADERS CARD 4821",
+      "name": "Lowther Traders",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-reed-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 RDCLFF TTRCT GB",
+      "name": "Redcliff Attractions",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "LNER",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Octopus Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

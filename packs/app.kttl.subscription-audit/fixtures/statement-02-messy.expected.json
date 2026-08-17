@@ -1,0 +1,30 @@
+{
+  "fixture_id": "messy-merchant-strings-01",
+  "normalise": [
+    { "raw": "PAYPAL *DISNEYPLUS", "name": "Disney+" },
+    { "raw": "AMAZON PRIME", "name": "Amazon Prime" },
+    { "raw": "SQ *KAFFA COFFEE", "name": "Kaffa Coffee" },
+    { "raw": "ZETTLE_*COFFEECART", "name": "Coffee Cart" },
+    { "raw": "AMZNMktplace*2K4J", "name": "Amazon Marketplace" }
+  ],
+  "classify": [
+    { "id": "disney-plus-messy-descriptor-01", "strata": ["messy-merchant-strings"],
+      "name": "Disney+", "kind": "subscription", "category": "streaming" },
+    { "id": "amazon-prime-messy-descriptor-01", "strata": ["messy-merchant-strings"],
+      "name": "Amazon Prime", "kind": "subscription", "category": "retail" },
+    { "id": "kaffa-coffee-messy-descriptor-01", "strata": ["messy-merchant-strings"],
+      "name": "Kaffa Coffee", "kind": "regular_spend", "category": "food_drink" },
+    { "id": "coffee-cart-messy-descriptor-01", "strata": ["messy-merchant-strings"],
+      "name": "Coffee Cart", "kind": "regular_spend", "category": "food_drink" },
+    { "id": "amazon-marketplace-one-off-01", "strata": ["messy-merchant-strings"],
+      "name": "Amazon Marketplace", "kind": "one_off", "category": "retail" }
+  ],
+  "recurring": [
+    { "merchant": "Disney+", "period": "monthly",
+      "annualised": 131.88, "price_rise": true },
+    { "merchant": "Amazon Prime", "period": "yearly",
+      "annualised": 95.00, "price_rise": false }
+  ],
+  "tolerances": { "normalise": "fuzzy:0.85", "classify_kind": "exact",
+                  "classify_category": "exact", "recurring": "exact" }
+}

@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-undated_relative-pine-25",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 42 days",
+        "due": null,
+        "kind": "response",
+        "party": "Harborne Parking Services"
+      },
+      "id": "undated_relative-pine-25-response-00",
+      "segment": "Please return the enclosed form about your parking charge within 42 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-pine-25-no-ask-01",
+      "segment": "A prepaid envelope is enclosed for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-pine-25-no-ask-03",
+      "segment": "Your membership number has not changed and your card remains valid until March 2028.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

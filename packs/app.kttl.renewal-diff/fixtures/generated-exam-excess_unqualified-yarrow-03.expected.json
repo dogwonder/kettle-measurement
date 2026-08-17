@@ -1,0 +1,122 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_unqualified-yarrow-03",
+  "inputs": {
+    "previous": "generated-exam-excess_unqualified-yarrow-03-previous.txt",
+    "renewal": "generated-exam-excess_unqualified-yarrow-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-yarrow-03-previous-no-value-e10d06",
+      "role": "previous",
+      "segment": "Schedule YARROW-EU-414 of your car insurance cover with Kestrel Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £8,530.00.",
+        "term": "premium",
+        "value": "£8,530.00"
+      },
+      "id": "exam-excess_unqualified-yarrow-03-previous-premium-2b088e",
+      "role": "previous",
+      "segment": "The price for the year comes to £8,530.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-yarrow-03-previous-excess-unqualified-059a84",
+      "review": true,
+      "role": "previous",
+      "segment": "An excess of £5,950.00 applies to each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-yarrow-03-previous-no-value-0e710c",
+      "role": "previous",
+      "segment": "Please quote YARROW-EU-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-yarrow-03-previous-no-value-30b052",
+      "role": "previous",
+      "segment": "Cover for car insurance under YARROW-EU-414 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-yarrow-03-renewal-no-value-ff2254",
+      "role": "renewal",
+      "segment": "Your car insurance cover with Kestrel Assurance under YARROW-EU-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £8,530.00.",
+        "term": "premium",
+        "value": "£8,530.00"
+      },
+      "id": "exam-excess_unqualified-yarrow-03-renewal-premium-2b088e",
+      "role": "renewal",
+      "segment": "The price for the year comes to £8,530.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-yarrow-03-renewal-excess-unqualified-ed90ad",
+      "review": true,
+      "role": "renewal",
+      "segment": "An excess of £6,075.00 applies to each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-yarrow-03-renewal-no-value-30b052",
+      "role": "renewal",
+      "segment": "Cover for car insurance under YARROW-EU-414 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-yarrow-03-renewal-no-value-0e710c",
+      "role": "renewal",
+      "segment": "Please quote YARROW-EU-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

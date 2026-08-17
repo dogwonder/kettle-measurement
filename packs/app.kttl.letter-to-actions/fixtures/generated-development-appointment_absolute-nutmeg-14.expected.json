@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-nutmeg-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "15 August 2026",
+        "deadline": "on 15 August 2026",
+        "due": "2026-08-15",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_absolute-nutmeg-14-attendance-01",
+      "segment": "You have an appointment about your council tax account at Kelsford Borough Council on 15 August 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-nutmeg-14-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-nutmeg-14-no-ask-04",
+      "segment": "The engineer's visit on 8 January resolved the fault and no follow-up was needed.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-undated_relative-juniper-path-18",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 35 days",
+        "due": null,
+        "kind": "response",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "undated_relative-juniper-path-18-response-00",
+      "segment": "The enclosed form about your check-up should be completed and returned within 35 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-juniper-path-18-no-ask-01",
+      "segment": "Return postage has been paid for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-juniper-path-18-no-ask-03",
+      "segment": "The residual sum of £8.40 has been written off.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

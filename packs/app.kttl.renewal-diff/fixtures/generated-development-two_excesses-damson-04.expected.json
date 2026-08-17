@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-two_excesses-damson-04",
+  "inputs": {
+    "previous": "generated-development-two_excesses-damson-04-previous.txt",
+    "renewal": "generated-development-two_excesses-damson-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-two_excesses-damson-04-previous-no-value-11fa2e",
+      "role": "previous",
+      "segment": "Haldon Insurance Services contents insurance — policy schedule DAMSON-TE-421 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,390.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,390.00"
+      },
+      "id": "development-two_excesses-damson-04-previous-compulsory-excess-cb5dca",
+      "role": "previous",
+      "segment": "Compulsory excess: £4,390.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £988.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£988.00"
+      },
+      "id": "development-two_excesses-damson-04-previous-voluntary-excess-6cf78f",
+      "role": "previous",
+      "segment": "Voluntary excess: £988.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,378.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,378.00"
+      },
+      "id": "development-two_excesses-damson-04-previous-total-excess-8194c1",
+      "role": "previous",
+      "segment": "Total excess payable: £5,378.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-damson-04-previous-no-value-1f27c8",
+      "role": "previous",
+      "segment": "Your reference is DAMSON-TE-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-damson-04-previous-no-value-abb3f8",
+      "role": "previous",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under DAMSON-TE-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-damson-04-renewal-no-value-517cb9",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services contents insurance — renewal schedule DAMSON-TE-421 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,440.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,440.00"
+      },
+      "id": "development-two_excesses-damson-04-renewal-compulsory-excess-d32972",
+      "role": "renewal",
+      "segment": "Compulsory excess: £4,440.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £988.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£988.00"
+      },
+      "id": "development-two_excesses-damson-04-renewal-voluntary-excess-6cf78f",
+      "role": "renewal",
+      "segment": "Voluntary excess: £988.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,428.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,428.00"
+      },
+      "id": "development-two_excesses-damson-04-renewal-total-excess-97a619",
+      "role": "renewal",
+      "segment": "Total excess payable: £5,428.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-damson-04-renewal-no-value-abb3f8",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under DAMSON-TE-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-damson-04-renewal-no-value-1f27c8",
+      "role": "renewal",
+      "segment": "Your reference is DAMSON-TE-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

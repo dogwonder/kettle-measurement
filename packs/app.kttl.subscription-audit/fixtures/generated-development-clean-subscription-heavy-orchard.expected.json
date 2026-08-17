@@ -1,0 +1,243 @@
+{
+  "fixture_id": "development-generated-clean-subscription-heavy-orchard",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "SQ *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PAYPAL *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PRIVATE EYE",
+      "name": "Private Eye"
+    },
+    {
+      "raw": "SKILLSHARE",
+      "name": "Skillshare"
+    },
+    {
+      "raw": "DAVID LLOYD",
+      "name": "David Lloyd"
+    },
+    {
+      "raw": "NOW TV",
+      "name": "NOW"
+    },
+    {
+      "raw": "TIDAL",
+      "name": "TIDAL"
+    },
+    {
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "SQ *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "PAYPAL *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "THE TELEGRAPH",
+      "name": "The Telegraph"
+    },
+    {
+      "raw": "STRIPE* SALTMARSHSTALL",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "SQ *SALTMARSHSTALL",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "PAYPAL *SALTMARSHSTALL",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "STANWICK LEISURE",
+      "name": "Stanwick Leisure"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-clean-subscription-heavy-orchard-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-orchard-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "PRIVATE EYE",
+      "name": "Private Eye",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-orchard-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "SKILLSHARE",
+      "name": "Skillshare",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-orchard-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "DAVID LLOYD",
+      "name": "David Lloyd",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-clean-subscription-heavy-orchard-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "NOW TV",
+      "name": "NOW",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-orchard-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "TIDAL",
+      "name": "TIDAL",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-orchard-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-orchard-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE TELEGRAPH",
+      "name": "The Telegraph",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-orchard-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* SALTMARSHSTALL",
+      "name": "Saltmarsh Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-clean-subscription-heavy-orchard-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STANWICK LEISURE",
+      "name": "Stanwick Leisure",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "pCloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Private Eye",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Skillshare",
+      "period": "monthly"
+    },
+    {
+      "merchant": "David Lloyd",
+      "period": "monthly"
+    },
+    {
+      "merchant": "NOW",
+      "period": "monthly"
+    },
+    {
+      "merchant": "TIDAL",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Telegraph",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

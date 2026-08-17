@@ -1,0 +1,130 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-cooling_off_changed-sorrel-04",
+  "inputs": {
+    "previous": "generated-exam-cooling_off_changed-sorrel-04-previous.txt",
+    "renewal": "generated-exam-cooling_off_changed-sorrel-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-sorrel-04-previous-no-value-6ef389",
+      "role": "previous",
+      "segment": "Schedule SORREL-COC-421 of your home insurance cover with Marlowe Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,429.00.",
+        "term": "premium",
+        "value": "£5,429.00"
+      },
+      "id": "exam-cooling_off_changed-sorrel-04-previous-premium-c33c19",
+      "role": "previous",
+      "segment": "The price for the year comes to £5,429.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "You may change your mind and cancel within 15 days.",
+        "term": "cooling_off_period",
+        "value": "15 days"
+      },
+      "id": "exam-cooling_off_changed-sorrel-04-previous-cooling-off-period-5a75e5",
+      "role": "previous",
+      "segment": "You may change your mind and cancel within 15 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-sorrel-04-previous-no-value-97e572",
+      "role": "previous",
+      "segment": "Please quote SORREL-COC-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-sorrel-04-previous-no-value-050f6f",
+      "role": "previous",
+      "segment": "Cover for home insurance under SORREL-COC-421 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-sorrel-04-renewal-no-value-987a6a",
+      "role": "renewal",
+      "segment": "Your home insurance cover with Marlowe Mutual under SORREL-COC-421 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,429.00.",
+        "term": "premium",
+        "value": "£5,429.00"
+      },
+      "id": "exam-cooling_off_changed-sorrel-04-renewal-premium-c33c19",
+      "role": "renewal",
+      "segment": "The price for the year comes to £5,429.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "You may change your mind and cancel within 29 days.",
+        "term": "cooling_off_period",
+        "value": "29 days"
+      },
+      "id": "exam-cooling_off_changed-sorrel-04-renewal-cooling-off-period-bdd6e6",
+      "role": "renewal",
+      "segment": "You may change your mind and cancel within 29 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-sorrel-04-renewal-no-value-050f6f",
+      "role": "renewal",
+      "segment": "Cover for home insurance under SORREL-COC-421 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-sorrel-04-renewal-no-value-97e572",
+      "role": "renewal",
+      "segment": "Please quote SORREL-COC-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

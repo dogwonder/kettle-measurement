@@ -1,0 +1,145 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-term_added-rowan-03",
+  "inputs": {
+    "previous": "generated-exam-term_added-rowan-03-previous.txt",
+    "renewal": "generated-exam-term_added-rowan-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-term_added-rowan-03-previous-no-value-51dbe8",
+      "role": "previous",
+      "segment": "Schedule ROWAN-TA-414 of your car insurance cover with Kestrel Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £3,483.00.",
+        "term": "premium",
+        "value": "£3,483.00"
+      },
+      "id": "exam-term_added-rowan-03-previous-premium-dee6c8",
+      "role": "previous",
+      "segment": "The price for the year comes to £3,483.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,345.00.",
+        "term": "compulsory_excess",
+        "value": "£2,345.00"
+      },
+      "id": "exam-term_added-rowan-03-previous-compulsory-excess-37950a",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £2,345.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-rowan-03-previous-no-value-5386e1",
+      "role": "previous",
+      "segment": "Please quote ROWAN-TA-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-rowan-03-previous-no-value-27ee16",
+      "role": "previous",
+      "segment": "Cover for car insurance under ROWAN-TA-414 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-rowan-03-renewal-no-value-17ef5f",
+      "role": "renewal",
+      "segment": "Your car insurance cover with Kestrel Assurance under ROWAN-TA-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £3,483.00.",
+        "term": "premium",
+        "value": "£3,483.00"
+      },
+      "id": "exam-term_added-rowan-03-renewal-premium-dee6c8",
+      "role": "renewal",
+      "segment": "The price for the year comes to £3,483.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,345.00.",
+        "term": "compulsory_excess",
+        "value": "£2,345.00"
+      },
+      "id": "exam-term_added-rowan-03-renewal-compulsory-excess-37950a",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £2,345.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £529.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£529.00"
+      },
+      "id": "exam-term_added-rowan-03-renewal-voluntary-excess-a6a607",
+      "role": "renewal",
+      "segment": "You chose to carry a further £529.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-rowan-03-renewal-no-value-27ee16",
+      "role": "renewal",
+      "segment": "Cover for car insurance under ROWAN-TA-414 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-rowan-03-renewal-no-value-5386e1",
+      "role": "renewal",
+      "segment": "Please quote ROWAN-TA-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

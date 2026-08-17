@@ -1,0 +1,70 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-nothing_stated-rowan-03",
+  "inputs": {
+    "previous": "generated-exam-nothing_stated-rowan-03-previous.txt",
+    "renewal": "generated-exam-nothing_stated-rowan-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-rowan-03-previous-no-value-237893",
+      "role": "previous",
+      "segment": "Schedule ROWAN-NS-414 of your landlord insurance cover with Westmarch Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-rowan-03-previous-no-value-3f5cfc",
+      "role": "previous",
+      "segment": "Please quote ROWAN-NS-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-rowan-03-previous-no-value-cc59bb",
+      "role": "previous",
+      "segment": "Cover for landlord insurance under ROWAN-NS-414 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-rowan-03-renewal-no-value-84722c",
+      "role": "renewal",
+      "segment": "Your landlord insurance cover with Westmarch Cover under ROWAN-NS-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-rowan-03-renewal-no-value-cc59bb",
+      "role": "renewal",
+      "segment": "Cover for landlord insurance under ROWAN-NS-414 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-rowan-03-renewal-no-value-3f5cfc",
+      "role": "renewal",
+      "segment": "Please quote ROWAN-NS-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

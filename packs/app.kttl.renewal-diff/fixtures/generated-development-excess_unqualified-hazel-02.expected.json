@@ -1,0 +1,122 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_unqualified-hazel-02",
+  "inputs": {
+    "previous": "generated-development-excess_unqualified-hazel-02-previous.txt",
+    "renewal": "generated-development-excess_unqualified-hazel-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-hazel-02-previous-no-value-3713ee",
+      "role": "previous",
+      "segment": "Marlowe Mutual home insurance — policy schedule HAZEL-EU-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £8,523.00.",
+        "term": "premium",
+        "value": "£8,523.00"
+      },
+      "id": "development-excess_unqualified-hazel-02-previous-premium-24f78a",
+      "role": "previous",
+      "segment": "Total annual premium: £8,523.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-hazel-02-previous-excess-unqualified-2ad9aa",
+      "review": true,
+      "role": "previous",
+      "segment": "Excess: £5,945.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-hazel-02-previous-no-value-369cea",
+      "role": "previous",
+      "segment": "Your reference is HAZEL-EU-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-hazel-02-previous-no-value-538c35",
+      "role": "previous",
+      "segment": "Marlowe Mutual arranges home insurance cover under HAZEL-EU-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-hazel-02-renewal-no-value-e1ad39",
+      "role": "renewal",
+      "segment": "Marlowe Mutual home insurance — renewal schedule HAZEL-EU-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £8,523.00.",
+        "term": "premium",
+        "value": "£8,523.00"
+      },
+      "id": "development-excess_unqualified-hazel-02-renewal-premium-24f78a",
+      "role": "renewal",
+      "segment": "Total annual premium: £8,523.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-hazel-02-renewal-excess-unqualified-99cc83",
+      "review": true,
+      "role": "renewal",
+      "segment": "Excess: £6,070.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-hazel-02-renewal-no-value-538c35",
+      "role": "renewal",
+      "segment": "Marlowe Mutual arranges home insurance cover under HAZEL-EU-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-hazel-02-renewal-no-value-369cea",
+      "role": "renewal",
+      "segment": "Your reference is HAZEL-EU-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

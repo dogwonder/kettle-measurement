@@ -1,0 +1,145 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-term_added-damson-04",
+  "inputs": {
+    "previous": "generated-development-term_added-damson-04-previous.txt",
+    "renewal": "generated-development-term_added-damson-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-term_added-damson-04-previous-no-value-8973ea",
+      "role": "previous",
+      "segment": "Brackenfield Cover buildings insurance — policy schedule DAMSON-TA-421 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £3,490.00.",
+        "term": "premium",
+        "value": "£3,490.00"
+      },
+      "id": "development-term_added-damson-04-previous-premium-1e48a0",
+      "role": "previous",
+      "segment": "Total annual premium: £3,490.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,350.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,350.00"
+      },
+      "id": "development-term_added-damson-04-previous-compulsory-excess-68609a",
+      "role": "previous",
+      "segment": "Compulsory excess: £2,350.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-damson-04-previous-no-value-e8d125",
+      "role": "previous",
+      "segment": "Your reference is DAMSON-TA-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-damson-04-previous-no-value-ce8109",
+      "role": "previous",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under DAMSON-TA-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-damson-04-renewal-no-value-2a949d",
+      "role": "renewal",
+      "segment": "Brackenfield Cover buildings insurance — renewal schedule DAMSON-TA-421 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £3,490.00.",
+        "term": "premium",
+        "value": "£3,490.00"
+      },
+      "id": "development-term_added-damson-04-renewal-premium-1e48a0",
+      "role": "renewal",
+      "segment": "Total annual premium: £3,490.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,350.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,350.00"
+      },
+      "id": "development-term_added-damson-04-renewal-compulsory-excess-68609a",
+      "role": "renewal",
+      "segment": "Compulsory excess: £2,350.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £530.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£530.00"
+      },
+      "id": "development-term_added-damson-04-renewal-voluntary-excess-433cc1",
+      "role": "renewal",
+      "segment": "Voluntary excess: £530.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-damson-04-renewal-no-value-ce8109",
+      "role": "renewal",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under DAMSON-TA-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-damson-04-renewal-no-value-e8d125",
+      "role": "renewal",
+      "segment": "Your reference is DAMSON-TA-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-dateless_anchor-flint-01-controlled-anchor-substituted",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the invoice date",
+        "deadline": "within 14 days",
+        "due": null,
+        "kind": "response",
+        "party": "Harborne Parking Services"
+      },
+      "id": "controlled-anchor-substituted-dateless_anchor-flint-01-response-00",
+      "segment": "Please return the signed agreement for your parking charge within 14 days of the invoice date.",
+      "strata": [
+        "any-letter",
+        "dateless-anchor",
+        "undated-letter",
+        "stated-anchor",
+        "controlled-change",
+        "controlled-anchor-substituted"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "controlled-anchor-substituted-dateless_anchor-flint-01-no-ask-01",
+      "segment": "A spare copy of the agreement is enclosed for your own records.",
+      "strata": [
+        "any-letter",
+        "dateless-anchor",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "controlled-anchor-substituted-dateless_anchor-flint-01-no-ask-03",
+      "segment": "We have extended your deadline to 21 July, and our records show you met the original one anyway.",
+      "strata": [
+        "any-letter",
+        "dateless-anchor",
+        "no-obligation"
+      ]
+    }
+  ]
+}

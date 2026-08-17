@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_absolute-silver-wood-18",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "8 November 2026",
+        "deadline": "on 8 November 2026",
+        "due": "2026-11-08",
+        "kind": "attendance",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_absolute-silver-wood-18-attendance-01",
+      "segment": "We have booked your check-up appointment with Fenwick Dental Practice on 8 November 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-silver-wood-18-no-ask-02",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-silver-wood-18-no-ask-04",
+      "segment": "A further letter is anticipated in approximately 8 weeks.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

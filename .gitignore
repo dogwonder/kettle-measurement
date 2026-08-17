@@ -1,0 +1,86 @@
+# Build
+target/
+node_modules/
+app/dist/
+# The public browser demo build (#269) — deployed, never committed
+app/dist-demo/
+
+# Vendored sidecar binaries (see sidecars/README.md)
+sidecars/*
+!sidecars/README.md
+
+# Model weights — never committed. `models/` is a local symlink to wherever
+# this machine keeps its weights, so the link itself stays out too.
+*.gguf
+models
+
+# Run artefacts (per-run directories: inputs hashes, model I/O logs, reports)
+runs/
+
+# Local eval results against real data
+evals/local/
+
+# Eval recordings and resume state (#293). These live under evals/ so
+# `cargo clean` cannot take them — they are hours of measuring, not
+# build output — but they are far too large for git: one 355-fixture
+# recording is 8.1MB.
+#
+# `evals/runs/` is named here even though the bare `runs/` rule above
+# already catches it. That rule is for the app's per-run directories,
+# and tightening it to `/runs/` some day would silently start committing
+# recordings. A file this size should be excluded on purpose.
+evals/runs/
+evals/resume/
+
+# A recording carried off a rented GPU lands here as a tarball before it
+# is unpacked and archived (evals/RENTED-GPU.md). Same bytes as the two
+# directories above and the same reason to keep them out — named
+# separately because they arrive at the repo root, where `git add -A`
+# would sweep them into whatever PR was open at the time.
+pod-*.tgz
+
+# Somebody's real records must never enter the repo — synthetic fixtures
+# only. Name any real document *.private.<ext> and it stays out.
+#
+# Not just statements: a letter arrives as a photograph, and the OCR'd
+# text of one is the same disclosure as the picture (#399). The list
+# covers every form a real document reaches this tree in — the file
+# chosen, a conversion of it, and the text pulled out of it.
+*.private.csv
+*.private.pdf
+*.private.txt
+*.private.md
+*.private.jpg
+*.private.jpeg
+*.private.png
+*.private.heic
+*.private.heif
+# A phone does not name files in lower case. `core.ignorecase` hides
+# this on macOS and does not on Linux or in CI, and the failure mode is
+# a real letter that was ignored on the machine it was taken on and
+# committable everywhere else.
+*.private.JPG
+*.private.JPEG
+*.private.PNG
+*.private.HEIC
+*.private.HEIF
+
+# OS noise
+.DS_Store
+
+# Agent worktrees — scratch checkouts, never part of the repo
+.claude/worktrees/
+.gstack/
+
+# A rented-GPU run's own output (scripts/pod-eval.sh).
+#
+# Not tidiness: the script refuses a dirty tree, deliberately, because a
+# measurement should name a commit. Its own log, baseline, manifest and
+# tarball land in the repo — so without this, running it a second time
+# refuses on the first run's leftovers, and the fix under time pressure
+# is to delete evidence of a run that has not been archived yet.
+pod-eval.log
+pod-run.out
+pod-run.tgz
+pod-baseline-*.json
+MANIFEST-pod.md

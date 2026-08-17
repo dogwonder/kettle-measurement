@@ -1,0 +1,77 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-three_asks-violet-ridge-13",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-06-23",
+        "kind": "payment",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "three_asks-violet-ridge-13-payment-01",
+      "segment": "A payment of £310.00 towards your tenancy account is due within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "18 January 2026",
+        "deadline": "on 18 January 2026",
+        "due": "2026-01-18",
+        "kind": "attendance",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "three_asks-violet-ridge-13-attendance-02",
+      "segment": "You are required to attend a case review at our offices on 18 January 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-06-30",
+        "kind": "response",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "three_asks-violet-ridge-13-response-03",
+      "segment": "Please confirm your attendance in writing by the end of the month.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-violet-ridge-13-no-ask-04",
+      "segment": "A copy of this letter has been placed on your file.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-violet-ridge-13-no-ask-06",
+      "segment": "Reimbursement of £88.75 was despatched on 23 April and clears within 3 days.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

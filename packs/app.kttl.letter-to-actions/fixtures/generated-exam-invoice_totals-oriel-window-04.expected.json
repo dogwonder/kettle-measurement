@@ -1,0 +1,49 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-invoice_totals-oriel-window-04",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "invoice_totals-oriel-window-04-no-ask-01",
+      "segment": "Our invoice for the pet health plan is set out below. The amount shown as due should reach us by the date given against it.",
+      "strata": [
+        "invoice-totals",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "27 October 2026",
+        "deadline": "27 October 2026",
+        "due": "2026-10-27",
+        "kind": "payment",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "invoice_totals-oriel-window-04-payment-02",
+      "segment": "Due date 27 October 2026",
+      "strata": [
+        "invoice-totals",
+        "absolute-deadline",
+        "in-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-oriel-window-04-no-ask-03",
+      "segment": "Our accounts team can arrange instalments where that would help.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-oriel-window-04-no-ask-05",
+      "segment": "The matter was concluded on 3 March and papers are retained for 7 years.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-undated_relative-elm-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 35 days",
+        "due": null,
+        "kind": "response",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "undated_relative-elm-14-response-00",
+      "segment": "Please return the enclosed form about your council tax account within 35 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-elm-14-no-ask-01",
+      "segment": "A prepaid envelope is enclosed for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-elm-14-no-ask-03",
+      "segment": "Payment of £340.00 was received in full and on time.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

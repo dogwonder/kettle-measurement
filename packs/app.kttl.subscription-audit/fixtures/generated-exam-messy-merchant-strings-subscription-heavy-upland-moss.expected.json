@@ -1,0 +1,258 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-subscription-heavy-upland-moss",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* TRESORIT CARD 4821",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "SQ *TRESORIT CARD 4821",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "PAYPAL *TRESORIT CARD 4821",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "CARD 4821 HSTRY TDY GB",
+      "name": "History Today"
+    },
+    {
+      "raw": "CARD 4821 CRSR GB",
+      "name": "Coursera"
+    },
+    {
+      "raw": "CARD 4821 LS MLLS PLS GB",
+      "name": "Les Mills+"
+    },
+    {
+      "raw": "CARD 4821 BRTBX GB",
+      "name": "BritBox"
+    },
+    {
+      "raw": "CARD 4821 SNDCLD G GB",
+      "name": "SoundCloud"
+    },
+    {
+      "raw": "STRIPE* BITWARDEN CARD 4821",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "SQ *BITWARDEN CARD 4821",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "PAYPAL *BITWARDEN CARD 4821",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "CARD 4821 NYTMS GB",
+      "name": "The New York Times"
+    },
+    {
+      "raw": "STRIPE* CHILTERNRAIL CARD 4821",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "SQ *CHILTERNRAIL CARD 4821",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "PAYPAL *CHILTERNRAIL CARD 4821",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "STRIPE* LBJORNSSON CARD 4821",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "SQ *LBJORNSSON CARD 4821",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "PAYPAL *LBJORNSSON CARD 4821",
+      "name": "L Bjornsson"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TRESORIT CARD 4821",
+      "name": "Tresorit",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 HSTRY TDY GB",
+      "name": "History Today",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 CRSR GB",
+      "name": "Coursera",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 LS MLLS PLS GB",
+      "name": "Les Mills+",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 BRTBX GB",
+      "name": "BritBox",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 SNDCLD G GB",
+      "name": "SoundCloud",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BITWARDEN CARD 4821",
+      "name": "Bitwarden",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 NYTMS GB",
+      "name": "The New York Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* CHILTERNRAIL CARD 4821",
+      "name": "Chiltern Railways",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-upland-moss-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LBJORNSSON CARD 4821",
+      "name": "L Bjornsson",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Tresorit",
+      "period": "yearly"
+    },
+    {
+      "merchant": "History Today",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Coursera",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Les Mills+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "BritBox",
+      "period": "monthly"
+    },
+    {
+      "merchant": "SoundCloud",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The New York Times",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Chiltern Railways",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

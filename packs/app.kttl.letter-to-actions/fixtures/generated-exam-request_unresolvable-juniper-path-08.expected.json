@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-request_unresolvable-juniper-path-08",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "as soon as you are able",
+        "due": null,
+        "kind": "response",
+        "party": "Harborne Parking Services"
+      },
+      "id": "request_unresolvable-juniper-path-08-response-01",
+      "segment": "We would be grateful if you could send a meter reading for your parking charge as soon as you are able.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "unresolvable-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-juniper-path-08-no-ask-02",
+      "segment": "We hold your account in good standing and no charge applies.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-juniper-path-08-no-ask-04",
+      "segment": "The 21 days referred to previously are no longer applicable.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    }
+  ]
+}

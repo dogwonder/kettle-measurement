@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_absolute-quiet-river-16",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "24 September 2026",
+        "deadline": "on 24 September 2026",
+        "due": "2026-09-24",
+        "kind": "attendance",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_absolute-quiet-river-16-attendance-01",
+      "segment": "We have booked your pet health plan appointment with Denholm Veterinary Group on 24 September 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-quiet-river-16-no-ask-02",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-quiet-river-16-no-ask-04",
+      "segment": "This account has carried a credit balance of £47.05 since 12 February.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

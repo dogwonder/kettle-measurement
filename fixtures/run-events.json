@@ -1,0 +1,30 @@
+{
+  "cancelled_cleanly": {
+    "kept_data": null,
+    "run_id": "run-07"
+  },
+  "cancelled_with_data_kept": {
+    "kept_data": "The run stopped, but Kettle couldn't delete everything it had written. Some of this run's working data may still be on this computer.",
+    "run_id": "run-07"
+  },
+  "complete": {
+    "run_id": "run-07"
+  },
+  "error": {
+    "message": "Kettle couldn't find any payments in that file. Check the date range you exported, then try again.",
+    "run_id": "run-07",
+    "step": "Reading your statement"
+  },
+  "getting_ready": {
+    "current": 1,
+    "run_id": "run-07",
+    "step_label": "Getting the reading tool ready — slower the first time",
+    "total": 1
+  },
+  "progress": {
+    "current": 1,
+    "run_id": "run-07",
+    "step_label": "Reading your statement",
+    "total": 2
+  }
+}

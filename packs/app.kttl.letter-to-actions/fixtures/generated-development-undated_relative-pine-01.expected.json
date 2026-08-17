@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-undated_relative-pine-01",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": null,
+        "kind": "response",
+        "party": "Harborne Parking Services"
+      },
+      "id": "undated_relative-pine-01-response-00",
+      "segment": "Please return the enclosed form about your parking charge within 14 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-pine-01-no-ask-01",
+      "segment": "A prepaid envelope is enclosed for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-pine-01-no-ask-03",
+      "segment": "The £25.00 charge applied in error on 7 March has been refunded to your account.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

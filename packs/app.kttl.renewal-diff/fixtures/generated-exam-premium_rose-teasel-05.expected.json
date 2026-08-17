@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-premium_rose-teasel-05",
+  "inputs": {
+    "previous": "generated-exam-premium_rose-teasel-05-previous.txt",
+    "renewal": "generated-exam-premium_rose-teasel-05-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-premium_rose-teasel-05-previous-no-value-273cea",
+      "role": "previous",
+      "segment": "Schedule TEASEL-PR-428 of your travel insurance cover with Pennine Line Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £1,355.00.",
+        "term": "premium",
+        "value": "£1,355.00"
+      },
+      "id": "exam-premium_rose-teasel-05-previous-premium-083cdd",
+      "role": "previous",
+      "segment": "The price for the year comes to £1,355.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £825.00.",
+        "term": "compulsory_excess",
+        "value": "£825.00"
+      },
+      "id": "exam-premium_rose-teasel-05-previous-compulsory-excess-94992c",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £825.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £3,750.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£3,750.00"
+      },
+      "id": "exam-premium_rose-teasel-05-previous-cover-limit-6afab9",
+      "role": "previous",
+      "segment": "We will pay up to £3,750.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-teasel-05-previous-no-value-96a394",
+      "role": "previous",
+      "segment": "Please quote TEASEL-PR-428 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-teasel-05-previous-no-value-8603ef",
+      "role": "previous",
+      "segment": "Cover for travel insurance under TEASEL-PR-428 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-teasel-05-renewal-no-value-8ee7ba",
+      "role": "renewal",
+      "segment": "Your travel insurance cover with Pennine Line Assurance under TEASEL-PR-428 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £1,487.50.",
+        "term": "premium",
+        "value": "£1,487.50"
+      },
+      "id": "exam-premium_rose-teasel-05-renewal-premium-aced82",
+      "role": "renewal",
+      "segment": "The price for the year comes to £1,487.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £825.00.",
+        "term": "compulsory_excess",
+        "value": "£825.00"
+      },
+      "id": "exam-premium_rose-teasel-05-renewal-compulsory-excess-94992c",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £825.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £3,750.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£3,750.00"
+      },
+      "id": "exam-premium_rose-teasel-05-renewal-cover-limit-6afab9",
+      "role": "renewal",
+      "segment": "We will pay up to £3,750.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-teasel-05-renewal-no-value-8603ef",
+      "role": "renewal",
+      "segment": "Cover for travel insurance under TEASEL-PR-428 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-teasel-05-renewal-no-value-96a394",
+      "role": "renewal",
+      "segment": "Please quote TEASEL-PR-428 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

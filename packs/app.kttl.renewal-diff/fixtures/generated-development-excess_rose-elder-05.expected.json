@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_rose-elder-05",
+  "inputs": {
+    "previous": "generated-development-excess_rose-elder-05-previous.txt",
+    "renewal": "generated-development-excess_rose-elder-05-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_rose-elder-05-previous-no-value-c3ebe3",
+      "role": "previous",
+      "segment": "Corvin Mutual pet insurance — policy schedule ELDER-ER-428 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £260.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£260.00"
+      },
+      "id": "development-excess_rose-elder-05-previous-compulsory-excess-7b0201",
+      "role": "previous",
+      "segment": "Compulsory excess: £260.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £564.00.",
+        "term": "premium",
+        "value": "£564.00"
+      },
+      "id": "development-excess_rose-elder-05-previous-premium-4d551c",
+      "role": "previous",
+      "segment": "Total annual premium: £564.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £2,620.00 per policy.",
+        "term": "cover_limit",
+        "value": "£2,620.00"
+      },
+      "id": "development-excess_rose-elder-05-previous-cover-limit-8b5a32",
+      "role": "previous",
+      "segment": "Cover limit: £2,620.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-elder-05-previous-no-value-2e6002",
+      "role": "previous",
+      "segment": "Your reference is ELDER-ER-428. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-elder-05-previous-no-value-f1a72e",
+      "role": "previous",
+      "segment": "Corvin Mutual arranges pet insurance cover under ELDER-ER-428 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-elder-05-renewal-no-value-e17c2f",
+      "role": "renewal",
+      "segment": "Corvin Mutual pet insurance — renewal schedule ELDER-ER-428 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £522.50 per claim.",
+        "term": "compulsory_excess",
+        "value": "£522.50"
+      },
+      "id": "development-excess_rose-elder-05-renewal-compulsory-excess-f84666",
+      "role": "renewal",
+      "segment": "Compulsory excess: £522.50 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £564.00.",
+        "term": "premium",
+        "value": "£564.00"
+      },
+      "id": "development-excess_rose-elder-05-renewal-premium-4d551c",
+      "role": "renewal",
+      "segment": "Total annual premium: £564.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £2,620.00 per policy.",
+        "term": "cover_limit",
+        "value": "£2,620.00"
+      },
+      "id": "development-excess_rose-elder-05-renewal-cover-limit-8b5a32",
+      "role": "renewal",
+      "segment": "Cover limit: £2,620.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-elder-05-renewal-no-value-f1a72e",
+      "role": "renewal",
+      "segment": "Corvin Mutual arranges pet insurance cover under ELDER-ER-428 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-elder-05-renewal-no-value-2e6002",
+      "role": "renewal",
+      "segment": "Your reference is ELDER-ER-428. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

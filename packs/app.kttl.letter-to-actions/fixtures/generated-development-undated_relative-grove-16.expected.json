@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-undated_relative-grove-16",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": null,
+        "kind": "response",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "undated_relative-grove-16-response-00",
+      "segment": "Please return the enclosed form about your estate matter within 14 days.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "undated-letter"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-grove-16-no-ask-01",
+      "segment": "A prepaid envelope is enclosed for your convenience.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "undated_relative-grove-16-no-ask-03",
+      "segment": "The interest rate on your account changed on 1 April, and we applied it for you.",
+      "strata": [
+        "any-letter",
+        "undated-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

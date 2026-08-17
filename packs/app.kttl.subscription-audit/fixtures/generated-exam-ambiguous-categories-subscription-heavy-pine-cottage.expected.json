@@ -1,0 +1,258 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-subscription-heavy-pine-cottage",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* KOOFR",
+      "name": "Koofr"
+    },
+    {
+      "raw": "SQ *KOOFR",
+      "name": "Koofr"
+    },
+    {
+      "raw": "PAYPAL *KOOFR",
+      "name": "Koofr"
+    },
+    {
+      "raw": "THE WEEK PAYMENT",
+      "name": "The Week"
+    },
+    {
+      "raw": "BUSUU PAYMENT",
+      "name": "Busuu"
+    },
+    {
+      "raw": "PELOTON PAYMENT",
+      "name": "Peloton"
+    },
+    {
+      "raw": "PRIME VIDEO PAYMENT",
+      "name": "Prime Video"
+    },
+    {
+      "raw": "AMAZON MUSIC PAYMENT",
+      "name": "Amazon Music"
+    },
+    {
+      "raw": "STRIPE* ICLOUDPLUS",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "SQ *ICLOUDPLUS",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "PAYPAL *ICLOUDPLUS",
+      "name": "iCloud+"
+    },
+    {
+      "raw": "THE INDEPENDENT PAYMENT",
+      "name": "The Independent"
+    },
+    {
+      "raw": "STRIPE* AVANTIWESTCST",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "SQ *AVANTIWESTCST",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "PAYPAL *AVANTIWESTCST",
+      "name": "Avanti West Coast"
+    },
+    {
+      "raw": "STRIPE* DCHAUDHRY",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "SQ *DCHAUDHRY",
+      "name": "D Chaudhry"
+    },
+    {
+      "raw": "PAYPAL *DCHAUDHRY",
+      "name": "D Chaudhry"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* KOOFR",
+      "name": "Koofr",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "THE WEEK PAYMENT",
+      "name": "The Week",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BUSUU PAYMENT",
+      "name": "Busuu",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "PELOTON PAYMENT",
+      "name": "Peloton",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "PRIME VIDEO PAYMENT",
+      "name": "Prime Video",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "AMAZON MUSIC PAYMENT",
+      "name": "Amazon Music",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ICLOUDPLUS",
+      "name": "iCloud+",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE INDEPENDENT PAYMENT",
+      "name": "The Independent",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* AVANTIWESTCST",
+      "name": "Avanti West Coast",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-pine-cottage-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* DCHAUDHRY",
+      "name": "D Chaudhry",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Koofr",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Week",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Busuu",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Peloton",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Prime Video",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Amazon Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Independent",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Avanti West Coast",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

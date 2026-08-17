@@ -1,0 +1,77 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-three_asks-dawn-20",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-08-26",
+        "kind": "payment",
+        "party": "Cranleigh Energy"
+      },
+      "id": "three_asks-dawn-20-payment-01",
+      "segment": "Please pay £142.75 towards your energy account within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "2 March 2026",
+        "deadline": "on 2 March 2026",
+        "due": "2026-03-02",
+        "kind": "attendance",
+        "party": "Cranleigh Energy"
+      },
+      "id": "three_asks-dawn-20-attendance-02",
+      "segment": "You must attend a review meeting at our offices on 2 March 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-08-31",
+        "kind": "response",
+        "party": "Cranleigh Energy"
+      },
+      "id": "three_asks-dawn-20-response-03",
+      "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-dawn-20-no-ask-04",
+      "segment": "We look forward to hearing from you in due course.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-dawn-20-no-ask-06",
+      "segment": "Our surveyor attended on 13 March and found nothing that needs your attention.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

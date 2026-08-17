@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_relative-juniper-23",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-12-11",
+        "kind": "payment",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "payment_relative-juniper-23-payment-01",
+      "segment": "Our records show that check-up of £68.50 remains outstanding. Please pay £68.50 within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-juniper-23-no-ask-02",
+      "segment": "We are sorry for any inconvenience this may have caused.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-juniper-23-no-ask-04",
+      "segment": "Everything discussed on 22 April has now been actioned by us.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

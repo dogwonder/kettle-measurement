@@ -1,0 +1,303 @@
+{
+  "id": "app.kttl.letter-to-actions",
+  "name": "Letter to actions",
+  "description": "Reads a letter and lists what it asks you to do, and by when.",
+  "version": "0.2.0",
+  "min_runner_version": "0.1.0",
+  "inputs": [
+    {
+      "role": "letter",
+      "label": "Your letters",
+      "accept": [
+        "text/plain",
+        "text/markdown",
+        "application/pdf"
+      ],
+      "multiple": true
+    }
+  ],
+  "capabilities": [
+    "read"
+  ],
+  "model": {
+    "min_tier": "7b",
+    "recommended_tier": "7b",
+    "context": 8192,
+    "temperature": 0
+  },
+  "copy": {
+    "time": {
+      "kind": "varies",
+      "estimate": "by letter",
+      "on_this_computer": "We haven't timed this task yet, so there's no figure to give you — we'd rather say nothing than guess."
+    },
+    "will": [
+      {
+        "doing": "Read your letter",
+        "detail": "the one document you choose, and nothing else.",
+        "steps": [
+          "Reading your document"
+        ]
+      },
+      {
+        "doing": "Find what it asks of you",
+        "detail": "each thing to do, with the words in the letter that ask for it.",
+        "steps": [
+          "Reading what it asks of you"
+        ]
+      },
+      {
+        "doing": "Work out the deadlines",
+        "detail": "counted from the letter's own date, soonest first.",
+        "steps": [
+          "Working out the deadlines"
+        ]
+      },
+      {
+        "doing": "Write your report",
+        "detail": "every task traceable to the passage that asks for it.",
+        "steps": [
+          "Writing your report"
+        ]
+      }
+    ],
+    "run_verb": "Read this letter"
+  },
+  "pipeline": [
+    {
+      "step": "preprocess",
+      "impl": "builtin:document-text"
+    },
+    {
+      "step": "model",
+      "role": "obligations",
+      "prompt": "prompts/obligations.md",
+      "schema": "schemas/obligations.schema.json",
+      "batch": 20,
+      "examples": "examples/obligations.examples.json"
+    },
+    {
+      "step": "aggregate",
+      "impl": "builtin:timeline-sort"
+    },
+    {
+      "step": "render",
+      "template": "report.html.tera"
+    }
+  ],
+  "eval": {
+    "obligations": 0.95
+  },
+  "eval_gate": "pooled",
+  "eval_metrics": [
+    "extraction"
+  ],
+  "eval_strata": {
+    "any-letter": {
+      "description": "Every scored passage in the bed. The gated slice: the evidence is kept in one place rather than sliced six ways until no slice can say anything. At the 2% obligation ceiling a stratum needs 189 decisions before a clean run can clear it; at the 1% goal it needs 381.",
+      "classes": {
+        "obligation": {
+          "max_wilson_95": 0.02,
+          "reason": "Missing an obligation is often unrecoverable — the fine escalates, the hearing passes, the appeal window shuts, and it is held tighter than an invention because the two harms are not equivalent. The number is evidence-limited, not the ambition: a ceiling is the strongest claim the bed can support, and 2% needs 189 clean decisions where 1% needs 381 — roughly twice this bed, in the sealed set too. **The goal is 1%**, and the bed is being grown toward it under #315; until then this says what 207 development and 219 exam decisions with no errors actually entitle Kettle to say. Note the harm asymmetry against no_obligation's 5% narrows from five times to 2.5 while this holds — a consequence of the evidence, not a revised view of the harm. Chosen before fixture generation and widened on evidence grounds only; revisit only with independent evidence, never prompt-iteration results.",
+          "date": "2026-08-02"
+        },
+        "no_obligation": {
+          "max_wilson_95": 0.05,
+          "reason": "An invented obligation costs a person time and worry but is recoverable by reading the letter again. Same appliance-risk bar as the subscription pack's classes.",
+          "date": "2026-07-31"
+        }
+      }
+    },
+    "absolute-deadline": {
+      "description": "A date written out in the letter, needing no arithmetic.",
+      "classes": {}
+    },
+    "relative-deadline": {
+      "description": "A period counted from the letter's own date.",
+      "classes": {}
+    },
+    "dated-anchor": {
+      "description": "A period counted from a dated event, which must beat the letter date.",
+      "classes": {}
+    },
+    "month-end": {
+      "description": "\"By the end of the month\", including a leap-year February.",
+      "classes": {}
+    },
+    "unresolvable-deadline": {
+      "description": "A real ask whose deadline no resolver should invent.",
+      "classes": {}
+    },
+    "undated-letter": {
+      "description": "A letter that never dates itself, so a relative deadline stays undated.",
+      "classes": {}
+    },
+    "no-obligation": {
+      "description": "Passages that ask for nothing at all — where inventions are measured.",
+      "classes": {}
+    },
+    "multiple-obligations": {
+      "description": "More than one ask in one letter.",
+      "classes": {}
+    },
+    "repeated-obligation": {
+      "description": "One ask made twice, which must merge to one.",
+      "classes": {}
+    },
+    "appointment-absolute": {
+      "description": "Shape: an appointment on a named date.",
+      "classes": {}
+    },
+    "payment-relative": {
+      "description": "Shape: a bill due within a fortnight.",
+      "classes": {}
+    },
+    "payment-anchored": {
+      "description": "Shape: a payment counted from a dated review.",
+      "classes": {}
+    },
+    "payment-and-response": {
+      "description": "Shape: pay, and confirm in writing.",
+      "classes": {}
+    },
+    "payment-month-end": {
+      "description": "Shape: settle by the end of the month.",
+      "classes": {}
+    },
+    "request-unresolvable": {
+      "description": "Shape: a request with no resolvable date.",
+      "classes": {}
+    },
+    "undated-relative": {
+      "description": "Shape: an undated letter asking within a fortnight.",
+      "classes": {}
+    },
+    "courtesy-only": {
+      "description": "Shape: a letter that asks for nothing.",
+      "classes": {}
+    },
+    "repeated-ask": {
+      "description": "Shape: the same ask, made twice.",
+      "classes": {}
+    },
+    "three-asks": {
+      "description": "Shape: three obligations of three kinds.",
+      "classes": {}
+    },
+    "document-instruction": {
+      "description": "Instruction-shaped document content, pooled across every adversarial family (#433). Diagnostic: harm stays gated on the pooled ceilings these items also join; a gated adversarial ceiling would first need 73+ distinct decisions per set at 5%.",
+      "classes": {}
+    },
+    "injection-ignore-previous": {
+      "description": "Adversarial family (#433), diagnostic slice of the letter bed.",
+      "classes": {}
+    },
+    "injection-fake-headings": {
+      "description": "Adversarial family (#433), diagnostic slice of the letter bed.",
+      "classes": {}
+    },
+    "injection-json-answer": {
+      "description": "Adversarial family (#433), diagnostic slice of the letter bed.",
+      "classes": {}
+    },
+    "injection-quoted-to-another-ai": {
+      "description": "Adversarial family (#433), diagnostic slice of the letter bed.",
+      "classes": {}
+    },
+    "injection-footer-omit-or-invent": {
+      "description": "Adversarial family (#433), diagnostic slice of the letter bed.",
+      "classes": {}
+    },
+    "injection-long-surround": {
+      "description": "Adversarial family (#433), diagnostic slice of the letter bed.",
+      "classes": {}
+    },
+    "injection-unicode-confusables": {
+      "description": "Adversarial family (#433), diagnostic slice of the letter bed.",
+      "classes": {}
+    },
+    "discusses-instructions-benign": {
+      "description": "Adversarial family (#433), diagnostic slice of the letter bed.",
+      "classes": {}
+    },
+    "passive-obligation": {
+      "description": "Shape (#456): an ask in the passive voice, naming no actor.",
+      "classes": {}
+    },
+    "passive-voice": {
+      "description": "Passages carrying an obligation with no actor named — the construction official correspondence uses most, and the one every ceiling before #456 was cleared without.",
+      "classes": {}
+    },
+    "passive-no-obligation": {
+      "description": "The counter-case: passive passages somebody else acts on, so 'treat every passive sentence as an obligation' cannot score full marks.",
+      "classes": {}
+    },
+    "injection-unusual-delimiters": {
+      "description": "Adversarial family (#433), diagnostic slice of the letter bed.",
+      "classes": {}
+    },
+    "invoice-totals": {
+      "description": "Shape (#406, #504): an invoice whose due date is set in a column beside its totals, sharing print rows with them. The first shape in this bed that is not prose. What is scored is the deadline, not the money — the obligations schema carries no amount, deliberately — so the question is whether an absolute date survives being read out of a table. Its decisions do not join 'any-letter': on the v14 run the twelve development invoices took 'obligation' to 0.05 against a 0.02 ceiling and 'no_obligation' to 0.11 against 0.05, from the two sides of one disagreement about where the obligation sits, while every mature stratum in the bed answered 1.00. A gate encodes a settled judgement, so an open authoring question gates nothing and is watched here instead.",
+      "classes": {}
+    },
+    "points-at-a-table": {
+      "description": "A passage that defers to a layout rather than restating it: 'due by the date shown beside it'. The date appears once, in the table, so a reader that ignores the layout has nothing to fall back on — which is what stops the shape being answerable without reading the columns. Scored, expecting nothing (#406): the bed's position is that the obligation belongs on the row carrying its date, not on the sentence pointing at the row. Contestable, hence ungated — and stated rather than left unscored, because an assertion on an unscored passage is synthesised as an unauthored item, and an unauthored item carries the pack's whole gated stratum set for want of fixture strata to inherit.",
+      "classes": {}
+    },
+    "in-a-table": {
+      "description": "Passages laid out in columns, where reading the source order and reading the meaning give different answers. Ungated on purpose: 24 decisions across both sets is far too few to carry a ceiling, and a gate encodes a settled judgement. Promotion condition, restated after the v14 measurement (#406): the disagreement about where an invoice's obligation sits is settled — either the bed moves to the prose or the model reads the column — and it then holds on a full run of both sets, the exam invoices included, which have never been measured. Only then can a Wilson bound over these decisions mean anything, and only then does a gate here encode a judgement rather than an open question.",
+      "classes": {}
+    },
+    "dateless-anchor": {
+      "description": "Shape (#465, absorbing #292): an undated letter whose ask states its own anchor. The anchor resolves to no date, so per-item scoring cannot see its wording — the declared controlled-change relation over obligations_with_anchors is what can.",
+      "classes": {}
+    },
+    "stated-anchor": {
+      "description": "Passages that state, in the sentence itself, what their deadline counts from — the wording the controlled anchor twin substitutes.",
+      "classes": {}
+    },
+    "controlled-change": {
+      "description": "One authored edit, pooled across every controlled-change family (#465). Diagnostic: the declared relation carries the judgement; harm stays gated on the pooled ceilings these items also join.",
+      "classes": {}
+    },
+    "controlled-deadline-one-day": {
+      "description": "Controlled-change family (#465): one deadline moves one day later, and only the declared deadline may move.",
+      "classes": {}
+    },
+    "controlled-must-to-may": {
+      "description": "Controlled-change family (#465): must becomes may, so the obligation disappears and nothing else moves.",
+      "classes": {}
+    },
+    "controlled-anchor-substituted": {
+      "description": "Controlled-change family (#465, #292): the stated dateless anchor becomes a semantically false one; visible only through the obligations_with_anchors projection.",
+      "classes": {}
+    }
+  },
+  "eval_costs": {
+    "review_rate": {
+      "reason": "Tracks how many passages a person reads themselves. Surfacing uncertainty is a cost, never a wrong answer.",
+      "date": "2026-07-31"
+    }
+  },
+  "eval_evidence": {
+    "existence": {
+      "reason": "Every obligation's evidence passage must be verbatim in the letter it was read from. Scoreable from the beds as authored: the passage is the fixture's own text.",
+      "date": "2026-08-07"
+    },
+    "attribution": {
+      "reason": "The evidence must be the passage the decision is about, not real words borrowed from elsewhere in the letter. Scoreable from the authored segment on every expectation.",
+      "date": "2026-08-07"
+    },
+    "support": {
+      "reason": "A verbatim passage can negate the claim it is offered for. The expectation's own tuple is the supported claim, so support is scoreable from the beds as authored; richer unsupported near-misses arrive with the relation twins (#427).",
+      "date": "2026-08-07"
+    }
+  },
+  "eval_items": {
+    "retired": []
+  },
+  "outputs": [
+    "report.html",
+    "actions.json"
+  ]
+}

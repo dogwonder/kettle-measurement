@@ -1,0 +1,243 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-subscription-heavy-island",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* IDRIVE CARD 4821",
+      "name": "IDrive"
+    },
+    {
+      "raw": "SQ *IDRIVE CARD 4821",
+      "name": "IDrive"
+    },
+    {
+      "raw": "PAYPAL *IDRIVE CARD 4821",
+      "name": "IDrive"
+    },
+    {
+      "raw": "CARD 4821 TH SPCTTR GB",
+      "name": "The Spectator"
+    },
+    {
+      "raw": "CARD 4821 MSTRCLSS GB",
+      "name": "MasterClass"
+    },
+    {
+      "raw": "CARD 4821 NFFLD HLTH GB",
+      "name": "Nuffield Health"
+    },
+    {
+      "raw": "CARD 4821 PRMNT PLS GB",
+      "name": "Paramount+"
+    },
+    {
+      "raw": "CARD 4821 DZR GB",
+      "name": "Deezer"
+    },
+    {
+      "raw": "STRIPE* PROTON CARD 4821",
+      "name": "Proton"
+    },
+    {
+      "raw": "SQ *PROTON CARD 4821",
+      "name": "Proton"
+    },
+    {
+      "raw": "PAYPAL *PROTON CARD 4821",
+      "name": "Proton"
+    },
+    {
+      "raw": "CARD 4821 FNNCL TMS GB",
+      "name": "Financial Times"
+    },
+    {
+      "raw": "STRIPE* GRANARYMARKET CARD 4821",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "SQ *GRANARYMARKET CARD 4821",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "PAYPAL *GRANARYMARKET CARD 4821",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "CARD 4821 BLLFRD PRKS GB",
+      "name": "Bellford Parks"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* IDRIVE CARD 4821",
+      "name": "IDrive",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 TH SPCTTR GB",
+      "name": "The Spectator",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 MSTRCLSS GB",
+      "name": "MasterClass",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 NFFLD HLTH GB",
+      "name": "Nuffield Health",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 PRMNT PLS GB",
+      "name": "Paramount+",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 DZR GB",
+      "name": "Deezer",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* PROTON CARD 4821",
+      "name": "Proton",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 FNNCL TMS GB",
+      "name": "Financial Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* GRANARYMARKET CARD 4821",
+      "name": "Granary Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-island-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 BLLFRD PRKS GB",
+      "name": "Bellford Parks",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "IDrive",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Spectator",
+      "period": "yearly"
+    },
+    {
+      "merchant": "MasterClass",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Nuffield Health",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Paramount+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Deezer",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Financial Times",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

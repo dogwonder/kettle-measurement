@@ -1,0 +1,77 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-three_asks-winter-bay-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-07-28",
+        "kind": "payment",
+        "party": "Belwood Insurance"
+      },
+      "id": "three_asks-winter-bay-14-payment-01",
+      "segment": "A payment of £188.20 towards your policy renewal is due within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "23 August 2026",
+        "deadline": "on 23 August 2026",
+        "due": "2026-08-23",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "three_asks-winter-bay-14-attendance-02",
+      "segment": "You are required to attend a case review at our offices on 23 August 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-07-31",
+        "kind": "response",
+        "party": "Belwood Insurance"
+      },
+      "id": "three_asks-winter-bay-14-response-03",
+      "segment": "Please confirm your attendance in writing by the end of the month.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-winter-bay-14-no-ask-04",
+      "segment": "A copy of this letter has been placed on your file.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-winter-bay-14-no-ask-06",
+      "segment": "The responsible team has been instructed to reply within 5 days.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

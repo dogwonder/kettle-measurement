@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_anchored-pine-cottage-25",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "11 April 2026",
+        "deadline": "within 45 days",
+        "due": "2026-05-26",
+        "kind": "payment",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "payment_anchored-pine-cottage-25-payment-02",
+      "segment": "The sum of £310.00 falls due within 45 days of 11 April 2026. Please quote AHT-7043 when you pay.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-pine-cottage-25-no-ask-03",
+      "segment": "We are grateful for your attention to this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-pine-cottage-25-no-ask-05",
+      "segment": "Retain this letter as you see fit; the file copy is definitive.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

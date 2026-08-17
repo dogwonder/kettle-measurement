@@ -1,0 +1,122 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_unqualified-garnet-01",
+  "inputs": {
+    "previous": "generated-development-excess_unqualified-garnet-01-previous.txt",
+    "renewal": "generated-development-excess_unqualified-garnet-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-garnet-01-previous-no-value-1bd01d",
+      "role": "previous",
+      "segment": "Westmarch Cover landlord insurance — policy schedule GARNET-EU-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £8,516.00.",
+        "term": "premium",
+        "value": "£8,516.00"
+      },
+      "id": "development-excess_unqualified-garnet-01-previous-premium-025e26",
+      "role": "previous",
+      "segment": "Total annual premium: £8,516.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-garnet-01-previous-excess-unqualified-f0e9ee",
+      "review": true,
+      "role": "previous",
+      "segment": "Excess: £5,940.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-garnet-01-previous-no-value-fc2ba1",
+      "role": "previous",
+      "segment": "Your reference is GARNET-EU-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-garnet-01-previous-no-value-94b995",
+      "role": "previous",
+      "segment": "Westmarch Cover arranges landlord insurance cover under GARNET-EU-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-garnet-01-renewal-no-value-f84417",
+      "role": "renewal",
+      "segment": "Westmarch Cover landlord insurance — renewal schedule GARNET-EU-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £8,516.00.",
+        "term": "premium",
+        "value": "£8,516.00"
+      },
+      "id": "development-excess_unqualified-garnet-01-renewal-premium-025e26",
+      "role": "renewal",
+      "segment": "Total annual premium: £8,516.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-garnet-01-renewal-excess-unqualified-9c3b8c",
+      "review": true,
+      "role": "renewal",
+      "segment": "Excess: £6,065.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-garnet-01-renewal-no-value-94b995",
+      "role": "renewal",
+      "segment": "Westmarch Cover arranges landlord insurance cover under GARNET-EU-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified-garnet-01-renewal-no-value-fc2ba1",
+      "role": "renewal",
+      "segment": "Your reference is GARNET-EU-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

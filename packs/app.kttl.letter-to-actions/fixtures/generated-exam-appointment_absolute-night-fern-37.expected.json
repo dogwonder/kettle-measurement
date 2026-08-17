@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_absolute-night-fern-37",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "25 December 2026",
+        "deadline": "on 25 December 2026",
+        "due": "2026-12-25",
+        "kind": "attendance",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "appointment_absolute-night-fern-37-attendance-01",
+      "segment": "We have booked your tenancy account appointment with Ashcombe Housing Trust on 25 December 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-night-fern-37-no-ask-02",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-night-fern-37-no-ask-04",
+      "segment": "A nil balance is shown, confirming the account is settled.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

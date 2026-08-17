@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-clean-no-subscriptions-kestrel-field",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* LINDLEYLETTINGS",
+      "name": "Lindley Lettings"
+    },
+    {
+      "raw": "SQ *LINDLEYLETTINGS",
+      "name": "Lindley Lettings"
+    },
+    {
+      "raw": "PAYPAL *LINDLEYLETTINGS",
+      "name": "Lindley Lettings"
+    },
+    {
+      "raw": "FAIRHOLM CERAMICS",
+      "name": "Fairholm Ceramics"
+    },
+    {
+      "raw": "STRIPE* THAMESLINK",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "SQ *THAMESLINK",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "PAYPAL *THAMESLINK",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "STRIPE* PWHITTAKER",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "SQ *PWHITTAKER",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "PAYPAL *PWHITTAKER",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "STRIPE* MSFOOD",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "SQ *MSFOOD",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "PAYPAL *MSFOOD",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "TK MAXX",
+      "name": "TK Maxx"
+    },
+    {
+      "raw": "GOOD ENERGY",
+      "name": "Good Energy"
+    },
+    {
+      "raw": "HOLLOWDENE PETS",
+      "name": "Hollowdene Pets"
+    },
+    {
+      "raw": "STRIPE* KILNBROOKSTALL",
+      "name": "Kilnbrook Stall"
+    },
+    {
+      "raw": "SQ *KILNBROOKSTALL",
+      "name": "Kilnbrook Stall"
+    },
+    {
+      "raw": "PAYPAL *KILNBROOKSTALL",
+      "name": "Kilnbrook Stall"
+    },
+    {
+      "raw": "THORNMERE VALLEY",
+      "name": "Thornmere Valley"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-monthly-rent",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LINDLEYLETTINGS",
+      "name": "Lindley Lettings",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-monthly-salary",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "FAIRHOLM CERAMICS",
+      "name": "Fairholm Ceramics",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* THAMESLINK",
+      "name": "Thameslink",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* PWHITTAKER",
+      "name": "P Whittaker",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MSFOOD",
+      "name": "M&S Food",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "TK MAXX",
+      "name": "TK Maxx",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "GOOD ENERGY",
+      "name": "Good Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "HOLLOWDENE PETS",
+      "name": "Hollowdene Pets",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* KILNBROOKSTALL",
+      "name": "Kilnbrook Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-kestrel-field-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "THORNMERE VALLEY",
+      "name": "Thornmere Valley",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Thameslink",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Good Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

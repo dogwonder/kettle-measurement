@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-repeated_ask-yarrow-30",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-06-20",
+        "kind": "payment",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "repeated_ask-yarrow-30-payment-01",
+      "segment": "Please pay £310.00 for your tenancy account within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-yarrow-30-no-ask-03",
+      "segment": "No further action is needed once you have paid.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "repeated_ask-yarrow-30-no-ask-05",
+      "segment": "The scheme closes to new applications on 31 October, and you joined some years before that.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_relative-rose-garden-06",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-12-14",
+        "kind": "payment",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "payment_relative-rose-garden-06-payment-01",
+      "segment": "The sum of £68.50 for your check-up is now overdue. Payment must reach us within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-rose-garden-06-no-ask-02",
+      "segment": "If you have already paid, please disregard this notice.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-rose-garden-06-no-ask-04",
+      "segment": "The certificate dated 2 October remains in force for a further 12 months.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

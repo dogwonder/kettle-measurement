@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_month_end-robin-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-02-28",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "payment_month_end-robin-14-payment-01",
+      "segment": "The balance on your council tax account is £214.60. Please settle it by the end of the month.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "month-end"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-robin-14-no-ask-02",
+      "segment": "This letter is for your records and no reply is needed if you have already paid.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-robin-14-no-ask-04",
+      "segment": "This information is provided under our licence conditions and needs no reply.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    }
+  ]
+}

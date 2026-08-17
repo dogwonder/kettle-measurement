@@ -1,0 +1,450 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-sections_repeat-birch-02",
+  "inputs": {
+    "previous": "generated-development-sections_repeat-birch-02-previous.txt",
+    "renewal": "generated-development-sections_repeat-birch-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-previous-no-value-45cb89",
+      "role": "previous",
+      "segment": "Haldon Insurance Services contents insurance — policy schedule BIRCH-SR-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-previous-no-value-c02232",
+      "role": "previous",
+      "segment": "Period of insurance under BIRCH-SR-407: From 1 September 2025 to 31 August 2026 both days inclusive.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-previous-no-value-7db869",
+      "role": "previous",
+      "segment": "Section: professional indemnity (schedule BIRCH-SR-407)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £604,500.00.",
+        "term": "cover_limit",
+        "value": "£604,500.00"
+      },
+      "id": "development-sections_repeat-birch-02-previous-cover-limit-6be855",
+      "role": "previous",
+      "segment": "Insurance amount: £604,500.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,425.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,425.00"
+      },
+      "id": "development-sections_repeat-birch-02-previous-compulsory-excess-6cd21a",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,425.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,448.50.",
+        "term": "premium",
+        "value": "£1,448.50"
+      },
+      "id": "development-sections_repeat-birch-02-previous-premium-597e15",
+      "role": "previous",
+      "segment": "Annual premium: £1,448.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-previous-no-value-262bf3",
+      "role": "previous",
+      "segment": "Section: legal expenses (schedule BIRCH-SR-407)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £854,500.00.",
+        "term": "cover_limit",
+        "value": "£854,500.00"
+      },
+      "id": "development-sections_repeat-birch-02-previous-cover-limit-83a6ea",
+      "role": "previous",
+      "segment": "Insurance amount: £854,500.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,456.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,456.00"
+      },
+      "id": "development-sections_repeat-birch-02-previous-compulsory-excess-ca4dab",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,456.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,495.50.",
+        "term": "premium",
+        "value": "£1,495.50"
+      },
+      "id": "development-sections_repeat-birch-02-previous-premium-a97a30",
+      "role": "previous",
+      "segment": "Annual premium: £1,495.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-previous-no-value-c7ac56",
+      "role": "previous",
+      "segment": "Section: crisis containment (schedule BIRCH-SR-407)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £1,104,500.00.",
+        "term": "cover_limit",
+        "value": "£1,104,500.00"
+      },
+      "id": "development-sections_repeat-birch-02-previous-cover-limit-69e081",
+      "role": "previous",
+      "segment": "Insurance amount: £1,104,500.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,487.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,487.00"
+      },
+      "id": "development-sections_repeat-birch-02-previous-compulsory-excess-912377",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,487.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,542.50.",
+        "term": "premium",
+        "value": "£1,542.50"
+      },
+      "id": "development-sections_repeat-birch-02-previous-premium-700dd9",
+      "role": "previous",
+      "segment": "Annual premium: £1,542.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium for all sections: £4,486.50.",
+        "term": "premium",
+        "value": "£4,486.50"
+      },
+      "id": "development-sections_repeat-birch-02-previous-premium-c3a743",
+      "role": "previous",
+      "segment": "Total annual premium for all sections: £4,486.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-previous-no-value-e1e178",
+      "role": "previous",
+      "segment": "Your reference is BIRCH-SR-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-previous-no-value-f8100d",
+      "role": "previous",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under BIRCH-SR-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-renewal-no-value-55c0e5",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services contents insurance — renewal schedule BIRCH-SR-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-renewal-no-value-bf75d0",
+      "role": "renewal",
+      "segment": "Period of insurance under BIRCH-SR-407: From 1 September 2026 to 31 August 2027 both days inclusive.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-renewal-no-value-7db869",
+      "role": "renewal",
+      "segment": "Section: professional indemnity (schedule BIRCH-SR-407)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £604,500.00.",
+        "term": "cover_limit",
+        "value": "£604,500.00"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-cover-limit-6be855",
+      "role": "renewal",
+      "segment": "Insurance amount: £604,500.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,425.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,425.00"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-compulsory-excess-6cd21a",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,425.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,463.50.",
+        "term": "premium",
+        "value": "£1,463.50"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-premium-e7d4f0",
+      "role": "renewal",
+      "segment": "Annual premium: £1,463.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-renewal-no-value-262bf3",
+      "role": "renewal",
+      "segment": "Section: legal expenses (schedule BIRCH-SR-407)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £854,500.00.",
+        "term": "cover_limit",
+        "value": "£854,500.00"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-cover-limit-83a6ea",
+      "role": "renewal",
+      "segment": "Insurance amount: £854,500.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,456.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,456.00"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-compulsory-excess-ca4dab",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,456.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,510.50.",
+        "term": "premium",
+        "value": "£1,510.50"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-premium-df73ae",
+      "role": "renewal",
+      "segment": "Annual premium: £1,510.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-renewal-no-value-c7ac56",
+      "role": "renewal",
+      "segment": "Section: crisis containment (schedule BIRCH-SR-407)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £1,104,500.00.",
+        "term": "cover_limit",
+        "value": "£1,104,500.00"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-cover-limit-69e081",
+      "role": "renewal",
+      "segment": "Insurance amount: £1,104,500.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,487.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,487.00"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-compulsory-excess-912377",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,487.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,557.50.",
+        "term": "premium",
+        "value": "£1,557.50"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-premium-530876",
+      "role": "renewal",
+      "segment": "Annual premium: £1,557.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium for all sections: £4,531.50.",
+        "term": "premium",
+        "value": "£4,531.50"
+      },
+      "id": "development-sections_repeat-birch-02-renewal-premium-a26da8",
+      "role": "renewal",
+      "segment": "Total annual premium for all sections: £4,531.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-renewal-no-value-f8100d",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under BIRCH-SR-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-birch-02-renewal-no-value-e1e178",
+      "role": "renewal",
+      "segment": "Your reference is BIRCH-SR-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

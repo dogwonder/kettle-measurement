@@ -1,0 +1,245 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-subscription-heavy-tansy",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* DROPBOX",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "SQ *DROPBOX",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "PAYPAL *DROPBOX",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "NEW SCIENTIST PAYMENT",
+      "name": "New Scientist"
+    },
+    {
+      "raw": "BABBEL PAYMENT",
+      "name": "Babbel"
+    },
+    {
+      "raw": "THE GYM GROUP PAYMENT",
+      "name": "The Gym Group"
+    },
+    {
+      "raw": "DISNEY PLUS PAYMENT",
+      "name": "Disney+"
+    },
+    {
+      "raw": "APPLE MUSIC PAYMENT",
+      "name": "Apple Music"
+    },
+    {
+      "raw": "STRIPE* MICROSOFT365",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "SQ *MICROSOFT365",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "PAYPAL *MICROSOFT365",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "THE TIMES PAYMENT",
+      "name": "The Times"
+    },
+    {
+      "raw": "STRIPE* SAINSBURYS",
+      "name": "Sainsbury's"
+    },
+    {
+      "raw": "SQ *SAINSBURYS",
+      "name": "Sainsbury's"
+    },
+    {
+      "raw": "PAYPAL *SAINSBURYS",
+      "name": "Sainsbury's"
+    },
+    {
+      "raw": "DUNELM PAYMENT",
+      "name": "Dunelm"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* DROPBOX",
+      "name": "Dropbox",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "NEW SCIENTIST PAYMENT",
+      "name": "New Scientist",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BABBEL PAYMENT",
+      "name": "Babbel",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "THE GYM GROUP PAYMENT",
+      "name": "The Gym Group",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "DISNEY PLUS PAYMENT",
+      "name": "Disney+",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "APPLE MUSIC PAYMENT",
+      "name": "Apple Music",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* MICROSOFT365",
+      "name": "Microsoft 365",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE TIMES PAYMENT",
+      "name": "The Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SAINSBURYS",
+      "name": "Sainsbury's",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-tansy-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "DUNELM PAYMENT",
+      "name": "Dunelm",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Dropbox",
+      "period": "yearly"
+    },
+    {
+      "merchant": "New Scientist",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Babbel",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Gym Group",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Disney+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Apple Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Times",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

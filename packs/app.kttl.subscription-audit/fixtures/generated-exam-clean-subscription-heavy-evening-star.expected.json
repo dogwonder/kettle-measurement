@@ -1,0 +1,258 @@
+{
+  "fixture_id": "exam-generated-clean-subscription-heavy-evening-star",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* TRESORIT",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "SQ *TRESORIT",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "PAYPAL *TRESORIT",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "HISTORY TODAY",
+      "name": "History Today"
+    },
+    {
+      "raw": "COURSERA",
+      "name": "Coursera"
+    },
+    {
+      "raw": "LES MILLS PLUS",
+      "name": "Les Mills+"
+    },
+    {
+      "raw": "BRITBOX",
+      "name": "BritBox"
+    },
+    {
+      "raw": "SOUNDCLOUD GO",
+      "name": "SoundCloud"
+    },
+    {
+      "raw": "STRIPE* BITWARDEN",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "SQ *BITWARDEN",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "PAYPAL *BITWARDEN",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "NYTIMES",
+      "name": "The New York Times"
+    },
+    {
+      "raw": "STRIPE* CHILTERNRAIL",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "SQ *CHILTERNRAIL",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "PAYPAL *CHILTERNRAIL",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "STRIPE* LBJORNSSON",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "SQ *LBJORNSSON",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "PAYPAL *LBJORNSSON",
+      "name": "L Bjornsson"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TRESORIT",
+      "name": "Tresorit",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "HISTORY TODAY",
+      "name": "History Today",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "COURSERA",
+      "name": "Coursera",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "LES MILLS PLUS",
+      "name": "Les Mills+",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "BRITBOX",
+      "name": "BritBox",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "SOUNDCLOUD GO",
+      "name": "SoundCloud",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BITWARDEN",
+      "name": "Bitwarden",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "NYTIMES",
+      "name": "The New York Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* CHILTERNRAIL",
+      "name": "Chiltern Railways",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-evening-star-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LBJORNSSON",
+      "name": "L Bjornsson",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Tresorit",
+      "period": "yearly"
+    },
+    {
+      "merchant": "History Today",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Coursera",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Les Mills+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "BritBox",
+      "period": "monthly"
+    },
+    {
+      "merchant": "SoundCloud",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The New York Times",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Chiltern Railways",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

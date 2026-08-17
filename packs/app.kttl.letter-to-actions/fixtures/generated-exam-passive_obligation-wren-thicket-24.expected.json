@@ -1,0 +1,53 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-passive_obligation-wren-thicket-24",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 42 days",
+        "due": "2026-06-12",
+        "kind": "payment",
+        "party": "Northgate Water"
+      },
+      "id": "passive_obligation-wren-thicket-24-payment-01",
+      "segment": "Settlement of £96.45 must be received within 42 days of the date of this letter, or the matter is referred onward.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-wren-thicket-24-no-ask-02",
+      "segment": "The water account will be reviewed by our assessment team, and a decision is to be issued within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-wren-thicket-24-no-ask-03",
+      "segment": "This notice is issued for information and no reply is needed to it.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-wren-thicket-24-no-ask-05",
+      "segment": "A duplicate charge of £33.00 raised on 2 May has been reversed.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

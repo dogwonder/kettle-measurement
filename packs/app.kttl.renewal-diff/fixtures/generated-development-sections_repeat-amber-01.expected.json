@@ -1,0 +1,450 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-sections_repeat-amber-01",
+  "inputs": {
+    "previous": "generated-development-sections_repeat-amber-01-previous.txt",
+    "renewal": "generated-development-sections_repeat-amber-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-previous-no-value-1ec645",
+      "role": "previous",
+      "segment": "Brackenfield Cover buildings insurance — policy schedule AMBER-SR-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-previous-no-value-94eb6c",
+      "role": "previous",
+      "segment": "Period of insurance under AMBER-SR-400: From 1 September 2025 to 31 August 2026 both days inclusive.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-previous-no-value-350b31",
+      "role": "previous",
+      "segment": "Section: professional indemnity (schedule AMBER-SR-400)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £604,400.00.",
+        "term": "cover_limit",
+        "value": "£604,400.00"
+      },
+      "id": "development-sections_repeat-amber-01-previous-cover-limit-367418",
+      "role": "previous",
+      "segment": "Insurance amount: £604,400.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,420.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,420.00"
+      },
+      "id": "development-sections_repeat-amber-01-previous-compulsory-excess-d364c7",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,420.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,447.20.",
+        "term": "premium",
+        "value": "£1,447.20"
+      },
+      "id": "development-sections_repeat-amber-01-previous-premium-3f0acf",
+      "role": "previous",
+      "segment": "Annual premium: £1,447.20.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-previous-no-value-963c1f",
+      "role": "previous",
+      "segment": "Section: legal expenses (schedule AMBER-SR-400)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £854,400.00.",
+        "term": "cover_limit",
+        "value": "£854,400.00"
+      },
+      "id": "development-sections_repeat-amber-01-previous-cover-limit-4e3287",
+      "role": "previous",
+      "segment": "Insurance amount: £854,400.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,451.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,451.00"
+      },
+      "id": "development-sections_repeat-amber-01-previous-compulsory-excess-b8125d",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,451.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,494.20.",
+        "term": "premium",
+        "value": "£1,494.20"
+      },
+      "id": "development-sections_repeat-amber-01-previous-premium-25ffb3",
+      "role": "previous",
+      "segment": "Annual premium: £1,494.20.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-previous-no-value-c48b68",
+      "role": "previous",
+      "segment": "Section: crisis containment (schedule AMBER-SR-400)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £1,104,400.00.",
+        "term": "cover_limit",
+        "value": "£1,104,400.00"
+      },
+      "id": "development-sections_repeat-amber-01-previous-cover-limit-258180",
+      "role": "previous",
+      "segment": "Insurance amount: £1,104,400.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,482.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,482.00"
+      },
+      "id": "development-sections_repeat-amber-01-previous-compulsory-excess-c9dadd",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,482.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,541.20.",
+        "term": "premium",
+        "value": "£1,541.20"
+      },
+      "id": "development-sections_repeat-amber-01-previous-premium-71887b",
+      "role": "previous",
+      "segment": "Annual premium: £1,541.20.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium for all sections: £4,482.60.",
+        "term": "premium",
+        "value": "£4,482.60"
+      },
+      "id": "development-sections_repeat-amber-01-previous-premium-648c36",
+      "role": "previous",
+      "segment": "Total annual premium for all sections: £4,482.60.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-previous-no-value-06754f",
+      "role": "previous",
+      "segment": "Your reference is AMBER-SR-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-previous-no-value-74b08c",
+      "role": "previous",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under AMBER-SR-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-renewal-no-value-0bcaad",
+      "role": "renewal",
+      "segment": "Brackenfield Cover buildings insurance — renewal schedule AMBER-SR-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-renewal-no-value-528dbb",
+      "role": "renewal",
+      "segment": "Period of insurance under AMBER-SR-400: From 1 September 2026 to 31 August 2027 both days inclusive.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-renewal-no-value-350b31",
+      "role": "renewal",
+      "segment": "Section: professional indemnity (schedule AMBER-SR-400)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £604,400.00.",
+        "term": "cover_limit",
+        "value": "£604,400.00"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-cover-limit-367418",
+      "role": "renewal",
+      "segment": "Insurance amount: £604,400.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,420.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,420.00"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-compulsory-excess-d364c7",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,420.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,462.20.",
+        "term": "premium",
+        "value": "£1,462.20"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-premium-9d924d",
+      "role": "renewal",
+      "segment": "Annual premium: £1,462.20.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-renewal-no-value-963c1f",
+      "role": "renewal",
+      "segment": "Section: legal expenses (schedule AMBER-SR-400)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £854,400.00.",
+        "term": "cover_limit",
+        "value": "£854,400.00"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-cover-limit-4e3287",
+      "role": "renewal",
+      "segment": "Insurance amount: £854,400.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,451.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,451.00"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-compulsory-excess-b8125d",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,451.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,509.20.",
+        "term": "premium",
+        "value": "£1,509.20"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-premium-9c5848",
+      "role": "renewal",
+      "segment": "Annual premium: £1,509.20.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-renewal-no-value-c48b68",
+      "role": "renewal",
+      "segment": "Section: crisis containment (schedule AMBER-SR-400)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £1,104,400.00.",
+        "term": "cover_limit",
+        "value": "£1,104,400.00"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-cover-limit-258180",
+      "role": "renewal",
+      "segment": "Insurance amount: £1,104,400.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,482.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,482.00"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-compulsory-excess-c9dadd",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,482.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,556.20.",
+        "term": "premium",
+        "value": "£1,556.20"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-premium-37e86b",
+      "role": "renewal",
+      "segment": "Annual premium: £1,556.20.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium for all sections: £4,527.60.",
+        "term": "premium",
+        "value": "£4,527.60"
+      },
+      "id": "development-sections_repeat-amber-01-renewal-premium-d5f908",
+      "role": "renewal",
+      "segment": "Total annual premium for all sections: £4,527.60.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-renewal-no-value-74b08c",
+      "role": "renewal",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under AMBER-SR-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-amber-01-renewal-no-value-06754f",
+      "role": "renewal",
+      "segment": "Your reference is AMBER-SR-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

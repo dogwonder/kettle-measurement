@@ -1,0 +1,18 @@
+{
+  "merchants": [
+    { "id": 901, "raw": "Netflix" },
+    { "id": 902, "raw": "British Gas" },
+    { "id": 903, "raw": "Kaffa Coffee" },
+    { "id": 904, "raw": "Amazon Marketplace" },
+    { "id": 905, "raw": "J Henderson Windows" },
+    { "id": 906, "raw": "TLM Services" }
+  ],
+  "results": [
+    { "id": 901, "name": "Netflix", "category": "streaming", "confidence": "high" },
+    { "id": 902, "name": "British Gas", "category": "energy", "confidence": "high" },
+    { "id": 903, "name": "Kaffa Coffee", "category": "food_drink", "confidence": "high" },
+    { "id": 904, "name": "Amazon Marketplace", "category": "retail", "confidence": "medium" },
+    { "id": 905, "name": "J Henderson Windows", "category": "other", "confidence": "medium" },
+    { "id": 906, "name": "TLM Services", "category": "unknown", "confidence": "low" }
+  ]
+}

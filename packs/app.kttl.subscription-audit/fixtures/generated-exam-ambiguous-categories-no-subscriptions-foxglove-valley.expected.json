@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-no-subscriptions-foxglove-valley",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* SEDGEWICKPROP",
+      "name": "Sedgewick Property"
+    },
+    {
+      "raw": "SQ *SEDGEWICKPROP",
+      "name": "Sedgewick Property"
+    },
+    {
+      "raw": "PAYPAL *SEDGEWICKPROP",
+      "name": "Sedgewick Property"
+    },
+    {
+      "raw": "WEXFORD DENTAL PAYMENT",
+      "name": "Wexford Dental"
+    },
+    {
+      "raw": "STRIPE* TRANSPENNINE",
+      "name": "TransPennine Express"
+    },
+    {
+      "raw": "SQ *TRANSPENNINE",
+      "name": "TransPennine Express"
+    },
+    {
+      "raw": "PAYPAL *TRANSPENNINE",
+      "name": "TransPennine Express"
+    },
+    {
+      "raw": "STRIPE* NABBASI",
+      "name": "N Abbasi"
+    },
+    {
+      "raw": "SQ *NABBASI",
+      "name": "N Abbasi"
+    },
+    {
+      "raw": "PAYPAL *NABBASI",
+      "name": "N Abbasi"
+    },
+    {
+      "raw": "STRIPE* SPARUK",
+      "name": "Spar"
+    },
+    {
+      "raw": "SQ *SPARUK",
+      "name": "Spar"
+    },
+    {
+      "raw": "PAYPAL *SPARUK",
+      "name": "Spar"
+    },
+    {
+      "raw": "WICKES PAYMENT",
+      "name": "Wickes"
+    },
+    {
+      "raw": "ECOTRICITY PAYMENT",
+      "name": "Ecotricity"
+    },
+    {
+      "raw": "SILVERTHORN ART PAYMENT",
+      "name": "Silverthorn Art"
+    },
+    {
+      "raw": "STRIPE* CANONGATEMKT",
+      "name": "Canongate Market"
+    },
+    {
+      "raw": "SQ *CANONGATEMKT",
+      "name": "Canongate Market"
+    },
+    {
+      "raw": "PAYPAL *CANONGATEMKT",
+      "name": "Canongate Market"
+    },
+    {
+      "raw": "ST GILLAN PASS PAYMENT",
+      "name": "St Gillan Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SEDGEWICKPROP",
+      "name": "Sedgewick Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "WEXFORD DENTAL PAYMENT",
+      "name": "Wexford Dental",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TRANSPENNINE",
+      "name": "TransPennine Express",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* NABBASI",
+      "name": "N Abbasi",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SPARUK",
+      "name": "Spar",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "WICKES PAYMENT",
+      "name": "Wickes",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "ECOTRICITY PAYMENT",
+      "name": "Ecotricity",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "SILVERTHORN ART PAYMENT",
+      "name": "Silverthorn Art",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* CANONGATEMKT",
+      "name": "Canongate Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-foxglove-valley-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "ST GILLAN PASS PAYMENT",
+      "name": "St Gillan Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "TransPennine Express",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Ecotricity",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

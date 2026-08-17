@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-harbour-32",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "27 February 2026",
+        "deadline": "on 27 February 2026",
+        "due": "2026-02-27",
+        "kind": "attendance",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_absolute-harbour-32-attendance-01",
+      "segment": "You have an appointment about your energy account at Cranleigh Energy on 27 February 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-harbour-32-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-harbour-32-no-ask-04",
+      "segment": "Your membership number has not changed and your card remains valid until March 2028.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

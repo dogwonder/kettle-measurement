@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_relative-upland-moss-33",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-03-11",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "payment_relative-upland-moss-33-payment-01",
+      "segment": "The sum of £214.60 for your council tax account is now overdue. Payment must reach us within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-upland-moss-33-no-ask-02",
+      "segment": "If you have already paid, please disregard this notice.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-upland-moss-33-no-ask-04",
+      "segment": "The sum of £96.15 was credited to this account on 8 March.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "fixture_id": "development-generated-clean-subscription-heavy-fern",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "SQ *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PAYPAL *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PRIVATE EYE",
+      "name": "Private Eye"
+    },
+    {
+      "raw": "SKILLSHARE",
+      "name": "Skillshare"
+    },
+    {
+      "raw": "DAVID LLOYD",
+      "name": "David Lloyd"
+    },
+    {
+      "raw": "NOW TV",
+      "name": "NOW"
+    },
+    {
+      "raw": "TIDAL",
+      "name": "TIDAL"
+    },
+    {
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "SQ *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "PAYPAL *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "THE TELEGRAPH",
+      "name": "The Telegraph"
+    },
+    {
+      "raw": "STRIPE* SOUTHERNRAIL",
+      "name": "Southern"
+    },
+    {
+      "raw": "SQ *SOUTHERNRAIL",
+      "name": "Southern"
+    },
+    {
+      "raw": "PAYPAL *SOUTHERNRAIL",
+      "name": "Southern"
+    },
+    {
+      "raw": "STRIPE* RPATEL",
+      "name": "R Patel"
+    },
+    {
+      "raw": "SQ *RPATEL",
+      "name": "R Patel"
+    },
+    {
+      "raw": "PAYPAL *RPATEL",
+      "name": "R Patel"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-clean-subscription-heavy-fern-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-fern-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "PRIVATE EYE",
+      "name": "Private Eye",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-fern-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "SKILLSHARE",
+      "name": "Skillshare",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-fern-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "DAVID LLOYD",
+      "name": "David Lloyd",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-clean-subscription-heavy-fern-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "NOW TV",
+      "name": "NOW",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-fern-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "TIDAL",
+      "name": "TIDAL",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-fern-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-fern-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE TELEGRAPH",
+      "name": "The Telegraph",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-fern-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SOUTHERNRAIL",
+      "name": "Southern",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-clean-subscription-heavy-fern-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* RPATEL",
+      "name": "R Patel",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "pCloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Private Eye",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Skillshare",
+      "period": "monthly"
+    },
+    {
+      "merchant": "David Lloyd",
+      "period": "monthly"
+    },
+    {
+      "merchant": "NOW",
+      "period": "monthly"
+    },
+    {
+      "merchant": "TIDAL",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Telegraph",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Southern",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

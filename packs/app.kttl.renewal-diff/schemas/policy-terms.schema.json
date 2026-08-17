@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "segment": { "type": "string" },
+          "confidence": { "enum": ["high", "medium", "low"] },
+          "terms": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "term": {
+                  "enum": [
+                    "premium",
+                    "compulsory_excess",
+                    "voluntary_excess",
+                    "total_excess",
+                    "cover_limit",
+                    "no_claims_discount",
+                    "cooling_off_period",
+                    "other"
+                  ]
+                },
+                "basis": {
+                  "enum": [
+                    "annual",
+                    "monthly",
+                    "per_claim",
+                    "per_policy"
+                  ]
+                },
+                "value": { "type": "string" },
+                "quote": { "type": "string" }
+              },
+              "required": ["term", "basis", "value", "quote"]
+            }
+          }
+        },
+        "required": ["id", "segment", "confidence", "terms"]
+      }
+    }
+  },
+  "required": ["results"]
+}

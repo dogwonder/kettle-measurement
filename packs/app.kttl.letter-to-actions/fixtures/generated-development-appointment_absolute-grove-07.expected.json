@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-grove-07",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "6 July 2026",
+        "deadline": "on 6 July 2026",
+        "due": "2026-07-06",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_absolute-grove-07-attendance-01",
+      "segment": "You have an appointment about your policy renewal at Belwood Insurance on 6 July 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-grove-07-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-grove-07-no-ask-04",
+      "segment": "We have already passed your details to the billing team, who will make the change within 10 days.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

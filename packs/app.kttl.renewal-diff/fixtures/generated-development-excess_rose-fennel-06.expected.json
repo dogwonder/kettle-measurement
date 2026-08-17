@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_rose-fennel-06",
+  "inputs": {
+    "previous": "generated-development-excess_rose-fennel-06-previous.txt",
+    "renewal": "generated-development-excess_rose-fennel-06-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_rose-fennel-06-previous-no-value-5bc975",
+      "role": "previous",
+      "segment": "Westmarch Cover landlord insurance — policy schedule FENNEL-ER-435 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £265.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£265.00"
+      },
+      "id": "development-excess_rose-fennel-06-previous-compulsory-excess-1b11ba",
+      "role": "previous",
+      "segment": "Compulsory excess: £265.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £571.00.",
+        "term": "premium",
+        "value": "£571.00"
+      },
+      "id": "development-excess_rose-fennel-06-previous-premium-ad77b4",
+      "role": "previous",
+      "segment": "Total annual premium: £571.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £2,630.00 per policy.",
+        "term": "cover_limit",
+        "value": "£2,630.00"
+      },
+      "id": "development-excess_rose-fennel-06-previous-cover-limit-cd224c",
+      "role": "previous",
+      "segment": "Cover limit: £2,630.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-fennel-06-previous-no-value-bc35e5",
+      "role": "previous",
+      "segment": "Your reference is FENNEL-ER-435. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-fennel-06-previous-no-value-d55363",
+      "role": "previous",
+      "segment": "Westmarch Cover arranges landlord insurance cover under FENNEL-ER-435 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-fennel-06-renewal-no-value-a42961",
+      "role": "renewal",
+      "segment": "Westmarch Cover landlord insurance — renewal schedule FENNEL-ER-435 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £532.50 per claim.",
+        "term": "compulsory_excess",
+        "value": "£532.50"
+      },
+      "id": "development-excess_rose-fennel-06-renewal-compulsory-excess-ac4bdb",
+      "role": "renewal",
+      "segment": "Compulsory excess: £532.50 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £571.00.",
+        "term": "premium",
+        "value": "£571.00"
+      },
+      "id": "development-excess_rose-fennel-06-renewal-premium-ad77b4",
+      "role": "renewal",
+      "segment": "Total annual premium: £571.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £2,630.00 per policy.",
+        "term": "cover_limit",
+        "value": "£2,630.00"
+      },
+      "id": "development-excess_rose-fennel-06-renewal-cover-limit-cd224c",
+      "role": "renewal",
+      "segment": "Cover limit: £2,630.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-fennel-06-renewal-no-value-d55363",
+      "role": "renewal",
+      "segment": "Westmarch Cover arranges landlord insurance cover under FENNEL-ER-435 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-fennel-06-renewal-no-value-bc35e5",
+      "role": "renewal",
+      "segment": "Your reference is FENNEL-ER-435. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

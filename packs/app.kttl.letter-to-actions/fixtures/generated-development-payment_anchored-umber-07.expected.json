@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_anchored-umber-07",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "26 November 2026",
+        "deadline": "within 30 days",
+        "due": "2026-12-26",
+        "kind": "payment",
+        "party": "Belwood Insurance"
+      },
+      "id": "payment_anchored-umber-07-payment-02",
+      "segment": "Please pay £188.20 within 30 days of 26 November 2026, quoting reference BI-66319.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-umber-07-no-ask-03",
+      "segment": "Thank you for your co-operation in this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-umber-07-no-ask-05",
+      "segment": "Your solicitor has been sent a copy of this letter and will deal with the signing.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

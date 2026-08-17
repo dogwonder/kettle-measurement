@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-two_excesses-cedar-03",
+  "inputs": {
+    "previous": "generated-development-two_excesses-cedar-03-previous.txt",
+    "renewal": "generated-development-two_excesses-cedar-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-two_excesses-cedar-03-previous-no-value-b06fe7",
+      "role": "previous",
+      "segment": "Brackenfield Cover buildings insurance — policy schedule CEDAR-TE-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,385.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,385.00"
+      },
+      "id": "development-two_excesses-cedar-03-previous-compulsory-excess-113f85",
+      "role": "previous",
+      "segment": "Compulsory excess: £4,385.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £987.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£987.00"
+      },
+      "id": "development-two_excesses-cedar-03-previous-voluntary-excess-cbdc33",
+      "role": "previous",
+      "segment": "Voluntary excess: £987.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,372.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,372.00"
+      },
+      "id": "development-two_excesses-cedar-03-previous-total-excess-040ad7",
+      "role": "previous",
+      "segment": "Total excess payable: £5,372.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-cedar-03-previous-no-value-e70835",
+      "role": "previous",
+      "segment": "Your reference is CEDAR-TE-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-cedar-03-previous-no-value-ecdeb7",
+      "role": "previous",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under CEDAR-TE-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-cedar-03-renewal-no-value-bdd3b6",
+      "role": "renewal",
+      "segment": "Brackenfield Cover buildings insurance — renewal schedule CEDAR-TE-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,435.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,435.00"
+      },
+      "id": "development-two_excesses-cedar-03-renewal-compulsory-excess-d7f8da",
+      "role": "renewal",
+      "segment": "Compulsory excess: £4,435.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £987.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£987.00"
+      },
+      "id": "development-two_excesses-cedar-03-renewal-voluntary-excess-cbdc33",
+      "role": "renewal",
+      "segment": "Voluntary excess: £987.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,422.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,422.00"
+      },
+      "id": "development-two_excesses-cedar-03-renewal-total-excess-9660ee",
+      "role": "renewal",
+      "segment": "Total excess payable: £5,422.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-cedar-03-renewal-no-value-ecdeb7",
+      "role": "renewal",
+      "segment": "Brackenfield Cover arranges buildings insurance cover under CEDAR-TE-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-cedar-03-renewal-no-value-e70835",
+      "role": "renewal",
+      "segment": "Your reference is CEDAR-TE-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

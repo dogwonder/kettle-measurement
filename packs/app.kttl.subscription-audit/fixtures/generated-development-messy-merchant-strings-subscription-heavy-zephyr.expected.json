@@ -1,0 +1,245 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-subscription-heavy-zephyr",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* PCLOUD CARD 4821",
+      "name": "pCloud"
+    },
+    {
+      "raw": "SQ *PCLOUD CARD 4821",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PAYPAL *PCLOUD CARD 4821",
+      "name": "pCloud"
+    },
+    {
+      "raw": "CARD 4821 PRVT Y GB",
+      "name": "Private Eye"
+    },
+    {
+      "raw": "CARD 4821 SKLLSHR GB",
+      "name": "Skillshare"
+    },
+    {
+      "raw": "CARD 4821 DVD LLYD GB",
+      "name": "David Lloyd"
+    },
+    {
+      "raw": "CARD 4821 NW TV GB",
+      "name": "NOW"
+    },
+    {
+      "raw": "CARD 4821 TDL GB",
+      "name": "TIDAL"
+    },
+    {
+      "raw": "STRIPE* ADOBE CARD 4821",
+      "name": "Adobe"
+    },
+    {
+      "raw": "SQ *ADOBE CARD 4821",
+      "name": "Adobe"
+    },
+    {
+      "raw": "PAYPAL *ADOBE CARD 4821",
+      "name": "Adobe"
+    },
+    {
+      "raw": "CARD 4821 TH TLGRPH GB",
+      "name": "The Telegraph"
+    },
+    {
+      "raw": "STRIPE* ALDI CARD 4821",
+      "name": "Aldi"
+    },
+    {
+      "raw": "SQ *ALDI CARD 4821",
+      "name": "Aldi"
+    },
+    {
+      "raw": "PAYPAL *ALDI CARD 4821",
+      "name": "Aldi"
+    },
+    {
+      "raw": "CARD 4821 K GB",
+      "name": "IKEA"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* PCLOUD CARD 4821",
+      "name": "pCloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 PRVT Y GB",
+      "name": "Private Eye",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 SKLLSHR GB",
+      "name": "Skillshare",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 DVD LLYD GB",
+      "name": "David Lloyd",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 NW TV GB",
+      "name": "NOW",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 TDL GB",
+      "name": "TIDAL",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ADOBE CARD 4821",
+      "name": "Adobe",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 TH TLGRPH GB",
+      "name": "The Telegraph",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ALDI CARD 4821",
+      "name": "Aldi",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-zephyr-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 K GB",
+      "name": "IKEA",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "pCloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Private Eye",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Skillshare",
+      "period": "monthly"
+    },
+    {
+      "merchant": "David Lloyd",
+      "period": "monthly"
+    },
+    {
+      "merchant": "NOW",
+      "period": "monthly"
+    },
+    {
+      "merchant": "TIDAL",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Telegraph",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

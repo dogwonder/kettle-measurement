@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-no-subscriptions-vale-bridge",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* SEDGEWICKPROP CARD 4821",
+      "name": "Sedgewick Property"
+    },
+    {
+      "raw": "SQ *SEDGEWICKPROP CARD 4821",
+      "name": "Sedgewick Property"
+    },
+    {
+      "raw": "PAYPAL *SEDGEWICKPROP CARD 4821",
+      "name": "Sedgewick Property"
+    },
+    {
+      "raw": "CARD 4821 WXFRD DNTL GB",
+      "name": "Wexford Dental"
+    },
+    {
+      "raw": "STRIPE* TRANSPENNINE CARD 4821",
+      "name": "TransPennine Express"
+    },
+    {
+      "raw": "SQ *TRANSPENNINE CARD 4821",
+      "name": "TransPennine Express"
+    },
+    {
+      "raw": "PAYPAL *TRANSPENNINE CARD 4821",
+      "name": "TransPennine Express"
+    },
+    {
+      "raw": "STRIPE* NABBASI CARD 4821",
+      "name": "N Abbasi"
+    },
+    {
+      "raw": "SQ *NABBASI CARD 4821",
+      "name": "N Abbasi"
+    },
+    {
+      "raw": "PAYPAL *NABBASI CARD 4821",
+      "name": "N Abbasi"
+    },
+    {
+      "raw": "STRIPE* SPARUK CARD 4821",
+      "name": "Spar"
+    },
+    {
+      "raw": "SQ *SPARUK CARD 4821",
+      "name": "Spar"
+    },
+    {
+      "raw": "PAYPAL *SPARUK CARD 4821",
+      "name": "Spar"
+    },
+    {
+      "raw": "CARD 4821 WCKS GB",
+      "name": "Wickes"
+    },
+    {
+      "raw": "CARD 4821 CTRCTY GB",
+      "name": "Ecotricity"
+    },
+    {
+      "raw": "CARD 4821 SLVRTHRN RT GB",
+      "name": "Silverthorn Art"
+    },
+    {
+      "raw": "STRIPE* CANONGATEMKT CARD 4821",
+      "name": "Canongate Market"
+    },
+    {
+      "raw": "SQ *CANONGATEMKT CARD 4821",
+      "name": "Canongate Market"
+    },
+    {
+      "raw": "PAYPAL *CANONGATEMKT CARD 4821",
+      "name": "Canongate Market"
+    },
+    {
+      "raw": "CARD 4821 ST GLLN PSS GB",
+      "name": "St Gillan Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SEDGEWICKPROP CARD 4821",
+      "name": "Sedgewick Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 WXFRD DNTL GB",
+      "name": "Wexford Dental",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TRANSPENNINE CARD 4821",
+      "name": "TransPennine Express",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* NABBASI CARD 4821",
+      "name": "N Abbasi",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SPARUK CARD 4821",
+      "name": "Spar",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 WCKS GB",
+      "name": "Wickes",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 CTRCTY GB",
+      "name": "Ecotricity",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 SLVRTHRN RT GB",
+      "name": "Silverthorn Art",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* CANONGATEMKT CARD 4821",
+      "name": "Canongate Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-vale-bridge-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 ST GLLN PSS GB",
+      "name": "St Gillan Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "TransPennine Express",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Ecotricity",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

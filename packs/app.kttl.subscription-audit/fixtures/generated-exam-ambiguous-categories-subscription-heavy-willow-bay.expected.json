@@ -1,0 +1,245 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-subscription-heavy-willow-bay",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* JOTTACLOUD",
+      "name": "Jottacloud"
+    },
+    {
+      "raw": "SQ *JOTTACLOUD",
+      "name": "Jottacloud"
+    },
+    {
+      "raw": "PAYPAL *JOTTACLOUD",
+      "name": "Jottacloud"
+    },
+    {
+      "raw": "BBC GOOD FOOD PAYMENT",
+      "name": "BBC Good Food"
+    },
+    {
+      "raw": "PIMSLEUR PAYMENT",
+      "name": "Pimsleur"
+    },
+    {
+      "raw": "ANYTIME FITNESS PAYMENT",
+      "name": "Anytime Fitness"
+    },
+    {
+      "raw": "CRUNCHYROLL PAYMENT",
+      "name": "Crunchyroll"
+    },
+    {
+      "raw": "AUDIBLE UK PAYMENT",
+      "name": "Audible"
+    },
+    {
+      "raw": "STRIPE* TODOIST",
+      "name": "Todoist"
+    },
+    {
+      "raw": "SQ *TODOIST",
+      "name": "Todoist"
+    },
+    {
+      "raw": "PAYPAL *TODOIST",
+      "name": "Todoist"
+    },
+    {
+      "raw": "TORTOISE MEDIA PAYMENT",
+      "name": "Tortoise Media"
+    },
+    {
+      "raw": "STRIPE* MSFOOD",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "SQ *MSFOOD",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "PAYPAL *MSFOOD",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "TK MAXX PAYMENT",
+      "name": "TK Maxx"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* JOTTACLOUD",
+      "name": "Jottacloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "BBC GOOD FOOD PAYMENT",
+      "name": "BBC Good Food",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "PIMSLEUR PAYMENT",
+      "name": "Pimsleur",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "ANYTIME FITNESS PAYMENT",
+      "name": "Anytime Fitness",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CRUNCHYROLL PAYMENT",
+      "name": "Crunchyroll",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "AUDIBLE UK PAYMENT",
+      "name": "Audible",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TODOIST",
+      "name": "Todoist",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "TORTOISE MEDIA PAYMENT",
+      "name": "Tortoise Media",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MSFOOD",
+      "name": "M&S Food",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-willow-bay-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "TK MAXX PAYMENT",
+      "name": "TK Maxx",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Jottacloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "BBC Good Food",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Pimsleur",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Anytime Fitness",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Crunchyroll",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Audible",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Tortoise Media",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

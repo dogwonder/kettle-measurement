@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-clean-no-subscriptions-kelp",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* CALDERLETTINGS",
+      "name": "Calder Lettings"
+    },
+    {
+      "raw": "SQ *CALDERLETTINGS",
+      "name": "Calder Lettings"
+    },
+    {
+      "raw": "PAYPAL *CALDERLETTINGS",
+      "name": "Calder Lettings"
+    },
+    {
+      "raw": "KIRKLAND SUPPLIES",
+      "name": "Kirkland Supplies"
+    },
+    {
+      "raw": "STRIPE* NORTHERNRAIL",
+      "name": "Northern"
+    },
+    {
+      "raw": "SQ *NORTHERNRAIL",
+      "name": "Northern"
+    },
+    {
+      "raw": "PAYPAL *NORTHERNRAIL",
+      "name": "Northern"
+    },
+    {
+      "raw": "STRIPE* SMACLEOD",
+      "name": "S MacLeod"
+    },
+    {
+      "raw": "SQ *SMACLEOD",
+      "name": "S MacLeod"
+    },
+    {
+      "raw": "PAYPAL *SMACLEOD",
+      "name": "S MacLeod"
+    },
+    {
+      "raw": "STRIPE* LIDLGB",
+      "name": "Lidl"
+    },
+    {
+      "raw": "SQ *LIDLGB",
+      "name": "Lidl"
+    },
+    {
+      "raw": "PAYPAL *LIDLGB",
+      "name": "Lidl"
+    },
+    {
+      "raw": "WILKO",
+      "name": "Wilko"
+    },
+    {
+      "raw": "EON NEXT",
+      "name": "E.ON Next"
+    },
+    {
+      "raw": "TANNERY BOOKS",
+      "name": "Tannery Books"
+    },
+    {
+      "raw": "STRIPE* GRANARYMARKET",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "SQ *GRANARYMARKET",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "PAYPAL *GRANARYMARKET",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "BELLFORD PARKS",
+      "name": "Bellford Parks"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-clean-no-subscriptions-kelp-monthly-rent",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* CALDERLETTINGS",
+      "name": "Calder Lettings",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-clean-no-subscriptions-kelp-monthly-salary",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "KIRKLAND SUPPLIES",
+      "name": "Kirkland Supplies",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-clean-no-subscriptions-kelp-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* NORTHERNRAIL",
+      "name": "Northern",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-clean-no-subscriptions-kelp-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SMACLEOD",
+      "name": "S MacLeod",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-clean-no-subscriptions-kelp-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LIDLGB",
+      "name": "Lidl",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-clean-no-subscriptions-kelp-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "WILKO",
+      "name": "Wilko",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-clean-no-subscriptions-kelp-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "EON NEXT",
+      "name": "E.ON Next",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-clean-no-subscriptions-kelp-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "TANNERY BOOKS",
+      "name": "Tannery Books",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-clean-no-subscriptions-kelp-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* GRANARYMARKET",
+      "name": "Granary Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-clean-no-subscriptions-kelp-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "BELLFORD PARKS",
+      "name": "Bellford Parks",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Northern",
+      "period": "yearly"
+    },
+    {
+      "merchant": "E.ON Next",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-valley-22",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "3 April 2026",
+        "deadline": "on 3 April 2026",
+        "due": "2026-04-03",
+        "kind": "attendance",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_absolute-valley-22-attendance-01",
+      "segment": "You have an appointment about your membership at Eastvale Library Service on 3 April 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-valley-22-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-valley-22-no-ask-04",
+      "segment": "Our records show your last contribution was made on 29 May.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

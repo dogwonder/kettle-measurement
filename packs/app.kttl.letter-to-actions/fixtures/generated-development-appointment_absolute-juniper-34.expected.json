@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-juniper-34",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "11 April 2026",
+        "deadline": "on 11 April 2026",
+        "due": "2026-04-11",
+        "kind": "attendance",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_absolute-juniper-34-attendance-01",
+      "segment": "You have an appointment about your membership at Eastvale Library Service on 11 April 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-juniper-34-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-juniper-34-no-ask-04",
+      "segment": "The team responsible has been asked to reply to you within 5 days.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

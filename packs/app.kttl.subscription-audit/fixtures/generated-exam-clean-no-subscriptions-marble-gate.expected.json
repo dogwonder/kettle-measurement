@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-clean-no-subscriptions-marble-gate",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* SEDGEWICKPROP",
+      "name": "Sedgewick Property"
+    },
+    {
+      "raw": "SQ *SEDGEWICKPROP",
+      "name": "Sedgewick Property"
+    },
+    {
+      "raw": "PAYPAL *SEDGEWICKPROP",
+      "name": "Sedgewick Property"
+    },
+    {
+      "raw": "WEXFORD DENTAL",
+      "name": "Wexford Dental"
+    },
+    {
+      "raw": "STRIPE* TRANSPENNINE",
+      "name": "TransPennine Express"
+    },
+    {
+      "raw": "SQ *TRANSPENNINE",
+      "name": "TransPennine Express"
+    },
+    {
+      "raw": "PAYPAL *TRANSPENNINE",
+      "name": "TransPennine Express"
+    },
+    {
+      "raw": "STRIPE* NABBASI",
+      "name": "N Abbasi"
+    },
+    {
+      "raw": "SQ *NABBASI",
+      "name": "N Abbasi"
+    },
+    {
+      "raw": "PAYPAL *NABBASI",
+      "name": "N Abbasi"
+    },
+    {
+      "raw": "STRIPE* SPARUK",
+      "name": "Spar"
+    },
+    {
+      "raw": "SQ *SPARUK",
+      "name": "Spar"
+    },
+    {
+      "raw": "PAYPAL *SPARUK",
+      "name": "Spar"
+    },
+    {
+      "raw": "WICKES",
+      "name": "Wickes"
+    },
+    {
+      "raw": "ECOTRICITY",
+      "name": "Ecotricity"
+    },
+    {
+      "raw": "SILVERTHORN ART",
+      "name": "Silverthorn Art"
+    },
+    {
+      "raw": "STRIPE* CANONGATEMKT",
+      "name": "Canongate Market"
+    },
+    {
+      "raw": "SQ *CANONGATEMKT",
+      "name": "Canongate Market"
+    },
+    {
+      "raw": "PAYPAL *CANONGATEMKT",
+      "name": "Canongate Market"
+    },
+    {
+      "raw": "ST GILLAN PASS",
+      "name": "St Gillan Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-monthly-rent",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SEDGEWICKPROP",
+      "name": "Sedgewick Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-monthly-salary",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "WEXFORD DENTAL",
+      "name": "Wexford Dental",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TRANSPENNINE",
+      "name": "TransPennine Express",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* NABBASI",
+      "name": "N Abbasi",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SPARUK",
+      "name": "Spar",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "WICKES",
+      "name": "Wickes",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "ECOTRICITY",
+      "name": "Ecotricity",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "SILVERTHORN ART",
+      "name": "Silverthorn Art",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* CANONGATEMKT",
+      "name": "Canongate Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-marble-gate-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "ST GILLAN PASS",
+      "name": "St Gillan Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "TransPennine Express",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Ecotricity",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

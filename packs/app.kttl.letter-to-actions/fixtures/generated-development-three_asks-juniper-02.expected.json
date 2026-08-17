@@ -1,0 +1,77 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-three_asks-juniper-02",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-02-20",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "three_asks-juniper-02-payment-01",
+      "segment": "Please pay £214.60 towards your council tax account within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "16 September 2026",
+        "deadline": "on 16 September 2026",
+        "due": "2026-09-16",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "three_asks-juniper-02-attendance-02",
+      "segment": "You must attend a review meeting at our offices on 16 September 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-02-28",
+        "kind": "response",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "three_asks-juniper-02-response-03",
+      "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-juniper-02-no-ask-04",
+      "segment": "We look forward to hearing from you in due course.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-juniper-02-no-ask-06",
+      "segment": "Our records show your last contribution was made on 29 May.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

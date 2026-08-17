@@ -1,0 +1,77 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-three_asks-yellow-birch-16",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-10-08",
+        "kind": "payment",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "three_asks-yellow-birch-16-payment-01",
+      "segment": "A payment of £54.00 towards your pet health plan is due within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "7 October 2026",
+        "deadline": "on 7 October 2026",
+        "due": "2026-10-07",
+        "kind": "attendance",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "three_asks-yellow-birch-16-attendance-02",
+      "segment": "You are required to attend a case review at our offices on 7 October 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-09-30",
+        "kind": "response",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "three_asks-yellow-birch-16-response-03",
+      "segment": "Please confirm your attendance in writing by the end of the month.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-yellow-birch-16-no-ask-04",
+      "segment": "A copy of this letter has been placed on your file.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-yellow-birch-16-no-ask-06",
+      "segment": "The statement for the period ending 31 March accompanies this letter for information.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

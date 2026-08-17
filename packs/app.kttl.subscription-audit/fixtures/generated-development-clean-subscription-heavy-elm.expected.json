@@ -1,0 +1,258 @@
+{
+  "fixture_id": "development-generated-clean-subscription-heavy-elm",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* DROPBOX",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "SQ *DROPBOX",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "PAYPAL *DROPBOX",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "NEW SCIENTIST",
+      "name": "New Scientist"
+    },
+    {
+      "raw": "BABBEL",
+      "name": "Babbel"
+    },
+    {
+      "raw": "THE GYM GROUP",
+      "name": "The Gym Group"
+    },
+    {
+      "raw": "DISNEY PLUS",
+      "name": "Disney+"
+    },
+    {
+      "raw": "APPLE MUSIC",
+      "name": "Apple Music"
+    },
+    {
+      "raw": "STRIPE* MICROSOFT365",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "SQ *MICROSOFT365",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "PAYPAL *MICROSOFT365",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "THE TIMES",
+      "name": "The Times"
+    },
+    {
+      "raw": "STRIPE* LNER",
+      "name": "LNER"
+    },
+    {
+      "raw": "SQ *LNER",
+      "name": "LNER"
+    },
+    {
+      "raw": "PAYPAL *LNER",
+      "name": "LNER"
+    },
+    {
+      "raw": "STRIPE* MOKONKWO",
+      "name": "M Okonkwo"
+    },
+    {
+      "raw": "SQ *MOKONKWO",
+      "name": "M Okonkwo"
+    },
+    {
+      "raw": "PAYPAL *MOKONKWO",
+      "name": "M Okonkwo"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-clean-subscription-heavy-elm-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* DROPBOX",
+      "name": "Dropbox",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-elm-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "NEW SCIENTIST",
+      "name": "New Scientist",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-elm-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BABBEL",
+      "name": "Babbel",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-elm-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "THE GYM GROUP",
+      "name": "The Gym Group",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-clean-subscription-heavy-elm-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "DISNEY PLUS",
+      "name": "Disney+",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-elm-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "APPLE MUSIC",
+      "name": "Apple Music",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-elm-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* MICROSOFT365",
+      "name": "Microsoft 365",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-elm-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE TIMES",
+      "name": "The Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-elm-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LNER",
+      "name": "LNER",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-clean-subscription-heavy-elm-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MOKONKWO",
+      "name": "M Okonkwo",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Dropbox",
+      "period": "yearly"
+    },
+    {
+      "merchant": "New Scientist",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Babbel",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Gym Group",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Disney+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Apple Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Times",
+      "period": "monthly"
+    },
+    {
+      "merchant": "LNER",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

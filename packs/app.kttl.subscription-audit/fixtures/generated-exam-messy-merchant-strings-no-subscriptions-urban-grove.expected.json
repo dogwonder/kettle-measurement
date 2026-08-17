@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-no-subscriptions-urban-grove",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* MARCHMONTHOMES CARD 4821",
+      "name": "Marchmont Homes"
+    },
+    {
+      "raw": "SQ *MARCHMONTHOMES CARD 4821",
+      "name": "Marchmont Homes"
+    },
+    {
+      "raw": "PAYPAL *MARCHMONTHOMES CARD 4821",
+      "name": "Marchmont Homes"
+    },
+    {
+      "raw": "CARD 4821 LYNTN HLG GB",
+      "name": "Lynton Haulage"
+    },
+    {
+      "raw": "STRIPE* C2CRAIL CARD 4821",
+      "name": "c2c"
+    },
+    {
+      "raw": "SQ *C2CRAIL CARD 4821",
+      "name": "c2c"
+    },
+    {
+      "raw": "PAYPAL *C2CRAIL CARD 4821",
+      "name": "c2c"
+    },
+    {
+      "raw": "STRIPE* EMORGENSTERN CARD 4821",
+      "name": "E Morgenstern"
+    },
+    {
+      "raw": "SQ *EMORGENSTERN CARD 4821",
+      "name": "E Morgenstern"
+    },
+    {
+      "raw": "PAYPAL *EMORGENSTERN CARD 4821",
+      "name": "E Morgenstern"
+    },
+    {
+      "raw": "STRIPE* BOOTHS CARD 4821",
+      "name": "Booths"
+    },
+    {
+      "raw": "SQ *BOOTHS CARD 4821",
+      "name": "Booths"
+    },
+    {
+      "raw": "PAYPAL *BOOTHS CARD 4821",
+      "name": "Booths"
+    },
+    {
+      "raw": "CARD 4821 RBRT DYS GB",
+      "name": "Robert Dyas"
+    },
+    {
+      "raw": "CARD 4821 RBL NRGY GB",
+      "name": "Rebel Energy"
+    },
+    {
+      "raw": "CARD 4821 BRCKN CMPNG GB",
+      "name": "Bracken Camping"
+    },
+    {
+      "raw": "STRIPE* OLDMILLTRADERS CARD 4821",
+      "name": "Oldmill Traders"
+    },
+    {
+      "raw": "SQ *OLDMILLTRADERS CARD 4821",
+      "name": "Oldmill Traders"
+    },
+    {
+      "raw": "PAYPAL *OLDMILLTRADERS CARD 4821",
+      "name": "Oldmill Traders"
+    },
+    {
+      "raw": "CARD 4821 BRMPTN GRDNS GB",
+      "name": "Brampton Gardens"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MARCHMONTHOMES CARD 4821",
+      "name": "Marchmont Homes",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 LYNTN HLG GB",
+      "name": "Lynton Haulage",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* C2CRAIL CARD 4821",
+      "name": "c2c",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* EMORGENSTERN CARD 4821",
+      "name": "E Morgenstern",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* BOOTHS CARD 4821",
+      "name": "Booths",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 RBRT DYS GB",
+      "name": "Robert Dyas",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 RBL NRGY GB",
+      "name": "Rebel Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 BRCKN CMPNG GB",
+      "name": "Bracken Camping",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* OLDMILLTRADERS CARD 4821",
+      "name": "Oldmill Traders",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-urban-grove-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 BRMPTN GRDNS GB",
+      "name": "Brampton Gardens",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "c2c",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Rebel Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

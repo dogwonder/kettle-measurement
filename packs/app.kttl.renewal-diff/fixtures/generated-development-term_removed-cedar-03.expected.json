@@ -1,0 +1,145 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-term_removed-cedar-03",
+  "inputs": {
+    "previous": "generated-development-term_removed-cedar-03-previous.txt",
+    "renewal": "generated-development-term_removed-cedar-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-term_removed-cedar-03-previous-no-value-e667bf",
+      "role": "previous",
+      "segment": "Corvin Mutual pet insurance — policy schedule CEDAR-TR-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,211.00.",
+        "term": "premium",
+        "value": "£4,211.00"
+      },
+      "id": "development-term_removed-cedar-03-previous-premium-6656f8",
+      "role": "previous",
+      "segment": "Total annual premium: £4,211.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "No claims discount: 43%.",
+        "term": "no_claims_discount",
+        "value": "43%"
+      },
+      "id": "development-term_removed-cedar-03-previous-no-claims-discount-813c2d",
+      "role": "previous",
+      "segment": "No claims discount: 43%.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,865.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,865.00"
+      },
+      "id": "development-term_removed-cedar-03-previous-compulsory-excess-76245c",
+      "role": "previous",
+      "segment": "Compulsory excess: £2,865.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-cedar-03-previous-no-value-b9b29d",
+      "role": "previous",
+      "segment": "Your reference is CEDAR-TR-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-cedar-03-previous-no-value-c54b4c",
+      "role": "previous",
+      "segment": "Corvin Mutual arranges pet insurance cover under CEDAR-TR-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-cedar-03-renewal-no-value-034dbf",
+      "role": "renewal",
+      "segment": "Corvin Mutual pet insurance — renewal schedule CEDAR-TR-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,211.00.",
+        "term": "premium",
+        "value": "£4,211.00"
+      },
+      "id": "development-term_removed-cedar-03-renewal-premium-6656f8",
+      "role": "renewal",
+      "segment": "Total annual premium: £4,211.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,865.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,865.00"
+      },
+      "id": "development-term_removed-cedar-03-renewal-compulsory-excess-76245c",
+      "role": "renewal",
+      "segment": "Compulsory excess: £2,865.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-cedar-03-renewal-no-value-c54b4c",
+      "role": "renewal",
+      "segment": "Corvin Mutual arranges pet insurance cover under CEDAR-TR-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-cedar-03-renewal-no-value-b9b29d",
+      "role": "renewal",
+      "segment": "Your reference is CEDAR-TR-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

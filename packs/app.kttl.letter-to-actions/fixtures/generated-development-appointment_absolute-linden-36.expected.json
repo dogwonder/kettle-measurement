@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-linden-36",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "21 June 2026",
+        "deadline": "on 21 June 2026",
+        "due": "2026-06-21",
+        "kind": "attendance",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_absolute-linden-36-attendance-01",
+      "segment": "You have an appointment about your case file at Grantley Legal Aid on 21 June 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-linden-36-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-linden-36-no-ask-04",
+      "segment": "Your annual statement for the year ending 31 March is enclosed for your information.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

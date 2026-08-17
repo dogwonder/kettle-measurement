@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-maple-13",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "10 January 2026",
+        "deadline": "on 10 January 2026",
+        "due": "2026-01-10",
+        "kind": "attendance",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_absolute-maple-13-attendance-01",
+      "segment": "You have an appointment about your parking charge at Harborne Parking Services on 10 January 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-maple-13-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-maple-13-no-ask-04",
+      "segment": "Your cover continues until 14 September and renews by itself unless you tell us otherwise.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

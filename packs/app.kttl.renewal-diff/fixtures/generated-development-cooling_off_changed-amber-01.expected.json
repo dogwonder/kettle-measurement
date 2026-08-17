@@ -1,0 +1,130 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-cooling_off_changed-amber-01",
+  "inputs": {
+    "previous": "generated-development-cooling_off_changed-amber-01-previous.txt",
+    "renewal": "generated-development-cooling_off_changed-amber-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-amber-01-previous-no-value-a71bd0",
+      "role": "previous",
+      "segment": "Pennine Line Assurance travel insurance — policy schedule AMBER-COC-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,408.00.",
+        "term": "premium",
+        "value": "£5,408.00"
+      },
+      "id": "development-cooling_off_changed-amber-01-previous-premium-a673ed",
+      "role": "previous",
+      "segment": "Total annual premium: £5,408.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cooling-off period: 12 days.",
+        "term": "cooling_off_period",
+        "value": "12 days"
+      },
+      "id": "development-cooling_off_changed-amber-01-previous-cooling-off-period-457529",
+      "role": "previous",
+      "segment": "Cooling-off period: 12 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-amber-01-previous-no-value-6a8c0d",
+      "role": "previous",
+      "segment": "Your reference is AMBER-COC-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-amber-01-previous-no-value-b7bf63",
+      "role": "previous",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under AMBER-COC-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-amber-01-renewal-no-value-d5a27b",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance travel insurance — renewal schedule AMBER-COC-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £5,408.00.",
+        "term": "premium",
+        "value": "£5,408.00"
+      },
+      "id": "development-cooling_off_changed-amber-01-renewal-premium-a673ed",
+      "role": "renewal",
+      "segment": "Total annual premium: £5,408.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cooling-off period: 26 days.",
+        "term": "cooling_off_period",
+        "value": "26 days"
+      },
+      "id": "development-cooling_off_changed-amber-01-renewal-cooling-off-period-be35d6",
+      "role": "renewal",
+      "segment": "Cooling-off period: 26 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-amber-01-renewal-no-value-b7bf63",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under AMBER-COC-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-cooling_off_changed-amber-01-renewal-no-value-6a8c0d",
+      "role": "renewal",
+      "segment": "Your reference is AMBER-COC-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

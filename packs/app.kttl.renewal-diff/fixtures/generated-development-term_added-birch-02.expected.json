@@ -1,0 +1,145 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-term_added-birch-02",
+  "inputs": {
+    "previous": "generated-development-term_added-birch-02-previous.txt",
+    "renewal": "generated-development-term_added-birch-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-term_added-birch-02-previous-no-value-130d3c",
+      "role": "previous",
+      "segment": "Marlowe Mutual home insurance — policy schedule BIRCH-TA-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £3,476.00.",
+        "term": "premium",
+        "value": "£3,476.00"
+      },
+      "id": "development-term_added-birch-02-previous-premium-e89f12",
+      "role": "previous",
+      "segment": "Total annual premium: £3,476.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,340.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,340.00"
+      },
+      "id": "development-term_added-birch-02-previous-compulsory-excess-eccf6b",
+      "role": "previous",
+      "segment": "Compulsory excess: £2,340.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-birch-02-previous-no-value-c62dd8",
+      "role": "previous",
+      "segment": "Your reference is BIRCH-TA-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-birch-02-previous-no-value-f856c9",
+      "role": "previous",
+      "segment": "Marlowe Mutual arranges home insurance cover under BIRCH-TA-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-birch-02-renewal-no-value-80fa6a",
+      "role": "renewal",
+      "segment": "Marlowe Mutual home insurance — renewal schedule BIRCH-TA-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £3,476.00.",
+        "term": "premium",
+        "value": "£3,476.00"
+      },
+      "id": "development-term_added-birch-02-renewal-premium-e89f12",
+      "role": "renewal",
+      "segment": "Total annual premium: £3,476.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,340.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,340.00"
+      },
+      "id": "development-term_added-birch-02-renewal-compulsory-excess-eccf6b",
+      "role": "renewal",
+      "segment": "Compulsory excess: £2,340.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £528.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£528.00"
+      },
+      "id": "development-term_added-birch-02-renewal-voluntary-excess-122c6d",
+      "role": "renewal",
+      "segment": "Voluntary excess: £528.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-birch-02-renewal-no-value-f856c9",
+      "role": "renewal",
+      "segment": "Marlowe Mutual arranges home insurance cover under BIRCH-TA-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-birch-02-renewal-no-value-c62dd8",
+      "role": "renewal",
+      "segment": "Your reference is BIRCH-TA-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,450 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-sections_repeat-quince-02",
+  "inputs": {
+    "previous": "generated-exam-sections_repeat-quince-02-previous.txt",
+    "renewal": "generated-exam-sections_repeat-quince-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-previous-no-value-3fcbe7",
+      "role": "previous",
+      "segment": "Schedule QUINCE-SR-407 of your contents insurance cover with Haldon Insurance Services, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-previous-no-value-11054d",
+      "role": "previous",
+      "segment": "Cover under QUINCE-SR-407 runs from 1 September 2025 until 31 August 2026, both days included.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-previous-no-value-aad613",
+      "role": "previous",
+      "segment": "The next part of QUINCE-SR-407 covers professional indemnity.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £604,500.00 under it.",
+        "term": "cover_limit",
+        "value": "£604,500.00"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-cover-limit-f8d695",
+      "role": "previous",
+      "segment": "We will pay up to £604,500.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,425.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,425.00"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-compulsory-excess-7ecfd9",
+      "role": "previous",
+      "segment": "You pay the first £5,425.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,448.50 for the year.",
+        "term": "premium",
+        "value": "£1,448.50"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-premium-9960d9",
+      "role": "previous",
+      "segment": "This part costs £1,448.50 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-previous-no-value-591bb2",
+      "role": "previous",
+      "segment": "The next part of QUINCE-SR-407 covers legal expenses.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £854,500.00 under it.",
+        "term": "cover_limit",
+        "value": "£854,500.00"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-cover-limit-e2a67f",
+      "role": "previous",
+      "segment": "We will pay up to £854,500.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,456.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,456.00"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-compulsory-excess-581b3c",
+      "role": "previous",
+      "segment": "You pay the first £5,456.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,495.50 for the year.",
+        "term": "premium",
+        "value": "£1,495.50"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-premium-844e11",
+      "role": "previous",
+      "segment": "This part costs £1,495.50 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-previous-no-value-2900d7",
+      "role": "previous",
+      "segment": "The next part of QUINCE-SR-407 covers crisis containment.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £1,104,500.00 under it.",
+        "term": "cover_limit",
+        "value": "£1,104,500.00"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-cover-limit-87b620",
+      "role": "previous",
+      "segment": "We will pay up to £1,104,500.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,487.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,487.00"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-compulsory-excess-9091eb",
+      "role": "previous",
+      "segment": "You pay the first £5,487.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,542.50 for the year.",
+        "term": "premium",
+        "value": "£1,542.50"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-premium-c64f9d",
+      "role": "previous",
+      "segment": "This part costs £1,542.50 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Adding the parts together, the year costs £4,486.50.",
+        "term": "premium",
+        "value": "£4,486.50"
+      },
+      "id": "exam-sections_repeat-quince-02-previous-premium-ceb2b0",
+      "role": "previous",
+      "segment": "Adding the parts together, the year costs £4,486.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-previous-no-value-9aa418",
+      "role": "previous",
+      "segment": "Please quote QUINCE-SR-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-previous-no-value-c22a60",
+      "role": "previous",
+      "segment": "Cover for contents insurance under QUINCE-SR-407 is arranged by Haldon Insurance Services, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-renewal-no-value-35e7d5",
+      "role": "renewal",
+      "segment": "Your contents insurance cover with Haldon Insurance Services under QUINCE-SR-407 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-renewal-no-value-14d3f8",
+      "role": "renewal",
+      "segment": "Cover under QUINCE-SR-407 runs from 1 September 2026 until 31 August 2027, both days included.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-renewal-no-value-aad613",
+      "role": "renewal",
+      "segment": "The next part of QUINCE-SR-407 covers professional indemnity.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £604,500.00 under it.",
+        "term": "cover_limit",
+        "value": "£604,500.00"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-cover-limit-f8d695",
+      "role": "renewal",
+      "segment": "We will pay up to £604,500.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,425.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,425.00"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-compulsory-excess-7ecfd9",
+      "role": "renewal",
+      "segment": "You pay the first £5,425.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,463.50 for the year.",
+        "term": "premium",
+        "value": "£1,463.50"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-premium-df66f1",
+      "role": "renewal",
+      "segment": "This part costs £1,463.50 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-renewal-no-value-591bb2",
+      "role": "renewal",
+      "segment": "The next part of QUINCE-SR-407 covers legal expenses.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £854,500.00 under it.",
+        "term": "cover_limit",
+        "value": "£854,500.00"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-cover-limit-e2a67f",
+      "role": "renewal",
+      "segment": "We will pay up to £854,500.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,456.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,456.00"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-compulsory-excess-581b3c",
+      "role": "renewal",
+      "segment": "You pay the first £5,456.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,510.50 for the year.",
+        "term": "premium",
+        "value": "£1,510.50"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-premium-e5a4b9",
+      "role": "renewal",
+      "segment": "This part costs £1,510.50 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-renewal-no-value-2900d7",
+      "role": "renewal",
+      "segment": "The next part of QUINCE-SR-407 covers crisis containment.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £1,104,500.00 under it.",
+        "term": "cover_limit",
+        "value": "£1,104,500.00"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-cover-limit-87b620",
+      "role": "renewal",
+      "segment": "We will pay up to £1,104,500.00 under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You pay the first £5,487.00 of any claim under it.",
+        "term": "compulsory_excess",
+        "value": "£5,487.00"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-compulsory-excess-9091eb",
+      "role": "renewal",
+      "segment": "You pay the first £5,487.00 of any claim under it.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "This part costs £1,557.50 for the year.",
+        "term": "premium",
+        "value": "£1,557.50"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-premium-76123f",
+      "role": "renewal",
+      "segment": "This part costs £1,557.50 for the year.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Adding the parts together, the year costs £4,531.50.",
+        "term": "premium",
+        "value": "£4,531.50"
+      },
+      "id": "exam-sections_repeat-quince-02-renewal-premium-7d30f1",
+      "role": "renewal",
+      "segment": "Adding the parts together, the year costs £4,531.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-renewal-no-value-c22a60",
+      "role": "renewal",
+      "segment": "Cover for contents insurance under QUINCE-SR-407 is arranged by Haldon Insurance Services, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-sections_repeat-quince-02-renewal-no-value-9aa418",
+      "role": "renewal",
+      "segment": "Please quote QUINCE-SR-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

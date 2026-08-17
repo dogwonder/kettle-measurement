@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-nothing_moved-damson-04",
+  "inputs": {
+    "previous": "generated-development-nothing_moved-damson-04-previous.txt",
+    "renewal": "generated-development-nothing_moved-damson-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-nothing_moved-damson-04-previous-no-value-26baa5",
+      "role": "previous",
+      "segment": "Haldon Insurance Services contents insurance — policy schedule DAMSON-NM-421 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £2,699.00.",
+        "term": "premium",
+        "value": "£2,699.00"
+      },
+      "id": "development-nothing_moved-damson-04-previous-premium-90a2b2",
+      "role": "previous",
+      "segment": "Total annual premium: £2,699.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,785.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,785.00"
+      },
+      "id": "development-nothing_moved-damson-04-previous-compulsory-excess-3c9b04",
+      "role": "previous",
+      "segment": "Compulsory excess: £1,785.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £5,670.00 per policy.",
+        "term": "cover_limit",
+        "value": "£5,670.00"
+      },
+      "id": "development-nothing_moved-damson-04-previous-cover-limit-60662a",
+      "role": "previous",
+      "segment": "Cover limit: £5,670.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-damson-04-previous-no-value-284c89",
+      "role": "previous",
+      "segment": "Your reference is DAMSON-NM-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-damson-04-previous-no-value-1ae4e5",
+      "role": "previous",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under DAMSON-NM-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-damson-04-renewal-no-value-f75b0b",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services contents insurance — renewal schedule DAMSON-NM-421 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £2,699.00.",
+        "term": "premium",
+        "value": "£2,699.00"
+      },
+      "id": "development-nothing_moved-damson-04-renewal-premium-90a2b2",
+      "role": "renewal",
+      "segment": "Total annual premium: £2,699.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,785.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,785.00"
+      },
+      "id": "development-nothing_moved-damson-04-renewal-compulsory-excess-3c9b04",
+      "role": "renewal",
+      "segment": "Compulsory excess: £1,785.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £5,670.00 per policy.",
+        "term": "cover_limit",
+        "value": "£5,670.00"
+      },
+      "id": "development-nothing_moved-damson-04-renewal-cover-limit-60662a",
+      "role": "renewal",
+      "segment": "Cover limit: £5,670.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-damson-04-renewal-no-value-1ae4e5",
+      "role": "renewal",
+      "segment": "Haldon Insurance Services arranges contents insurance cover under DAMSON-NM-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-damson-04-renewal-no-value-284c89",
+      "role": "renewal",
+      "segment": "Your reference is DAMSON-NM-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

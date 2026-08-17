@@ -1,0 +1,125 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_unqualified_residual-mallow-03",
+  "inputs": {
+    "previous": "generated-development-excess_unqualified_residual-mallow-03-previous.txt",
+    "renewal": "generated-development-excess_unqualified_residual-mallow-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-mallow-03-previous-no-value-02852f",
+      "role": "previous",
+      "segment": "Corvin Mutual pet insurance — policy schedule MALLOW-EUR-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £9,258.00.",
+        "term": "premium",
+        "value": "£9,258.00"
+      },
+      "id": "development-excess_unqualified_residual-mallow-03-previous-premium-bc27be",
+      "role": "previous",
+      "segment": "Total annual premium: £9,258.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £6,470.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£6,470.00"
+      },
+      "id": "development-excess_unqualified_residual-mallow-03-previous-compulsory-excess-e0baf5",
+      "role": "previous",
+      "segment": "Compulsory excess: £6,470.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-mallow-03-previous-no-value-921772",
+      "role": "previous",
+      "segment": "Your reference is MALLOW-EUR-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-mallow-03-previous-no-value-4c10a3",
+      "role": "previous",
+      "segment": "Corvin Mutual arranges pet insurance cover under MALLOW-EUR-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-mallow-03-renewal-no-value-05d3c7",
+      "role": "renewal",
+      "segment": "Corvin Mutual pet insurance — renewal schedule MALLOW-EUR-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £9,258.00.",
+        "term": "premium",
+        "value": "£9,258.00"
+      },
+      "id": "development-excess_unqualified_residual-mallow-03-renewal-premium-bc27be",
+      "role": "renewal",
+      "segment": "Total annual premium: £9,258.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-mallow-03-renewal-excess-unqualified-19454a",
+      "review": true,
+      "role": "renewal",
+      "segment": "Excess: £6,520.00 each and every claim.",
+      "strata": [
+        "excess-unqualified-residual"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-mallow-03-renewal-no-value-4c10a3",
+      "role": "renewal",
+      "segment": "Corvin Mutual arranges pet insurance cover under MALLOW-EUR-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_unqualified_residual-mallow-03-renewal-no-value-921772",
+      "role": "renewal",
+      "segment": "Your reference is MALLOW-EUR-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

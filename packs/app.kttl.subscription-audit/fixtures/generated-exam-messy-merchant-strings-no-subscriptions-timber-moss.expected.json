@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-no-subscriptions-timber-moss",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* LINDLEYLETTINGS CARD 4821",
+      "name": "Lindley Lettings"
+    },
+    {
+      "raw": "SQ *LINDLEYLETTINGS CARD 4821",
+      "name": "Lindley Lettings"
+    },
+    {
+      "raw": "PAYPAL *LINDLEYLETTINGS CARD 4821",
+      "name": "Lindley Lettings"
+    },
+    {
+      "raw": "CARD 4821 FRHLM CRMCS GB",
+      "name": "Fairholm Ceramics"
+    },
+    {
+      "raw": "STRIPE* THAMESLINK CARD 4821",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "SQ *THAMESLINK CARD 4821",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "PAYPAL *THAMESLINK CARD 4821",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "STRIPE* PWHITTAKER CARD 4821",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "SQ *PWHITTAKER CARD 4821",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "PAYPAL *PWHITTAKER CARD 4821",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "STRIPE* MSFOOD CARD 4821",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "SQ *MSFOOD CARD 4821",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "PAYPAL *MSFOOD CARD 4821",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "CARD 4821 TK MXX GB",
+      "name": "TK Maxx"
+    },
+    {
+      "raw": "CARD 4821 GD NRGY GB",
+      "name": "Good Energy"
+    },
+    {
+      "raw": "CARD 4821 HLLWDN PTS GB",
+      "name": "Hollowdene Pets"
+    },
+    {
+      "raw": "STRIPE* KILNBROOKSTALL CARD 4821",
+      "name": "Kilnbrook Stall"
+    },
+    {
+      "raw": "SQ *KILNBROOKSTALL CARD 4821",
+      "name": "Kilnbrook Stall"
+    },
+    {
+      "raw": "PAYPAL *KILNBROOKSTALL CARD 4821",
+      "name": "Kilnbrook Stall"
+    },
+    {
+      "raw": "CARD 4821 THRNMR VLLY GB",
+      "name": "Thornmere Valley"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LINDLEYLETTINGS CARD 4821",
+      "name": "Lindley Lettings",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 FRHLM CRMCS GB",
+      "name": "Fairholm Ceramics",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* THAMESLINK CARD 4821",
+      "name": "Thameslink",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* PWHITTAKER CARD 4821",
+      "name": "P Whittaker",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MSFOOD CARD 4821",
+      "name": "M&S Food",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 TK MXX GB",
+      "name": "TK Maxx",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 GD NRGY GB",
+      "name": "Good Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 HLLWDN PTS GB",
+      "name": "Hollowdene Pets",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* KILNBROOKSTALL CARD 4821",
+      "name": "Kilnbrook Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-timber-moss-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 THRNMR VLLY GB",
+      "name": "Thornmere Valley",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Thameslink",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Good Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

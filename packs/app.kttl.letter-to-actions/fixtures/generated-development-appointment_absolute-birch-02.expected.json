@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-birch-02",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "7 August 2026",
+        "deadline": "on 7 August 2026",
+        "due": "2026-08-07",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_absolute-birch-02-attendance-01",
+      "segment": "You have an appointment about your council tax account at Kelsford Borough Council on 7 August 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-birch-02-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-birch-02-no-ask-04",
+      "segment": "We received your completed form on 11 April, so there is nothing further to send.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

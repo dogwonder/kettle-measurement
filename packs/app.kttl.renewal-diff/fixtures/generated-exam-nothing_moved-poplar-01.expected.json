@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-nothing_moved-poplar-01",
+  "inputs": {
+    "previous": "generated-exam-nothing_moved-poplar-01-previous.txt",
+    "renewal": "generated-exam-nothing_moved-poplar-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-poplar-01-previous-no-value-adca66",
+      "role": "previous",
+      "segment": "Schedule POPLAR-NM-400 of your home insurance cover with Marlowe Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £2,678.00.",
+        "term": "premium",
+        "value": "£2,678.00"
+      },
+      "id": "exam-nothing_moved-poplar-01-previous-premium-d7ac65",
+      "role": "previous",
+      "segment": "The price for the year comes to £2,678.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £1,770.00.",
+        "term": "compulsory_excess",
+        "value": "£1,770.00"
+      },
+      "id": "exam-nothing_moved-poplar-01-previous-compulsory-excess-c2d816",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £1,770.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £5,640.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£5,640.00"
+      },
+      "id": "exam-nothing_moved-poplar-01-previous-cover-limit-1aad86",
+      "role": "previous",
+      "segment": "We will pay up to £5,640.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-poplar-01-previous-no-value-92844b",
+      "role": "previous",
+      "segment": "Please quote POPLAR-NM-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-poplar-01-previous-no-value-51993d",
+      "role": "previous",
+      "segment": "Cover for home insurance under POPLAR-NM-400 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-poplar-01-renewal-no-value-47081d",
+      "role": "renewal",
+      "segment": "Your home insurance cover with Marlowe Mutual under POPLAR-NM-400 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £2,678.00.",
+        "term": "premium",
+        "value": "£2,678.00"
+      },
+      "id": "exam-nothing_moved-poplar-01-renewal-premium-d7ac65",
+      "role": "renewal",
+      "segment": "The price for the year comes to £2,678.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £1,770.00.",
+        "term": "compulsory_excess",
+        "value": "£1,770.00"
+      },
+      "id": "exam-nothing_moved-poplar-01-renewal-compulsory-excess-c2d816",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £1,770.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £5,640.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£5,640.00"
+      },
+      "id": "exam-nothing_moved-poplar-01-renewal-cover-limit-1aad86",
+      "role": "renewal",
+      "segment": "We will pay up to £5,640.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-poplar-01-renewal-no-value-51993d",
+      "role": "renewal",
+      "segment": "Cover for home insurance under POPLAR-NM-400 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-poplar-01-renewal-no-value-92844b",
+      "role": "renewal",
+      "segment": "Please quote POPLAR-NM-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-passive_obligation-tansy-20",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 42 days",
+        "due": "2026-09-23",
+        "kind": "response",
+        "party": "Cranleigh Energy"
+      },
+      "id": "passive_obligation-tansy-20-response-01",
+      "segment": "Confirmation that the energy account details are correct must be returned within 42 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "passive-voice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-tansy-20-no-ask-02",
+      "segment": "The energy account is being checked by the department that holds it, and any correction is applied automatically within 30 days.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation",
+        "passive-no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-tansy-20-no-ask-03",
+      "segment": "This part of the letter is sent for information only.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "passive_obligation-tansy-20-no-ask-05",
+      "segment": "The review you asked about was completed on 19 February and the outcome is enclosed for information only.",
+      "strata": [
+        "any-letter",
+        "passive-obligation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-nothing_stated-quince-02",
+  "inputs": {
+    "previous": "generated-exam-nothing_stated-quince-02-previous.txt",
+    "renewal": "generated-exam-nothing_stated-quince-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-quince-02-previous-no-value-a44706",
+      "role": "previous",
+      "segment": "Schedule QUINCE-NS-407 of your pet insurance cover with Corvin Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-quince-02-previous-no-value-84719c",
+      "role": "previous",
+      "segment": "Please quote QUINCE-NS-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-quince-02-previous-no-value-3fedc7",
+      "role": "previous",
+      "segment": "Cover for pet insurance under QUINCE-NS-407 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-quince-02-renewal-no-value-e6ecb9",
+      "role": "renewal",
+      "segment": "Your pet insurance cover with Corvin Mutual under QUINCE-NS-407 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-quince-02-renewal-no-value-3fedc7",
+      "role": "renewal",
+      "segment": "Cover for pet insurance under QUINCE-NS-407 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_stated-quince-02-renewal-no-value-84719c",
+      "role": "renewal",
+      "segment": "Please quote QUINCE-NS-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

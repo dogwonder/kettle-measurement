@@ -1,0 +1,1134 @@
+{
+  "fixture_id": "broad-diverse-merchants-01",
+  "normalise": [
+    {
+      "raw": "NORTHSTAR STREAMING SUBSCRIPTION",
+      "name": "Northstar Streaming Subscription"
+    },
+    {
+      "raw": "FIREFLY FILMS SUBSCRIPTION",
+      "name": "Firefly Films Subscription"
+    },
+    {
+      "raw": "HARBOUR TV SUBSCRIPTION",
+      "name": "Harbour TV Subscription"
+    },
+    {
+      "raw": "ORCHARD MUSIC SUBSCRIPTION",
+      "name": "Orchard Music Subscription"
+    },
+    {
+      "raw": "PAPERPLANE CLOUD SUBSCRIPTION",
+      "name": "Paperplane Cloud Subscription"
+    },
+    {
+      "raw": "LANTERN NOTES SUBSCRIPTION",
+      "name": "Lantern Notes Subscription"
+    },
+    {
+      "raw": "COPPER CRM SUBSCRIPTION",
+      "name": "Copper CRM Subscription"
+    },
+    {
+      "raw": "WILLOW PASSWORDS SUBSCRIPTION",
+      "name": "Willow Passwords Subscription"
+    },
+    {
+      "raw": "MORNING LEDGER SUBSCRIPTION",
+      "name": "Morning Ledger Subscription"
+    },
+    {
+      "raw": "CITY JOURNAL SUBSCRIPTION",
+      "name": "City Journal Subscription"
+    },
+    {
+      "raw": "WEEKLY REVIEW SUBSCRIPTION",
+      "name": "Weekly Review Subscription"
+    },
+    {
+      "raw": "SCIENCE MONTHLY SUBSCRIPTION",
+      "name": "Science Monthly Subscription"
+    },
+    {
+      "raw": "RIVER YOGA SUBSCRIPTION",
+      "name": "River Yoga Subscription"
+    },
+    {
+      "raw": "SUMMIT FITNESS SUBSCRIPTION",
+      "name": "Summit Fitness Subscription"
+    },
+    {
+      "raw": "CYCLE COACH SUBSCRIPTION",
+      "name": "Cycle Coach Subscription"
+    },
+    {
+      "raw": "HOME PILATES SUBSCRIPTION",
+      "name": "Home Pilates Subscription"
+    },
+    {
+      "raw": "SEASIDE AUDIOBOOK SUBSCRIPTION",
+      "name": "Seaside Audiobook Subscription"
+    },
+    {
+      "raw": "MAPLE LANGUAGE APP SUBSCRIPTION",
+      "name": "Maple Language App Subscription"
+    },
+    {
+      "raw": "NIGHT OWL SLEEP APP SUBSCRIPTION",
+      "name": "Night Owl Sleep App Subscription"
+    },
+    {
+      "raw": "ARCADE GAME PASS SUBSCRIPTION",
+      "name": "Arcade Game Pass Subscription"
+    },
+    {
+      "raw": "NORTH COUNTY ENERGY",
+      "name": "North County Energy"
+    },
+    {
+      "raw": "SUNWARD ELECTRIC",
+      "name": "Sunward Electric"
+    },
+    {
+      "raw": "HEARTH GAS",
+      "name": "Hearth Gas"
+    },
+    {
+      "raw": "GREEN GRID POWER",
+      "name": "Green Grid Power"
+    },
+    {
+      "raw": "CITY WATER BILL",
+      "name": "City Water Bill"
+    },
+    {
+      "raw": "RIVER WATER SERVICES",
+      "name": "River Water Services"
+    },
+    {
+      "raw": "HOME INSURANCE MONTHLY PREMIUM",
+      "name": "Home Insurance Monthly Premium"
+    },
+    {
+      "raw": "MOTOR COVER MONTHLY PREMIUM",
+      "name": "Motor Cover Monthly Premium"
+    },
+    {
+      "raw": "PET COVER MONTHLY PREMIUM",
+      "name": "Pet Cover Monthly Premium"
+    },
+    {
+      "raw": "TRAVEL COVER ANNUAL PREMIUM",
+      "name": "Travel Cover Annual Premium"
+    },
+    {
+      "raw": "OAK STREET MONTHLY RENT",
+      "name": "Oak Street Monthly Rent"
+    },
+    {
+      "raw": "HARBOUR MORTGAGE REPAYMENT",
+      "name": "Harbour Mortgage Repayment"
+    },
+    {
+      "raw": "CITY COUNCIL TAX BILL",
+      "name": "City Council Tax Bill"
+    },
+    {
+      "raw": "BUILDING MONTHLY SERVICE CHARGE",
+      "name": "Building Monthly Service Charge"
+    },
+    {
+      "raw": "COMMUNITY CREDIT LOAN REPAYMENT",
+      "name": "Community Credit Loan Repayment"
+    },
+    {
+      "raw": "STUDENT LOAN REPAYMENT",
+      "name": "Student Loan Repayment"
+    },
+    {
+      "raw": "FAMILY LIFE MONTHLY PREMIUM",
+      "name": "Family Life Monthly Premium"
+    },
+    {
+      "raw": "BOILER CARE MONTHLY PLAN",
+      "name": "Boiler Care Monthly Plan"
+    },
+    {
+      "raw": "LANDLINE MONTHLY BILL",
+      "name": "Landline Monthly Bill"
+    },
+    {
+      "raw": "MUNICIPAL HEATING",
+      "name": "Municipal Heating"
+    },
+    {
+      "raw": "CORNER CUP WEEKDAY COFFEE",
+      "name": "Corner Cup Weekday Coffee"
+    },
+    {
+      "raw": "MARKET WEEKLY BAKERY",
+      "name": "Market Weekly Bakery"
+    },
+    {
+      "raw": "LUNCHBOX WORKDAY CAFE",
+      "name": "Lunchbox Workday Cafe"
+    },
+    {
+      "raw": "GREEN WEEKLY GROCER",
+      "name": "Green Weekly Grocer"
+    },
+    {
+      "raw": "RIVERSIDE WEEKDAY DELI",
+      "name": "Riverside Weekday Deli"
+    },
+    {
+      "raw": "STATION WORKDAY CANTEEN",
+      "name": "Station Workday Canteen"
+    },
+    {
+      "raw": "WEEKLY SUPERMARKET SHOP",
+      "name": "Weekly Supermarket Shop"
+    },
+    {
+      "raw": "FRIDAY TAKEAWAY",
+      "name": "Friday Takeaway"
+    },
+    {
+      "raw": "DAILY CITY BUS",
+      "name": "Daily City Bus"
+    },
+    {
+      "raw": "WEEKLY METRO TOPUP",
+      "name": "Weekly Metro Topup"
+    },
+    {
+      "raw": "WORKDAY PARKING APP",
+      "name": "Workday Parking App"
+    },
+    {
+      "raw": "COMMUTER FUEL",
+      "name": "Commuter Fuel"
+    },
+    {
+      "raw": "WEEKLY BIKE HIRE",
+      "name": "Weekly Bike Hire"
+    },
+    {
+      "raw": "COMMUTER FERRY TICKETS",
+      "name": "Commuter Ferry Tickets"
+    },
+    {
+      "raw": "LOCAL PHARMACY",
+      "name": "Local Pharmacy"
+    },
+    {
+      "raw": "HOMEWARE SHOP",
+      "name": "Homeware Shop"
+    },
+    {
+      "raw": "STATIONERY STORE",
+      "name": "Stationery Store"
+    },
+    {
+      "raw": "HIGH STREET BOOKS",
+      "name": "High Street Books"
+    },
+    {
+      "raw": "PET SUPPLIES SHOP",
+      "name": "Pet Supplies Shop"
+    },
+    {
+      "raw": "LOCAL HARDWARE",
+      "name": "Local Hardware"
+    },
+    {
+      "raw": "FURNITURE WAREHOUSE PURCHASE",
+      "name": "Furniture Warehouse Purchase"
+    },
+    {
+      "raw": "ELECTRONICS OUTLET PURCHASE",
+      "name": "Electronics Outlet Purchase"
+    },
+    {
+      "raw": "GARDEN SHED PURCHASE",
+      "name": "Garden Shed Purchase"
+    },
+    {
+      "raw": "FORMALWEAR PURCHASE",
+      "name": "Formalwear Purchase"
+    },
+    {
+      "raw": "KITCHEN APPLIANCE SALE",
+      "name": "Kitchen Appliance Sale"
+    },
+    {
+      "raw": "AIRLINE TICKET",
+      "name": "Airline Ticket"
+    },
+    {
+      "raw": "HOLIDAY RAIL BOOKING",
+      "name": "Holiday Rail Booking"
+    },
+    {
+      "raw": "CAR HIRE WEEKEND",
+      "name": "Car Hire Weekend"
+    },
+    {
+      "raw": "AIRPORT TRANSFER",
+      "name": "Airport Transfer"
+    },
+    {
+      "raw": "COMMUNITY FUND DONATION",
+      "name": "Community Fund Donation"
+    },
+    {
+      "raw": "WILDLIFE APPEAL",
+      "name": "Wildlife Appeal"
+    },
+    {
+      "raw": "LOCAL FOODBANK GIFT",
+      "name": "Local Foodbank Gift"
+    },
+    {
+      "raw": "MARATHON SPONSORSHIP",
+      "name": "Marathon Sponsorship"
+    },
+    {
+      "raw": "ROOF REPAIR",
+      "name": "Roof Repair"
+    },
+    {
+      "raw": "WINDOW INSTALLATION",
+      "name": "Window Installation"
+    },
+    {
+      "raw": "BANK TRANSFER FEE",
+      "name": "Bank Transfer Fee"
+    },
+    {
+      "raw": "PASSPORT OFFICE",
+      "name": "Passport Office"
+    },
+    {
+      "raw": "LOCAL SOLICITOR",
+      "name": "Local Solicitor"
+    },
+    {
+      "raw": "WEDDING PHOTOGRAPHER",
+      "name": "Wedding Photographer"
+    },
+    {
+      "raw": "DENTAL CLINIC",
+      "name": "Dental Clinic"
+    }
+  ],
+  "classify": [
+    {
+      "id": "broad-northstar-streaming-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Northstar Streaming Subscription",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "broad-firefly-films-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Firefly Films Subscription",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "broad-harbour-tv-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Harbour TV Subscription",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "broad-orchard-music-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Orchard Music Subscription",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "broad-paperplane-cloud-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Paperplane Cloud Subscription",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "broad-lantern-notes-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Lantern Notes Subscription",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "broad-copper-crm-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Copper CRM Subscription",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "broad-willow-passwords-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Willow Passwords Subscription",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "broad-morning-ledger-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Morning Ledger Subscription",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "broad-city-journal-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "City Journal Subscription",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "broad-weekly-review-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Weekly Review Subscription",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "broad-science-monthly-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Science Monthly Subscription",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "broad-river-yoga-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "River Yoga Subscription",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "broad-summit-fitness-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Summit Fitness Subscription",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "broad-cycle-coach-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Cycle Coach Subscription",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "broad-home-pilates-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Home Pilates Subscription",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "broad-seaside-audiobook-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Seaside Audiobook Subscription",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "broad-maple-language-app-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Maple Language App Subscription",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "broad-night-owl-sleep-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Night Owl Sleep App Subscription",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "broad-arcade-game-pass-01",
+      "strata": [
+        "broad",
+        "automatic-billing"
+      ],
+      "name": "Arcade Game Pass Subscription",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "broad-north-county-energy-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "North County Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "broad-sunward-electric-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Sunward Electric",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "broad-hearth-gas-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Hearth Gas",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "broad-green-grid-power-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Green Grid Power",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "broad-city-water-bill-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "City Water Bill",
+      "kind": "utility",
+      "category": "other"
+    },
+    {
+      "id": "broad-river-water-services-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "River Water Services",
+      "kind": "utility",
+      "category": "other"
+    },
+    {
+      "id": "broad-home-insurance-premium-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Home Insurance Monthly Premium",
+      "kind": "utility",
+      "category": "insurance"
+    },
+    {
+      "id": "broad-motor-cover-premium-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Motor Cover Monthly Premium",
+      "kind": "utility",
+      "category": "insurance"
+    },
+    {
+      "id": "broad-pet-cover-premium-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Pet Cover Monthly Premium",
+      "kind": "utility",
+      "category": "insurance"
+    },
+    {
+      "id": "broad-travel-cover-premium-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Travel Cover Annual Premium",
+      "kind": "utility",
+      "category": "insurance"
+    },
+    {
+      "id": "broad-oak-street-rent-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Oak Street Monthly Rent",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "broad-harbour-mortgage-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Harbour Mortgage Repayment",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "broad-city-council-tax-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "City Council Tax Bill",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "broad-building-service-charge-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Building Monthly Service Charge",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "broad-community-credit-loan-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Community Credit Loan Repayment",
+      "kind": "utility",
+      "category": "finance"
+    },
+    {
+      "id": "broad-student-loan-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Student Loan Repayment",
+      "kind": "utility",
+      "category": "finance"
+    },
+    {
+      "id": "broad-family-life-premium-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Family Life Monthly Premium",
+      "kind": "utility",
+      "category": "insurance"
+    },
+    {
+      "id": "broad-boiler-care-plan-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Boiler Care Monthly Plan",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "broad-landline-bill-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Landline Monthly Bill",
+      "kind": "utility",
+      "category": "telecoms"
+    },
+    {
+      "id": "broad-municipal-heating-01",
+      "strata": [
+        "broad",
+        "essential-bill"
+      ],
+      "name": "Municipal Heating",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "broad-corner-cup-coffee-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Corner Cup Weekday Coffee",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "broad-market-bakery-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Market Weekly Bakery",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "broad-lunchbox-cafe-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Lunchbox Workday Cafe",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "broad-green-grocer-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Green Weekly Grocer",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "broad-riverside-deli-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Riverside Weekday Deli",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "broad-station-canteen-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Station Workday Canteen",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "broad-supermarket-shop-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Weekly Supermarket Shop",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "broad-friday-takeaway-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Friday Takeaway",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "broad-city-bus-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Daily City Bus",
+      "kind": "regular_spend",
+      "category": "transport"
+    },
+    {
+      "id": "broad-metro-topup-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Weekly Metro Topup",
+      "kind": "regular_spend",
+      "category": "transport"
+    },
+    {
+      "id": "broad-parking-app-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Workday Parking App",
+      "kind": "regular_spend",
+      "category": "transport"
+    },
+    {
+      "id": "broad-commuter-fuel-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Commuter Fuel",
+      "kind": "regular_spend",
+      "category": "transport"
+    },
+    {
+      "id": "broad-bike-hire-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Weekly Bike Hire",
+      "kind": "regular_spend",
+      "category": "transport"
+    },
+    {
+      "id": "broad-ferry-tickets-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Commuter Ferry Tickets",
+      "kind": "regular_spend",
+      "category": "transport"
+    },
+    {
+      "id": "broad-local-pharmacy-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Local Pharmacy",
+      "kind": "regular_spend",
+      "category": "retail"
+    },
+    {
+      "id": "broad-homeware-shop-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Homeware Shop",
+      "kind": "regular_spend",
+      "category": "retail"
+    },
+    {
+      "id": "broad-stationery-store-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Stationery Store",
+      "kind": "regular_spend",
+      "category": "retail"
+    },
+    {
+      "id": "broad-high-street-books-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "High Street Books",
+      "kind": "regular_spend",
+      "category": "retail"
+    },
+    {
+      "id": "broad-pet-supplies-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Pet Supplies Shop",
+      "kind": "regular_spend",
+      "category": "retail"
+    },
+    {
+      "id": "broad-local-hardware-01",
+      "strata": [
+        "broad",
+        "habitual-spend"
+      ],
+      "name": "Local Hardware",
+      "kind": "regular_spend",
+      "category": "retail"
+    },
+    {
+      "id": "broad-furniture-warehouse-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Furniture Warehouse Purchase",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "broad-electronics-outlet-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Electronics Outlet Purchase",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "broad-garden-shed-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Garden Shed Purchase",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "broad-formalwear-purchase-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Formalwear Purchase",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "broad-kitchen-appliance-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Kitchen Appliance Sale",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "broad-airline-ticket-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Airline Ticket",
+      "kind": "one_off",
+      "category": "transport"
+    },
+    {
+      "id": "broad-holiday-rail-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Holiday Rail Booking",
+      "kind": "one_off",
+      "category": "transport"
+    },
+    {
+      "id": "broad-car-hire-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Car Hire Weekend",
+      "kind": "one_off",
+      "category": "transport"
+    },
+    {
+      "id": "broad-airport-transfer-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Airport Transfer",
+      "kind": "one_off",
+      "category": "transport"
+    },
+    {
+      "id": "broad-community-donation-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Community Fund Donation",
+      "kind": "one_off",
+      "category": "charity"
+    },
+    {
+      "id": "broad-wildlife-appeal-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Wildlife Appeal",
+      "kind": "one_off",
+      "category": "charity"
+    },
+    {
+      "id": "broad-foodbank-gift-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Local Foodbank Gift",
+      "kind": "one_off",
+      "category": "charity"
+    },
+    {
+      "id": "broad-marathon-sponsorship-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Marathon Sponsorship",
+      "kind": "one_off",
+      "category": "charity"
+    },
+    {
+      "id": "broad-roof-repair-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Roof Repair",
+      "kind": "one_off",
+      "category": "housing"
+    },
+    {
+      "id": "broad-window-installation-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Window Installation",
+      "kind": "one_off",
+      "category": "housing"
+    },
+    {
+      "id": "broad-bank-transfer-fee-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Bank Transfer Fee",
+      "kind": "one_off",
+      "category": "finance"
+    },
+    {
+      "id": "broad-passport-office-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Passport Office",
+      "kind": "one_off",
+      "category": "other"
+    },
+    {
+      "id": "broad-local-solicitor-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Local Solicitor",
+      "kind": "one_off",
+      "category": "other"
+    },
+    {
+      "id": "broad-wedding-photographer-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Wedding Photographer",
+      "kind": "one_off",
+      "category": "other"
+    },
+    {
+      "id": "broad-dental-clinic-01",
+      "strata": [
+        "broad",
+        "isolated-purchase"
+      ],
+      "name": "Dental Clinic",
+      "kind": "one_off",
+      "category": "other"
+    }
+  ],
+  "recurring": [],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

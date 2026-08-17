@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_anchored-robin-28",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "27 February 2026",
+        "deadline": "within 30 days",
+        "due": "2026-03-29",
+        "kind": "payment",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "payment_anchored-robin-28-payment-02",
+      "segment": "Please pay £480.00 within 30 days of 27 February 2026, quoting reference TY-31882.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-robin-28-no-ask-03",
+      "segment": "Thank you for your co-operation in this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-robin-28-no-ask-05",
+      "segment": "Your name was removed from the mailing list on 10 June.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-term_removed-rowan-03",
+  "inputs": {
+    "previous": "generated-exam-term_removed-rowan-03-previous.txt",
+    "renewal": "generated-exam-term_removed-rowan-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-term_removed-rowan-03-previous-no-value-83f7cb",
+      "role": "previous",
+      "segment": "Schedule ROWAN-TR-414 of your pet insurance cover with Corvin Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £4,211.00.",
+        "term": "premium",
+        "value": "£4,211.00"
+      },
+      "id": "exam-term_removed-rowan-03-previous-premium-ee8ba3",
+      "role": "previous",
+      "segment": "The price for the year comes to £4,211.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Your no claims discount stands at 43%.",
+        "term": "no_claims_discount",
+        "value": "43%"
+      },
+      "id": "exam-term_removed-rowan-03-previous-no-claims-discount-4ec476",
+      "role": "previous",
+      "segment": "Your no claims discount stands at 43%.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,865.00.",
+        "term": "compulsory_excess",
+        "value": "£2,865.00"
+      },
+      "id": "exam-term_removed-rowan-03-previous-compulsory-excess-42aa94",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £2,865.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-rowan-03-previous-no-value-d7daf3",
+      "role": "previous",
+      "segment": "Please quote ROWAN-TR-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-rowan-03-previous-no-value-a9ba6c",
+      "role": "previous",
+      "segment": "Cover for pet insurance under ROWAN-TR-414 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-rowan-03-renewal-no-value-4eda38",
+      "role": "renewal",
+      "segment": "Your pet insurance cover with Corvin Mutual under ROWAN-TR-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £4,211.00.",
+        "term": "premium",
+        "value": "£4,211.00"
+      },
+      "id": "exam-term_removed-rowan-03-renewal-premium-ee8ba3",
+      "role": "renewal",
+      "segment": "The price for the year comes to £4,211.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,865.00.",
+        "term": "compulsory_excess",
+        "value": "£2,865.00"
+      },
+      "id": "exam-term_removed-rowan-03-renewal-compulsory-excess-42aa94",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £2,865.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-rowan-03-renewal-no-value-a9ba6c",
+      "role": "renewal",
+      "segment": "Cover for pet insurance under ROWAN-TR-414 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-rowan-03-renewal-no-value-d7daf3",
+      "role": "renewal",
+      "segment": "Please quote ROWAN-TR-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

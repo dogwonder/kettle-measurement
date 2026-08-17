@@ -1,0 +1,125 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_unqualified_residual-ochre-01",
+  "inputs": {
+    "previous": "generated-exam-excess_unqualified_residual-ochre-01-previous.txt",
+    "renewal": "generated-exam-excess_unqualified_residual-ochre-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-ochre-01-previous-no-value-d18fde",
+      "role": "previous",
+      "segment": "Schedule OCHRE-EUR-400 of your contents insurance cover with Haldon Insurance Services, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £9,244.00.",
+        "term": "premium",
+        "value": "£9,244.00"
+      },
+      "id": "exam-excess_unqualified_residual-ochre-01-previous-premium-7f0465",
+      "role": "previous",
+      "segment": "The price for the year comes to £9,244.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £6,460.00.",
+        "term": "compulsory_excess",
+        "value": "£6,460.00"
+      },
+      "id": "exam-excess_unqualified_residual-ochre-01-previous-compulsory-excess-c0fcc1",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £6,460.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-ochre-01-previous-no-value-81be4b",
+      "role": "previous",
+      "segment": "Please quote OCHRE-EUR-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-ochre-01-previous-no-value-49bb05",
+      "role": "previous",
+      "segment": "Cover for contents insurance under OCHRE-EUR-400 is arranged by Haldon Insurance Services, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-ochre-01-renewal-no-value-f0ea58",
+      "role": "renewal",
+      "segment": "Your contents insurance cover with Haldon Insurance Services under OCHRE-EUR-400 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £9,244.00.",
+        "term": "premium",
+        "value": "£9,244.00"
+      },
+      "id": "exam-excess_unqualified_residual-ochre-01-renewal-premium-7f0465",
+      "role": "renewal",
+      "segment": "The price for the year comes to £9,244.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-ochre-01-renewal-excess-unqualified-259283",
+      "review": true,
+      "role": "renewal",
+      "segment": "An excess of £6,510.00 applies to each and every claim.",
+      "strata": [
+        "excess-unqualified-residual"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-ochre-01-renewal-no-value-49bb05",
+      "role": "renewal",
+      "segment": "Cover for contents insurance under OCHRE-EUR-400 is arranged by Haldon Insurance Services, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-ochre-01-renewal-no-value-81be4b",
+      "role": "renewal",
+      "segment": "Please quote OCHRE-EUR-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

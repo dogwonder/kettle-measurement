@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-no-subscriptions-driftwood-heath",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* LINDLEYLETTINGS",
+      "name": "Lindley Lettings"
+    },
+    {
+      "raw": "SQ *LINDLEYLETTINGS",
+      "name": "Lindley Lettings"
+    },
+    {
+      "raw": "PAYPAL *LINDLEYLETTINGS",
+      "name": "Lindley Lettings"
+    },
+    {
+      "raw": "FAIRHOLM CERAMICS PAYMENT",
+      "name": "Fairholm Ceramics"
+    },
+    {
+      "raw": "STRIPE* THAMESLINK",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "SQ *THAMESLINK",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "PAYPAL *THAMESLINK",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "STRIPE* PWHITTAKER",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "SQ *PWHITTAKER",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "PAYPAL *PWHITTAKER",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "STRIPE* MSFOOD",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "SQ *MSFOOD",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "PAYPAL *MSFOOD",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "TK MAXX PAYMENT",
+      "name": "TK Maxx"
+    },
+    {
+      "raw": "GOOD ENERGY PAYMENT",
+      "name": "Good Energy"
+    },
+    {
+      "raw": "HOLLOWDENE PETS PAYMENT",
+      "name": "Hollowdene Pets"
+    },
+    {
+      "raw": "STRIPE* KILNBROOKSTALL",
+      "name": "Kilnbrook Stall"
+    },
+    {
+      "raw": "SQ *KILNBROOKSTALL",
+      "name": "Kilnbrook Stall"
+    },
+    {
+      "raw": "PAYPAL *KILNBROOKSTALL",
+      "name": "Kilnbrook Stall"
+    },
+    {
+      "raw": "THORNMERE VALLEY PAYMENT",
+      "name": "Thornmere Valley"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LINDLEYLETTINGS",
+      "name": "Lindley Lettings",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "FAIRHOLM CERAMICS PAYMENT",
+      "name": "Fairholm Ceramics",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* THAMESLINK",
+      "name": "Thameslink",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* PWHITTAKER",
+      "name": "P Whittaker",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MSFOOD",
+      "name": "M&S Food",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "TK MAXX PAYMENT",
+      "name": "TK Maxx",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "GOOD ENERGY PAYMENT",
+      "name": "Good Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "HOLLOWDENE PETS PAYMENT",
+      "name": "Hollowdene Pets",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* KILNBROOKSTALL",
+      "name": "Kilnbrook Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-ambiguous-categories-no-subscriptions-driftwood-heath-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "THORNMERE VALLEY PAYMENT",
+      "name": "Thornmere Valley",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Thameslink",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Good Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

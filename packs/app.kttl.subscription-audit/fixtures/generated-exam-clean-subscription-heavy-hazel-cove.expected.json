@@ -1,0 +1,245 @@
+{
+  "fixture_id": "exam-generated-clean-subscription-heavy-hazel-cove",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* TRESORIT",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "SQ *TRESORIT",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "PAYPAL *TRESORIT",
+      "name": "Tresorit"
+    },
+    {
+      "raw": "HISTORY TODAY",
+      "name": "History Today"
+    },
+    {
+      "raw": "COURSERA",
+      "name": "Coursera"
+    },
+    {
+      "raw": "LES MILLS PLUS",
+      "name": "Les Mills+"
+    },
+    {
+      "raw": "BRITBOX",
+      "name": "BritBox"
+    },
+    {
+      "raw": "SOUNDCLOUD GO",
+      "name": "SoundCloud"
+    },
+    {
+      "raw": "STRIPE* BITWARDEN",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "SQ *BITWARDEN",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "PAYPAL *BITWARDEN",
+      "name": "Bitwarden"
+    },
+    {
+      "raw": "NYTIMES",
+      "name": "The New York Times"
+    },
+    {
+      "raw": "STRIPE* COOPFOOD",
+      "name": "Co-op"
+    },
+    {
+      "raw": "SQ *COOPFOOD",
+      "name": "Co-op"
+    },
+    {
+      "raw": "PAYPAL *COOPFOOD",
+      "name": "Co-op"
+    },
+    {
+      "raw": "JOHN LEWIS",
+      "name": "John Lewis"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TRESORIT",
+      "name": "Tresorit",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "HISTORY TODAY",
+      "name": "History Today",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "COURSERA",
+      "name": "Coursera",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "LES MILLS PLUS",
+      "name": "Les Mills+",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "BRITBOX",
+      "name": "BritBox",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "SOUNDCLOUD GO",
+      "name": "SoundCloud",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BITWARDEN",
+      "name": "Bitwarden",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "NYTIMES",
+      "name": "The New York Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* COOPFOOD",
+      "name": "Co-op",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-hazel-cove-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "JOHN LEWIS",
+      "name": "John Lewis",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Tresorit",
+      "period": "yearly"
+    },
+    {
+      "merchant": "History Today",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Coursera",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Les Mills+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "BritBox",
+      "period": "monthly"
+    },
+    {
+      "merchant": "SoundCloud",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The New York Times",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

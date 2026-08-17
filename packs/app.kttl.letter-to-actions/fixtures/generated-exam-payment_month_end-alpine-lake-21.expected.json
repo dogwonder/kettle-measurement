@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_month_end-alpine-lake-21",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-02-28",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "payment_month_end-alpine-lake-21-payment-01",
+      "segment": "Your council tax account stands at £214.60. We ask that this is cleared by the end of the month.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "month-end"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-alpine-lake-21-no-ask-02",
+      "segment": "Where payment has already been sent, this notice can be ignored.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-alpine-lake-21-no-ask-04",
+      "segment": "Instructions have been issued internally and will take effect within 7 days.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    }
+  ]
+}

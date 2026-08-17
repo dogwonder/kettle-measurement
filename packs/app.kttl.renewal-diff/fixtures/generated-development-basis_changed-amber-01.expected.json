@@ -1,0 +1,130 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-basis_changed-amber-01",
+  "inputs": {
+    "previous": "generated-development-basis_changed-amber-01-previous.txt",
+    "renewal": "generated-development-basis_changed-amber-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-basis_changed-amber-01-previous-no-value-92bd13",
+      "role": "previous",
+      "segment": "Marlowe Mutual home insurance — policy schedule AMBER-BC-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £1,880.00.",
+        "term": "premium",
+        "value": "£1,880.00"
+      },
+      "id": "development-basis_changed-amber-01-previous-premium-0d1657",
+      "role": "previous",
+      "segment": "Total annual premium: £1,880.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,200.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,200.00"
+      },
+      "id": "development-basis_changed-amber-01-previous-compulsory-excess-d64f5d",
+      "role": "previous",
+      "segment": "Compulsory excess: £1,200.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-amber-01-previous-no-value-af0e92",
+      "role": "previous",
+      "segment": "Your reference is AMBER-BC-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-amber-01-previous-no-value-2f95f3",
+      "role": "previous",
+      "segment": "Marlowe Mutual arranges home insurance cover under AMBER-BC-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-amber-01-renewal-no-value-bf86f7",
+      "role": "renewal",
+      "segment": "Marlowe Mutual home insurance — renewal schedule AMBER-BC-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "monthly",
+        "quote": "Payable by twelve monthly instalments of £156.66.",
+        "term": "premium",
+        "value": "£156.66"
+      },
+      "id": "development-basis_changed-amber-01-renewal-premium-cd793e",
+      "role": "renewal",
+      "segment": "Payable by twelve monthly instalments of £156.66.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,200.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,200.00"
+      },
+      "id": "development-basis_changed-amber-01-renewal-compulsory-excess-d64f5d",
+      "role": "renewal",
+      "segment": "Compulsory excess: £1,200.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-amber-01-renewal-no-value-2f95f3",
+      "role": "renewal",
+      "segment": "Marlowe Mutual arranges home insurance cover under AMBER-BC-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-basis_changed-amber-01-renewal-no-value-af0e92",
+      "role": "renewal",
+      "segment": "Your reference is AMBER-BC-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

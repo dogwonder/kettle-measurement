@@ -1,0 +1,25 @@
+{
+  "comment": "Shared RFC 5545 SUMMARY vectors (#112). The Rust exporter in app/src-tauri/src/core.rs is normative; app/src/lib/fake.ts mirrors it. Both test suites (core.rs tests, app/src/lib/fake.test.ts) check against these cases so the two can never drift apart. `summary` is the raw action summary; `escaped` is its RFC 5545 TEXT encoding before folding.",
+  "cases": [
+    {
+      "name": "reserved characters are escaped",
+      "summary": "Coffee, tea; and C:\\Users\\rich",
+      "escaped": "Coffee\\, tea\\; and C:\\\\Users\\\\rich"
+    },
+    {
+      "name": "CRLF cannot inject a calendar property",
+      "summary": "Pay rent\r\nX-INJECT:BOOM",
+      "escaped": "Pay rent\\nX-INJECT:BOOM"
+    },
+    {
+      "name": "a lone CR becomes a newline, not a control character",
+      "summary": "one\rtwo",
+      "escaped": "one\\ntwo"
+    },
+    {
+      "name": "long unicode text folds without splitting a code point",
+      "summary": "£12.99 → £14.99, £12.99 → £14.99, £12.99 → £14.99, £12.99 → £14.99, £12.99 → £14.99, £12.99 → £14.99",
+      "escaped": "£12.99 → £14.99\\, £12.99 → £14.99\\, £12.99 → £14.99\\, £12.99 → £14.99\\, £12.99 → £14.99\\, £12.99 → £14.99"
+    }
+  ]
+}

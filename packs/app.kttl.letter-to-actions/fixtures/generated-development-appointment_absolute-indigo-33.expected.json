@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-indigo-33",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "6 September 2026",
+        "deadline": "on 6 September 2026",
+        "due": "2026-09-06",
+        "kind": "attendance",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_absolute-indigo-33-attendance-01",
+      "segment": "You have an appointment about your pet health plan at Denholm Veterinary Group on 6 September 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-indigo-33-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-indigo-33-no-ask-04",
+      "segment": "A refund of £74.10 was sent to your bank on 26 April and should have arrived within 3 days.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

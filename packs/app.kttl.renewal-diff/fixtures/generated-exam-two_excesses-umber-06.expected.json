@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-two_excesses-umber-06",
+  "inputs": {
+    "previous": "generated-exam-two_excesses-umber-06-previous.txt",
+    "renewal": "generated-exam-two_excesses-umber-06-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-two_excesses-umber-06-previous-no-value-1e4d8c",
+      "role": "previous",
+      "segment": "Schedule UMBER-TE-435 of your pet insurance cover with Corvin Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,400.00.",
+        "term": "compulsory_excess",
+        "value": "£4,400.00"
+      },
+      "id": "exam-two_excesses-umber-06-previous-compulsory-excess-ed17b6",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £4,400.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £990.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£990.00"
+      },
+      "id": "exam-two_excesses-umber-06-previous-voluntary-excess-816303",
+      "role": "previous",
+      "segment": "You chose to carry a further £990.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,390.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,390.00"
+      },
+      "id": "exam-two_excesses-umber-06-previous-total-excess-9a021c",
+      "role": "previous",
+      "segment": "Altogether the excess comes to £5,390.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-umber-06-previous-no-value-7dd881",
+      "role": "previous",
+      "segment": "Please quote UMBER-TE-435 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-umber-06-previous-no-value-ea33d0",
+      "role": "previous",
+      "segment": "Cover for pet insurance under UMBER-TE-435 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-umber-06-renewal-no-value-5929f2",
+      "role": "renewal",
+      "segment": "Your pet insurance cover with Corvin Mutual under UMBER-TE-435 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,450.00.",
+        "term": "compulsory_excess",
+        "value": "£4,450.00"
+      },
+      "id": "exam-two_excesses-umber-06-renewal-compulsory-excess-0ca231",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £4,450.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £990.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£990.00"
+      },
+      "id": "exam-two_excesses-umber-06-renewal-voluntary-excess-816303",
+      "role": "renewal",
+      "segment": "You chose to carry a further £990.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,440.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,440.00"
+      },
+      "id": "exam-two_excesses-umber-06-renewal-total-excess-6e3bed",
+      "role": "renewal",
+      "segment": "Altogether the excess comes to £5,440.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-umber-06-renewal-no-value-ea33d0",
+      "role": "renewal",
+      "segment": "Cover for pet insurance under UMBER-TE-435 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-umber-06-renewal-no-value-7dd881",
+      "role": "renewal",
+      "segment": "Please quote UMBER-TE-435 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

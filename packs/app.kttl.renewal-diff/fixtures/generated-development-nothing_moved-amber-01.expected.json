@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-nothing_moved-amber-01",
+  "inputs": {
+    "previous": "generated-development-nothing_moved-amber-01-previous.txt",
+    "renewal": "generated-development-nothing_moved-amber-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-nothing_moved-amber-01-previous-no-value-4c40c1",
+      "role": "previous",
+      "segment": "Marlowe Mutual home insurance — policy schedule AMBER-NM-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £2,678.00.",
+        "term": "premium",
+        "value": "£2,678.00"
+      },
+      "id": "development-nothing_moved-amber-01-previous-premium-8101c6",
+      "role": "previous",
+      "segment": "Total annual premium: £2,678.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,770.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,770.00"
+      },
+      "id": "development-nothing_moved-amber-01-previous-compulsory-excess-1da7e2",
+      "role": "previous",
+      "segment": "Compulsory excess: £1,770.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £5,640.00 per policy.",
+        "term": "cover_limit",
+        "value": "£5,640.00"
+      },
+      "id": "development-nothing_moved-amber-01-previous-cover-limit-431531",
+      "role": "previous",
+      "segment": "Cover limit: £5,640.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-amber-01-previous-no-value-4798db",
+      "role": "previous",
+      "segment": "Your reference is AMBER-NM-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-amber-01-previous-no-value-f56316",
+      "role": "previous",
+      "segment": "Marlowe Mutual arranges home insurance cover under AMBER-NM-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-amber-01-renewal-no-value-a9a91c",
+      "role": "renewal",
+      "segment": "Marlowe Mutual home insurance — renewal schedule AMBER-NM-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £2,678.00.",
+        "term": "premium",
+        "value": "£2,678.00"
+      },
+      "id": "development-nothing_moved-amber-01-renewal-premium-8101c6",
+      "role": "renewal",
+      "segment": "Total annual premium: £2,678.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,770.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,770.00"
+      },
+      "id": "development-nothing_moved-amber-01-renewal-compulsory-excess-1da7e2",
+      "role": "renewal",
+      "segment": "Compulsory excess: £1,770.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £5,640.00 per policy.",
+        "term": "cover_limit",
+        "value": "£5,640.00"
+      },
+      "id": "development-nothing_moved-amber-01-renewal-cover-limit-431531",
+      "role": "renewal",
+      "segment": "Cover limit: £5,640.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-amber-01-renewal-no-value-f56316",
+      "role": "renewal",
+      "segment": "Marlowe Mutual arranges home insurance cover under AMBER-NM-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-amber-01-renewal-no-value-4798db",
+      "role": "renewal",
+      "segment": "Your reference is AMBER-NM-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

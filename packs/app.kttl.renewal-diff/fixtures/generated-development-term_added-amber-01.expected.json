@@ -1,0 +1,145 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-term_added-amber-01",
+  "inputs": {
+    "previous": "generated-development-term_added-amber-01-previous.txt",
+    "renewal": "generated-development-term_added-amber-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-term_added-amber-01-previous-no-value-773dcf",
+      "role": "previous",
+      "segment": "Westmarch Cover landlord insurance — policy schedule AMBER-TA-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £3,469.00.",
+        "term": "premium",
+        "value": "£3,469.00"
+      },
+      "id": "development-term_added-amber-01-previous-premium-305343",
+      "role": "previous",
+      "segment": "Total annual premium: £3,469.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,335.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,335.00"
+      },
+      "id": "development-term_added-amber-01-previous-compulsory-excess-4aa142",
+      "role": "previous",
+      "segment": "Compulsory excess: £2,335.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-amber-01-previous-no-value-383046",
+      "role": "previous",
+      "segment": "Your reference is AMBER-TA-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-amber-01-previous-no-value-74d557",
+      "role": "previous",
+      "segment": "Westmarch Cover arranges landlord insurance cover under AMBER-TA-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-amber-01-renewal-no-value-fc8e8c",
+      "role": "renewal",
+      "segment": "Westmarch Cover landlord insurance — renewal schedule AMBER-TA-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £3,469.00.",
+        "term": "premium",
+        "value": "£3,469.00"
+      },
+      "id": "development-term_added-amber-01-renewal-premium-305343",
+      "role": "renewal",
+      "segment": "Total annual premium: £3,469.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,335.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,335.00"
+      },
+      "id": "development-term_added-amber-01-renewal-compulsory-excess-4aa142",
+      "role": "renewal",
+      "segment": "Compulsory excess: £2,335.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £527.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£527.00"
+      },
+      "id": "development-term_added-amber-01-renewal-voluntary-excess-e54f02",
+      "role": "renewal",
+      "segment": "Voluntary excess: £527.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-amber-01-renewal-no-value-74d557",
+      "role": "renewal",
+      "segment": "Westmarch Cover arranges landlord insurance cover under AMBER-TA-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_added-amber-01-renewal-no-value-383046",
+      "role": "renewal",
+      "segment": "Your reference is AMBER-TA-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

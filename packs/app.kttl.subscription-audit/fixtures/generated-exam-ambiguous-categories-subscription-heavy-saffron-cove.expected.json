@@ -1,0 +1,258 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-subscription-heavy-saffron-cove",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* JOTTACLOUD",
+      "name": "Jottacloud"
+    },
+    {
+      "raw": "SQ *JOTTACLOUD",
+      "name": "Jottacloud"
+    },
+    {
+      "raw": "PAYPAL *JOTTACLOUD",
+      "name": "Jottacloud"
+    },
+    {
+      "raw": "BBC GOOD FOOD PAYMENT",
+      "name": "BBC Good Food"
+    },
+    {
+      "raw": "PIMSLEUR PAYMENT",
+      "name": "Pimsleur"
+    },
+    {
+      "raw": "ANYTIME FITNESS PAYMENT",
+      "name": "Anytime Fitness"
+    },
+    {
+      "raw": "CRUNCHYROLL PAYMENT",
+      "name": "Crunchyroll"
+    },
+    {
+      "raw": "AUDIBLE UK PAYMENT",
+      "name": "Audible"
+    },
+    {
+      "raw": "STRIPE* TODOIST",
+      "name": "Todoist"
+    },
+    {
+      "raw": "SQ *TODOIST",
+      "name": "Todoist"
+    },
+    {
+      "raw": "PAYPAL *TODOIST",
+      "name": "Todoist"
+    },
+    {
+      "raw": "TORTOISE MEDIA PAYMENT",
+      "name": "Tortoise Media"
+    },
+    {
+      "raw": "STRIPE* THAMESLINK",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "SQ *THAMESLINK",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "PAYPAL *THAMESLINK",
+      "name": "Thameslink"
+    },
+    {
+      "raw": "STRIPE* PWHITTAKER",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "SQ *PWHITTAKER",
+      "name": "P Whittaker"
+    },
+    {
+      "raw": "PAYPAL *PWHITTAKER",
+      "name": "P Whittaker"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* JOTTACLOUD",
+      "name": "Jottacloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "BBC GOOD FOOD PAYMENT",
+      "name": "BBC Good Food",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "PIMSLEUR PAYMENT",
+      "name": "Pimsleur",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "ANYTIME FITNESS PAYMENT",
+      "name": "Anytime Fitness",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CRUNCHYROLL PAYMENT",
+      "name": "Crunchyroll",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "AUDIBLE UK PAYMENT",
+      "name": "Audible",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TODOIST",
+      "name": "Todoist",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "TORTOISE MEDIA PAYMENT",
+      "name": "Tortoise Media",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* THAMESLINK",
+      "name": "Thameslink",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-saffron-cove-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* PWHITTAKER",
+      "name": "P Whittaker",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Jottacloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "BBC Good Food",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Pimsleur",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Anytime Fitness",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Crunchyroll",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Audible",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Tortoise Media",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Thameslink",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

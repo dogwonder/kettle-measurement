@@ -1,0 +1,77 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-three_asks-juniper-path-01",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-07-17",
+        "kind": "payment",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "three_asks-juniper-path-01-payment-01",
+      "segment": "A payment of £310.00 towards your tenancy account is due within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "10 January 2026",
+        "deadline": "on 10 January 2026",
+        "due": "2026-01-10",
+        "kind": "attendance",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "three_asks-juniper-path-01-attendance-02",
+      "segment": "You are required to attend a case review at our offices on 10 January 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-06-30",
+        "kind": "response",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "three_asks-juniper-path-01-response-03",
+      "segment": "Please confirm your attendance in writing by the end of the month.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-juniper-path-01-no-ask-04",
+      "segment": "A copy of this letter has been placed on your file.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-juniper-path-01-no-ask-06",
+      "segment": "Settlement of £1,205.00 was received within the period allowed.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

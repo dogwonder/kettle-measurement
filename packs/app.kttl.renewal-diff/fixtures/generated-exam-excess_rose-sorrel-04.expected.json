@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_rose-sorrel-04",
+  "inputs": {
+    "previous": "generated-exam-excess_rose-sorrel-04-previous.txt",
+    "renewal": "generated-exam-excess_rose-sorrel-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_rose-sorrel-04-previous-no-value-e5d179",
+      "role": "previous",
+      "segment": "Schedule SORREL-ER-421 of your travel insurance cover with Pennine Line Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £255.00.",
+        "term": "compulsory_excess",
+        "value": "£255.00"
+      },
+      "id": "exam-excess_rose-sorrel-04-previous-compulsory-excess-2b50b8",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £255.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £557.00.",
+        "term": "premium",
+        "value": "£557.00"
+      },
+      "id": "exam-excess_rose-sorrel-04-previous-premium-0bcca3",
+      "role": "previous",
+      "segment": "The price for the year comes to £557.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £2,610.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£2,610.00"
+      },
+      "id": "exam-excess_rose-sorrel-04-previous-cover-limit-fc5fa4",
+      "role": "previous",
+      "segment": "We will pay up to £2,610.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-sorrel-04-previous-no-value-5b5d02",
+      "role": "previous",
+      "segment": "Please quote SORREL-ER-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-sorrel-04-previous-no-value-9c50b2",
+      "role": "previous",
+      "segment": "Cover for travel insurance under SORREL-ER-421 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-sorrel-04-renewal-no-value-9de11c",
+      "role": "renewal",
+      "segment": "Your travel insurance cover with Pennine Line Assurance under SORREL-ER-421 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £512.50.",
+        "term": "compulsory_excess",
+        "value": "£512.50"
+      },
+      "id": "exam-excess_rose-sorrel-04-renewal-compulsory-excess-f13930",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £512.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £557.00.",
+        "term": "premium",
+        "value": "£557.00"
+      },
+      "id": "exam-excess_rose-sorrel-04-renewal-premium-0bcca3",
+      "role": "renewal",
+      "segment": "The price for the year comes to £557.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £2,610.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£2,610.00"
+      },
+      "id": "exam-excess_rose-sorrel-04-renewal-cover-limit-fc5fa4",
+      "role": "renewal",
+      "segment": "We will pay up to £2,610.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-sorrel-04-renewal-no-value-9c50b2",
+      "role": "renewal",
+      "segment": "Cover for travel insurance under SORREL-ER-421 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-sorrel-04-renewal-no-value-5b5d02",
+      "role": "renewal",
+      "segment": "Please quote SORREL-ER-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_and_response-honey-meadow-34",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-04-13",
+        "kind": "payment",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "payment_and_response-honey-meadow-34-payment-01",
+      "segment": "Please settle £0.00 for your annual review within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 35 days",
+        "due": "2026-04-27",
+        "kind": "response",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "payment_and_response-honey-meadow-34-response-02",
+      "segment": "You must also write to confirm that payment has been made, within 35 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_and_response-honey-meadow-34-no-ask-03",
+      "segment": "Your co-operation saves us both a further exchange of letters.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_and_response-honey-meadow-34-no-ask-05",
+      "segment": "Reimbursement of £88.75 was despatched on 23 April and clears within 3 days.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_anchored-wheat-meadow-33",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "25 December 2026",
+        "deadline": "within 45 days",
+        "due": "2027-02-08",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "payment_anchored-wheat-meadow-33-payment-02",
+      "segment": "The sum of £214.60 falls due within 45 days of 25 December 2026. Please quote KBC-90114 when you pay.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-wheat-meadow-33-no-ask-03",
+      "segment": "We are grateful for your attention to this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-wheat-meadow-33-no-ask-05",
+      "segment": "Notification is given that the terms were varied on 1 January.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

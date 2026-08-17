@@ -1,0 +1,77 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-three_asks-saffron-11",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-12-07",
+        "kind": "payment",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "three_asks-saffron-11-payment-01",
+      "segment": "Please pay £68.50 towards your check-up within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "9 December 2026",
+        "deadline": "on 9 December 2026",
+        "due": "2026-12-09",
+        "kind": "attendance",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "three_asks-saffron-11-attendance-02",
+      "segment": "You must attend a review meeting at our offices on 9 December 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-11-30",
+        "kind": "response",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "three_asks-saffron-11-response-03",
+      "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-saffron-11-no-ask-04",
+      "segment": "We look forward to hearing from you in due course.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-saffron-11-no-ask-06",
+      "segment": "We are told the works on your street will finish by 30 September; the contractor is handling it.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

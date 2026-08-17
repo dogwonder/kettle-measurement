@@ -1,0 +1,77 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-three_asks-silver-wood-34",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-04-13",
+        "kind": "payment",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "three_asks-silver-wood-34-payment-01",
+      "segment": "A payment of £0.00 towards your annual review is due within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "19 April 2026",
+        "deadline": "on 19 April 2026",
+        "due": "2026-04-19",
+        "kind": "attendance",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "three_asks-silver-wood-34-attendance-02",
+      "segment": "You are required to attend a case review at our offices on 19 April 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-03-31",
+        "kind": "response",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "three_asks-silver-wood-34-response-03",
+      "segment": "Please confirm your attendance in writing by the end of the month.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-silver-wood-34-no-ask-04",
+      "segment": "A copy of this letter has been placed on your file.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-silver-wood-34-no-ask-06",
+      "segment": "The sum of £96.15 was credited to this account on 8 March.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

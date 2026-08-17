@@ -1,0 +1,46 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-courtesy_only-indigo-02",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "courtesy_only-indigo-02-no-ask-01",
+      "segment": "We are writing to confirm that your council tax account has been updated on our records. You do not need to do anything.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "courtesy_only-indigo-02-no-ask-02",
+      "segment": "We are grateful for your patience while we made these changes.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "courtesy_only-indigo-02-no-ask-03",
+      "segment": "If anything in this letter is unclear, our team is happy to explain it.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "courtesy_only-indigo-02-no-ask-05",
+      "segment": "You may keep this letter for your records; a copy is also held on your file.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    }
+  ]
+}

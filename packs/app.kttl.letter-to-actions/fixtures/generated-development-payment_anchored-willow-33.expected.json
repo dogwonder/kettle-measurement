@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_anchored-willow-33",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "26 January 2026",
+        "deadline": "within 30 days",
+        "due": "2026-02-25",
+        "kind": "payment",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "payment_anchored-willow-33-payment-02",
+      "segment": "Please pay £54.00 within 30 days of 26 January 2026, quoting reference DVG-1180.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-willow-33-no-ask-03",
+      "segment": "Thank you for your co-operation in this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-willow-33-no-ask-05",
+      "segment": "We are required to tell you that the policy wording changed on 1 January.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

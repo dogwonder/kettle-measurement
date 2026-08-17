@@ -1,0 +1,145 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-term_removed-birch-02",
+  "inputs": {
+    "previous": "generated-development-term_removed-birch-02-previous.txt",
+    "renewal": "generated-development-term_removed-birch-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-term_removed-birch-02-previous-no-value-1fad4f",
+      "role": "previous",
+      "segment": "Pennine Line Assurance travel insurance — policy schedule BIRCH-TR-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,204.00.",
+        "term": "premium",
+        "value": "£4,204.00"
+      },
+      "id": "development-term_removed-birch-02-previous-premium-e570f9",
+      "role": "previous",
+      "segment": "Total annual premium: £4,204.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "No claims discount: 42%.",
+        "term": "no_claims_discount",
+        "value": "42%"
+      },
+      "id": "development-term_removed-birch-02-previous-no-claims-discount-706e18",
+      "role": "previous",
+      "segment": "No claims discount: 42%.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,860.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,860.00"
+      },
+      "id": "development-term_removed-birch-02-previous-compulsory-excess-e425e8",
+      "role": "previous",
+      "segment": "Compulsory excess: £2,860.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-birch-02-previous-no-value-f86166",
+      "role": "previous",
+      "segment": "Your reference is BIRCH-TR-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-birch-02-previous-no-value-3988a7",
+      "role": "previous",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under BIRCH-TR-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-birch-02-renewal-no-value-4b318f",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance travel insurance — renewal schedule BIRCH-TR-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,204.00.",
+        "term": "premium",
+        "value": "£4,204.00"
+      },
+      "id": "development-term_removed-birch-02-renewal-premium-e570f9",
+      "role": "renewal",
+      "segment": "Total annual premium: £4,204.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,860.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,860.00"
+      },
+      "id": "development-term_removed-birch-02-renewal-compulsory-excess-e425e8",
+      "role": "renewal",
+      "segment": "Compulsory excess: £2,860.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-birch-02-renewal-no-value-3988a7",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under BIRCH-TR-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-birch-02-renewal-no-value-f86166",
+      "role": "renewal",
+      "segment": "Your reference is BIRCH-TR-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

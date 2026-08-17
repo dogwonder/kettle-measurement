@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-clean-no-subscriptions-olive-shore",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* GRESHAMESTATES",
+      "name": "Gresham Estates"
+    },
+    {
+      "raw": "SQ *GRESHAMESTATES",
+      "name": "Gresham Estates"
+    },
+    {
+      "raw": "PAYPAL *GRESHAMESTATES",
+      "name": "Gresham Estates"
+    },
+    {
+      "raw": "VERNHAM ANALYTICS",
+      "name": "Vernham Analytics"
+    },
+    {
+      "raw": "STRIPE* CHILTERNRAIL",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "SQ *CHILTERNRAIL",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "PAYPAL *CHILTERNRAIL",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "STRIPE* LBJORNSSON",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "SQ *LBJORNSSON",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "PAYPAL *LBJORNSSON",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "STRIPE* COOPFOOD",
+      "name": "Co-op"
+    },
+    {
+      "raw": "SQ *COOPFOOD",
+      "name": "Co-op"
+    },
+    {
+      "raw": "PAYPAL *COOPFOOD",
+      "name": "Co-op"
+    },
+    {
+      "raw": "JOHN LEWIS",
+      "name": "John Lewis"
+    },
+    {
+      "raw": "UTILITA",
+      "name": "Utilita"
+    },
+    {
+      "raw": "PENTLOW GARDEN",
+      "name": "Pentlow Garden"
+    },
+    {
+      "raw": "STRIPE* TOLLGATESTALL",
+      "name": "Tollgate Stall"
+    },
+    {
+      "raw": "SQ *TOLLGATESTALL",
+      "name": "Tollgate Stall"
+    },
+    {
+      "raw": "PAYPAL *TOLLGATESTALL",
+      "name": "Tollgate Stall"
+    },
+    {
+      "raw": "ALDERCOTE LEISURE",
+      "name": "Aldercote Leisure"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-monthly-rent",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* GRESHAMESTATES",
+      "name": "Gresham Estates",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-monthly-salary",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "VERNHAM ANALYTICS",
+      "name": "Vernham Analytics",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* CHILTERNRAIL",
+      "name": "Chiltern Railways",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LBJORNSSON",
+      "name": "L Bjornsson",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* COOPFOOD",
+      "name": "Co-op",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "JOHN LEWIS",
+      "name": "John Lewis",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "UTILITA",
+      "name": "Utilita",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "PENTLOW GARDEN",
+      "name": "Pentlow Garden",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TOLLGATESTALL",
+      "name": "Tollgate Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-olive-shore-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "ALDERCOTE LEISURE",
+      "name": "Aldercote Leisure",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Chiltern Railways",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Utilita",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-two_excesses-birch-02",
+  "inputs": {
+    "previous": "generated-development-two_excesses-birch-02-previous.txt",
+    "renewal": "generated-development-two_excesses-birch-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-two_excesses-birch-02-previous-no-value-e9c462",
+      "role": "previous",
+      "segment": "Kestrel Assurance car insurance — policy schedule BIRCH-TE-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,380.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,380.00"
+      },
+      "id": "development-two_excesses-birch-02-previous-compulsory-excess-0cbdd9",
+      "role": "previous",
+      "segment": "Compulsory excess: £4,380.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £986.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£986.00"
+      },
+      "id": "development-two_excesses-birch-02-previous-voluntary-excess-a00154",
+      "role": "previous",
+      "segment": "Voluntary excess: £986.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,366.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,366.00"
+      },
+      "id": "development-two_excesses-birch-02-previous-total-excess-7afefe",
+      "role": "previous",
+      "segment": "Total excess payable: £5,366.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-birch-02-previous-no-value-44e910",
+      "role": "previous",
+      "segment": "Your reference is BIRCH-TE-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-birch-02-previous-no-value-908ec6",
+      "role": "previous",
+      "segment": "Kestrel Assurance arranges car insurance cover under BIRCH-TE-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-birch-02-renewal-no-value-f51346",
+      "role": "renewal",
+      "segment": "Kestrel Assurance car insurance — renewal schedule BIRCH-TE-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,430.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,430.00"
+      },
+      "id": "development-two_excesses-birch-02-renewal-compulsory-excess-ee22bc",
+      "role": "renewal",
+      "segment": "Compulsory excess: £4,430.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £986.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£986.00"
+      },
+      "id": "development-two_excesses-birch-02-renewal-voluntary-excess-a00154",
+      "role": "renewal",
+      "segment": "Voluntary excess: £986.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,416.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,416.00"
+      },
+      "id": "development-two_excesses-birch-02-renewal-total-excess-bfa615",
+      "role": "renewal",
+      "segment": "Total excess payable: £5,416.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-birch-02-renewal-no-value-908ec6",
+      "role": "renewal",
+      "segment": "Kestrel Assurance arranges car insurance cover under BIRCH-TE-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-birch-02-renewal-no-value-44e910",
+      "role": "renewal",
+      "segment": "Your reference is BIRCH-TE-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

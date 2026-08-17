@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-request_unresolvable-winter-bay-21",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "as soon as you are able",
+        "due": null,
+        "kind": "response",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "request_unresolvable-winter-bay-21-response-01",
+      "segment": "We would be grateful if you could send a meter reading for your council tax account as soon as you are able.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "unresolvable-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-winter-bay-21-no-ask-02",
+      "segment": "We hold your account in good standing and no charge applies.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-winter-bay-21-no-ask-04",
+      "segment": "Representations closed on 5 April; the decision notice is published.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,450 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-sections_repeat-cedar-03",
+  "inputs": {
+    "previous": "generated-development-sections_repeat-cedar-03-previous.txt",
+    "renewal": "generated-development-sections_repeat-cedar-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-previous-no-value-050dea",
+      "role": "previous",
+      "segment": "Pennine Line Assurance travel insurance — policy schedule CEDAR-SR-414 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-previous-no-value-ac6de3",
+      "role": "previous",
+      "segment": "Period of insurance under CEDAR-SR-414: From 1 September 2025 to 31 August 2026 both days inclusive.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-previous-no-value-09cd7d",
+      "role": "previous",
+      "segment": "Section: professional indemnity (schedule CEDAR-SR-414)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £604,600.00.",
+        "term": "cover_limit",
+        "value": "£604,600.00"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-cover-limit-060420",
+      "role": "previous",
+      "segment": "Insurance amount: £604,600.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,430.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,430.00"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-compulsory-excess-0df6cf",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,430.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,449.80.",
+        "term": "premium",
+        "value": "£1,449.80"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-premium-e10122",
+      "role": "previous",
+      "segment": "Annual premium: £1,449.80.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-previous-no-value-e7f717",
+      "role": "previous",
+      "segment": "Section: legal expenses (schedule CEDAR-SR-414)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £854,600.00.",
+        "term": "cover_limit",
+        "value": "£854,600.00"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-cover-limit-73231a",
+      "role": "previous",
+      "segment": "Insurance amount: £854,600.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,461.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,461.00"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-compulsory-excess-b54b7c",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,461.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,496.80.",
+        "term": "premium",
+        "value": "£1,496.80"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-premium-0964e5",
+      "role": "previous",
+      "segment": "Annual premium: £1,496.80.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-previous-no-value-360887",
+      "role": "previous",
+      "segment": "Section: crisis containment (schedule CEDAR-SR-414)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £1,104,600.00.",
+        "term": "cover_limit",
+        "value": "£1,104,600.00"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-cover-limit-b89ba3",
+      "role": "previous",
+      "segment": "Insurance amount: £1,104,600.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,492.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,492.00"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-compulsory-excess-8c1f31",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,492.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,543.80.",
+        "term": "premium",
+        "value": "£1,543.80"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-premium-648c0c",
+      "role": "previous",
+      "segment": "Annual premium: £1,543.80.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium for all sections: £4,490.40.",
+        "term": "premium",
+        "value": "£4,490.40"
+      },
+      "id": "development-sections_repeat-cedar-03-previous-premium-75e8b6",
+      "role": "previous",
+      "segment": "Total annual premium for all sections: £4,490.40.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-previous-no-value-2c4cab",
+      "role": "previous",
+      "segment": "Your reference is CEDAR-SR-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-previous-no-value-c8cddc",
+      "role": "previous",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under CEDAR-SR-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-renewal-no-value-bc515c",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance travel insurance — renewal schedule CEDAR-SR-414 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-renewal-no-value-5a8a50",
+      "role": "renewal",
+      "segment": "Period of insurance under CEDAR-SR-414: From 1 September 2026 to 31 August 2027 both days inclusive.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-renewal-no-value-09cd7d",
+      "role": "renewal",
+      "segment": "Section: professional indemnity (schedule CEDAR-SR-414)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £604,600.00.",
+        "term": "cover_limit",
+        "value": "£604,600.00"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-cover-limit-060420",
+      "role": "renewal",
+      "segment": "Insurance amount: £604,600.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,430.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,430.00"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-compulsory-excess-0df6cf",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,430.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,464.80.",
+        "term": "premium",
+        "value": "£1,464.80"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-premium-b33682",
+      "role": "renewal",
+      "segment": "Annual premium: £1,464.80.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-renewal-no-value-e7f717",
+      "role": "renewal",
+      "segment": "Section: legal expenses (schedule CEDAR-SR-414)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £854,600.00.",
+        "term": "cover_limit",
+        "value": "£854,600.00"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-cover-limit-73231a",
+      "role": "renewal",
+      "segment": "Insurance amount: £854,600.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,461.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,461.00"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-compulsory-excess-b54b7c",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,461.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,511.80.",
+        "term": "premium",
+        "value": "£1,511.80"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-premium-07ba72",
+      "role": "renewal",
+      "segment": "Annual premium: £1,511.80.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-renewal-no-value-360887",
+      "role": "renewal",
+      "segment": "Section: crisis containment (schedule CEDAR-SR-414)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £1,104,600.00.",
+        "term": "cover_limit",
+        "value": "£1,104,600.00"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-cover-limit-b89ba3",
+      "role": "renewal",
+      "segment": "Insurance amount: £1,104,600.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,492.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,492.00"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-compulsory-excess-8c1f31",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,492.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,558.80.",
+        "term": "premium",
+        "value": "£1,558.80"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-premium-1b7b53",
+      "role": "renewal",
+      "segment": "Annual premium: £1,558.80.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium for all sections: £4,535.40.",
+        "term": "premium",
+        "value": "£4,535.40"
+      },
+      "id": "development-sections_repeat-cedar-03-renewal-premium-ca0be1",
+      "role": "renewal",
+      "segment": "Total annual premium for all sections: £4,535.40.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-renewal-no-value-c8cddc",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under CEDAR-SR-414 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-cedar-03-renewal-no-value-2c4cab",
+      "role": "renewal",
+      "segment": "Your reference is CEDAR-SR-414. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

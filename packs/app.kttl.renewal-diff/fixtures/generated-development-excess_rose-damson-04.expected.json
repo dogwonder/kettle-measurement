@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-excess_rose-damson-04",
+  "inputs": {
+    "previous": "generated-development-excess_rose-damson-04-previous.txt",
+    "renewal": "generated-development-excess_rose-damson-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-excess_rose-damson-04-previous-no-value-672a36",
+      "role": "previous",
+      "segment": "Pennine Line Assurance travel insurance — policy schedule DAMSON-ER-421 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £255.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£255.00"
+      },
+      "id": "development-excess_rose-damson-04-previous-compulsory-excess-d3f42e",
+      "role": "previous",
+      "segment": "Compulsory excess: £255.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £557.00.",
+        "term": "premium",
+        "value": "£557.00"
+      },
+      "id": "development-excess_rose-damson-04-previous-premium-95accf",
+      "role": "previous",
+      "segment": "Total annual premium: £557.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £2,610.00 per policy.",
+        "term": "cover_limit",
+        "value": "£2,610.00"
+      },
+      "id": "development-excess_rose-damson-04-previous-cover-limit-62f561",
+      "role": "previous",
+      "segment": "Cover limit: £2,610.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-damson-04-previous-no-value-b511f3",
+      "role": "previous",
+      "segment": "Your reference is DAMSON-ER-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-damson-04-previous-no-value-e68e1b",
+      "role": "previous",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under DAMSON-ER-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-damson-04-renewal-no-value-9931f7",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance travel insurance — renewal schedule DAMSON-ER-421 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £512.50 per claim.",
+        "term": "compulsory_excess",
+        "value": "£512.50"
+      },
+      "id": "development-excess_rose-damson-04-renewal-compulsory-excess-243e91",
+      "role": "renewal",
+      "segment": "Compulsory excess: £512.50 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £557.00.",
+        "term": "premium",
+        "value": "£557.00"
+      },
+      "id": "development-excess_rose-damson-04-renewal-premium-95accf",
+      "role": "renewal",
+      "segment": "Total annual premium: £557.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £2,610.00 per policy.",
+        "term": "cover_limit",
+        "value": "£2,610.00"
+      },
+      "id": "development-excess_rose-damson-04-renewal-cover-limit-62f561",
+      "role": "renewal",
+      "segment": "Cover limit: £2,610.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-damson-04-renewal-no-value-e68e1b",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under DAMSON-ER-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-excess_rose-damson-04-renewal-no-value-b511f3",
+      "role": "renewal",
+      "segment": "Your reference is DAMSON-ER-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

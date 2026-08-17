@@ -1,0 +1,49 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-invoice_totals-soffit-08",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "invoice_totals-soffit-08-no-ask-01",
+      "segment": "Please find our invoice for your energy account below. Payment of the total is due by the date shown beside it.",
+      "strata": [
+        "invoice-totals",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "5 September 2026",
+        "deadline": "5 September 2026",
+        "due": "2026-09-05",
+        "kind": "payment",
+        "party": "Cranleigh Energy"
+      },
+      "id": "invoice_totals-soffit-08-payment-02",
+      "segment": "Due date 5 September 2026",
+      "strata": [
+        "invoice-totals",
+        "absolute-deadline",
+        "in-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-soffit-08-no-ask-03",
+      "segment": "Please quote the reference above if you need to contact us about this.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-soffit-08-no-ask-05",
+      "segment": "The interest rate on your account changed on 1 April, and we applied it for you.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    }
+  ]
+}

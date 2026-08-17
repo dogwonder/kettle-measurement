@@ -1,0 +1,245 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-subscription-heavy-copper-lane",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* JOTTACLOUD CARD 4821",
+      "name": "Jottacloud"
+    },
+    {
+      "raw": "SQ *JOTTACLOUD CARD 4821",
+      "name": "Jottacloud"
+    },
+    {
+      "raw": "PAYPAL *JOTTACLOUD CARD 4821",
+      "name": "Jottacloud"
+    },
+    {
+      "raw": "CARD 4821 BBC GD FD GB",
+      "name": "BBC Good Food"
+    },
+    {
+      "raw": "CARD 4821 PMSLR GB",
+      "name": "Pimsleur"
+    },
+    {
+      "raw": "CARD 4821 NYTM FTNSS GB",
+      "name": "Anytime Fitness"
+    },
+    {
+      "raw": "CARD 4821 CRNCHYRLL GB",
+      "name": "Crunchyroll"
+    },
+    {
+      "raw": "CARD 4821 DBL K GB",
+      "name": "Audible"
+    },
+    {
+      "raw": "STRIPE* TODOIST CARD 4821",
+      "name": "Todoist"
+    },
+    {
+      "raw": "SQ *TODOIST CARD 4821",
+      "name": "Todoist"
+    },
+    {
+      "raw": "PAYPAL *TODOIST CARD 4821",
+      "name": "Todoist"
+    },
+    {
+      "raw": "CARD 4821 TRTS MD GB",
+      "name": "Tortoise Media"
+    },
+    {
+      "raw": "STRIPE* MSFOOD CARD 4821",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "SQ *MSFOOD CARD 4821",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "PAYPAL *MSFOOD CARD 4821",
+      "name": "M&S Food"
+    },
+    {
+      "raw": "CARD 4821 TK MXX GB",
+      "name": "TK Maxx"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* JOTTACLOUD CARD 4821",
+      "name": "Jottacloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 BBC GD FD GB",
+      "name": "BBC Good Food",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 PMSLR GB",
+      "name": "Pimsleur",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 NYTM FTNSS GB",
+      "name": "Anytime Fitness",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 CRNCHYRLL GB",
+      "name": "Crunchyroll",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 DBL K GB",
+      "name": "Audible",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TODOIST CARD 4821",
+      "name": "Todoist",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 TRTS MD GB",
+      "name": "Tortoise Media",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MSFOOD CARD 4821",
+      "name": "M&S Food",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-copper-lane-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 TK MXX GB",
+      "name": "TK Maxx",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Jottacloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "BBC Good Food",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Pimsleur",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Anytime Fitness",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Crunchyroll",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Audible",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Tortoise Media",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_and_response-valley-25",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-01-23",
+        "kind": "payment",
+        "party": "Harborne Parking Services"
+      },
+      "id": "payment_and_response-valley-25-payment-01",
+      "segment": "Please pay £120.00 for your parking charge within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 28 days",
+        "due": "2026-02-06",
+        "kind": "response",
+        "party": "Harborne Parking Services"
+      },
+      "id": "payment_and_response-valley-25-response-02",
+      "segment": "You must also confirm in writing that you have made this payment, within 28 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_and_response-valley-25-no-ask-03",
+      "segment": "We appreciate your prompt attention to this.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_and_response-valley-25-no-ask-05",
+      "segment": "Your solicitor has been sent a copy of this letter and will deal with the signing.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "no-obligation"
+      ]
+    }
+  ]
+}

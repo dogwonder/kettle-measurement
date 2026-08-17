@@ -1,0 +1,122 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_unqualified-zinnia-04",
+  "inputs": {
+    "previous": "generated-exam-excess_unqualified-zinnia-04-previous.txt",
+    "renewal": "generated-exam-excess_unqualified-zinnia-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-zinnia-04-previous-no-value-d0dce0",
+      "role": "previous",
+      "segment": "Schedule ZINNIA-EU-421 of your buildings insurance cover with Brackenfield Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £8,537.00.",
+        "term": "premium",
+        "value": "£8,537.00"
+      },
+      "id": "exam-excess_unqualified-zinnia-04-previous-premium-91f605",
+      "role": "previous",
+      "segment": "The price for the year comes to £8,537.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-zinnia-04-previous-excess-unqualified-52a4e5",
+      "review": true,
+      "role": "previous",
+      "segment": "An excess of £5,955.00 applies to each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-zinnia-04-previous-no-value-9dbbb9",
+      "role": "previous",
+      "segment": "Please quote ZINNIA-EU-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-zinnia-04-previous-no-value-bd2d2f",
+      "role": "previous",
+      "segment": "Cover for buildings insurance under ZINNIA-EU-421 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-zinnia-04-renewal-no-value-3a8d0e",
+      "role": "renewal",
+      "segment": "Your buildings insurance cover with Brackenfield Cover under ZINNIA-EU-421 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £8,537.00.",
+        "term": "premium",
+        "value": "£8,537.00"
+      },
+      "id": "exam-excess_unqualified-zinnia-04-renewal-premium-91f605",
+      "role": "renewal",
+      "segment": "The price for the year comes to £8,537.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-zinnia-04-renewal-excess-unqualified-848179",
+      "review": true,
+      "role": "renewal",
+      "segment": "An excess of £6,080.00 applies to each and every claim.",
+      "strata": [
+        "any-schedule",
+        "excess-unqualified"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-zinnia-04-renewal-no-value-bd2d2f",
+      "role": "renewal",
+      "segment": "Cover for buildings insurance under ZINNIA-EU-421 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified-zinnia-04-renewal-no-value-9dbbb9",
+      "role": "renewal",
+      "segment": "Please quote ZINNIA-EU-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

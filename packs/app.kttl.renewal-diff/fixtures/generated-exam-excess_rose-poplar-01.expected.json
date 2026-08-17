@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_rose-poplar-01",
+  "inputs": {
+    "previous": "generated-exam-excess_rose-poplar-01-previous.txt",
+    "renewal": "generated-exam-excess_rose-poplar-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_rose-poplar-01-previous-no-value-9a31c1",
+      "role": "previous",
+      "segment": "Schedule POPLAR-ER-400 of your car insurance cover with Kestrel Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £240.00.",
+        "term": "compulsory_excess",
+        "value": "£240.00"
+      },
+      "id": "exam-excess_rose-poplar-01-previous-compulsory-excess-8cf11d",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £240.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £536.00.",
+        "term": "premium",
+        "value": "£536.00"
+      },
+      "id": "exam-excess_rose-poplar-01-previous-premium-adb7e2",
+      "role": "previous",
+      "segment": "The price for the year comes to £536.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £2,580.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£2,580.00"
+      },
+      "id": "exam-excess_rose-poplar-01-previous-cover-limit-253495",
+      "role": "previous",
+      "segment": "We will pay up to £2,580.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-poplar-01-previous-no-value-bc7d1e",
+      "role": "previous",
+      "segment": "Please quote POPLAR-ER-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-poplar-01-previous-no-value-bf4677",
+      "role": "previous",
+      "segment": "Cover for car insurance under POPLAR-ER-400 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-poplar-01-renewal-no-value-a75094",
+      "role": "renewal",
+      "segment": "Your car insurance cover with Kestrel Assurance under POPLAR-ER-400 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £482.50.",
+        "term": "compulsory_excess",
+        "value": "£482.50"
+      },
+      "id": "exam-excess_rose-poplar-01-renewal-compulsory-excess-ebc538",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £482.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £536.00.",
+        "term": "premium",
+        "value": "£536.00"
+      },
+      "id": "exam-excess_rose-poplar-01-renewal-premium-adb7e2",
+      "role": "renewal",
+      "segment": "The price for the year comes to £536.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £2,580.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£2,580.00"
+      },
+      "id": "exam-excess_rose-poplar-01-renewal-cover-limit-253495",
+      "role": "renewal",
+      "segment": "We will pay up to £2,580.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-poplar-01-renewal-no-value-bf4677",
+      "role": "renewal",
+      "segment": "Cover for car insurance under POPLAR-ER-400 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_rose-poplar-01-renewal-no-value-bc7d1e",
+      "role": "renewal",
+      "segment": "Please quote POPLAR-ER-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-three_asks-kelp-03",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-03-25",
+        "kind": "payment",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "three_asks-kelp-03-payment-01",
+      "segment": "Please pay £0.00 towards your annual review within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "21 April 2026",
+        "deadline": "on 21 April 2026",
+        "due": "2026-04-21",
+        "kind": "attendance",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "three_asks-kelp-03-attendance-02",
+      "segment": "You must attend a review meeting at our offices on 21 April 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-03-31",
+        "kind": "response",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "three_asks-kelp-03-response-03",
+      "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-kelp-03-no-ask-04",
+      "segment": "We look forward to hearing from you in due course.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-kelp-03-no-ask-06",
+      "segment": "The interest rate on your account changed on 1 April, and we applied it for you.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

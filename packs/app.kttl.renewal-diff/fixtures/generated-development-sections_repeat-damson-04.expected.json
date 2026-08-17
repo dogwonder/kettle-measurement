@@ -1,0 +1,450 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-sections_repeat-damson-04",
+  "inputs": {
+    "previous": "generated-development-sections_repeat-damson-04-previous.txt",
+    "renewal": "generated-development-sections_repeat-damson-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-previous-no-value-e81ee5",
+      "role": "previous",
+      "segment": "Corvin Mutual pet insurance — policy schedule DAMSON-SR-421 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-previous-no-value-3e037e",
+      "role": "previous",
+      "segment": "Period of insurance under DAMSON-SR-421: From 1 September 2025 to 31 August 2026 both days inclusive.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-previous-no-value-b66bac",
+      "role": "previous",
+      "segment": "Section: professional indemnity (schedule DAMSON-SR-421)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £604,700.00.",
+        "term": "cover_limit",
+        "value": "£604,700.00"
+      },
+      "id": "development-sections_repeat-damson-04-previous-cover-limit-ea7c80",
+      "role": "previous",
+      "segment": "Insurance amount: £604,700.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,435.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,435.00"
+      },
+      "id": "development-sections_repeat-damson-04-previous-compulsory-excess-ea7305",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,435.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,451.10.",
+        "term": "premium",
+        "value": "£1,451.10"
+      },
+      "id": "development-sections_repeat-damson-04-previous-premium-27df75",
+      "role": "previous",
+      "segment": "Annual premium: £1,451.10.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-previous-no-value-a11e97",
+      "role": "previous",
+      "segment": "Section: legal expenses (schedule DAMSON-SR-421)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £854,700.00.",
+        "term": "cover_limit",
+        "value": "£854,700.00"
+      },
+      "id": "development-sections_repeat-damson-04-previous-cover-limit-954984",
+      "role": "previous",
+      "segment": "Insurance amount: £854,700.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,466.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,466.00"
+      },
+      "id": "development-sections_repeat-damson-04-previous-compulsory-excess-ce0590",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,466.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,498.10.",
+        "term": "premium",
+        "value": "£1,498.10"
+      },
+      "id": "development-sections_repeat-damson-04-previous-premium-ea0fed",
+      "role": "previous",
+      "segment": "Annual premium: £1,498.10.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-previous-no-value-2fd54d",
+      "role": "previous",
+      "segment": "Section: crisis containment (schedule DAMSON-SR-421)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £1,104,700.00.",
+        "term": "cover_limit",
+        "value": "£1,104,700.00"
+      },
+      "id": "development-sections_repeat-damson-04-previous-cover-limit-64f189",
+      "role": "previous",
+      "segment": "Insurance amount: £1,104,700.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,497.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,497.00"
+      },
+      "id": "development-sections_repeat-damson-04-previous-compulsory-excess-1fac79",
+      "role": "previous",
+      "segment": "Compulsory excess: £5,497.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,545.10.",
+        "term": "premium",
+        "value": "£1,545.10"
+      },
+      "id": "development-sections_repeat-damson-04-previous-premium-e17434",
+      "role": "previous",
+      "segment": "Annual premium: £1,545.10.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium for all sections: £4,494.30.",
+        "term": "premium",
+        "value": "£4,494.30"
+      },
+      "id": "development-sections_repeat-damson-04-previous-premium-3abec3",
+      "role": "previous",
+      "segment": "Total annual premium for all sections: £4,494.30.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-previous-no-value-574af1",
+      "role": "previous",
+      "segment": "Your reference is DAMSON-SR-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-previous-no-value-754939",
+      "role": "previous",
+      "segment": "Corvin Mutual arranges pet insurance cover under DAMSON-SR-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-renewal-no-value-5a015b",
+      "role": "renewal",
+      "segment": "Corvin Mutual pet insurance — renewal schedule DAMSON-SR-421 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-renewal-no-value-d4b66e",
+      "role": "renewal",
+      "segment": "Period of insurance under DAMSON-SR-421: From 1 September 2026 to 31 August 2027 both days inclusive.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-renewal-no-value-b66bac",
+      "role": "renewal",
+      "segment": "Section: professional indemnity (schedule DAMSON-SR-421)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £604,700.00.",
+        "term": "cover_limit",
+        "value": "£604,700.00"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-cover-limit-ea7c80",
+      "role": "renewal",
+      "segment": "Insurance amount: £604,700.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,435.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,435.00"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-compulsory-excess-ea7305",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,435.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,466.10.",
+        "term": "premium",
+        "value": "£1,466.10"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-premium-d49b56",
+      "role": "renewal",
+      "segment": "Annual premium: £1,466.10.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-renewal-no-value-a11e97",
+      "role": "renewal",
+      "segment": "Section: legal expenses (schedule DAMSON-SR-421)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £854,700.00.",
+        "term": "cover_limit",
+        "value": "£854,700.00"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-cover-limit-954984",
+      "role": "renewal",
+      "segment": "Insurance amount: £854,700.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,466.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,466.00"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-compulsory-excess-ce0590",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,466.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,513.10.",
+        "term": "premium",
+        "value": "£1,513.10"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-premium-9851ad",
+      "role": "renewal",
+      "segment": "Annual premium: £1,513.10.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-renewal-no-value-2fd54d",
+      "role": "renewal",
+      "segment": "Section: crisis containment (schedule DAMSON-SR-421)",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Insurance amount: £1,104,700.00.",
+        "term": "cover_limit",
+        "value": "£1,104,700.00"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-cover-limit-64f189",
+      "role": "renewal",
+      "segment": "Insurance amount: £1,104,700.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £5,497.00 each and every claim.",
+        "term": "compulsory_excess",
+        "value": "£5,497.00"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-compulsory-excess-1fac79",
+      "role": "renewal",
+      "segment": "Compulsory excess: £5,497.00 each and every claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Annual premium: £1,560.10.",
+        "term": "premium",
+        "value": "£1,560.10"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-premium-788483",
+      "role": "renewal",
+      "segment": "Annual premium: £1,560.10.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium for all sections: £4,539.30.",
+        "term": "premium",
+        "value": "£4,539.30"
+      },
+      "id": "development-sections_repeat-damson-04-renewal-premium-1e20bf",
+      "role": "renewal",
+      "segment": "Total annual premium for all sections: £4,539.30.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-renewal-no-value-754939",
+      "role": "renewal",
+      "segment": "Corvin Mutual arranges pet insurance cover under DAMSON-SR-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-sections_repeat-damson-04-renewal-no-value-574af1",
+      "role": "renewal",
+      "segment": "Your reference is DAMSON-SR-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

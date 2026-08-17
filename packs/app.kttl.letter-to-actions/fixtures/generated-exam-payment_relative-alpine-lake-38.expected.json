@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_relative-alpine-lake-38",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-08-05",
+        "kind": "payment",
+        "party": "Belwood Insurance"
+      },
+      "id": "payment_relative-alpine-lake-38-payment-01",
+      "segment": "The sum of £188.20 for your policy renewal is now overdue. Payment must reach us within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-alpine-lake-38-no-ask-02",
+      "segment": "If you have already paid, please disregard this notice.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-alpine-lake-38-no-ask-04",
+      "segment": "Collection of £210.00 by direct debit continues on the 1st of each month unchanged.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

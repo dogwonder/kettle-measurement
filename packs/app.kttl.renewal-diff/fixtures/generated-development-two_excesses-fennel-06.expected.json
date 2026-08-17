@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-two_excesses-fennel-06",
+  "inputs": {
+    "previous": "generated-development-two_excesses-fennel-06-previous.txt",
+    "renewal": "generated-development-two_excesses-fennel-06-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-two_excesses-fennel-06-previous-no-value-e9e9b7",
+      "role": "previous",
+      "segment": "Corvin Mutual pet insurance — policy schedule FENNEL-TE-435 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,400.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,400.00"
+      },
+      "id": "development-two_excesses-fennel-06-previous-compulsory-excess-f9f96f",
+      "role": "previous",
+      "segment": "Compulsory excess: £4,400.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £990.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£990.00"
+      },
+      "id": "development-two_excesses-fennel-06-previous-voluntary-excess-46c7a5",
+      "role": "previous",
+      "segment": "Voluntary excess: £990.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,390.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,390.00"
+      },
+      "id": "development-two_excesses-fennel-06-previous-total-excess-426b40",
+      "role": "previous",
+      "segment": "Total excess payable: £5,390.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-fennel-06-previous-no-value-656ba0",
+      "role": "previous",
+      "segment": "Your reference is FENNEL-TE-435. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-fennel-06-previous-no-value-33b1b4",
+      "role": "previous",
+      "segment": "Corvin Mutual arranges pet insurance cover under FENNEL-TE-435 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-fennel-06-renewal-no-value-843444",
+      "role": "renewal",
+      "segment": "Corvin Mutual pet insurance — renewal schedule FENNEL-TE-435 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,450.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,450.00"
+      },
+      "id": "development-two_excesses-fennel-06-renewal-compulsory-excess-8c49ea",
+      "role": "renewal",
+      "segment": "Compulsory excess: £4,450.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £990.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£990.00"
+      },
+      "id": "development-two_excesses-fennel-06-renewal-voluntary-excess-46c7a5",
+      "role": "renewal",
+      "segment": "Voluntary excess: £990.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,440.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,440.00"
+      },
+      "id": "development-two_excesses-fennel-06-renewal-total-excess-053e32",
+      "role": "renewal",
+      "segment": "Total excess payable: £5,440.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-fennel-06-renewal-no-value-33b1b4",
+      "role": "renewal",
+      "segment": "Corvin Mutual arranges pet insurance cover under FENNEL-TE-435 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-fennel-06-renewal-no-value-656ba0",
+      "role": "renewal",
+      "segment": "Your reference is FENNEL-TE-435. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

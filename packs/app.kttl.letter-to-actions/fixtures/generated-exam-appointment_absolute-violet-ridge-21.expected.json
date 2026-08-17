@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_absolute-violet-ridge-21",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "23 August 2026",
+        "deadline": "on 23 August 2026",
+        "due": "2026-08-23",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_absolute-violet-ridge-21-attendance-01",
+      "segment": "We have booked your council tax account appointment with Kelsford Borough Council on 23 August 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-violet-ridge-21-no-ask-02",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-violet-ridge-21-no-ask-04",
+      "segment": "Settlement of £1,205.00 was received within the period allowed.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

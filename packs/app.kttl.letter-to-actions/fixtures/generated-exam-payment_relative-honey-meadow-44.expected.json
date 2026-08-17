@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_relative-honey-meadow-44",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-02-07",
+        "kind": "payment",
+        "party": "Harborne Parking Services"
+      },
+      "id": "payment_relative-honey-meadow-44-payment-01",
+      "segment": "The sum of £120.00 for your parking charge is now overdue. Payment must reach us within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-honey-meadow-44-no-ask-02",
+      "segment": "If you have already paid, please disregard this notice.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-honey-meadow-44-no-ask-04",
+      "segment": "The other party has been given 21 days to respond to this office.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

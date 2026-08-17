@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-nothing_moved-quince-02",
+  "inputs": {
+    "previous": "generated-exam-nothing_moved-quince-02-previous.txt",
+    "renewal": "generated-exam-nothing_moved-quince-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-quince-02-previous-no-value-8eea63",
+      "role": "previous",
+      "segment": "Schedule QUINCE-NM-407 of your car insurance cover with Kestrel Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £2,685.00.",
+        "term": "premium",
+        "value": "£2,685.00"
+      },
+      "id": "exam-nothing_moved-quince-02-previous-premium-05122f",
+      "role": "previous",
+      "segment": "The price for the year comes to £2,685.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £1,775.00.",
+        "term": "compulsory_excess",
+        "value": "£1,775.00"
+      },
+      "id": "exam-nothing_moved-quince-02-previous-compulsory-excess-87dff6",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £1,775.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £5,650.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£5,650.00"
+      },
+      "id": "exam-nothing_moved-quince-02-previous-cover-limit-56f66f",
+      "role": "previous",
+      "segment": "We will pay up to £5,650.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-quince-02-previous-no-value-ad71c3",
+      "role": "previous",
+      "segment": "Please quote QUINCE-NM-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-quince-02-previous-no-value-e360d3",
+      "role": "previous",
+      "segment": "Cover for car insurance under QUINCE-NM-407 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-quince-02-renewal-no-value-2dd670",
+      "role": "renewal",
+      "segment": "Your car insurance cover with Kestrel Assurance under QUINCE-NM-407 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £2,685.00.",
+        "term": "premium",
+        "value": "£2,685.00"
+      },
+      "id": "exam-nothing_moved-quince-02-renewal-premium-05122f",
+      "role": "renewal",
+      "segment": "The price for the year comes to £2,685.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £1,775.00.",
+        "term": "compulsory_excess",
+        "value": "£1,775.00"
+      },
+      "id": "exam-nothing_moved-quince-02-renewal-compulsory-excess-87dff6",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £1,775.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £5,650.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£5,650.00"
+      },
+      "id": "exam-nothing_moved-quince-02-renewal-cover-limit-56f66f",
+      "role": "renewal",
+      "segment": "We will pay up to £5,650.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-quince-02-renewal-no-value-e360d3",
+      "role": "renewal",
+      "segment": "Cover for car insurance under QUINCE-NM-407 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-nothing_moved-quince-02-renewal-no-value-ad71c3",
+      "role": "renewal",
+      "segment": "Please quote QUINCE-NM-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

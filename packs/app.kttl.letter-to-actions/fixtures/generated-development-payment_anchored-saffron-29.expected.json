@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_anchored-saffron-29",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "6 September 2026",
+        "deadline": "within 30 days",
+        "due": "2026-10-06",
+        "kind": "payment",
+        "party": "Northgate Water"
+      },
+      "id": "payment_anchored-saffron-29-payment-02",
+      "segment": "Please pay £96.45 within 30 days of 6 September 2026, quoting reference NW-55210.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-saffron-29-no-ask-03",
+      "segment": "Thank you for your co-operation in this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-saffron-29-no-ask-05",
+      "segment": "There is no charge for this service and none will be raised.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-cooling_off_changed-poplar-01",
+  "inputs": {
+    "previous": "generated-exam-cooling_off_changed-poplar-01-previous.txt",
+    "renewal": "generated-exam-cooling_off_changed-poplar-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-poplar-01-previous-no-value-e29ad6",
+      "role": "previous",
+      "segment": "Schedule POPLAR-COC-400 of your travel insurance cover with Pennine Line Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,408.00.",
+        "term": "premium",
+        "value": "£5,408.00"
+      },
+      "id": "exam-cooling_off_changed-poplar-01-previous-premium-5cf07d",
+      "role": "previous",
+      "segment": "The price for the year comes to £5,408.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "You may change your mind and cancel within 12 days.",
+        "term": "cooling_off_period",
+        "value": "12 days"
+      },
+      "id": "exam-cooling_off_changed-poplar-01-previous-cooling-off-period-405a73",
+      "role": "previous",
+      "segment": "You may change your mind and cancel within 12 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-poplar-01-previous-no-value-f969a6",
+      "role": "previous",
+      "segment": "Please quote POPLAR-COC-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-poplar-01-previous-no-value-0c7569",
+      "role": "previous",
+      "segment": "Cover for travel insurance under POPLAR-COC-400 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-poplar-01-renewal-no-value-604d20",
+      "role": "renewal",
+      "segment": "Your travel insurance cover with Pennine Line Assurance under POPLAR-COC-400 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,408.00.",
+        "term": "premium",
+        "value": "£5,408.00"
+      },
+      "id": "exam-cooling_off_changed-poplar-01-renewal-premium-5cf07d",
+      "role": "renewal",
+      "segment": "The price for the year comes to £5,408.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "You may change your mind and cancel within 26 days.",
+        "term": "cooling_off_period",
+        "value": "26 days"
+      },
+      "id": "exam-cooling_off_changed-poplar-01-renewal-cooling-off-period-826bb6",
+      "role": "renewal",
+      "segment": "You may change your mind and cancel within 26 days.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-poplar-01-renewal-no-value-0c7569",
+      "role": "renewal",
+      "segment": "Cover for travel insurance under POPLAR-COC-400 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-cooling_off_changed-poplar-01-renewal-no-value-f969a6",
+      "role": "renewal",
+      "segment": "Please quote POPLAR-COC-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

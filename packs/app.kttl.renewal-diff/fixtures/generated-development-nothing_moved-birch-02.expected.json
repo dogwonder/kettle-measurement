@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-nothing_moved-birch-02",
+  "inputs": {
+    "previous": "generated-development-nothing_moved-birch-02-previous.txt",
+    "renewal": "generated-development-nothing_moved-birch-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-nothing_moved-birch-02-previous-no-value-f3511f",
+      "role": "previous",
+      "segment": "Kestrel Assurance car insurance — policy schedule BIRCH-NM-407 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £2,685.00.",
+        "term": "premium",
+        "value": "£2,685.00"
+      },
+      "id": "development-nothing_moved-birch-02-previous-premium-1bfa93",
+      "role": "previous",
+      "segment": "Total annual premium: £2,685.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,775.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,775.00"
+      },
+      "id": "development-nothing_moved-birch-02-previous-compulsory-excess-0c4933",
+      "role": "previous",
+      "segment": "Compulsory excess: £1,775.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £5,650.00 per policy.",
+        "term": "cover_limit",
+        "value": "£5,650.00"
+      },
+      "id": "development-nothing_moved-birch-02-previous-cover-limit-cbfa65",
+      "role": "previous",
+      "segment": "Cover limit: £5,650.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-birch-02-previous-no-value-365bb0",
+      "role": "previous",
+      "segment": "Your reference is BIRCH-NM-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-birch-02-previous-no-value-18b1cc",
+      "role": "previous",
+      "segment": "Kestrel Assurance arranges car insurance cover under BIRCH-NM-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-birch-02-renewal-no-value-2836b1",
+      "role": "renewal",
+      "segment": "Kestrel Assurance car insurance — renewal schedule BIRCH-NM-407 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £2,685.00.",
+        "term": "premium",
+        "value": "£2,685.00"
+      },
+      "id": "development-nothing_moved-birch-02-renewal-premium-1bfa93",
+      "role": "renewal",
+      "segment": "Total annual premium: £2,685.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £1,775.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£1,775.00"
+      },
+      "id": "development-nothing_moved-birch-02-renewal-compulsory-excess-0c4933",
+      "role": "renewal",
+      "segment": "Compulsory excess: £1,775.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £5,650.00 per policy.",
+        "term": "cover_limit",
+        "value": "£5,650.00"
+      },
+      "id": "development-nothing_moved-birch-02-renewal-cover-limit-cbfa65",
+      "role": "renewal",
+      "segment": "Cover limit: £5,650.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-birch-02-renewal-no-value-18b1cc",
+      "role": "renewal",
+      "segment": "Kestrel Assurance arranges car insurance cover under BIRCH-NM-407 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-nothing_moved-birch-02-renewal-no-value-365bb0",
+      "role": "renewal",
+      "segment": "Your reference is BIRCH-NM-407. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

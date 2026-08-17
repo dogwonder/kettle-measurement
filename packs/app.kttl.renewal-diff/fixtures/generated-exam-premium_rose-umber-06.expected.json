@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-premium_rose-umber-06",
+  "inputs": {
+    "previous": "generated-exam-premium_rose-umber-06-previous.txt",
+    "renewal": "generated-exam-premium_rose-umber-06-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-premium_rose-umber-06-previous-no-value-d891aa",
+      "role": "previous",
+      "segment": "Schedule UMBER-PR-435 of your pet insurance cover with Corvin Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £1,362.00.",
+        "term": "premium",
+        "value": "£1,362.00"
+      },
+      "id": "exam-premium_rose-umber-06-previous-premium-a06766",
+      "role": "previous",
+      "segment": "The price for the year comes to £1,362.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £830.00.",
+        "term": "compulsory_excess",
+        "value": "£830.00"
+      },
+      "id": "exam-premium_rose-umber-06-previous-compulsory-excess-e6c033",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £830.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £3,760.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£3,760.00"
+      },
+      "id": "exam-premium_rose-umber-06-previous-cover-limit-1d91a1",
+      "role": "previous",
+      "segment": "We will pay up to £3,760.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-umber-06-previous-no-value-349381",
+      "role": "previous",
+      "segment": "Please quote UMBER-PR-435 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-umber-06-previous-no-value-f6fac4",
+      "role": "previous",
+      "segment": "Cover for pet insurance under UMBER-PR-435 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-umber-06-renewal-no-value-fcbdc5",
+      "role": "renewal",
+      "segment": "Your pet insurance cover with Corvin Mutual under UMBER-PR-435 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £1,494.50.",
+        "term": "premium",
+        "value": "£1,494.50"
+      },
+      "id": "exam-premium_rose-umber-06-renewal-premium-c63756",
+      "role": "renewal",
+      "segment": "The price for the year comes to £1,494.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £830.00.",
+        "term": "compulsory_excess",
+        "value": "£830.00"
+      },
+      "id": "exam-premium_rose-umber-06-renewal-compulsory-excess-e6c033",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £830.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "We will pay up to £3,760.00 under this policy.",
+        "term": "cover_limit",
+        "value": "£3,760.00"
+      },
+      "id": "exam-premium_rose-umber-06-renewal-cover-limit-1d91a1",
+      "role": "renewal",
+      "segment": "We will pay up to £3,760.00 under this policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-umber-06-renewal-no-value-f6fac4",
+      "role": "renewal",
+      "segment": "Cover for pet insurance under UMBER-PR-435 is arranged by Corvin Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-premium_rose-umber-06-renewal-no-value-349381",
+      "role": "renewal",
+      "segment": "Please quote UMBER-PR-435 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

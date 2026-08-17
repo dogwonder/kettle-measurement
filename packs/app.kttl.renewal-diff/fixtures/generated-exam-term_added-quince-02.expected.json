@@ -1,0 +1,145 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-term_added-quince-02",
+  "inputs": {
+    "previous": "generated-exam-term_added-quince-02-previous.txt",
+    "renewal": "generated-exam-term_added-quince-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-term_added-quince-02-previous-no-value-7819a3",
+      "role": "previous",
+      "segment": "Schedule QUINCE-TA-407 of your home insurance cover with Marlowe Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £3,476.00.",
+        "term": "premium",
+        "value": "£3,476.00"
+      },
+      "id": "exam-term_added-quince-02-previous-premium-17a6ad",
+      "role": "previous",
+      "segment": "The price for the year comes to £3,476.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,340.00.",
+        "term": "compulsory_excess",
+        "value": "£2,340.00"
+      },
+      "id": "exam-term_added-quince-02-previous-compulsory-excess-a80bfe",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £2,340.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-quince-02-previous-no-value-95e61a",
+      "role": "previous",
+      "segment": "Please quote QUINCE-TA-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-quince-02-previous-no-value-d04437",
+      "role": "previous",
+      "segment": "Cover for home insurance under QUINCE-TA-407 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-quince-02-renewal-no-value-3f1a2a",
+      "role": "renewal",
+      "segment": "Your home insurance cover with Marlowe Mutual under QUINCE-TA-407 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £3,476.00.",
+        "term": "premium",
+        "value": "£3,476.00"
+      },
+      "id": "exam-term_added-quince-02-renewal-premium-17a6ad",
+      "role": "renewal",
+      "segment": "The price for the year comes to £3,476.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,340.00.",
+        "term": "compulsory_excess",
+        "value": "£2,340.00"
+      },
+      "id": "exam-term_added-quince-02-renewal-compulsory-excess-a80bfe",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £2,340.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £528.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£528.00"
+      },
+      "id": "exam-term_added-quince-02-renewal-voluntary-excess-fa7779",
+      "role": "renewal",
+      "segment": "You chose to carry a further £528.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-quince-02-renewal-no-value-d04437",
+      "role": "renewal",
+      "segment": "Cover for home insurance under QUINCE-TA-407 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-quince-02-renewal-no-value-95e61a",
+      "role": "renewal",
+      "segment": "Please quote QUINCE-TA-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

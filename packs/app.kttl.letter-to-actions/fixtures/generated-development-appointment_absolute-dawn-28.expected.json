@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-dawn-28",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "7 October 2026",
+        "deadline": "on 7 October 2026",
+        "due": "2026-10-07",
+        "kind": "attendance",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_absolute-dawn-28-attendance-01",
+      "segment": "You have an appointment about your estate matter at Trentham & Yale Solicitors on 7 October 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-dawn-28-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-dawn-28-no-ask-04",
+      "segment": "Nothing is outstanding on your account as at 1 August.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

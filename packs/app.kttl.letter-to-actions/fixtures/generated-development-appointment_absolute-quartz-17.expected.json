@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-quartz-17",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "4 May 2026",
+        "deadline": "on 4 May 2026",
+        "due": "2026-05-04",
+        "kind": "attendance",
+        "party": "Northgate Water"
+      },
+      "id": "appointment_absolute-quartz-17-attendance-01",
+      "segment": "You have an appointment about your water account at Northgate Water on 4 May 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-quartz-17-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-quartz-17-no-ask-04",
+      "segment": "The change of address you reported on 17 June is now showing on all our systems.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

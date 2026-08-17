@@ -1,0 +1,77 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-three_asks-thistle-12",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2027-01-11",
+        "kind": "payment",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "three_asks-thistle-12-payment-01",
+      "segment": "Please pay £0.00 towards your case file within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "14 July 2026",
+        "deadline": "on 14 July 2026",
+        "due": "2026-07-14",
+        "kind": "attendance",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "three_asks-thistle-12-attendance-02",
+      "segment": "You must attend a review meeting at our offices on 14 July 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-12-31",
+        "kind": "response",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "three_asks-thistle-12-response-03",
+      "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-thistle-12-no-ask-04",
+      "segment": "We look forward to hearing from you in due course.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-thistle-12-no-ask-06",
+      "segment": "Your membership number has not changed and your card remains valid until March 2028.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

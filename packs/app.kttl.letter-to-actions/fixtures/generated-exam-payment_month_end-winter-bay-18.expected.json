@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_month_end-winter-bay-18",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-11-30",
+        "kind": "payment",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "payment_month_end-winter-bay-18-payment-01",
+      "segment": "Your check-up stands at £68.50. We ask that this is cleared by the end of the month.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "month-end"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-winter-bay-18-no-ask-02",
+      "segment": "Where payment has already been sent, this notice can be ignored.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-winter-bay-18-no-ask-04",
+      "segment": "An assessment concluded on 26 February; its findings are attached for information.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    }
+  ]
+}

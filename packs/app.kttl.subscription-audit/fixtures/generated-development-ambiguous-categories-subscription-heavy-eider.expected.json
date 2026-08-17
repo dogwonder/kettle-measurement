@@ -1,0 +1,243 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-subscription-heavy-eider",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "SQ *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PAYPAL *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PRIVATE EYE PAYMENT",
+      "name": "Private Eye"
+    },
+    {
+      "raw": "SKILLSHARE PAYMENT",
+      "name": "Skillshare"
+    },
+    {
+      "raw": "DAVID LLOYD PAYMENT",
+      "name": "David Lloyd"
+    },
+    {
+      "raw": "NOW TV PAYMENT",
+      "name": "NOW"
+    },
+    {
+      "raw": "TIDAL PAYMENT",
+      "name": "TIDAL"
+    },
+    {
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "SQ *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "PAYPAL *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "THE TELEGRAPH PAYMENT",
+      "name": "The Telegraph"
+    },
+    {
+      "raw": "STRIPE* SALTMARSHSTALL",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "SQ *SALTMARSHSTALL",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "PAYPAL *SALTMARSHSTALL",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "STANWICK LEISURE PAYMENT",
+      "name": "Stanwick Leisure"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "PRIVATE EYE PAYMENT",
+      "name": "Private Eye",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "SKILLSHARE PAYMENT",
+      "name": "Skillshare",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "DAVID LLOYD PAYMENT",
+      "name": "David Lloyd",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "NOW TV PAYMENT",
+      "name": "NOW",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "TIDAL PAYMENT",
+      "name": "TIDAL",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE TELEGRAPH PAYMENT",
+      "name": "The Telegraph",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* SALTMARSHSTALL",
+      "name": "Saltmarsh Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-eider-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STANWICK LEISURE PAYMENT",
+      "name": "Stanwick Leisure",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "pCloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Private Eye",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Skillshare",
+      "period": "monthly"
+    },
+    {
+      "merchant": "David Lloyd",
+      "period": "monthly"
+    },
+    {
+      "merchant": "NOW",
+      "period": "monthly"
+    },
+    {
+      "merchant": "TIDAL",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Telegraph",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

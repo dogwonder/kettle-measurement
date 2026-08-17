@@ -1,0 +1,87 @@
+{
+  "schema": "kettle/proposed-actions@0",
+  "run_id": "run-01",
+  "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+  "actions": [
+    {
+      "id": "act-01",
+      "kind": "review_price_rise",
+      "title": "Netflix rose £10.99 → £12.99 in May 2025",
+      "detail": "That's an extra £24.00 a year. If you'd rather not pay it, a cheaper plan or a pause might suit — worth a look.",
+      "evidence": {
+        "after": "12.99",
+        "before": "10.99",
+        "merchant": "Netflix",
+        "month": "2025-05"
+      },
+      "export": {
+        "ics": {
+          "summary": "Review Netflix subscription (rose to £12.99)",
+          "date": "2026-08-01"
+        },
+        "text": "Review Netflix: price rose from £10.99 to £12.99 in May 2025 (+£24.00/year)."
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "act-02",
+      "kind": "review_subscription",
+      "title": "PureGym costs £299.88 a year — still using it?",
+      "detail": "£24.99 every month since at least January 2025. If you're using it, ignore this. If not, it's one of the easier savings in this statement.",
+      "evidence": {
+        "amount": "24.99",
+        "annualised": "299.88",
+        "merchant": "PureGym",
+        "period": "monthly"
+      },
+      "export": {
+        "ics": {
+          "summary": "Decide: keep or cancel PureGym (£24.99/month)",
+          "date": "2026-07-26"
+        },
+        "text": "PureGym: £24.99/month, £299.88/year. Decide whether to keep it."
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "act-03",
+      "kind": "check_renewal",
+      "title": "Amazon Prime renews around 14 March 2027 (£95.00)",
+      "detail": "Yearly plans are easy to forget. A reminder a week before gives you time to decide.",
+      "evidence": {
+        "amount": "95.00",
+        "last_charged": "2025-03-14",
+        "merchant": "Amazon Prime",
+        "period": "yearly"
+      },
+      "export": {
+        "ics": {
+          "summary": "Amazon Prime renews soon — £95.00. Keep it?",
+          "date": "2027-03-07"
+        },
+        "text": "Amazon Prime renews around 14 March 2027 (£95.00/year). Decide the week before."
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "act-04",
+      "kind": "calendar_reminder",
+      "title": "Next British Gas payment lands around 15 October 2026",
+      "detail": "£88.00 each quarter so far. A reminder means it never surprises the month's budget.",
+      "evidence": {
+        "amount": "88.00",
+        "last_charged": "2025-10-15",
+        "merchant": "British Gas",
+        "period": "quarterly"
+      },
+      "export": {
+        "ics": {
+          "summary": "British Gas quarter payment due (~£88.00)",
+          "date": "2026-10-13"
+        },
+        "text": "British Gas quarter payment (~£88.00) due around 15 October 2026."
+      },
+      "status": "proposed"
+    }
+  ]
+}

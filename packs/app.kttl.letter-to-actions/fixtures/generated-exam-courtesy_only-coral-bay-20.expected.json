@@ -1,0 +1,46 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-courtesy_only-coral-bay-20",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "courtesy_only-coral-bay-20-no-ask-01",
+      "segment": "This letter confirms that the changes to your parking charge are now in force. No action is required from you.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "courtesy_only-coral-bay-20-no-ask-02",
+      "segment": "We are obliged to write to you whenever these details change.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "courtesy_only-coral-bay-20-no-ask-03",
+      "segment": "Our advisers can talk you through any of this if you would find it useful.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "courtesy_only-coral-bay-20-no-ask-05",
+      "segment": "Instructions have been issued internally and will take effect within 7 days.",
+      "strata": [
+        "any-letter",
+        "courtesy-only",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-term_removed-sorrel-04",
+  "inputs": {
+    "previous": "generated-exam-term_removed-sorrel-04-previous.txt",
+    "renewal": "generated-exam-term_removed-sorrel-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-term_removed-sorrel-04-previous-no-value-54ca8d",
+      "role": "previous",
+      "segment": "Schedule SORREL-TR-421 of your landlord insurance cover with Westmarch Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £4,218.00.",
+        "term": "premium",
+        "value": "£4,218.00"
+      },
+      "id": "exam-term_removed-sorrel-04-previous-premium-c3d933",
+      "role": "previous",
+      "segment": "The price for the year comes to £4,218.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Your no claims discount stands at 44%.",
+        "term": "no_claims_discount",
+        "value": "44%"
+      },
+      "id": "exam-term_removed-sorrel-04-previous-no-claims-discount-a2a94d",
+      "role": "previous",
+      "segment": "Your no claims discount stands at 44%.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,870.00.",
+        "term": "compulsory_excess",
+        "value": "£2,870.00"
+      },
+      "id": "exam-term_removed-sorrel-04-previous-compulsory-excess-492ee7",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £2,870.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-sorrel-04-previous-no-value-609d74",
+      "role": "previous",
+      "segment": "Please quote SORREL-TR-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-sorrel-04-previous-no-value-01a075",
+      "role": "previous",
+      "segment": "Cover for landlord insurance under SORREL-TR-421 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-sorrel-04-renewal-no-value-ff343b",
+      "role": "renewal",
+      "segment": "Your landlord insurance cover with Westmarch Cover under SORREL-TR-421 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £4,218.00.",
+        "term": "premium",
+        "value": "£4,218.00"
+      },
+      "id": "exam-term_removed-sorrel-04-renewal-premium-c3d933",
+      "role": "renewal",
+      "segment": "The price for the year comes to £4,218.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,870.00.",
+        "term": "compulsory_excess",
+        "value": "£2,870.00"
+      },
+      "id": "exam-term_removed-sorrel-04-renewal-compulsory-excess-492ee7",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £2,870.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-sorrel-04-renewal-no-value-01a075",
+      "role": "renewal",
+      "segment": "Cover for landlord insurance under SORREL-TR-421 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_removed-sorrel-04-renewal-no-value-609d74",
+      "role": "renewal",
+      "segment": "Please quote SORREL-TR-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

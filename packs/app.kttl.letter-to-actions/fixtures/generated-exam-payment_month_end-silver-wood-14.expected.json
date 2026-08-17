@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_month_end-silver-wood-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-07-31",
+        "kind": "payment",
+        "party": "Belwood Insurance"
+      },
+      "id": "payment_month_end-silver-wood-14-payment-01",
+      "segment": "Your policy renewal stands at £188.20. We ask that this is cleared by the end of the month.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "month-end"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-silver-wood-14-no-ask-02",
+      "segment": "Where payment has already been sent, this notice can be ignored.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-silver-wood-14-no-ask-04",
+      "segment": "This notice is issued under our regulatory obligations and invites no reply.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    }
+  ]
+}

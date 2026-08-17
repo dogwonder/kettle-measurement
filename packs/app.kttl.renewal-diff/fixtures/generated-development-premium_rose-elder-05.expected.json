@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-premium_rose-elder-05",
+  "inputs": {
+    "previous": "generated-development-premium_rose-elder-05-previous.txt",
+    "renewal": "generated-development-premium_rose-elder-05-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-premium_rose-elder-05-previous-no-value-8c5b8b",
+      "role": "previous",
+      "segment": "Pennine Line Assurance travel insurance — policy schedule ELDER-PR-428 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £1,355.00.",
+        "term": "premium",
+        "value": "£1,355.00"
+      },
+      "id": "development-premium_rose-elder-05-previous-premium-0cf085",
+      "role": "previous",
+      "segment": "Total annual premium: £1,355.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £825.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£825.00"
+      },
+      "id": "development-premium_rose-elder-05-previous-compulsory-excess-d20908",
+      "role": "previous",
+      "segment": "Compulsory excess: £825.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £3,750.00 per policy.",
+        "term": "cover_limit",
+        "value": "£3,750.00"
+      },
+      "id": "development-premium_rose-elder-05-previous-cover-limit-125688",
+      "role": "previous",
+      "segment": "Cover limit: £3,750.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-elder-05-previous-no-value-7e29ad",
+      "role": "previous",
+      "segment": "Your reference is ELDER-PR-428. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-elder-05-previous-no-value-cc55ff",
+      "role": "previous",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under ELDER-PR-428 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-elder-05-renewal-no-value-0abcee",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance travel insurance — renewal schedule ELDER-PR-428 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £1,487.50.",
+        "term": "premium",
+        "value": "£1,487.50"
+      },
+      "id": "development-premium_rose-elder-05-renewal-premium-8d3760",
+      "role": "renewal",
+      "segment": "Total annual premium: £1,487.50.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £825.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£825.00"
+      },
+      "id": "development-premium_rose-elder-05-renewal-compulsory-excess-d20908",
+      "role": "renewal",
+      "segment": "Compulsory excess: £825.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "Cover limit: £3,750.00 per policy.",
+        "term": "cover_limit",
+        "value": "£3,750.00"
+      },
+      "id": "development-premium_rose-elder-05-renewal-cover-limit-125688",
+      "role": "renewal",
+      "segment": "Cover limit: £3,750.00 per policy.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-elder-05-renewal-no-value-cc55ff",
+      "role": "renewal",
+      "segment": "Pennine Line Assurance arranges travel insurance cover under ELDER-PR-428 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-premium_rose-elder-05-renewal-no-value-7e29ad",
+      "role": "renewal",
+      "segment": "Your reference is ELDER-PR-428. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

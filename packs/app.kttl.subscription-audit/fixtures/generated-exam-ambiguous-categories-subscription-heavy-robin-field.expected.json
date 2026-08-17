@@ -1,0 +1,258 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-subscription-heavy-robin-field",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "SQ *BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "PAYPAL *BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "PROSPECT MAG PAYMENT",
+      "name": "Prospect"
+    },
+    {
+      "raw": "UDEMY PAYMENT",
+      "name": "Udemy"
+    },
+    {
+      "raw": "VIRGIN ACTIVE PAYMENT",
+      "name": "Virgin Active"
+    },
+    {
+      "raw": "SKY DIGITAL PAYMENT",
+      "name": "Sky"
+    },
+    {
+      "raw": "BANDCAMP PAYMENT",
+      "name": "Bandcamp"
+    },
+    {
+      "raw": "STRIPE* EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "SQ *EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "PAYPAL *EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "WASHINGTONPOST PAYMENT",
+      "name": "The Washington Post"
+    },
+    {
+      "raw": "STRIPE* SCOTRAIL",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "SQ *SCOTRAIL",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "PAYPAL *SCOTRAIL",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "STRIPE* KADEYEMI",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "SQ *KADEYEMI",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "PAYPAL *KADEYEMI",
+      "name": "K Adeyemi"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BOXCOM",
+      "name": "Box",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "PROSPECT MAG PAYMENT",
+      "name": "Prospect",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "UDEMY PAYMENT",
+      "name": "Udemy",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "VIRGIN ACTIVE PAYMENT",
+      "name": "Virgin Active",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "SKY DIGITAL PAYMENT",
+      "name": "Sky",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "BANDCAMP PAYMENT",
+      "name": "Bandcamp",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* EVERNOTE",
+      "name": "Evernote",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "WASHINGTONPOST PAYMENT",
+      "name": "The Washington Post",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SCOTRAIL",
+      "name": "ScotRail",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-robin-field-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* KADEYEMI",
+      "name": "K Adeyemi",
+      "kind": "regular_spend",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Box",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Prospect",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Udemy",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Virgin Active",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Sky",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Bandcamp",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Washington Post",
+      "period": "monthly"
+    },
+    {
+      "merchant": "ScotRail",
+      "period": "yearly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

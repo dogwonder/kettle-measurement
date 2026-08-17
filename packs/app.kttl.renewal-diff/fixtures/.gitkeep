@@ -1,0 +1,6 @@
+The bed lands here (#66, AUTHORING steps 2-3): composition in JSON,
+structure in Rust, ceilings declared before a fixture is generated.
+
+Tracked empty so `fixtures_in` has a directory to read - every
+pack-wide test calls it for every pack, so a missing directory is a
+failing suite rather than a pack without a bed.

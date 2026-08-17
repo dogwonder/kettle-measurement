@@ -1,0 +1,49 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-invoice_totals-newel-post-03",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "invoice_totals-newel-post-03-no-ask-01",
+      "segment": "Our invoice for the energy account is set out below. The amount shown as due should reach us by the date given against it.",
+      "strata": [
+        "invoice-totals",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "14 September 2026",
+        "deadline": "14 September 2026",
+        "due": "2026-09-14",
+        "kind": "payment",
+        "party": "Cranleigh Energy"
+      },
+      "id": "invoice_totals-newel-post-03-payment-02",
+      "segment": "Due date 14 September 2026",
+      "strata": [
+        "invoice-totals",
+        "absolute-deadline",
+        "in-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-newel-post-03-no-ask-03",
+      "segment": "Our accounts team can arrange instalments where that would help.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-newel-post-03-no-ask-05",
+      "segment": "A further letter is anticipated in approximately 8 weeks.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    }
+  ]
+}

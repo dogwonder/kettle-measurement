@@ -1,0 +1,125 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-excess_unqualified_residual-russet-04",
+  "inputs": {
+    "previous": "generated-exam-excess_unqualified_residual-russet-04-previous.txt",
+    "renewal": "generated-exam-excess_unqualified_residual-russet-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-russet-04-previous-no-value-a28402",
+      "role": "previous",
+      "segment": "Schedule RUSSET-EUR-421 of your landlord insurance cover with Westmarch Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £9,265.00.",
+        "term": "premium",
+        "value": "£9,265.00"
+      },
+      "id": "exam-excess_unqualified_residual-russet-04-previous-premium-f01453",
+      "role": "previous",
+      "segment": "The price for the year comes to £9,265.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £6,475.00.",
+        "term": "compulsory_excess",
+        "value": "£6,475.00"
+      },
+      "id": "exam-excess_unqualified_residual-russet-04-previous-compulsory-excess-f3c4f4",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £6,475.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-russet-04-previous-no-value-794487",
+      "role": "previous",
+      "segment": "Please quote RUSSET-EUR-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-russet-04-previous-no-value-567d8d",
+      "role": "previous",
+      "segment": "Cover for landlord insurance under RUSSET-EUR-421 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-russet-04-renewal-no-value-f3a0cb",
+      "role": "renewal",
+      "segment": "Your landlord insurance cover with Westmarch Cover under RUSSET-EUR-421 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £9,265.00.",
+        "term": "premium",
+        "value": "£9,265.00"
+      },
+      "id": "exam-excess_unqualified_residual-russet-04-renewal-premium-f01453",
+      "role": "renewal",
+      "segment": "The price for the year comes to £9,265.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-russet-04-renewal-excess-unqualified-827426",
+      "review": true,
+      "role": "renewal",
+      "segment": "An excess of £6,525.00 applies to each and every claim.",
+      "strata": [
+        "excess-unqualified-residual"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-russet-04-renewal-no-value-567d8d",
+      "role": "renewal",
+      "segment": "Cover for landlord insurance under RUSSET-EUR-421 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-excess_unqualified_residual-russet-04-renewal-no-value-794487",
+      "role": "renewal",
+      "segment": "Please quote RUSSET-EUR-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

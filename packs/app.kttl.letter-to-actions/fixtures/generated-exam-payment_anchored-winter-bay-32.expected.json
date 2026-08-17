@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_anchored-winter-bay-32",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "20 May 2026",
+        "deadline": "within 45 days",
+        "due": "2026-07-04",
+        "kind": "payment",
+        "party": "Harborne Parking Services"
+      },
+      "id": "payment_anchored-winter-bay-32-payment-02",
+      "segment": "The sum of £120.00 falls due within 45 days of 20 May 2026. Please quote HPS-4821 when you pay.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-winter-bay-32-no-ask-03",
+      "segment": "We are grateful for your attention to this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-winter-bay-32-no-ask-05",
+      "segment": "Conduct of this matter passed to our Bristol office on 1 March under the same reference.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

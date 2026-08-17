@@ -1,0 +1,245 @@
+{
+  "fixture_id": "development-generated-clean-subscription-heavy-glen",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* BACKBLAZE",
+      "name": "Backblaze"
+    },
+    {
+      "raw": "SQ *BACKBLAZE",
+      "name": "Backblaze"
+    },
+    {
+      "raw": "PAYPAL *BACKBLAZE",
+      "name": "Backblaze"
+    },
+    {
+      "raw": "THE ECONOMIST",
+      "name": "The Economist"
+    },
+    {
+      "raw": "DUOLINGO",
+      "name": "Duolingo"
+    },
+    {
+      "raw": "PUREGYM LTD",
+      "name": "PureGym"
+    },
+    {
+      "raw": "NETFLIX.COM",
+      "name": "Netflix"
+    },
+    {
+      "raw": "SPOTIFY LTD",
+      "name": "Spotify"
+    },
+    {
+      "raw": "STRIPE* GOOGLEONE",
+      "name": "Google One"
+    },
+    {
+      "raw": "SQ *GOOGLEONE",
+      "name": "Google One"
+    },
+    {
+      "raw": "PAYPAL *GOOGLEONE",
+      "name": "Google One"
+    },
+    {
+      "raw": "THE GUARDIAN",
+      "name": "The Guardian"
+    },
+    {
+      "raw": "STRIPE* TESCOSTORES",
+      "name": "Tesco"
+    },
+    {
+      "raw": "SQ *TESCOSTORES",
+      "name": "Tesco"
+    },
+    {
+      "raw": "PAYPAL *TESCOSTORES",
+      "name": "Tesco"
+    },
+    {
+      "raw": "ARGOS",
+      "name": "Argos"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-clean-subscription-heavy-glen-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BACKBLAZE",
+      "name": "Backblaze",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-glen-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "THE ECONOMIST",
+      "name": "The Economist",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-glen-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "DUOLINGO",
+      "name": "Duolingo",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-glen-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "PUREGYM LTD",
+      "name": "PureGym",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-clean-subscription-heavy-glen-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "NETFLIX.COM",
+      "name": "Netflix",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-glen-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "SPOTIFY LTD",
+      "name": "Spotify",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-glen-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* GOOGLEONE",
+      "name": "Google One",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-glen-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE GUARDIAN",
+      "name": "The Guardian",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-glen-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TESCOSTORES",
+      "name": "Tesco",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-clean-subscription-heavy-glen-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "ARGOS",
+      "name": "Argos",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Backblaze",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Economist",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Duolingo",
+      "period": "monthly"
+    },
+    {
+      "merchant": "PureGym",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Netflix",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Spotify",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Guardian",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

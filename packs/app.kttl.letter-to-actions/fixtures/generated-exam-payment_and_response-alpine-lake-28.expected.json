@@ -1,0 +1,60 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-payment_and_response-alpine-lake-28",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-10-12",
+        "kind": "payment",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "payment_and_response-alpine-lake-28-payment-01",
+      "segment": "Please settle £54.00 for your pet health plan within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 35 days",
+        "due": "2026-10-26",
+        "kind": "response",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "payment_and_response-alpine-lake-28-response-02",
+      "segment": "You must also write to confirm that payment has been made, within 35 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_and_response-alpine-lake-28-no-ask-03",
+      "segment": "Your co-operation saves us both a further exchange of letters.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_and_response-alpine-lake-28-no-ask-05",
+      "segment": "The certificate dated 2 October remains in force for a further 12 months.",
+      "strata": [
+        "any-letter",
+        "payment-and-response",
+        "no-obligation"
+      ]
+    }
+  ]
+}

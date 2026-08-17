@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-two_excesses-teasel-05",
+  "inputs": {
+    "previous": "generated-exam-two_excesses-teasel-05-previous.txt",
+    "renewal": "generated-exam-two_excesses-teasel-05-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-two_excesses-teasel-05-previous-no-value-527d0f",
+      "role": "previous",
+      "segment": "Schedule TEASEL-TE-428 of your travel insurance cover with Pennine Line Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,395.00.",
+        "term": "compulsory_excess",
+        "value": "£4,395.00"
+      },
+      "id": "exam-two_excesses-teasel-05-previous-compulsory-excess-b876d7",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £4,395.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £989.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£989.00"
+      },
+      "id": "exam-two_excesses-teasel-05-previous-voluntary-excess-07c2ad",
+      "role": "previous",
+      "segment": "You chose to carry a further £989.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,384.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,384.00"
+      },
+      "id": "exam-two_excesses-teasel-05-previous-total-excess-3b67b0",
+      "role": "previous",
+      "segment": "Altogether the excess comes to £5,384.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-teasel-05-previous-no-value-6afe8f",
+      "role": "previous",
+      "segment": "Please quote TEASEL-TE-428 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-teasel-05-previous-no-value-a900cf",
+      "role": "previous",
+      "segment": "Cover for travel insurance under TEASEL-TE-428 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-teasel-05-renewal-no-value-519641",
+      "role": "renewal",
+      "segment": "Your travel insurance cover with Pennine Line Assurance under TEASEL-TE-428 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,445.00.",
+        "term": "compulsory_excess",
+        "value": "£4,445.00"
+      },
+      "id": "exam-two_excesses-teasel-05-renewal-compulsory-excess-d39950",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £4,445.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £989.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£989.00"
+      },
+      "id": "exam-two_excesses-teasel-05-renewal-voluntary-excess-07c2ad",
+      "role": "renewal",
+      "segment": "You chose to carry a further £989.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,434.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,434.00"
+      },
+      "id": "exam-two_excesses-teasel-05-renewal-total-excess-703227",
+      "role": "renewal",
+      "segment": "Altogether the excess comes to £5,434.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-teasel-05-renewal-no-value-a900cf",
+      "role": "renewal",
+      "segment": "Cover for travel insurance under TEASEL-TE-428 is arranged by Pennine Line Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-teasel-05-renewal-no-value-6afe8f",
+      "role": "renewal",
+      "segment": "Please quote TEASEL-TE-428 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-no-subscriptions-vervain",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* WESTMARSHLETTING CARD 4821",
+      "name": "Westmarsh Letting"
+    },
+    {
+      "raw": "SQ *WESTMARSHLETTING CARD 4821",
+      "name": "Westmarsh Letting"
+    },
+    {
+      "raw": "PAYPAL *WESTMARSHLETTING CARD 4821",
+      "name": "Westmarsh Letting"
+    },
+    {
+      "raw": "CARD 4821 HLLWY PRNTRS GB",
+      "name": "Holloway Printers"
+    },
+    {
+      "raw": "STRIPE* TFLTRAVEL CARD 4821",
+      "name": "TfL"
+    },
+    {
+      "raw": "SQ *TFLTRAVEL CARD 4821",
+      "name": "TfL"
+    },
+    {
+      "raw": "PAYPAL *TFLTRAVEL CARD 4821",
+      "name": "TfL"
+    },
+    {
+      "raw": "STRIPE* TFARRELL CARD 4821",
+      "name": "T Farrell"
+    },
+    {
+      "raw": "SQ *TFARRELL CARD 4821",
+      "name": "T Farrell"
+    },
+    {
+      "raw": "PAYPAL *TFARRELL CARD 4821",
+      "name": "T Farrell"
+    },
+    {
+      "raw": "STRIPE* WAITROSE CARD 4821",
+      "name": "Waitrose"
+    },
+    {
+      "raw": "SQ *WAITROSE CARD 4821",
+      "name": "Waitrose"
+    },
+    {
+      "raw": "PAYPAL *WAITROSE CARD 4821",
+      "name": "Waitrose"
+    },
+    {
+      "raw": "CARD 4821 HMBS GB",
+      "name": "Homebase"
+    },
+    {
+      "raw": "CARD 4821 SCTTSH PWR GB",
+      "name": "ScottishPower"
+    },
+    {
+      "raw": "CARD 4821 MLLGT TLS GB",
+      "name": "Millgate Tools"
+    },
+    {
+      "raw": "STRIPE* BRINDLEMARKET CARD 4821",
+      "name": "Brindle Market"
+    },
+    {
+      "raw": "SQ *BRINDLEMARKET CARD 4821",
+      "name": "Brindle Market"
+    },
+    {
+      "raw": "PAYPAL *BRINDLEMARKET CARD 4821",
+      "name": "Brindle Market"
+    },
+    {
+      "raw": "CARD 4821 MRLW GRDNS GB",
+      "name": "Marlow Gardens"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* WESTMARSHLETTING CARD 4821",
+      "name": "Westmarsh Letting",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 HLLWY PRNTRS GB",
+      "name": "Holloway Printers",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TFLTRAVEL CARD 4821",
+      "name": "TfL",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TFARRELL CARD 4821",
+      "name": "T Farrell",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* WAITROSE CARD 4821",
+      "name": "Waitrose",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 HMBS GB",
+      "name": "Homebase",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 SCTTSH PWR GB",
+      "name": "ScottishPower",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 MLLGT TLS GB",
+      "name": "Millgate Tools",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BRINDLEMARKET CARD 4821",
+      "name": "Brindle Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-vervain-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 MRLW GRDNS GB",
+      "name": "Marlow Gardens",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "TfL",
+      "period": "yearly"
+    },
+    {
+      "merchant": "ScottishPower",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_absolute-saffron-19",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "14 July 2026",
+        "deadline": "on 14 July 2026",
+        "due": "2026-07-14",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_absolute-saffron-19-attendance-01",
+      "segment": "You have an appointment about your policy renewal at Belwood Insurance on 14 July 2026. Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-saffron-19-no-ask-02",
+      "segment": "If you have any questions about this letter, our reception team will be glad to help.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-saffron-19-no-ask-04",
+      "segment": "Your case was closed on 23 March and the file will be kept for 6 years.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-no-subscriptions-coral",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* OAKFIELDESTATES",
+      "name": "Oakfield Estates"
+    },
+    {
+      "raw": "SQ *OAKFIELDESTATES",
+      "name": "Oakfield Estates"
+    },
+    {
+      "raw": "PAYPAL *OAKFIELDESTATES",
+      "name": "Oakfield Estates"
+    },
+    {
+      "raw": "ASHDOWN ENGINEERS PAYMENT",
+      "name": "Ashdown Engineers"
+    },
+    {
+      "raw": "STRIPE* SOUTHERNRAIL",
+      "name": "Southern"
+    },
+    {
+      "raw": "SQ *SOUTHERNRAIL",
+      "name": "Southern"
+    },
+    {
+      "raw": "PAYPAL *SOUTHERNRAIL",
+      "name": "Southern"
+    },
+    {
+      "raw": "STRIPE* RPATEL",
+      "name": "R Patel"
+    },
+    {
+      "raw": "SQ *RPATEL",
+      "name": "R Patel"
+    },
+    {
+      "raw": "PAYPAL *RPATEL",
+      "name": "R Patel"
+    },
+    {
+      "raw": "STRIPE* ALDI",
+      "name": "Aldi"
+    },
+    {
+      "raw": "SQ *ALDI",
+      "name": "Aldi"
+    },
+    {
+      "raw": "PAYPAL *ALDI",
+      "name": "Aldi"
+    },
+    {
+      "raw": "IKEA PAYMENT",
+      "name": "IKEA"
+    },
+    {
+      "raw": "EDF ENERGY PAYMENT",
+      "name": "EDF"
+    },
+    {
+      "raw": "ELMWOOD CYCLES PAYMENT",
+      "name": "Elmwood Cycles"
+    },
+    {
+      "raw": "STRIPE* SALTMARSHSTALL",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "SQ *SALTMARSHSTALL",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "PAYPAL *SALTMARSHSTALL",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "STANWICK LEISURE PAYMENT",
+      "name": "Stanwick Leisure"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* OAKFIELDESTATES",
+      "name": "Oakfield Estates",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "ASHDOWN ENGINEERS PAYMENT",
+      "name": "Ashdown Engineers",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SOUTHERNRAIL",
+      "name": "Southern",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* RPATEL",
+      "name": "R Patel",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ALDI",
+      "name": "Aldi",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "IKEA PAYMENT",
+      "name": "IKEA",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "EDF ENERGY PAYMENT",
+      "name": "EDF",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "ELMWOOD CYCLES PAYMENT",
+      "name": "Elmwood Cycles",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* SALTMARSHSTALL",
+      "name": "Saltmarsh Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-coral-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STANWICK LEISURE PAYMENT",
+      "name": "Stanwick Leisure",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Southern",
+      "period": "yearly"
+    },
+    {
+      "merchant": "EDF",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-unmodelled_term-quince-02",
+  "inputs": {
+    "previous": "generated-exam-unmodelled_term-quince-02-previous.txt",
+    "renewal": "generated-exam-unmodelled_term-quince-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-quince-02-previous-no-value-96d26a",
+      "role": "previous",
+      "segment": "Schedule QUINCE-UT-407 of your home insurance cover with Marlowe Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £4,974.00.",
+        "term": "premium",
+        "value": "£4,974.00"
+      },
+      "id": "exam-unmodelled_term-quince-02-previous-premium-6ae0ff",
+      "role": "previous",
+      "segment": "The price for the year comes to £4,974.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Work to a windscreen carries a £717.00 contribution.",
+        "term": "other",
+        "value": "£717.00"
+      },
+      "id": "exam-unmodelled_term-quince-02-previous-other-a48b06",
+      "review": true,
+      "role": "previous",
+      "segment": "Work to a windscreen carries a £717.00 contribution.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-quince-02-previous-no-value-672951",
+      "role": "previous",
+      "segment": "Please quote QUINCE-UT-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-quince-02-previous-no-value-b7e2c1",
+      "role": "previous",
+      "segment": "Cover for home insurance under QUINCE-UT-407 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-quince-02-renewal-no-value-3dadb0",
+      "role": "renewal",
+      "segment": "Your home insurance cover with Marlowe Mutual under QUINCE-UT-407 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,014.00.",
+        "term": "premium",
+        "value": "£5,014.00"
+      },
+      "id": "exam-unmodelled_term-quince-02-renewal-premium-b43db3",
+      "role": "renewal",
+      "segment": "The price for the year comes to £5,014.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Work to a windscreen carries a £717.00 contribution.",
+        "term": "other",
+        "value": "£717.00"
+      },
+      "id": "exam-unmodelled_term-quince-02-renewal-other-a48b06",
+      "review": true,
+      "role": "renewal",
+      "segment": "Work to a windscreen carries a £717.00 contribution.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-quince-02-renewal-no-value-b7e2c1",
+      "role": "renewal",
+      "segment": "Cover for home insurance under QUINCE-UT-407 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-quince-02-renewal-no-value-672951",
+      "role": "renewal",
+      "segment": "Please quote QUINCE-UT-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

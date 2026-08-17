@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-no-subscriptions-raven-wood",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* GRESHAMESTATES CARD 4821",
+      "name": "Gresham Estates"
+    },
+    {
+      "raw": "SQ *GRESHAMESTATES CARD 4821",
+      "name": "Gresham Estates"
+    },
+    {
+      "raw": "PAYPAL *GRESHAMESTATES CARD 4821",
+      "name": "Gresham Estates"
+    },
+    {
+      "raw": "CARD 4821 VRNHM NLYTCS GB",
+      "name": "Vernham Analytics"
+    },
+    {
+      "raw": "STRIPE* CHILTERNRAIL CARD 4821",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "SQ *CHILTERNRAIL CARD 4821",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "PAYPAL *CHILTERNRAIL CARD 4821",
+      "name": "Chiltern Railways"
+    },
+    {
+      "raw": "STRIPE* LBJORNSSON CARD 4821",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "SQ *LBJORNSSON CARD 4821",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "PAYPAL *LBJORNSSON CARD 4821",
+      "name": "L Bjornsson"
+    },
+    {
+      "raw": "STRIPE* COOPFOOD CARD 4821",
+      "name": "Co-op"
+    },
+    {
+      "raw": "SQ *COOPFOOD CARD 4821",
+      "name": "Co-op"
+    },
+    {
+      "raw": "PAYPAL *COOPFOOD CARD 4821",
+      "name": "Co-op"
+    },
+    {
+      "raw": "CARD 4821 JHN LWS GB",
+      "name": "John Lewis"
+    },
+    {
+      "raw": "CARD 4821 TLT GB",
+      "name": "Utilita"
+    },
+    {
+      "raw": "CARD 4821 PNTLW GRDN GB",
+      "name": "Pentlow Garden"
+    },
+    {
+      "raw": "STRIPE* TOLLGATESTALL CARD 4821",
+      "name": "Tollgate Stall"
+    },
+    {
+      "raw": "SQ *TOLLGATESTALL CARD 4821",
+      "name": "Tollgate Stall"
+    },
+    {
+      "raw": "PAYPAL *TOLLGATESTALL CARD 4821",
+      "name": "Tollgate Stall"
+    },
+    {
+      "raw": "CARD 4821 LDRCT LSR GB",
+      "name": "Aldercote Leisure"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* GRESHAMESTATES CARD 4821",
+      "name": "Gresham Estates",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 VRNHM NLYTCS GB",
+      "name": "Vernham Analytics",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* CHILTERNRAIL CARD 4821",
+      "name": "Chiltern Railways",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LBJORNSSON CARD 4821",
+      "name": "L Bjornsson",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* COOPFOOD CARD 4821",
+      "name": "Co-op",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 JHN LWS GB",
+      "name": "John Lewis",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 TLT GB",
+      "name": "Utilita",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 PNTLW GRDN GB",
+      "name": "Pentlow Garden",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* TOLLGATESTALL CARD 4821",
+      "name": "Tollgate Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-no-subscriptions-raven-wood-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 LDRCT LSR GB",
+      "name": "Aldercote Leisure",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Chiltern Railways",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Utilita",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

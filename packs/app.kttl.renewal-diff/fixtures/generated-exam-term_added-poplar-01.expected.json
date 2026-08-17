@@ -1,0 +1,145 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-term_added-poplar-01",
+  "inputs": {
+    "previous": "generated-exam-term_added-poplar-01-previous.txt",
+    "renewal": "generated-exam-term_added-poplar-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-term_added-poplar-01-previous-no-value-d40415",
+      "role": "previous",
+      "segment": "Schedule POPLAR-TA-400 of your landlord insurance cover with Westmarch Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £3,469.00.",
+        "term": "premium",
+        "value": "£3,469.00"
+      },
+      "id": "exam-term_added-poplar-01-previous-premium-464a5d",
+      "role": "previous",
+      "segment": "The price for the year comes to £3,469.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,335.00.",
+        "term": "compulsory_excess",
+        "value": "£2,335.00"
+      },
+      "id": "exam-term_added-poplar-01-previous-compulsory-excess-151a43",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £2,335.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-poplar-01-previous-no-value-011673",
+      "role": "previous",
+      "segment": "Please quote POPLAR-TA-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-poplar-01-previous-no-value-028d58",
+      "role": "previous",
+      "segment": "Cover for landlord insurance under POPLAR-TA-400 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-poplar-01-renewal-no-value-b749e6",
+      "role": "renewal",
+      "segment": "Your landlord insurance cover with Westmarch Cover under POPLAR-TA-400 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £3,469.00.",
+        "term": "premium",
+        "value": "£3,469.00"
+      },
+      "id": "exam-term_added-poplar-01-renewal-premium-464a5d",
+      "role": "renewal",
+      "segment": "The price for the year comes to £3,469.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,335.00.",
+        "term": "compulsory_excess",
+        "value": "£2,335.00"
+      },
+      "id": "exam-term_added-poplar-01-renewal-compulsory-excess-151a43",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £2,335.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £527.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£527.00"
+      },
+      "id": "exam-term_added-poplar-01-renewal-voluntary-excess-2d0e68",
+      "role": "renewal",
+      "segment": "You chose to carry a further £527.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-poplar-01-renewal-no-value-028d58",
+      "role": "renewal",
+      "segment": "Cover for landlord insurance under POPLAR-TA-400 is arranged by Westmarch Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-poplar-01-renewal-no-value-011673",
+      "role": "renewal",
+      "segment": "Please quote POPLAR-TA-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

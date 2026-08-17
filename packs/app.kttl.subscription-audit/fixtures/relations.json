@@ -1,0 +1,80 @@
+{
+  "relations": [
+    {
+      "id": "reorder-holds-development-subscription-heavy",
+      "kind": {
+        "invariance": {
+          "projection": "classifications_by_merchant"
+        }
+      },
+      "left": "development-generated-clean-subscription-heavy-amber",
+      "right": "development-generated-clean-subscription-heavy-amber-reordered"
+    },
+    {
+      "id": "removal-drops-one-merchant-development",
+      "kind": {
+        "algebraic": "merchant_removal"
+      },
+      "left": "development-generated-clean-subscription-heavy-amber",
+      "right": "development-generated-clean-subscription-heavy-amber-one-removed"
+    },
+    {
+      "id": "reorder-holds-development-no-subscriptions",
+      "kind": {
+        "invariance": {
+          "projection": "classifications_by_merchant"
+        }
+      },
+      "left": "development-generated-clean-no-subscriptions-granite",
+      "right": "development-generated-clean-no-subscriptions-granite-reordered"
+    },
+    {
+      "id": "reorder-holds-exam-subscription-heavy",
+      "kind": {
+        "invariance": {
+          "projection": "classifications_by_merchant"
+        }
+      },
+      "left": "exam-generated-clean-subscription-heavy-alpine-lake",
+      "right": "exam-generated-clean-subscription-heavy-alpine-lake-reordered"
+    },
+    {
+      "id": "removal-drops-one-merchant-exam",
+      "kind": {
+        "algebraic": "merchant_removal"
+      },
+      "left": "exam-generated-clean-subscription-heavy-alpine-lake",
+      "right": "exam-generated-clean-subscription-heavy-alpine-lake-one-removed"
+    },
+    {
+      "id": "reorder-holds-exam-no-subscriptions",
+      "kind": {
+        "invariance": {
+          "projection": "classifications_by_merchant"
+        }
+      },
+      "left": "exam-generated-clean-no-subscriptions-glacier-path",
+      "right": "exam-generated-clean-no-subscriptions-glacier-path-reordered"
+    },
+    {
+      "id": "adv-descriptor-command-text-holds-development",
+      "kind": {
+        "invariance": {
+          "projection": "classifications_by_merchant"
+        }
+      },
+      "left": "development-generated-clean-subscription-heavy-amber",
+      "right": "development-generated-clean-subscription-heavy-amber-descriptor-command-text"
+    },
+    {
+      "id": "adv-descriptor-command-text-holds-exam",
+      "kind": {
+        "invariance": {
+          "projection": "classifications_by_merchant"
+        }
+      },
+      "left": "exam-generated-clean-subscription-heavy-alpine-lake",
+      "right": "exam-generated-clean-subscription-heavy-alpine-lake-descriptor-command-text"
+    }
+  ]
+}

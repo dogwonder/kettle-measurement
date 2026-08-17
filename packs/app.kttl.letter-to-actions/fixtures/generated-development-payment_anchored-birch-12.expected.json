@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_anchored-birch-12",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "25 October 2026",
+        "deadline": "within 30 days",
+        "due": "2026-11-24",
+        "kind": "payment",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "payment_anchored-birch-12-payment-02",
+      "segment": "Please pay £0.00 within 30 days of 25 October 2026, quoting reference GLA-5527.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-birch-12-no-ask-03",
+      "segment": "Thank you for your co-operation in this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-birch-12-no-ask-05",
+      "segment": "Your details were updated on 15 March following your telephone call.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

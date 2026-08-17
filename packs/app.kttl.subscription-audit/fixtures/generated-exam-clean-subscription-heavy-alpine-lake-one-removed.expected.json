@@ -1,0 +1,214 @@
+{
+  "classify": [
+    {
+      "category": "news_media",
+      "id": "removal-exam-clean-subscription-heavy-alpine-lake-annual-journal",
+      "kind": "subscription",
+      "name": "The Week",
+      "raw": "THE WEEK",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ]
+    },
+    {
+      "category": "software",
+      "id": "removal-exam-clean-subscription-heavy-alpine-lake-trial-learning",
+      "kind": "subscription",
+      "name": "Busuu",
+      "raw": "BUSUU",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ]
+    },
+    {
+      "category": "fitness",
+      "id": "removal-exam-clean-subscription-heavy-alpine-lake-trial-fitness",
+      "kind": "subscription",
+      "name": "Peloton",
+      "raw": "PELOTON",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ]
+    },
+    {
+      "category": "streaming",
+      "id": "removal-exam-clean-subscription-heavy-alpine-lake-resumed-streaming",
+      "kind": "subscription",
+      "name": "Prime Video",
+      "raw": "PRIME VIDEO",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ]
+    },
+    {
+      "category": "streaming",
+      "id": "removal-exam-clean-subscription-heavy-alpine-lake-resumed-music",
+      "kind": "subscription",
+      "name": "Amazon Music",
+      "raw": "AMAZON MUSIC",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ]
+    },
+    {
+      "category": "software",
+      "id": "removal-exam-clean-subscription-heavy-alpine-lake-rising-cloud",
+      "kind": "subscription",
+      "name": "iCloud+",
+      "raw": "STRIPE* ICLOUDPLUS",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ]
+    },
+    {
+      "category": "news_media",
+      "id": "removal-exam-clean-subscription-heavy-alpine-lake-refunded-news",
+      "kind": "subscription",
+      "name": "The Independent",
+      "raw": "THE INDEPENDENT",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ]
+    },
+    {
+      "category": "housing",
+      "id": "removal-exam-clean-subscription-heavy-alpine-lake-monthly-rent",
+      "kind": "utility",
+      "name": "Thornbury Letting",
+      "raw": "STRIPE* THORNBURYLETTING",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ]
+    },
+    {
+      "category": "finance",
+      "id": "removal-exam-clean-subscription-heavy-alpine-lake-monthly-salary",
+      "kind": "income",
+      "name": "Tarlton Joinery",
+      "raw": "TARLTON JOINERY",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series"
+      ]
+    }
+  ],
+  "eval_set": "exam",
+  "fixture_id": "exam-generated-clean-subscription-heavy-alpine-lake-one-removed",
+  "normalise": [
+    {
+      "name": "The Week",
+      "raw": "THE WEEK"
+    },
+    {
+      "name": "Busuu",
+      "raw": "BUSUU"
+    },
+    {
+      "name": "Peloton",
+      "raw": "PELOTON"
+    },
+    {
+      "name": "Prime Video",
+      "raw": "PRIME VIDEO"
+    },
+    {
+      "name": "Amazon Music",
+      "raw": "AMAZON MUSIC"
+    },
+    {
+      "name": "iCloud+",
+      "raw": "STRIPE* ICLOUDPLUS"
+    },
+    {
+      "name": "iCloud+",
+      "raw": "SQ *ICLOUDPLUS"
+    },
+    {
+      "name": "iCloud+",
+      "raw": "PAYPAL *ICLOUDPLUS"
+    },
+    {
+      "name": "The Independent",
+      "raw": "THE INDEPENDENT"
+    },
+    {
+      "name": "Thornbury Letting",
+      "raw": "STRIPE* THORNBURYLETTING"
+    },
+    {
+      "name": "Thornbury Letting",
+      "raw": "SQ *THORNBURYLETTING"
+    },
+    {
+      "name": "Thornbury Letting",
+      "raw": "PAYPAL *THORNBURYLETTING"
+    },
+    {
+      "name": "Tarlton Joinery",
+      "raw": "TARLTON JOINERY"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "The Week",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Busuu",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Peloton",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Prime Video",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Amazon Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Independent",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "classify_category": "exact",
+    "classify_kind": "exact",
+    "normalise": "fuzzy:0.85",
+    "recurring": "exact"
+  }
+}

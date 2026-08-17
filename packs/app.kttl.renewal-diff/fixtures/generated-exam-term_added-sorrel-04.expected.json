@@ -1,0 +1,145 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-term_added-sorrel-04",
+  "inputs": {
+    "previous": "generated-exam-term_added-sorrel-04-previous.txt",
+    "renewal": "generated-exam-term_added-sorrel-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-term_added-sorrel-04-previous-no-value-e9ce4b",
+      "role": "previous",
+      "segment": "Schedule SORREL-TA-421 of your buildings insurance cover with Brackenfield Cover, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £3,490.00.",
+        "term": "premium",
+        "value": "£3,490.00"
+      },
+      "id": "exam-term_added-sorrel-04-previous-premium-0e0235",
+      "role": "previous",
+      "segment": "The price for the year comes to £3,490.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,350.00.",
+        "term": "compulsory_excess",
+        "value": "£2,350.00"
+      },
+      "id": "exam-term_added-sorrel-04-previous-compulsory-excess-549ca9",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £2,350.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-sorrel-04-previous-no-value-568278",
+      "role": "previous",
+      "segment": "Please quote SORREL-TA-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-sorrel-04-previous-no-value-10ed4d",
+      "role": "previous",
+      "segment": "Cover for buildings insurance under SORREL-TA-421 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-sorrel-04-renewal-no-value-962560",
+      "role": "renewal",
+      "segment": "Your buildings insurance cover with Brackenfield Cover under SORREL-TA-421 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £3,490.00.",
+        "term": "premium",
+        "value": "£3,490.00"
+      },
+      "id": "exam-term_added-sorrel-04-renewal-premium-0e0235",
+      "role": "renewal",
+      "segment": "The price for the year comes to £3,490.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £2,350.00.",
+        "term": "compulsory_excess",
+        "value": "£2,350.00"
+      },
+      "id": "exam-term_added-sorrel-04-renewal-compulsory-excess-549ca9",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £2,350.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £530.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£530.00"
+      },
+      "id": "exam-term_added-sorrel-04-renewal-voluntary-excess-6ec333",
+      "role": "renewal",
+      "segment": "You chose to carry a further £530.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-sorrel-04-renewal-no-value-10ed4d",
+      "role": "renewal",
+      "segment": "Cover for buildings insurance under SORREL-TA-421 is arranged by Brackenfield Cover, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-term_added-sorrel-04-renewal-no-value-568278",
+      "role": "renewal",
+      "segment": "Please quote SORREL-TA-421 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

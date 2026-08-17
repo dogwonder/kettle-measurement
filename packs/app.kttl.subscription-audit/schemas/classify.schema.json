@@ -1,0 +1,54 @@
+{
+ "type": "object",
+ "properties": {
+  "results": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "integer"
+     },
+     "name": {
+      "type": "string"
+     },
+     "category": {
+      "enum": [
+       "streaming",
+       "software",
+       "news_media",
+       "fitness",
+       "telecoms",
+       "energy",
+       "insurance",
+       "finance",
+       "transport",
+       "food_drink",
+       "retail",
+       "charity",
+       "housing",
+       "other",
+       "unknown"
+      ]
+     },
+     "confidence": {
+      "enum": [
+       "high",
+       "medium",
+       "low"
+      ]
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "category",
+     "confidence"
+    ]
+   }
+  }
+ },
+ "required": [
+  "results"
+ ]
+}

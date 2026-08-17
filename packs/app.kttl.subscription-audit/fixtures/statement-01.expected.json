@@ -1,0 +1,35 @@
+{
+  "fixture_id": "clean-everyday-01",
+  "normalise": [
+    { "raw": "NETFLIX.COM", "name": "Netflix" },
+    { "raw": "SPOTIFY LTD", "name": "Spotify" },
+    { "raw": "PUREGYM LTD", "name": "PureGym" },
+    { "raw": "BRITISH GAS", "name": "British Gas" },
+    { "raw": "TESCO STORES 3412", "name": "Tesco" },
+    { "raw": "ACME PAYROLL", "name": "Acme Payroll" }
+  ],
+  "classify": [
+    { "id": "monthly-video-streaming-01", "strata": ["clean"],
+      "name": "Netflix", "kind": "subscription", "category": "streaming" },
+    { "id": "monthly-music-streaming-01", "strata": ["clean"],
+      "name": "Spotify", "kind": "subscription", "category": "streaming" },
+    { "id": "monthly-fitness-membership-01", "strata": ["clean"],
+      "name": "PureGym", "kind": "subscription", "category": "fitness" },
+    { "id": "household-energy-bill-01", "strata": ["clean"],
+      "name": "British Gas", "kind": "utility", "category": "energy" },
+    { "id": "recurring-grocery-shop-01", "strata": ["clean"],
+      "name": "Tesco", "kind": "regular_spend", "category": "food_drink" }
+  ],
+  "recurring": [
+    { "merchant": "Netflix", "period": "monthly",
+      "annualised": 155.88, "price_rise": true },
+    { "merchant": "Spotify", "period": "monthly",
+      "annualised": 143.88, "price_rise": false },
+    { "merchant": "PureGym", "period": "monthly",
+      "annualised": 299.88, "price_rise": false },
+    { "merchant": "British Gas", "period": "quarterly",
+      "annualised": 352.00, "price_rise": false }
+  ],
+  "tolerances": { "normalise": "fuzzy:0.85", "classify_kind": "exact",
+                  "classify_category": "exact", "recurring": "exact" }
+}

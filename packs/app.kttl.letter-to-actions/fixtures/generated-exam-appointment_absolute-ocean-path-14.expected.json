@@ -1,0 +1,42 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_absolute-ocean-path-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "14 July 2026",
+        "deadline": "on 14 July 2026",
+        "due": "2026-07-14",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_absolute-ocean-path-14-attendance-01",
+      "segment": "We have booked your policy renewal appointment with Belwood Insurance on 14 July 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-ocean-path-14-no-ask-02",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_absolute-ocean-path-14-no-ask-04",
+      "segment": "The repair carried out on 16 January was signed off with no further works identified.",
+      "strata": [
+        "any-letter",
+        "appointment-absolute",
+        "no-obligation"
+      ]
+    }
+  ]
+}

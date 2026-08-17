@@ -1,0 +1,112 @@
+{
+  "relations": [
+    {
+      "id": "swap-inverts-development-excess-rose",
+      "kind": {
+        "algebraic": "term_change_inversion"
+      },
+      "left": "development-excess_rose-amber-01",
+      "right": "development-excess_rose-amber-01-swapped"
+    },
+    {
+      "id": "swap-inverts-development-premium-rose",
+      "kind": {
+        "algebraic": "term_change_inversion"
+      },
+      "left": "development-premium_rose-amber-01",
+      "right": "development-premium_rose-amber-01-swapped"
+    },
+    {
+      "id": "swap-inverts-development-basis-changed",
+      "kind": {
+        "algebraic": "term_change_inversion"
+      },
+      "left": "development-basis_changed-amber-01",
+      "right": "development-basis_changed-amber-01-swapped"
+    },
+    {
+      "id": "swap-inverts-exam-excess-rose",
+      "kind": {
+        "algebraic": "term_change_inversion"
+      },
+      "left": "exam-excess_rose-poplar-01",
+      "right": "exam-excess_rose-poplar-01-swapped"
+    },
+    {
+      "id": "swap-inverts-exam-premium-rose",
+      "kind": {
+        "algebraic": "term_change_inversion"
+      },
+      "left": "exam-premium_rose-poplar-01",
+      "right": "exam-premium_rose-poplar-01-swapped"
+    },
+    {
+      "id": "swap-inverts-exam-basis-changed",
+      "kind": {
+        "algebraic": "term_change_inversion"
+      },
+      "left": "exam-basis_changed-poplar-01",
+      "right": "exam-basis_changed-poplar-01-swapped"
+    },
+    {
+      "id": "adv-descriptor-command-text-holds-development",
+      "kind": {
+        "invariance": {
+          "projection": "terms_by_role"
+        }
+      },
+      "left": "development-excess_rose-amber-01",
+      "right": "development-excess_rose-amber-01-descriptor-command-text"
+    },
+    {
+      "id": "adv-injection-json-terms-holds-development",
+      "kind": {
+        "invariance": {
+          "projection": "terms_by_role"
+        }
+      },
+      "left": "development-premium_rose-amber-01",
+      "right": "development-premium_rose-amber-01-injection-json-terms"
+    },
+    {
+      "id": "adv-injection-unusual-delimiters-holds-development",
+      "kind": {
+        "invariance": {
+          "projection": "terms_by_role"
+        }
+      },
+      "left": "development-two_excesses-amber-01",
+      "right": "development-two_excesses-amber-01-injection-unusual-delimiters"
+    },
+    {
+      "id": "adv-descriptor-command-text-holds-exam",
+      "kind": {
+        "invariance": {
+          "projection": "terms_by_role"
+        }
+      },
+      "left": "exam-excess_rose-poplar-01",
+      "right": "exam-excess_rose-poplar-01-descriptor-command-text"
+    },
+    {
+      "id": "adv-injection-json-terms-holds-exam",
+      "kind": {
+        "invariance": {
+          "projection": "terms_by_role"
+        }
+      },
+      "left": "exam-premium_rose-poplar-01",
+      "right": "exam-premium_rose-poplar-01-injection-json-terms"
+    },
+    {
+      "id": "adv-injection-unusual-delimiters-holds-exam",
+      "kind": {
+        "invariance": {
+          "projection": "terms_by_role"
+        }
+      },
+      "left": "exam-two_excesses-poplar-01",
+      "right": "exam-two_excesses-poplar-01-injection-unusual-delimiters"
+    }
+  ]
+}

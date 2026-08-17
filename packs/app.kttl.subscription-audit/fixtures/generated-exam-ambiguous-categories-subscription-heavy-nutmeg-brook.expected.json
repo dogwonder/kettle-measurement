@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-ambiguous-categories-subscription-heavy-nutmeg-brook",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "SQ *BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "PAYPAL *BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "PROSPECT MAG PAYMENT",
+      "name": "Prospect"
+    },
+    {
+      "raw": "UDEMY PAYMENT",
+      "name": "Udemy"
+    },
+    {
+      "raw": "VIRGIN ACTIVE PAYMENT",
+      "name": "Virgin Active"
+    },
+    {
+      "raw": "SKY DIGITAL PAYMENT",
+      "name": "Sky"
+    },
+    {
+      "raw": "BANDCAMP PAYMENT",
+      "name": "Bandcamp"
+    },
+    {
+      "raw": "STRIPE* EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "SQ *EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "PAYPAL *EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "WASHINGTONPOST PAYMENT",
+      "name": "The Washington Post"
+    },
+    {
+      "raw": "STRIPE* ABBEYGATEPROP",
+      "name": "Abbeygate Property"
+    },
+    {
+      "raw": "SQ *ABBEYGATEPROP",
+      "name": "Abbeygate Property"
+    },
+    {
+      "raw": "PAYPAL *ABBEYGATEPROP",
+      "name": "Abbeygate Property"
+    },
+    {
+      "raw": "DUNMORE CATERING PAYMENT",
+      "name": "Dunmore Catering"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BOXCOM",
+      "name": "Box",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "PROSPECT MAG PAYMENT",
+      "name": "Prospect",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "UDEMY PAYMENT",
+      "name": "Udemy",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "VIRGIN ACTIVE PAYMENT",
+      "name": "Virgin Active",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "SKY DIGITAL PAYMENT",
+      "name": "Sky",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "BANDCAMP PAYMENT",
+      "name": "Bandcamp",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* EVERNOTE",
+      "name": "Evernote",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "WASHINGTONPOST PAYMENT",
+      "name": "The Washington Post",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ABBEYGATEPROP",
+      "name": "Abbeygate Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-ambiguous-categories-subscription-heavy-nutmeg-brook-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series"
+      ],
+      "raw": "DUNMORE CATERING PAYMENT",
+      "name": "Dunmore Catering",
+      "kind": "income",
+      "category": "finance"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Box",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Prospect",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Udemy",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Virgin Active",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Sky",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Bandcamp",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Washington Post",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-unmodelled_term-rowan-03",
+  "inputs": {
+    "previous": "generated-exam-unmodelled_term-rowan-03-previous.txt",
+    "renewal": "generated-exam-unmodelled_term-rowan-03-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-rowan-03-previous-no-value-543de4",
+      "role": "previous",
+      "segment": "Schedule ROWAN-UT-414 of your car insurance cover with Kestrel Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £4,981.00.",
+        "term": "premium",
+        "value": "£4,981.00"
+      },
+      "id": "exam-unmodelled_term-rowan-03-previous-premium-22d1a2",
+      "role": "previous",
+      "segment": "The price for the year comes to £4,981.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Work to a windscreen carries a £718.00 contribution.",
+        "term": "other",
+        "value": "£718.00"
+      },
+      "id": "exam-unmodelled_term-rowan-03-previous-other-b20ae6",
+      "review": true,
+      "role": "previous",
+      "segment": "Work to a windscreen carries a £718.00 contribution.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-rowan-03-previous-no-value-a5a0e1",
+      "role": "previous",
+      "segment": "Please quote ROWAN-UT-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-rowan-03-previous-no-value-fea276",
+      "role": "previous",
+      "segment": "Cover for car insurance under ROWAN-UT-414 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-rowan-03-renewal-no-value-9a7ded",
+      "role": "renewal",
+      "segment": "Your car insurance cover with Kestrel Assurance under ROWAN-UT-414 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £5,021.00.",
+        "term": "premium",
+        "value": "£5,021.00"
+      },
+      "id": "exam-unmodelled_term-rowan-03-renewal-premium-14a753",
+      "role": "renewal",
+      "segment": "The price for the year comes to £5,021.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Work to a windscreen carries a £718.00 contribution.",
+        "term": "other",
+        "value": "£718.00"
+      },
+      "id": "exam-unmodelled_term-rowan-03-renewal-other-b20ae6",
+      "review": true,
+      "role": "renewal",
+      "segment": "Work to a windscreen carries a £718.00 contribution.",
+      "strata": [
+        "any-schedule",
+        "unmodelled-value"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-rowan-03-renewal-no-value-fea276",
+      "role": "renewal",
+      "segment": "Cover for car insurance under ROWAN-UT-414 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-unmodelled_term-rowan-03-renewal-no-value-a5a0e1",
+      "role": "renewal",
+      "segment": "Please quote ROWAN-UT-414 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

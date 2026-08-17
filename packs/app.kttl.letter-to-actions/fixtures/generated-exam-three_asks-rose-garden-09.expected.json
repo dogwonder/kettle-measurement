@@ -1,0 +1,77 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-three_asks-rose-garden-09",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-03-03",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "three_asks-rose-garden-09-payment-01",
+      "segment": "A payment of £214.60 towards your council tax account is due within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "24 September 2026",
+        "deadline": "on 24 September 2026",
+        "due": "2026-09-24",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "three_asks-rose-garden-09-attendance-02",
+      "segment": "You are required to attend a case review at our offices on 24 September 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-02-28",
+        "kind": "response",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "three_asks-rose-garden-09-response-03",
+      "segment": "Please confirm your attendance in writing by the end of the month.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-rose-garden-09-no-ask-04",
+      "segment": "A copy of this letter has been placed on your file.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-rose-garden-09-no-ask-06",
+      "segment": "Amendments discussed by telephone were applied on 19 March.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

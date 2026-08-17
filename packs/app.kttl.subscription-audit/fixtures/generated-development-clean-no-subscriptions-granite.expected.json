@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-clean-no-subscriptions-granite",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* HARTWELLLETTINGS",
+      "name": "Hartwell Lettings"
+    },
+    {
+      "raw": "SQ *HARTWELLLETTINGS",
+      "name": "Hartwell Lettings"
+    },
+    {
+      "raw": "PAYPAL *HARTWELLLETTINGS",
+      "name": "Hartwell Lettings"
+    },
+    {
+      "raw": "CALDWELL LOGISTICS",
+      "name": "Caldwell Logistics"
+    },
+    {
+      "raw": "STRIPE* TRAINLINE",
+      "name": "Trainline"
+    },
+    {
+      "raw": "SQ *TRAINLINE",
+      "name": "Trainline"
+    },
+    {
+      "raw": "PAYPAL *TRAINLINE",
+      "name": "Trainline"
+    },
+    {
+      "raw": "STRIPE* JHENDERSON",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "SQ *JHENDERSON",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "PAYPAL *JHENDERSON",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "STRIPE* TESCOSTORES",
+      "name": "Tesco"
+    },
+    {
+      "raw": "SQ *TESCOSTORES",
+      "name": "Tesco"
+    },
+    {
+      "raw": "PAYPAL *TESCOSTORES",
+      "name": "Tesco"
+    },
+    {
+      "raw": "ARGOS",
+      "name": "Argos"
+    },
+    {
+      "raw": "BRITISH GAS",
+      "name": "British Gas"
+    },
+    {
+      "raw": "BRIGHTWATER HOME",
+      "name": "Brightwater Home"
+    },
+    {
+      "raw": "STRIPE* FENWICKMARKET",
+      "name": "Fenwick Market"
+    },
+    {
+      "raw": "SQ *FENWICKMARKET",
+      "name": "Fenwick Market"
+    },
+    {
+      "raw": "PAYPAL *FENWICKMARKET",
+      "name": "Fenwick Market"
+    },
+    {
+      "raw": "HOLLINGWOOD PASS",
+      "name": "Hollingwood Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-clean-no-subscriptions-granite-monthly-rent",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* HARTWELLLETTINGS",
+      "name": "Hartwell Lettings",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-clean-no-subscriptions-granite-monthly-salary",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CALDWELL LOGISTICS",
+      "name": "Caldwell Logistics",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-clean-no-subscriptions-granite-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TRAINLINE",
+      "name": "Trainline",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-clean-no-subscriptions-granite-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* JHENDERSON",
+      "name": "J Henderson",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-clean-no-subscriptions-granite-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TESCOSTORES",
+      "name": "Tesco",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-clean-no-subscriptions-granite-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "ARGOS",
+      "name": "Argos",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-clean-no-subscriptions-granite-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "BRITISH GAS",
+      "name": "British Gas",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-clean-no-subscriptions-granite-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BRIGHTWATER HOME",
+      "name": "Brightwater Home",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-clean-no-subscriptions-granite-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* FENWICKMARKET",
+      "name": "Fenwick Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-clean-no-subscriptions-granite-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "HOLLINGWOOD PASS",
+      "name": "Hollingwood Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Trainline",
+      "period": "yearly"
+    },
+    {
+      "merchant": "British Gas",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

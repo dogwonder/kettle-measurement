@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_relative-oat-28",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-05-08",
+        "kind": "payment",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "payment_relative-oat-28-payment-01",
+      "segment": "Our records show that estate matter of £480.00 remains outstanding. Please pay £480.00 within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-oat-28-no-ask-02",
+      "segment": "We are sorry for any inconvenience this may have caused.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-oat-28-no-ask-04",
+      "segment": "Your file was transferred to our Leeds office on 28 February; the same reference applies.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

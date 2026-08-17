@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-no-subscriptions-alder",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* HARTWELLLETTINGS",
+      "name": "Hartwell Lettings"
+    },
+    {
+      "raw": "SQ *HARTWELLLETTINGS",
+      "name": "Hartwell Lettings"
+    },
+    {
+      "raw": "PAYPAL *HARTWELLLETTINGS",
+      "name": "Hartwell Lettings"
+    },
+    {
+      "raw": "CALDWELL LOGISTICS PAYMENT",
+      "name": "Caldwell Logistics"
+    },
+    {
+      "raw": "STRIPE* TRAINLINE",
+      "name": "Trainline"
+    },
+    {
+      "raw": "SQ *TRAINLINE",
+      "name": "Trainline"
+    },
+    {
+      "raw": "PAYPAL *TRAINLINE",
+      "name": "Trainline"
+    },
+    {
+      "raw": "STRIPE* JHENDERSON",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "SQ *JHENDERSON",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "PAYPAL *JHENDERSON",
+      "name": "J Henderson"
+    },
+    {
+      "raw": "STRIPE* TESCOSTORES",
+      "name": "Tesco"
+    },
+    {
+      "raw": "SQ *TESCOSTORES",
+      "name": "Tesco"
+    },
+    {
+      "raw": "PAYPAL *TESCOSTORES",
+      "name": "Tesco"
+    },
+    {
+      "raw": "ARGOS PAYMENT",
+      "name": "Argos"
+    },
+    {
+      "raw": "BRITISH GAS PAYMENT",
+      "name": "British Gas"
+    },
+    {
+      "raw": "BRIGHTWATER HOME PAYMENT",
+      "name": "Brightwater Home"
+    },
+    {
+      "raw": "STRIPE* FENWICKMARKET",
+      "name": "Fenwick Market"
+    },
+    {
+      "raw": "SQ *FENWICKMARKET",
+      "name": "Fenwick Market"
+    },
+    {
+      "raw": "PAYPAL *FENWICKMARKET",
+      "name": "Fenwick Market"
+    },
+    {
+      "raw": "HOLLINGWOOD PASS PAYMENT",
+      "name": "Hollingwood Pass"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* HARTWELLLETTINGS",
+      "name": "Hartwell Lettings",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CALDWELL LOGISTICS PAYMENT",
+      "name": "Caldwell Logistics",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TRAINLINE",
+      "name": "Trainline",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* JHENDERSON",
+      "name": "J Henderson",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* TESCOSTORES",
+      "name": "Tesco",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "ARGOS PAYMENT",
+      "name": "Argos",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "BRITISH GAS PAYMENT",
+      "name": "British Gas",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BRIGHTWATER HOME PAYMENT",
+      "name": "Brightwater Home",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* FENWICKMARKET",
+      "name": "Fenwick Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-alder-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "HOLLINGWOOD PASS PAYMENT",
+      "name": "Hollingwood Pass",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Trainline",
+      "period": "yearly"
+    },
+    {
+      "merchant": "British Gas",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

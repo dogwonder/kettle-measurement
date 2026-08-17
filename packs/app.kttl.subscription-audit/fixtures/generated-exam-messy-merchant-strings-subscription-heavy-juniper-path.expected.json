@@ -1,0 +1,243 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-subscription-heavy-juniper-path",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* BOXCOM CARD 4821",
+      "name": "Box"
+    },
+    {
+      "raw": "SQ *BOXCOM CARD 4821",
+      "name": "Box"
+    },
+    {
+      "raw": "PAYPAL *BOXCOM CARD 4821",
+      "name": "Box"
+    },
+    {
+      "raw": "CARD 4821 PRSPCT MG GB",
+      "name": "Prospect"
+    },
+    {
+      "raw": "CARD 4821 DMY GB",
+      "name": "Udemy"
+    },
+    {
+      "raw": "CARD 4821 VRGN CTV GB",
+      "name": "Virgin Active"
+    },
+    {
+      "raw": "CARD 4821 SKY DGTL GB",
+      "name": "Sky"
+    },
+    {
+      "raw": "CARD 4821 BNDCMP GB",
+      "name": "Bandcamp"
+    },
+    {
+      "raw": "STRIPE* EVERNOTE CARD 4821",
+      "name": "Evernote"
+    },
+    {
+      "raw": "SQ *EVERNOTE CARD 4821",
+      "name": "Evernote"
+    },
+    {
+      "raw": "PAYPAL *EVERNOTE CARD 4821",
+      "name": "Evernote"
+    },
+    {
+      "raw": "CARD 4821 WSHNGTNPST GB",
+      "name": "The Washington Post"
+    },
+    {
+      "raw": "STRIPE* WEAVERSMARKET CARD 4821",
+      "name": "Weavers Market"
+    },
+    {
+      "raw": "SQ *WEAVERSMARKET CARD 4821",
+      "name": "Weavers Market"
+    },
+    {
+      "raw": "PAYPAL *WEAVERSMARKET CARD 4821",
+      "name": "Weavers Market"
+    },
+    {
+      "raw": "CARD 4821 PNHL PRKS GB",
+      "name": "Penhale Parks"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BOXCOM CARD 4821",
+      "name": "Box",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 PRSPCT MG GB",
+      "name": "Prospect",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 DMY GB",
+      "name": "Udemy",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 VRGN CTV GB",
+      "name": "Virgin Active",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 SKY DGTL GB",
+      "name": "Sky",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 BNDCMP GB",
+      "name": "Bandcamp",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* EVERNOTE CARD 4821",
+      "name": "Evernote",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 WSHNGTNPST GB",
+      "name": "The Washington Post",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* WEAVERSMARKET CARD 4821",
+      "name": "Weavers Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-juniper-path-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 PNHL PRKS GB",
+      "name": "Penhale Parks",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Box",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Prospect",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Udemy",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Virgin Active",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Sky",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Bandcamp",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Washington Post",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

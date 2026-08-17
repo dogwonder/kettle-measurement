@@ -1,0 +1,245 @@
+{
+  "fixture_id": "exam-generated-clean-subscription-heavy-island-light",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "SQ *BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "PAYPAL *BOXCOM",
+      "name": "Box"
+    },
+    {
+      "raw": "PROSPECT MAG",
+      "name": "Prospect"
+    },
+    {
+      "raw": "UDEMY",
+      "name": "Udemy"
+    },
+    {
+      "raw": "VIRGIN ACTIVE",
+      "name": "Virgin Active"
+    },
+    {
+      "raw": "SKY DIGITAL",
+      "name": "Sky"
+    },
+    {
+      "raw": "BANDCAMP",
+      "name": "Bandcamp"
+    },
+    {
+      "raw": "STRIPE* EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "SQ *EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "PAYPAL *EVERNOTE",
+      "name": "Evernote"
+    },
+    {
+      "raw": "WASHINGTONPOST",
+      "name": "The Washington Post"
+    },
+    {
+      "raw": "STRIPE* ICELANDFOODS",
+      "name": "Iceland"
+    },
+    {
+      "raw": "SQ *ICELANDFOODS",
+      "name": "Iceland"
+    },
+    {
+      "raw": "PAYPAL *ICELANDFOODS",
+      "name": "Iceland"
+    },
+    {
+      "raw": "SCREWFIX",
+      "name": "Screwfix"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-clean-subscription-heavy-island-light-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BOXCOM",
+      "name": "Box",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-island-light-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "PROSPECT MAG",
+      "name": "Prospect",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-island-light-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "UDEMY",
+      "name": "Udemy",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-island-light-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "VIRGIN ACTIVE",
+      "name": "Virgin Active",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-island-light-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "SKY DIGITAL",
+      "name": "Sky",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-island-light-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "BANDCAMP",
+      "name": "Bandcamp",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-island-light-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* EVERNOTE",
+      "name": "Evernote",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-island-light-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "WASHINGTONPOST",
+      "name": "The Washington Post",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-island-light-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ICELANDFOODS",
+      "name": "Iceland",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-clean-subscription-heavy-island-light-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "SCREWFIX",
+      "name": "Screwfix",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Box",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Prospect",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Udemy",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Virgin Active",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Sky",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Bandcamp",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Washington Post",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

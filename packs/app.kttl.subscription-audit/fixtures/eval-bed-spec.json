@@ -1,0 +1,1400 @@
+{
+  "provenance": {
+    "date": "2026-07-29",
+    "issue": 237,
+    "source": "Entirely synthetic. Shapes were derived from Kettle's existing synthetic fixtures and deterministic recurrence tests; no private statement values were used.",
+    "identity": "Fixture and item IDs combine authored set, base-stratum, family, token and pattern IDs from this file. They never use output order, emitted row ordinals or merchant display text.",
+    "merchant_naming": "Real public brands where recognising the merchant is the skill under test, and invented unknowable merchants where declining is the correct answer (#257, decided 30 July 2026). Statements remain wholly synthetic: invented dates, amounts and sequences.",
+    "sets_are_held_out": "Each pattern's brand list is split in half: the first six merchants are the development set's, the last six the exam set's, and no merchant appears in both (#317, 2 August 2026). Appended rather than interleaved so the development bed regenerates byte for byte and the diff is the exam alone."
+  },
+  "negative_pairs": {
+    "rent-and-salary": [
+      "monthly-rent",
+      "monthly-salary"
+    ],
+    "season-and-standing": [
+      "annual-season-ticket",
+      "standing-order-person"
+    ],
+    "grocery-and-duplicate": [
+      "weekly-grocery",
+      "duplicate-retail-charge"
+    ],
+    "energy-and-chargeback": [
+      "rising-energy-bill",
+      "refunded-card-purchase"
+    ],
+    "processor-and-season-pass": [
+      "processor-market-purchase",
+      "duplicate-season-pass"
+    ]
+  },
+  "subscription_patterns": [
+    {
+      "id": "annual-archive",
+      "noun": "Archive",
+      "kind": "subscription",
+      "category": "software",
+      "shape": "annual_multi",
+      "strata": [
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "brands": [
+        {
+          "descriptor": "BACKBLAZE",
+          "name": "Backblaze"
+        },
+        {
+          "descriptor": "DROPBOX",
+          "name": "Dropbox"
+        },
+        {
+          "descriptor": "PCLOUD",
+          "name": "pCloud"
+        },
+        {
+          "descriptor": "IDRIVE",
+          "name": "IDrive"
+        },
+        {
+          "descriptor": "MEGA.NZ",
+          "name": "MEGA"
+        },
+        {
+          "descriptor": "SYNC.COM",
+          "name": "Sync"
+        },
+        {
+          "descriptor": "KOOFR",
+          "name": "Koofr"
+        },
+        {
+          "descriptor": "TRESORIT",
+          "name": "Tresorit"
+        },
+        {
+          "descriptor": "BOX.COM",
+          "name": "Box"
+        },
+        {
+          "descriptor": "JOTTACLOUD",
+          "name": "Jottacloud"
+        },
+        {
+          "descriptor": "ICEDRIVE",
+          "name": "Icedrive"
+        },
+        {
+          "descriptor": "DEGOO",
+          "name": "Degoo"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "annual-journal",
+      "noun": "Journal",
+      "kind": "subscription",
+      "category": "news_media",
+      "shape": "annual",
+      "strata": [
+        "annual-subscription-once-yearly"
+      ],
+      "brands": [
+        {
+          "descriptor": "THE ECONOMIST",
+          "name": "The Economist"
+        },
+        {
+          "descriptor": "NEW SCIENTIST",
+          "name": "New Scientist"
+        },
+        {
+          "descriptor": "PRIVATE EYE",
+          "name": "Private Eye"
+        },
+        {
+          "descriptor": "THE SPECTATOR",
+          "name": "The Spectator"
+        },
+        {
+          "descriptor": "NATIONAL GEOGRAPHIC",
+          "name": "National Geographic"
+        },
+        {
+          "descriptor": "BBC SCIENCE FOCUS",
+          "name": "BBC Science Focus"
+        },
+        {
+          "descriptor": "THE WEEK",
+          "name": "The Week"
+        },
+        {
+          "descriptor": "HISTORY TODAY",
+          "name": "History Today"
+        },
+        {
+          "descriptor": "PROSPECT MAG",
+          "name": "Prospect"
+        },
+        {
+          "descriptor": "BBC GOOD FOOD",
+          "name": "BBC Good Food"
+        },
+        {
+          "descriptor": "THE OLDIE",
+          "name": "The Oldie"
+        },
+        {
+          "descriptor": "WHICH LTD",
+          "name": "Which?"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "trial-learning",
+      "noun": "Learning",
+      "kind": "subscription",
+      "category": "software",
+      "shape": "trial_refund",
+      "strata": [
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "brands": [
+        {
+          "descriptor": "DUOLINGO",
+          "name": "Duolingo"
+        },
+        {
+          "descriptor": "BABBEL",
+          "name": "Babbel"
+        },
+        {
+          "descriptor": "SKILLSHARE",
+          "name": "Skillshare"
+        },
+        {
+          "descriptor": "MASTERCLASS",
+          "name": "MasterClass"
+        },
+        {
+          "descriptor": "ROSETTA STONE",
+          "name": "Rosetta Stone"
+        },
+        {
+          "descriptor": "MEMRISE",
+          "name": "Memrise"
+        },
+        {
+          "descriptor": "BUSUU",
+          "name": "Busuu"
+        },
+        {
+          "descriptor": "COURSERA",
+          "name": "Coursera"
+        },
+        {
+          "descriptor": "UDEMY",
+          "name": "Udemy"
+        },
+        {
+          "descriptor": "PIMSLEUR",
+          "name": "Pimsleur"
+        },
+        {
+          "descriptor": "LINGODEER",
+          "name": "LingoDeer"
+        },
+        {
+          "descriptor": "BRILLIANT.ORG",
+          "name": "Brilliant"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "trial-fitness",
+      "noun": "Fitness",
+      "kind": "subscription",
+      "category": "fitness",
+      "shape": "trial",
+      "strata": [
+        "free-trial-conversion"
+      ],
+      "brands": [
+        {
+          "descriptor": "PUREGYM LTD",
+          "name": "PureGym"
+        },
+        {
+          "descriptor": "THE GYM GROUP",
+          "name": "The Gym Group"
+        },
+        {
+          "descriptor": "DAVID LLOYD",
+          "name": "David Lloyd"
+        },
+        {
+          "descriptor": "NUFFIELD HEALTH",
+          "name": "Nuffield Health"
+        },
+        {
+          "descriptor": "STRAVA",
+          "name": "Strava"
+        },
+        {
+          "descriptor": "FIIT",
+          "name": "Fiit"
+        },
+        {
+          "descriptor": "PELOTON",
+          "name": "Peloton"
+        },
+        {
+          "descriptor": "LES MILLS PLUS",
+          "name": "Les Mills+"
+        },
+        {
+          "descriptor": "VIRGIN ACTIVE",
+          "name": "Virgin Active"
+        },
+        {
+          "descriptor": "ANYTIME FITNESS",
+          "name": "Anytime Fitness"
+        },
+        {
+          "descriptor": "WW UK",
+          "name": "WW"
+        },
+        {
+          "descriptor": "FREELETICS",
+          "name": "Freeletics"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "resumed-streaming",
+      "noun": "Streaming",
+      "kind": "subscription",
+      "category": "streaming",
+      "shape": "cancel_price",
+      "strata": [
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "brands": [
+        {
+          "descriptor": "NETFLIX.COM",
+          "name": "Netflix"
+        },
+        {
+          "descriptor": "DISNEY PLUS",
+          "name": "Disney+"
+        },
+        {
+          "descriptor": "NOW TV",
+          "name": "NOW"
+        },
+        {
+          "descriptor": "PARAMOUNT PLUS",
+          "name": "Paramount+"
+        },
+        {
+          "descriptor": "APPLE TV PLUS",
+          "name": "Apple TV+"
+        },
+        {
+          "descriptor": "MUBI",
+          "name": "MUBI"
+        },
+        {
+          "descriptor": "PRIME VIDEO",
+          "name": "Prime Video"
+        },
+        {
+          "descriptor": "BRITBOX",
+          "name": "BritBox"
+        },
+        {
+          "descriptor": "SKY DIGITAL",
+          "name": "Sky"
+        },
+        {
+          "descriptor": "CRUNCHYROLL",
+          "name": "Crunchyroll"
+        },
+        {
+          "descriptor": "CURZON HOME CIN",
+          "name": "Curzon Home Cinema"
+        },
+        {
+          "descriptor": "ITVX PREMIUM",
+          "name": "ITVX"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "resumed-music",
+      "noun": "Music",
+      "kind": "subscription",
+      "category": "streaming",
+      "shape": "cancelled",
+      "strata": [
+        "cancelled-then-resumed"
+      ],
+      "brands": [
+        {
+          "descriptor": "SPOTIFY LTD",
+          "name": "Spotify"
+        },
+        {
+          "descriptor": "APPLE MUSIC",
+          "name": "Apple Music"
+        },
+        {
+          "descriptor": "TIDAL",
+          "name": "TIDAL"
+        },
+        {
+          "descriptor": "DEEZER",
+          "name": "Deezer"
+        },
+        {
+          "descriptor": "YOUTUBE MUSIC",
+          "name": "YouTube Music"
+        },
+        {
+          "descriptor": "QOBUZ",
+          "name": "Qobuz"
+        },
+        {
+          "descriptor": "AMAZON MUSIC",
+          "name": "Amazon Music"
+        },
+        {
+          "descriptor": "SOUNDCLOUD GO",
+          "name": "SoundCloud"
+        },
+        {
+          "descriptor": "BANDCAMP",
+          "name": "Bandcamp"
+        },
+        {
+          "descriptor": "AUDIBLE UK",
+          "name": "Audible"
+        },
+        {
+          "descriptor": "NUGS.NET",
+          "name": "nugs.net"
+        },
+        {
+          "descriptor": "IDAGIO",
+          "name": "IDAGIO"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "rising-cloud",
+      "noun": "Cloud",
+      "kind": "subscription",
+      "category": "software",
+      "shape": "price_multi",
+      "strata": [
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "brands": [
+        {
+          "descriptor": "GOOGLE ONE",
+          "name": "Google One"
+        },
+        {
+          "descriptor": "MICROSOFT 365",
+          "name": "Microsoft 365"
+        },
+        {
+          "descriptor": "ADOBE",
+          "name": "Adobe"
+        },
+        {
+          "descriptor": "PROTON",
+          "name": "Proton"
+        },
+        {
+          "descriptor": "1PASSWORD",
+          "name": "1Password"
+        },
+        {
+          "descriptor": "NOTION",
+          "name": "Notion"
+        },
+        {
+          "descriptor": "ICLOUD PLUS",
+          "name": "iCloud+"
+        },
+        {
+          "descriptor": "BITWARDEN",
+          "name": "Bitwarden"
+        },
+        {
+          "descriptor": "EVERNOTE",
+          "name": "Evernote"
+        },
+        {
+          "descriptor": "TODOIST",
+          "name": "Todoist"
+        },
+        {
+          "descriptor": "SETAPP",
+          "name": "Setapp"
+        },
+        {
+          "descriptor": "DASHLANE",
+          "name": "Dashlane"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "refunded-news",
+      "noun": "News",
+      "kind": "subscription",
+      "category": "news_media",
+      "shape": "monthly_refund",
+      "strata": [
+        "refunds-and-chargebacks"
+      ],
+      "brands": [
+        {
+          "descriptor": "THE GUARDIAN",
+          "name": "The Guardian"
+        },
+        {
+          "descriptor": "THE TIMES",
+          "name": "The Times"
+        },
+        {
+          "descriptor": "THE TELEGRAPH",
+          "name": "The Telegraph"
+        },
+        {
+          "descriptor": "FINANCIAL TIMES",
+          "name": "Financial Times"
+        },
+        {
+          "descriptor": "THE ATHLETIC",
+          "name": "The Athletic"
+        },
+        {
+          "descriptor": "THE I PAPER",
+          "name": "The i Paper"
+        },
+        {
+          "descriptor": "THE INDEPENDENT",
+          "name": "The Independent"
+        },
+        {
+          "descriptor": "NYTIMES",
+          "name": "The New York Times"
+        },
+        {
+          "descriptor": "WASHINGTONPOST",
+          "name": "The Washington Post"
+        },
+        {
+          "descriptor": "TORTOISE MEDIA",
+          "name": "Tortoise Media"
+        },
+        {
+          "descriptor": "THE CRITIC MAG",
+          "name": "The Critic"
+        },
+        {
+          "descriptor": "THE BIG ISSUE",
+          "name": "The Big Issue"
+        }
+      ],
+      "recognisable": true
+    }
+  ],
+  "negative_patterns": [
+    {
+      "id": "monthly-rent",
+      "noun": "Rent",
+      "kind": "utility",
+      "category": "housing",
+      "shape": "rent_price_multi",
+      "strata": [
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "brands": [
+        {
+          "descriptor": "HARTWELL LETTINGS",
+          "name": "Hartwell Lettings"
+        },
+        {
+          "descriptor": "MERIDIAN PROPERTY",
+          "name": "Meridian Property"
+        },
+        {
+          "descriptor": "OAKFIELD ESTATES",
+          "name": "Oakfield Estates"
+        },
+        {
+          "descriptor": "CALDER LETTINGS",
+          "name": "Calder Lettings"
+        },
+        {
+          "descriptor": "STONEBRIDGE PROP",
+          "name": "Stonebridge Property"
+        },
+        {
+          "descriptor": "WESTMARSH LETTING",
+          "name": "Westmarsh Letting"
+        },
+        {
+          "descriptor": "THORNBURY LETTING",
+          "name": "Thornbury Letting"
+        },
+        {
+          "descriptor": "GRESHAM ESTATES",
+          "name": "Gresham Estates"
+        },
+        {
+          "descriptor": "ABBEYGATE PROP",
+          "name": "Abbeygate Property"
+        },
+        {
+          "descriptor": "LINDLEY LETTINGS",
+          "name": "Lindley Lettings"
+        },
+        {
+          "descriptor": "MARCHMONT HOMES",
+          "name": "Marchmont Homes"
+        },
+        {
+          "descriptor": "SEDGEWICK PROP",
+          "name": "Sedgewick Property"
+        }
+      ],
+      "recognisable": false
+    },
+    {
+      "id": "monthly-salary",
+      "noun": "Payroll",
+      "kind": "income",
+      "category": "finance",
+      "shape": "salary_rise",
+      "strata": [
+        "price-rise-mid-series"
+      ],
+      "brands": [
+        {
+          "descriptor": "CALDWELL LOGISTICS",
+          "name": "Caldwell Logistics"
+        },
+        {
+          "descriptor": "PENROSE HEALTHCARE",
+          "name": "Penrose Healthcare"
+        },
+        {
+          "descriptor": "ASHDOWN ENGINEERS",
+          "name": "Ashdown Engineers"
+        },
+        {
+          "descriptor": "KIRKLAND SUPPLIES",
+          "name": "Kirkland Supplies"
+        },
+        {
+          "descriptor": "BRAMFORD TEXTILES",
+          "name": "Bramford Textiles"
+        },
+        {
+          "descriptor": "HOLLOWAY PRINTERS",
+          "name": "Holloway Printers"
+        },
+        {
+          "descriptor": "TARLTON JOINERY",
+          "name": "Tarlton Joinery"
+        },
+        {
+          "descriptor": "VERNHAM ANALYTICS",
+          "name": "Vernham Analytics"
+        },
+        {
+          "descriptor": "DUNMORE CATERING",
+          "name": "Dunmore Catering"
+        },
+        {
+          "descriptor": "FAIRHOLM CERAMICS",
+          "name": "Fairholm Ceramics"
+        },
+        {
+          "descriptor": "LYNTON HAULAGE",
+          "name": "Lynton Haulage"
+        },
+        {
+          "descriptor": "WEXFORD DENTAL",
+          "name": "Wexford Dental"
+        }
+      ],
+      "recognisable": false
+    },
+    {
+      "id": "annual-season-ticket",
+      "noun": "Season Ticket",
+      "kind": "utility",
+      "category": "transport",
+      "shape": "season_refund_multi",
+      "strata": [
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "brands": [
+        {
+          "descriptor": "TRAINLINE",
+          "name": "Trainline"
+        },
+        {
+          "descriptor": "LNER",
+          "name": "LNER"
+        },
+        {
+          "descriptor": "SOUTHERN RAIL",
+          "name": "Southern"
+        },
+        {
+          "descriptor": "NORTHERN RAIL",
+          "name": "Northern"
+        },
+        {
+          "descriptor": "GWR",
+          "name": "GWR"
+        },
+        {
+          "descriptor": "TFL TRAVEL",
+          "name": "TfL"
+        },
+        {
+          "descriptor": "AVANTI WEST CST",
+          "name": "Avanti West Coast"
+        },
+        {
+          "descriptor": "CHILTERN RAIL",
+          "name": "Chiltern Railways"
+        },
+        {
+          "descriptor": "SCOTRAIL",
+          "name": "ScotRail"
+        },
+        {
+          "descriptor": "THAMESLINK",
+          "name": "Thameslink"
+        },
+        {
+          "descriptor": "C2C RAIL",
+          "name": "c2c"
+        },
+        {
+          "descriptor": "TRANSPENNINE",
+          "name": "TransPennine Express"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "standing-order-person",
+      "noun": "Standing Order",
+      "kind": "regular_spend",
+      "category": "finance",
+      "shape": "standing_price_multi",
+      "strata": [
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "brands": [
+        {
+          "descriptor": "J HENDERSON",
+          "name": "J Henderson"
+        },
+        {
+          "descriptor": "M OKONKWO",
+          "name": "M Okonkwo"
+        },
+        {
+          "descriptor": "R PATEL",
+          "name": "R Patel"
+        },
+        {
+          "descriptor": "S MACLEOD",
+          "name": "S MacLeod"
+        },
+        {
+          "descriptor": "A NOWAK",
+          "name": "A Nowak"
+        },
+        {
+          "descriptor": "T FARRELL",
+          "name": "T Farrell"
+        },
+        {
+          "descriptor": "D CHAUDHRY",
+          "name": "D Chaudhry"
+        },
+        {
+          "descriptor": "L BJORNSSON",
+          "name": "L Bjornsson"
+        },
+        {
+          "descriptor": "K ADEYEMI",
+          "name": "K Adeyemi"
+        },
+        {
+          "descriptor": "P WHITTAKER",
+          "name": "P Whittaker"
+        },
+        {
+          "descriptor": "E MORGENSTERN",
+          "name": "E Morgenstern"
+        },
+        {
+          "descriptor": "N ABBASI",
+          "name": "N Abbasi"
+        }
+      ],
+      "recognisable": false
+    },
+    {
+      "id": "weekly-grocery",
+      "noun": "Grocer",
+      "kind": "regular_spend",
+      "category": "food_drink",
+      "shape": "grocery_refund_multi",
+      "strata": [
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "brands": [
+        {
+          "descriptor": "TESCO STORES",
+          "name": "Tesco"
+        },
+        {
+          "descriptor": "SAINSBURYS",
+          "name": "Sainsbury's"
+        },
+        {
+          "descriptor": "ALDI",
+          "name": "Aldi"
+        },
+        {
+          "descriptor": "LIDL GB",
+          "name": "Lidl"
+        },
+        {
+          "descriptor": "MORRISONS",
+          "name": "Morrisons"
+        },
+        {
+          "descriptor": "WAITROSE",
+          "name": "Waitrose"
+        },
+        {
+          "descriptor": "ASDA STORES",
+          "name": "Asda"
+        },
+        {
+          "descriptor": "CO-OP FOOD",
+          "name": "Co-op"
+        },
+        {
+          "descriptor": "ICELAND FOODS",
+          "name": "Iceland"
+        },
+        {
+          "descriptor": "M&S FOOD",
+          "name": "M&S Food"
+        },
+        {
+          "descriptor": "BOOTHS",
+          "name": "Booths"
+        },
+        {
+          "descriptor": "SPAR UK",
+          "name": "Spar"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "duplicate-retail-charge",
+      "noun": "Home Store",
+      "kind": "one_off",
+      "category": "retail",
+      "shape": "duplicate_refund",
+      "strata": [
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "brands": [
+        {
+          "descriptor": "ARGOS",
+          "name": "Argos"
+        },
+        {
+          "descriptor": "DUNELM",
+          "name": "Dunelm"
+        },
+        {
+          "descriptor": "IKEA",
+          "name": "IKEA"
+        },
+        {
+          "descriptor": "WILKO",
+          "name": "Wilko"
+        },
+        {
+          "descriptor": "THE RANGE",
+          "name": "The Range"
+        },
+        {
+          "descriptor": "HOMEBASE",
+          "name": "Homebase"
+        },
+        {
+          "descriptor": "B&Q LTD",
+          "name": "B&Q"
+        },
+        {
+          "descriptor": "JOHN LEWIS",
+          "name": "John Lewis"
+        },
+        {
+          "descriptor": "SCREWFIX",
+          "name": "Screwfix"
+        },
+        {
+          "descriptor": "TK MAXX",
+          "name": "TK Maxx"
+        },
+        {
+          "descriptor": "ROBERT DYAS",
+          "name": "Robert Dyas"
+        },
+        {
+          "descriptor": "WICKES",
+          "name": "Wickes"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "rising-energy-bill",
+      "noun": "Energy",
+      "kind": "utility",
+      "category": "energy",
+      "shape": "energy_price",
+      "strata": [
+        "price-rise-mid-series"
+      ],
+      "brands": [
+        {
+          "descriptor": "BRITISH GAS",
+          "name": "British Gas"
+        },
+        {
+          "descriptor": "OCTOPUS ENERGY",
+          "name": "Octopus Energy"
+        },
+        {
+          "descriptor": "EDF ENERGY",
+          "name": "EDF"
+        },
+        {
+          "descriptor": "EON NEXT",
+          "name": "E.ON Next"
+        },
+        {
+          "descriptor": "OVO ENERGY",
+          "name": "OVO Energy"
+        },
+        {
+          "descriptor": "SCOTTISH POWER",
+          "name": "ScottishPower"
+        },
+        {
+          "descriptor": "SO ENERGY",
+          "name": "So Energy"
+        },
+        {
+          "descriptor": "UTILITA",
+          "name": "Utilita"
+        },
+        {
+          "descriptor": "OUTFOX THE MKT",
+          "name": "Outfox the Market"
+        },
+        {
+          "descriptor": "GOOD ENERGY",
+          "name": "Good Energy"
+        },
+        {
+          "descriptor": "REBEL ENERGY",
+          "name": "Rebel Energy"
+        },
+        {
+          "descriptor": "ECOTRICITY",
+          "name": "Ecotricity"
+        }
+      ],
+      "recognisable": true
+    },
+    {
+      "id": "refunded-card-purchase",
+      "noun": "Card Purchase",
+      "kind": "one_off",
+      "category": "retail",
+      "shape": "chargeback",
+      "strata": [
+        "refunds-and-chargebacks"
+      ],
+      "brands": [
+        {
+          "descriptor": "BRIGHTWATER HOME",
+          "name": "Brightwater Home"
+        },
+        {
+          "descriptor": "QUAYSIDE HARDWARE",
+          "name": "Quayside Hardware"
+        },
+        {
+          "descriptor": "ELMWOOD CYCLES",
+          "name": "Elmwood Cycles"
+        },
+        {
+          "descriptor": "TANNERY BOOKS",
+          "name": "Tannery Books"
+        },
+        {
+          "descriptor": "HARBOUR OUTDOORS",
+          "name": "Harbour Outdoors"
+        },
+        {
+          "descriptor": "MILLGATE TOOLS",
+          "name": "Millgate Tools"
+        },
+        {
+          "descriptor": "CARRICK KITCHENS",
+          "name": "Carrick Kitchens"
+        },
+        {
+          "descriptor": "PENTLOW GARDEN",
+          "name": "Pentlow Garden"
+        },
+        {
+          "descriptor": "ASHWORTH AUDIO",
+          "name": "Ashworth Audio"
+        },
+        {
+          "descriptor": "HOLLOWDENE PETS",
+          "name": "Hollowdene Pets"
+        },
+        {
+          "descriptor": "BRACKEN CAMPING",
+          "name": "Bracken Camping"
+        },
+        {
+          "descriptor": "SILVERTHORN ART",
+          "name": "Silverthorn Art"
+        }
+      ],
+      "recognisable": false
+    },
+    {
+      "id": "processor-market-purchase",
+      "noun": "Market",
+      "kind": "one_off",
+      "category": "retail",
+      "shape": "market_refund_multi",
+      "strata": [
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "brands": [
+        {
+          "descriptor": "FENWICK MARKET",
+          "name": "Fenwick Market"
+        },
+        {
+          "descriptor": "LOWTHER TRADERS",
+          "name": "Lowther Traders"
+        },
+        {
+          "descriptor": "SALTMARSH STALL",
+          "name": "Saltmarsh Stall"
+        },
+        {
+          "descriptor": "GRANARY MARKET",
+          "name": "Granary Market"
+        },
+        {
+          "descriptor": "CROSSKEYS STALL",
+          "name": "Crosskeys Stall"
+        },
+        {
+          "descriptor": "BRINDLE MARKET",
+          "name": "Brindle Market"
+        },
+        {
+          "descriptor": "HAYWARD MARKET",
+          "name": "Hayward Market"
+        },
+        {
+          "descriptor": "TOLLGATE STALL",
+          "name": "Tollgate Stall"
+        },
+        {
+          "descriptor": "WEAVERS MARKET",
+          "name": "Weavers Market"
+        },
+        {
+          "descriptor": "KILNBROOK STALL",
+          "name": "Kilnbrook Stall"
+        },
+        {
+          "descriptor": "OLDMILL TRADERS",
+          "name": "Oldmill Traders"
+        },
+        {
+          "descriptor": "CANONGATE MKT",
+          "name": "Canongate Market"
+        }
+      ],
+      "recognisable": false
+    },
+    {
+      "id": "duplicate-season-pass",
+      "noun": "Event Pass",
+      "kind": "one_off",
+      "category": "transport",
+      "shape": "duplicate",
+      "strata": [
+        "duplicate-charge-not-subscription"
+      ],
+      "brands": [
+        {
+          "descriptor": "HOLLINGWOOD PASS",
+          "name": "Hollingwood Pass"
+        },
+        {
+          "descriptor": "REDCLIFF ATTRACT",
+          "name": "Redcliff Attractions"
+        },
+        {
+          "descriptor": "STANWICK LEISURE",
+          "name": "Stanwick Leisure"
+        },
+        {
+          "descriptor": "BELLFORD PARKS",
+          "name": "Bellford Parks"
+        },
+        {
+          "descriptor": "KESTREL VALLEY",
+          "name": "Kestrel Valley"
+        },
+        {
+          "descriptor": "MARLOW GARDENS",
+          "name": "Marlow Gardens"
+        },
+        {
+          "descriptor": "WYNDHAM PASS",
+          "name": "Wyndham Pass"
+        },
+        {
+          "descriptor": "ALDERCOTE LEISURE",
+          "name": "Aldercote Leisure"
+        },
+        {
+          "descriptor": "PENHALE PARKS",
+          "name": "Penhale Parks"
+        },
+        {
+          "descriptor": "THORNMERE VALLEY",
+          "name": "Thornmere Valley"
+        },
+        {
+          "descriptor": "BRAMPTON GARDENS",
+          "name": "Brampton Gardens"
+        },
+        {
+          "descriptor": "ST GILLAN PASS",
+          "name": "St Gillan Pass"
+        }
+      ],
+      "recognisable": false
+    }
+  ],
+  "sets": {
+    "development": {
+      "heavy": {
+        "clean": {
+          "rent-and-salary": [
+            "amber",
+            "birch",
+            "cedar"
+          ],
+          "season-and-standing": [
+            "dawn",
+            "elm",
+            "fern"
+          ],
+          "grocery-and-duplicate": [
+            "glen",
+            "hearth",
+            "ivory"
+          ],
+          "energy-and-chargeback": [
+            "juniper",
+            "kestrel",
+            "lantern"
+          ],
+          "processor-and-season-pass": [
+            "maple",
+            "northstar",
+            "orchard"
+          ]
+        },
+        "messy-merchant-strings": {
+          "rent-and-salary": [
+            "pebble",
+            "quartz",
+            "river",
+            "saffron"
+          ],
+          "season-and-standing": [
+            "thistle",
+            "umber",
+            "valley",
+            "willow"
+          ],
+          "grocery-and-duplicate": [
+            "xenia",
+            "yarrow",
+            "zephyr",
+            "acorn"
+          ],
+          "energy-and-chargeback": [
+            "bramble",
+            "copper",
+            "drift",
+            "ember"
+          ],
+          "processor-and-season-pass": [
+            "flint",
+            "grove",
+            "harbour",
+            "island"
+          ]
+        },
+        "ambiguous-categories": {
+          "rent-and-salary": [
+            "jasmine",
+            "kingfisher",
+            "lilac",
+            "meadow"
+          ],
+          "season-and-standing": [
+            "nutmeg",
+            "otter",
+            "pine",
+            "robin"
+          ],
+          "grocery-and-duplicate": [
+            "silver",
+            "tansy",
+            "upland",
+            "violet"
+          ],
+          "energy-and-chargeback": [
+            "wren",
+            "yew",
+            "apricot",
+            "bluebell"
+          ],
+          "processor-and-season-pass": [
+            "clover",
+            "dapple",
+            "eider",
+            "foxglove"
+          ]
+        }
+      },
+      "no_subscriptions": {
+        "clean": [
+          "granite",
+          "hazel",
+          "indigo",
+          "kelp",
+          "linden",
+          "moss",
+          "nectar",
+          "oat"
+        ],
+        "messy-merchant-strings": [
+          "prism",
+          "reed",
+          "sorrel",
+          "topaz",
+          "urchin",
+          "vervain",
+          "walnut"
+        ],
+        "ambiguous-categories": [
+          "alder",
+          "bay",
+          "coral",
+          "dune",
+          "egret",
+          "fallow",
+          "gorse"
+        ]
+      }
+    },
+    "exam": {
+      "heavy": {
+        "clean": {
+          "rent-and-salary": [
+            "alpine-lake",
+            "bronze-leaf",
+            "coral-bay"
+          ],
+          "season-and-standing": [
+            "dragonfly-meadow",
+            "evening-star",
+            "forest-gate"
+          ],
+          "grocery-and-duplicate": [
+            "golden-reed",
+            "hazel-cove",
+            "island-light"
+          ],
+          "energy-and-chargeback": [
+            "jasmine-hill",
+            "kingfisher-lane",
+            "lunar-field"
+          ],
+          "processor-and-season-pass": [
+            "morning-dew",
+            "night-fern",
+            "ocean-path"
+          ]
+        },
+        "messy-merchant-strings": {
+          "rent-and-salary": [
+            "pebble-shore",
+            "quiet-river",
+            "rose-garden",
+            "silver-wood"
+          ],
+          "season-and-standing": [
+            "twilight-brook",
+            "upland-moss",
+            "violet-ridge",
+            "winter-bay"
+          ],
+          "grocery-and-duplicate": [
+            "yellow-field",
+            "acorn-bridge",
+            "blue-harbour",
+            "copper-lane"
+          ],
+          "energy-and-chargeback": [
+            "dusk-valley",
+            "ember-hill",
+            "feather-cove",
+            "green-orchard"
+          ],
+          "processor-and-season-pass": [
+            "honey-meadow",
+            "iron-gate",
+            "juniper-path",
+            "kite-field"
+          ]
+        },
+        "ambiguous-categories": {
+          "rent-and-salary": [
+            "lemon-grove",
+            "misty-reed",
+            "nutmeg-brook",
+            "opal-shore"
+          ],
+          "season-and-standing": [
+            "pine-cottage",
+            "quartz-hill",
+            "robin-field",
+            "saffron-cove"
+          ],
+          "grocery-and-duplicate": [
+            "thistle-lane",
+            "umber-gate",
+            "velvet-river",
+            "willow-bay"
+          ],
+          "energy-and-chargeback": [
+            "yarrow-moss",
+            "zenith-wood",
+            "apple-crossing",
+            "bramble-heath"
+          ],
+          "processor-and-season-pass": [
+            "cloud-meadow",
+            "dew-garden",
+            "elder-ridge",
+            "flint-orchard"
+          ]
+        }
+      },
+      "no_subscriptions": {
+        "clean": [
+          "glacier-path",
+          "heath-cove",
+          "iris-brook",
+          "kestrel-field",
+          "larch-bay",
+          "marble-gate",
+          "nettle-hill",
+          "olive-shore"
+        ],
+        "messy-merchant-strings": [
+          "poppy-lane",
+          "raven-wood",
+          "spruce-river",
+          "timber-moss",
+          "urban-grove",
+          "vale-bridge",
+          "wheat-meadow"
+        ],
+        "ambiguous-categories": [
+          "ash-cottage",
+          "beacon-ridge",
+          "creek-garden",
+          "driftwood-heath",
+          "elm-crossing",
+          "foxglove-valley",
+          "granite-orchard"
+        ]
+      }
+    }
+  }
+}

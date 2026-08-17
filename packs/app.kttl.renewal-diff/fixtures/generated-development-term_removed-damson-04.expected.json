@@ -1,0 +1,145 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-term_removed-damson-04",
+  "inputs": {
+    "previous": "generated-development-term_removed-damson-04-previous.txt",
+    "renewal": "generated-development-term_removed-damson-04-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-term_removed-damson-04-previous-no-value-1af7e2",
+      "role": "previous",
+      "segment": "Westmarch Cover landlord insurance — policy schedule DAMSON-TR-421 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,218.00.",
+        "term": "premium",
+        "value": "£4,218.00"
+      },
+      "id": "development-term_removed-damson-04-previous-premium-b1c5c8",
+      "role": "previous",
+      "segment": "Total annual premium: £4,218.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_policy",
+        "quote": "No claims discount: 44%.",
+        "term": "no_claims_discount",
+        "value": "44%"
+      },
+      "id": "development-term_removed-damson-04-previous-no-claims-discount-2792e0",
+      "role": "previous",
+      "segment": "No claims discount: 44%.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,870.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,870.00"
+      },
+      "id": "development-term_removed-damson-04-previous-compulsory-excess-b091da",
+      "role": "previous",
+      "segment": "Compulsory excess: £2,870.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-damson-04-previous-no-value-8e257b",
+      "role": "previous",
+      "segment": "Your reference is DAMSON-TR-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-damson-04-previous-no-value-da4a3a",
+      "role": "previous",
+      "segment": "Westmarch Cover arranges landlord insurance cover under DAMSON-TR-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-damson-04-renewal-no-value-88057c",
+      "role": "renewal",
+      "segment": "Westmarch Cover landlord insurance — renewal schedule DAMSON-TR-421 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "Total annual premium: £4,218.00.",
+        "term": "premium",
+        "value": "£4,218.00"
+      },
+      "id": "development-term_removed-damson-04-renewal-premium-b1c5c8",
+      "role": "renewal",
+      "segment": "Total annual premium: £4,218.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £2,870.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£2,870.00"
+      },
+      "id": "development-term_removed-damson-04-renewal-compulsory-excess-b091da",
+      "role": "renewal",
+      "segment": "Compulsory excess: £2,870.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-damson-04-renewal-no-value-da4a3a",
+      "role": "renewal",
+      "segment": "Westmarch Cover arranges landlord insurance cover under DAMSON-TR-421 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-term_removed-damson-04-renewal-no-value-8e257b",
+      "role": "renewal",
+      "segment": "Your reference is DAMSON-TR-421. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-subscription-heavy-foxglove",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* IDRIVE",
+      "name": "IDrive"
+    },
+    {
+      "raw": "SQ *IDRIVE",
+      "name": "IDrive"
+    },
+    {
+      "raw": "PAYPAL *IDRIVE",
+      "name": "IDrive"
+    },
+    {
+      "raw": "THE SPECTATOR PAYMENT",
+      "name": "The Spectator"
+    },
+    {
+      "raw": "MASTERCLASS PAYMENT",
+      "name": "MasterClass"
+    },
+    {
+      "raw": "NUFFIELD HEALTH PAYMENT",
+      "name": "Nuffield Health"
+    },
+    {
+      "raw": "PARAMOUNT PLUS PAYMENT",
+      "name": "Paramount+"
+    },
+    {
+      "raw": "DEEZER PAYMENT",
+      "name": "Deezer"
+    },
+    {
+      "raw": "STRIPE* PROTON",
+      "name": "Proton"
+    },
+    {
+      "raw": "SQ *PROTON",
+      "name": "Proton"
+    },
+    {
+      "raw": "PAYPAL *PROTON",
+      "name": "Proton"
+    },
+    {
+      "raw": "FINANCIAL TIMES PAYMENT",
+      "name": "Financial Times"
+    },
+    {
+      "raw": "STRIPE* GRANARYMARKET",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "SQ *GRANARYMARKET",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "PAYPAL *GRANARYMARKET",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "BELLFORD PARKS PAYMENT",
+      "name": "Bellford Parks"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* IDRIVE",
+      "name": "IDrive",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "THE SPECTATOR PAYMENT",
+      "name": "The Spectator",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "MASTERCLASS PAYMENT",
+      "name": "MasterClass",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "NUFFIELD HEALTH PAYMENT",
+      "name": "Nuffield Health",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "PARAMOUNT PLUS PAYMENT",
+      "name": "Paramount+",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "DEEZER PAYMENT",
+      "name": "Deezer",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* PROTON",
+      "name": "Proton",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "FINANCIAL TIMES PAYMENT",
+      "name": "Financial Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* GRANARYMARKET",
+      "name": "Granary Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-foxglove-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "BELLFORD PARKS PAYMENT",
+      "name": "Bellford Parks",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "IDrive",
+      "period": "yearly"
+    },
+    {
+      "merchant": "The Spectator",
+      "period": "yearly"
+    },
+    {
+      "merchant": "MasterClass",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Nuffield Health",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Paramount+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Deezer",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Financial Times",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

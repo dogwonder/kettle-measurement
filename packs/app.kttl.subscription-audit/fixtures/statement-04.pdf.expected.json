@@ -1,0 +1,29 @@
+{
+  "rows": 30,
+  "recurring": [
+    {
+      "merchant": "Netflix",
+      "period": "monthly",
+      "annualised": "155.88",
+      "price_rise": true
+    },
+    {
+      "merchant": "Spotify",
+      "period": "monthly",
+      "annualised": "119.88",
+      "price_rise": false
+    },
+    {
+      "merchant": "PureGym",
+      "period": "monthly",
+      "annualised": "299.88",
+      "price_rise": false
+    }
+  ],
+  "summary": {
+    "recurring_count": 3,
+    "annualised_total": "575.64",
+    "monthly_equivalent": "47.97",
+    "price_rises": 1
+  }
+}

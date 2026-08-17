@@ -1,0 +1,52 @@
+{
+  "results": [
+    {
+      "id": 900,
+      "segment": "Please pay £84.00 for your garden waste licence within 14 days of the date of this letter.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "payment",
+          "party": "Redhill District Council",
+          "ask": "Pay £84.00 for the garden waste licence",
+          "deadline": "within 14 days",
+          "anchor": "the date of this letter"
+        }
+      ]
+    },
+    {
+      "id": 901,
+      "segment": "We are sorry for the delay in replying and thank you for your patience.",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 902,
+      "segment": "You must attend a hearing at the tribunal on 14 September 2026.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "attendance",
+          "party": "Redhill District Council",
+          "ask": "Attend the tribunal hearing",
+          "deadline": "on 14 September 2026",
+          "anchor": "14 September 2026"
+        }
+      ]
+    },
+    {
+      "id": 903,
+      "segment": "Please send us a reading from your meter at your earliest convenience.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "response",
+          "party": "Redhill District Council",
+          "ask": "Send a meter reading",
+          "deadline": "at your earliest convenience",
+          "anchor": "no particular date"
+        }
+      ]
+    }
+  ]
+}

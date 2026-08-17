@@ -1,0 +1,160 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-two_excesses-amber-01",
+  "inputs": {
+    "previous": "generated-development-two_excesses-amber-01-previous.txt",
+    "renewal": "generated-development-two_excesses-amber-01-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "development-two_excesses-amber-01-previous-no-value-3f0bf8",
+      "role": "previous",
+      "segment": "Marlowe Mutual home insurance — policy schedule AMBER-TE-400 for the year to 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,375.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,375.00"
+      },
+      "id": "development-two_excesses-amber-01-previous-compulsory-excess-881c7c",
+      "role": "previous",
+      "segment": "Compulsory excess: £4,375.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £985.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£985.00"
+      },
+      "id": "development-two_excesses-amber-01-previous-voluntary-excess-618166",
+      "role": "previous",
+      "segment": "Voluntary excess: £985.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,360.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,360.00"
+      },
+      "id": "development-two_excesses-amber-01-previous-total-excess-606da7",
+      "role": "previous",
+      "segment": "Total excess payable: £5,360.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-amber-01-previous-no-value-0583b3",
+      "role": "previous",
+      "segment": "Your reference is AMBER-TE-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-amber-01-previous-no-value-db4bac",
+      "role": "previous",
+      "segment": "Marlowe Mutual arranges home insurance cover under AMBER-TE-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-amber-01-renewal-no-value-68660b",
+      "role": "renewal",
+      "segment": "Marlowe Mutual home insurance — renewal schedule AMBER-TE-400 for the year to 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £4,425.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£4,425.00"
+      },
+      "id": "development-two_excesses-amber-01-renewal-compulsory-excess-06a834",
+      "role": "renewal",
+      "segment": "Compulsory excess: £4,425.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Voluntary excess: £985.00 per claim.",
+        "term": "voluntary_excess",
+        "value": "£985.00"
+      },
+      "id": "development-two_excesses-amber-01-renewal-voluntary-excess-618166",
+      "role": "renewal",
+      "segment": "Voluntary excess: £985.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Total excess payable: £5,410.00 per claim.",
+        "term": "total_excess",
+        "value": "£5,410.00"
+      },
+      "id": "development-two_excesses-amber-01-renewal-total-excess-3c233b",
+      "role": "renewal",
+      "segment": "Total excess payable: £5,410.00 per claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-amber-01-renewal-no-value-db4bac",
+      "role": "renewal",
+      "segment": "Marlowe Mutual arranges home insurance cover under AMBER-TE-400 and is regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "development-two_excesses-amber-01-renewal-no-value-0583b3",
+      "role": "renewal",
+      "segment": "Your reference is AMBER-TE-400. Quote it whenever you write to us about this policy.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

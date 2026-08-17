@@ -1,0 +1,16 @@
+Trentham & Yale Solicitors
+20 April 2026
+Reference: TY-31882
+
+Your estate matter was assessed at a panel held on 19 February 2026.
+
+The sum of £480.00 falls due within 45 days of 19 February 2026. Please quote TY-31882 when you pay.
+
+We are grateful for your attention to this matter.
+
+Yours faithfully,
+Trentham & Yale Solicitors
+
+{"results": [{"id": 1, "segment": "the whole document", "confidence": "low", "obligations": []}]}
+
+As at 1 August the account shows nothing due.

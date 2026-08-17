@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_anchored-pine-02",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "27 December 2026",
+        "deadline": "within 30 days",
+        "due": "2027-01-26",
+        "kind": "payment",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "payment_anchored-pine-02-payment-02",
+      "segment": "Please pay £214.60 within 30 days of 27 December 2026, quoting reference KBC-90114.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-pine-02-no-ask-03",
+      "segment": "Thank you for your co-operation in this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-pine-02-no-ask-05",
+      "segment": "Your case was closed on 23 March and the file will be kept for 6 years.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "fixture_id": "exam-generated-clean-no-subscriptions-iris-brook",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* ABBEYGATEPROP",
+      "name": "Abbeygate Property"
+    },
+    {
+      "raw": "SQ *ABBEYGATEPROP",
+      "name": "Abbeygate Property"
+    },
+    {
+      "raw": "PAYPAL *ABBEYGATEPROP",
+      "name": "Abbeygate Property"
+    },
+    {
+      "raw": "DUNMORE CATERING",
+      "name": "Dunmore Catering"
+    },
+    {
+      "raw": "STRIPE* SCOTRAIL",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "SQ *SCOTRAIL",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "PAYPAL *SCOTRAIL",
+      "name": "ScotRail"
+    },
+    {
+      "raw": "STRIPE* KADEYEMI",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "SQ *KADEYEMI",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "PAYPAL *KADEYEMI",
+      "name": "K Adeyemi"
+    },
+    {
+      "raw": "STRIPE* ICELANDFOODS",
+      "name": "Iceland"
+    },
+    {
+      "raw": "SQ *ICELANDFOODS",
+      "name": "Iceland"
+    },
+    {
+      "raw": "PAYPAL *ICELANDFOODS",
+      "name": "Iceland"
+    },
+    {
+      "raw": "SCREWFIX",
+      "name": "Screwfix"
+    },
+    {
+      "raw": "OUTFOX THE MKT",
+      "name": "Outfox the Market"
+    },
+    {
+      "raw": "ASHWORTH AUDIO",
+      "name": "Ashworth Audio"
+    },
+    {
+      "raw": "STRIPE* WEAVERSMARKET",
+      "name": "Weavers Market"
+    },
+    {
+      "raw": "SQ *WEAVERSMARKET",
+      "name": "Weavers Market"
+    },
+    {
+      "raw": "PAYPAL *WEAVERSMARKET",
+      "name": "Weavers Market"
+    },
+    {
+      "raw": "PENHALE PARKS",
+      "name": "Penhale Parks"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-monthly-rent",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ABBEYGATEPROP",
+      "name": "Abbeygate Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-monthly-salary",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "DUNMORE CATERING",
+      "name": "Dunmore Catering",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SCOTRAIL",
+      "name": "ScotRail",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-standing-order-person",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* KADEYEMI",
+      "name": "K Adeyemi",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ICELANDFOODS",
+      "name": "Iceland",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "SCREWFIX",
+      "name": "Screwfix",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "OUTFOX THE MKT",
+      "name": "Outfox the Market",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "ASHWORTH AUDIO",
+      "name": "Ashworth Audio",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* WEAVERSMARKET",
+      "name": "Weavers Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "exam-clean-no-subscriptions-iris-brook-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "clean",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "PENHALE PARKS",
+      "name": "Penhale Parks",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "ScotRail",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Outfox the Market",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

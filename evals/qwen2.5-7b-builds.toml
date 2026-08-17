@@ -1,0 +1,26 @@
+# Reproduce the four-build comparison from #234.
+#
+# Download and verify the files using app/src-tauri/models.md, then run:
+#
+#   cargo run -p kettle -- eval app.kttl.subscription-audit \
+#     --models evals/qwen2.5-7b-builds.toml --runs 3
+
+[[model]]
+file = "models/qwen2.5-7b-instruct-q4_k_m.gguf"
+params = "7B"
+quant = "Q4_K_M"
+
+[[model]]
+file = "models/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf"
+params = "7B"
+quant = "Q4_K_M"
+
+[[model]]
+file = "models/qwen2.5-7b-instruct-q4_k_m-lmstudio.gguf"
+params = "7B"
+quant = "Q4_K_M"
+
+[[model]]
+file = "models/qwen2.5-7b-instruct-q4_k_m-maziyar.gguf"
+params = "7B"
+quant = "Q4_K_M"

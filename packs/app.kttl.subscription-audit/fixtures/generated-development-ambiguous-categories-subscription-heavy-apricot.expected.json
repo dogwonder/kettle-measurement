@@ -1,0 +1,238 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-subscription-heavy-apricot",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "SQ *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PAYPAL *PCLOUD",
+      "name": "pCloud"
+    },
+    {
+      "raw": "PRIVATE EYE PAYMENT",
+      "name": "Private Eye"
+    },
+    {
+      "raw": "SKILLSHARE PAYMENT",
+      "name": "Skillshare"
+    },
+    {
+      "raw": "DAVID LLOYD PAYMENT",
+      "name": "David Lloyd"
+    },
+    {
+      "raw": "NOW TV PAYMENT",
+      "name": "NOW"
+    },
+    {
+      "raw": "TIDAL PAYMENT",
+      "name": "TIDAL"
+    },
+    {
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "SQ *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "PAYPAL *ADOBE",
+      "name": "Adobe"
+    },
+    {
+      "raw": "THE TELEGRAPH PAYMENT",
+      "name": "The Telegraph"
+    },
+    {
+      "raw": "EDF ENERGY PAYMENT",
+      "name": "EDF"
+    },
+    {
+      "raw": "ELMWOOD CYCLES PAYMENT",
+      "name": "Elmwood Cycles"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-annual-archive",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* PCLOUD",
+      "name": "pCloud",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-annual-journal",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "PRIVATE EYE PAYMENT",
+      "name": "Private Eye",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-trial-learning",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "SKILLSHARE PAYMENT",
+      "name": "Skillshare",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-trial-fitness",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "DAVID LLOYD PAYMENT",
+      "name": "David Lloyd",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "NOW TV PAYMENT",
+      "name": "NOW",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-resumed-music",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "TIDAL PAYMENT",
+      "name": "TIDAL",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-rising-cloud",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* ADOBE",
+      "name": "Adobe",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-refunded-news",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE TELEGRAPH PAYMENT",
+      "name": "The Telegraph",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "price-rise-mid-series"
+      ],
+      "raw": "EDF ENERGY PAYMENT",
+      "name": "EDF",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-ambiguous-categories-subscription-heavy-apricot-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "ELMWOOD CYCLES PAYMENT",
+      "name": "Elmwood Cycles",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "pCloud",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Private Eye",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Skillshare",
+      "period": "monthly"
+    },
+    {
+      "merchant": "David Lloyd",
+      "period": "monthly"
+    },
+    {
+      "merchant": "NOW",
+      "period": "monthly"
+    },
+    {
+      "merchant": "TIDAL",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Telegraph",
+      "period": "monthly"
+    },
+    {
+      "merchant": "EDF",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

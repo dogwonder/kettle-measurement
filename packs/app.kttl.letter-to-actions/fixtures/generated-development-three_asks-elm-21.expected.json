@@ -1,0 +1,77 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-three_asks-elm-21",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-10-01",
+        "kind": "payment",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "three_asks-elm-21-payment-01",
+      "segment": "Please pay £54.00 towards your pet health plan within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "7 October 2026",
+        "deadline": "on 7 October 2026",
+        "due": "2026-10-07",
+        "kind": "attendance",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "three_asks-elm-21-attendance-02",
+      "segment": "You must attend a review meeting at our offices on 7 October 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-09-30",
+        "kind": "response",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "three_asks-elm-21-response-03",
+      "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-elm-21-no-ask-04",
+      "segment": "We look forward to hearing from you in due course.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-elm-21-no-ask-06",
+      "segment": "The tenancy renewal was signed on both sides on 1 July.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

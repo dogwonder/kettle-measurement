@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_anchored-fern-16",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "19 February 2026",
+        "deadline": "within 30 days",
+        "due": "2026-03-21",
+        "kind": "payment",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "payment_anchored-fern-16-payment-02",
+      "segment": "Please pay £480.00 within 30 days of 19 February 2026, quoting reference TY-31882.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "dated-anchor"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-fern-16-no-ask-03",
+      "segment": "Thank you for your co-operation in this matter.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_anchored-fern-16-no-ask-05",
+      "segment": "A refund of £74.10 was sent to your bank on 26 April and should have arrived within 3 days.",
+      "strata": [
+        "any-letter",
+        "payment-anchored",
+        "no-obligation"
+      ]
+    }
+  ]
+}

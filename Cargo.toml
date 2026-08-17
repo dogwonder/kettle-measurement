@@ -1,0 +1,55 @@
+[workspace]
+resolver = "2"
+members = ["crates/runner", "crates/cli", "crates/privacy-audit"]
+# The Tauri shell is its own workspace so root `cargo test` stays lean
+# and needs no webview system packages (see app/DECISIONS.md).
+exclude = ["app/src-tauri"]
+
+# Declared once here so a new crate cannot join the workspace
+# unlicensed. `app/src-tauri` is a separate workspace and is
+# deliberately not published under these terms (see NOTICE).
+[workspace.package]
+license = "Apache-2.0"
+edition = "2021"
+authors = ["DGW Ltd"]
+
+[workspace.dependencies]
+rust_decimal = { version = "1", features = ["serde"] }
+blake3 = "1"
+# SHA-256, because that is what model publishers publish (#49). blake3
+# stays the internal identity hash; this is for matching somebody else's
+# stated digest, not for choosing one.
+sha2 = "0.11"
+csv = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+semver = "1"
+num_cpus = "1"
+chrono = { version = "0.4", default-features = false, features = ["alloc", "serde"] }
+strsim = "0.11"
+toml = "1"
+tera = { version = "2", default-features = false }
+# `default-features = false` because jsonschema's defaults include
+# `resolve-http`, which pulls in `reqwest` (and hyper, tokio, rustls)
+# and makes the validator fetch a remote `$ref` over HTTPS at
+# validation time (#233). No schema Kettle loads uses `$ref` at all, so
+# the resolvers buy nothing — and an HTTP client reachable from a pack's
+# schema is exactly the undeclared path the boundary file exists to
+# refuse. `resolve-file` is off for the same reason in the other
+# direction: it would resolve `file://` refs out of a pack.
+jsonschema = { version = "0.49", default-features = false }
+# TLS is on deliberately (#49). Model weights come from https, and a
+# build without it downloads nothing real while every mock test — all
+# http — still passes. The rest of ureq's defaults stay off.
+ureq = { version = "3", default-features = false, features = ["rustls"] }
+pdfium-render = "0.9"
+# Apple Vision, for photographed letters (#399). On-device, no vendored
+# binary, and it reports a confidence per observation — which is the
+# half of #399 that says when *not* to trust a reading. macOS-only, so
+# these are target-scoped in the crate that uses them; #71 keeps the
+# portable Tesseract path for scans.
+objc2 = "0.6"
+objc2-foundation = { version = "0.3", features = ["NSString", "NSArray", "NSURL", "NSDictionary", "NSError"] }
+objc2-vision = { version = "0.3", features = ["VNRequest", "VNRequestHandler", "VNObservation", "VNTypes", "VNRecognizeTextRequest"] }
+html5ever = "0.39"
+cssparser = "0.37"

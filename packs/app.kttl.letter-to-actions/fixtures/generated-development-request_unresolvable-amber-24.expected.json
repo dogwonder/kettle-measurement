@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-request_unresolvable-amber-24",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "at your earliest convenience",
+        "due": null,
+        "kind": "response",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "request_unresolvable-amber-24-response-01",
+      "segment": "Please send us a meter reading for your case file at your earliest convenience.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "unresolvable-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-amber-24-no-ask-02",
+      "segment": "Thank you for being a customer of ours.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "request_unresolvable-amber-24-no-ask-04",
+      "segment": "The engineer's visit on 8 January resolved the fault and no follow-up was needed.",
+      "strata": [
+        "any-letter",
+        "request-unresolvable",
+        "no-obligation"
+      ]
+    }
+  ]
+}

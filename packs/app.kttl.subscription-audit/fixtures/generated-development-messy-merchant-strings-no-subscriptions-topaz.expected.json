@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-no-subscriptions-topaz",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* CALDERLETTINGS CARD 4821",
+      "name": "Calder Lettings"
+    },
+    {
+      "raw": "SQ *CALDERLETTINGS CARD 4821",
+      "name": "Calder Lettings"
+    },
+    {
+      "raw": "PAYPAL *CALDERLETTINGS CARD 4821",
+      "name": "Calder Lettings"
+    },
+    {
+      "raw": "CARD 4821 KRKLND SPPLS GB",
+      "name": "Kirkland Supplies"
+    },
+    {
+      "raw": "STRIPE* NORTHERNRAIL CARD 4821",
+      "name": "Northern"
+    },
+    {
+      "raw": "SQ *NORTHERNRAIL CARD 4821",
+      "name": "Northern"
+    },
+    {
+      "raw": "PAYPAL *NORTHERNRAIL CARD 4821",
+      "name": "Northern"
+    },
+    {
+      "raw": "STRIPE* SMACLEOD CARD 4821",
+      "name": "S MacLeod"
+    },
+    {
+      "raw": "SQ *SMACLEOD CARD 4821",
+      "name": "S MacLeod"
+    },
+    {
+      "raw": "PAYPAL *SMACLEOD CARD 4821",
+      "name": "S MacLeod"
+    },
+    {
+      "raw": "STRIPE* LIDLGB CARD 4821",
+      "name": "Lidl"
+    },
+    {
+      "raw": "SQ *LIDLGB CARD 4821",
+      "name": "Lidl"
+    },
+    {
+      "raw": "PAYPAL *LIDLGB CARD 4821",
+      "name": "Lidl"
+    },
+    {
+      "raw": "CARD 4821 WLK GB",
+      "name": "Wilko"
+    },
+    {
+      "raw": "CARD 4821 N NXT GB",
+      "name": "E.ON Next"
+    },
+    {
+      "raw": "CARD 4821 TNNRY BKS GB",
+      "name": "Tannery Books"
+    },
+    {
+      "raw": "STRIPE* GRANARYMARKET CARD 4821",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "SQ *GRANARYMARKET CARD 4821",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "PAYPAL *GRANARYMARKET CARD 4821",
+      "name": "Granary Market"
+    },
+    {
+      "raw": "CARD 4821 BLLFRD PRKS GB",
+      "name": "Bellford Parks"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* CALDERLETTINGS CARD 4821",
+      "name": "Calder Lettings",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 KRKLND SPPLS GB",
+      "name": "Kirkland Supplies",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* NORTHERNRAIL CARD 4821",
+      "name": "Northern",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SMACLEOD CARD 4821",
+      "name": "S MacLeod",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LIDLGB CARD 4821",
+      "name": "Lidl",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 WLK GB",
+      "name": "Wilko",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 N NXT GB",
+      "name": "E.ON Next",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 TNNRY BKS GB",
+      "name": "Tannery Books",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* GRANARYMARKET CARD 4821",
+      "name": "Granary Market",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-topaz-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 BLLFRD PRKS GB",
+      "name": "Bellford Parks",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Northern",
+      "period": "yearly"
+    },
+    {
+      "merchant": "E.ON Next",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

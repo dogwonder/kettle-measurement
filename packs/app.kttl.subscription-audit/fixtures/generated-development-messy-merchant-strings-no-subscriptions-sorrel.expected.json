@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-no-subscriptions-sorrel",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* OAKFIELDESTATES CARD 4821",
+      "name": "Oakfield Estates"
+    },
+    {
+      "raw": "SQ *OAKFIELDESTATES CARD 4821",
+      "name": "Oakfield Estates"
+    },
+    {
+      "raw": "PAYPAL *OAKFIELDESTATES CARD 4821",
+      "name": "Oakfield Estates"
+    },
+    {
+      "raw": "CARD 4821 SHDWN NGNRS GB",
+      "name": "Ashdown Engineers"
+    },
+    {
+      "raw": "STRIPE* SOUTHERNRAIL CARD 4821",
+      "name": "Southern"
+    },
+    {
+      "raw": "SQ *SOUTHERNRAIL CARD 4821",
+      "name": "Southern"
+    },
+    {
+      "raw": "PAYPAL *SOUTHERNRAIL CARD 4821",
+      "name": "Southern"
+    },
+    {
+      "raw": "STRIPE* RPATEL CARD 4821",
+      "name": "R Patel"
+    },
+    {
+      "raw": "SQ *RPATEL CARD 4821",
+      "name": "R Patel"
+    },
+    {
+      "raw": "PAYPAL *RPATEL CARD 4821",
+      "name": "R Patel"
+    },
+    {
+      "raw": "STRIPE* ALDI CARD 4821",
+      "name": "Aldi"
+    },
+    {
+      "raw": "SQ *ALDI CARD 4821",
+      "name": "Aldi"
+    },
+    {
+      "raw": "PAYPAL *ALDI CARD 4821",
+      "name": "Aldi"
+    },
+    {
+      "raw": "CARD 4821 K GB",
+      "name": "IKEA"
+    },
+    {
+      "raw": "CARD 4821 DF NRGY GB",
+      "name": "EDF"
+    },
+    {
+      "raw": "CARD 4821 LMWD CYCLS GB",
+      "name": "Elmwood Cycles"
+    },
+    {
+      "raw": "STRIPE* SALTMARSHSTALL CARD 4821",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "SQ *SALTMARSHSTALL CARD 4821",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "PAYPAL *SALTMARSHSTALL CARD 4821",
+      "name": "Saltmarsh Stall"
+    },
+    {
+      "raw": "CARD 4821 STNWCK LSR GB",
+      "name": "Stanwick Leisure"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* OAKFIELDESTATES CARD 4821",
+      "name": "Oakfield Estates",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 SHDWN NGNRS GB",
+      "name": "Ashdown Engineers",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SOUTHERNRAIL CARD 4821",
+      "name": "Southern",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* RPATEL CARD 4821",
+      "name": "R Patel",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ALDI CARD 4821",
+      "name": "Aldi",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 K GB",
+      "name": "IKEA",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 DF NRGY GB",
+      "name": "EDF",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 LMWD CYCLS GB",
+      "name": "Elmwood Cycles",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* SALTMARSHSTALL CARD 4821",
+      "name": "Saltmarsh Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-sorrel-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 STNWCK LSR GB",
+      "name": "Stanwick Leisure",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Southern",
+      "period": "yearly"
+    },
+    {
+      "merchant": "EDF",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-two_excesses-quince-02",
+  "inputs": {
+    "previous": "generated-exam-two_excesses-quince-02-previous.txt",
+    "renewal": "generated-exam-two_excesses-quince-02-renewal.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "exam-two_excesses-quince-02-previous-no-value-4ec4e7",
+      "role": "previous",
+      "segment": "Schedule QUINCE-TE-407 of your car insurance cover with Kestrel Assurance, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,380.00.",
+        "term": "compulsory_excess",
+        "value": "£4,380.00"
+      },
+      "id": "exam-two_excesses-quince-02-previous-compulsory-excess-ba1981",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £4,380.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £986.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£986.00"
+      },
+      "id": "exam-two_excesses-quince-02-previous-voluntary-excess-392fb7",
+      "role": "previous",
+      "segment": "You chose to carry a further £986.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,366.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,366.00"
+      },
+      "id": "exam-two_excesses-quince-02-previous-total-excess-bd017a",
+      "role": "previous",
+      "segment": "Altogether the excess comes to £5,366.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-quince-02-previous-no-value-2dee17",
+      "role": "previous",
+      "segment": "Please quote QUINCE-TE-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-quince-02-previous-no-value-c94a4c",
+      "role": "previous",
+      "segment": "Cover for car insurance under QUINCE-TE-407 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-quince-02-renewal-no-value-40931d",
+      "role": "renewal",
+      "segment": "Your car insurance cover with Kestrel Assurance under QUINCE-TE-407 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £4,430.00.",
+        "term": "compulsory_excess",
+        "value": "£4,430.00"
+      },
+      "id": "exam-two_excesses-quince-02-renewal-compulsory-excess-2a89eb",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £4,430.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "You chose to carry a further £986.00 of excess on each claim.",
+        "term": "voluntary_excess",
+        "value": "£986.00"
+      },
+      "id": "exam-two_excesses-quince-02-renewal-voluntary-excess-392fb7",
+      "role": "renewal",
+      "segment": "You chose to carry a further £986.00 of excess on each claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "Altogether the excess comes to £5,416.00 on a claim.",
+        "term": "total_excess",
+        "value": "£5,416.00"
+      },
+      "id": "exam-two_excesses-quince-02-renewal-total-excess-e7c96d",
+      "role": "renewal",
+      "segment": "Altogether the excess comes to £5,416.00 on a claim.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-quince-02-renewal-no-value-c94a4c",
+      "role": "renewal",
+      "segment": "Cover for car insurance under QUINCE-TE-407 is arranged by Kestrel Assurance, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "exam-two_excesses-quince-02-renewal-no-value-2dee17",
+      "role": "renewal",
+      "segment": "Please quote QUINCE-TE-407 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "fixture_id": "development-generated-clean-subscription-heavy-kestrel",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* DROPBOX",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "SQ *DROPBOX",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "PAYPAL *DROPBOX",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "NEW SCIENTIST",
+      "name": "New Scientist"
+    },
+    {
+      "raw": "BABBEL",
+      "name": "Babbel"
+    },
+    {
+      "raw": "THE GYM GROUP",
+      "name": "The Gym Group"
+    },
+    {
+      "raw": "DISNEY PLUS",
+      "name": "Disney+"
+    },
+    {
+      "raw": "APPLE MUSIC",
+      "name": "Apple Music"
+    },
+    {
+      "raw": "STRIPE* MICROSOFT365",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "SQ *MICROSOFT365",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "PAYPAL *MICROSOFT365",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "THE TIMES",
+      "name": "The Times"
+    },
+    {
+      "raw": "OCTOPUS ENERGY",
+      "name": "Octopus Energy"
+    },
+    {
+      "raw": "QUAYSIDE HARDWARE",
+      "name": "Quayside Hardware"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-clean-subscription-heavy-kestrel-annual-archive",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* DROPBOX",
+      "name": "Dropbox",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-kestrel-annual-journal",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "NEW SCIENTIST",
+      "name": "New Scientist",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-kestrel-trial-learning",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "BABBEL",
+      "name": "Babbel",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-kestrel-trial-fitness",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "THE GYM GROUP",
+      "name": "The Gym Group",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-clean-subscription-heavy-kestrel-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "DISNEY PLUS",
+      "name": "Disney+",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-kestrel-resumed-music",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "APPLE MUSIC",
+      "name": "Apple Music",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-clean-subscription-heavy-kestrel-rising-cloud",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* MICROSOFT365",
+      "name": "Microsoft 365",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-clean-subscription-heavy-kestrel-refunded-news",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "THE TIMES",
+      "name": "The Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-clean-subscription-heavy-kestrel-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "price-rise-mid-series"
+      ],
+      "raw": "OCTOPUS ENERGY",
+      "name": "Octopus Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-clean-subscription-heavy-kestrel-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "clean",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "QUAYSIDE HARDWARE",
+      "name": "Quayside Hardware",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Dropbox",
+      "period": "yearly"
+    },
+    {
+      "merchant": "New Scientist",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Babbel",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Gym Group",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Disney+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Apple Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Times",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Octopus Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

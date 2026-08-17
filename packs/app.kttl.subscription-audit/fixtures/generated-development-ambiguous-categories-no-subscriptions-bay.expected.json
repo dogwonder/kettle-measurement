@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-ambiguous-categories-no-subscriptions-bay",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* MERIDIANPROPERTY",
+      "name": "Meridian Property"
+    },
+    {
+      "raw": "SQ *MERIDIANPROPERTY",
+      "name": "Meridian Property"
+    },
+    {
+      "raw": "PAYPAL *MERIDIANPROPERTY",
+      "name": "Meridian Property"
+    },
+    {
+      "raw": "PENROSE HEALTHCARE PAYMENT",
+      "name": "Penrose Healthcare"
+    },
+    {
+      "raw": "STRIPE* LNER",
+      "name": "LNER"
+    },
+    {
+      "raw": "SQ *LNER",
+      "name": "LNER"
+    },
+    {
+      "raw": "PAYPAL *LNER",
+      "name": "LNER"
+    },
+    {
+      "raw": "STRIPE* MOKONKWO",
+      "name": "M Okonkwo"
+    },
+    {
+      "raw": "SQ *MOKONKWO",
+      "name": "M Okonkwo"
+    },
+    {
+      "raw": "PAYPAL *MOKONKWO",
+      "name": "M Okonkwo"
+    },
+    {
+      "raw": "STRIPE* SAINSBURYS",
+      "name": "Sainsbury's"
+    },
+    {
+      "raw": "SQ *SAINSBURYS",
+      "name": "Sainsbury's"
+    },
+    {
+      "raw": "PAYPAL *SAINSBURYS",
+      "name": "Sainsbury's"
+    },
+    {
+      "raw": "DUNELM PAYMENT",
+      "name": "Dunelm"
+    },
+    {
+      "raw": "OCTOPUS ENERGY PAYMENT",
+      "name": "Octopus Energy"
+    },
+    {
+      "raw": "QUAYSIDE HARDWARE PAYMENT",
+      "name": "Quayside Hardware"
+    },
+    {
+      "raw": "STRIPE* LOWTHERTRADERS",
+      "name": "Lowther Traders"
+    },
+    {
+      "raw": "SQ *LOWTHERTRADERS",
+      "name": "Lowther Traders"
+    },
+    {
+      "raw": "PAYPAL *LOWTHERTRADERS",
+      "name": "Lowther Traders"
+    },
+    {
+      "raw": "REDCLIFF ATTRACT PAYMENT",
+      "name": "Redcliff Attractions"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-monthly-rent",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MERIDIANPROPERTY",
+      "name": "Meridian Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-monthly-salary",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "PENROSE HEALTHCARE PAYMENT",
+      "name": "Penrose Healthcare",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* LNER",
+      "name": "LNER",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-standing-order-person",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MOKONKWO",
+      "name": "M Okonkwo",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* SAINSBURYS",
+      "name": "Sainsbury's",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "DUNELM PAYMENT",
+      "name": "Dunelm",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "OCTOPUS ENERGY PAYMENT",
+      "name": "Octopus Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "QUAYSIDE HARDWARE PAYMENT",
+      "name": "Quayside Hardware",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* LOWTHERTRADERS",
+      "name": "Lowther Traders",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-ambiguous-categories-no-subscriptions-bay-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "ambiguous-categories",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "REDCLIFF ATTRACT PAYMENT",
+      "name": "Redcliff Attractions",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "LNER",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Octopus Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

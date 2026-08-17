@@ -1,0 +1,245 @@
+{
+  "fixture_id": "exam-generated-messy-merchant-strings-subscription-heavy-blue-harbour",
+  "eval_set": "exam",
+  "normalise": [
+    {
+      "raw": "STRIPE* BOXCOM CARD 4821",
+      "name": "Box"
+    },
+    {
+      "raw": "SQ *BOXCOM CARD 4821",
+      "name": "Box"
+    },
+    {
+      "raw": "PAYPAL *BOXCOM CARD 4821",
+      "name": "Box"
+    },
+    {
+      "raw": "CARD 4821 PRSPCT MG GB",
+      "name": "Prospect"
+    },
+    {
+      "raw": "CARD 4821 DMY GB",
+      "name": "Udemy"
+    },
+    {
+      "raw": "CARD 4821 VRGN CTV GB",
+      "name": "Virgin Active"
+    },
+    {
+      "raw": "CARD 4821 SKY DGTL GB",
+      "name": "Sky"
+    },
+    {
+      "raw": "CARD 4821 BNDCMP GB",
+      "name": "Bandcamp"
+    },
+    {
+      "raw": "STRIPE* EVERNOTE CARD 4821",
+      "name": "Evernote"
+    },
+    {
+      "raw": "SQ *EVERNOTE CARD 4821",
+      "name": "Evernote"
+    },
+    {
+      "raw": "PAYPAL *EVERNOTE CARD 4821",
+      "name": "Evernote"
+    },
+    {
+      "raw": "CARD 4821 WSHNGTNPST GB",
+      "name": "The Washington Post"
+    },
+    {
+      "raw": "STRIPE* ICELANDFOODS CARD 4821",
+      "name": "Iceland"
+    },
+    {
+      "raw": "SQ *ICELANDFOODS CARD 4821",
+      "name": "Iceland"
+    },
+    {
+      "raw": "PAYPAL *ICELANDFOODS CARD 4821",
+      "name": "Iceland"
+    },
+    {
+      "raw": "CARD 4821 SCRWFX GB",
+      "name": "Screwfix"
+    }
+  ],
+  "classify": [
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* BOXCOM CARD 4821",
+      "name": "Box",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 PRSPCT MG GB",
+      "name": "Prospect",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 DMY GB",
+      "name": "Udemy",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 VRGN CTV GB",
+      "name": "Virgin Active",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 SKY DGTL GB",
+      "name": "Sky",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 BNDCMP GB",
+      "name": "Bandcamp",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* EVERNOTE CARD 4821",
+      "name": "Evernote",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 WSHNGTNPST GB",
+      "name": "The Washington Post",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ICELANDFOODS CARD 4821",
+      "name": "Iceland",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "exam-messy-merchant-strings-subscription-heavy-blue-harbour-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 SCRWFX GB",
+      "name": "Screwfix",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Box",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Prospect",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Udemy",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Virgin Active",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Sky",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Bandcamp",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Washington Post",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

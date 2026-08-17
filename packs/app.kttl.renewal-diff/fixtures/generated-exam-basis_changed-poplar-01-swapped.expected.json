@@ -1,0 +1,130 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-basis_changed-poplar-01-swapped",
+  "inputs": {
+    "previous": "generated-exam-basis_changed-poplar-01-renewal.txt",
+    "renewal": "generated-exam-basis_changed-poplar-01-previous.txt"
+  },
+  "policy-terms": [
+    {
+      "expect": null,
+      "id": "swap-exam-basis_changed-poplar-01-previous-no-value-d69ff0",
+      "role": "renewal",
+      "segment": "Schedule POPLAR-BC-400 of your home insurance cover with Marlowe Mutual, running until 31 August 2026.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "annual",
+        "quote": "The price for the year comes to £1,880.00.",
+        "term": "premium",
+        "value": "£1,880.00"
+      },
+      "id": "swap-exam-basis_changed-poplar-01-previous-premium-bed7be",
+      "role": "renewal",
+      "segment": "The price for the year comes to £1,880.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £1,200.00.",
+        "term": "compulsory_excess",
+        "value": "£1,200.00"
+      },
+      "id": "swap-exam-basis_changed-poplar-01-previous-compulsory-excess-b85940",
+      "role": "renewal",
+      "segment": "The excess you must pay on any claim is £1,200.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "swap-exam-basis_changed-poplar-01-previous-no-value-20476c",
+      "role": "renewal",
+      "segment": "Please quote POPLAR-BC-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "swap-exam-basis_changed-poplar-01-previous-no-value-c8d248",
+      "role": "renewal",
+      "segment": "Cover for home insurance under POPLAR-BC-400 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "swap-exam-basis_changed-poplar-01-renewal-no-value-904354",
+      "role": "previous",
+      "segment": "Your home insurance cover with Marlowe Mutual under POPLAR-BC-400 is due to renew on 31 August 2027.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "monthly",
+        "quote": "You will pay this in twelve instalments of £156.66 each.",
+        "term": "premium",
+        "value": "£156.66"
+      },
+      "id": "swap-exam-basis_changed-poplar-01-renewal-premium-90fd46",
+      "role": "previous",
+      "segment": "You will pay this in twelve instalments of £156.66 each.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": {
+        "basis": "per_claim",
+        "quote": "The excess you must pay on any claim is £1,200.00.",
+        "term": "compulsory_excess",
+        "value": "£1,200.00"
+      },
+      "id": "swap-exam-basis_changed-poplar-01-renewal-compulsory-excess-b85940",
+      "role": "previous",
+      "segment": "The excess you must pay on any claim is £1,200.00.",
+      "strata": [
+        "any-schedule",
+        "value-stated"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "swap-exam-basis_changed-poplar-01-renewal-no-value-c8d248",
+      "role": "previous",
+      "segment": "Cover for home insurance under POPLAR-BC-400 is arranged by Marlowe Mutual, who are regulated in the United Kingdom.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "swap-exam-basis_changed-poplar-01-renewal-no-value-20476c",
+      "role": "previous",
+      "segment": "Please quote POPLAR-BC-400 in any letter or call about this cover.",
+      "strata": [
+        "any-schedule",
+        "states-nothing"
+      ]
+    }
+  ]
+}

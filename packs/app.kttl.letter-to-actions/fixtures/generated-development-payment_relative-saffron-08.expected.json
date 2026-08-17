@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_relative-saffron-08",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-08-22",
+        "kind": "payment",
+        "party": "Cranleigh Energy"
+      },
+      "id": "payment_relative-saffron-08-payment-01",
+      "segment": "Our records show that energy account of £142.75 remains outstanding. Please pay £142.75 within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "relative-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-saffron-08-no-ask-02",
+      "segment": "We are sorry for any inconvenience this may have caused.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_relative-saffron-08-no-ask-04",
+      "segment": "Your details were updated on 15 March following your telephone call.",
+      "strata": [
+        "any-letter",
+        "payment-relative",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-subscription-heavy-copper",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* DROPBOX CARD 4821",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "SQ *DROPBOX CARD 4821",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "PAYPAL *DROPBOX CARD 4821",
+      "name": "Dropbox"
+    },
+    {
+      "raw": "CARD 4821 NW SCNTST GB",
+      "name": "New Scientist"
+    },
+    {
+      "raw": "CARD 4821 BBBL GB",
+      "name": "Babbel"
+    },
+    {
+      "raw": "CARD 4821 TH GYM GRP GB",
+      "name": "The Gym Group"
+    },
+    {
+      "raw": "CARD 4821 DSNY PLS GB",
+      "name": "Disney+"
+    },
+    {
+      "raw": "CARD 4821 PPL MSC GB",
+      "name": "Apple Music"
+    },
+    {
+      "raw": "STRIPE* MICROSOFT365 CARD 4821",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "SQ *MICROSOFT365 CARD 4821",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "PAYPAL *MICROSOFT365 CARD 4821",
+      "name": "Microsoft 365"
+    },
+    {
+      "raw": "CARD 4821 TH TMS GB",
+      "name": "The Times"
+    },
+    {
+      "raw": "CARD 4821 CTPS NRGY GB",
+      "name": "Octopus Energy"
+    },
+    {
+      "raw": "CARD 4821 QYSD HRDWR GB",
+      "name": "Quayside Hardware"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-annual-archive",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* DROPBOX CARD 4821",
+      "name": "Dropbox",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-annual-journal",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "annual-subscription-once-yearly"
+      ],
+      "raw": "CARD 4821 NW SCNTST GB",
+      "name": "New Scientist",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-trial-learning",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 BBBL GB",
+      "name": "Babbel",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-trial-fitness",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "free-trial-conversion"
+      ],
+      "raw": "CARD 4821 TH GYM GRP GB",
+      "name": "The Gym Group",
+      "kind": "subscription",
+      "category": "fitness"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-resumed-streaming",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 DSNY PLS GB",
+      "name": "Disney+",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-resumed-music",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "cancelled-then-resumed"
+      ],
+      "raw": "CARD 4821 PPL MSC GB",
+      "name": "Apple Music",
+      "kind": "subscription",
+      "category": "streaming"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-rising-cloud",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* MICROSOFT365 CARD 4821",
+      "name": "Microsoft 365",
+      "kind": "subscription",
+      "category": "software"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-refunded-news",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 TH TMS GB",
+      "name": "The Times",
+      "kind": "subscription",
+      "category": "news_media"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 CTPS NRGY GB",
+      "name": "Octopus Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-messy-merchant-strings-subscription-heavy-copper-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "subscription-heavy",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 QYSD HRDWR GB",
+      "name": "Quayside Hardware",
+      "kind": "one_off",
+      "category": "retail"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "Dropbox",
+      "period": "yearly"
+    },
+    {
+      "merchant": "New Scientist",
+      "period": "yearly"
+    },
+    {
+      "merchant": "Babbel",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Gym Group",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Disney+",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Apple Music",
+      "period": "monthly"
+    },
+    {
+      "merchant": "The Times",
+      "period": "monthly"
+    },
+    {
+      "merchant": "Octopus Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

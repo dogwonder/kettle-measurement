@@ -1,0 +1,77 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-three_asks-willow-15",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-03-29",
+        "kind": "payment",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "three_asks-willow-15-payment-01",
+      "segment": "Please pay £0.00 towards your annual review within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "relative-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "3 April 2026",
+        "deadline": "on 3 April 2026",
+        "due": "2026-04-03",
+        "kind": "attendance",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "three_asks-willow-15-attendance-02",
+      "segment": "You must attend a review meeting at our offices on 3 April 2026.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "absolute-deadline",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-03-31",
+        "kind": "response",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "three_asks-willow-15-response-03",
+      "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "month-end",
+        "multiple-obligations"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-willow-15-no-ask-04",
+      "segment": "We look forward to hearing from you in due course.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "three_asks-willow-15-no-ask-06",
+      "segment": "We have already cancelled the appointment you could not attend on 18 February.",
+      "strata": [
+        "any-letter",
+        "three-asks",
+        "no-obligation"
+      ]
+    }
+  ]
+}

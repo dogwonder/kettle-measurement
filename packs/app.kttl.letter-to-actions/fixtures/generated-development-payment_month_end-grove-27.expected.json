@@ -1,0 +1,42 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-payment_month_end-grove-27",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date of this letter",
+        "deadline": "by the end of the month",
+        "due": "2026-03-31",
+        "kind": "payment",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "payment_month_end-grove-27-payment-01",
+      "segment": "The balance on your annual review is £0.00. Please settle it by the end of the month.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "month-end"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-grove-27-no-ask-02",
+      "segment": "This letter is for your records and no reply is needed if you have already paid.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "payment_month_end-grove-27-no-ask-04",
+      "segment": "Your cover continues until 14 September and renews by itself unless you tell us otherwise.",
+      "strata": [
+        "any-letter",
+        "payment-month-end",
+        "no-obligation"
+      ]
+    }
+  ]
+}

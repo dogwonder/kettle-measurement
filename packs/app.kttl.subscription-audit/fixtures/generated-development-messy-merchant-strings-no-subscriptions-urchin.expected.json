@@ -1,0 +1,244 @@
+{
+  "fixture_id": "development-generated-messy-merchant-strings-no-subscriptions-urchin",
+  "eval_set": "development",
+  "normalise": [
+    {
+      "raw": "STRIPE* STONEBRIDGEPROP CARD 4821",
+      "name": "Stonebridge Property"
+    },
+    {
+      "raw": "SQ *STONEBRIDGEPROP CARD 4821",
+      "name": "Stonebridge Property"
+    },
+    {
+      "raw": "PAYPAL *STONEBRIDGEPROP CARD 4821",
+      "name": "Stonebridge Property"
+    },
+    {
+      "raw": "CARD 4821 BRMFRD TXTLS GB",
+      "name": "Bramford Textiles"
+    },
+    {
+      "raw": "STRIPE* GWR CARD 4821",
+      "name": "GWR"
+    },
+    {
+      "raw": "SQ *GWR CARD 4821",
+      "name": "GWR"
+    },
+    {
+      "raw": "PAYPAL *GWR CARD 4821",
+      "name": "GWR"
+    },
+    {
+      "raw": "STRIPE* ANOWAK CARD 4821",
+      "name": "A Nowak"
+    },
+    {
+      "raw": "SQ *ANOWAK CARD 4821",
+      "name": "A Nowak"
+    },
+    {
+      "raw": "PAYPAL *ANOWAK CARD 4821",
+      "name": "A Nowak"
+    },
+    {
+      "raw": "STRIPE* MORRISONS CARD 4821",
+      "name": "Morrisons"
+    },
+    {
+      "raw": "SQ *MORRISONS CARD 4821",
+      "name": "Morrisons"
+    },
+    {
+      "raw": "PAYPAL *MORRISONS CARD 4821",
+      "name": "Morrisons"
+    },
+    {
+      "raw": "CARD 4821 TH RNG GB",
+      "name": "The Range"
+    },
+    {
+      "raw": "CARD 4821 V NRGY GB",
+      "name": "OVO Energy"
+    },
+    {
+      "raw": "CARD 4821 HRBR TDRS GB",
+      "name": "Harbour Outdoors"
+    },
+    {
+      "raw": "STRIPE* CROSSKEYSSTALL CARD 4821",
+      "name": "Crosskeys Stall"
+    },
+    {
+      "raw": "SQ *CROSSKEYSSTALL CARD 4821",
+      "name": "Crosskeys Stall"
+    },
+    {
+      "raw": "PAYPAL *CROSSKEYSSTALL CARD 4821",
+      "name": "Crosskeys Stall"
+    },
+    {
+      "raw": "CARD 4821 KSTRL VLLY GB",
+      "name": "Kestrel Valley"
+    }
+  ],
+  "classify": [
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-monthly-rent",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* STONEBRIDGEPROP CARD 4821",
+      "name": "Stonebridge Property",
+      "kind": "utility",
+      "category": "housing"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-monthly-salary",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 BRMFRD TXTLS GB",
+      "name": "Bramford Textiles",
+      "kind": "income",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-annual-season-ticket",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* GWR CARD 4821",
+      "name": "GWR",
+      "kind": "utility",
+      "category": "transport"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-standing-order-person",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* ANOWAK CARD 4821",
+      "name": "A Nowak",
+      "kind": "regular_spend",
+      "category": "finance"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-weekly-grocery",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "STRIPE* MORRISONS CARD 4821",
+      "name": "Morrisons",
+      "kind": "regular_spend",
+      "category": "food_drink"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-duplicate-retail-charge",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 TH RNG GB",
+      "name": "The Range",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-rising-energy-bill",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "price-rise-mid-series"
+      ],
+      "raw": "CARD 4821 V NRGY GB",
+      "name": "OVO Energy",
+      "kind": "utility",
+      "category": "energy"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-refunded-card-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks"
+      ],
+      "raw": "CARD 4821 HRBR TDRS GB",
+      "name": "Harbour Outdoors",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-processor-market-purchase",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "refunds-and-chargebacks",
+        "multi-descriptor-merchant"
+      ],
+      "raw": "STRIPE* CROSSKEYSSTALL CARD 4821",
+      "name": "Crosskeys Stall",
+      "kind": "one_off",
+      "category": "retail"
+    },
+    {
+      "id": "development-messy-merchant-strings-no-subscriptions-urchin-duplicate-season-pass",
+      "strata": [
+        "any-statement",
+        "messy-merchant-strings",
+        "no-subscriptions",
+        "duplicate-charge-not-subscription"
+      ],
+      "raw": "CARD 4821 KSTRL VLLY GB",
+      "name": "Kestrel Valley",
+      "kind": "one_off",
+      "category": "transport"
+    }
+  ],
+  "recurring": [
+    {
+      "merchant": "GWR",
+      "period": "yearly"
+    },
+    {
+      "merchant": "OVO Energy",
+      "period": "monthly"
+    }
+  ],
+  "tolerances": {
+    "normalise": "fuzzy:0.85",
+    "classify_kind": "exact",
+    "classify_category": "exact",
+    "recurring": "exact"
+  }
+}

@@ -50,7 +50,10 @@ re-derives what the evidence supports now:
 `failed` is a finding, not an error state: "a quote is evidence only of
 a value it contains" (#460) is one of the most useful records here.
 
-An issue reference is context, never proof. A manual release check is
+An issue reference is context, never proof. Issue numbers (#457 and
+kin) point at the private development tracker, so a note must carry its
+substance itself — a reader who cannot follow the number loses history,
+never evidence. A manual release check is
 evidence — with a date and an expiry — because "not automatable" and
 "not evidenced" are different things and the registry must say which.
 

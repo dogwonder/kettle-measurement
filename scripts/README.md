@@ -10,9 +10,10 @@ vendor-sidecar.sh   →   sign-macos.sh   →   tauri build   →   smoke-instal
 ```
 
 `reset-history.sh` belongs to a different job and is documented apart,
-in `PUBLISHING.md`: how the measurement layer reaches its two public
-repositories, and why their history starts at the flip rather than at
-the first commit.
+in `PUBLISHING.md`: how the three public repositories are produced from
+this one — the measurement projection, the run archive and the demo at
+kttl.app — why their history starts at the flip rather than at the first
+commit, and the first-time setup behind the site.
 
 `vendor-sidecar.sh` prepares a runtime and `publish-sidecar.sh`
 validates it before replacing anything under `sidecars/`. The publisher

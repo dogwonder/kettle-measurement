@@ -145,7 +145,7 @@ pub fn run_json(root: &Path, current_scoring_version: u32, today: chrono::NaiveD
                 "recorded_status": assessed.recorded,
                 "status_reasons": assessed.reasons,
                 "scope": claim.scope,
-                "evidence": claim.evidence,
+                "evidence": evidence_with_addresses(claim, &registry),
                 "recorded": claim.recorded,
                 "invalidation": claim.invalidation,
                 "review_route": claim.review_route,
@@ -166,13 +166,47 @@ pub fn run_json(root: &Path, current_scoring_version: u32, today: chrono::NaiveD
         })
         .collect::<Vec<_>>();
 
-    let document = json!({
+    let mut document = json!({
         "schema": "kettle/public-claims@0",
         "claims": claims,
     });
+    // Where the tree these paths live in was published (#478). Emitted
+    // rather than assumed by the page, and omitted rather than emptied,
+    // so a registry validated before the flip projects exactly as it
+    // did — with descriptions where there are no addresses.
+    if let Some(published_at) = &registry.published_at {
+        document["published_at"] = json!(published_at);
+    }
+    if let Some(recordings_at) = &registry.recordings_at {
+        document["recordings_at"] = json!(recordings_at);
+    }
     let text = serde_json::to_string_pretty(&document).expect("public claims serialise") + "\n";
     let code = exit_code(&assessment);
     Outcome { text, code }
+}
+
+/// A claim's evidence, each item carrying the address a reader outside
+/// this repository would open it at (#478), where the declared boundary
+/// publishes it. Evidence outside the boundary keeps its description and
+/// grows no link: real here, unopenable there, and the difference must
+/// not be allowed to look like unevidenced.
+fn evidence_with_addresses(
+    claim: &runner::assurance::Claim,
+    registry: &runner::assurance::Registry,
+) -> serde_json::Value {
+    let published_at = registry.published_at.as_deref();
+    claim
+        .evidence
+        .iter()
+        .map(|evidence| {
+            let mut projected = json!(evidence);
+            if let Some(url) = evidence.public_url(&registry.published, published_at) {
+                projected["url"] = json!(url);
+            }
+            projected
+        })
+        .collect::<Vec<_>>()
+        .into()
 }
 
 fn status_word(status: Status) -> &'static str {

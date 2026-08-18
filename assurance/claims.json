@@ -1,4 +1,6 @@
 {
+  "published_at": "https://github.com/dogwonder/kettle-measurement",
+  "recordings_at": "https://github.com/dogwonder/kettle-runs",
   "published": [
     "crates/",
     "packs/",

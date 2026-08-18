@@ -6,18 +6,37 @@
 # with stale entries reads as though Kettle reaches more of the network
 # than it does.
 #
-# Only two kinds are permitted, and `nothing_reaches_the_network_except_
-# loopback_and_an_explicit_download` is what holds that:
+# Only three kinds are permitted, and `nothing_reaches_the_network_
+# except_loopback_a_download_and_a_printed_address` is what holds that:
 #
 #   loopback                  127.0.0.1 only, runner <-> llama-server.
 #   explicit_model_download   external HTTPS, and only after a person
 #                             has chosen to download weights.
+#   published_address         an address printed on a public page and
+#                             fetched by nobody. Added 18 August 2026.
 #
 # Anything else — telemetry, usage analytics, Kettle-originated crash
 # reporting, automatic update checks, remote fonts, scripts, images or
 # report assets — is forbidden until separately designed, disclosed and
 # approved in its own issue. Adding a `kind` here is that conversation,
 # not a way to skip it.
+#
+# The third kind was that conversation, and it is worth recording why it
+# is not a hole in the other two. The scanner reads source, where a URL
+# a reader may click is indistinguishable from a URL the product
+# fetches — and the measurement layer going public (#478) meant the
+# evidence pages had to print two of them. A printed address issues no
+# request: nothing loads until a person clicks, and a click sends what
+# any click sends, from their browser rather than from Kettle.
+#
+# What stops the word being a way in is where it may be written.
+# `PUBLISHED_ADDRESS_SURFACES` is `assurance/` alone — the registry,
+# which is where an address is written and from which every page reads
+# one — and `bundle.resources` in `tauri.conf.json` does not contain it,
+# so nothing declared this way is in the packaged app at all. `a_printed_address_is_only_declared_where_
+# the_product_ships_nothing` fails on an entry outside those two
+# prefixes, which is what keeps `published_address` from becoming a
+# label somebody pastes onto a real call.
 #
 # This file is checked against *source*. It cannot prove what a packaged
 # release does at runtime, and nothing here should be read as though it
@@ -267,3 +286,37 @@ The drop handler connects once to the loop's own loopback port so the
 accept loop observes the stop flag and the thread exits with the call.
 """
 added = "2026-08-07"
+
+
+# ---------------------------------------------------------------------
+# Published addresses: links on the public evidence pages
+# ---------------------------------------------------------------------
+
+[[path]]
+file = "assurance/claims.json"
+calls = "https://github.com/dogwonder/kettle-measurement"
+kind = "published_address"
+reason = """
+`published_at` — where the measurement layer was published (#478),
+declared beside the boundary that says what goes into it because the
+publish workflow, `kettle claims --json` and the evidence pages must
+name one repository. It is data the registry carries, read at build
+time to turn an in-boundary citation into an address; no code in this
+repository requests it, and the registry is not bundled with the app.
+"""
+added = "2026-08-18"
+
+[[path]]
+file = "assurance/claims.json"
+calls = "https://github.com/dogwonder/kettle-runs"
+kind = "published_address"
+reason = """
+`recordings_at` — the run archive the baselines rest on, linked from
+the evidence landing page beside the measurement layer it backs. Here
+rather than in the page that renders it for the reason its sibling is:
+the public projection carries no `app/`, so an address written into a
+screen would be declared in a file this boundary describes and absent
+from the tree it is published as. No code requests it; a person clicks
+an anchor, from their own browser.
+"""
+added = "2026-08-18"

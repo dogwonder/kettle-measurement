@@ -118,6 +118,21 @@ impl Evidence {
         }
     }
 
+    /// Where a reader outside this repository opens this evidence.
+    ///
+    /// Derived from the same `inside_boundary` sentence the validator
+    /// and `kettle project` read, so a path cannot be publishable to the
+    /// projection and unlinkable on the page, or the reverse. Evidence
+    /// with no file has no address: a manual check travels as its own
+    /// description, and an issue is a private tracker reference whose
+    /// substance is the claim's note.
+    pub fn public_url(&self, published: &[String], published_at: Option<&str>) -> Option<String> {
+        let base = published_at?;
+        let path = self.path()?;
+        inside_boundary(path, published)
+            .then(|| format!("{}/blob/main/{path}", base.trim_end_matches('/')))
+    }
+
     /// Whether a reader outside this repository could open it.
     ///
     /// A manual check counts: its description travels in the registry,
@@ -257,6 +272,27 @@ pub struct Registry {
     /// for anyone validating a tree that is not being published.
     #[serde(default)]
     pub published: Vec<String>,
+    /// Where the published tree lives, once it does (#478). The
+    /// boundary says *what* goes public; this says *where* it went, and
+    /// the two are one sentence for the same reason the boundary is one
+    /// list: a reader following a link and a job pushing the tree must
+    /// mean the same repository.
+    ///
+    /// Absent until the flip, and absent means no addresses are
+    /// emitted. A registry that predates publication stays valid, and a
+    /// tree that is not published cites nothing it cannot open.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub published_at: Option<String>,
+    /// Where the run recordings the baselines rest on were published.
+    ///
+    /// A second repository because it is data rather than software —
+    /// pushed by hand after a sitting, not generated on merge — and a
+    /// second field here rather than a constant in a page, for the
+    /// reason every address in this file is here: the projection does
+    /// not carry `app/`, so an address written into a screen is one the
+    /// public tree can neither render nor check.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub recordings_at: Option<String>,
     pub claims: Vec<Claim>,
 }
 

@@ -270,3 +270,125 @@ fn the_public_projection_carries_what_the_cited_issue_found() {
         "a claim with no note does not grow an empty one: {plain}"
     );
 }
+
+/// #478, after the flip. The measurement layer is public, so a path a
+/// claim cites is a page a reader can open — but only where the
+/// declared boundary publishes it, and only once the registry says
+/// where the published tree lives. Both halves are the registry's to
+/// state: a second list, or a hard-coded repository, is how the links
+/// come to disagree with the tree they point into.
+#[test]
+fn published_evidence_carries_the_address_a_reader_can_open() {
+    let dir = root(
+        "evidence-links",
+        r##"{
+          "published_at": "https://github.com/dogwonder/kettle-measurement",
+          "published": ["evals/", "crates/"],
+          "claims": [
+            {
+              "id": "inside-the-boundary",
+              "wording": "The letter pack meets its gates.",
+              "status": "unproven",
+              "scope": {},
+              "evidence": [ { "kind": "baseline", "path": "evals/baseline-v14-letter.json" } ],
+              "recorded": "2026-08-09",
+              "invalidation": [],
+              "surfaces": [],
+              "review_route": "the baseline"
+            },
+            {
+              "id": "outside-the-boundary",
+              "wording": "The shell refuses a pack asking for more than read.",
+              "status": "unproven",
+              "scope": {},
+              "evidence": [
+                { "kind": "test", "path": "app/src-tauri/tests/capabilities.rs", "name": "refuses_write" },
+                { "kind": "issue", "number": 233 }
+              ],
+              "recorded": "2026-08-09",
+              "invalidation": [],
+              "surfaces": [],
+              "review_route": "the owning test"
+            }
+          ]
+        }"##,
+    );
+
+    let outcome = cli::claims::run_json(&dir, runner::eval::SCORING_VERSION, today());
+    let document: serde_json::Value =
+        serde_json::from_str(&outcome.text).expect("the projection is JSON");
+    let claims = document["claims"].as_array().expect("claims array");
+
+    assert_eq!(
+        document["published_at"], "https://github.com/dogwonder/kettle-measurement",
+        "the projection says where the published tree lives: {document}"
+    );
+
+    let inside = claims
+        .iter()
+        .find(|claim| claim["id"] == "inside-the-boundary")
+        .expect("the in-boundary claim is projected");
+    assert_eq!(
+        inside["evidence"][0]["url"],
+        "https://github.com/dogwonder/kettle-measurement/blob/main/evals/baseline-v14-letter.json",
+        "a published path is an address, not a description: {inside}"
+    );
+
+    let outside = claims
+        .iter()
+        .find(|claim| claim["id"] == "outside-the-boundary")
+        .expect("the out-of-boundary claim is projected");
+    for (index, evidence) in outside["evidence"]
+        .as_array()
+        .expect("evidence array")
+        .iter()
+        .enumerate()
+    {
+        assert!(
+            evidence.get("url").is_none_or(serde_json::Value::is_null),
+            "evidence {index} is real here and unopenable there, so it carries no link: {evidence}"
+        );
+    }
+}
+
+/// A registry that has not declared where it is published links to
+/// nothing. The boundary predates the flip and must stay valid for
+/// anyone validating a tree that is not being published at all.
+#[test]
+fn an_undeclared_address_produces_no_links() {
+    let dir = root(
+        "no-address",
+        r##"{
+          "published": ["evals/"],
+          "claims": [
+            {
+              "id": "inside-the-boundary",
+              "wording": "The letter pack meets its gates.",
+              "status": "unproven",
+              "scope": {},
+              "evidence": [ { "kind": "baseline", "path": "evals/baseline-v14-letter.json" } ],
+              "recorded": "2026-08-09",
+              "invalidation": [],
+              "surfaces": [],
+              "review_route": "the baseline"
+            }
+          ]
+        }"##,
+    );
+
+    let outcome = cli::claims::run_json(&dir, runner::eval::SCORING_VERSION, today());
+    let document: serde_json::Value =
+        serde_json::from_str(&outcome.text).expect("the projection is JSON");
+    assert!(
+        document
+            .get("published_at")
+            .is_none_or(serde_json::Value::is_null),
+        "an undeclared address is absent, not empty: {document}"
+    );
+    assert!(
+        document["claims"][0]["evidence"][0]
+            .get("url")
+            .is_none_or(serde_json::Value::is_null),
+        "no address, no link: {document}"
+    );
+}

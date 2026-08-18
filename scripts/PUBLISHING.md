@@ -12,7 +12,10 @@ The boundary is declared once, as `published` in
 `assurance/claims.json`, because validation and `kettle project` must
 read the same sentence. It is not repeated here, and a second list is
 how the published tree would come to disagree with the registry that
-describes it.
+describes it. The same file's `published_at` says where the projection
+goes, so the workflow's remote, every evidence link on kttl.app and the
+registry itself name one repository; a test fails if the workflow and
+the registry drift apart.
 
 ## The first publication is a decision, not a merge
 

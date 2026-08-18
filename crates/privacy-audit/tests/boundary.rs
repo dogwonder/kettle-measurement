@@ -1,7 +1,7 @@
 //! #233: the network boundary Kettle claims is the one its source can
 //! reach.
 
-use privacy_audit::{call_sites, declared, PathKind};
+use privacy_audit::{call_sites, declared, PathKind, PUBLISHED_ADDRESS_SURFACES};
 use std::path::{Path, PathBuf};
 
 fn repo_root() -> PathBuf {
@@ -67,20 +67,49 @@ fn every_declared_path_still_exists() {
 }
 
 #[test]
-fn nothing_reaches_the_network_except_loopback_and_an_explicit_download() {
+fn nothing_reaches_the_network_except_loopback_a_download_and_a_printed_address() {
     // The contract in one sentence, asserted rather than described.
     // Anything else — telemetry, crash reporting, update checks, remote
     // fonts or report assets — needs its own designed and disclosed
     // issue before a `PathKind` exists for it, and this test is what
     // makes adding one impossible to do quietly.
+    //
+    // The third kind arrived on 18 August 2026 with the measurement
+    // layer going public (#478): an address rendered on a public page
+    // so a reader can follow a citation. It is not a path Kettle takes.
+    // Nothing is requested until a person clicks, nothing is sent that
+    // a click does not send, and it is not in the packaged app at all —
+    // which the test below is what actually holds.
     for path in declared(&repo_root()).expect("privacy-boundary.toml parses") {
         assert!(
             matches!(
                 path.kind,
-                PathKind::Loopback | PathKind::ExplicitModelDownload
+                PathKind::Loopback | PathKind::ExplicitModelDownload | PathKind::PublishedAddress
             ),
-            "{} declares a path that is neither loopback nor an explicit \
-             model download",
+            "{} declares a path that is none of the three permitted kinds",
+            path.file
+        );
+    }
+}
+
+#[test]
+fn a_printed_address_is_only_declared_where_the_product_ships_nothing() {
+    // The constraint that makes the third kind a boundary rather than a
+    // label. Without it, `published_address` is a word anybody can
+    // paste onto a real call in `exec.rs` to make this suite green —
+    // the exact failure the other two kinds are narrow enough to
+    // prevent. So it may only be declared on the public site and the
+    // registry it renders, neither of which the packaged app contains.
+    for path in declared(&repo_root()).expect("privacy-boundary.toml parses") {
+        if path.kind != PathKind::PublishedAddress {
+            continue;
+        }
+        assert!(
+            PUBLISHED_ADDRESS_SURFACES
+                .iter()
+                .any(|surface| path.file.starts_with(surface)),
+            "{} declares a printed address on a surface the product ships; \
+             permitted surfaces are {PUBLISHED_ADDRESS_SURFACES:?}",
             path.file
         );
     }

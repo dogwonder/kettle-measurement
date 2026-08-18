@@ -51,7 +51,8 @@ pub struct DeclaredPath {
 
 /// What a declared path is *for*. The distinction #233 turns on:
 /// loopback traffic to our own sidecar and a download a person
-/// explicitly asked for are both fine, and nothing else is.
+/// explicitly asked for are both fine, and nothing else is — with one
+/// later addition that is not traffic at all.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, serde::Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum PathKind {
@@ -60,7 +61,35 @@ pub enum PathKind {
     /// External HTTPS, reached only after a person chooses to download
     /// weights.
     ExplicitModelDownload,
+    /// An address printed on a public page, added 18 August 2026 when
+    /// the measurement layer went public (#478).
+    ///
+    /// The kind exists because the scanner reads source, and a URL a
+    /// reader may click looks in source exactly like a URL the product
+    /// fetches. The difference is real: nothing is requested until a
+    /// person acts, nothing is sent that any click does not send, and
+    /// the surfaces this may be declared on are not in the packaged
+    /// app. That last part is the only half a reviewer cannot check by
+    /// reading, so it is the half [`PUBLISHED_ADDRESS_SURFACES`]
+    /// enforces.
+    PublishedAddress,
 }
+
+/// Where an address may be printed, as repo-relative prefixes.
+///
+/// A kind with no constraint is a label: `published_address` on a
+/// telemetry call in `exec.rs` would pass a test that only checks the
+/// word. One surface, the assurance registry, which `bundle.resources`
+/// does not contain — so an address declared this way cannot be one
+/// the product takes.
+///
+/// The evidence pages render these addresses and declare none of their
+/// own, which is a property of the registry being the single place an
+/// address is written rather than a rule about screens. It is also why
+/// this list did not need `app/demo/`: the public projection does not
+/// carry `app/`, so an entry pointing there would be a live declaration
+/// here and a stale one in the tree it describes.
+pub const PUBLISHED_ADDRESS_SURFACES: [&str; 1] = ["assurance/"];
 
 /// A network call site the scanner found in source.
 #[derive(Debug, Clone, PartialEq, Eq)]

@@ -112,6 +112,29 @@ sentence:
   else. A second list in the workflow is how the published tree would
   come to disagree with the registry describing it.
 
+### `published_at` says where it went
+
+The boundary says *what* is published; `published_at` says *where*, and
+it is one field in the same file for the same reason the boundary is one
+list. Three things need the answer — the publish workflow that pushes
+the tree, `kettle claims --json` which turns every in-boundary citation
+into an address a reader can open, and the evidence pages that say the
+measurement layer is public — and a link is only worth following if all
+three mean the same repository.
+
+Absent means not published, and absent is a valid state rather than an
+oversight: the registry predates the flip and stays valid for anyone
+validating a tree nobody is publishing. With no address declared, no
+citation grows a link and the evidence landing claims no public tree —
+the page cannot assert a publication the registry has not recorded.
+
+Two properties follow, and both are checked. Evidence *outside* the
+boundary keeps its description and grows no link, because real-here and
+unopenable-there must not be dressed up as openable; and the declared
+address must be the one the workflow actually pushes to, which
+`demo.test.ts` holds against
+`.github/workflows/public-tree-publish.yml`.
+
 So a change here is a publication decision, reviewed as one. Two
 consequences are worth knowing before making one:
 

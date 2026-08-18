@@ -16,6 +16,18 @@
         "minLength": 1
       }
     },
+    "published_at": {
+      "description": "Where the published tree lives (#478), as an https URL. The boundary says what goes public; this says where it went, and one field serves the publish workflow, the addresses `kettle claims --json` puts on in-boundary citations, and the evidence pages that say so. Absent means not published: no citation grows a link and no page claims a public tree.",
+      "type": "string",
+      "format": "uri",
+      "minLength": 1
+    },
+    "recordings_at": {
+      "description": "Where the run recordings the baselines rest on were published (#478). A second repository because it is data rather than software, and a second field here rather than a constant in a page, because the public projection carries no `app/`.",
+      "type": "string",
+      "format": "uri",
+      "minLength": 1
+    },
     "claims": {
       "type": "array",
       "items": {

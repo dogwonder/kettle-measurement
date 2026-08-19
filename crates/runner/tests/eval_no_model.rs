@@ -10,7 +10,7 @@
 //! wrong, stop and report it rather than editing it — a reported defect
 //! in the contract is a good outcome, not a failure to finish.
 
-use runner::eval::fixture::{EvalSet, FixtureEvaluator};
+use runner::eval::fixture::{EvalSelection, FixtureEvaluator};
 use runner::eval::{EvalMetric, MachineInfo, MetricReport, Verdict};
 use runner::packs::load_pack;
 use runner::run::Answers;
@@ -167,7 +167,7 @@ fn exam_floor_is_a_separate_sealed_measurement() {
         .evaluate_exam(&pack)
         .expect("the exam floor runs");
 
-    assert_eq!(report.eval_set, EvalSet::Exam);
+    assert_eq!(report.eval_set, EvalSelection::Exam);
     assert_eq!(report.fixtures.len(), 81);
     assert!(report
         .fixtures

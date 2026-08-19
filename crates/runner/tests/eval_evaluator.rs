@@ -4,7 +4,7 @@
 
 mod support;
 
-use runner::eval::fixture::{model_info, EvalSet, FixtureEvaluator};
+use runner::eval::fixture::{model_info, EvalSelection, FixtureEvaluator};
 use runner::eval::{EvalMetric, MachineInfo, MetricReport, SidecarInfo, Verdict};
 use runner::kinds::KindFrom;
 use runner::packs::load_pack;
@@ -445,7 +445,7 @@ fn a_model_answering_as_expected_passes_its_fixtures_not_unseen_pack_strata() {
 
     assert_eq!(report.pack, "app.kttl.subscription-audit");
     assert_eq!(report.pack_version, "1.5.0");
-    assert_eq!(report.eval_set, EvalSet::Development);
+    assert_eq!(report.eval_set, EvalSelection::Development);
     let model = report.model.as_ref().expect("a measured model is named");
     assert_eq!(model.params, "7B");
     assert_eq!(report.machine.ram_gb, 16);

@@ -14,10 +14,11 @@
 //! it would quietly measure something other than what was asked for.
 
 use super::{EvalRequest, Evaluator};
-use runner::eval::fixture::FixtureEvaluator;
+use runner::eval::fixture::{EvalSelection, FixtureEvaluator};
 use runner::eval::{EvalReport, MachineInfo, ModelInfo, SidecarInfo};
 use runner::exec::Endpoint;
 use runner::packs::load_pack;
+use runner::packs::Pack;
 use runner::run::Answers;
 use runner::sidecar::{Sidecar, SidecarRuntime, DEFAULT_CONTEXT};
 use std::path::PathBuf;
@@ -108,11 +109,7 @@ impl Evaluator for SidecarEvaluator {
                 runs_dir: None,
                 resume_dir: None,
             };
-            return if request.exam {
-                evaluator.evaluate_exam(&pack)
-            } else {
-                evaluator.evaluate(&pack)
-            };
+            return run_selected(&evaluator, &pack, request.selection);
         }
 
         let pack = load_pack(&request.pack_dir)
@@ -133,11 +130,7 @@ impl Evaluator for SidecarEvaluator {
                 runs_dir: Some(self.runs_dir.join(format!("run{}", request.run))),
                 resume_dir: self.resume_dir.clone(),
             };
-            return if request.exam {
-                evaluator.evaluate_exam(&pack)
-            } else {
-                evaluator.evaluate(&pack)
-            };
+            return run_selected(&evaluator, &pack, request.selection);
         };
 
         if !spec.path.exists() {
@@ -190,16 +183,27 @@ impl Evaluator for SidecarEvaluator {
             runs_dir: Some(self.runs_dir.join(format!("run{}", request.run))),
             resume_dir: self.resume_dir.clone(),
         };
-        let mut report = if request.exam {
-            evaluator.evaluate_exam(&pack)
-        } else {
-            evaluator.evaluate(&pack)
-        }?;
+        let mut report = run_selected(&evaluator, &pack, request.selection)?;
         // The policy the report claims is the policy the sidecar above
         // was spawned with — one local, never re-derived (#232).
         report.runtime = Some(policy);
         Ok(report)
         // The sidecar is killed on drop (runner::sidecar), so a failed
         // eval never leaves a model resident.
+    }
+}
+
+/// One place that turns the requested selection into the evaluator
+/// call, so the three routes above (replay, floor, sidecar) cannot
+/// drift apart on which slice they run.
+fn run_selected(
+    evaluator: &FixtureEvaluator,
+    pack: &Pack,
+    selection: EvalSelection,
+) -> Result<EvalReport, String> {
+    match selection {
+        EvalSelection::Development => evaluator.evaluate(pack),
+        EvalSelection::Exam => evaluator.evaluate_exam(pack),
+        EvalSelection::Audition => evaluator.evaluate_audition(pack),
     }
 }

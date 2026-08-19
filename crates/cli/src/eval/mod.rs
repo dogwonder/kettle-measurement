@@ -52,6 +52,7 @@ pub mod table;
 pub mod tiers;
 
 use chrono::{DateTime, Utc};
+use runner::eval::fixture::EvalSelection;
 use runner::eval::{EvalReport, FixtureResult, Perf, Spread, Stability};
 use std::path::{Path, PathBuf};
 
@@ -171,9 +172,10 @@ pub struct EvalRequest<'a> {
     /// statements instead, which are gitignored and never come into the
     /// repo (CLAUDE.md, data rules).
     pub fixture_dir: Option<&'a Path>,
-    /// Select the sealed exam set instead of development. Reserved for
-    /// a pack-version-bump measurement.
-    pub exam: bool,
+    /// Which fixture selection to run: development, the sealed exam
+    /// set, or the audition subset (#539). One field rather than flags
+    /// that can disagree (#334's reasoning).
+    pub selection: EvalSelection,
     /// Which repeat this is, 1-based, and how many were asked for.
     /// Present so a real evaluator can label its per-run directory; the
     /// answer for a given repeat should not depend on it.
@@ -260,6 +262,11 @@ pub struct Options {
     /// Run the sealed exam fixtures for a pack-version-bump measurement
     #[arg(long)]
     pub exam: bool,
+    /// Run the audition subset (#539): the committed go/no-go bed a
+    /// candidate model runs before earning a full bed run. A scheduling
+    /// measurement, never a tier claim.
+    #[arg(long, conflicts_with = "exam")]
+    pub audition: bool,
     /// Reuse fixtures already scored under identical conditions, so an
     /// interrupted measurement is picked up rather than lost (#282).
     ///
@@ -349,7 +356,13 @@ pub fn run(options: &Options, evaluator: &dyn Evaluator, now: DateTime<Utc>) -> 
                     pack_dir: options.packs_dir.join(pack),
                     model: *model,
                     fixture_dir: options.fixture_dir.as_deref(),
-                    exam: options.exam,
+                    selection: if options.exam {
+                        EvalSelection::Exam
+                    } else if options.audition {
+                        EvalSelection::Audition
+                    } else {
+                        EvalSelection::Development
+                    },
                     replay: options.replay.as_deref(),
                     run,
                     runs: options.runs,

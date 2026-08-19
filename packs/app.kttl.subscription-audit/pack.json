@@ -195,6 +195,17 @@
       "classes": {}
     }
   },
-  "eval_items": { "retired": [] },
+  "eval_items": {
+    "retired": [],
+    "audition": [
+      "statement-01.csv",
+      "statement-02-messy.csv",
+      "statement-06-broad.csv",
+      "generated-development-clean-subscription-heavy-amber-descriptor-command-text.csv",
+      "generated-development-messy-merchant-strings-subscription-heavy-acorn.csv",
+      "generated-development-ambiguous-categories-no-subscriptions-alder.csv",
+      "generated-development-clean-no-subscriptions-granite.csv"
+    ]
+  },
   "outputs": ["report.html", "actions.json"]
 }

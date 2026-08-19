@@ -143,6 +143,18 @@ pub struct Manifest {
 pub struct EvalItems {
     #[serde(default)]
     pub retired: Vec<String>,
+    /// The audition set (#539): fixture *file names* (unlike `retired`,
+    /// which holds item ids) making up the committed go/no-go bed a
+    /// candidate model runs before earning a full bed run.
+    ///
+    /// Declared here rather than in each fixture's `expected.json`
+    /// because those bytes feed the recorded bed digests (#320) and
+    /// every resume key — tagging a development fixture in-file would
+    /// change the development digest and read as "the bed changed" when
+    /// no question or expectation moved. Development fixtures only; a
+    /// name from the sealed exam set is refused at selection.
+    #[serde(default)]
+    pub audition: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]

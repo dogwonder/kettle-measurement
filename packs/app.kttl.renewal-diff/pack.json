@@ -137,7 +137,15 @@
     }
   },
   "eval_items": {
-    "retired": []
+    "retired": [],
+    "audition": [
+      "generated-development-excess_rose-amber-01",
+      "generated-development-excess_rose-amber-01-descriptor-command-text",
+      "generated-development-two_excesses-amber-01",
+      "generated-development-nothing_moved-amber-01",
+      "generated-development-basis_changed-amber-01",
+      "generated-development-unmodelled_term-amber-01"
+    ]
   },
   "outputs": [
     "report.html"

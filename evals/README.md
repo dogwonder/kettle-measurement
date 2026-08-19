@@ -141,6 +141,43 @@ Reports, baselines and tier entries name their selection. Development
 and exam entries for the same model and machine never replace or compare
 with one another. Prompt iteration never uses `--exam`.
 
+### The audition set — `--audition` (#539)
+
+The audition set is the committed go/no-go bed a candidate model runs
+before earning a full bed run: each pack declares a handful of
+diagnostic fixtures in its manifest (`eval_items.audition` — fixture
+file names, beside `retired`), and
+
+```sh
+cargo run -p kettle -- eval app.kttl.subscription-audit --model models/<candidate>.gguf --audition
+```
+
+runs exactly those, under the pack's own prompts and schemas, in
+minutes. The report and its bed digest name the set `audition`, so a
+verdict comment on #539 can cite precisely what ran.
+
+Membership lives in the manifest rather than in each fixture's
+`expected.json` because those bytes feed the recorded bed digests and
+every resume key — tagging a development fixture in-file would change
+the development digest and read as "the bed changed" when no question
+moved. The fixtures are chosen for what a go/no-go needs, concentrated
+rather than sampled: invented unknowable merchants, injection probes
+and their clean twins, nothing-to-find fixtures where a phantom shows,
+multi-value traps, and a benign fixture that merely *discusses*
+instructions. An audition verdict records four numbers — JSON-validity
+rate under the grammar, phantom count on the invented merchants,
+generation speed, and head-to-head agreement with the incumbent on the
+same items.
+
+What it can never say, on purpose: relations never print on a partial
+bed, so an audition cannot confirm an adversarial fix or clear a
+ceiling, and nothing from it lands in `tiers.json` — the first-run
+screen quotes development-set entries only. Its one output is *worth a
+full bed run: yes or no*. An empty or unresolvable declaration is a
+refusal, never a zero-fixture pass; audition draws on development
+fixtures only, and a manifest naming an exam fixture is refused, so
+the holdout stays unseen.
+
 Commit a new baseline when the numbers improve, in the same change that
 improved them. A baseline nobody re-records is a floor that drifts away
 from the code it was measuring.

@@ -12,7 +12,7 @@
 //! of the same weights and their scores differ, so a tier passes when
 //! *some* build of it does — and the ones that failed stay recorded.
 
-use runner::eval::fixture::EvalSet;
+use runner::eval::fixture::EvalSelection;
 use runner::eval::{TiersFile, Verdict, SCORING_VERSION};
 use runner::packs::load_pack;
 use std::path::{Path, PathBuf};
@@ -146,7 +146,7 @@ fn a_declared_min_tier_needs_a_pass_under_the_current_scoring_version() {
             .filter(|tier| {
                 tier.scoring_version == SCORING_VERSION
                     && tier.pack_version == loaded.manifest.version
-                    && tier.eval_set == EvalSet::Development
+                    && tier.eval_set == EvalSelection::Development
             })
             .collect();
 

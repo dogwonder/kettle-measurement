@@ -50,7 +50,7 @@ fn report(pack: &str, model: &str) -> EvalReport {
         reused_fixtures: 0,
         pack: pack.to_owned(),
         pack_version: "1.0.0".to_owned(),
-        eval_set: runner::eval::fixture::EvalSet::Development,
+        eval_set: runner::eval::fixture::EvalSelection::Development,
         model: Some(ModelInfo {
             file: model.to_owned(),
             params: "3B".to_owned(),
@@ -136,7 +136,7 @@ impl Canned {
 impl Evaluator for Canned {
     fn evaluate(&self, request: &EvalRequest) -> Result<EvalReport, String> {
         self.asked.lock().expect("asked").push(format!(
-            "{} {} run {} of {} fixtures {} exam {}",
+            "{} {} run {} of {} fixtures {} exam {} selection {}",
             request.pack,
             request
                 .model
@@ -148,7 +148,8 @@ impl Evaluator for Canned {
                 .fixture_dir
                 .map(|dir| dir.display().to_string())
                 .unwrap_or_else(|| "<pack>".to_owned()),
-            request.exam,
+            request.selection == runner::eval::fixture::EvalSelection::Exam,
+            request.selection.as_str(),
         ));
         self.answers
             .lock()
@@ -175,6 +176,7 @@ fn options(packs_dir: &Path, pack: &str) -> Options {
         write_tiers: false,
         fixture_dir: None,
         exam: false,
+        audition: false,
     }
 }
 
@@ -1566,7 +1568,29 @@ fn exam_selection_reaches_the_evaluator_explicitly() {
 
     assert_eq!(outcome.code, ExitCode::Ok, "{}", outcome.text);
     assert!(
-        canned.asked()[0].ends_with("exam true"),
+        canned.asked()[0].contains("exam true"),
+        "{:?}",
+        canned.asked()
+    );
+}
+
+/// The audition subset is a first-class selection (#539): the go/no-go
+/// bed a candidate model runs before earning a full run, and the
+/// evaluator must be told which slice was asked for rather than
+/// inferring it.
+#[test]
+fn audition_selection_reaches_the_evaluator_explicitly() {
+    let dir = scratch("audition");
+    let packs = packs_dir(&dir, &[PACK]);
+    let mut options = options(&packs, PACK);
+    options.audition = true;
+
+    let canned = Canned::new(vec![report(PACK, "qwen2.5-3b-instruct-q4_k_m.gguf")]);
+    let outcome = run_at(&options, &canned);
+
+    assert_eq!(outcome.code, ExitCode::Ok, "{}", outcome.text);
+    assert!(
+        canned.asked()[0].contains("audition"),
         "{:?}",
         canned.asked()
     );
@@ -2610,13 +2634,13 @@ fn a_change_to_one_set_does_not_retire_the_other_sets_measurements() {
     let dir = scratch("baseline-one-set-only");
     let packs = packs_dir(&dir, &[PACK]);
     let mut before = report(PACK, "qwen2.5-3b-instruct-q4_k_m.gguf");
-    before.eval_set = runner::eval::fixture::EvalSet::Development;
+    before.eval_set = runner::eval::fixture::EvalSelection::Development;
     before.bed = Some("blake3:development-bed".to_owned());
     let baseline = write_baseline(&dir, &[before]);
 
     // The exam bed was rewritten; this development measurement stands.
     let mut now = report(PACK, "qwen2.5-3b-instruct-q4_k_m.gguf");
-    now.eval_set = runner::eval::fixture::EvalSet::Development;
+    now.eval_set = runner::eval::fixture::EvalSelection::Development;
     now.bed = Some("blake3:development-bed".to_owned());
 
     let mut options = options(&packs, PACK);

@@ -460,7 +460,7 @@ pub struct EvalReport {
     /// report. Older reports predate the sealed split and read as
     /// development.
     #[serde(default)]
-    pub eval_set: fixture::EvalSet,
+    pub eval_set: fixture::EvalSelection,
     /// The weights under test — `None` for the deterministic floor
     /// (#73), which is a measurement of the pipeline with no model at
     /// all. Absent rather than a placeholder, because a report that
@@ -2898,10 +2898,10 @@ pub struct Tier {
     pub machine: MachineInfo,
     /// The pack version this was measured against.
     pub pack_version: String,
-    /// Development and held-out exam measurements are different claims
-    /// and must never replace one another.
+    /// Development, held-out exam and audition measurements are
+    /// different claims and must never replace one another.
     #[serde(default)]
-    pub eval_set: fixture::EvalSet,
+    pub eval_set: fixture::EvalSelection,
     /// What these numbers mean, when they were taken — see
     /// [`SCORING_VERSION`]. Never rewritten by a later measurement of
     /// something else.

@@ -99,6 +99,33 @@ impl EvalSet {
     }
 }
 
+/// What an eval run selects from the bed: the development set, the
+/// sealed exam set, or the audition subset (#539) — the tagged
+/// development fixtures a candidate model runs before earning a full
+/// bed run. A selection, not a fixture property: fixtures declare
+/// `eval_set` and the `audition` overlay, and this names which slice a
+/// run asked for — and a report carries it, because a recording must
+/// describe itself (#303).
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum EvalSelection {
+    /// Older reports predate the sealed split and read as development.
+    #[default]
+    Development,
+    Exam,
+    Audition,
+}
+
+impl EvalSelection {
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::Development => "development",
+            Self::Exam => "exam",
+            Self::Audition => "audition",
+        }
+    }
+}
+
 impl Expected {
     /// Is this fixture answerable at all?
     ///
@@ -408,18 +435,29 @@ impl FixtureEvaluator {
     /// all. A fixture the *model* did badly on is not an error — it is
     /// the measurement, and it comes back as a low score.
     pub fn evaluate(&self, pack: &Pack) -> Result<EvalReport, String> {
-        self.evaluate_selected(pack, false)
+        self.evaluate_selected(pack, EvalSelection::Development)
     }
 
     /// Run the sealed exam set on its own. Keeping development out of
     /// this report prevents prompt-tuned evidence masking a held-out
     /// failure at a pack-version bump.
     pub fn evaluate_exam(&self, pack: &Pack) -> Result<EvalReport, String> {
-        self.evaluate_selected(pack, true)
+        self.evaluate_selected(pack, EvalSelection::Exam)
     }
 
-    fn evaluate_selected(&self, pack: &Pack, exam: bool) -> Result<EvalReport, String> {
-        self.evaluate_filtered(pack, exam, None)
+    /// Run the audition subset on its own (#539): the committed
+    /// go/no-go bed for a candidate model, minutes not hours, whose one
+    /// output is whether a full bed run is worth scheduling.
+    pub fn evaluate_audition(&self, pack: &Pack) -> Result<EvalReport, String> {
+        self.evaluate_selected(pack, EvalSelection::Audition)
+    }
+
+    fn evaluate_selected(
+        &self,
+        pack: &Pack,
+        selection: EvalSelection,
+    ) -> Result<EvalReport, String> {
+        self.evaluate_filtered(pack, selection, None)
     }
 
     /// One fixture of the selection, by name — the mutation harness
@@ -429,29 +467,31 @@ impl FixtureEvaluator {
     pub(crate) fn evaluate_only(
         &self,
         pack: &Pack,
-        exam: bool,
+        selection: EvalSelection,
         fixture: &str,
     ) -> Result<EvalReport, String> {
-        self.evaluate_filtered(pack, exam, Some(fixture))
+        self.evaluate_filtered(pack, selection, Some(fixture))
     }
 
     fn evaluate_filtered(
         &self,
         pack: &Pack,
-        exam: bool,
+        selection: EvalSelection,
         only: Option<&str>,
     ) -> Result<EvalReport, String> {
         let fixtures = match &self.fixtures_dir {
             Some(dir) => fixtures_at_for_eval(
                 dir,
                 &pack.manifest.eval_items.retired,
-                exam,
+                &pack.manifest.eval_items.audition,
+                selection,
                 &pack.manifest.inputs,
             )?,
             None => fixtures_at_for_eval(
                 &pack.dir.join("fixtures"),
                 &pack.manifest.eval_items.retired,
-                exam,
+                &pack.manifest.eval_items.audition,
+                selection,
                 &pack.manifest.inputs,
             )?,
         };
@@ -737,11 +777,7 @@ impl FixtureEvaluator {
             reused_fixtures: reused,
             pack: pack.manifest.id.clone(),
             pack_version: pack.manifest.version.clone(),
-            eval_set: if exam {
-                EvalSet::Exam
-            } else {
-                EvalSet::Development
-            },
+            eval_set: selection,
             model: self.model.clone(),
             machine: self.machine.clone(),
             evidence: super::EvidenceCoverage::from_declared(&pack.manifest.eval_evidence),
@@ -885,18 +921,68 @@ pub fn fixtures_at(dir: &Path) -> Result<Vec<Fixture>, String> {
 pub fn fixtures_at_for_eval(
     dir: &Path,
     retired_item_ids: &[String],
-    exam: bool,
+    audition: &[String],
+    selection: EvalSelection,
     roles: &[InputSpec],
 ) -> Result<Vec<Fixture>, String> {
     let fixtures = fixtures_at_with_roles(dir, retired_item_ids, roles)?;
-    let selected = if exam {
-        EvalSet::Exam
-    } else {
-        EvalSet::Development
+    if selection == EvalSelection::Audition {
+        return audition_fixtures(dir, fixtures, audition);
+    }
+    let selected = match selection {
+        EvalSelection::Development => EvalSet::Development,
+        EvalSelection::Exam => EvalSet::Exam,
+        EvalSelection::Audition => unreachable!("handled above"),
     };
     Ok(fixtures
         .into_iter()
         .filter(|fixture| fixture.expected.eval_set == selected)
+        .collect())
+}
+
+/// Resolve the manifest's declared audition names (#539) against what
+/// is actually on disk. Every failure is a refusal rather than a
+/// filter: a silently shrinking audition would still print a digest and
+/// read as the committed instrument.
+fn audition_fixtures(
+    dir: &Path,
+    fixtures: Vec<Fixture>,
+    audition: &[String],
+) -> Result<Vec<Fixture>, String> {
+    // Zero fixtures scoring zero questions would read as a pass, and
+    // the set that exists to gatekeep full runs must fail without its
+    // fixtures, never skip quietly into green (PR #99).
+    if audition.is_empty() {
+        return Err(format!(
+            "the audition set is empty: the pack declares no audition fixtures \
+             (eval_items.audition) for {}",
+            dir.display()
+        ));
+    }
+    let mut by_name: BTreeMap<&str, &Fixture> = BTreeMap::new();
+    for fixture in &fixtures {
+        by_name.insert(fixture.name.as_str(), fixture);
+    }
+    for name in audition {
+        let Some(fixture) = by_name.get(name.as_str()) else {
+            return Err(format!(
+                "the audition list names {name}, and no such fixture exists in {}",
+                dir.display()
+            ));
+        };
+        // The holdout's job is to be unseen, and a set candidate models
+        // run against during triage is the opposite of unseen.
+        if fixture.expected.eval_set == EvalSet::Exam {
+            return Err(format!(
+                "the audition list names {name}, which is in the sealed exam set: \
+                 audition draws on development fixtures only"
+            ));
+        }
+    }
+    let declared: BTreeSet<&str> = audition.iter().map(String::as_str).collect();
+    Ok(fixtures
+        .into_iter()
+        .filter(|fixture| declared.contains(fixture.name.as_str()))
         .collect())
 }
 

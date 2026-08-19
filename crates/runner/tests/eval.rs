@@ -1040,7 +1040,7 @@ fn report_of(fixtures: Vec<FixtureResult>) -> EvalReport {
         reused_fixtures: 0,
         pack: "app.kttl.subscription-audit".to_string(),
         pack_version: "1.0.0".to_string(),
-        eval_set: runner::eval::fixture::EvalSet::Development,
+        eval_set: runner::eval::fixture::EvalSelection::Development,
         model: Some(ModelInfo {
             file: "qwen2.5-3b-instruct-q4_k_m.gguf".to_string(),
             params: "3B".to_string(),
@@ -1189,7 +1189,7 @@ fn tier_records_the_worst_fixture_not_the_mean() {
 fn development_and_exam_are_distinct_tier_measurements() {
     let development = report_of(vec![fixture(1.0, 1.0, 1.0, 0.0)]);
     let mut exam = development.clone();
-    exam.eval_set = runner::eval::fixture::EvalSet::Exam;
+    exam.eval_set = runner::eval::fixture::EvalSelection::Exam;
     let measured_at = chrono::DateTime::parse_from_rfc3339("2026-07-29T12:00:00Z")
         .unwrap()
         .with_timezone(&chrono::Utc);

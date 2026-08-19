@@ -581,7 +581,7 @@ fn columns(rows: &[Vec<String>]) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use runner::eval::fixture::EvalSet;
+    use runner::eval::fixture::EvalSelection;
     use runner::eval::relations::{Projection, RelationKind, RelationOutcome, RelationResult};
     use runner::eval::{MachineInfo, ModelInfo, Verdict};
 
@@ -590,7 +590,7 @@ mod tests {
             reused_fixtures: 0,
             pack: "app.kttl.letter-to-actions".to_owned(),
             pack_version: "0.2.0".to_owned(),
-            eval_set: EvalSet::Development,
+            eval_set: EvalSelection::Development,
             model: Some(ModelInfo {
                 file: "qwen3.5-4b-q4_k_m.gguf".to_owned(),
                 params: "4B".to_owned(),

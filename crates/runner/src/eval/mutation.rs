@@ -581,8 +581,11 @@ impl MutationHarness {
         recording: Recording,
         fixture: &str,
     ) -> Result<super::EvalReport, String> {
-        self.evaluator(recording)
-            .evaluate_only(pack, false, fixture)
+        self.evaluator(recording).evaluate_only(
+            pack,
+            super::fixture::EvalSelection::Development,
+            fixture,
+        )
     }
 
     fn evaluator(&self, recording: Recording) -> super::fixture::FixtureEvaluator {

@@ -44,7 +44,7 @@ struct PublicScore {
     recorded_at: String,
     pack: String,
     pack_version: String,
-    eval_set: runner::eval::fixture::EvalSet,
+    eval_set: runner::eval::fixture::EvalSelection,
     scoring_version: u32,
     bed: Option<String>,
     policy: PublicPolicy,

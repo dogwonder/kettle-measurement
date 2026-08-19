@@ -1,7 +1,8 @@
 //! Finding the fixtures a pack can be scored against (#25).
 
 use runner::eval::fixture::{
-    fixtures_at, fixtures_at_for_eval, fixtures_in, validate_declared_strata, EvalSet, Expected,
+    fixtures_at, fixtures_at_for_eval, fixtures_in, validate_declared_strata, EvalSelection,
+    EvalSet, Expected,
 };
 use runner::eval::HarmClass;
 use runner::packs::load_pack;
@@ -233,8 +234,8 @@ fn exam_fixtures_are_excluded_unless_explicitly_requested() {
         .expect("write expectations");
     }
 
-    let development =
-        fixtures_at_for_eval(&dir, &[], false, &[]).expect("development fixtures readable");
+    let development = fixtures_at_for_eval(&dir, &[], &[], EvalSelection::Development, &[])
+        .expect("development fixtures readable");
     assert_eq!(
         development
             .iter()
@@ -243,8 +244,8 @@ fn exam_fixtures_are_excluded_unless_explicitly_requested() {
         ["statement-development.csv"]
     );
 
-    let pack_version_bump =
-        fixtures_at_for_eval(&dir, &[], true, &[]).expect("exam fixtures readable");
+    let pack_version_bump = fixtures_at_for_eval(&dir, &[], &[], EvalSelection::Exam, &[])
+        .expect("exam fixtures readable");
     assert_eq!(
         pack_version_bump
             .iter()

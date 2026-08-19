@@ -1,8 +1,8 @@
 //! #478: the public "how it works" page answers "which questions can
 //! this document answer?" from the pack manifests themselves.
 //!
-//! The essay's note on the page warned that a hand-written table there
-//! is stale the next time a pack changes. So the page owns no table:
+//! A hand-written table there is stale the next time a pack changes,
+//! so the page owns no table:
 //! it renders this projection, which comes through the same loader a
 //! run does. A pack that would not load cannot be advertised, and a
 //! pack whose declared inputs change moves the page without anyone
@@ -37,7 +37,7 @@ fn packs_are_a_validated_projection_of_their_manifests_not_page_copy() {
         .iter()
         .find(|pack| pack["id"] == "app.kttl.renewal-diff")
         .expect("renewal pack projects");
-    assert_eq!(renewal["name"], "Renewal diff");
+    assert_eq!(renewal["name"], "See what changed in a renewal");
     // The question the pack answers, in the pack's own words. The page
     // must not paraphrase it into marketing copy.
     assert!(
@@ -69,6 +69,63 @@ fn packs_are_a_validated_projection_of_their_manifests_not_page_copy() {
     assert_eq!(
         renewal["capabilities"].as_array().expect("capabilities"),
         &vec![serde_json::Value::from("read")]
+    );
+}
+
+/// The landing page's "time made honest" grid used to be three
+/// hand-written cards, and it had drifted exactly the way this file's
+/// header warns: one card offered "Index a year of paperwork", which is
+/// not a pack and never has been, beside a statement audit our own
+/// score page marks a current failure. A page that owns a list owns a
+/// claim.
+///
+/// So the projection carries each pack's own time block. `kind` is the
+/// commitment (quick / kettle-worthy / overnight) and `estimate` is the
+/// pack's own words for it — the same fields the app's TimeTag renders,
+/// from the same manifest, so the public page cannot promise a speed
+/// the product does not.
+#[test]
+fn the_projection_carries_each_pack_s_own_time_claim() {
+    let outcome = cli::packs::run_json(&repo_root().join("packs"));
+    assert_eq!(outcome.code, cli::packs::ExitCode::Ok, "{}", outcome.text);
+    let document: serde_json::Value = serde_json::from_str(&outcome.text).expect("packs JSON");
+    let packs = document["packs"].as_array().expect("packs");
+
+    for pack in packs {
+        let time = &pack["time"];
+        assert!(
+            time["kind"].is_string() && time["estimate"].is_string(),
+            "{} publishes no time claim: {time}",
+            pack["id"],
+        );
+    }
+
+    // The pack's own words, whatever they currently are — read from the
+    // manifest rather than repeated here. This assertion first said
+    // `varies` / `by letter`, which was true when it was written and
+    // false an hour later, when two measured runs earned the pack
+    // `quick` / `under a minute`. A test that transcribes copy fails on
+    // the copy being improved, which teaches people to edit the test.
+    let manifest: serde_json::Value = serde_json::from_str(
+        &std::fs::read_to_string(repo_root().join("packs/app.kttl.letter-to-actions/pack.json"))
+            .expect("the letter pack's manifest"),
+    )
+    .expect("manifest JSON");
+    let letter = packs
+        .iter()
+        .find(|pack| pack["id"] == "app.kttl.letter-to-actions")
+        .expect("the letter pack");
+    assert_eq!(
+        letter["time"],
+        manifest["copy"]["time"]["kind"]
+            .as_str()
+            .map(|kind| {
+                serde_json::json!({
+                    "kind": kind,
+                    "estimate": manifest["copy"]["time"]["estimate"],
+                })
+            })
+            .expect("the manifest declares a time class")
     );
 }
 

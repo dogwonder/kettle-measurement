@@ -1,6 +1,6 @@
 {
   "id": "app.kttl.subscription-audit",
-  "name": "Subscription & Recurring Spend Audit",
+  "name": "Audit a bank statement",
   "description": "Finds every subscription, price rise and regular cost, and what they add up to over a year.",
   "version": "1.5.0",
   "min_runner_version": "0.1.0",

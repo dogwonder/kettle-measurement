@@ -186,6 +186,21 @@ fn project(root: &Path, current_scoring_version: u32) -> Result<PublicScores, St
     })
 }
 
+/// What a committed eval report may be called, and why there are two.
+///
+/// `baseline` is a report something is guarded against. `measured` is a
+/// report nobody adopted — the 14 August subscription run under scoring
+/// 14 failed, so no baseline came from it, and while this list held one
+/// prefix that failure could not be published at all. The public page
+/// then showed the pack's July record as merely "historical", which
+/// reads as evidence gone stale rather than a current measurement that
+/// went badly.
+///
+/// A report is published because it exists. Adoption is a separate
+/// question and belongs in the file's own words, not in its name
+/// deciding whether anyone may see it.
+const EVIDENCE_PREFIXES: [&str; 2] = ["baseline", "measured"];
+
 fn baseline_paths(root: &Path) -> Result<Vec<PathBuf>, String> {
     let evals = root.join("evals");
     let entries = match std::fs::read_dir(&evals) {
@@ -204,7 +219,11 @@ fn baseline_paths(root: &Path) -> Result<Vec<PathBuf>, String> {
                 && path
                     .file_name()
                     .and_then(|name| name.to_str())
-                    .is_some_and(|name| name.starts_with("baseline"))
+                    .is_some_and(|name| {
+                        EVIDENCE_PREFIXES
+                            .iter()
+                            .any(|prefix| name.starts_with(prefix))
+                    })
         })
         .collect::<Vec<_>>();
     paths.sort();

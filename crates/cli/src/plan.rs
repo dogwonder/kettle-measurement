@@ -182,7 +182,7 @@ mod tests {
         let listed = list_packs(&[pack()]);
 
         assert!(listed.contains("app.kttl.subscription-audit"));
-        assert!(listed.contains("Subscription & Recurring Spend Audit"));
+        assert!(listed.contains("Audit a bank statement"));
         assert!(listed.contains("1.5.0"));
         assert!(listed.contains("read"), "the read-only promise is visible");
         assert!(

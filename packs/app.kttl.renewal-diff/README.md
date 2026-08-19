@@ -1,4 +1,4 @@
-# Renewal diff
+# See what changed in a renewal
 
 Last year's policy and this year's renewal, and what changed between
 them. #66.

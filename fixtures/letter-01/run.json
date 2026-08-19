@@ -1,0 +1,15 @@
+{
+  "inputs": [
+    {
+      "file": "generated-development-three_asks-linden-04.txt",
+      "size": 493,
+      "hash": "blake3:721a7ca15f49fdf4d3f77df2a81a7d6ad00d18a404fd7d0c44de1524f0b20dcf"
+    }
+  ],
+  "model": {
+    "file": "qwen3.5-4b-q4_k_m.gguf",
+    "params": "4B",
+    "quant": "Q4_K_M",
+    "context": 8192
+  }
+}

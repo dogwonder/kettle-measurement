@@ -1,35 +1,35 @@
 {
   "id": "app.kttl.letter-to-actions",
-  "name": "Letter to actions",
+  "name": "Read a letter",
   "description": "Reads a letter and lists what it asks you to do, and by when.",
   "version": "0.2.0",
   "min_runner_version": "0.1.0",
   "inputs": [
     {
       "role": "letter",
-      "label": "Your letters",
+      "label": "Your letter",
       "accept": [
         "text/plain",
         "text/markdown",
         "application/pdf"
       ],
-      "multiple": true
+      "count": 1
     }
   ],
   "capabilities": [
     "read"
   ],
   "model": {
-    "min_tier": "7b",
-    "recommended_tier": "7b",
+    "min_tier": "4b",
+    "recommended_tier": "4b",
     "context": 8192,
     "temperature": 0
   },
   "copy": {
     "time": {
-      "kind": "varies",
-      "estimate": "by letter",
-      "on_this_computer": "We haven't timed this task yet, so there's no figure to give you — we'd rather say nothing than guess."
+      "kind": "quick",
+      "estimate": "under a minute",
+      "on_this_computer": "On the M1 Pro we measured, two one-page letters took 18 and 26 seconds. A slower computer will take longer."
     },
     "will": [
       {

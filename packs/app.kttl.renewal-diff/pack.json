@@ -1,6 +1,6 @@
 {
   "id": "app.kttl.renewal-diff",
-  "name": "Renewal diff",
+  "name": "See what changed in a renewal",
   "description": "Reads last year's policy and this year's renewal, and says what changed.",
   "version": "0.1.0",
   "min_runner_version": "0.1.0",

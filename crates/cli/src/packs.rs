@@ -1,10 +1,10 @@
 //! `kettle packs --json` — the public, build-time projection of the pack
 //! manifests (#478).
 //!
-//! The website never owns a list of what Kettle can read. The essay's
-//! note on the "how it works" page said why: a two-column table written
-//! by hand there is stale the next time a pack changes, and it changed
-//! three times in a fortnight. So the page asks this command, which
+//! The website never owns a list of what Kettle can read. A two-column
+//! table written by hand there is stale the next time a pack changes,
+//! and it changed three times in a fortnight. So the page asks this
+//! command, which
 //! loads every pack through the same loader a run uses and hands back
 //! only what a public page can support — the pack's own words, its
 //! named documents, and what it may do.
@@ -14,7 +14,7 @@
 //! doing its best; a public page silently dropping one is a page
 //! quietly misdescribing the product.
 
-use runner::packs::{load_pack, Manifest};
+use runner::packs::{load_pack, Manifest, TimeKind};
 use serde::Serialize;
 use std::path::{Path, PathBuf};
 
@@ -47,6 +47,22 @@ struct PublicPack {
     description: String,
     inputs: Vec<PublicInput>,
     capabilities: Vec<String>,
+    /// What the pack says a run costs in time. Published because the
+    /// public page had a hand-written grid of three tasks, one of which
+    /// ("Index a year of paperwork") is not a pack at all — the same
+    /// defect this file exists to prevent, one section further down the
+    /// page. A promise about time is a claim like any other, and the
+    /// pack is the only thing entitled to make it.
+    time: PublicTime,
+}
+
+#[derive(Debug, Serialize)]
+struct PublicTime {
+    /// The commitment class: quick, kettle-worthy, overnight, varies.
+    kind: TimeKind,
+    /// The pack's own words beside it — "by letter", "with statement
+    /// size". Never derived from anything by string surgery.
+    estimate: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -76,6 +92,10 @@ fn project(manifest: &Manifest) -> PublicPack {
             })
             .collect(),
         capabilities: manifest.capabilities.clone(),
+        time: PublicTime {
+            kind: manifest.copy().time.kind,
+            estimate: manifest.copy().time.estimate.clone(),
+        },
     }
 }
 

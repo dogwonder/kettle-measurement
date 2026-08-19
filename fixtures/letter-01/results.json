@@ -1,0 +1,76 @@
+{
+  "schema": "kettle/letter-report@0",
+  "run": {
+    "id": "run-05",
+    "pack": "app.kttl.letter-to-actions",
+    "pack_version": "0.2.0",
+    "file": "generated-development-three_asks-linden-04.txt",
+    "passages": 10,
+    "started": "2026-08-18T16:35:41Z",
+    "finished": "2026-08-18T16:36:07Z"
+  },
+  "summary": {
+    "obligations_count": 3,
+    "dated_count": 3,
+    "undated_count": 0,
+    "needs_review_count": 0,
+    "note": "This letter asks you to do 3 things."
+  },
+  "obligations": [
+    {
+      "kind": "payment",
+      "party": "Trentham & Yale Solicitors",
+      "ask": "Pay £480.00 towards the estate matter",
+      "deadline": "within 14 days",
+      "due": {
+        "date": "30 April 2026",
+        "kind": "worked_out"
+      },
+      "confidence": "high",
+      "evidence": [
+        {
+          "page": 1,
+          "text": "Please pay £480.00 towards your estate matter within 14 days of the date of this letter."
+        }
+      ],
+      "disputed": []
+    },
+    {
+      "kind": "response",
+      "party": "Trentham & Yale Solicitors",
+      "ask": "Reply to confirm attendance",
+      "deadline": "by the end of the month",
+      "due": {
+        "date": "30 April 2026",
+        "kind": "worked_out"
+      },
+      "confidence": "high",
+      "evidence": [
+        {
+          "page": 1,
+          "text": "Please reply to this letter by the end of the month to confirm that you will attend."
+        }
+      ],
+      "disputed": []
+    },
+    {
+      "kind": "attendance",
+      "party": "Trentham & Yale Solicitors",
+      "ask": "Attend the review meeting",
+      "deadline": "on 26 November 2026",
+      "due": {
+        "date": "26 November 2026",
+        "kind": "read_and_verified"
+      },
+      "confidence": "high",
+      "evidence": [
+        {
+          "page": 1,
+          "text": "You must attend a review meeting at our offices on 26 November 2026."
+        }
+      ],
+      "disputed": []
+    }
+  ],
+  "needs_review": []
+}

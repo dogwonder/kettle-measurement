@@ -1,0 +1,64 @@
+{
+  "schema": "kettle/proposed-actions@0",
+  "run_id": "run-05",
+  "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+  "actions": [
+    {
+      "id": "act-01",
+      "kind": "calendar_reminder",
+      "title": "Pay £480.00 towards the estate matter",
+      "detail": "Trentham & Yale Solicitors asked for this by 30 April 2026. The letter says \"within 14 days\".",
+      "evidence": {
+        "asked_by": "Trentham & Yale Solicitors",
+        "in_the_letter": "within 14 days",
+        "passage_1": "Please pay £480.00 towards your estate matter within 14 days of the date of this letter."
+      },
+      "export": {
+        "ics": {
+          "summary": "Pay £480.00 towards the estate matter — Trentham & Yale Solicitors",
+          "date": "2026-04-30"
+        },
+        "text": "Pay £480.00 towards the estate matter (Trentham & Yale Solicitors) — within 14 days"
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "act-02",
+      "kind": "calendar_reminder",
+      "title": "Reply to confirm attendance",
+      "detail": "Trentham & Yale Solicitors asked for this by 30 April 2026. The letter says \"by the end of the month\".",
+      "evidence": {
+        "asked_by": "Trentham & Yale Solicitors",
+        "in_the_letter": "by the end of the month",
+        "passage_1": "Please reply to this letter by the end of the month to confirm that you will attend."
+      },
+      "export": {
+        "ics": {
+          "summary": "Reply to confirm attendance — Trentham & Yale Solicitors",
+          "date": "2026-04-30"
+        },
+        "text": "Reply to confirm attendance (Trentham & Yale Solicitors) — by the end of the month"
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "act-03",
+      "kind": "calendar_reminder",
+      "title": "Attend the review meeting",
+      "detail": "Trentham & Yale Solicitors asked for this by 26 November 2026. The letter says \"on 26 November 2026\".",
+      "evidence": {
+        "asked_by": "Trentham & Yale Solicitors",
+        "in_the_letter": "on 26 November 2026",
+        "passage_1": "You must attend a review meeting at our offices on 26 November 2026."
+      },
+      "export": {
+        "ics": {
+          "summary": "Attend the review meeting — Trentham & Yale Solicitors",
+          "date": "2026-11-26"
+        },
+        "text": "Attend the review meeting (Trentham & Yale Solicitors) — on 26 November 2026"
+      },
+      "status": "proposed"
+    }
+  ]
+}

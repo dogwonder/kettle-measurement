@@ -3,8 +3,8 @@
 One reviewable place where a product-level claim names the evidence it
 stands on and the changes that stop it applying (#434). The registry
 points at evidence — baselines, owning tests, release checks, issues —
-it never replaces it, and it never copies a mutable number. README, app
-copy and essay figures cite a claim id; the claim cites the evidence.
+it never replaces it, and it never copies a mutable number. README and
+app copy cite a claim id; the claim cites the evidence.
 
 - `claims.json` — the registry. Each entry carries a stable id, the
   exact wording, its scope (pack, version, model, eval set, machine,

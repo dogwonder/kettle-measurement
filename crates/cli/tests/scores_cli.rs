@@ -112,6 +112,45 @@ fn scores_are_a_validated_projection_of_measurements_not_page_copy() {
     }));
 }
 
+/// A measurement nobody adopted is still a measurement, and the public
+/// projection has to be able to carry it.
+///
+/// The subscription pack was measured on 14 August 2026 under scoring
+/// 14, on the model Kettle now ships, and it **failed** — so no
+/// baseline was adopted from it. The projection found files by the
+/// prefix `baseline`, which meant the only committed evidence for that
+/// pack stayed the passing-shaped v5 record from July: the public page
+/// said "historical", implying evidence that had merely gone stale,
+/// while a current failure sat in a private run archive.
+///
+/// So the file name stops deciding what counts as evidence. `measured`
+/// is the honest prefix for a report that guards nothing, and the
+/// projection reads both — a report is published because it exists, not
+/// because it flattered anyone.
+#[test]
+fn a_measurement_no_baseline_was_adopted_from_is_published_too() {
+    let dir = root("unadopted");
+    write_baseline(
+        &dir,
+        "measured-v14-subscription.json",
+        14,
+        "2026-08-14T16:00:00Z",
+    );
+
+    let outcome = cli::scores::run_json(&dir, 14);
+    assert_eq!(outcome.code, cli::scores::ExitCode::Ok, "{}", outcome.text);
+    let document: serde_json::Value = serde_json::from_str(&outcome.text).expect("scores JSON");
+    let measurements = document["measurements"].as_array().expect("measurements");
+
+    assert!(
+        measurements
+            .iter()
+            .any(|row| row["source"] == "evals/measured-v14-subscription.json"),
+        "a measured-* report is evidence and belongs in the projection: {}",
+        outcome.text
+    );
+}
+
 #[test]
 fn a_malformed_measurement_stops_the_public_projection() {
     let dir = root("broken");

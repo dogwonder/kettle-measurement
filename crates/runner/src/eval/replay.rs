@@ -20,9 +20,9 @@
 //! and the run stops with a sentence saying so. The safety property is
 //! structural rather than remembered.
 //!
-//! Only a *prompt* change invalidates a recording. A scorer change does
-//! not, because it cannot alter what the model would have said — which
-//! is precisely the case this exists to serve.
+//! A prompt or request-policy change invalidates a recording. A scorer
+//! change does not, because it cannot alter what the model would have
+//! said — which is precisely the case this exists to serve.
 
 use std::collections::BTreeMap;
 use std::path::Path;
@@ -47,9 +47,8 @@ impl Recording {
     /// rather than half-loaded.
     pub fn from_run_dirs(root: &Path) -> Result<Self, String> {
         let mut answers = BTreeMap::new();
-        let mut found = 0usize;
         let mut models: BTreeMap<String, crate::eval::ModelInfo> = BTreeMap::new();
-        collect(root, &mut answers, &mut found, &mut models)?;
+        collect(root, &mut answers, &mut models, None)?;
         if answers.is_empty() {
             return Err(format!(
                 "no recorded answers under {} — a replay needs a run that kept its \
@@ -128,38 +127,44 @@ impl Recording {
     }
 }
 
-/// A question's identity: the rendered prompt and the schema that
-/// constrains the answer. Both, because both change what the model
-/// would say — and the prompt is what a run directory records, so this
-/// is keyed on what actually exists on disk rather than on the HTTP
-/// payload, which is not kept.
+/// A question's exact in-memory identity: the chat-completions request
+/// Kettle sends, including the rendered prompt and schema.
 ///
 /// Length-prefixed so a prompt ending where a schema begins cannot
 /// collide with a different split of the same bytes.
 fn digest(prompt: &str, schema: &serde_json::Value) -> String {
-    let schema = serde_json::to_string(schema).unwrap_or_default();
+    let request = crate::exec::RequestPolicy::current().request(prompt, schema);
+    let request = serde_json::to_vec(&request).unwrap_or_default();
     let mut hasher = blake3::Hasher::new();
-    for part in [prompt, schema.as_str()] {
-        hasher.update(&(part.len() as u64).to_le_bytes());
-        hasher.update(part.as_bytes());
-    }
+    hasher.update(&(request.len() as u64).to_le_bytes());
+    hasher.update(&request);
     format!("blake3:{}", hasher.finalize().to_hex())
 }
 
-/// The key for an entry loaded from a run directory, where the schema
-/// was never recorded.
+/// The key for an entry loaded from a run directory, where the prompt
+/// is recorded per exchange and the stable request policy is recorded
+/// once in `run.json`. The schema remains unavailable on legacy and
+/// current run directories; in-memory recordings use [`digest`] and
+/// keep its exact identity.
 pub(crate) fn digest_prompt_only(prompt: &str) -> String {
+    digest_policy_prompt(&crate::exec::RequestPolicy::current(), prompt)
+}
+
+fn digest_policy_prompt(policy: &crate::exec::RequestPolicy, prompt: &str) -> String {
+    let policy = serde_json::to_vec(policy).unwrap_or_default();
     let mut hasher = blake3::Hasher::new();
-    hasher.update(&(prompt.len() as u64).to_le_bytes());
-    hasher.update(prompt.as_bytes());
-    format!("blake3:prompt:{}", hasher.finalize().to_hex())
+    for part in [policy.as_slice(), prompt.as_bytes()] {
+        hasher.update(&(part.len() as u64).to_le_bytes());
+        hasher.update(part);
+    }
+    format!("blake3:request-prompt:{}", hasher.finalize().to_hex())
 }
 
 fn collect(
     dir: &Path,
     answers: &mut BTreeMap<String, String>,
-    found: &mut usize,
     models: &mut BTreeMap<String, crate::eval::ModelInfo>,
+    inherited_policy: Option<&crate::exec::RequestPolicy>,
 ) -> Result<(), String> {
     let entries = match std::fs::read_dir(dir) {
         Ok(entries) => entries,
@@ -167,28 +172,37 @@ fn collect(
         // empty-recording check above gives the useful sentence.
         Err(_) => return Ok(()),
     };
+    // Read the run-level request identity before its raw exchanges.
+    // Directory iteration order is unspecified, so learning this while
+    // walking the entries could key an exchange before its manifest.
+    let manifest = std::fs::read_to_string(dir.join("run.json"))
+        .ok()
+        .and_then(|text| serde_json::from_str::<serde_json::Value>(&text).ok());
+    let request_policy = manifest
+        .as_ref()
+        .and_then(|manifest| manifest.get("request"))
+        .and_then(|request| {
+            serde_json::from_value::<crate::exec::RequestPolicy>(request.clone()).ok()
+        })
+        .or_else(|| inherited_policy.cloned())
+        // Archived recordings predate #328. Treat them as the request
+        // shape current when the compatibility rule landed: this keeps
+        // the archive usable, while any future role/bound/format change
+        // gets a different key and refuses them.
+        .unwrap_or_else(crate::exec::RequestPolicy::current);
+    if let Some(model) = manifest.as_ref().and_then(|manifest| {
+        serde_json::from_value::<crate::eval::ModelInfo>(manifest.get("model")?.clone()).ok()
+    }) {
+        models.insert(model.file.clone(), model);
+    }
+
     for entry in entries.flatten() {
         let path = entry.path();
         if path.is_dir() {
-            collect(&path, answers, found, models)?;
+            collect(&path, answers, models, Some(&request_policy))?;
             continue;
         }
-        // The run's own note of what it stood on (#303). A manifest
-        // that will not parse is treated as one that says nothing:
-        // the answers beside it are still perfectly good, and losing
-        // a replay over a malformed sidecar note would be the wrong
-        // trade.
         if path.file_name().is_some_and(|name| name == "run.json") {
-            if let Some(model) = std::fs::read_to_string(&path)
-                .ok()
-                .and_then(|text| serde_json::from_str::<serde_json::Value>(&text).ok())
-                .and_then(|manifest| {
-                    serde_json::from_value::<crate::eval::ModelInfo>(manifest.get("model")?.clone())
-                        .ok()
-                })
-            {
-                models.insert(model.file.clone(), model);
-            }
             continue;
         }
         let Some(name) = path.file_name().and_then(|n| n.to_str()) else {
@@ -221,8 +235,19 @@ fn collect(
         // change without a prompt change is not a thing any pack has
         // done — but it is a gap, and it is written down rather than
         // hidden.
-        answers.insert(digest_prompt_only(&request_text), body);
-        *found += 1;
+        let key = digest_policy_prompt(&request_policy, &request_text);
+        if let Some(previous) = answers.get(&key) {
+            if previous != &body {
+                return Err(format!(
+                    "the recording under {} holds different answers for the same request — \
+                     it mixes runs whose request identity cannot distinguish them. Point \
+                     --replay at one coherent run set.",
+                    dir.display()
+                ));
+            }
+        } else {
+            answers.insert(key, body);
+        }
     }
     Ok(())
 }

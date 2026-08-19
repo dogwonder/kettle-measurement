@@ -107,6 +107,97 @@ fn a_changed_schema_also_refuses_even_when_the_prompt_is_identical() {
     );
 }
 
+/// #328: the rendered prompt is only the content of one message, not
+/// the request Kettle sent. A chat template may answer the same bytes
+/// differently in a system turn and a user turn, so a recording made
+/// under one role is not evidence about the other.
+#[test]
+fn a_recording_refuses_the_same_prompt_sent_under_a_different_role() {
+    let dir =
+        std::env::temp_dir().join(format!("kettle-replay-request-role-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&dir);
+    let run = dir.join("app.kttl.test-somepack-model-fixture-csv");
+    let raw = run.join("raw");
+    std::fs::create_dir_all(&raw).expect("run dir");
+
+    std::fs::write(
+        raw.join("0001-sorting-merchants.request.txt"),
+        "Sort these merchants",
+    )
+    .expect("write request");
+    std::fs::write(
+        raw.join("0001-sorting-merchants.response.json"),
+        String::from(r#"{"results": [{"id": 0, "name": "System answer"}]}"#),
+    )
+    .expect("write response");
+    std::fs::write(
+        run.join("run.json"),
+        serde_json::json!({
+            "inputs": [],
+            "request": {
+                "model": "local",
+                "temperature": 0,
+                "message_role": "system",
+                "max_tokens": runner::exec::MAX_ANSWER_TOKENS,
+                "response_format": "json_schema"
+            }
+        })
+        .to_string(),
+    )
+    .expect("write manifest");
+
+    let endpoint = Endpoint::replaying(
+        Recording::from_run_dirs(&dir).expect("the system-role recording loads"),
+    );
+    let error = call_constrained(
+        &endpoint,
+        "Sort these merchants",
+        &schema(),
+        &AtomicBool::new(false),
+    )
+    .expect_err("a user-turn request must not receive a system-turn answer");
+
+    assert!(error.to_string().contains("no recorded answer"), "{error}");
+    let _ = std::fs::remove_dir_all(&dir);
+}
+
+/// Runs archived before #328 cannot say which request policy produced
+/// an answer. They remain usable as the current policy, but two
+/// different answers to one inferred request are ambiguous and must
+/// refuse rather than letting directory order choose the evidence.
+#[test]
+fn legacy_runs_with_conflicting_answers_to_one_request_are_refused() {
+    let dir = std::env::temp_dir().join(format!(
+        "kettle-replay-conflicting-legacy-runs-{}",
+        std::process::id()
+    ));
+    let _ = std::fs::remove_dir_all(&dir);
+
+    for (run_name, answer) in [("old-system", "System answer"), ("new-user", "User answer")] {
+        let raw = dir.join(run_name).join("raw");
+        std::fs::create_dir_all(&raw).expect("run dir");
+        std::fs::write(
+            raw.join("0001-sorting-merchants.request.json"),
+            "Sort these merchants",
+        )
+        .expect("write request");
+        std::fs::write(
+            raw.join("0001-sorting-merchants.response.json"),
+            format!(r#"{{"results": [{{"id": 0, "name": "{answer}"}}]}}"#),
+        )
+        .expect("write response");
+    }
+
+    let error = Recording::from_run_dirs(&dir)
+        .expect_err("ambiguous legacy evidence must not choose whichever answer loads last");
+
+    assert!(
+        error.contains("different answers for the same request"),
+        "{error}"
+    );
+    let _ = std::fs::remove_dir_all(&dir);
+}
+
 #[test]
 fn a_replayed_answer_is_validated_by_the_same_rules_as_a_live_one() {
     // A replay must be scored identically or it is not the same

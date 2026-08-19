@@ -5,7 +5,7 @@
 //! reordered result costs one item to needs-review rather than silently
 //! misattributing every answer in the batch.
 
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::mpsc;
 use std::sync::{Arc, Mutex};
@@ -133,6 +133,52 @@ pub fn render_prompt(
 /// cannot drift apart — two copies of a runtime fact is how #251
 /// happened.
 pub const MAX_ANSWER_TOKENS: u32 = 4096;
+
+/// The stable part of the chat-completions request Kettle sends.
+///
+/// A rendered prompt is only one field inside this contract. The same
+/// bytes in a system turn and a user turn are different questions to a
+/// chat template (#328), just as a different output bound or response
+/// format is a different measurement. Run directories record this
+/// policy once beside the model; replay combines it with each recorded
+/// prompt, so a future request-shape change refuses old answers rather
+/// than silently treating them as evidence.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub(crate) struct RequestPolicy {
+    pub(crate) model: String,
+    pub(crate) temperature: u32,
+    pub(crate) message_role: String,
+    pub(crate) max_tokens: u32,
+    pub(crate) response_format: String,
+}
+
+impl RequestPolicy {
+    /// The policy executed by [`call_constrained`]. Kept as one value
+    /// so the HTTP request and the run manifest cannot describe two
+    /// different contracts.
+    pub(crate) fn current() -> Self {
+        RequestPolicy {
+            model: "local".to_owned(),
+            temperature: 0,
+            message_role: "user".to_owned(),
+            max_tokens: MAX_ANSWER_TOKENS,
+            response_format: "json_schema".to_owned(),
+        }
+    }
+
+    pub(crate) fn request(&self, prompt: &str, schema: &serde_json::Value) -> serde_json::Value {
+        serde_json::json!({
+            "model": self.model,
+            "temperature": self.temperature,
+            "messages": [{ "role": self.message_role, "content": prompt }],
+            "max_tokens": self.max_tokens,
+            "response_format": {
+                "type": self.response_format,
+                "json_schema": { "schema": schema }
+            }
+        })
+    }
+}
 
 /// Why a call was asked again (#150). Different failures with different
 /// fixes — a truncation wants a smaller batch, a schema failure wants a
@@ -379,26 +425,16 @@ pub fn call_constrained(
     schema: &serde_json::Value,
     cancel: &AtomicBool,
 ) -> Result<serde_json::Value, ModelCallError> {
-    let request = serde_json::json!({
-        "model": "local",
-        "temperature": 0,
-        // A user turn, not a system one: a chat template may insist on
-        // a user query and refuse the request outright without it
-        // (Qwen3.5 does, with HTTP 400 and no tokens generated). The
-        // rendered prompt is instruction and data together, so there is
-        // nothing to split; the only question is which turn carries it,
-        // and only one of the two answers every template accepts.
-        "messages": [{ "role": "user", "content": prompt }],
-        // An explicit output bound (#232): exhaustion answers
-        // `finish_reason: "length"` and takes the truncation path
-        // below, so the bound can cut a runaway generation short but
-        // can never silently pass off a cut-off answer as a whole one.
-        "max_tokens": MAX_ANSWER_TOKENS,
-        "response_format": {
-            "type": "json_schema",
-            "json_schema": { "schema": schema }
-        }
-    });
+    // A user turn, not a system one: a chat template may insist on a
+    // user query and refuse the request outright without it (Qwen3.5
+    // does, with HTTP 400 and no tokens generated). The rendered prompt
+    // is instruction and data together, so there is nothing to split.
+    //
+    // The explicit output bound (#232) turns exhaustion into
+    // `finish_reason: "length"` and the truncation path below. Both
+    // choices come from the recorded policy, so executed and replayed
+    // request identity cannot drift.
+    let request = RequestPolicy::current().request(prompt, schema);
 
     let transport = |e: &dyn std::fmt::Display| ModelCallError::Transport(e.to_string());
 

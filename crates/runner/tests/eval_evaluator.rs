@@ -798,6 +798,20 @@ fn a_run_directory_names_the_model_so_a_replay_can_say_whose_answers_it_serves()
     };
     evaluator.evaluate(&pack).expect("the eval runs");
 
+    let manifest_path = walk(&runs)
+        .into_iter()
+        .find(|path| path.ends_with("run.json"))
+        .expect("the eval writes a run manifest");
+    let manifest: serde_json::Value = serde_json::from_str(
+        &std::fs::read_to_string(&manifest_path).expect("read the run manifest"),
+    )
+    .expect("the run manifest is JSON");
+    assert_eq!(manifest["request"]["message_role"], "user");
+    assert_eq!(
+        manifest["request"]["max_tokens"],
+        runner::exec::MAX_ANSWER_TOKENS
+    );
+
     let recording =
         runner::eval::replay::Recording::from_run_dirs(&runs).expect("the recording loads");
     let model = recording

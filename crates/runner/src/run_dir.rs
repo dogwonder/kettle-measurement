@@ -148,6 +148,11 @@ struct RunManifest {
     /// is that no model was involved.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     model: Option<crate::eval::ModelInfo>,
+    /// The stable chat-request shape every exchange in this run used
+    /// (#328). The rendered prompt remains beside each response; this
+    /// is the missing context that says what request carried it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    request: Option<crate::exec::RequestPolicy>,
 }
 
 impl RunDir {
@@ -258,6 +263,7 @@ impl RunDir {
     pub fn record_model(&self, model: Option<&crate::eval::ModelInfo>) -> Result<(), RunDirError> {
         let mut manifest = self.manifest();
         manifest.model = model.cloned();
+        manifest.request = model.map(|_| crate::exec::RequestPolicy::current());
         self.write_manifest(&manifest)
     }
 

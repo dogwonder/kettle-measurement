@@ -7,7 +7,7 @@
 //! recorded rather than averaged away, and "any" means any.
 
 use runner::eval::{Spread, Stability};
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 #[test]
 fn runs_that_agreed_have_not_moved() {
@@ -70,6 +70,7 @@ fn stability_has_moved_when_anything_in_it_has() {
         steps: BTreeMap::from([("normalise".to_owned(), Spread::across([1.0, 1.0, 1.0]))]),
         end_to_end: Spread::across([0.96, 0.96, 0.96]),
         needs_review_rate: Spread::across([0.12, 0.12, 0.12]),
+        record_digests: BTreeSet::new(),
     };
     assert!(!steady.moved());
 
@@ -98,6 +99,7 @@ fn a_stability_block_survives_a_round_trip_through_json() {
         steps: BTreeMap::from([("classify".to_owned(), Spread::across([0.9, 0.8, 0.9]))]),
         end_to_end: Spread::across([1.0, 0.95, 1.0]),
         needs_review_rate: Spread::across([0.1, 0.1, 0.1]),
+        record_digests: BTreeSet::from(["blake3:one".to_owned()]),
     };
 
     let json = serde_json::to_string(&stability).expect("serialise");
@@ -105,4 +107,39 @@ fn a_stability_block_survives_a_round_trip_through_json() {
 
     assert_eq!(back, stability);
     assert!(back.moved());
+}
+
+/// The named spreads are a list of the quantities somebody remembered
+/// to watch, and the harm ceiling is not on it (#533). `steps`,
+/// `end_to_end` and `needs_review_rate` say nothing about `items`,
+/// `containment` or the calibration buckets — and `confident_wrong` is
+/// computed from `items`. So a repeat could move in exactly the number
+/// a ceiling is a ceiling on while every spread held, the harness would
+/// report stable, and the registry check that withdraws a claim on
+/// moved evidence would never fire.
+///
+/// The digest makes "did the repeats agree?" total rather than
+/// enumerated: one entry means every repeat recorded the same thing
+/// about this fixture, whatever anyone thought to watch.
+#[test]
+fn a_repeat_that_moved_only_where_no_spread_looks_still_counts_as_moved() {
+    let steady = Stability {
+        runs: 3,
+        steps: BTreeMap::from([("obligations".to_owned(), Spread::across([0.98, 0.98, 0.98]))]),
+        end_to_end: Spread::across([0.97, 0.97, 0.97]),
+        needs_review_rate: Spread::across([0.0, 0.0, 0.0]),
+        record_digests: BTreeSet::from(["blake3:aaa".to_owned()]),
+    };
+    assert!(!steady.moved(), "one digest is every repeat agreeing");
+
+    // Every named spread holds. The run recorded something different
+    // anyway — an item flipping from wrong-and-unsure to
+    // wrong-and-confident moves the ceiling and not the score.
+    let mut divergent = steady.clone();
+    divergent.record_digests = BTreeSet::from(["blake3:aaa".to_owned(), "blake3:bbb".to_owned()]);
+    assert!(
+        divergent.moved(),
+        "repeats that recorded different things disagreed, whatever the \
+         spreads say"
+    );
 }

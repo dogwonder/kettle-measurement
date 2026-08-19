@@ -66,6 +66,42 @@ Running a bed on rented hardware — which box, which credentials, and
 what a cross-machine measurement does and does not license — is
 `RENTED-GPU.md`.
 
+## Repeats, and the backend they were measured on
+
+Answers at temperature 0 under a grammar should not move, so `--runs`
+exists to confirm that rather than to average it away. On 19 August 2026
+it was pointed at the two measurements the registry depends on, for the
+first time: three repeats each of the letter development bed (413
+fixtures) and the renewal one (62), on a rented RTX 5090. **Nothing
+moved.** Better than that, and stronger than the instrument reports,
+every raw model response was byte-identical across the three runs on
+both packs — checked directly against the archived recordings, so
+everything derived from them, harm gates included, was identical too.
+
+Since then a `Stability` block carries a digest of everything each
+repeat recorded about a fixture, not only the spreads. The spreads were
+a list of the quantities somebody remembered to watch, and
+`confident_wrong` — the number the harm ceilings *are* ceilings on — was
+not on it, being computed from `items` that no spread covered. One
+digest means every repeat recorded the same thing; more than one
+downgrades any claim standing on that baseline.
+
+**The limit worth stating plainly: this was measured on CUDA, and
+Kettle's users run Metal.** llama.cpp's sources of non-determinism are
+backend-specific — batch-split reductions among them — so "byte-identical
+across three runs on an RTX 5090" is what the evidence says, and
+"Kettle is deterministic" is not. A repeat on Apple silicon is 5½ hours
+for the letter bed, which is why it has not happened. Until it does,
+every stability statement here is a statement about one backend.
+
+The same caveat, from the other direction, applies to scores: this file
+asserts that scores are machine-independent while timings are not, and
+that assertion is still unmeasured. The closest evidence is a pod run
+and an M1 Pro run of the same bed and weights agreeing on every score
+and differing by one claim-containment candidate in 4,036 — but on
+*adjacent* commits rather than the same one, so the difference has two
+possible causes and this pair cannot separate them.
+
 ## Using it
 
 Run these commands from the repository root. The Cargo package and the

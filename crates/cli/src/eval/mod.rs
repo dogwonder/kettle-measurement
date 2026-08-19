@@ -52,7 +52,7 @@ pub mod table;
 pub mod tiers;
 
 use chrono::{DateTime, Utc};
-use runner::eval::{EvalReport, Spread, Stability};
+use runner::eval::{EvalReport, FixtureResult, Perf, Spread, Stability};
 use std::path::{Path, PathBuf};
 
 pub use models::ModelSpec;
@@ -558,9 +558,34 @@ fn stability_of(repeats: &[EvalReport]) -> Vec<Option<Stability>> {
                     .collect(),
                 end_to_end: Spread::across(at(index).map(|f| f.end_to_end)),
                 needs_review_rate: Spread::across(at(index).map(|f| f.needs_review_rate)),
+                record_digests: at(index).map(record_digest).collect(),
             })
         })
         .collect()
+}
+
+/// Everything a repeat recorded about one fixture, as a digest.
+///
+/// The spreads beside this one are the quantities somebody remembered
+/// to watch, and the harm ceiling was not among them (#533):
+/// `confident_wrong` comes from `items`, which no spread covers. So
+/// this hashes the whole record instead — scores, items, containment,
+/// end-to-end, review rate — and the set of digests answers "did the
+/// repeats agree?" totally rather than for a list of fields that has to
+/// be maintained.
+///
+/// Two things are excluded, and both would produce a false alarm:
+/// `perf`, because two repeats taking different wall-clock times is the
+/// machine being a machine; and `stability` itself, which is not yet
+/// populated here and would be self-referential if it were.
+fn record_digest(fixture: &FixtureResult) -> String {
+    let comparable = FixtureResult {
+        perf: Perf::default(),
+        stability: None,
+        ..fixture.clone()
+    };
+    let json = serde_json::to_vec(&comparable).unwrap_or_default();
+    format!("blake3:{}", blake3::hash(&json).to_hex())
 }
 
 /// The lowest single step score anywhere in a report — how badly its

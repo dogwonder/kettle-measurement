@@ -945,6 +945,7 @@ dependencies = [
 name = "kettle"
 version = "0.1.0"
 dependencies = [
+ "blake3",
  "chrono",
  "clap",
  "runner",

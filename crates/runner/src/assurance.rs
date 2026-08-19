@@ -648,6 +648,13 @@ struct StabilityProvenance {
     steps: BTreeMap<String, SpreadProvenance>,
     end_to_end: Option<SpreadProvenance>,
     needs_review_rate: Option<SpreadProvenance>,
+    /// More than one digest is repeats that recorded different things,
+    /// whatever the spreads say — the total form of the question
+    /// (#533). Read here for the same reason it exists there: the
+    /// spreads do not cover `items`, and the harm ceiling is computed
+    /// from them.
+    #[serde(default)]
+    record_digests: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -668,6 +675,12 @@ impl StabilityProvenance {
     /// moved, because the reason is the whole point of not refusing.
     fn moved(&self) -> Vec<String> {
         let mut moved = Vec::new();
+        if self.record_digests.len() > 1 {
+            moved.push(format!(
+                "{} repeats recorded different results",
+                self.record_digests.len()
+            ));
+        }
         for (step, spread) in &self.steps {
             if spread.moved() {
                 moved.push(format!("{step} {} to {}", spread.low, spread.high));

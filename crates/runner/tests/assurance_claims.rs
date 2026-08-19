@@ -1421,3 +1421,56 @@ fn registry_for_letter_ceilings() -> Registry {
     )
     .expect("registry parses")
 }
+
+/// The spreads a claim's baseline records are the quantities somebody
+/// remembered to watch, and the harm ceiling is not among them (#533).
+/// So validation reads the total form too: repeats that recorded
+/// different results downgrade the claim even when every spread held.
+#[test]
+fn repeats_that_recorded_different_results_downgrade_even_with_flat_spreads() {
+    let root = evidence_root("moved-digest");
+    let baseline = format!(
+        r#"{{
+          "scoring_version": {},
+          "recorded_at": "2026-08-19T12:00:00Z",
+          "reports": [
+            {{
+              "pack": "app.kttl.letter-to-actions",
+              "pack_version": "0.2.0",
+              "eval_set": "development",
+              "model": {{ "file": "qwen3.5-4b-q4_k_m.gguf" }},
+              "verdict": "pass",
+              "fixtures": [
+                {{
+                  "fixture": "flat-but-divergent",
+                  "stability": {{
+                    "runs": 3,
+                    "steps": {{ "obligations": {{ "low": 0.98, "high": 0.98 }} }},
+                    "end_to_end": {{ "low": 0.97, "high": 0.97 }},
+                    "needs_review_rate": {{ "low": 0.0, "high": 0.0 }},
+                    "record_digests": ["blake3:aaa", "blake3:bbb"]
+                  }}
+                }}
+              ]
+            }}
+          ]
+        }}"#,
+        runner::eval::SCORING_VERSION,
+    );
+    std::fs::write(root.join("evals/baseline-letter.json"), baseline).expect("write baseline");
+
+    let assessment =
+        registry_for_letter_ceilings().validate(&root, runner::eval::SCORING_VERSION, today());
+
+    let claim = &assessment.claims[0];
+    assert_eq!(
+        claim.effective,
+        Status::Unproven,
+        "every spread held and the repeats still disagreed: {:?}",
+        claim.reasons
+    );
+    assert!(
+        claim.reasons.join("\n").contains("flat-but-divergent"),
+        "the fixture that diverged is named"
+    );
+}

@@ -2533,6 +2533,23 @@ pub struct Stability {
     /// right: the same statement landed differently in front of a
     /// person, even if every score held.
     pub needs_review_rate: Spread,
+    /// One digest per repeat of everything that repeat recorded about
+    /// this fixture, deduplicated — so **one entry means every repeat
+    /// recorded the same thing** and more than one means they did not.
+    ///
+    /// The spreads above are a list of the quantities somebody
+    /// remembered to watch, and on 19 August the harm ceiling was not
+    /// on it (#533): `confident_wrong` is computed from `items`, which
+    /// no spread covers, so a repeat could move in exactly the number a
+    /// ceiling is a ceiling on while every spread held. This makes the
+    /// question total rather than enumerated, and it needs no upkeep
+    /// when the report grows a field.
+    ///
+    /// `perf` is excluded, deliberately: two repeats taking different
+    /// wall-clock times is the machine being a machine, not the run
+    /// disagreeing with itself.
+    #[serde(default, skip_serializing_if = "BTreeSet::is_empty")]
+    pub record_digests: BTreeSet<String>,
 }
 
 impl Stability {
@@ -2541,6 +2558,7 @@ impl Stability {
         self.steps.values().any(Spread::moved)
             || self.end_to_end.moved()
             || self.needs_review_rate.moved()
+            || self.record_digests.len() > 1
     }
 }
 

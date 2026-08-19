@@ -40,8 +40,19 @@
 
 set -euo pipefail
 
-PACK="${1:?usage: pod-eval.sh <pack-id> <weights.gguf>}"
-WEIGHTS="${2:?usage: pod-eval.sh <pack-id> <weights.gguf>}"
+PACK="${1:?usage: pod-eval.sh <pack-id> <weights.gguf> [eval flags...]}"
+WEIGHTS="${2:?usage: pod-eval.sh <pack-id> <weights.gguf> [eval flags...]}"
+shift 2
+# Anything further is passed to `kettle eval` as given. This exists for
+# `--runs`, which is the one flag a rented box is *for*: a stability
+# check is three bed runs, ~35 minutes here against five and a half
+# hours on an M1 Pro, which is why #533's claims stood on `--runs 1`
+# for as long as they did. Deliberately a pass-through and not a named
+# option — the refusals above are about the machine, and the eval's own
+# flags are the eval's business. `--fixture-dir` stays impossible
+# because it is never *offered*, and adding it here would need typing
+# out a private path in full.
+EVAL_FLAGS=("$@")
 
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo"
@@ -103,6 +114,24 @@ if ! cargo --version >/dev/null 2>&1; then
   echo "see evals/RENTED-GPU.md" >&2
   exit 1
 fi
+
+# `--resume` is refused alongside `--runs`, and correctly: a repeat that
+# reused another repeat's answers would measure nothing and report
+# perfect stability, which is the one wrong answer a stability check
+# must not be able to give. Decided here rather than at the call, with
+# the rest of the knowable-in-one-second checks: a person who asked for
+# three runs should learn what this script did with that before the
+# CUDA build, not after it. The cost is worth stating too — a stability
+# run has no crash insurance, so run it under tmux and expect to start
+# over if it dies.
+resume=(--resume)
+for flag in "${EVAL_FLAGS[@]}"; do
+  if [[ "$flag" == "--runs" || "$flag" == --runs=* ]]; then
+    resume=()
+    echo "→ --runs given, so not resuming: repeats must not reuse each other"
+    break
+  fi
+done
 
 if [[ ! -f "packs/$PACK/pack.json" ]]; then
   echo "no pack called $PACK in packs/" >&2
@@ -186,8 +215,9 @@ out="pod-baseline-$(basename "$PACK").json"
 # letter run lost 326 fixtures to a dropped connection without it.
 cargo run --locked -p kettle -- eval "$PACK" \
   --model "$WEIGHTS" \
-  --resume \
+  "${resume[@]}" \
   --write-baseline "$out" \
+  "${EVAL_FLAGS[@]}" \
   2>&1 | tee "pod-eval.log"
 
 cat > MANIFEST-pod.md <<EOF
@@ -195,6 +225,7 @@ cat > MANIFEST-pod.md <<EOF
 
 - **Commit**: $commit
 - **Weights**: $(basename "$WEIGHTS")
+- **Eval flags**: ${EVAL_FLAGS[*]:-none}
 - **Host**: $(uname -sm), $(nproc) cores
 - **GPU**: $(command -v nvidia-smi >/dev/null && nvidia-smi --query-gpu=name --format=csv,noheader | head -1 || echo "none — CPU build")
 - **llama.cpp**: pinned tag, built by scripts/vendor-sidecar.sh on this host
@@ -206,7 +237,14 @@ laptop. See scripts/pod-eval.sh for what a cross-instrument measurement
 does and does not license.
 EOF
 
-tar czf pod-run.tgz evals/runs/run1 "$out" pod-eval.log MANIFEST-pod.md
+# Every run directory, not `run1`. `--runs 3` writes run1..run3 and this
+# line named the first, so a stability run came home with its scores —
+# aggregated into the baseline — and without two thirds of the answers
+# they were computed from. Nothing looked wrong, which is the bad kind
+# of bug: the recordings exist so a score can be re-asked under new
+# scoring without re-running the GPU, and "did the repeats agree?" is
+# exactly the question a missing repeat can never answer again.
+tar czf pod-run.tgz evals/runs/run* "$out" pod-eval.log MANIFEST-pod.md
 echo
 echo "done — copy pod-run.tgz back, e.g.:"
 echo "  scp <pod>:$repo/pod-run.tgz ."

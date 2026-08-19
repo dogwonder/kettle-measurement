@@ -30,6 +30,7 @@
 //! unproven since Tuesday's bump" stays visible.
 
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 use std::path::Path;
 
 /// What a claim's evidence supports.
@@ -626,6 +627,62 @@ struct ReportProvenance {
     bed: Option<String>,
     sidecar: Option<SidecarProvenance>,
     verdict: Option<String>,
+    #[serde(default)]
+    fixtures: Vec<FixtureProvenance>,
+}
+
+#[derive(Debug, Deserialize)]
+struct FixtureProvenance {
+    fixture: Option<String>,
+    stability: Option<StabilityProvenance>,
+}
+
+/// The spreads `--runs` recorded, read here rather than reused from
+/// [`crate::eval::Stability`] for the same reason every other struct in
+/// this file is its own: validation deserialises the fields it checks
+/// and tolerates a baseline carrying anything else, so an unrelated
+/// addition to the report shape cannot start refusing the registry.
+#[derive(Debug, Deserialize)]
+struct StabilityProvenance {
+    #[serde(default)]
+    steps: BTreeMap<String, SpreadProvenance>,
+    end_to_end: Option<SpreadProvenance>,
+    needs_review_rate: Option<SpreadProvenance>,
+}
+
+#[derive(Debug, Deserialize)]
+struct SpreadProvenance {
+    low: f32,
+    high: f32,
+}
+
+impl SpreadProvenance {
+    fn moved(&self) -> bool {
+        self.low != self.high
+    }
+}
+
+impl StabilityProvenance {
+    /// What disagreed, named. `Stability::moved` answers the same
+    /// question as a bool; a downgrade has to say which measurement
+    /// moved, because the reason is the whole point of not refusing.
+    fn moved(&self) -> Vec<String> {
+        let mut moved = Vec::new();
+        for (step, spread) in &self.steps {
+            if spread.moved() {
+                moved.push(format!("{step} {} to {}", spread.low, spread.high));
+            }
+        }
+        for (label, spread) in [
+            ("end to end", &self.end_to_end),
+            ("review rate", &self.needs_review_rate),
+        ] {
+            if let Some(spread) = spread.as_ref().filter(|spread| spread.moved()) {
+                moved.push(format!("{label} {} to {}", spread.low, spread.high));
+            }
+        }
+        moved
+    }
 }
 
 #[derive(Debug, Deserialize)]
@@ -751,6 +808,31 @@ fn check_baseline(
                 .as_ref()
                 .and_then(|sidecar| sidecar.version.as_ref()),
         );
+    }
+
+    // Repeats that disagreed (#533). `--runs` exists to confirm
+    // stability, not to improve an estimate: at temperature 0 under a
+    // grammar nothing should move, so a spread is a fault to chase and
+    // a claim cannot stand `proven` on a run set that disagreed with
+    // itself. The asymmetry is deliberate and load-bearing — absent
+    // stability is a `--runs 1` measurement and stays valid, because
+    // requiring repeats everywhere would make every cheap measurement
+    // unusable as evidence. What is refused is *measured and moved*,
+    // never *unmeasured*.
+    for fixture in &report.fixtures {
+        let Some(stability) = &fixture.stability else {
+            continue;
+        };
+        let moved = stability.moved();
+        if moved.is_empty() {
+            continue;
+        }
+        let name = fixture.fixture.as_deref().unwrap_or("an unnamed fixture");
+        reasons.push(format!(
+            "{path} records {name} moving across repeats ({}) — a claim cannot stand on \
+             a run set that disagreed with itself",
+            moved.join(", "),
+        ));
     }
 
     if let Some(expected) = claim.expects.as_ref().and_then(|e| e.verdict.as_ref()) {

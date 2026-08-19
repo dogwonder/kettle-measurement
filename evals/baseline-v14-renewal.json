@@ -1,6 +1,6 @@
 {
   "scoring_version": 14,
-  "recorded_at": "2026-08-14T16:18:01Z",
+  "recorded_at": "2026-08-19T11:57:38Z",
   "reports": [
     {
       "pack": "app.kttl.renewal-diff",
@@ -13,8 +13,8 @@
         "context": 8192
       },
       "machine": {
-        "cpu": "AMD EPYC 9354 32-Core Processor",
-        "ram_gb": 377,
+        "cpu": "AMD Ryzen 9 9950X 16-Core Processor",
+        "ram_gb": 123,
         "os": "Ubuntu 24.04.3 LTS"
       },
       "evidence": {
@@ -95,7 +95,7 @@
       "sidecar": {
         "version": "10145 (ad256ded)",
         "file": "llama-server",
-        "device": "CUDA0 (NVIDIA GeForce RTX 5090) (0000:ca:00.0)"
+        "device": "CUDA0 (NVIDIA GeForce RTX 5090) (0000:02:00.0)"
       },
       "fixtures": [
         {
@@ -601,11 +601,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3274,
-            "model_ms": 3193,
-            "tokens_per_second": 296.29764,
-            "peak_rss_mb": 3104,
+            "wall_ms": 2932,
+            "model_ms": 2919,
+            "tokens_per_second": 308.05185,
+            "peak_rss_mb": 3234,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -1111,11 +1128,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3131,
-            "model_ms": 2911,
-            "tokens_per_second": 296.99463,
-            "peak_rss_mb": 3104,
+            "wall_ms": 2852,
+            "model_ms": 2790,
+            "tokens_per_second": 308.33038,
+            "peak_rss_mb": 3234,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -1621,11 +1655,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3174,
-            "model_ms": 2951,
-            "tokens_per_second": 296.55234,
-            "peak_rss_mb": 3104,
+            "wall_ms": 2892,
+            "model_ms": 2819,
+            "tokens_per_second": 307.91956,
+            "peak_rss_mb": 3234,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -2131,11 +2182,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3151,
-            "model_ms": 2925,
-            "tokens_per_second": 295.62976,
-            "peak_rss_mb": 3104,
+            "wall_ms": 2869,
+            "model_ms": 2795,
+            "tokens_per_second": 307.89023,
+            "peak_rss_mb": 3234,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -2641,11 +2709,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3166,
-            "model_ms": 2941,
-            "tokens_per_second": 295.48083,
-            "peak_rss_mb": 3104,
+            "wall_ms": 2882,
+            "model_ms": 2810,
+            "tokens_per_second": 307.67004,
+            "peak_rss_mb": 3234,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -3151,11 +3236,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3003,
-            "model_ms": 2765,
-            "tokens_per_second": 296.85986,
-            "peak_rss_mb": 3104,
+            "wall_ms": 2716,
+            "model_ms": 2646,
+            "tokens_per_second": 308.4969,
+            "peak_rss_mb": 3234,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -3661,11 +3763,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3042,
-            "model_ms": 2796,
-            "tokens_per_second": 294.89685,
-            "peak_rss_mb": 3104,
+            "wall_ms": 2726,
+            "model_ms": 2657,
+            "tokens_per_second": 308.0291,
+            "peak_rss_mb": 3234,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -4171,11 +4290,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 2973,
-            "model_ms": 2758,
-            "tokens_per_second": 297.7191,
-            "peak_rss_mb": 3200,
+            "wall_ms": 2723,
+            "model_ms": 2646,
+            "tokens_per_second": 308.52563,
+            "peak_rss_mb": 3234,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -4681,11 +4817,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3237,
-            "model_ms": 3008,
-            "tokens_per_second": 290.01477,
-            "peak_rss_mb": 3477,
+            "wall_ms": 2922,
+            "model_ms": 2850,
+            "tokens_per_second": 303.10605,
+            "peak_rss_mb": 3470,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -5301,11 +5454,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3739,
-            "model_ms": 3515,
-            "tokens_per_second": 297.08636,
-            "peak_rss_mb": 3736,
+            "wall_ms": 3436,
+            "model_ms": 3365,
+            "tokens_per_second": 308.9794,
+            "peak_rss_mb": 3752,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -5958,11 +6128,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3918,
-            "model_ms": 3818,
-            "tokens_per_second": 297.761,
-            "peak_rss_mb": 3747,
+            "wall_ms": 3662,
+            "model_ms": 3649,
+            "tokens_per_second": 309.13568,
+            "peak_rss_mb": 3752,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -6578,11 +6765,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3764,
-            "model_ms": 3524,
-            "tokens_per_second": 296.04828,
-            "peak_rss_mb": 4021,
+            "wall_ms": 3450,
+            "model_ms": 3375,
+            "tokens_per_second": 307.57928,
+            "peak_rss_mb": 4016,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -7198,11 +7402,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3892,
-            "model_ms": 3619,
-            "tokens_per_second": 296.81265,
-            "peak_rss_mb": 4021,
+            "wall_ms": 3551,
+            "model_ms": 3461,
+            "tokens_per_second": 309.03848,
+            "peak_rss_mb": 4035,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -7818,11 +8039,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 4043,
-            "model_ms": 3824,
-            "tokens_per_second": 292.91983,
-            "peak_rss_mb": 4026,
+            "wall_ms": 3743,
+            "model_ms": 3655,
+            "tokens_per_second": 305.18884,
+            "peak_rss_mb": 4035,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -8438,11 +8676,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3872,
-            "model_ms": 3628,
-            "tokens_per_second": 298.04404,
-            "peak_rss_mb": 4056,
+            "wall_ms": 3558,
+            "model_ms": 3470,
+            "tokens_per_second": 308.78394,
+            "peak_rss_mb": 4307,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -9058,11 +9313,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3778,
-            "model_ms": 3517,
-            "tokens_per_second": 296.10425,
-            "peak_rss_mb": 4056,
+            "wall_ms": 3428,
+            "model_ms": 3341,
+            "tokens_per_second": 310.22977,
+            "peak_rss_mb": 4307,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -9678,11 +9950,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3921,
-            "model_ms": 3663,
-            "tokens_per_second": 296.18515,
-            "peak_rss_mb": 4065,
+            "wall_ms": 3621,
+            "model_ms": 3531,
+            "tokens_per_second": 306.10675,
+            "peak_rss_mb": 4307,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -10188,11 +10477,28 @@
           "end_to_end": 0.5,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3339,
-            "model_ms": 3119,
-            "tokens_per_second": 289.64328,
-            "peak_rss_mb": 4348,
+            "wall_ms": 3039,
+            "model_ms": 2964,
+            "tokens_per_second": 303.44867,
+            "peak_rss_mb": 4338,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 0.5,
+                "high": 0.5
+              }
+            },
+            "end_to_end": {
+              "low": 0.5,
+              "high": 0.5
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -10698,11 +11004,28 @@
           "end_to_end": 0.5,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3191,
-            "model_ms": 2928,
-            "tokens_per_second": 295.37415,
-            "peak_rss_mb": 4388,
+            "wall_ms": 2887,
+            "model_ms": 2798,
+            "tokens_per_second": 307.75427,
+            "peak_rss_mb": 4390,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 0.5,
+                "high": 0.5
+              }
+            },
+            "end_to_end": {
+              "low": 0.5,
+              "high": 0.5
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -11208,11 +11531,28 @@
           "end_to_end": 0.5,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3145,
-            "model_ms": 2899,
-            "tokens_per_second": 296.39243,
-            "peak_rss_mb": 4637,
+            "wall_ms": 2863,
+            "model_ms": 2778,
+            "tokens_per_second": 307.77567,
+            "peak_rss_mb": 4401,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 0.5,
+                "high": 0.5
+              }
+            },
+            "end_to_end": {
+              "low": 0.5,
+              "high": 0.5
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -11718,11 +12058,28 @@
           "end_to_end": 0.5,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3144,
-            "model_ms": 2930,
-            "tokens_per_second": 295.04437,
-            "peak_rss_mb": 4637,
+            "wall_ms": 2866,
+            "model_ms": 2796,
+            "tokens_per_second": 307.7177,
+            "peak_rss_mb": 4646,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 0.5,
+                "high": 0.5
+              }
+            },
+            "end_to_end": {
+              "low": 0.5,
+              "high": 0.5
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -12213,11 +12570,28 @@
           "end_to_end": 0.88888896,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3175,
-            "model_ms": 2952,
-            "tokens_per_second": 295.31552,
-            "peak_rss_mb": 4900,
+            "wall_ms": 2890,
+            "model_ms": 2819,
+            "tokens_per_second": 307.60626,
+            "peak_rss_mb": 4910,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 0.88888896,
+              "high": 0.88888896
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -12708,11 +13082,28 @@
           "end_to_end": 0.88888896,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3181,
-            "model_ms": 2941,
-            "tokens_per_second": 294.69006,
-            "peak_rss_mb": 5164,
+            "wall_ms": 2879,
+            "model_ms": 2805,
+            "tokens_per_second": 307.42645,
+            "peak_rss_mb": 5174,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 0.88888896,
+              "high": 0.88888896
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -13203,11 +13594,28 @@
           "end_to_end": 0.88888896,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3137,
-            "model_ms": 2906,
-            "tokens_per_second": 294.8227,
-            "peak_rss_mb": 5435,
+            "wall_ms": 2846,
+            "model_ms": 2773,
+            "tokens_per_second": 307.35995,
+            "peak_rss_mb": 5437,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 0.88888896,
+              "high": 0.88888896
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -13698,11 +14106,28 @@
           "end_to_end": 0.88888896,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3148,
-            "model_ms": 2937,
-            "tokens_per_second": 295.05435,
-            "peak_rss_mb": 5691,
+            "wall_ms": 2878,
+            "model_ms": 2806,
+            "tokens_per_second": 307.41516,
+            "peak_rss_mb": 5701,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 0.88888896,
+              "high": 0.88888896
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -14322,11 +14747,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 4135,
-            "model_ms": 3894,
-            "tokens_per_second": 292.62845,
-            "peak_rss_mb": 5693,
+            "wall_ms": 3795,
+            "model_ms": 3709,
+            "tokens_per_second": 306.07745,
+            "peak_rss_mb": 5709,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -14946,11 +15388,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3913,
-            "model_ms": 3652,
-            "tokens_per_second": 300.15042,
-            "peak_rss_mb": 5699,
+            "wall_ms": 3602,
+            "model_ms": 3515,
+            "tokens_per_second": 310.74942,
+            "peak_rss_mb": 5709,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -15570,11 +16029,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 4148,
-            "model_ms": 3899,
-            "tokens_per_second": 292.34122,
-            "peak_rss_mb": 5700,
+            "wall_ms": 3922,
+            "model_ms": 3836,
+            "tokens_per_second": 295.82364,
+            "peak_rss_mb": 5710,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -16194,11 +16670,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 4137,
-            "model_ms": 3901,
-            "tokens_per_second": 293.83038,
-            "peak_rss_mb": 5712,
+            "wall_ms": 3856,
+            "model_ms": 3753,
+            "tokens_per_second": 303.83362,
+            "peak_rss_mb": 5710,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -16467,11 +16960,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 1670,
-            "model_ms": 1427,
-            "tokens_per_second": 282.6834,
-            "peak_rss_mb": 5712,
+            "wall_ms": 1481,
+            "model_ms": 1364,
+            "tokens_per_second": 291.8499,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -16740,11 +17250,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 1695,
-            "model_ms": 1619,
-            "tokens_per_second": 269.514,
-            "peak_rss_mb": 5712,
+            "wall_ms": 1547,
+            "model_ms": 1535,
+            "tokens_per_second": 280.1177,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -17013,11 +17540,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 1648,
-            "model_ms": 1600,
-            "tokens_per_second": 273.37894,
-            "peak_rss_mb": 5713,
+            "wall_ms": 1524,
+            "model_ms": 1512,
+            "tokens_per_second": 283.40042,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -17633,11 +18177,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3697,
-            "model_ms": 3623,
-            "tokens_per_second": 298.26,
-            "peak_rss_mb": 5724,
+            "wall_ms": 3542,
+            "model_ms": 3530,
+            "tokens_per_second": 305.05057,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -18284,11 +18845,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3903,
-            "model_ms": 3817,
-            "tokens_per_second": 299.7725,
-            "peak_rss_mb": 5724,
+            "wall_ms": 3691,
+            "model_ms": 3678,
+            "tokens_per_second": 309.58896,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -18904,11 +19482,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3882,
-            "model_ms": 3610,
-            "tokens_per_second": 299.34662,
-            "peak_rss_mb": 5737,
+            "wall_ms": 3587,
+            "model_ms": 3491,
+            "tokens_per_second": 308.2497,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -19524,11 +20119,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 4094,
-            "model_ms": 3857,
-            "tokens_per_second": 294.12607,
-            "peak_rss_mb": 5746,
+            "wall_ms": 3878,
+            "model_ms": 3766,
+            "tokens_per_second": 300.13165,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -20144,11 +20756,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3851,
-            "model_ms": 3589,
-            "tokens_per_second": 300.98557,
-            "peak_rss_mb": 5757,
+            "wall_ms": 3646,
+            "model_ms": 3529,
+            "tokens_per_second": 304.97833,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -20764,11 +21393,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3852,
-            "model_ms": 3612,
-            "tokens_per_second": 300.16406,
-            "peak_rss_mb": 5757,
+            "wall_ms": 3590,
+            "model_ms": 3489,
+            "tokens_per_second": 310.05148,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -21384,11 +22030,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 4098,
-            "model_ms": 3844,
-            "tokens_per_second": 293.41382,
-            "peak_rss_mb": 5757,
+            "wall_ms": 3769,
+            "model_ms": 3678,
+            "tokens_per_second": 305.5192,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -22004,11 +22667,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3868,
-            "model_ms": 3615,
-            "tokens_per_second": 300.01944,
-            "peak_rss_mb": 5772,
+            "wall_ms": 3563,
+            "model_ms": 3470,
+            "tokens_per_second": 310.64453,
+            "peak_rss_mb": 5979,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -23812,11 +24492,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 11800,
-            "model_ms": 11317,
-            "tokens_per_second": 296.1179,
-            "peak_rss_mb": 6077,
+            "wall_ms": 11138,
+            "model_ms": 10960,
+            "tokens_per_second": 305.03528,
+            "peak_rss_mb": 6086,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -25620,11 +26317,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 11873,
-            "model_ms": 11390,
-            "tokens_per_second": 295.69003,
-            "peak_rss_mb": 6114,
+            "wall_ms": 11153,
+            "model_ms": 10954,
+            "tokens_per_second": 307.07083,
+            "peak_rss_mb": 6120,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -27428,11 +28142,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 11825,
-            "model_ms": 11301,
-            "tokens_per_second": 296.52805,
-            "peak_rss_mb": 6151,
+            "wall_ms": 11099,
+            "model_ms": 10890,
+            "tokens_per_second": 307.04678,
+            "peak_rss_mb": 6155,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -29220,11 +29951,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 11530,
-            "model_ms": 10991,
-            "tokens_per_second": 297.37646,
-            "peak_rss_mb": 6186,
+            "wall_ms": 10776,
+            "model_ms": 10577,
+            "tokens_per_second": 308.39514,
+            "peak_rss_mb": 6197,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -29787,11 +30535,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3750,
-            "model_ms": 3495,
-            "tokens_per_second": 291.3621,
-            "peak_rss_mb": 6215,
+            "wall_ms": 3436,
+            "model_ms": 3339,
+            "tokens_per_second": 303.92828,
+            "peak_rss_mb": 6241,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -30354,11 +31119,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3534,
-            "model_ms": 3298,
-            "tokens_per_second": 297.71292,
-            "peak_rss_mb": 6231,
+            "wall_ms": 3254,
+            "model_ms": 3166,
+            "tokens_per_second": 308.96677,
+            "peak_rss_mb": 6241,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -30921,11 +31703,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3728,
-            "model_ms": 3482,
-            "tokens_per_second": 292.35104,
-            "peak_rss_mb": 6481,
+            "wall_ms": 3401,
+            "model_ms": 3327,
+            "tokens_per_second": 304.87442,
+            "peak_rss_mb": 6492,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -31482,11 +32281,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3726,
-            "model_ms": 3497,
-            "tokens_per_second": 291.04315,
-            "peak_rss_mb": 6757,
+            "wall_ms": 3416,
+            "model_ms": 3342,
+            "tokens_per_second": 303.51483,
+            "peak_rss_mb": 6761,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -32049,11 +32865,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3499,
-            "model_ms": 3249,
-            "tokens_per_second": 296.46814,
-            "peak_rss_mb": 7027,
+            "wall_ms": 3195,
+            "model_ms": 3118,
+            "tokens_per_second": 307.69714,
+            "peak_rss_mb": 7022,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -32616,11 +33449,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3732,
-            "model_ms": 3457,
-            "tokens_per_second": 291.881,
-            "peak_rss_mb": 7306,
+            "wall_ms": 3378,
+            "model_ms": 3299,
+            "tokens_per_second": 304.74976,
+            "peak_rss_mb": 7297,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -33183,11 +34033,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3423,
-            "model_ms": 3192,
-            "tokens_per_second": 299.3207,
-            "peak_rss_mb": 7564,
+            "wall_ms": 3139,
+            "model_ms": 3065,
+            "tokens_per_second": 310.42355,
+            "peak_rss_mb": 7566,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -33750,11 +34617,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3682,
-            "model_ms": 3433,
-            "tokens_per_second": 292.51328,
-            "peak_rss_mb": 7568,
+            "wall_ms": 3369,
+            "model_ms": 3280,
+            "tokens_per_second": 304.95786,
+            "peak_rss_mb": 7566,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -34366,11 +35250,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3862,
-            "model_ms": 3622,
-            "tokens_per_second": 301.0805,
-            "peak_rss_mb": 7579,
+            "wall_ms": 3558,
+            "model_ms": 3472,
+            "tokens_per_second": 311.0866,
+            "peak_rss_mb": 7580,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -35027,11 +35928,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.07692308,
           "perf": {
-            "wall_ms": 4464,
-            "model_ms": 4371,
-            "tokens_per_second": 293.33768,
-            "peak_rss_mb": 7579,
+            "wall_ms": 4180,
+            "model_ms": 4168,
+            "tokens_per_second": 306.36502,
+            "peak_rss_mb": 7580,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.07692308,
+              "high": 0.07692308
+            }
           }
         },
         {
@@ -35643,11 +36561,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3970,
-            "model_ms": 3709,
-            "tokens_per_second": 298.27664,
-            "peak_rss_mb": 7583,
+            "wall_ms": 3651,
+            "model_ms": 3558,
+            "tokens_per_second": 309.91016,
+            "peak_rss_mb": 7585,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -36259,11 +37194,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3910,
-            "model_ms": 3682,
-            "tokens_per_second": 299.40793,
-            "peak_rss_mb": 7583,
+            "wall_ms": 3635,
+            "model_ms": 3543,
+            "tokens_per_second": 309.9804,
+            "peak_rss_mb": 7585,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -36875,11 +37827,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3959,
-            "model_ms": 3696,
-            "tokens_per_second": 299.3992,
-            "peak_rss_mb": 7583,
+            "wall_ms": 3650,
+            "model_ms": 3559,
+            "tokens_per_second": 309.627,
+            "peak_rss_mb": 7585,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -37491,11 +38460,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3971,
-            "model_ms": 3720,
-            "tokens_per_second": 299.59766,
-            "peak_rss_mb": 7588,
+            "wall_ms": 3663,
+            "model_ms": 3567,
+            "tokens_per_second": 309.99048,
+            "peak_rss_mb": 7595,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -38107,11 +39093,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.0,
           "perf": {
-            "wall_ms": 3972,
-            "model_ms": 3715,
-            "tokens_per_second": 297.06607,
-            "peak_rss_mb": 7588,
+            "wall_ms": 3654,
+            "model_ms": 3562,
+            "tokens_per_second": 308.76578,
+            "peak_rss_mb": 7810,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.0,
+              "high": 0.0
+            }
           }
         },
         {
@@ -38605,11 +39608,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.2,
           "perf": {
-            "wall_ms": 3110,
-            "model_ms": 2857,
-            "tokens_per_second": 294.88077,
-            "peak_rss_mb": 7590,
+            "wall_ms": 2824,
+            "model_ms": 2728,
+            "tokens_per_second": 307.13428,
+            "peak_rss_mb": 7810,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.2,
+              "high": 0.2
+            }
           }
         },
         {
@@ -39103,11 +40123,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.2,
           "perf": {
-            "wall_ms": 3308,
-            "model_ms": 3091,
-            "tokens_per_second": 291.38068,
-            "peak_rss_mb": 7852,
+            "wall_ms": 3004,
+            "model_ms": 2932,
+            "tokens_per_second": 304.09033,
+            "peak_rss_mb": 7885,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.2,
+              "high": 0.2
+            }
           }
         },
         {
@@ -39601,11 +40638,28 @@
           "end_to_end": 1.0,
           "needs_review_rate": 0.2,
           "perf": {
-            "wall_ms": 3096,
-            "model_ms": 2859,
-            "tokens_per_second": 294.5525,
-            "peak_rss_mb": 8109,
+            "wall_ms": 2800,
+            "model_ms": 2730,
+            "tokens_per_second": 306.7838,
+            "peak_rss_mb": 8149,
             "retries": 0
+          },
+          "stability": {
+            "runs": 3,
+            "steps": {
+              "policy-terms": {
+                "low": 1.0,
+                "high": 1.0
+              }
+            },
+            "end_to_end": {
+              "low": 1.0,
+              "high": 1.0
+            },
+            "needs_review_rate": {
+              "low": 0.2,
+              "high": 0.2
+            }
           }
         }
       ],
@@ -40605,11 +41659,11 @@
                 "routed_to_review": 11,
                 "error_rate": {
                   "successes": 8,
-                  "n": 342,
-                  "estimate": 0.023391812865497075,
+                  "n": 331,
+                  "estimate": 0.02416918429003021,
                   "wilson_95": {
-                    "low": 0.01189963412107739,
-                    "high": 0.04547191088787765
+                    "low": 0.012296699410815681,
+                    "high": 0.04695957933846287
                   }
                 }
               },

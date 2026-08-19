@@ -1270,3 +1270,154 @@ fn the_projection_still_checks_the_evidence_it_does_carry() {
          in the projection: {refusals:?}"
     );
 }
+
+/// A `proven` claim standing on repeats that disagreed with each other
+/// is the registry asserting more than the evidence shows (#533). Both
+/// live claims were recorded at `--runs 1` — `letter-harm-ceilings`
+/// passes at Wilson upper 0.02 against a 0.02 ceiling, so one decision
+/// moving in one repeat is the difference between proven and withdrawn.
+///
+/// A downgrade rather than a refusal, on the same argument as a moved
+/// bed digest: the registry file is fine, the evidence simply stopped
+/// supporting the sentence, and a person has to re-read one against the
+/// other.
+#[test]
+fn a_baseline_whose_repeats_disagreed_cannot_keep_a_claim_proven() {
+    let root = evidence_root("moved-spread");
+    let baseline = format!(
+        r#"{{
+          "scoring_version": {},
+          "recorded_at": "2026-08-19T12:00:00Z",
+          "reports": [
+            {{
+              "pack": "app.kttl.letter-to-actions",
+              "pack_version": "0.2.0",
+              "eval_set": "development",
+              "model": {{ "file": "qwen3.5-4b-q4_k_m.gguf" }},
+              "verdict": "pass",
+              "fixtures": [
+                {{
+                  "fixture": "steady-one",
+                  "stability": {{
+                    "runs": 3,
+                    "steps": {{ "obligations": {{ "low": 0.98, "high": 0.98 }} }},
+                    "end_to_end": {{ "low": 0.97, "high": 0.97 }},
+                    "needs_review_rate": {{ "low": 0.0, "high": 0.0 }}
+                  }}
+                }},
+                {{
+                  "fixture": "wobbled-two",
+                  "stability": {{
+                    "runs": 3,
+                    "steps": {{ "obligations": {{ "low": 0.94, "high": 0.98 }} }},
+                    "end_to_end": {{ "low": 0.97, "high": 0.97 }},
+                    "needs_review_rate": {{ "low": 0.0, "high": 0.0 }}
+                  }}
+                }}
+              ]
+            }}
+          ]
+        }}"#,
+        runner::eval::SCORING_VERSION,
+    );
+    std::fs::write(root.join("evals/baseline-letter.json"), baseline).expect("write baseline");
+
+    let assessment =
+        registry_for_letter_ceilings().validate(&root, runner::eval::SCORING_VERSION, today());
+
+    assert!(
+        assessment.refusals.is_empty(),
+        "repeats that disagreed are a downgrade, not a structural refusal: {:?}",
+        assessment.refusals
+    );
+    let claim = &assessment.claims[0];
+    assert_eq!(
+        claim.effective,
+        Status::Unproven,
+        "proven must not survive a run set that disagreed with itself: {:?}",
+        claim.reasons
+    );
+    let reasons = claim.reasons.join("\n");
+    assert!(
+        reasons.contains("wobbled-two"),
+        "the fixture that moved is named, so there is something to chase: {reasons}"
+    );
+}
+
+/// The asymmetry the check encodes deliberately (#533): what is refused
+/// is *measured and moved*, never *unmeasured*. Requiring repeats
+/// everywhere would make every `--runs 1` measurement unusable as
+/// evidence, which is most of them and all of the cheap ones.
+#[test]
+fn stability_that_held_or_was_never_measured_leaves_a_claim_proven() {
+    for (name, fixtures) in [
+        (
+            "held",
+            r#"[{ "fixture": "steady-one", "stability": { "runs": 3, "steps": { "obligations": { "low": 0.98, "high": 0.98 } }, "end_to_end": { "low": 0.97, "high": 0.97 }, "needs_review_rate": { "low": 0.0, "high": 0.0 } } }]"#,
+        ),
+        ("unmeasured", r#"[{ "fixture": "steady-one" }]"#),
+        ("no-fixtures-at-all", "[]"),
+    ] {
+        let root = evidence_root(&format!("stability-{name}"));
+        let baseline = format!(
+            r#"{{
+              "scoring_version": {},
+              "recorded_at": "2026-08-19T12:00:00Z",
+              "reports": [
+                {{
+                  "pack": "app.kttl.letter-to-actions",
+                  "pack_version": "0.2.0",
+                  "eval_set": "development",
+                  "model": {{ "file": "qwen3.5-4b-q4_k_m.gguf" }},
+                  "verdict": "pass",
+                  "fixtures": {fixtures}
+                }}
+              ]
+            }}"#,
+            runner::eval::SCORING_VERSION,
+        );
+        std::fs::write(root.join("evals/baseline-letter.json"), baseline).expect("write baseline");
+
+        let assessment =
+            registry_for_letter_ceilings().validate(&root, runner::eval::SCORING_VERSION, today());
+
+        let claim = &assessment.claims[0];
+        assert_eq!(
+            claim.effective,
+            Status::Proven,
+            "{name}: nothing moved, so nothing is withdrawn: {:?}",
+            claim.reasons
+        );
+    }
+}
+
+/// The claim both stability tests stand on, so the two differ only in
+/// the baseline they are handed.
+fn registry_for_letter_ceilings() -> Registry {
+    Registry::from_json(
+        r#"{
+          "claims": [
+            {
+              "id": "letter-harm-ceilings",
+              "wording": "Kettle's letter pack meets its harm ceilings on the development bed.",
+              "status": "proven",
+              "scope": {
+                "pack": "app.kttl.letter-to-actions",
+                "pack_version": "0.2.0",
+                "model": "qwen3.5-4b-q4_k_m.gguf",
+                "eval_set": "development"
+              },
+              "evidence": [
+                { "kind": "baseline", "path": "evals/baseline-letter.json" }
+              ],
+              "expects": { "verdict": "pass" },
+              "recorded": "2026-08-19",
+              "invalidation": ["scoring version change", "bed change"],
+              "surfaces": [],
+              "review_route": "re-measure with kettle eval --write-baseline"
+            }
+          ]
+        }"#,
+    )
+    .expect("registry parses")
+}

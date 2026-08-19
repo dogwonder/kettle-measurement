@@ -1,6 +1,6 @@
 # This tree is a projection
 
-Generated from `dogwonder/kettle` at `7e20a0d` on 2026-08-19, carrying 2579 files. It is not edited here: every file is a copy, and a change made in this repository would be overwritten by the next projection rather than reaching the product.
+Generated from `dogwonder/kettle` at `84222c6` on 2026-08-19, carrying 2579 files. It is not edited here: every file is a copy, and a change made in this repository would be overwritten by the next projection rather than reaching the product.
 
 ## What it carries
 

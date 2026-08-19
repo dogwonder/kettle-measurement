@@ -16,6 +16,7 @@
 //! ban on floats in `CLAUDE.md` is about amounts, and no amount appears
 //! in this file.
 
+pub mod ablation;
 pub mod bed;
 pub mod evidence;
 pub mod fixture;

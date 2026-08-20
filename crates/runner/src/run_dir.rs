@@ -44,6 +44,23 @@ pub trait RunLog {
     );
 }
 
+/// The directory name one fixture's eval run is kept under.
+///
+/// One function because two callers need the same answer for opposite
+/// reasons: the harness writes the recording here, and #432's ablation
+/// walk has to find it again a month later. Parsing the name back is
+/// the alternative and it is guesswork the moment a file name changes
+/// (#303) — so both sides construct it from the same fields instead.
+pub fn eval_run_id(pack: &str, model_file: Option<&str>, fixture: &str) -> String {
+    format!(
+        "{pack}-{}-{}",
+        model_file
+            .map(|file| file.trim_end_matches(".gguf"))
+            .unwrap_or("no-model"),
+        fixture.replace('.', "-"),
+    )
+}
+
 /// For runs nobody is debugging — unit tests, and any caller that has
 /// nowhere to write. The eval harness deliberately does *not* use this
 /// when given a runs directory: a score with no record of what the

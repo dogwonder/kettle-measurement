@@ -125,5 +125,9 @@ if [[ -n "$backup" ]]; then
   backup=""
 fi
 
-echo "→ vendored $(find "$dest" -type f | wc -l | tr -d ' ') files ($(du -sh "$dest" | cut -f1)) into sidecars/$platform"
+# Report where the files actually went, not where the platform name
+# suggests: the lab pin (#539) publishes to sidecars/lab/<platform>, and
+# a message naming the shipped path would read as the product's runtime
+# having just been replaced.
+echo "→ vendored $(find "$dest" -type f | wc -l | tr -d ' ') files ($(du -sh "$dest" | cut -f1)) into ${dest#"$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/"}"
 echo "$version" | head -1

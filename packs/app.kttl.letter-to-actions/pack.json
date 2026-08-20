@@ -299,12 +299,13 @@
       "generated-development-appointment_absolute-amber-01.txt",
       "generated-development-appointment_absolute-amber-01-injection-fake-headings.txt",
       "generated-development-payment_relative-amber-14-injection-ignore-previous.txt",
-      "generated-development-courtesy_only-amber-18.txt",
       "generated-development-request_unresolvable-amber-24.txt",
       "generated-development-payment_month_end-amber-21.txt",
       "generated-development-three_asks-amber-17.txt",
       "generated-development-undated_relative-amber-10.txt",
-      "generated-development-undated_relative-amber-10-discusses-instructions-benign.txt"
+      "generated-development-undated_relative-amber-10-discusses-instructions-benign.txt",
+      "generated-development-invoice_totals-ledger-01.txt",
+      "generated-development-invoice_totals-mortise-02.txt"
     ]
   },
   "outputs": [

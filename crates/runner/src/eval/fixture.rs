@@ -725,19 +725,38 @@ impl FixtureEvaluator {
                         .map_err(|e| {
                             format!("{} isn't a valid relations file: {e}", path.display())
                         })?;
+                    let carries =
+                        |id: &str| results.iter().any(|fixture| fixture.fixture_id() == id);
                     let in_selection: Vec<super::relations::RelationDeclaration> = file
                         .relations
                         .into_iter()
                         .filter(|declaration| {
-                            // Development and exam remain separate
-                            // measurements: judge the relations whose
-                            // fixtures this selection carries.
-                            results
-                                .iter()
-                                .any(|fixture| fixture.fixture_id() == declaration.left)
-                                || results
-                                    .iter()
-                                    .any(|fixture| fixture.fixture_id() == declaration.right)
+                            let left = carries(&declaration.left);
+                            let right = carries(&declaration.right);
+                            // The audition is a *declared* subset (#539)
+                            // — six to ten fixtures chosen for what a
+                            // go/no-go needs — so carrying one half of a
+                            // twin pair is the set working as designed,
+                            // and a relation it cannot judge is simply
+                            // not judged. Relations never print on a
+                            // partial bed.
+                            //
+                            // Development and exam are complete beds, so
+                            // a half-present relation there reaches
+                            // across the set boundary: absent by mistake
+                            // rather than by declaration, and a bed that
+                            // cannot state its declared relationships is
+                            // a different bed. Keeping it here is what
+                            // makes `judge` refuse it, deliberately.
+                            //
+                            // Only the selection can tell those two
+                            // apart, which is why this is not simply
+                            // "both halves present".
+                            if selection == EvalSelection::Audition {
+                                left && right
+                            } else {
+                                left || right
+                            }
                         })
                         .collect();
                     super::relations::judge(&in_selection, &results)?
@@ -807,14 +826,10 @@ impl FixtureEvaluator {
     /// them is the wrong way round (see [`RunLog`]).
     fn run_dir_for(&self, pack: &Pack, fixture: &Fixture) -> Option<RunDir> {
         let root = self.runs_dir.as_ref()?;
-        let run_id = format!(
-            "{}-{}-{}",
-            pack.manifest.id,
-            self.model
-                .as_ref()
-                .map(|model| model.file.trim_end_matches(".gguf"))
-                .unwrap_or("no-model"),
-            fixture.name.replace('.', "-"),
+        let run_id = crate::run_dir::eval_run_id(
+            &pack.manifest.id,
+            self.model.as_ref().map(|model| model.file.as_str()),
+            &fixture.name,
         );
         // Deliberately `replace`: these ids are a function of what was
         // scored, so running the same eval again means this run's
@@ -1609,7 +1624,7 @@ fn scored_needs_review(decision: &ScoredDecision) -> bool {
     )
 }
 
-fn scored_assertion_is_wrong(decision: &ScoredDecision) -> bool {
+pub(super) fn scored_assertion_is_wrong(decision: &ScoredDecision) -> bool {
     match decision {
         ScoredDecision::Classification {
             expected,

@@ -1138,3 +1138,63 @@ fn each_current_pack_ships_at_least_three_relations() {
         );
     }
 }
+
+/// An audition run judges only the relations it carries both halves of
+/// (#539, #432).
+///
+/// The audition set is a *declared* subset — six to ten fixtures chosen
+/// for what a go/no-go verdict needs — so it will routinely carry one
+/// half of a twin pair and not the other. That is the set working as
+/// designed, and #539 says so in as many words: relations never print
+/// on a partial bed.
+///
+/// It must not be confused with the case
+/// `a_relation_across_the_set_boundary_is_refused` pins, where a
+/// relation reaches from development into exam. That one is a bed
+/// error and stays a refusal. The difference is whether the fixture is
+/// absent *by declaration* or absent *by mistake*, and only the
+/// selection knows which.
+///
+/// Found the hard way on 20 August: `--audition` refused on all three
+/// shipped packs, after running every fixture through the model and
+/// discarding the results at the final step.
+#[test]
+fn an_audition_carrying_one_half_of_a_twin_judges_no_relation() {
+    let dir = swap_twin_pack("audition-half");
+    // Declare an audition naming one half of the twin pair, which is
+    // what a real audition subset looks like.
+    let manifest = std::fs::read_to_string(dir.join("pack.json"))
+        .expect("manifest reads")
+        .replace(
+            r#""outputs": ["report.html"]"#,
+            r#""eval_items": { "audition": ["forward"] },
+               "outputs": ["report.html"]"#,
+        );
+    std::fs::write(dir.join("pack.json"), manifest).expect("write manifest");
+
+    let pack = load_pack(&dir).expect("the pack loads");
+    let mock = MockModel::respond_sequence(vec![(
+        "200 OK",
+        faithful_answer(OLD_SCHEDULE, NEW_SCHEDULE),
+    )]);
+    let evaluator = FixtureEvaluator {
+        answers: Answers::FromModel(mock.endpoint()),
+        model: Some(model_info("qwen2.5-7b-instruct-q4_k_m.gguf", 8192)),
+        machine: machine(),
+        sidecar: None,
+        peak_rss: None,
+        fixtures_dir: None,
+        runs_dir: None,
+        resume_dir: None,
+    };
+
+    let report = evaluator
+        .evaluate_audition(&pack)
+        .expect("an audition that carries one half of a twin still runs");
+
+    assert!(
+        report.relations.is_empty(),
+        "a partial bed judges no relation rather than refusing: {:?}",
+        report.relations
+    );
+}

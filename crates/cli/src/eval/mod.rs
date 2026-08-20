@@ -259,6 +259,18 @@ pub struct Options {
     /// own fixtures
     #[arg(long)]
     pub fixture_dir: Option<PathBuf>,
+    /// Measure on a llama-server other than the shipped pin — the lab
+    /// build (#539), vendored by `scripts/vendor-sidecar.sh --lab`.
+    ///
+    /// A lab-build number is a fact about that candidate on that
+    /// runtime and nothing more: #74 couples the shipped pin to its
+    /// scores, so this result is **not comparable** with a committed
+    /// baseline, must not fill `tiers.json`, and cannot back an
+    /// assurance claim. The report records which llama-server answered
+    /// (`SidecarInfo`), so the recording says so itself rather than
+    /// relying on whoever reads it remembering (#303).
+    #[arg(long)]
+    pub sidecar_binary: Option<PathBuf>,
     /// Run the sealed exam fixtures for a pack-version-bump measurement
     #[arg(long)]
     pub exam: bool,

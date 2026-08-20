@@ -15,9 +15,16 @@
 //! to benchmark them, and a mode that exists to be measured is a mode
 //! somebody can run.
 
-use crate::claim_trace::{CheckOutcome, ClaimKind, ClaimTrace, Guardrail};
-use crate::eval::{ExpectedObligation, Extracted};
+use crate::claim_trace::{
+    CheckOutcome, ClaimKind, ClaimTrace, ClaimTraceDocument, Guardrail, TerminalDisposition,
+};
+use crate::eval::fixture::scored_assertion_is_wrong;
+use crate::eval::{
+    ClassificationOutcome, ExpectedObligation, Extracted, ExtractionOutcome, ScoredDecision,
+    ScoredItem,
+};
 use std::collections::{BTreeMap, BTreeSet};
+use std::path::Path;
 
 /// A complete system, named by which boundaries it applies.
 ///
@@ -29,6 +36,13 @@ use std::collections::{BTreeMap, BTreeSet};
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Policy {
     pub name: String,
+    /// Whether this policy runs the model at all.
+    ///
+    /// The deterministic floor is not a pipeline with every guardrail
+    /// removed — it is a system that asks the model nothing, and the
+    /// difference is the whole comparison. Expressed the same way as
+    /// the boundaries, as something a policy *has*.
+    pub model: bool,
     pub active: BTreeSet<Guardrail>,
 }
 
@@ -36,6 +50,51 @@ impl Policy {
     pub fn named(name: &str) -> Policy {
         Policy {
             name: name.to_owned(),
+            model: true,
+            active: BTreeSet::new(),
+        }
+    }
+
+    /// The rungs to score one recording on: the floor, a model with no
+    /// boundaries, then each boundary the recording exercised, added
+    /// one at a time in the order the pipeline applies them.
+    ///
+    /// Built from what was observed rather than from a fixed list.
+    /// A fixed ladder invents rungs: a pack that never runs a check
+    /// gets a policy indistinguishable from the one below it, and two
+    /// identical rows read as evidence that the boundary between them
+    /// costs nothing — a claim nobody measured. Cumulative because the
+    /// question is which guard supplies the reliability, and that is
+    /// only readable as the difference between consecutive rows.
+    ///
+    /// `BTreeSet` iterates [`Guardrail`] in declaration order, which is
+    /// pipeline order; the enum is the single place that order lives.
+    pub fn ladder(observed: &BTreeSet<Guardrail>) -> Vec<Policy> {
+        let mut rungs = vec![Policy::floor(), Policy::named("no-boundaries")];
+        let mut rung = Policy::named("");
+        for guardrail in observed {
+            rung = rung.with(*guardrail);
+            rung.name = rung
+                .active
+                .iter()
+                .map(guardrail_label)
+                .collect::<Vec<&str>>()
+                .join("+");
+            rungs.push(rung.clone());
+        }
+        rungs
+    }
+
+    /// The deterministic no-model floor: the row every model policy is
+    /// read against.
+    ///
+    /// Its harm columns are empty by construction, which is exactly
+    /// what a perfect system's would look like. [`PolicyRow::answered`]
+    /// is what tells the two apart.
+    pub fn floor() -> Policy {
+        Policy {
+            name: "deterministic-floor".to_owned(),
+            model: false,
             active: BTreeSet::new(),
         }
     }
@@ -46,6 +105,23 @@ impl Policy {
     pub fn with(mut self, guardrail: Guardrail) -> Policy {
         self.active.insert(guardrail);
         self
+    }
+}
+
+/// A boundary's name in a policy name, in the vocabulary the trace uses
+/// rather than a display string a template could drift from.
+fn guardrail_label(guardrail: &Guardrail) -> &'static str {
+    match guardrail {
+        Guardrail::Schema => "schema",
+        Guardrail::Pairing => "pairing",
+        Guardrail::Quote => "quote",
+        Guardrail::QuoteIdentifiesPassage => "quote-identifies-passage",
+        Guardrail::ValueShape => "value-shape",
+        Guardrail::PackCoverage => "pack-coverage",
+        Guardrail::DeterministicDerivation => "deterministic-derivation",
+        Guardrail::ReviewRouting => "review-routing",
+        Guardrail::Report => "report",
+        Guardrail::Action => "action",
     }
 }
 
@@ -63,7 +139,7 @@ impl Policy {
 /// every stopped claim as an error prevented and the scorecard credits
 /// the pipeline with catching harm it introduces itself, which inverts
 /// the question the ablation exists to answer.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum CandidateVerdict {
     /// The recording shows the proposed value was already wrong.
     Wrong,
@@ -85,6 +161,25 @@ pub enum CandidateVerdict {
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct PolicyRow {
     pub policy: String,
+    /// Every claim this policy put in front of a person as an
+    /// assertion, right or wrong.
+    ///
+    /// Without it a harm-only row ranks the deterministic floor first
+    /// on every scorecard, because a system that answers nothing gets
+    /// nothing wrong. Safety and usefulness are separate columns for
+    /// that reason and are never collapsed into one score whose
+    /// weights hide the decision (#432).
+    pub answered: Vec<String>,
+    /// Claims this policy asserted **and** got right: the end-to-end
+    /// task done for the person, without them.
+    ///
+    /// `answered` alone only half-solves the floor problem, because it
+    /// counts assertions without asking whether they were any good. A
+    /// row needs both: what reached the person, and how much of it was
+    /// right. Together with the harm columns they make a Pareto
+    /// frontier readable rather than a single weighted score whose
+    /// weights hide the decision (#432).
+    pub delivered: Vec<String>,
     /// Wrong candidates this policy would have asserted.
     pub escaped: Vec<String>,
     /// Candidates one of its boundaries stopped that the recording
@@ -115,12 +210,31 @@ pub fn scorecard(
                 ..PolicyRow::default()
             };
             for trace in traces {
-                let verdict = verdicts.get(&trace.id).copied();
+                // A policy with no model asked nothing and was told
+                // nothing, so a model claim is neither asserted nor
+                // caught by it. Treating the floor as a pipeline that
+                // stopped everything would credit it with containment
+                // it never performed.
+                if !policy.model {
+                    continue;
+                }
+                // Every column shares one denominator. A claim the
+                // recording cannot judge belongs in none of them: the
+                // letter run records 4,035 claims and can judge 510,
+                // and a row counting all 4,035 as answered beside 12
+                // escaped errors invites a rate whose numerator and
+                // denominator are about different populations.
+                let Some(verdict) = verdicts.get(&trace.id).copied() else {
+                    continue;
+                };
                 let stopped = stopped_by(trace, policy);
+                if !stopped {
+                    row.answered.push(trace.id.clone());
+                }
                 match (verdict, stopped) {
-                    (Some(CandidateVerdict::Wrong), true) => row.prevented.push(trace.id.clone()),
-                    (Some(CandidateVerdict::Wrong), false) => row.escaped.push(trace.id.clone()),
-                    (Some(CandidateVerdict::Unknown), true) => row.unknown.push(trace.id.clone()),
+                    (CandidateVerdict::Wrong, true) => row.prevented.push(trace.id.clone()),
+                    (CandidateVerdict::Wrong, false) => row.escaped.push(trace.id.clone()),
+                    (CandidateVerdict::Unknown, true) => row.unknown.push(trace.id.clone()),
                     // A candidate the recording cannot judge and no
                     // boundary stopped was asserted, and asserting
                     // something unjudgeable is not the same finding as
@@ -129,12 +243,16 @@ pub fn scorecard(
                     // guessing which would be the collapse #432
                     // forbids — so it is carried nowhere until there
                     // is a column that means it.
-                    (Some(CandidateVerdict::Unknown), false) => {}
-                    // Right, and either stopped (review spent on
-                    // something that did not need it) or asserted
-                    // (the pipeline working). Neither is harm.
-                    (Some(CandidateVerdict::Correct), _) => {}
-                    (None, _) => {}
+                    (CandidateVerdict::Unknown, false) => {}
+                    // Right and asserted: the pipeline working, and
+                    // the only cell in this table that is a *good*
+                    // outcome rather than an absence of a bad one.
+                    (CandidateVerdict::Correct, false) => row.delivered.push(trace.id.clone()),
+                    // Right and stopped. Not harm, and not delivery
+                    // either — the answer was correct and the person
+                    // still had to do the work, which is review burden
+                    // and belongs in neither column here.
+                    (CandidateVerdict::Correct, true) => {}
                 }
             }
             row
@@ -145,16 +263,26 @@ pub fn scorecard(
 /// Whether a boundary this policy applies actually stopped the
 /// candidate.
 ///
-/// `Failed` only. `Warned` and `ChangedValue` are deliberately not
-/// containment: a warning let the candidate through (#460 rule 2), and
-/// a changed value is the pipeline's own act on a candidate that was
-/// never at fault (#470). Counting either as a catch would credit a
-/// policy with reliability it did not supply, which is the one thing
-/// this scorecard exists to measure.
+/// `Failed` only, among checks. `Warned` and `ChangedValue` are
+/// deliberately not containment: a warning let the candidate through
+/// (#460 rule 2), and a changed value is the pipeline's own act on a
+/// candidate that was never at fault (#470). Counting either as a catch
+/// would credit a policy with reliability it did not supply, which is
+/// the one thing this scorecard exists to measure.
+///
+/// A claim that ended in review is contained whether or not a check
+/// failed, which is the line `containment_metrics` already draws:
+/// honest low confidence reaches a person without failing anything
+/// semantic, and review routing is itself the boundary. Read through
+/// failed checks alone, the letter run would credit routing with
+/// stopping one claim when it stopped sixty-nine.
 fn stopped_by(trace: &ClaimTrace, policy: &Policy) -> bool {
-    trace.checks.iter().any(|check| {
+    let failed = trace.checks.iter().any(|check| {
         policy.active.contains(&check.guardrail) && check.outcome == CheckOutcome::Failed
-    })
+    });
+    let routed = policy.active.contains(&Guardrail::ReviewRouting)
+        && trace.terminal == TerminalDisposition::NeedsReview;
+    failed || routed
 }
 
 /// What a recording can say about the value one candidate proposed.
@@ -264,40 +392,313 @@ fn proposed_assertion(trace: &ClaimTrace) -> Option<Extracted> {
     }
 }
 
-// ## Where this was left, 19 August 2026 — resume here (#432)
+/// Both halves of one recording, joined into a verdict per claim id
+/// (#432).
+///
+/// A recording does not speak about its candidates in one voice, and
+/// the split is the reason this function exists rather than a lookup:
+///
+///   * a claim that **became an assertion** was judged when the run was
+///     scored, so the scorer's own predicate is the answer. Reusing it
+///     is the discipline, not a convenience — a plausible parallel
+///     correctness test written on 19 August called 2,629 of 3,028 real
+///     items wrong, because `outcome: absent` is the *correct* answer
+///     for a no-obligation item;
+///   * a claim a guard **stopped** was never scored at all. Its
+///     decision carries a reason and no value, so its verdict is read
+///     back off the trace's candidate by [`verdict_for`].
+///
+/// The dividing line is whether the scored decision asserts a value,
+/// not whether the run called it a failure. A rejected claim leaves an
+/// `Absent` decision that the eval rightly counts as a miss — but a
+/// miss is the pipeline's outcome, not a statement about the value the
+/// model proposed, and booking it as one would call every contained
+/// candidate wrong and credit its guard with catching it.
+///
+/// Only the claims some item judged as a **value** appear in the map. A
+/// trace nothing was scored from has no oracle at all, and inventing an
+/// entry for it would put a claim in the scorecard's columns on no
+/// evidence.
+pub fn verdicts(items: &[ScoredItem], traces: &[ClaimTrace]) -> BTreeMap<String, CandidateVerdict> {
+    let by_id: BTreeMap<&str, &ClaimTrace> = traces
+        .iter()
+        .map(|trace| (trace.id.as_str(), trace))
+        .collect();
+
+    // Collected as a set per claim, because two items may be scored
+    // from one candidate. Agreeing is the ordinary case and settles
+    // it; disagreeing means the recording holds two answers about one
+    // value, which is unjudgeable rather than a majority.
+    let mut proposed: BTreeMap<String, BTreeSet<CandidateVerdict>> = BTreeMap::new();
+    for item in items {
+        let judged: Vec<&ClaimTrace> = item
+            .trace_ids
+            .iter()
+            .filter_map(|id| by_id.get(id.as_str()).copied())
+            .filter(|trace| answers(trace.kind, &item.decision))
+            .collect();
+        // One scored decision over several candidate values judged the
+        // item, and which of them it judged is not in the recording.
+        // Attributing it to either is a guess in the direction that
+        // flatters whichever guard stopped the other one. The letter
+        // bed produces this never — see [`answers`] — but the rule has
+        // to hold for the pack that does.
+        let verdict = match judged.as_slice() {
+            [trace] => item_verdict(item, trace),
+            _ => CandidateVerdict::Unknown,
+        };
+        for trace in judged {
+            proposed
+                .entry(trace.id.clone())
+                .or_default()
+                .insert(verdict);
+        }
+    }
+
+    proposed
+        .into_iter()
+        .map(|(id, seen)| {
+            let settled = match seen.len() {
+                1 => seen.into_iter().next().unwrap_or(CandidateVerdict::Unknown),
+                _ => CandidateVerdict::Unknown,
+            };
+            (id, settled)
+        })
+        .collect()
+}
+
+/// Whether this claim is the one a scored decision judged.
+///
+/// An item links the whole chain that produced it, and most of that
+/// chain is not a candidate value. Measured on the run behind
+/// `evals/baseline-v14-letter.json`: of 3,028 items, 2,148 link a lone
+/// `decision`, 510 link a `decision` and the `obligation` nested inside
+/// it, and 370 link two `decision` traces — and **none links two
+/// value-bearing claims**. So a decision and its own obligation are a
+/// passage-level answer and the value read out of it, never two
+/// candidates in competition, and refusing to judge the pair would
+/// throw away every extraction the letter bed scores.
+///
+/// Matched by question rather than by proximity, which is #271's rule:
+/// a merchant's item links its normalisation trace as well as its
+/// classification, and the two answer different questions. A join that
+/// took whichever was nearest would calibrate the wrong one.
+fn answers(kind: ClaimKind, decision: &ScoredDecision) -> bool {
+    match decision {
+        ScoredDecision::Extraction { .. } => {
+            matches!(kind, ClaimKind::Obligation | ClaimKind::PolicyTerm)
+        }
+        ScoredDecision::Classification { .. } => matches!(kind, ClaimKind::Classification),
+    }
+}
+
+/// The verdict one scored item carries about the one candidate it was
+/// read from.
+fn item_verdict(item: &ScoredItem, trace: &ClaimTrace) -> CandidateVerdict {
+    if asserts_a_value(&item.decision) {
+        if scored_assertion_is_wrong(&item.decision) {
+            return CandidateVerdict::Wrong;
+        }
+        // `Correct` rather than "not wrong": the two are read
+        // differently by [`scorecard`], where a correct candidate a
+        // guard stopped is review spent needlessly and an unknown one
+        // is a bound the reader has to see.
+        return CandidateVerdict::Correct;
+    }
+    verdict_for(trace, expectation(&item.decision))
+}
+
+/// Whether this decision records a value the run actually asserted.
+///
+/// Review-routed and absent decisions do not: the first was surfaced to
+/// a person and the second asserts nothing, and in both the value the
+/// candidate proposed lives only in the trace.
+fn asserts_a_value(decision: &ScoredDecision) -> bool {
+    match decision {
+        ScoredDecision::Classification { actual, .. } => {
+            matches!(actual, ClassificationOutcome::Classified { .. })
+        }
+        ScoredDecision::Extraction { actual, .. } => {
+            matches!(actual, ExtractionOutcome::Found { .. })
+        }
+    }
+}
+
+/// What the bed authored for this decision, in the shape
+/// [`verdict_for`] compares against.
+///
+/// `None` for a classification: a class is not an [`Extracted`] value
+/// and the candidate-level comparison has no shape for one, so a
+/// stopped classification is honestly unjudgeable here rather than
+/// squeezed into the wrong oracle.
+fn expectation(decision: &ScoredDecision) -> Option<&Extracted> {
+    match decision {
+        ScoredDecision::Extraction { expected, .. } => expected.as_ref(),
+        ScoredDecision::Classification { .. } => None,
+    }
+}
+
+/// One fixture's recording: what its run wrote, and what the eval
+/// scored from it.
+#[derive(Debug, Clone)]
+pub struct Recording {
+    /// The fixture's file name, as the eval report records it.
+    pub fixture: String,
+    pub traces: Vec<ClaimTrace>,
+    pub items: Vec<ScoredItem>,
+}
+
+/// Several recordings, made poolable.
+#[derive(Debug, Clone, Default)]
+pub struct Pooled {
+    pub traces: Vec<ClaimTrace>,
+    pub verdicts: BTreeMap<String, CandidateVerdict>,
+}
+
+/// Pool recordings into one trace list and one verdict map (#432).
+///
+/// A claim id is a per-run counter — `claim-000042` is simply the
+/// forty-second thing that run recorded — so two fixtures collide on
+/// every id they both reach. Pooled on the bare id, one fixture's
+/// candidate would be scored against another's expectation, which is
+/// the "scored against different things" failure the claim-id column
+/// exists to make impossible. So a pooled id names its recording.
+///
+/// Qualifying here rather than in [`verdicts`] is deliberate: within
+/// one recording the bare id is the right key and is what the file on
+/// disk says. The fixture is context the pooler has and the recording
+/// does not.
+pub fn pool(recordings: &[Recording]) -> Pooled {
+    let mut pooled = Pooled::default();
+    for recording in recordings {
+        let verdicts = verdicts(&recording.items, &recording.traces);
+        for trace in &recording.traces {
+            let mut qualified = trace.clone();
+            qualified.id = pooled_id(&recording.fixture, &trace.id);
+            qualified.parent_id = trace
+                .parent_id
+                .as_ref()
+                .map(|parent| pooled_id(&recording.fixture, parent));
+            pooled.traces.push(qualified);
+        }
+        for (id, verdict) in verdicts {
+            pooled
+                .verdicts
+                .insert(pooled_id(&recording.fixture, &id), verdict);
+        }
+    }
+    pooled
+}
+
+/// A claim id that survives being pooled with another run's.
+///
+/// `#` because a fixture name carries dots and dashes already, and a
+/// separator that could occur in either half would make the id
+/// ambiguous in exactly the way the qualification is fixing.
+fn pooled_id(fixture: &str, claim: &str) -> String {
+    format!("{fixture}#{claim}")
+}
+
+/// What a walk over a runs directory found, and what it did not.
+#[derive(Debug, Clone, Default)]
+pub struct Walk {
+    pub recordings: Vec<Recording>,
+    /// Fixtures the report names whose recording is not on disk.
+    ///
+    /// Named rather than counted, and never silently skipped: a
+    /// scorecard assembled from half a run has smaller harm columns
+    /// than the run it claims to describe, which reads as a better
+    /// policy.
+    pub missing: Vec<String>,
+}
+
+/// Read one eval run's recordings off disk (#432).
+///
+/// A run directory is self-describing: `claims.json` is what the
+/// pipeline recorded, `eval-items.json` is what the harness scored from
+/// it, and the two join on trace ids inside that one directory. So the
+/// walk needs no third file and no report to pair them.
+///
+/// Which directory belongs to which fixture is **constructed** through
+/// [`crate::run_dir::eval_run_id`], the same function the harness names
+/// it with. Parsing the name back is the alternative, and re-deriving a
+/// claim's source from its own text is the defect this project has now
+/// paid for twice (#361, #457).
+pub fn walk(runs_dir: &Path, pack: &str, model_file: Option<&str>, fixtures: &[String]) -> Walk {
+    let mut walk = Walk::default();
+    for fixture in fixtures {
+        let dir = runs_dir.join(crate::run_dir::eval_run_id(pack, model_file, fixture));
+        match read_recording(&dir, fixture) {
+            Some(recording) => walk.recordings.push(recording),
+            None => walk.missing.push(fixture.clone()),
+        }
+    }
+    walk
+}
+
+/// One run directory, or nothing.
+///
+/// Both halves are required. A directory with traces and no scored
+/// items has no oracle, and one with items and no traces has no
+/// candidates — either way there is no recording here to score, and
+/// treating a half as a whole would quietly shrink a harm column.
+fn read_recording(dir: &Path, fixture: &str) -> Option<Recording> {
+    let claims = std::fs::read_to_string(dir.join("claims.json")).ok()?;
+    let document: ClaimTraceDocument = serde_json::from_str(&claims).ok()?;
+    let items = std::fs::read_to_string(dir.join("eval-items.json")).ok()?;
+    let items: Vec<ScoredItem> = serde_json::from_str(&items).ok()?;
+    Some(Recording {
+        fixture: fixture.to_owned(),
+        traces: document.claims,
+        items,
+    })
+}
+
+// ## Where this was left, 20 August 2026 — resume here (#432)
 //
-// What works: a policy ladder scores a trace, and a single candidate
-// gets a verdict. What does not exist yet is anything that reads a real
-// recording, so this module has never produced a number from the
-// archive it was built for.
+// The scorecard exists and has been read against both committed v14
+// baselines through `kettle ablate`. What it says, 20 August 2026:
 //
-// The next cycle is `verdicts(items, traces) -> BTreeMap<String,
-// CandidateVerdict>`, joining the two halves of a recording:
+//   letters   510 judgeable claims of 4,035 — 12 escaped, under every
+//             policy from a bare model to the full pipeline; 1 stopped,
+//             unjudgeable.
+//   renewal   363 of 1,132 — 8 escaped, again identical on every rung;
+//             7 stopped by pack coverage, all unjudgeable.
 //
-//   * a claim that became an assertion was already judged when the run
-//     was scored, so reuse `eval::fixture::scored_assertion_is_wrong`
-//     — the same predicate `containment_metrics` counts escaped errors
-//     with. It is private and would need `pub(super)`. Do not write a
-//     second one: a plausible correctness heuristic tried on 19 August
-//     called 2,629 of 3,028 real items wrong, because `outcome:
-//     absent` is the *correct* answer for a no-obligation item;
-//   * a claim a guard stopped was never scored at all, so its verdict
-//     comes from `verdict_for` against the trace's candidate.
+// So on this evidence **no guardrail demonstrably prevented a single
+// wrong claim on either bed**. The quote rules ran 356 times on renewal
+// and failed none. That is a one-sided bound and must be read as one:
+// `prevented` counts demonstrated catches, and a stopped claim whose
+// candidate cannot be judged is `unknown` rather than a catch. But the
+// unknown column is 1 and 7, so there is little room in it.
 //
-// Its failing test was written and is on the #432 issue thread rather
-// than here, so this file stays green.
+// Next, in order: the end-to-end task column (see below), then the
+// remaining rungs of #432's list that a recording cannot supply —
+// cascades and a second model — which need runs, not re-readings.
 //
-// Then, in order: the floor policy (an empty guardrail set — the row
-// every model policy is read against), a walk over a run directory plus
-// its baseline, and a CLI seam. Only then is there a scorecard.
-//
-// Two things known and unfinished:
+// Three things known and unfinished:
 //
 //   * `proposed_assertion` handles `ClaimKind::Obligation` and returns
 //     `None` for every other kind, so the renewal pack's `policy-term`
 //     claims would come out entirely `Unknown` — honest, and useless
 //     for renewal. It wants its own cycle once the letter path
 //     produces real rows.
+//   * 2,518 of the letter bed's 3,028 items link no value-bearing
+//     claim at all — the passages the run read and asserted nothing
+//     from. `delivered` counts the task done for the person, which is
+//     the end-to-end column at the granularity a recording supports;
+//     what is still missing is the other half, the authored
+//     expectation nothing proposed at all. A miss is a real cost no
+//     guardrail can change, so it is constant across policies and
+//     belongs beside the table rather than in it.
+//   * An item linking several value-bearing claims settles none of
+//     them, and renewal does this constantly: 220 of 356 asserted
+//     claims carry no verdict, because a passage stating several terms
+//     links them all to one scored decision. Letters never do it. The
+//     CLI prints the remainder rather than letting the columns
+//     silently fail to add up, but the renewal scorecard is 62%
+//     unjudgeable and that is the next thing to fix if renewal is to
+//     be read at all.
 //   * An integration test over real data has nowhere to read a trace
 //     from: baselines are committed, `claims.json` files are not
 //     (`evals/runs/` is gitignored and the archive is a separate

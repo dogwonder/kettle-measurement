@@ -26,6 +26,31 @@ set -euo pipefail
 # --baseline evals/baseline.json`, and say what moved.
 BUILD="b10145"
 
+# The lab pin (#539, decided 20 August 2026).
+#
+# A measurement lab that cannot load anything newer than the product's
+# build cannot find a ceiling, because the ceiling is always the newest
+# thing: b10145 refuses Muse Glimmer outright and predates Qwen3.8, so
+# four of five candidates on the 2026 list were blocked on the pin
+# rather than on their merits.
+#
+# The answer is a second pin, not a moved one. #74 couples the product's
+# pin to its scores deliberately — a llama-server upgrade moves numbers
+# on byte-identical weights — so moving it would retire every committed
+# baseline and every assurance claim resting on one, in exchange for
+# being able to audition a candidate. The lab build lives beside the
+# shipped one, at `sidecars/lab/<platform>`, and `kettle eval
+# --sidecar-binary` is how a measurement opts into it.
+#
+# What that buys and what it does not: a lab-build number is a fact
+# about that candidate on that runtime, and `SidecarInfo` records which
+# runtime, so a recording still describes itself (#303). It is not
+# comparable with a b10145 baseline, and nothing measured on it may fill
+# tiers.json or back an assurance claim. Promoting a candidate means
+# moving the *product* pin deliberately, with both packs re-recorded and
+# what moved stated — which is the same bar as before, unchanged.
+LAB_BUILD="b10516"
+
 # Vendoring runs on the machine it vendors for, so it can use that
 # platform's own tools to check its work. macOS consumes the upstream
 # release; ARM64 Linux builds the same tag on the supported ABI floor.
@@ -108,6 +133,29 @@ esac
 
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 dest="$repo/sidecars/$PLATFORM"
+
+# `--lab` vendors the lab pin alongside the shipped one instead of
+# replacing it. Deliberately a separate destination: a lab build that
+# overwrote `sidecars/<platform>` would silently re-runtime the product,
+# and the next eval would compare against a baseline recorded on another
+# llama-server without anything saying so.
+if [[ "${1:-}" == "--lab" ]]; then
+  BUILD="$LAB_BUILD"
+  dest="$repo/sidecars/lab/$PLATFORM"
+  case "$PLATFORM" in
+    "macos-arm64")
+      ARCHIVE="llama-$BUILD-bin-macos-arm64.tar.gz"
+      URL="https://github.com/ggml-org/llama.cpp/releases/download/$BUILD/$ARCHIVE"
+      SHA256="ee3324327d621026ae80c24031670e65fa62a0b23a3a027dbe2f65f240affd30"
+      ;;
+    *)
+      echo "no lab pin for $PLATFORM yet: add its archive and checksum above" >&2
+      echo "(the lab pin is vendored per platform, exactly as the shipped one is)" >&2
+      exit 1
+      ;;
+  esac
+  echo "→ lab pin $BUILD → sidecars/lab/$PLATFORM (the shipped pin stays at b10145)"
+fi
 
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT

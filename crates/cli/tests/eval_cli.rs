@@ -164,6 +164,8 @@ fn options(packs_dir: &Path, pack: &str) -> Options {
     Options {
         resume: false,
         replay: None,
+        // The shipped pin, which is what a plain `kettle eval` uses.
+        sidecar_binary: None,
         pack: Some(pack.to_owned()),
         all: false,
         packs_dir: packs_dir.to_path_buf(),

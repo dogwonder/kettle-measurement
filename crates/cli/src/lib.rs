@@ -6,6 +6,7 @@
 //! to test (CLAUDE.md — CI runs fmt, test and clippy only, and evals run
 //! locally).
 
+pub mod ablate;
 pub mod bed;
 pub mod claims;
 pub mod eval;

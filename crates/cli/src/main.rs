@@ -73,6 +73,15 @@ enum Command {
         #[arg(long)]
         check: bool,
     },
+    /// Read one archived eval run under several system policies (#432)
+    Ablate {
+        /// The committed baseline whose reports name the fixtures
+        #[arg(long)]
+        baseline: PathBuf,
+        /// The archived run directory holding one directory per fixture
+        #[arg(long)]
+        runs: PathBuf,
+    },
     /// Show what each product-level assurance claim stands on today
     Claims {
         /// The repository root, holding assurance/claims.json
@@ -217,7 +226,10 @@ fn main() {
             // Every flag, the baseline check and the table are finished;
             // the measuring itself is #25, which fills the seam.
             let evaluator = cli::eval::sidecar_evaluator::SidecarEvaluator {
-                sidecar_binary: default_sidecar_binary(),
+                sidecar_binary: options
+                    .sidecar_binary
+                    .clone()
+                    .unwrap_or_else(default_sidecar_binary),
                 // Where each of these lives, and why, is #293's rule:
                 // `cli::eval`'s three functions, so the answer sits
                 // somewhere a test can read it.
@@ -257,6 +269,13 @@ fn main() {
             print!("{}", outcome.text);
             if !outcome.ok {
                 std::process::exit(1);
+            }
+        }
+        Some(Command::Ablate { baseline, runs }) => {
+            let outcome = cli::ablate::run(&baseline, &runs, now());
+            print!("{}", outcome.text);
+            if outcome.code != cli::ablate::ExitCode::Ok {
+                std::process::exit(outcome.code as i32);
             }
         }
         Some(Command::Claims { root, json }) => {

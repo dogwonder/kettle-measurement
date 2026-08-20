@@ -53,3 +53,17 @@ objc2-foundation = { version = "0.3", features = ["NSString", "NSArray", "NSURL"
 objc2-vision = { version = "0.3", features = ["VNRequest", "VNRequestHandler", "VNObservation", "VNTypes", "VNRecognizeTextRequest"] }
 html5ever = "0.39"
 cssparser = "0.37"
+
+# Debug info is packed and thinned, deliberately (20 August 2026).
+# macOS defaults dev builds to `split-debuginfo = "unpacked"`, which
+# leaves DWARF in loose `.o` files beside each rlib and never collects
+# them: this tree had accumulated 1,067,978 of them across the two
+# workspaces, 88GiB, 88% orphaned by builds whose binaries were long
+# gone. `packed` puts the same information in one `.dSYM` per target,
+# which cargo does clean. `line-tables-only` keeps what we actually
+# read — file and line in a backtrace — and drops the variable and
+# type tables we would only use in lldb, which nothing here does.
+# Both apply to `test` too, which inherits `dev`.
+[profile.dev]
+debug = "line-tables-only"
+split-debuginfo = "packed"

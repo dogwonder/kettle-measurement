@@ -807,3 +807,92 @@ fn an_invoice_expects_the_due_date_it_prints() {
     }
     assert!(checked > 0, "the bed plants no dated invoices to check");
 }
+
+/// Every committed invoice resolves its pointer, both sets (#544).
+///
+/// The model half and the Rust half of this shape fail differently and
+/// should be asked about separately. Whether a model copies the
+/// pointing words is a bed run and costs GPU; whether `timeline` can
+/// then reach the row is arithmetic over committed files, and there is
+/// no reason to learn it from a rented box.
+///
+/// So this feeds each fixture's own authored deadline and anchor —
+/// what a model answering correctly would have said — through the real
+/// segmentation of the real letter, and asks whether the date comes
+/// back. It covers the **exam** invoices, which no model run has ever
+/// scored on this shape, and it is what would catch a pointer wording
+/// or a table layout that only one set uses.
+#[test]
+fn every_committed_invoice_resolves_its_pointer() {
+    let fixtures = pack_dir().join("fixtures");
+    let mut checked = 0usize;
+
+    for entry in std::fs::read_dir(&fixtures).expect("the letter pack's fixtures") {
+        let path = entry.expect("a fixture").path();
+        let name = path
+            .file_name()
+            .unwrap_or_default()
+            .to_string_lossy()
+            .to_string();
+        if !name.contains("invoice_totals") || !name.ends_with(".expected.json") {
+            continue;
+        }
+        let letter =
+            std::fs::read_to_string(path.with_file_name(name.replace(".expected.json", ".txt")))
+                .expect("the letter beside its expectations");
+        let expected: serde_json::Value =
+            serde_json::from_str(&std::fs::read_to_string(&path).expect("expectations"))
+                .expect("expectations parse");
+
+        let segments = runner::document::segments_from_text(&letter);
+        for item in expected["obligations"].as_array().expect("items") {
+            let Some(want) = item["expect"].as_object() else {
+                continue;
+            };
+            let segment_text = item["segment"].as_str().expect("a segment");
+            let evidence = segments
+                .iter()
+                .find(|segment| segment.text == segment_text)
+                .unwrap_or_else(|| panic!("{name}: no segment reads {segment_text:?}"))
+                .clone();
+
+            let obligation = runner::run::Obligation {
+                kind: want["kind"].as_str().expect("a kind").to_owned(),
+                party: want["party"].as_str().expect("a party").to_owned(),
+                ask: "Pay the total".to_owned(),
+                deadline: want["deadline"].as_str().expect("a deadline").to_owned(),
+                anchor: want["anchor"].as_str().expect("an anchor").to_owned(),
+                confidence: "high".to_owned(),
+                due: None,
+                evidence: vec![evidence],
+                dated_by: None,
+                disputed: vec![],
+            };
+
+            let sorted = runner::timeline::sort_timeline(vec![obligation], &segments);
+            let want_due = want["due"].as_str().expect("an expected due date");
+            assert_eq!(
+                sorted[0].due.map(|resolved| resolved.date.to_string()),
+                Some(want_due.to_owned()),
+                "{name}: {:?} does not reach {want_due}",
+                want["deadline"]
+            );
+            assert!(
+                sorted[0]
+                    .dated_by
+                    .as_ref()
+                    .is_some_and(|row| row.text.contains(&format!(
+                        "{}",
+                        chrono::NaiveDate::parse_from_str(want_due, "%Y-%m-%d")
+                            .expect("an ISO date")
+                            .format("%-d %B %Y")
+                    ))),
+                "{name}: the row carrying the date is not cited for it"
+            );
+            checked += 1;
+        }
+    }
+
+    // Both sets, every fixture, one dated obligation each.
+    assert_eq!(checked, 24, "every committed invoice is checked");
+}

@@ -141,6 +141,10 @@ pub fn run(
         };
     };
 
+    if let Err(message) = validate_destination(root, out) {
+        return broken(format!("{message}\n"));
+    }
+
     if let Err(e) = write_tree(root, out, &selected) {
         return broken(format!("{e}\n"));
     }
@@ -157,6 +161,80 @@ pub fn run(
         text: out_text,
         code: ExitCode::Ok,
     }
+}
+
+/// Refuse a destination whose cleanup could remove source material.
+///
+/// The default lives under `target/`, which is disposable build output.
+/// A destination outside the source tree is safe too. Anything else
+/// inside the source tree could be a tracked directory, while an equal
+/// or ancestor destination would remove the whole source tree.
+fn validate_destination(root: &Path, out: &Path) -> Result<(), String> {
+    let source = canonical_for_comparison(root)
+        .map_err(|e| format!("Could not resolve source {}: {e}", root.display()))?;
+    let destination = canonical_for_comparison(out)
+        .map_err(|e| format!("Could not resolve destination {}: {e}", out.display()))?;
+    let disposable = canonical_for_comparison(&source.join("target")).map_err(|e| {
+        format!(
+            "Could not resolve the disposable target directory under {}: {e}",
+            source.display()
+        )
+    })?;
+
+    if source.starts_with(&destination) {
+        return Err(format!(
+            "Refusing to project into {} because clearing it would remove the source tree {}.",
+            out.display(),
+            root.display()
+        ));
+    }
+    if destination.starts_with(&source) && !destination.starts_with(&disposable) {
+        return Err(format!(
+            "Refusing to project into {} because it is inside the source tree and outside its disposable target directory.",
+            out.display()
+        ));
+    }
+    Ok(())
+}
+
+/// Canonicalise the existing part of a path, then restore any suffix
+/// that has not been created yet. This catches symlink aliases without
+/// requiring the projection destination to exist already.
+fn canonical_for_comparison(path: &Path) -> std::io::Result<PathBuf> {
+    let absolute = if path.is_absolute() {
+        path.to_path_buf()
+    } else {
+        std::env::current_dir()?.join(path)
+    };
+    let mut existing = absolute.as_path();
+    let mut missing = Vec::new();
+    while !existing.exists() {
+        let name = existing.file_name().ok_or_else(|| {
+            std::io::Error::new(
+                std::io::ErrorKind::NotFound,
+                format!("{} has no existing ancestor", path.display()),
+            )
+        })?;
+        missing.push(name.to_os_string());
+        existing = existing.parent().ok_or_else(|| {
+            std::io::Error::new(
+                std::io::ErrorKind::NotFound,
+                format!("{} has no existing ancestor", path.display()),
+            )
+        })?;
+    }
+    let mut resolved = std::fs::canonicalize(existing)?;
+    for part in missing.into_iter().rev() {
+        if part == std::ffi::OsStr::new(".") {
+            continue;
+        }
+        if part == std::ffi::OsStr::new("..") {
+            resolved.pop();
+        } else {
+            resolved.push(part);
+        }
+    }
+    Ok(resolved)
 }
 
 /// Copy the selection into a tree that holds nothing else.
@@ -313,4 +391,50 @@ pub fn revision(root: &Path) -> Result<String, String> {
 /// Where a projection lands by default, when no destination is named.
 pub fn default_out_dir() -> PathBuf {
     PathBuf::from("target/public-tree")
+}
+
+#[cfg(test)]
+mod destination_tests {
+    use super::*;
+
+    fn scratch(name: &str) -> PathBuf {
+        let path = std::env::temp_dir().join(format!(
+            "kettle-project-destination-{}-{name}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&path);
+        std::fs::create_dir_all(&path).expect("scratch source");
+        path
+    }
+
+    #[test]
+    fn source_and_ancestor_destinations_are_refused() {
+        let source = scratch("overlap").join("source");
+        std::fs::create_dir_all(&source).expect("source");
+
+        assert!(validate_destination(&source, &source).is_err());
+        assert!(validate_destination(&source, source.parent().expect("parent")).is_err());
+    }
+
+    #[test]
+    fn only_target_is_disposable_inside_the_source() {
+        let source = scratch("inside");
+
+        assert!(validate_destination(&source, &source.join("packs/projected")).is_err());
+        assert!(validate_destination(&source, &source.join("target/public-tree")).is_ok());
+        assert!(
+            validate_destination(&source, &source.join("target/not-created/../../tracked"))
+                .is_err()
+        );
+    }
+
+    #[test]
+    fn a_separate_destination_is_allowed() {
+        let parent = scratch("separate");
+        let source = parent.join("source");
+        let destination = parent.join("public-tree");
+        std::fs::create_dir_all(&source).expect("source");
+
+        assert!(validate_destination(&source, &destination).is_ok());
+    }
 }

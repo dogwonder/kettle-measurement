@@ -18,7 +18,7 @@
     "app/src-tauri/models.json",
     "app/src-tauri/tauri.conf.json"
   ],
-  "revision": "ddb85b4",
+  "revision": "5bf6735",
   "schema": "kettle/projection@0",
   "source": "dogwonder/kettle"
 }

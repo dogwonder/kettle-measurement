@@ -271,6 +271,73 @@ Added by the third run, both in `pod-eval.sh` itself:
   script is re-run, which is the opposite of what a person reaching for
   the script at that moment wants.
 
+Added by the fifth run (21 August), and this one is about the *check*
+rather than the script around it:
+
+- **The 2GB probe cannot fail on the failure it guards.** The disk
+  section above is right that `df` lies on a network mount and that the
+  check must be a write — but `dd` does ordinary writes, and `rust-lld`
+  **mmaps** its output. On MooseFS (`mfs#…runpod.net`, which is what
+  `/workspace` is) an mmap write can return `SIGBUS` with tens of
+  gigabytes free. The probe passed, `du` showed 5.1G against a volume
+  with room, and the link died anyway:
+
+  ```
+  collect2: fatal error: ld terminated with signal 7 [Bus error], core dumped
+  error: could not compile `runner` (test "comparison")
+  ```
+
+  That is the same shape as this file's own closing lesson about checks
+  that only ever run against synthetic input: a probe that exercises a
+  different syscall from the thing it is standing in for reads as
+  coverage and is not.
+
+  **The fix is to keep the build off the network mount.** The container
+  overlay is local, and on the 21 August pod it had 30G free against
+  96M used:
+
+  ```sh
+  export CARGO_TARGET_DIR=/root/target TMPDIR=/root/tmp
+  mkdir -p "$CARGO_TARGET_DIR" "$TMPDIR"
+  ```
+
+  `pod-eval.sh` sets `TMPDIR` with `: "${TMPDIR:=/workspace/tmp}"`, so
+  an export survives it, and it sets `CARGO_PROFILE_DEV_DEBUG=0` itself,
+  which matters more once `target/` is on the smaller disk. Leave
+  `evals/runs` on `/workspace`: those are ordinary small writes, and it
+  is the artefact you actually have to get off the box.
+
+  Diagnosing it is two commands, and they separate the two causes that
+  look identical from the log — quota exhaustion and mmap refusal:
+
+  ```sh
+  dd if=/dev/zero of=$TMPDIR/.probe bs=1M count=2048 status=none && echo OK || echo FULL
+  df -h /root /
+  ```
+
+  `FULL` is the quota story this file already tells. `OK` plus a dead
+  linker is this one.
+
+- **Re-running costs the CUDA build again.** `vendor-sidecar.sh` has no
+  skip logic, so a failure *after* vendoring — which the above is, since
+  it dies in `cargo test` — pays ten minutes to rebuild a binary that is
+  already sitting correct in `sidecars/`. Check before you assume the
+  worst: `ls sidecars/linux-x86_64`. If the eval itself is all that is
+  left, the direct recipe under "Run it detached" skips the script and
+  starts immediately.
+
+- **Paste one line at a time while `apt-get` is running.** In the web
+  terminal, lines pasted during apt's output queue into *its* stdin
+  rather than bash's and vanish silently. On 21 August that swallowed
+  the whole rustup install, and the first symptom was `cargo: command
+  not found` twenty minutes later. Related: a fresh shell — including
+  every new tmux window — has none of the exports, and
+  `. "$CARGO_HOME/env"` then expands to `/env`, which is the error
+  `pod-eval.sh` already documents. The web terminal sources
+  `.runpod-web-terminal.bashrc`, not the `.bashrc` the setup appends to,
+  so setting the variables per shell is the reliable move rather than
+  the profile.
+
 ## What the first run cost, so the second does not
 
 Four defects, each waiting behind the last, every one found only by

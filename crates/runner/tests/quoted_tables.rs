@@ -56,6 +56,10 @@ fn prose() -> Segment {
 }
 
 fn html(evidence: Vec<Segment>) -> String {
+    html_dated_by(evidence, None)
+}
+
+fn html_dated_by(evidence: Vec<Segment>, dated_by: Option<Segment>) -> String {
     let outcome = ExtractionOutcome {
         date_disputes: vec![],
         obligations: vec![Obligation {
@@ -70,6 +74,7 @@ fn html(evidence: Vec<Segment>) -> String {
                 kind: runner::claim::Kind::ReadAndVerified,
             }),
             evidence,
+            dated_by,
             disputed: vec![],
         }],
     };
@@ -222,5 +227,49 @@ fn a_quoted_table_still_carries_its_page() {
     assert!(
         rendered.contains("Page 1"),
         "the quoted table says which page it came from"
+    );
+}
+
+/// #544: a date read out of a row is shown with the row.
+///
+/// The pointing passage — *"Payment of the total is due by the date
+/// shown beside it"* — contains no date, and the report asserts one. So
+/// the passage quoted beside the claim supports every part of it except
+/// the part a person is most likely to act on, which is the shape of
+/// unbacked claim #460's first rule refuses. The row the resolver read
+/// is what backs it, so the report has to show it.
+///
+/// It is shown *as a table*, for #406's reason: it is one, and a
+/// blockquote would claim the page ran those characters together.
+#[test]
+fn a_date_read_out_of_a_row_is_shown_with_the_row() {
+    let pointing = Segment {
+        document: 0,
+        page: 1,
+        ordinal: 2,
+        text: "Payment of the total is due by the date shown beside it.".to_owned(),
+        rows: Vec::new(),
+    };
+    let row = Segment {
+        document: 0,
+        page: 1,
+        ordinal: 3,
+        text: "Due date 1 September 2026".to_owned(),
+        rows: vec![
+            vec!["Due date".to_owned()],
+            vec!["1 September 2026".to_owned()],
+        ],
+    };
+
+    let rendered = html_dated_by(vec![pointing], Some(row));
+
+    assert!(
+        rendered.contains("1 September 2026"),
+        "the date's own passage reaches the page: {rendered}"
+    );
+    let rows = table_rows(&rendered);
+    assert!(
+        rows.iter().any(|row| row.contains("1 September 2026")),
+        "and reaches it as the table it was set as: {rows:#?}"
     );
 }

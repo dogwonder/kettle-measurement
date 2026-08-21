@@ -3,27 +3,27 @@
   "fixture_id": "exam-invoice_totals-soffit-board-08",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-soffit-board-08-no-ask-01",
-      "segment": "Our invoice for the parking charge is set out below. The amount shown as due should reach us by the date given against it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "4 February 2026",
-        "deadline": "4 February 2026",
+        "anchor": "the date given against it",
+        "deadline": "by the date given against it",
         "due": "2026-02-04",
         "kind": "payment",
         "party": "Harborne Parking Services"
       },
-      "id": "invoice_totals-soffit-board-08-payment-02",
-      "segment": "Due date 4 February 2026",
+      "id": "invoice_totals-soffit-board-08-payment-01",
+      "segment": "Our invoice for the parking charge is set out below. The amount shown as due should reach us by the date given against it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-soffit-board-08-no-ask-02",
+      "segment": "Due date 4 February 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

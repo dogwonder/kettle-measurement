@@ -3,27 +3,27 @@
   "fixture_id": "development-invoice_totals-oriel-04",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-oriel-04-no-ask-01",
-      "segment": "Please find our invoice for your estate matter below. Payment of the total is due by the date shown beside it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "28 May 2026",
-        "deadline": "28 May 2026",
+        "anchor": "the date shown beside it",
+        "deadline": "by the date shown beside it",
         "due": "2026-05-28",
         "kind": "payment",
         "party": "Trentham & Yale Solicitors"
       },
-      "id": "invoice_totals-oriel-04-payment-02",
-      "segment": "Due date 28 May 2026",
+      "id": "invoice_totals-oriel-04-payment-01",
+      "segment": "Please find our invoice for your estate matter below. Payment of the total is due by the date shown beside it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-oriel-04-no-ask-02",
+      "segment": "Due date 28 May 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

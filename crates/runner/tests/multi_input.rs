@@ -213,6 +213,7 @@ fn merged_evidence_stays_in_document_order() {
         confidence: "high".to_owned(),
         due: None,
         evidence,
+        dated_by: None,
         disputed: vec![],
     };
 
@@ -229,7 +230,7 @@ fn merged_evidence_stays_in_document_order() {
             )]),
             ask(vec![segment(0, 4, "Please pay £120.00 by 12 August 2026.")]),
         ],
-        &[None, None],
+        &[],
     );
 
     assert_eq!(sorted.len(), 1, "one ask, said twice: {sorted:#?}");

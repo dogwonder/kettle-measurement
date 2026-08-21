@@ -3,27 +3,27 @@
   "fixture_id": "exam-invoice_totals-upstand-kerb-10",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-upstand-kerb-10-no-ask-01",
-      "segment": "Our invoice for the annual review is set out below. The amount shown as due should reach us by the date given against it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "28 April 2026",
-        "deadline": "28 April 2026",
+        "anchor": "the date given against it",
+        "deadline": "by the date given against it",
         "due": "2026-04-28",
         "kind": "payment",
         "party": "Marlow Ridge Surgery"
       },
-      "id": "invoice_totals-upstand-kerb-10-payment-02",
-      "segment": "Due date 28 April 2026",
+      "id": "invoice_totals-upstand-kerb-10-payment-01",
+      "segment": "Our invoice for the annual review is set out below. The amount shown as due should reach us by the date given against it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-upstand-kerb-10-no-ask-02",
+      "segment": "Due date 28 April 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

@@ -3,27 +3,27 @@
   "fixture_id": "exam-invoice_totals-newel-post-03",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-newel-post-03-no-ask-01",
-      "segment": "Our invoice for the energy account is set out below. The amount shown as due should reach us by the date given against it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "14 September 2026",
-        "deadline": "14 September 2026",
+        "anchor": "the date given against it",
+        "deadline": "by the date given against it",
         "due": "2026-09-14",
         "kind": "payment",
         "party": "Cranleigh Energy"
       },
-      "id": "invoice_totals-newel-post-03-payment-02",
-      "segment": "Due date 14 September 2026",
+      "id": "invoice_totals-newel-post-03-payment-01",
+      "segment": "Our invoice for the energy account is set out below. The amount shown as due should reach us by the date given against it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-newel-post-03-no-ask-02",
+      "segment": "Due date 14 September 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

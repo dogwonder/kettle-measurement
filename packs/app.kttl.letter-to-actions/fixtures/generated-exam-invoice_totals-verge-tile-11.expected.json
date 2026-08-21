@@ -3,27 +3,27 @@
   "fixture_id": "exam-invoice_totals-verge-tile-11",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-verge-tile-11-no-ask-01",
-      "segment": "Our invoice for the estate matter is set out below. The amount shown as due should reach us by the date given against it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "10 June 2026",
-        "deadline": "10 June 2026",
+        "anchor": "the date given against it",
+        "deadline": "by the date given against it",
         "due": "2026-06-10",
         "kind": "payment",
         "party": "Trentham & Yale Solicitors"
       },
-      "id": "invoice_totals-verge-tile-11-payment-02",
-      "segment": "Due date 10 June 2026",
+      "id": "invoice_totals-verge-tile-11-payment-01",
+      "segment": "Our invoice for the estate matter is set out below. The amount shown as due should reach us by the date given against it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-verge-tile-11-no-ask-02",
+      "segment": "Due date 10 June 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

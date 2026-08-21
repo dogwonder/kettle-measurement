@@ -62,6 +62,7 @@ fn found(anchor: &str, due: Option<NaiveDate>) -> RunOutcome {
                     kind: Kind::WorkedOut,
                 }),
                 evidence: Vec::new(),
+                dated_by: None,
                 disputed: vec![],
             }],
         }),

@@ -55,6 +55,11 @@ pub fn build_letter_report_with_review(
                     rows: cells(&segment.rows),
                 })
                 .collect(),
+            dated_by: obligation.dated_by.as_ref().map(|segment| PassageOut {
+                page: segment.page,
+                text: segment.text.clone(),
+                rows: cells(&segment.rows),
+            }),
             disputed: obligation.disputed.iter().map(Into::into).collect(),
         })
         .collect();

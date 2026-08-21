@@ -2176,6 +2176,30 @@ body {
     <div class="govuk-inset-text">{{ passage.text }}<span class="govuk-hint">Page {{ passage.page }}</span></div>
     {% endif %}
     {% endfor %}
+    {# #544: where the deadline pointed at the page rather than stating a
+       date, the passage above contains no date and the claim above
+       asserts one. The row it was read out of is what backs it, so it is
+       shown — and shown as the table it was set as, for the same reason
+       the passages above are (#406). Labelled, because it is not a
+       passage anything was asked about: it is where the pointing words
+       point. #}
+    {% if item.dated_by %}
+    <p class="govuk-body">The date comes from this, on page {{ item.dated_by.page }}:</p>
+    {% if item.dated_by.rows %}
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-visually-hidden">Quoted from page {{ item.dated_by.page }}</caption>
+      <tbody class="govuk-table__body">
+        {% for row in item.dated_by.rows %}
+        <tr class="govuk-table__row">
+          {% for cell in row %}<td class="govuk-table__cell{% if cell.numeric %} govuk-table__cell--numeric{% endif %}">{{ cell.text }}</td>{% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="govuk-inset-text">{{ item.dated_by.text }}<span class="govuk-hint">Page {{ item.dated_by.page }}</span></div>
+    {% endif %}
+    {% endif %}
     {# #412 step 6: a photographed page is read twice, and where the two
        readings differ is the only signal that finds a wrong character —
        confidence cannot, having read the same reference number two ways

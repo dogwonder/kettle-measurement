@@ -3,27 +3,27 @@
   "fixture_id": "exam-invoice_totals-wainscot-rail-12",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-wainscot-rail-12-no-ask-01",
-      "segment": "Our invoice for the water account is set out below. The amount shown as due should reach us by the date given against it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "22 July 2026",
-        "deadline": "22 July 2026",
+        "anchor": "the date given against it",
+        "deadline": "by the date given against it",
         "due": "2026-07-22",
         "kind": "payment",
         "party": "Northgate Water"
       },
-      "id": "invoice_totals-wainscot-rail-12-payment-02",
-      "segment": "Due date 22 July 2026",
+      "id": "invoice_totals-wainscot-rail-12-payment-01",
+      "segment": "Our invoice for the water account is set out below. The amount shown as due should reach us by the date given against it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-wainscot-rail-12-no-ask-02",
+      "segment": "Due date 22 July 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

@@ -3,27 +3,27 @@
   "fixture_id": "development-invoice_totals-mortise-02",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-mortise-02-no-ask-01",
-      "segment": "Please find our invoice for your council tax account below. Payment of the total is due by the date shown beside it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "6 March 2026",
-        "deadline": "6 March 2026",
+        "anchor": "the date shown beside it",
+        "deadline": "by the date shown beside it",
         "due": "2026-03-06",
         "kind": "payment",
         "party": "Kelsford Borough Council"
       },
-      "id": "invoice_totals-mortise-02-payment-02",
-      "segment": "Due date 6 March 2026",
+      "id": "invoice_totals-mortise-02-payment-01",
+      "segment": "Please find our invoice for your council tax account below. Payment of the total is due by the date shown beside it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-mortise-02-no-ask-02",
+      "segment": "Due date 6 March 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

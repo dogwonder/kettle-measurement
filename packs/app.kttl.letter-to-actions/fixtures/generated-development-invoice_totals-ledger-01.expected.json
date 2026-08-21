@@ -3,27 +3,27 @@
   "fixture_id": "development-invoice_totals-ledger-01",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-ledger-01-no-ask-01",
-      "segment": "Please find our invoice for your parking charge below. Payment of the total is due by the date shown beside it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "22 January 2026",
-        "deadline": "22 January 2026",
+        "anchor": "the date shown beside it",
+        "deadline": "by the date shown beside it",
         "due": "2026-01-22",
         "kind": "payment",
         "party": "Harborne Parking Services"
       },
-      "id": "invoice_totals-ledger-01-payment-02",
-      "segment": "Due date 22 January 2026",
+      "id": "invoice_totals-ledger-01-payment-01",
+      "segment": "Please find our invoice for your parking charge below. Payment of the total is due by the date shown beside it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-ledger-01-no-ask-02",
+      "segment": "Due date 22 January 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

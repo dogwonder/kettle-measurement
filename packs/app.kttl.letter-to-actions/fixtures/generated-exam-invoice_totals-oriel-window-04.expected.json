@@ -3,27 +3,27 @@
   "fixture_id": "exam-invoice_totals-oriel-window-04",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-oriel-window-04-no-ask-01",
-      "segment": "Our invoice for the pet health plan is set out below. The amount shown as due should reach us by the date given against it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "27 October 2026",
-        "deadline": "27 October 2026",
+        "anchor": "the date given against it",
+        "deadline": "by the date given against it",
         "due": "2026-10-27",
         "kind": "payment",
         "party": "Denholm Veterinary Group"
       },
-      "id": "invoice_totals-oriel-window-04-payment-02",
-      "segment": "Due date 27 October 2026",
+      "id": "invoice_totals-oriel-window-04-payment-01",
+      "segment": "Our invoice for the pet health plan is set out below. The amount shown as due should reach us by the date given against it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-oriel-window-04-no-ask-02",
+      "segment": "Due date 27 October 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

@@ -356,6 +356,24 @@ pub struct Obligation {
     /// More than one when overlapping segments said the same thing and
     /// the duplicates merged.
     pub evidence: Vec<crate::document::Segment>,
+    /// The passage the due date was read out of, when the deadline
+    /// pointed at one instead of stating it (#544).
+    ///
+    /// Separate from `evidence`, and the separation is the point. The
+    /// passages in `evidence` are ones the model was *asked about* and
+    /// answered; this is one Rust went and read afterwards, because the
+    /// answer said where to look. Merging the two would make the run
+    /// look as though it had asserted an obligation on a due-date row —
+    /// which is exactly what the bed measures as an invention there,
+    /// and what the replay of the v14 letter run reported when this
+    /// was first written as an extra `evidence` entry.
+    ///
+    /// It is carried rather than dropped because the report asserts a
+    /// date the pointing passage does not contain, and #460's first
+    /// rule is that a quote must contain the value it evidences. The
+    /// row is that quote.
+    #[serde(default)]
+    pub dated_by: Option<crate::document::Segment>,
     /// Lines within those passages the two readings of the photograph
     /// did not agree about (#412 step 6).
     ///
@@ -1193,9 +1211,8 @@ fn run_bound(
                     current: 1,
                     total: 1,
                 });
-                let anchors = crate::timeline::document_dates(&segments);
                 obligations =
-                    crate::timeline::sort_timeline(std::mem::take(&mut obligations), &anchors);
+                    crate::timeline::sort_timeline(std::mem::take(&mut obligations), &segments);
                 // After the sort, not before: it merges duplicates
                 // (#330) and a merged obligation cites the passages of
                 // every document it was found in. Marking first would
@@ -2028,6 +2045,7 @@ fn segment_obligations(
                 // Filled by `mark_disputed` once the page's two readings
                 // have been compared — the model's answer knows nothing
                 // about how the page was read.
+                dated_by: None,
                 disputed: Vec::new(),
             }
         });

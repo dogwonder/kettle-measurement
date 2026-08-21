@@ -3,27 +3,27 @@
   "fixture_id": "exam-invoice_totals-quoin-stone-06",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-quoin-stone-06-no-ask-01",
-      "segment": "Our invoice for the check-up is set out below. The amount shown as due should reach us by the date given against it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "20 January 2026",
-        "deadline": "20 January 2026",
+        "anchor": "the date given against it",
+        "deadline": "by the date given against it",
         "due": "2027-01-20",
         "kind": "payment",
         "party": "Fenwick Dental Practice"
       },
-      "id": "invoice_totals-quoin-stone-06-payment-02",
-      "segment": "Due date 20 January 2026",
+      "id": "invoice_totals-quoin-stone-06-payment-01",
+      "segment": "Our invoice for the check-up is set out below. The amount shown as due should reach us by the date given against it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-quoin-stone-06-no-ask-02",
+      "segment": "Due date 20 January 2027",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

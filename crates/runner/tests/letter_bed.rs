@@ -642,26 +642,30 @@ fn the_invoice_shape_is_measured_but_does_not_gate() {
     assert!(invoices > 0, "the bed plants no invoices to check");
 }
 
-/// #406: the passage that points at the table is scored, and expects
-/// nothing.
+/// #406, settled by #544: both passages of an invoice are scored, and
+/// each carries the decision it can actually support.
 ///
-/// It is the passage the run asserted on — *"Payment of the total is
-/// due by the date shown beside it"*, read as a payment obligation
-/// whose deadline is that phrase — and the bed had no expectation
-/// there at all. An assertion on a passage the bed does not score is
-/// synthesised as an unauthored item, and an unauthored item is tagged
-/// into **every gated stratum of the pack** (#442), because it has no
-/// fixture strata to inherit. So leaving it unauthored would keep those
-/// twelve inventions inside `any-letter` however the shape's own items
-/// were tagged, and the ungating above would fix one side of the gate
-/// and not the other.
+/// The **pointing sentence** — *"Payment of the total is due by the
+/// date shown beside it"* — is where the ask is made, so it carries the
+/// obligation, and its deadline is the pointing words themselves. Its
+/// `due` is the table's date: `timeline` resolves the pointer against
+/// the row, so the bed can expect the date a person is actually given
+/// without expecting the model to have worked anything out.
 ///
-/// Authoring it states the bed's position — the obligation belongs on
-/// the row carrying its date, not on the sentence pointing at the row —
-/// in the one place a contestable expectation belongs: scored, visible,
-/// and outside the gate.
+/// The **due-date row** — *"Due date 6 March 2026"* — expects nothing.
+/// It names no action and no party, so a closed question about that
+/// passage alone cannot yield a payment obligation, and one read out of
+/// it was invented. That is now where the invention is measured.
+///
+/// Until #544 these were the other way round, and the v14 run was
+/// marked wrong on both, twelve times out of twelve, for giving the
+/// answer the prompt asks it for. Both passages stay scored either way,
+/// for #442's reason: an assertion on a passage the bed does not score
+/// is synthesised as an unauthored item, and an unauthored item is
+/// tagged into **every gated stratum of the pack**, having no fixture
+/// strata to inherit.
 #[test]
-fn the_passage_pointing_at_a_table_is_scored_as_expecting_nothing() {
+fn an_invoice_scores_the_ask_where_it_is_made_and_the_row_as_asking_nothing() {
     let spec = runner::eval::letters::committed_spec(&pack_dir()).expect("the committed spec");
     let letters = runner::eval::letters::generate(&spec);
 
@@ -674,35 +678,132 @@ fn the_passage_pointing_at_a_table_is_scored_as_expecting_nothing() {
     for letter in invoices {
         let expected: serde_json::Value =
             serde_json::from_str(&letter.expected).expect("expectations parse");
-        let pointing: Vec<_> = expected["obligations"]
-            .as_array()
-            .expect("items")
-            .iter()
-            .filter(|item| {
-                item["strata"]
-                    .as_array()
-                    .expect("a strata list")
-                    .iter()
-                    .any(|s| s == "points-at-a-table")
-            })
-            .collect();
+        let items = expected["obligations"].as_array().expect("items");
+        let tagged = |stratum: &str| -> Vec<&serde_json::Value> {
+            items
+                .iter()
+                .filter(|item| {
+                    item["strata"]
+                        .as_array()
+                        .expect("a strata list")
+                        .iter()
+                        .any(|s| s == stratum)
+                })
+                .collect()
+        };
+
+        let pointing = tagged("points-at-a-table");
         assert_eq!(
             pointing.len(),
             1,
             "{}: the passage pointing at the table is not scored",
             letter.stem
         );
+        let ask = &pointing[0]["expect"];
         assert!(
-            pointing[0]["expect"].is_null(),
-            "{}: the bed reads the obligation off the table row, not off the \
-             sentence pointing at it",
+            !ask.is_null(),
+            "{}: the ask is expected where the letter makes it",
             letter.stem
         );
-        let segment = pointing[0]["segment"].as_str().expect("a segment");
+        assert_eq!(
+            ask["kind"], "payment",
+            "{}: an invoice asks for payment",
+            letter.stem
+        );
+        let deadline = ask["deadline"].as_str().expect("a deadline phrase");
         assert!(
-            letter.text.contains(segment),
+            pointing[0]["segment"]
+                .as_str()
+                .expect("a segment")
+                .contains(deadline),
+            "{}: the expected deadline is the letter's own words: {deadline:?}",
+            letter.stem
+        );
+        assert!(
+            ask["due"].is_string(),
+            "{}: the pointer resolves, so a person is given the date",
+            letter.stem
+        );
+
+        let row = tagged("in-a-table");
+        assert_eq!(
+            row.len(),
+            1,
+            "{}: the due-date row is not scored",
+            letter.stem
+        );
+        assert!(
+            row[0]["expect"].is_null(),
+            "{}: a due-date row names no action and no party, so it asks nothing",
+            letter.stem
+        );
+        assert!(
+            row[0]["segment"]
+                .as_str()
+                .expect("a segment")
+                .starts_with("Due date"),
+            "{}: the scored row is the one carrying the date",
+            letter.stem
+        );
+
+        // The prose only. The row's segment is the shape's `reads_as`
+        // projection — the left column read down — which is what the
+        // letter *means* rather than the run of characters it prints,
+        // the columns being interleaved on the page.
+        assert!(
+            letter
+                .text
+                .contains(pointing[0]["segment"].as_str().expect("a segment")),
             "{}: the scored segment is not in the letter",
             letter.stem
         );
     }
+}
+
+/// An invoice must expect the date it prints (#544).
+///
+/// The due date is computed from the letter's own date and then
+/// written out for the page, and the writing-out is where these two
+/// can come apart. When they do, the bed prints one date and expects
+/// another — so a run that reads the page perfectly is scored wrong,
+/// and the fault is invisible because both halves look reasonable
+/// separately.
+///
+/// It was not hypothetical. Replaying the v14 letter run against the
+/// settled expectations left exactly two invoices failing, `verge-11`
+/// and `wainscot-12` — the two whose due date falls past the year end,
+/// printed as 2026 and expected as 2027.
+#[test]
+fn an_invoice_expects_the_due_date_it_prints() {
+    let spec = runner::eval::letters::committed_spec(&pack_dir()).expect("the committed spec");
+    let letters = runner::eval::letters::generate(&spec);
+
+    let mut checked = 0usize;
+    for letter in letters
+        .iter()
+        .filter(|letter| letter.stem.contains("invoice_totals"))
+    {
+        let expected: serde_json::Value =
+            serde_json::from_str(&letter.expected).expect("expectations parse");
+        for item in expected["obligations"].as_array().expect("items") {
+            let Some(due) = item["expect"]["due"].as_str() else {
+                continue;
+            };
+            let due = chrono::NaiveDate::parse_from_str(due, "%Y-%m-%d").expect("an ISO date");
+            let printed = format!(
+                "{} {} {}",
+                due.format("%-d"),
+                due.format("%B"),
+                due.format("%Y")
+            );
+            assert!(
+                letter.text.contains(&printed),
+                "{}: expects {printed}, which the letter never prints:\n{}",
+                letter.stem,
+                letter.text
+            );
+            checked += 1;
+        }
+    }
+    assert!(checked > 0, "the bed plants no dated invoices to check");
 }

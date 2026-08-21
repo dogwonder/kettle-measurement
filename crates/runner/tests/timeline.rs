@@ -5,7 +5,7 @@
 
 use chrono::NaiveDate;
 use runner::claim::Kind;
-use runner::document::Segment;
+use runner::document::{segments_from_text, Segment};
 use runner::run::Obligation;
 use runner::timeline::{
     confirm_letter_date, confirmed_deadline, date_dispute, letter_date, resolve_deadline,
@@ -178,6 +178,14 @@ fn segment(ordinal: usize, text: &str) -> Segment {
     }
 }
 
+/// A document that dates itself, as `sort_timeline` now reads it: the
+/// date is a passage of the letter rather than a value handed in
+/// beside it, because a pointing deadline needs the whole document and
+/// a date on its own could never have carried the table (#544).
+fn letter_dated(written: &str) -> Vec<Segment> {
+    vec![segment(0, written)]
+}
+
 fn obligation(deadline: &str, anchor: &str, evidence: Segment) -> Obligation {
     Obligation {
         kind: "payment".to_owned(),
@@ -188,6 +196,7 @@ fn obligation(deadline: &str, anchor: &str, evidence: Segment) -> Obligation {
         confidence: "high".to_owned(),
         due: None,
         evidence: vec![evidence],
+        dated_by: None,
         disputed: vec![],
     }
 }
@@ -211,7 +220,7 @@ fn duplicates_from_overlapping_segments_merge_keeping_every_piece_of_evidence() 
         ),
     );
 
-    let sorted = sort_timeline(vec![first, second], &[Some(date("2026-03-03"))]);
+    let sorted = sort_timeline(vec![first, second], &letter_dated("3 March 2026"));
 
     assert_eq!(sorted.len(), 1, "one obligation, said twice: {sorted:?}");
     assert_eq!(sorted[0].due.map(|d| d.date), Some(date("2026-03-17")));
@@ -227,7 +236,7 @@ fn a_less_confident_duplicate_makes_the_merged_obligation_less_confident() {
     let mut unsure = obligation("within 14 days", "the date of this letter", segment(2, "b"));
     unsure.confidence = "low".to_owned();
 
-    let sorted = sort_timeline(vec![confident, unsure], &[Some(date("2026-03-03"))]);
+    let sorted = sort_timeline(vec![confident, unsure], &letter_dated("3 March 2026"));
     assert_eq!(sorted.len(), 1);
     assert_eq!(sorted[0].confidence, "low");
 }
@@ -254,7 +263,7 @@ fn the_timeline_is_date_ordered_with_undated_obligations_surviving_last() {
         o
     };
 
-    let sorted = sort_timeline(vec![august, vague, march], &[Some(date("2026-03-03"))]);
+    let sorted = sort_timeline(vec![august, vague, march], &letter_dated("3 March 2026"));
 
     assert_eq!(sorted.len(), 3, "nothing is silently dropped: {sorted:?}");
     assert_eq!(
@@ -291,7 +300,7 @@ fn a_sorted_obligation_still_says_how_its_date_was_arrived_at() {
         o
     };
 
-    let sorted = sort_timeline(vec![written, counted], &[Some(date("2026-03-03"))]);
+    let sorted = sort_timeline(vec![written, counted], &letter_dated("3 March 2026"));
 
     assert_eq!(sorted[0].due.map(|d| d.kind), Some(Kind::WorkedOut));
     assert_eq!(sorted[1].due.map(|d| d.kind), Some(Kind::ReadAndVerified));
@@ -305,7 +314,7 @@ fn without_a_letter_date_relative_deadlines_stay_undated() {
         "the date of this letter",
         segment(1, "pay"),
     );
-    let sorted = sort_timeline(vec![relative], &[None]);
+    let sorted = sort_timeline(vec![relative], &[]);
     assert_eq!(sorted[0].due, None);
 }
 
@@ -564,4 +573,265 @@ fn a_date_deep_in_the_body_is_not_the_letter_date() {
     segments.push(segment(12, "Your visit of 12 January was noted."));
 
     assert_eq!(letter_date(&segments), None);
+}
+
+/// The mortise-02 letter, segmented as a run segments it.
+///
+/// Read from the committed fixture rather than retyped: what is under
+/// test is the passage a person's letter actually produces, and the
+/// alignment that makes the table a table is exactly what a retyped
+/// literal loses.
+fn mortise_02() -> Vec<Segment> {
+    let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
+        "../../packs/app.kttl.letter-to-actions/fixtures/\
+generated-development-invoice_totals-mortise-02.txt",
+    );
+    segments_from_text(&std::fs::read_to_string(path).expect("the mortise-02 letter"))
+}
+
+/// The passage that defers to the layout instead of restating it.
+fn pointing_passage(segments: &[Segment]) -> Segment {
+    segments
+        .iter()
+        .find(|segment| segment.text.starts_with("Please find our invoice"))
+        .expect("the passage that points at the table")
+        .clone()
+}
+
+/// #544: a deadline that points at a table resolves against the table.
+///
+/// The v14 letter run got this passage right and was scored wrong for
+/// it. Given `"Please find our invoice ... Payment of the total is due
+/// by the date shown beside it."`, the model recorded a payment
+/// obligation and copied the deadline exactly — which is what the
+/// prompt demands of it, since the sentence contains no date to read.
+/// The bed expected the obligation on the table row instead, and the
+/// row is `"Due date 6 March 2026"`: no ask, no party, nothing a
+/// closed question about that passage alone could turn into a payment.
+/// Asking the model for one is asking it to invent, which is the harm
+/// the pack's `no_obligation` ceiling exists to stop.
+///
+/// So the ask stays where it was made and the date stays where it was
+/// printed, and the resolver is what has to cross between them. The
+/// letter is read from the committed fixture rather than retyped: what
+/// is being tested is the passage a person's letter actually produces.
+#[test]
+fn a_pointing_deadline_resolves_against_the_table_it_points_at() {
+    let segments = mortise_02();
+    let prose = pointing_passage(&segments);
+
+    // The v14 run's own answer for that passage, copied from the
+    // archived response rather than written to suit the test.
+    let pointing = obligation(
+        "by the date shown beside it",
+        "the date shown beside it",
+        prose,
+    );
+
+    let sorted = sort_timeline(vec![pointing], &segments);
+
+    assert_eq!(
+        sorted[0].due.map(|resolved| resolved.date),
+        Some(date("2026-03-06")),
+        "the date printed beside the ask is the date a person is given: {sorted:#?}"
+    );
+}
+
+/// #460 rule one, applied to the date this resolution invents nothing
+/// to reach: the quote must contain the value it evidences.
+///
+/// The pointing passage says "by the date shown beside it" and that is
+/// the whole of what it says — a person reading the report sees 6 March
+/// 2026 asserted, and the words offered for it contain no date at all.
+/// The row the resolver read has to travel with the claim; otherwise
+/// the fix trades a missing date for an unbacked one, which is the
+/// worse of the two.
+///
+/// It travels in its own field, not in `evidence`, and that distinction
+/// was measured rather than reasoned. Written as an extra `evidence`
+/// entry it read, to everything downstream, as *the run asserted an
+/// obligation on this row* — and replaying the v14 letter run scored
+/// all twelve due-date rows as inventions on exactly that basis. The
+/// passages in `evidence` are the ones the model was asked about; this
+/// is one Rust went and read because the answer said where to look.
+#[test]
+fn the_row_a_pointing_deadline_was_read_from_travels_with_the_claim() {
+    let segments = mortise_02();
+    let prose = pointing_passage(&segments);
+    let sorted = sort_timeline(
+        vec![obligation(
+            "by the date shown beside it",
+            "the date shown beside it",
+            prose,
+        )],
+        &segments,
+    );
+
+    let dated_by = sorted[0]
+        .dated_by
+        .as_ref()
+        .expect("the row the date was read out of");
+    assert!(
+        dated_by.text.contains("6 March 2026"),
+        "the date a person is shown is quoted from the page it was read off: {dated_by:#?}"
+    );
+
+    let quoted: Vec<&str> = sorted[0]
+        .evidence
+        .iter()
+        .map(|segment| segment.text.as_str())
+        .collect();
+    assert_eq!(
+        quoted,
+        vec![
+            "Please find our invoice for your council tax account below. \
+Payment of the total is due by the date shown beside it."
+        ],
+        "the passage the model answered about is the only one it asserted on"
+    );
+}
+
+/// The refusal half. A pointing phrase is only resolvable because the
+/// page prints the date somewhere; where it does not, the honest answer
+/// is the one this pack already gives for every other phrase it cannot
+/// resolve — keep the words, stay undated, sort last (#241).
+///
+/// Without this the new rule degrades into "a letter that mentions a
+/// date beside something gets that date", which is the guessing the
+/// resolver's small closed phrase set exists to prevent.
+#[test]
+fn a_pointing_deadline_with_no_row_to_point_at_stays_undated() {
+    let segments = vec![
+        segment(0, "6 February 2026"),
+        segment(
+            1,
+            "Payment of the total is due by the date shown beside it.",
+        ),
+        segment(2, "We wrote to you about this on 3 January 2026."),
+    ];
+    let sorted = sort_timeline(
+        vec![obligation(
+            "by the date shown beside it",
+            "the date shown beside it",
+            segments[1].clone(),
+        )],
+        &segments,
+    );
+
+    assert_eq!(
+        sorted[0].due, None,
+        "no due-date row, so no date: {sorted:#?}"
+    );
+    assert_eq!(
+        sorted[0].deadline, "by the date shown beside it",
+        "the letter's own words survive to where a person will read them"
+    );
+}
+
+/// #330's rule, which this resolution has to inherit rather than
+/// rediscover: "beside it" is a place on *this* page. A run may pool a
+/// letter and its chaser, and the second document's due-date row is
+/// beside nothing in the first — a date months wrong, presented as read
+/// off the page, which is the strongest voice the report has.
+#[test]
+fn a_pointing_deadline_cannot_reach_another_documents_due_date() {
+    let mut invoice = segment(0, "Due date 6 March 2026");
+    invoice.document = 1;
+    let chaser = segment(
+        0,
+        "Payment of the total is due by the date shown beside it.",
+    );
+    let segments = vec![chaser.clone(), invoice];
+
+    let sorted = sort_timeline(
+        vec![obligation(
+            "by the date shown beside it",
+            "the date shown beside it",
+            chaser,
+        )],
+        &segments,
+    );
+
+    assert_eq!(
+        sorted[0].due, None,
+        "the other document's due date is beside nothing here: {sorted:#?}"
+    );
+}
+
+/// The commonest shape must be untouched. A deadline that states its
+/// own date resolves from the phrase, as it always has, and never
+/// consults a row — otherwise a letter carrying both would answer with
+/// whichever the code happened to try first.
+#[test]
+fn a_deadline_that_names_its_date_ignores_the_due_date_row() {
+    let segments = vec![
+        segment(0, "6 February 2026"),
+        segment(1, "Please confirm in writing by 20 February 2026."),
+        segment(2, "Due date 6 March 2026"),
+    ];
+    let sorted = sort_timeline(
+        vec![obligation(
+            "by 20 February 2026",
+            "20 February 2026",
+            segments[1].clone(),
+        )],
+        &segments,
+    );
+
+    assert_eq!(
+        sorted[0].due.map(|resolved| resolved.date),
+        Some(date("2026-02-20")),
+        "the phrase's own date is the answer: {sorted:#?}"
+    );
+}
+
+/// A letter is free to word the pointer however it likes, and the two
+/// halves of this bed already do: development invoices say "by the date
+/// shown beside it" and exam invoices say "by the date given against
+/// it". A rule that recognised the first and not the second would
+/// resolve the set it was written against and leave the sealed set
+/// undated, which is a fix that measures itself.
+///
+/// So the rule is stated over what the phrase *does* — name the date
+/// and point somewhere on the page — rather than over either set's
+/// wording.
+#[test]
+fn a_pointer_is_recognised_by_what_it_does_not_by_its_wording() {
+    let row = segment(2, "Due date 6 March 2026");
+    for words in [
+        "by the date shown beside it",
+        "by the date given against it",
+        "by the date shown opposite",
+        "by the date set out below",
+    ] {
+        let prose = segment(1, "Payment of the total is due.");
+        let segments = vec![segment(0, "6 February 2026"), prose.clone(), row.clone()];
+        let sorted = sort_timeline(vec![obligation(words, words, prose)], &segments);
+        assert_eq!(
+            sorted[0].due.map(|resolved| resolved.date),
+            Some(date("2026-03-06")),
+            "{words:?} points at the row: {sorted:#?}"
+        );
+    }
+
+    // And the counter-case, which is why this cannot simply be "any
+    // phrase naming a date": a date somewhere else is not a date on
+    // this page, and the row must not be read as though it were.
+    let prose = segment(
+        1,
+        "Payment is due by the date shown on your last statement.",
+    );
+    let segments = vec![segment(0, "6 February 2026"), prose.clone(), row];
+    let sorted = sort_timeline(
+        vec![obligation(
+            "by the date shown on your last statement",
+            "no particular date",
+            prose,
+        )],
+        &segments,
+    );
+    assert_eq!(
+        sorted[0].due, None,
+        "another document's date is not beside anything here: {sorted:#?}"
+    );
 }

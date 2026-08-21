@@ -37,6 +37,7 @@ fn obligation(ask: &str, deadline: &str, evidence: Segment) -> Obligation {
         confidence: "high".to_owned(),
         due: None,
         evidence: vec![evidence],
+        dated_by: None,
         disputed: vec![],
     }
 }

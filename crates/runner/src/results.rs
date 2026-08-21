@@ -389,6 +389,17 @@ pub struct ObligationOut {
     pub due: Option<DueOut>,
     pub confidence: Confidence,
     pub evidence: Vec<PassageOut>,
+    /// The passage the due date was read out of, where the deadline
+    /// pointed at one rather than stating it (#544).
+    ///
+    /// Shown, because the report otherwise asserts a date that appears
+    /// nowhere in the passage quoted for it — every part of the claim
+    /// backed except the part a person acts on, which is what #460's
+    /// first rule refuses. Kept out of `evidence` because it is not a
+    /// passage the model was asked about: it is one Rust went and read
+    /// because the answer said where to look.
+    #[serde(default)]
+    pub dated_by: Option<PassageOut>,
     /// Where the two readings of a photographed page did not agree
     /// about the passage this was read from (#412 step 6).
     ///

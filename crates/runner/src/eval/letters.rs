@@ -1080,13 +1080,17 @@ fn scored_tag(passage: &Passage) -> Option<&'static str> {
 /// `no-obligation` is the ordinary case: a passage that asks for
 /// nothing, where an invention is measured.
 ///
-/// `points-at-a-table` is the #406 case, and it is scored for a
-/// different reason. The passage does ask — *"Payment of the total is
-/// due by the date shown beside it"* — and the bed's position is that
-/// the obligation belongs on the row carrying the date, not on the
-/// sentence pointing at the row. That position is contestable, so it
-/// is stated where a contestable expectation belongs: scored, in this
-/// shape's own ungated slices.
+/// `in-a-table` is the #406 case, and it is here for a different
+/// reason. Its passage is a due-date row — *"Due date 6 March 2026"* —
+/// and the settled position (#544) is that it asks nothing: it names
+/// no action and no party, so a payment obligation read out of it was
+/// invented. The passage that *does* ask now carries the expectation,
+/// and this row is where the invention is measured.
+///
+/// Until #544 the two were the other way round, and `points-at-a-table`
+/// was scored negative. That expectation could not be met by a model
+/// answering the question the prompt actually asks it, which is what
+/// twelve identical v14 failures were reporting.
 ///
 /// Leaving it unscored is not neutral. An assertion on a passage the
 /// bed does not score is synthesised as an unauthored item (#442), and
@@ -1094,7 +1098,7 @@ fn scored_tag(passage: &Passage) -> Option<&'static str> {
 /// having no fixture strata to inherit — so twelve inventions counted
 /// against `any-letter` in the v14 run from a passage no gate was
 /// meant to be reading.
-const SCORED_NEGATIVE: [&str; 2] = ["no-obligation", "points-at-a-table"];
+const SCORED_NEGATIVE: [&str; 2] = ["no-obligation", "in-a-table"];
 
 fn month_name(month: usize) -> &'static str {
     [
@@ -1647,10 +1651,18 @@ fn passages(
                 letter_on,
                 if exam { 30 } else { 21 } + 7 * (index % 6) as u64,
             );
+            // The year comes from the date itself, never from the year
+            // the bed happens to be set in (#544). Six day-steps past a
+            // late letter date roll into the next year, and writing
+            // "2026" there printed one date while the expectation held
+            // another — a page a run could read perfectly and still be
+            // marked wrong on, which is the hardest kind of bed defect
+            // to see, both halves looking reasonable on their own.
             let when = format!(
-                "{} {} 2026",
+                "{} {} {}",
                 due_on.format("%-d"),
-                month_name(due_on.month() as usize)
+                month_name(due_on.month() as usize),
+                due_on.format("%Y")
             );
 
             // Money in pence, integers throughout: the bed states the
@@ -1666,23 +1678,43 @@ fn passages(
             // repeat it. If it appeared in both, a model that ignored
             // the table entirely would still score — and the shape
             // would measure nothing it exists to measure.
+            //
+            // The ask is expected *here*, where it is made, and its
+            // date is expected too (#544). The pointing words are the
+            // deadline: they are what the letter says about when, so
+            // they are what a model copying exactly must return, and
+            // `timeline` resolves them against the row below. Anchoring
+            // on the same words rather than on a date is not a detail —
+            // an anchor is compared by the date it names, and a pointer
+            // names none.
+            let pointer = if exam {
+                "by the date given against it"
+            } else {
+                "by the date shown beside it"
+            };
             out.push(Passage {
                 text: if exam {
                     format!(
                         "Our invoice for the {} is set out below. The amount shown as \
-                         due should reach us by the date given against it.",
+                         due should reach us {pointer}.",
                         sender.subject
                     )
                 } else {
                     format!(
                         "Please find our invoice for your {} below. Payment of the \
-                         total is due by the date shown beside it.",
+                         total is due {pointer}.",
                         sender.subject
                     )
                 },
                 reads_as: None,
-                expect: None,
-                strata: vec!["points-at-a-table"],
+                expect: Some(Obligation {
+                    kind: "payment",
+                    party: sender.name.clone(),
+                    deadline: pointer.to_owned(),
+                    anchor: pointer.trim_start_matches("by ").to_owned(),
+                    due: Some(due_on),
+                }),
+                strata: vec!["absolute-deadline", "points-at-a-table"],
             });
 
             // run-07's layout: when it is due on the left, what is owed
@@ -1708,14 +1740,16 @@ fn passages(
                 // The left column, read down. Authored from the shape's
                 // own composition, exactly as the dates are.
                 reads_as: Some(format!("Due date {when}")),
-                expect: Some(Obligation {
-                    kind: "payment",
-                    party: sender.name.clone(),
-                    deadline: when.clone(),
-                    anchor: when.clone(),
-                    due: Some(due_on),
-                }),
-                strata: vec!["absolute-deadline", "in-a-table"],
+                // Nothing is asked here, and that is now the scored
+                // decision (#544). "Due date 6 March 2026" names no
+                // action and no party: a closed question about this
+                // passage alone cannot yield a payment obligation, and
+                // a model that produces one has invented it. Expecting
+                // one was what the v14 run was marked down against
+                // twelve times out of twelve, on the answer the prompt
+                // asks it for.
+                expect: None,
+                strata: vec!["in-a-table"],
             });
 
             out.push(closing(if exam {

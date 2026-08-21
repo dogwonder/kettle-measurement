@@ -3,27 +3,27 @@
   "fixture_id": "exam-invoice_totals-rafter-end-07",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-rafter-end-07-no-ask-01",
-      "segment": "Our invoice for the case file is set out below. The amount shown as due should reach us by the date given against it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "3 March 2026",
-        "deadline": "3 March 2026",
+        "anchor": "the date given against it",
+        "deadline": "by the date given against it",
         "due": "2027-03-03",
         "kind": "payment",
         "party": "Grantley Legal Aid"
       },
-      "id": "invoice_totals-rafter-end-07-payment-02",
-      "segment": "Due date 3 March 2026",
+      "id": "invoice_totals-rafter-end-07-payment-01",
+      "segment": "Our invoice for the case file is set out below. The amount shown as due should reach us by the date given against it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-rafter-end-07-no-ask-02",
+      "segment": "Due date 3 March 2027",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

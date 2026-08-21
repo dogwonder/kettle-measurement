@@ -799,6 +799,7 @@ fn deadline_outcome(deadline: &str, anchor: &str, due: Option<&str>) -> RunOutco
                     kind: runner::claim::Kind::WorkedOut,
                 }),
                 evidence: Vec::new(),
+                dated_by: None,
                 disputed: vec![],
             }],
         }),
@@ -972,6 +973,7 @@ fn a_reading_that_moves_more_than_the_edit_fails_the_controlled_change() {
             confidence: "high".to_owned(),
             due: None,
             evidence: Vec::new(),
+            dated_by: None,
             disputed: vec![],
         });
     }

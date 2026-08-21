@@ -404,10 +404,8 @@ pub fn document_dates(segments: &[Segment]) -> Vec<Option<NaiveDate>> {
 /// Order is due date ascending, undated last — soonest obligations are
 /// the ones a person can still act on, and an undated one must survive
 /// to where they will see it.
-pub fn sort_timeline(
-    obligations: Vec<Obligation>,
-    document_dates: &[Option<NaiveDate>],
-) -> Vec<Obligation> {
+pub fn sort_timeline(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<Obligation> {
+    let document_dates = document_dates(segments);
     let mut merged: Vec<Obligation> = Vec::new();
     for mut obligation in obligations {
         // Each obligation counts from the date of the document it was
@@ -420,6 +418,20 @@ pub fn sort_timeline(
             .and_then(|segment| document_dates.get(segment.document).copied())
             .flatten();
         obligation.due = resolve(&obligation.deadline, &obligation.anchor, letter_date);
+        if obligation.due.is_none() {
+            // The row travels with the claim (#460 rule one): the
+            // pointing passage contains no date, so a date asserted
+            // without the row beside it is a claim whose own quote does
+            // not carry it. In `dated_by` and never in `evidence` —
+            // `evidence` is what the model was asked about and
+            // answered, and a row added there reads downstream as an
+            // obligation asserted on a due-date row, which is what the
+            // bed measures as an invention.
+            if let Some((resolved, row)) = pointed_at(&obligation, segments) {
+                obligation.due = Some(resolved);
+                obligation.dated_by = Some(row);
+            }
+        }
         match merged
             .iter_mut()
             .find(|kept| same_obligation(kept, &obligation))
@@ -451,6 +463,71 @@ pub fn sort_timeline(
         key(a).cmp(&key(b))
     });
     merged
+}
+
+/// Deadlines that name no date but say where one is printed (#544).
+///
+/// Two conditions, and the second is the one doing the work. Naming
+/// "the date" is common enough to mean little on its own; what makes a
+/// phrase a pointer is that it also names a **direction on the page**.
+/// "The date shown beside it" can only mean the layout. "The date shown
+/// on your last statement" names a source instead — another document
+/// this run may never have seen — and resolves to nothing, which is the
+/// honest answer.
+///
+/// Stated this way rather than as a phrasebook because the bed's two
+/// halves already word it differently ("shown beside it" against "given
+/// against it"), and a rule tuned to the set it was written against
+/// would leave the sealed set undated. Both lists are deliberately
+/// small; growing either is a code change with a test, exactly as
+/// [`counted_from`]'s set is.
+fn points_at_a_date(deadline: &str) -> bool {
+    const DIRECTIONS: [&str; 7] = [
+        "beside",
+        "against",
+        "opposite",
+        "alongside",
+        "below",
+        "above",
+        "next to",
+    ];
+    let lower = deadline.to_lowercase();
+    lower.contains("the date") && DIRECTIONS.iter().any(|where_| lower.contains(where_))
+}
+
+/// The date a pointing deadline points at, read off the same document.
+///
+/// The passage wanted is a due-date row and nothing else: a label the
+/// page uses for the date it wants payment by, and the date itself.
+/// That narrowness is the safety. A pointing phrase already had to be
+/// recognised before this is asked at all, so the only way to reach a
+/// wrong date is a letter that both defers to its layout and labels a
+/// second date as its due date.
+///
+/// Nothing here is arithmetic — the answer is the page's own date,
+/// which is why it comes back [`Kind::ReadAndVerified`] and not
+/// [`Kind::WorkedOut`].
+fn pointed_at(obligation: &Obligation, segments: &[Segment]) -> Option<(Resolved, Segment)> {
+    const LABELS: [&str; 3] = ["due date", "date due", "payment due"];
+    if !points_at_a_date(&obligation.deadline) {
+        return None;
+    }
+    let document = obligation.evidence.first()?.document;
+    segments
+        .iter()
+        .filter(|segment| segment.document == document)
+        .find_map(|segment| {
+            let lower = segment.text.to_lowercase();
+            let label = LABELS.iter().find(|label| lower.starts_with(**label))?;
+            let date = first_full_date(&segment.text[label.len()..])?;
+            Some((
+                Resolved {
+                    date,
+                    kind: Kind::ReadAndVerified,
+                },
+                segment.clone(),
+            ))
+        })
 }
 
 /// One ask, however many segments said it: identity is what is being

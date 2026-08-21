@@ -3,27 +3,27 @@
   "fixture_id": "exam-invoice_totals-mortise-joint-02",
   "obligations": [
     {
-      "expect": null,
-      "id": "invoice_totals-mortise-joint-02-no-ask-01",
-      "segment": "Our invoice for the policy renewal is set out below. The amount shown as due should reach us by the date given against it.",
-      "strata": [
-        "invoice-totals",
-        "points-at-a-table"
-      ]
-    },
-    {
       "expect": {
-        "anchor": "2 August 2026",
-        "deadline": "2 August 2026",
+        "anchor": "the date given against it",
+        "deadline": "by the date given against it",
         "due": "2026-08-02",
         "kind": "payment",
         "party": "Belwood Insurance"
       },
-      "id": "invoice_totals-mortise-joint-02-payment-02",
-      "segment": "Due date 2 August 2026",
+      "id": "invoice_totals-mortise-joint-02-payment-01",
+      "segment": "Our invoice for the policy renewal is set out below. The amount shown as due should reach us by the date given against it.",
       "strata": [
         "invoice-totals",
         "absolute-deadline",
+        "points-at-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-mortise-joint-02-no-ask-02",
+      "segment": "Due date 2 August 2026",
+      "strata": [
+        "invoice-totals",
         "in-a-table"
       ]
     },

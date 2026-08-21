@@ -52,6 +52,7 @@ fn outcome() -> ExtractionOutcome {
                     1,
                     "Please pay £120.00 within 14 days of the date of this letter.",
                 )],
+                dated_by: None,
                 disputed: vec![],
             },
             Obligation {
@@ -66,6 +67,7 @@ fn outcome() -> ExtractionOutcome {
                     3,
                     "Please send a reading at your earliest convenience.",
                 )],
+                dated_by: None,
                 disputed: vec![],
             },
         ],

@@ -163,6 +163,262 @@ fn the_exam_set_is_not_the_development_set_wearing_other_names() {
     );
 }
 
+/// The shapes whose two voices put a **different** party in the actor
+/// position, each with the reason it stands and the date it was
+/// measured.
+///
+/// Staged rather than fixed, and the distinction is the whole point of
+/// this list. On 21 August 2026 all seven were re-authored towards
+/// development on the reasoning that an exam voice planting a *harder*
+/// construction confounds every comparison the pack draws between the
+/// sets. The reasoning was sound and the premise was never measured. A
+/// full exam run on the corrected bed (RTX 5090, `--exam --runs 3`,
+/// scoring 14) said:
+///
+/// | | before | after |
+/// |---|---|---|
+/// | gate `any-letter` / obligation | 0.00 PASS | **0.05 FAIL** |
+/// | `payment_anchored` recall | 1.00 (36/36) | **0.67 (24/36)** |
+/// | `payment_relative` recall | 1.00 (47/47) | **0.91 (43/47)** |
+///
+/// The actorless voice was never the harder one — those shapes scored
+/// 36/36 and 47/47 *as actorless*, and `passive-voice`, the stratum
+/// built to measure actorlessness, scores 30/30 in both voices.
+///
+/// Nor were the obligations missed. **All 36 were found**, `due`
+/// identical on both sides, because `obligation_key` keys a dated
+/// obligation on the date it resolves to and not on the phrase. What
+/// demotes them is `same_assertion_as`, which compares `deadline`
+/// verbatim — so against `"You must clear £12.00 within 45 days of 23
+/// August 2026."` the answer `"within 45 days of 23 August 2026"` lands
+/// in the confident-wrong cell while the obligation it describes is
+/// recorded as found. Both strings are the words the letter uses, which
+/// is the whole of what the prompt asks for; the old wording merely
+/// elicited the bed's one 36 times running.
+///
+/// So the rewrite did not make a letter harder to read. It changed
+/// which of two faithful copies the model produced, against a scorer
+/// that answers "is the wording part of the claim" three different
+/// ways: `obligation_key` ignores `deadline` and `anchor` when the
+/// deadline resolves (#287), `same_assertion_as` takes `deadline`
+/// verbatim and reads `anchor` by the date it names (#452), and
+/// `support` takes both verbatim. That inconsistency is #457's defect
+/// and #544's on a third axis, it is recorded on #552, and it is not
+/// this list's to fix.
+///
+/// So the divergence is real, it is an inconsistency worth knowing
+/// about, and correcting it costs a gate PASS for a reason that has
+/// nothing to do with actors. It stays listed until a rewrite exists
+/// that leaves the deadline boundary alone — and that rewrite must be
+/// measured before it lands, which is the rule this list was created by
+/// breaking.
+const STAGED_VOICE_DIVERGENCES: [(&str, &str); 7] = [
+    (
+        "appointment_absolute",
+        "development \"You have an appointment…\", exam \"We have booked your … appointment…\" (2026-08-21)",
+    ),
+    (
+        "payment_anchored",
+        "development \"Please pay…\", exam \"The sum of £X falls due…\"; re-authoring cost 12 of 36 (2026-08-21)",
+    ),
+    (
+        "payment_month_end",
+        "development \"Please settle it…\", exam \"We ask that this is cleared…\" (2026-08-21)",
+    ),
+    (
+        "payment_relative",
+        "development \"Please pay…\", exam \"Payment must reach us…\"; re-authoring cost 4 of 47 (2026-08-21)",
+    ),
+    (
+        "repeated_ask",
+        "development \"Please pay…\", exam \"Payment of £X towards … is required…\" (2026-08-21)",
+    ),
+    (
+        "three_asks",
+        "development asks in the imperative throughout, exam makes one of its three actorless (2026-08-21)",
+    ),
+    (
+        "undated_relative",
+        "development \"Please return…\", exam \"The enclosed form … should be completed and returned…\" (2026-08-21)",
+    ),
+];
+
+/// Who the ask sentence puts in the position of the one who must act.
+///
+/// Binary, and deliberately so: the prompt's own rule (#458) is *"ask
+/// who is being told to act"*, which has two answers — the reader is
+/// named, or the reader is not. A finer taxonomy would be a taxonomy of
+/// this bed's prose rather than of the question the model is asked.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+enum Actor {
+    /// *"Please pay £68.50…"*, *"You must attend…"*, *"We would ask you
+    /// to send back…"* — the reader is addressed and is the one acting.
+    ReaderNamed,
+    /// *"Payment must reach us…"*, *"The enclosed form should be
+    /// completed and returned…"* — nobody is named, and the reader has
+    /// to work out that it is them.
+    ReaderUnnamed,
+}
+
+/// Every opening this bed authors, and which actor it puts in the
+/// sentence. Closed on purpose: a construction in neither list fails
+/// the test rather than defaulting, because defaulting is how a new
+/// exam sentence would enter the bed unclassified and unnoticed —
+/// which is the defect this test exists to catch.
+const CONSTRUCTIONS: [(&str, Actor); 17] = [
+    ("Please ", Actor::ReaderNamed),
+    ("You have ", Actor::ReaderNamed),
+    ("You must ", Actor::ReaderNamed),
+    ("You are ", Actor::ReaderNamed),
+    ("We would ask you to ", Actor::ReaderNamed),
+    ("We would be grateful if you could ", Actor::ReaderNamed),
+    ("A payment of ", Actor::ReaderUnnamed),
+    ("A written response about ", Actor::ReaderUnnamed),
+    ("Confirmation that ", Actor::ReaderUnnamed),
+    ("Payment of ", Actor::ReaderUnnamed),
+    ("Payment must reach us ", Actor::ReaderUnnamed),
+    ("Settlement of ", Actor::ReaderUnnamed),
+    ("The amount shown as due ", Actor::ReaderUnnamed),
+    ("The enclosed ", Actor::ReaderUnnamed),
+    ("The sum of ", Actor::ReaderUnnamed),
+    ("We ask that ", Actor::ReaderUnnamed),
+    ("We have booked your ", Actor::ReaderUnnamed),
+];
+
+/// The sentences of a passage, split on a full stop that ends one.
+///
+/// A decimal point never qualifies — `£1,205.00` is followed by a
+/// digit, not by a space — so this needs no money-aware special case.
+fn sentences(passage: &str) -> Vec<&str> {
+    let mut out = Vec::new();
+    let mut rest = passage;
+    while let Some(cut) = rest.find(". ") {
+        out.push(rest[..=cut].trim());
+        rest = &rest[cut + 2..];
+    }
+    out.push(rest.trim());
+    out.into_iter().filter(|s| !s.is_empty()).collect()
+}
+
+#[test]
+fn both_voices_of_a_shape_ask_in_the_same_construction_unless_staged() {
+    // #552. `Voice`'s own contract is that the two voices plant "the
+    // same difficulty in different words", and nothing tested it. In
+    // seven of twelve shapes development asks in the imperative and
+    // exam asks with nobody named, so the contract is not met.
+    //
+    // What this asserts is narrower than the contract, and deliberately
+    // so: the divergence set must be *exactly* what
+    // STAGED_VOICE_DIVERGENCES lists. Read that list before assuming
+    // the gap should simply be closed — closing it was tried, measured,
+    // and cost the obligation gate.
+    //
+    // The sentence that carries the ask is derived from the bed's own
+    // expectation — it is the one containing the `deadline` the
+    // expectation demands be copied — so which sentence counts is not
+    // a judgement made here.
+    let spec = runner::eval::letters::committed_spec(&pack_dir()).expect("the committed spec");
+    let letters = runner::eval::letters::generate(&spec);
+
+    let mut by_shape: BTreeMap<(String, String), std::collections::BTreeSet<Actor>> =
+        BTreeMap::new();
+
+    for letter in &letters {
+        let Some(rest) = letter.stem.strip_prefix("generated-") else {
+            continue;
+        };
+        let Some((set, rest)) = rest.split_once('-') else {
+            continue;
+        };
+        let shape = rest.split('-').next().expect("a shape segment").to_owned();
+
+        let expected: serde_json::Value =
+            serde_json::from_str(&letter.expected).expect("expectations parse");
+        for item in expected["obligations"].as_array().expect("items") {
+            let Some(deadline) = item["expect"]["deadline"].as_str() else {
+                continue;
+            };
+            let segment = item["segment"].as_str().expect("a segment");
+
+            let carrying: Vec<&str> = sentences(segment)
+                .into_iter()
+                .filter(|s| s.contains(deadline))
+                .collect();
+            assert_eq!(
+                carrying.len(),
+                1,
+                "{}: the deadline {deadline:?} must fall in exactly one sentence of \
+                 {segment:?}, or the ask cannot be located without a judgement",
+                letter.stem
+            );
+
+            let ask = carrying[0];
+            let actor = CONSTRUCTIONS
+                .iter()
+                .find(|(opening, _)| ask.starts_with(opening))
+                .map(|(_, actor)| *actor)
+                .unwrap_or_else(|| {
+                    panic!(
+                        "{}: the ask {ask:?} is a construction this test does not \
+                         classify. Add it to CONSTRUCTIONS with the actor it names — \
+                         an unclassified sentence must not default into agreement.",
+                        letter.stem
+                    )
+                });
+            by_shape
+                .entry((shape.clone(), set.to_owned()))
+                .or_default()
+                .insert(actor);
+        }
+    }
+
+    assert!(!by_shape.is_empty(), "no asks were classified at all");
+
+    let shapes: std::collections::BTreeSet<String> =
+        by_shape.keys().map(|(shape, _)| shape.clone()).collect();
+    let mut diverging = std::collections::BTreeSet::new();
+    for shape in &shapes {
+        let development = by_shape.get(&(shape.clone(), "development".to_owned()));
+        let exam = by_shape.get(&(shape.clone(), "exam".to_owned()));
+        if development != exam {
+            diverging.insert(shape.clone());
+        }
+    }
+
+    let staged: std::collections::BTreeSet<String> = STAGED_VOICE_DIVERGENCES
+        .iter()
+        .map(|(shape, _)| (*shape).to_owned())
+        .collect();
+
+    // Both directions fail, and the second is the one that keeps this
+    // list honest. A shape that stopped diverging while still listed
+    // would leave a staged exception describing nothing — the way a
+    // staged govuk component or an unused mixin rots — and the next
+    // person would read a measurement that no longer applies as though
+    // it still did.
+    let unlisted: Vec<&String> = diverging.difference(&staged).collect();
+    assert!(
+        unlisted.is_empty(),
+        "{} shape(s) put a different party in the actor position in each voice and \
+         are not staged: {unlisted:?}.\nThe exam voice is meant to plant the same \
+         difficulty in different words. Before correcting one, read \
+         STAGED_VOICE_DIVERGENCES: the same edit was made on 21 August 2026 and \
+         took the pack's obligation gate from 0.00 PASS to 0.05 FAIL, because it \
+         moved the sentence around the deadline. Measure on a full exam run before \
+         landing a fix, never after.",
+        unlisted.len()
+    );
+
+    let stale: Vec<&String> = staged.difference(&diverging).collect();
+    assert!(
+        stale.is_empty(),
+        "{} staged voice divergence(s) no longer diverge: {stale:?}. Remove them \
+         from STAGED_VOICE_DIVERGENCES — a staged exception that describes nothing \
+         is worse than none, because it reads as a known problem that is still there.",
+        stale.len()
+    );
+}
+
 #[test]
 fn a_gate_that_cannot_read_this_bed_is_refused_rather_than_applied() {
     // #301's second half. The menu alone is not enough: a pack could

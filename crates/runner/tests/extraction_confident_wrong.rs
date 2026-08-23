@@ -94,7 +94,13 @@ fn a_reworded_undated_anchor_is_not_a_wrong_obligation() {
 
 /// The other half. An anchor that names a date is doing work — it is
 /// what the arithmetic counts from — so naming the wrong one is a wrong
-/// assertion, and the field stays measured.
+/// assertion. Since scoring version 15 (#552) it is measured where the
+/// work shows: `timeline::resolve_deadline` counts from the anchor, so
+/// a wrong anchor is a wrong `due`, and `due` is what the person acts
+/// on. The v12 form of this test paired "8 June" with a due date of
+/// 15 June — a pair the resolver cannot produce — and measured the
+/// anchor's words instead, which is the disagreement with the pooled
+/// join that #552 found.
 #[test]
 fn an_anchor_naming_a_different_date_is_still_a_wrong_obligation() {
     assert_eq!(
@@ -107,11 +113,30 @@ fn an_anchor_naming_a_different_date_is_still_a_wrong_obligation() {
             obligation(
                 "within 14 days",
                 "the hearing on 8 June 2026",
-                Some("2026-06-15")
+                Some("2026-06-22")
             ),
         ),
         1,
-        "a dated anchor is what the deadline counts from"
+        "a dated anchor is what the deadline counts from, so the day moves with it"
+    );
+    // An anchor the arithmetic never used — the deadline named its own
+    // day — reaches nobody: no report renders the phrase (#452), and
+    // the pooled join never keyed on it (#287).
+    assert_eq!(
+        confidently_wrong(
+            obligation(
+                "by 15 June 2026",
+                "the hearing on 1 June 2026",
+                Some("2026-06-15")
+            ),
+            obligation(
+                "by 15 June 2026",
+                "the hearing on 8 June 2026",
+                Some("2026-06-15")
+            ),
+        ),
+        0,
+        "an absolute deadline counts from nothing, so its anchor asserts nothing"
     );
 }
 

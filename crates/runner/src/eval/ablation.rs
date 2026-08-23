@@ -331,13 +331,22 @@ pub fn verdict_for(trace: &ClaimTrace, expected: Option<&Extracted>) -> Candidat
 
 /// Whether everything the model itself supplied agrees, leaving only
 /// what a later deterministic stage would have produced.
+///
+/// Read through [`crate::timeline::deadline_signature`] rather than
+/// verbatim (#554): two signatures are equal exactly when the resolver,
+/// given one letter date, would give the two the same
+/// [`super::ObligationIdentity`]. Compared verbatim this was a fourth
+/// definition of the same obligation — "within 45 days of 23 August
+/// 2026" against the bed's split "within 45 days" + anchor was booked
+/// as a wrong candidate the guard prevented, crediting the guard for
+/// stopping a faithful reading.
 fn disagrees_only_in_derived_fields(expected: &Extracted, proposed: &Extracted) -> bool {
     match (expected, proposed) {
         (Extracted::Obligation(want), Extracted::Obligation(got)) => {
             want.kind == got.kind
-                && want.party == got.party
-                && want.deadline == got.deadline
-                && want.anchor == got.anchor
+                && want.party.eq_ignore_ascii_case(&got.party)
+                && crate::timeline::deadline_signature(&want.deadline, &want.anchor)
+                    == crate::timeline::deadline_signature(&got.deadline, &got.anchor)
         }
         _ => false,
     }

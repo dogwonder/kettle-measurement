@@ -163,7 +163,31 @@ pub const MAX_REVIEW_RATE_KEY: &str = "max_review_rate";
 /// no other passage of that document — is a warning in the claim
 /// trace, never a refusal, and moves no score by construction.
 /// Version 13 baselines are refused.
-pub const SCORING_VERSION: u32 = 14;
+/// Version 15 (#552): one definition of "the same obligation". Three
+/// parts of the scorer asked whether wording is part of the claim and
+/// gave three answers — the pooled join keyed a dated deadline on the
+/// day it resolves to and ignored the anchor (#287), the harm lens took
+/// the deadline verbatim and the anchor by its date (#452), and the
+/// evidence `support` dimension took both verbatim. So one faithful
+/// reading could be found, confident-wrong and unsupported at once:
+/// the re-authored exam bed of 21 August found all 36 `payment_anchored`
+/// obligations and demoted 12 to confident-wrong for copying the
+/// letter's date into the deadline, and on the bed that passes
+/// `support` failed 78 times per exam run and 79 per development run
+/// on `anchor` alone, right date, different words — a `month-end`
+/// stratum at 0 of 78 support reporting recall 1.00, because nothing
+/// consumed the dimension. [`ObligationIdentity`] is now the one
+/// definition and all three read it: the same ask, on the same party,
+/// by the same day *arrived at the same way* — the deadline's shape
+/// (counted, absolute, pointed, undated) travels with the day, so a
+/// date the model computed for itself, or fused from a table row it
+/// was not asked about, is still a different assertion from the one
+/// the letter wrote. Harm cells, escape counts and support outcomes
+/// move wherever a run resolved the right day in other words, so
+/// version 14 baselines are refused.
+pub const SCORING_VERSION: u32 = 15;
+
+pub use crate::timeline::DeadlineShape;
 
 /// The most two scores can differ by and still be the same score.
 ///
@@ -1115,6 +1139,114 @@ pub struct ExpectedObligation {
     pub due: Option<NaiveDate>,
 }
 
+impl ExpectedObligation {
+    /// What this obligation *is*, for every comparison the harness
+    /// makes (#554).
+    pub fn identity(&self) -> ObligationIdentity {
+        ObligationIdentity::of(
+            &self.kind,
+            &self.party,
+            &self.deadline,
+            &self.anchor,
+            self.due,
+        )
+    }
+}
+
+impl From<&crate::run::Obligation> for ExpectedObligation {
+    /// The run's obligation in the shape a bed author writes one —
+    /// the one conversion every lens reads a found obligation through,
+    /// so a field that joins identity is added here once rather than
+    /// to each copy of a struct literal.
+    fn from(found: &crate::run::Obligation) -> Self {
+        Self {
+            kind: found.kind.clone(),
+            party: found.party.clone(),
+            deadline: found.deadline.clone(),
+            anchor: found.anchor.clone(),
+            due: found.due.map(|d| d.date),
+        }
+    }
+}
+
+/// One obligation's identity — the single answer to "are these the same
+/// obligation" that the pooled join, the harm lens and the evidence
+/// `support` dimension all read (#554).
+///
+/// Before scoring version 15 each of those held its own answer: the
+/// join keyed a dated deadline on the day it resolves to and ignored
+/// the anchor (#287), the harm lens took the deadline verbatim and the
+/// anchor by its date (#452), and `support` took both verbatim. One
+/// faithful reading could be found, confident-wrong and unsupported at
+/// once.
+///
+/// The rule: the same kind of ask, on the same party (as the merchant
+/// joins read names, case apart), **by the same day arrived at the same
+/// way** — and where no day resolved, in the letter's own words, because
+/// the words are what a person is shown. A dated deadline's wording and
+/// its anchor are the working, not the claim: "within 45 days" counted
+/// from the anchor "23 August 2026" and "within 45 days of 23 August
+/// 2026" with no anchor are two faithful copies of one letter that
+/// resolve to one day by one route. The route — [`DeadlineShape`] — is
+/// kept because "by 7 October 2026" for that same letter is the model
+/// having done the arithmetic, which the prompt forbids and the report
+/// would otherwise present as read from the page; and a fused "by 6
+/// March 2026" on a passage whose deadline points at a table row (#544)
+/// is likewise not the pointing reading. A wrong anchor date on a
+/// counted deadline resolves to the wrong day and is caught there; on
+/// an undated one it is compared by the date it names, as #452 had it.
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct ObligationIdentity {
+    kind: String,
+    party: String,
+    when: When,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+enum When {
+    Day {
+        date: NaiveDate,
+        shape: DeadlineShape,
+    },
+    Words {
+        words: String,
+        anchor_date: Option<NaiveDate>,
+    },
+}
+
+impl ObligationIdentity {
+    pub fn of(
+        kind: &str,
+        party: &str,
+        deadline: &str,
+        anchor: &str,
+        due: Option<NaiveDate>,
+    ) -> Self {
+        let when = match due {
+            Some(date) => When::Day {
+                date,
+                shape: crate::timeline::deadline_shape(deadline),
+            },
+            None => When::Words {
+                words: deadline.to_lowercase(),
+                anchor_date: crate::timeline::first_full_date(anchor),
+            },
+        };
+        Self {
+            kind: kind.to_owned(),
+            party: party.to_ascii_lowercase(),
+            when,
+        }
+    }
+
+    /// The identity as one string, for joins that key on text. Derived
+    /// `Debug` quotes and escapes every field, so model-supplied text
+    /// cannot collide two obligations the way a bare delimiter could.
+    pub fn key(&self) -> String {
+        format!("{self:?}")
+    }
+}
+
 /// A named value a document states (#66, #350): what it is, what it is
 /// measured against, what it says, and the passage it was read from.
 ///
@@ -1186,32 +1318,26 @@ impl Extracted {
     /// `obligations (pooled) 1.00 (n=462)` beside a confident-wrong
     /// rate of 0.24, on a run whose every `due` date was right.
     ///
-    /// - an **anchor** is compared by the date it names, because naming
-    ///   a date is the whole of its job: [`crate::timeline`] counts a
-    ///   relative deadline from a dated anchor and otherwise from the
-    ///   document's own date, and no report renders the phrase. "The
-    ///   date of this letter" and "14 days" are therefore the same
-    ///   anchor — both undated, both counting from the same day — while
-    ///   an anchor naming the wrong date is still a wrong assertion.
+    /// - an **obligation** is the same assertion when it has the same
+    ///   [`ObligationIdentity`] — the one the pooled join finds by
+    ///   (#287, #554): the same kind of ask, on the same party, by the
+    ///   same day arrived at the same way; and where no day resolved,
+    ///   in the letter's own words. Version 12 kept the deadline
+    ///   verbatim here while the join ignored it, so an obligation could
+    ///   be *found* and *confident-wrong* at once — which the re-authored
+    ///   exam bed of 21 August reported twelve times, every `due`
+    ///   identical.
     /// - a **quote** is compared by containment, exactly as the terms
     ///   lens already joins one to its passage. The run has verified it
     ///   appears verbatim in the source (#258), so a trailing full stop
     ///   or a dropped label prefix is the same evidence said shorter,
     ///   not a different claim.
     ///
-    /// Every field the pooled scores join on — kind, party, deadline,
-    /// due; term, basis, value — stays exact, and two payload shapes
-    /// are never the same assertion.
+    /// Every field the pooled scores join on — term, basis, value —
+    /// stays exact, and two payload shapes are never the same assertion.
     pub fn same_assertion_as(&self, other: &Extracted) -> bool {
         match (self, other) {
-            (Self::Obligation(want), Self::Obligation(got)) => {
-                want.kind == got.kind
-                    && want.party == got.party
-                    && want.deadline == got.deadline
-                    && want.due == got.due
-                    && crate::timeline::first_full_date(&want.anchor)
-                        == crate::timeline::first_full_date(&got.anchor)
-            }
+            (Self::Obligation(want), Self::Obligation(got)) => want.identity() == got.identity(),
             (Self::Term(want), Self::Term(got)) => {
                 want.term == got.term
                     && want.basis == got.basis

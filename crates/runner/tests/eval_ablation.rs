@@ -63,6 +63,56 @@ fn obligation(party: &str) -> runner::eval::Extracted {
     })
 }
 
+/// A candidate the guards stopped, exactly as the model proposed it:
+/// no `due`, because the resolver never ran on it.
+fn stopped_candidate(deadline: &str, anchor: &str) -> ClaimTrace {
+    let mut trace = wrong_claim_stopped_by_quote();
+    trace.candidate = serde_json::json!({
+        "kind": "payment", "party": "Elmswood Lettings", "ask": "Clear the balance",
+        "deadline": deadline, "anchor": anchor
+    });
+    trace
+}
+
+/// #554: a stopped candidate carries no resolved day, so the scorecard
+/// compares what the model said. Verbatim, that was a fourth definition
+/// of the same obligation — the pair `same_assertion_as` now calls one
+/// reading was booked as a wrong candidate the guard prevented. Read
+/// through the deadline's signature, a faithful copy is unjudgeable
+/// (no day to settle it) and a different interval is wrong.
+#[test]
+fn a_stopped_candidate_worded_like_the_letter_is_not_booked_as_prevented() {
+    use runner::eval::ablation::{verdict_for, CandidateVerdict};
+    let expected = runner::eval::Extracted::Obligation(runner::eval::ExpectedObligation {
+        kind: "payment".to_owned(),
+        party: "Elmswood Lettings".to_owned(),
+        deadline: "within 45 days".to_owned(),
+        anchor: "23 August 2026".to_owned(),
+        due: Some(chrono::NaiveDate::from_ymd_opt(2026, 10, 7).expect("a date")),
+    });
+    assert_eq!(
+        verdict_for(
+            &stopped_candidate("within 45 days of 23 August 2026", ""),
+            Some(&expected)
+        ),
+        CandidateVerdict::Unknown,
+        "the anchor left in the phrase is the same base by another route"
+    );
+    assert_eq!(
+        verdict_for(
+            &stopped_candidate("within 46 days", "23 August 2026"),
+            Some(&expected)
+        ),
+        CandidateVerdict::Wrong,
+        "a different count is a different day, whatever the letter date"
+    );
+    assert_eq!(
+        verdict_for(&stopped_candidate("by 7 October 2026", ""), Some(&expected)),
+        CandidateVerdict::Wrong,
+        "a computed date is not the counted deadline the letter wrote"
+    );
+}
+
 /// One scored decision, linked to the claim it was read from.
 fn scored_item(
     trace_id: &str,

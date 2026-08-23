@@ -70,10 +70,11 @@ fn same_tier(declared: &str, measured_params: &str) -> bool {
 const STAGED_STALE_FLOORS: &[(&str, &str, &str)] = &[
     (
         "app.kttl.renewal-diff",
-        "same as the letter pack: min_tier 7b, no tiers.json, and its current \
-         measurement (evals/baseline-v14-renewal.json) is a PASS on Qwen3.5-4B. Both \
-         floors were declared before either pack had been measured on anything, and \
-         the guard could not see them.",
+        "min_tier 7b and no tiers.json; its last measurement \
+         (evals/baseline-v14-renewal.json) was a PASS on Qwen3.5-4B at scoring v14, \
+         refused since v15 (#554) until the pod re-records it. Both floors were \
+         declared before either pack had been measured on anything, and the guard \
+         could not see them.",
         "2026-08-18",
     ),
     (
@@ -81,7 +82,9 @@ const STAGED_STALE_FLOORS: &[(&str, &str, &str)] = &[
         "the Stage 3 bed (#252) re-scored classification under scoring v4 and no 7B build \
      passes it; #253 changes what classify is asked before any re-measurement can be \
      meaningful. The only 7B pass on record is scoring v2 against pack v1.0.0 — kept \
-     as history, no longer a floor.",
+     as history, no longer a floor. Re-measured at v15 on 23 August (#554): still a FAIL on \
+     Qwen3.5-4B (normalise 0.69), so the floor is stale for want of a pass, not \
+     for want of a current measurement.",
         "2026-07-29",
     ),
 ];

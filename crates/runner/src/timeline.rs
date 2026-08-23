@@ -119,7 +119,8 @@ fn resolve_kinded(
 /// this phrase relative* decides whether a date inside it is the answer
 /// or the starting point, and it has to be settled before that date is
 /// looked at.
-enum Counted {
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub(crate) enum Counted {
     Days(u64),
     MonthEnd,
 }
@@ -131,6 +132,90 @@ fn counted_from(lowered: &str) -> Option<Counted> {
     lowered
         .contains("end of the month")
         .then_some(Counted::MonthEnd)
+}
+
+/// What a deadline phrase does, read from its words alone (#554).
+///
+/// The resolver above asks these questions in this order — does it
+/// count, does it name a day, does it point at one — and the shape is
+/// that order's answer, so an identity built on it agrees with how the
+/// day was arrived at. It is part of an obligation's identity because
+/// two phrases can resolve to one day by different routes, and the
+/// route is a claim: "within 45 days of 23 August 2026" was read and
+/// counted, "by 7 October 2026" for the same letter was *computed by
+/// the model*, which the prompt forbids and the report would present
+/// as read from the page.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DeadlineShape {
+    /// Asks for arithmetic from a base date: "within 14 days", "by the
+    /// end of the month".
+    Counted,
+    /// Names its own day: "on 27 December 2026".
+    Absolute,
+    /// Names no day and says where on the page one is (#544): "the
+    /// date shown beside it".
+    Pointed,
+    /// None of the above: "as soon as you are able".
+    Undated,
+}
+
+pub fn deadline_shape(deadline: &str) -> DeadlineShape {
+    let lowered = deadline.to_lowercase();
+    if counted_from(&lowered).is_some() {
+        DeadlineShape::Counted
+    } else if first_full_date(deadline).is_some() {
+        DeadlineShape::Absolute
+    } else if points_at_a_date(deadline) {
+        DeadlineShape::Pointed
+    } else {
+        DeadlineShape::Undated
+    }
+}
+
+/// Everything the model supplied about a deadline, before any
+/// resolution (#554): the comparison a candidate that never reached the
+/// resolver can be held to. Two signatures are equal exactly when the
+/// resolver, given one letter date, would produce one identity from
+/// them — so the ablation scorecard can say "these agree on everything
+/// the model said" without running the arithmetic itself.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) enum DeadlineSignature {
+    Counted {
+        interval: Counted,
+        /// The base the count starts from, where the words name one —
+        /// in the anchor or left in the phrase, the same base by another
+        /// route.
+        base: Option<NaiveDate>,
+    },
+    Absolute(NaiveDate),
+    Pointed(String),
+    Undated {
+        words: String,
+        anchor_date: Option<NaiveDate>,
+    },
+}
+
+pub(crate) fn deadline_signature(deadline: &str, anchor: &str) -> DeadlineSignature {
+    let lowered = deadline.to_lowercase();
+    if let Some(interval) = counted_from(&lowered) {
+        return DeadlineSignature::Counted {
+            interval,
+            base: first_full_date(anchor).or_else(|| first_full_date(deadline)),
+        };
+    }
+    if let Some(date) = first_full_date(deadline) {
+        return DeadlineSignature::Absolute(date);
+    }
+    if points_at_a_date(deadline) {
+        return DeadlineSignature::Pointed(
+            lowered.split_whitespace().collect::<Vec<_>>().join(" "),
+        );
+    }
+    DeadlineSignature::Undated {
+        words: lowered.split_whitespace().collect::<Vec<_>>().join(" "),
+        anchor_date: first_full_date(anchor),
+    }
 }
 
 /// "within 14 days" -> 14. Calendar days only: "working days" needs a

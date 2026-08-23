@@ -1,19 +1,25 @@
 # evals/
 
-There is no current scoring-v14 comparison baseline yet. The files here
-are measurements and records; before a prompt edit, write a fresh
-baseline under the current scoring version, then compare the edited
-prompt against that exact file.
+The runner scores at version 15 (#554, 22 August 2026) and no v15
+baseline has been recorded yet: the `baseline-v14-*.json` files below
+are refused by `--baseline` (exit 2) until the pod re-records them with
+`--runs 3`, and the claims standing on them read unproven meanwhile.
+The v15 rule was verified by replaying the archived v14 recordings —
+zero metric lines moved on either committed bed. Before a prompt edit,
+write a fresh baseline under the current scoring version, then compare
+the edited prompt against that exact file.
 
 ## What is in this directory
 
-- `baseline-v14-letter.json` — the letter pack's current floor:
+- `baseline-v14-letter.json` — the letter pack's last recorded floor
+  (scoring v14; refused by the v15 runner until re-recorded):
   Qwen3.5-4B on the development bed, scoring v14, recorded 14 August
   2026 on a rented RTX 5090 (12m47s, verdict PASS). This is the file a
   prompt edit is compared against, and the evidence `letter-harm-ceilings`
   stands on. Its predecessor moved to `history/` when it stopped being
   cited.
-- `baseline-v14-renewal.json` — the renewal pack's current floor:
+- `baseline-v14-renewal.json` — the renewal pack's last recorded floor
+  (scoring v14; refused likewise):
   Qwen3.5-4B on the development bed, scoring v14, recorded 14 August
   2026 on the same rented RTX 5090 (4m11s, verdict PASS). The evidence
   `renewal-development-verdict` stands on. Its v13 predecessor moved to
@@ -642,6 +648,42 @@ of the bar) and cutting the review pile from 100% to 41%; the end
 result was already perfect without it. That is the margin statement
 working as designed: this pack is deterministic-dominant, and the
 model is an assistant to it, not the auditor.
+
+### What a `SCORING_VERSION` bump costs (learned on v15, #554)
+
+Four things go stale when the number moves, and each has its own
+mechanism. Budget all four before bumping:
+
+1. **The committed baselines** (`evals/baseline-v<N>-*.json`) are
+   refused (exit 2), and every registry claim citing one downgrades to
+   unproven — CI stays green by design. Verify the rule's delta by
+   `--replay` over the archived recordings (one `runs/runN` directory at
+   a time; `--replay` conflicts with `--runs`), then re-record on the
+   pod with `--runs 3` (#533). A replay must not mint the baseline: it
+   spawns no sidecar, so it carries no runtime policy.
+2. **`crates/cli/tests/eval_cli.rs`** pins the number with the bump's
+   reason, so every bump says why. Update it.
+3. **`crates/runner/tests/declared_tiers.rs`** — a pack whose only floor
+   evidence was scored under the old version goes in
+   `STAGED_STALE_FLOORS` with a reason and a date; the stage fails the
+   suite the moment a current pass lands, which is when it comes out.
+4. **`packs/*/tiers.json`** — the model-manager screen quotes only
+   current-version entries (#254), and `app/src-tauri`'s
+   `the_shipped_model_keeps_each_current_pack_verdict` (#549) requires
+   the shipped model's letter and subscription entries to be current.
+   Only a real run on a machine somebody owns can write one (#213): a
+   tier carries wall time, which a replay cannot produce. On an M1 Pro
+   that is about 105 minutes for the letter bed. Move `evals/runs/run1`
+   aside first — it accumulates scratch recordings, and a directory that
+   mixes runs refuses `--replay` later. The public demo reads the same
+   file (`app/src/lib/fake.ts`) and cannot know the runner's version, so
+   `app/src/lib/tiers-sync.test.ts` holds the quoted entry to it.
+
+Replay verifies the rule in seconds; the tiers run is the floor on how
+fast a bump can merge. And a run that backs a committed baseline or tier
+is archived to `dogwonder/kettle-runs` with a MANIFEST before cleanup —
+the archived recordings are what made the replay verification above
+cost nothing.
 
 ## Repeats
 

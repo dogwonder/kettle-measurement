@@ -282,21 +282,24 @@ fn attribution(
 /// own tuple is the supported claim, an `unsupported` counter-claim is
 /// a diagnosed near miss, and anything else the bed's author never
 /// wrote is unsupported by construction.
+///
+/// "The expectation's own tuple" is read as the harm lens reads it
+/// ([`super::Extracted::same_assertion_as`]) and not character by
+/// character (#552): the same ask on the same party by the same day is
+/// the supported claim whatever words the anchor wears. Compared
+/// verbatim, this dimension failed 78 times per run on the 21 August
+/// v14 letter bed with every date right — and reached no metric, so
+/// nobody saw it.
 fn support(
     want: &super::fixture::ObligationExpectation,
     found: &crate::run::Obligation,
 ) -> DimensionOutcome {
-    if let Some(expect) = &want.expect {
-        let asserted = super::ExpectedObligation {
-            kind: found.kind.clone(),
-            party: found.party.clone(),
-            deadline: found.deadline.clone(),
-            anchor: found.anchor.clone(),
-            due: found.due.map(|d| d.date),
-        };
-        if asserted == *expect {
-            return DimensionOutcome::Pass;
-        }
+    if want
+        .expect
+        .as_ref()
+        .is_some_and(|expect| expect.identity() == found.identity())
+    {
+        return DimensionOutcome::Pass;
     }
     if let Some(counter) = want
         .evidence

@@ -38,6 +38,30 @@ fn machine() -> MachineInfo {
 /// with a fixture authoring why a payment claim on the settled passage
 /// would be unsupported.
 fn letter_pack(name: &str) -> PathBuf {
+    letter_pack_with(name, LETTER, SETTLED_EXPECTED)
+}
+
+/// The settled-account fixture's expectations, authored beside it.
+const SETTLED_EXPECTED: &str = r#"{
+  "fixture_id": "settled-account-01",
+  "eval_set": "development",
+  "obligations": [
+    {
+      "id": "settled-account-no-payment-01",
+      "strata": [],
+      "segment": "Your account with Harborne Parking Services is settled and you do not need to pay anything at this time.",
+      "expect": null,
+      "evidence": {
+        "unsupported": [
+          { "claim": { "kind": "payment" }, "why": "the passage states no payment is needed" }
+        ]
+      }
+    }
+  ]
+}"#;
+
+/// The same pack over a different letter and its expectations.
+fn letter_pack_with(name: &str, letter: &str, expected: &str) -> PathBuf {
     let dir = std::env::temp_dir().join(format!("kettle-evidence-{}-{name}", std::process::id()));
     let _ = std::fs::remove_dir_all(&dir);
     for sub in ["prompts", "schemas", "fixtures"] {
@@ -95,28 +119,166 @@ fn letter_pack(name: &str) -> PathBuf {
             "required": ["results"] }"#,
     );
     write("report.html.tera", "<html></html>");
-    write("fixtures/letter-01.txt", LETTER);
-    write(
-        "fixtures/letter-01.expected.json",
-        r#"{
-          "fixture_id": "settled-account-01",
-          "eval_set": "development",
-          "obligations": [
-            {
-              "id": "settled-account-no-payment-01",
-              "strata": [],
-              "segment": "Your account with Harborne Parking Services is settled and you do not need to pay anything at this time.",
-              "expect": null,
-              "evidence": {
-                "unsupported": [
-                  { "claim": { "kind": "payment" }, "why": "the passage states no payment is needed" }
-                ]
-              }
-            }
-          ]
-        }"#,
-    );
+    write("fixtures/letter-01.txt", letter);
+    write("fixtures/letter-01.expected.json", expected);
     dir
+}
+
+/// A letter whose one ask is relative to the letter's own date. Wholly
+/// invented.
+const RELATIVE_LETTER: &str = "3 March 2026\n\nPlease pay the balance of £40.00 on your \
+account with Harborne Parking Services within 28 days.\n\nThank you for \
+your co-operation.";
+
+/// The bed's authored reading of it: counted from the date of the
+/// letter, due on 31 March.
+const RELATIVE_EXPECTED: &str = r#"{
+  "fixture_id": "relative-payment-01",
+  "eval_set": "development",
+  "obligations": [
+    {
+      "id": "relative-payment-01",
+      "strata": [],
+      "segment": "Please pay the balance of £40.00 on your account with Harborne Parking Services within 28 days.",
+      "expect": {
+        "kind": "payment",
+        "party": "Harborne Parking Services",
+        "deadline": "within 28 days",
+        "anchor": "the date of this letter",
+        "due": "2026-03-31"
+      }
+    }
+  ]
+}"#;
+
+/// The model reads the ask correctly and names the anchor with the
+/// deadline's own words — the form the 21 August v14 runs returned
+/// 78 times per exam run and 79 per development run.
+fn answer_naming_the_anchor_by_the_deadline() -> String {
+    let segments: Vec<&str> = RELATIVE_LETTER.split("\n\n").collect();
+    completion_envelope(
+        &serde_json::json!({
+            "results": [
+                { "id": 0, "segment": segments[0], "confidence": "high", "obligations": [] },
+                {
+                    "id": 1,
+                    "segment": segments[1],
+                    "confidence": "high",
+                    "obligations": [{
+                        "kind": "payment",
+                        "party": "Harborne Parking Services",
+                        "ask": "Pay the balance of £40.00",
+                        "deadline": "within 28 days",
+                        "anchor": "within 28 days"
+                    }]
+                },
+                { "id": 2, "segment": segments[2], "confidence": "high", "obligations": [] }
+            ]
+        })
+        .to_string(),
+    )
+}
+
+/// #552's standing defect: `support` compared the anchor verbatim while
+/// the harm lens compared it by the date it names (#452) and the pooled
+/// join ignored it (#287). On the 21 August v14 letter runs that was
+/// 78 support failures per exam run and 79 per development run, every
+/// one on `anchor` alone with the right date — the `month-end` stratum
+/// read 78 expected, 78 found, 0 support, and reported recall 1.00,
+/// because nothing consumed the dimension. Three comparisons of one
+/// answer must give one verdict.
+#[test]
+fn an_anchor_worded_as_the_deadline_supports_the_claim_it_resolves_with() {
+    let dir = letter_pack_with("anchor-wording", RELATIVE_LETTER, RELATIVE_EXPECTED);
+    let report = evaluate(&dir, answer_naming_the_anchor_by_the_deadline());
+
+    let item = report.fixtures[0]
+        .items
+        .iter()
+        .find(|item| item.item_id == "relative-payment-01")
+        .expect("the relative payment is a scored item");
+
+    assert_eq!(
+        item.evidence.get(&EvidenceDimension::Existence),
+        Some(&DimensionOutcome::Pass),
+        "the quoted passage is in the letter: {:?}",
+        item.evidence
+    );
+    assert_eq!(
+        item.evidence.get(&EvidenceDimension::Support),
+        Some(&DimensionOutcome::Pass),
+        "the same ask, on the same party, by the same day, is the supported claim \
+         whatever words the anchor wears: {:?}",
+        item.evidence
+    );
+}
+
+/// The re-authored exam bed of 21 August (#552): the model recorded the
+/// obligation every time and copied the letter's own words for the
+/// deadline, date included — "within 45 days of 23 August 2026" where
+/// the bed had split "within 45 days" from its anchor. `obligation_key`
+/// found all 36; `same_assertion_as` demoted 12 of them to
+/// confident-wrong on the wording. Both are faithful copies, both
+/// resolve to 7 October, and the date is what the person acts on.
+#[test]
+fn a_deadline_carrying_its_own_anchor_is_the_same_assertion() {
+    use chrono::NaiveDate;
+    use runner::eval::{ExpectedObligation, Extracted};
+
+    let obligation = |deadline: &str, anchor: &str, due: Option<&str>| {
+        Extracted::Obligation(ExpectedObligation {
+            kind: "payment".to_owned(),
+            party: "Elmswood Lettings".to_owned(),
+            deadline: deadline.to_owned(),
+            anchor: anchor.to_owned(),
+            due: due.map(|d| NaiveDate::parse_from_str(d, "%Y-%m-%d").expect("a date")),
+        })
+    };
+
+    let split = obligation("within 45 days", "23 August 2026", Some("2026-10-07"));
+    let whole = obligation("within 45 days of 23 August 2026", "", Some("2026-10-07"));
+    assert!(
+        split.same_assertion_as(&whole),
+        "two faithful copies of one deadline resolve to one day"
+    );
+
+    let off_by_one = obligation("within 46 days of 23 August 2026", "", Some("2026-10-08"));
+    assert!(
+        !split.same_assertion_as(&off_by_one),
+        "a different day is a different assertion, however close the words"
+    );
+
+    // The day is right and the route is not: the letter never wrote
+    // 7 October, the model counted to it, and the prompt forbids that.
+    // Keyed on the day alone this scored clean on every comparator and
+    // the report would have marked a computed date as read from the
+    // page (#554 review).
+    let computed = obligation("by 7 October 2026", "", Some("2026-10-07"));
+    assert!(
+        !split.same_assertion_as(&computed),
+        "a date the model worked out is not the deadline the letter wrote"
+    );
+
+    // #544: the passage points at a table row and the row carries the
+    // date. A reading that fuses the row's date into the prose claim
+    // resolves to the same day by a route the passage does not support.
+    let pointing = obligation("the date shown beside it", "", Some("2026-03-06"));
+    let fused = obligation("by 6 March 2026", "", Some("2026-03-06"));
+    assert!(
+        !pointing.same_assertion_as(&fused),
+        "a pointer and the date it points at are different readings of the passage"
+    );
+
+    let soon = obligation("at your earliest convenience", "", None);
+    let when_you_can = obligation("when you can", "", None);
+    assert!(
+        !soon.same_assertion_as(&when_you_can),
+        "an undated ask is shown in the letter's own words, so the words are the claim"
+    );
+    assert!(
+        soon.same_assertion_as(&obligation("At your earliest convenience", "", None)),
+        "as the pooled join reads them, case apart"
+    );
 }
 
 /// The model reads a payment obligation into the passage that says the

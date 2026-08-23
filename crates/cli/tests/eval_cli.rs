@@ -1861,16 +1861,16 @@ fn a_baseline_from_a_different_scoring_version_is_refused_not_compared() {
     );
     assert_eq!(
         eval::baseline::SCORING_VERSION,
-        14,
-        "a quote must now contain the value it evidences (#460). \
-         `quote_is_in` — is this text on the page — was necessary and not \
-         sufficient: the 8 August v12 renewal run quoted the bare label \
-         `Excess` as evidence for three different numbers, and a quote that \
-         supports three values supports none of them. A term whose quote \
-         does not contain its value is refused to review at the quote \
-         guardrail, so review rates, harm cells and verdicts move wherever \
-         a model quoted a label instead of a value, and no version 13 \
-         baseline may be compared"
+        15,
+        "the scorer now holds one definition of the same obligation (#552). \
+         The pooled join keyed a dated deadline on the day it resolves to, \
+         the harm lens took the deadline verbatim, and the evidence \
+         `support` dimension took deadline and anchor verbatim — so one \
+         faithful reading could be found, confident-wrong and unsupported \
+         at once, and on the 21 August v14 letter bed `support` failed 78 \
+         times per run with every date right. Harm cells, escape counts \
+         and support outcomes move wherever a run resolved the right day \
+         in other words, and no version 14 baseline may be compared"
     );
     older = older.replace(
         &format!("\"scoring_version\": {}", eval::baseline::SCORING_VERSION),

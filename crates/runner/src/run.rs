@@ -392,6 +392,20 @@ pub struct Obligation {
     pub disputed: Vec<crate::ocr::Disagreement>,
 }
 
+impl Obligation {
+    /// What this obligation *is*, for every comparison the eval harness
+    /// makes (#554) — the same identity a bed's expectation carries.
+    pub fn identity(&self) -> crate::eval::ObligationIdentity {
+        crate::eval::ObligationIdentity::of(
+            &self.kind,
+            &self.party,
+            &self.deadline,
+            &self.anchor,
+            self.due.map(|d| d.date),
+        )
+    }
+}
+
 /// Mark each obligation with the disputes that landed in its own
 /// passages (#412 step 6).
 ///

@@ -198,18 +198,18 @@ fn the_exam_set_is_not_the_development_set_wearing_other_names() {
 ///
 /// So the rewrite did not make a letter harder to read. It changed
 /// which of two faithful copies the model produced, against a scorer
-/// that answers "is the wording part of the claim" three different
-/// ways: `obligation_key` ignores `deadline` and `anchor` when the
-/// deadline resolves (#287), `same_assertion_as` takes `deadline`
-/// verbatim and reads `anchor` by the date it names (#452), and
-/// `support` takes both verbatim. That inconsistency is #457's defect
-/// and #544's on a third axis, it is recorded on #552, and it is not
-/// this list's to fix.
+/// that answered "is the wording part of the claim" three different
+/// ways. That was #554, fixed behind scoring version 15: one
+/// `ObligationIdentity`, and the re-authored recording replayed under
+/// it reads `payment_anchored` 36/36. What remains of the cost is
+/// real — four `payment_relative` day miscounts (`"within 22 days"` for
+/// a 21-day letter) and the gate failing on one decision in 252, whose
+/// Wilson upper bound is 0.022 against a ceiling of 0.02.
 ///
 /// So the divergence is real, it is an inconsistency worth knowing
-/// about, and correcting it costs a gate PASS for a reason that has
-/// nothing to do with actors. It stays listed until a rewrite exists
-/// that leaves the deadline boundary alone — and that rewrite must be
+/// about, and correcting it still costs a gate PASS for a reason that
+/// has nothing to do with actors. It stays listed until a rewrite exists
+/// that does not move those four answers — and that rewrite must be
 /// measured before it lands, which is the rule this list was created by
 /// breaking.
 const STAGED_VOICE_DIVERGENCES: [(&str, &str); 7] = [

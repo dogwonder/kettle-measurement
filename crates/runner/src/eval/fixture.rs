@@ -19,7 +19,6 @@ use crate::run::{run_pack, run_pack_bound, Answers, AuditOutcome, Payload, RunOu
 use crate::run_dir::{RunDir, RunLog};
 use crate::scoring::{keyed_accuracy, set_f1, Tolerance};
 use crate::sidecar::PeakRss;
-use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use std::cell::RefCell;
 use std::collections::{BTreeMap, BTreeSet};
@@ -1931,32 +1930,23 @@ fn term_key(document: Option<usize>, term: &str, basis: &str, value: &str) -> St
 }
 
 /// Did the run extract each obligation the document carries? Joined on
-/// the auditable core — kind, party, deadline, due — all exact: the
-/// deadline is read as written, and `due` is the day the person acts
-/// on. The `anchor` is not in the key and never was; it is an input to
-/// the arithmetic rather than a claim of its own, and the harm lens
-/// reads it the same way (`extracted_is_wrong`, #452).
+/// [`super::ObligationIdentity`] (#554) — the same kind of ask, on the
+/// same party, by the same day arrived at the same way; in the letter's
+/// own words where no day resolved. The harm lens and the evidence
+/// `support` dimension read the same identity, so a found obligation is
+/// a correct one and a supported one, and a wrong one is none of the
+/// three.
 fn score_obligations(expected: &Expected, extraction: &crate::run::ExtractionOutcome) -> StepScore {
     let want: Vec<(String, String)> = expected
         .obligations
         .iter()
         .filter_map(|o| o.expect.as_ref())
-        .map(|o| {
-            (
-                obligation_key(&o.kind, &o.party, &o.deadline, o.due),
-                String::new(),
-            )
-        })
+        .map(|o| (o.identity().key(), String::new()))
         .collect();
     let got: Vec<(String, String)> = extraction
         .obligations
         .iter()
-        .map(|o| {
-            (
-                obligation_key(&o.kind, &o.party, &o.deadline, o.due.map(|d| d.date)),
-                String::new(),
-            )
-        })
+        .map(|o| (o.identity().key(), String::new()))
         .collect();
     let want_refs: Vec<(&str, &str)> = want.iter().map(|(k, v)| (k.as_str(), v.as_str())).collect();
     let got_refs: Vec<(&str, &str)> = got.iter().map(|(k, v)| (k.as_str(), v.as_str())).collect();
@@ -1974,12 +1964,12 @@ fn score_extraction_end_to_end(
         .obligations
         .iter()
         .filter_map(|o| o.expect.as_ref())
-        .map(|o| obligation_key(&o.kind, &o.party, &o.deadline, o.due))
+        .map(|o| o.identity().key())
         .collect();
     let got: Vec<String> = extraction
         .obligations
         .iter()
-        .map(|o| obligation_key(&o.kind, &o.party, &o.deadline, o.due.map(|d| d.date)))
+        .map(|o| o.identity().key())
         .collect();
     set_f1(&borrowed(&want), &borrowed(&got))
 }
@@ -2011,26 +2001,6 @@ fn score_extraction_review_rate(outcome: &RunOutcome) -> f32 {
         Payload::Audit(_) => 0,
     };
     (outcome.needs_review.len() + low_confidence) as f32 / outcome.input.rows as f32
-}
-
-/// One obligation's identity for scoring, case-insensitive on the
-/// party as merchant joins are.
-///
-/// Keyed on the date the deadline *resolves to*, never on the anchor's
-/// wording (#287). The anchor reaches no person and
-/// `timeline::resolve_deadline` reads only a date inside it, so two
-/// dateless anchors are the same input: charging a run for preferring
-/// one wording measured the bed's ambiguity, not the model's reading.
-///
-/// When nothing resolved, the deadline phrase is the key, because an
-/// undated obligation is shown to a person in the letter's own words —
-/// there the wording is the deliverable.
-fn obligation_key(kind: &str, party: &str, deadline: &str, due: Option<NaiveDate>) -> String {
-    let when = match due {
-        Some(date) => date.to_string(),
-        None => format!("undated:{}", deadline.to_ascii_lowercase()),
-    };
-    format!("{}|{}|{}", kind, party.to_ascii_lowercase(), when)
 }
 
 /// Did the model turn each raw merchant into the name the fixture asks
@@ -2215,13 +2185,7 @@ fn extraction_items(
                     // The letter typology's payload, named as one of
                     // the shapes the lens can carry (#351) rather than
                     // as the only one.
-                    extracted: Extracted::Obligation(ExpectedObligation {
-                        kind: found.kind.clone(),
-                        party: found.party.clone(),
-                        deadline: found.deadline.clone(),
-                        anchor: found.anchor.clone(),
-                        due: found.due.map(|d| d.date),
-                    }),
+                    extracted: Extracted::Obligation(ExpectedObligation::from(found)),
                 }
             } else {
                 ExtractionOutcome::Absent
@@ -2326,13 +2290,7 @@ fn extraction_items(
                 expected_review: false,
                 unauthored_negative: false,
                 actual: ExtractionOutcome::Found {
-                    extracted: Extracted::Obligation(ExpectedObligation {
-                        kind: found.kind.clone(),
-                        party: found.party.clone(),
-                        deadline: found.deadline.clone(),
-                        anchor: found.anchor.clone(),
-                        due: found.due.map(|d| d.date),
-                    }),
+                    extracted: Extracted::Obligation(ExpectedObligation::from(found)),
                 },
             },
             evidence: BTreeMap::new(),
@@ -2849,6 +2807,202 @@ mod tests {
     use crate::claim_trace::{
         CheckOutcome, ClaimCheck, ClaimTrace, Guardrail, TerminalDisposition,
     };
+    use chrono::NaiveDate;
+
+    /// #554, structurally: three parts of the scorer asked "is the
+    /// wording part of the claim" and gave three answers. The pooled
+    /// join ignored a dated deadline's words and the anchor (#287);
+    /// `same_assertion_as` took the deadline verbatim and the anchor by
+    /// its date (#452); `support` took both verbatim. So an obligation
+    /// could be *found*, *confident-wrong* and *unsupported* at once —
+    /// which the re-authored exam bed reported 12 times on 21 August,
+    /// and what `support` reported 110 times per run on the bed that
+    /// passes. One definition, three consumers — and each case says
+    /// what the one answer must be, so the three agreeing on the wrong
+    /// answer is not a pass.
+    #[test]
+    fn found_confident_wrong_and_support_give_one_answer_on_wording() {
+        use super::super::evidence::{
+            obligation_evidence, DimensionOutcome, EvidenceDeclaration, EvidenceDimension,
+        };
+        use super::super::{ExpectedObligation, Extracted};
+        use crate::claim::Kind;
+        use crate::timeline::Resolved;
+
+        let date = |s: &str| NaiveDate::parse_from_str(s, "%Y-%m-%d").expect("a date");
+        let expected = |deadline: &str, anchor: &str, due: Option<&str>| ExpectedObligation {
+            kind: "payment".to_owned(),
+            party: "Elmswood Lettings".to_owned(),
+            deadline: deadline.to_owned(),
+            anchor: anchor.to_owned(),
+            due: due.map(date),
+        };
+        let found =
+            |party: &str, deadline: &str, anchor: &str, due: Option<&str>| crate::run::Obligation {
+                kind: "payment".to_owned(),
+                party: party.to_owned(),
+                ask: "Pay the arrears".to_owned(),
+                deadline: deadline.to_owned(),
+                anchor: anchor.to_owned(),
+                confidence: "high".to_owned(),
+                due: due.map(|d| Resolved {
+                    date: date(d),
+                    kind: Kind::WorkedOut,
+                }),
+                evidence: Vec::new(),
+                dated_by: None,
+                disputed: Vec::new(),
+            };
+        let declared = BTreeMap::from([(
+            EvidenceDimension::Support,
+            EvidenceDeclaration {
+                reason: "test".to_owned(),
+                date: date("2026-08-22"),
+            },
+        )]);
+
+        let cases: Vec<(&str, bool, ExpectedObligation, crate::run::Obligation)> = vec![
+            (
+                "the anchor worded as the deadline, same day",
+                true,
+                expected(
+                    "within 28 days",
+                    "the date of this letter",
+                    Some("2026-03-31"),
+                ),
+                found(
+                    "Elmswood Lettings",
+                    "within 28 days",
+                    "within 28 days",
+                    Some("2026-03-31"),
+                ),
+            ),
+            (
+                "the deadline carrying its own anchor, same day",
+                true,
+                expected("within 45 days", "23 August 2026", Some("2026-10-07")),
+                found(
+                    "Elmswood Lettings",
+                    "within 45 days of 23 August 2026",
+                    "",
+                    Some("2026-10-07"),
+                ),
+            ),
+            (
+                "the party as the merchant join reads it",
+                true,
+                expected(
+                    "within 28 days",
+                    "the date of this letter",
+                    Some("2026-03-31"),
+                ),
+                found(
+                    "ELMSWOOD LETTINGS",
+                    "within 28 days",
+                    "the date of this letter",
+                    Some("2026-03-31"),
+                ),
+            ),
+            (
+                "a different day",
+                false,
+                expected(
+                    "within 21 days",
+                    "the date of this letter",
+                    Some("2026-03-24"),
+                ),
+                found(
+                    "Elmswood Lettings",
+                    "within 22 days",
+                    "the date of this letter",
+                    Some("2026-03-25"),
+                ),
+            ),
+            (
+                "the right day, computed by the model instead of read",
+                false,
+                expected("within 45 days", "23 August 2026", Some("2026-10-07")),
+                found(
+                    "Elmswood Lettings",
+                    "by 7 October 2026",
+                    "",
+                    Some("2026-10-07"),
+                ),
+            ),
+            (
+                "the right day, fused from a table row the passage only points at (#544)",
+                false,
+                expected("the date shown beside it", "", Some("2026-03-06")),
+                found(
+                    "Elmswood Lettings",
+                    "by 6 March 2026",
+                    "",
+                    Some("2026-03-06"),
+                ),
+            ),
+            (
+                "undated, the same words",
+                true,
+                expected("at your earliest convenience", "", None),
+                found(
+                    "Elmswood Lettings",
+                    "at your earliest convenience",
+                    "",
+                    None,
+                ),
+            ),
+            (
+                "undated, different words",
+                false,
+                expected("at your earliest convenience", "", None),
+                found("Elmswood Lettings", "when you can", "", None),
+            ),
+            (
+                "undated, the anchor naming a different date (#452)",
+                false,
+                expected("as soon as possible", "the hearing on 1 June 2026", None),
+                found(
+                    "Elmswood Lettings",
+                    "as soon as possible",
+                    "the hearing on 8 June 2026",
+                    None,
+                ),
+            ),
+            (
+                "dated on one side only",
+                false,
+                expected(
+                    "within 28 days",
+                    "the date of this letter",
+                    Some("2026-03-31"),
+                ),
+                found("Elmswood Lettings", "within 28 days", "", None),
+            ),
+        ];
+
+        for (case, answer, want, got) in cases {
+            let found_it = want.identity() == got.identity();
+            let same = Extracted::Obligation(want.clone())
+                .same_assertion_as(&Extracted::Obligation(ExpectedObligation::from(&got)));
+            let expectation = ObligationExpectation {
+                id: "one".to_owned(),
+                strata: Vec::new(),
+                segment: "Please pay.".to_owned(),
+                expect: Some(want),
+                evidence: None,
+            };
+            let supported = matches!(
+                obligation_evidence(&declared, &expectation, &got, &[])
+                    .get(&EvidenceDimension::Support),
+                Some(DimensionOutcome::Pass)
+            );
+            assert!(
+                found_it == answer && same == answer && supported == answer,
+                "{case}: expected {answer}; found {found_it}, same assertion {same}, supported \
+                 {supported} — one answer was asked for"
+            );
+        }
+    }
 
     /// #470: an error the pipeline introduced has its own column, and
     /// only that column — booking it as `accepted` would hide it, and

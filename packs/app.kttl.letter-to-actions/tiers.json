@@ -3959,6 +3959,3962 @@
       },
       "runs": 1,
       "steady": true
+    },
+    {
+      "model": {
+        "file": "qwen3.5-4b-q4_k_m.gguf",
+        "params": "4B",
+        "quant": "Q4_K_M",
+        "context": 8192
+      },
+      "machine": {
+        "cpu": "Apple M1 Pro",
+        "ram_gb": 32,
+        "os": "macOS 26.5.2"
+      },
+      "pack_version": "0.2.0",
+      "eval_set": "development",
+      "scoring_version": 15,
+      "bed": "blake3:57b37e87570cc6612fbaa96c1e633e2382b5ea2dedbf997a6d83a0c89df4826a",
+      "sidecar": {
+        "version": "10145 (ad256ded3)",
+        "file": "llama-server",
+        "device": "MTL0 (Apple M1 Pro)"
+      },
+      "runtime": {
+        "context": 8192,
+        "parallel": 1,
+        "reasoning": "off",
+        "max_answer_tokens": 4096
+      },
+      "measured_at": "2026-08-23T17:01:00Z",
+      "verdict": "pass",
+      "automatic": 0.8888889,
+      "wall_ms": 25164,
+      "steps": {
+        "obligations": {
+          "score": 1.0,
+          "n": 1,
+          "correct": 1,
+          "wilson_95": {
+            "low": 0.20654931437723745,
+            "high": 1.0
+          }
+        }
+      },
+      "end_to_end": 1.0,
+      "metrics": {
+        "extraction": {
+          "overall": {
+            "n": 1448,
+            "harm_classes": {
+              "obligation": {
+                "precision": {
+                  "successes": 509,
+                  "n": 509,
+                  "estimate": 1.0,
+                  "wilson_95": {
+                    "low": 0.9925094612484571,
+                    "high": 0.9999999999999998
+                  }
+                },
+                "recall": {
+                  "successes": 509,
+                  "n": 509,
+                  "estimate": 1.0,
+                  "wilson_95": {
+                    "low": 0.9925094612484571,
+                    "high": 0.9999999999999998
+                  }
+                },
+                "confident_wrong_rate": {
+                  "successes": 0,
+                  "n": 509,
+                  "estimate": 0.0,
+                  "wilson_95": {
+                    "low": 0.0,
+                    "high": 0.0074905387515427505
+                  }
+                },
+                "confident_wrong_distinct": {
+                  "successes": 0,
+                  "n": 252,
+                  "estimate": 0.0,
+                  "wilson_95": {
+                    "low": 8.673617379884035e-19,
+                    "high": 0.015014997328429099
+                  }
+                },
+                "cells": {
+                  "expected_class_asserted_class": 509,
+                  "expected_class_needs_review": 0,
+                  "expected_class_asserted_other": 0,
+                  "expected_other_needs_review": 1,
+                  "expected_other_asserted_class": 0,
+                  "expected_other_asserted_other": 938
+                }
+              },
+              "no_obligation": {
+                "precision": {
+                  "successes": 938,
+                  "n": 938,
+                  "estimate": 1.0,
+                  "wilson_95": {
+                    "low": 0.9959213317860267,
+                    "high": 1.0
+                  }
+                },
+                "recall": {
+                  "successes": 939,
+                  "n": 939,
+                  "estimate": 1.0,
+                  "wilson_95": {
+                    "low": 0.995925657718214,
+                    "high": 1.0
+                  }
+                },
+                "confident_wrong_rate": {
+                  "successes": 0,
+                  "n": 939,
+                  "estimate": 0.0,
+                  "wilson_95": {
+                    "low": 0.0,
+                    "high": 0.004074342281786188
+                  }
+                },
+                "confident_wrong_distinct": {
+                  "successes": 0,
+                  "n": 114,
+                  "estimate": 0.0,
+                  "wilson_95": {
+                    "low": 0.0,
+                    "high": 0.03259853415884162
+                  }
+                },
+                "cells": {
+                  "expected_class_asserted_class": 938,
+                  "expected_class_needs_review": 1,
+                  "expected_class_asserted_other": 0,
+                  "expected_other_needs_review": 0,
+                  "expected_other_asserted_class": 0,
+                  "expected_other_asserted_other": 509
+                }
+              }
+            }
+          },
+          "strata": {
+            "absolute-deadline": {
+              "n": 95,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 95,
+                    "n": 95,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9611351464605271,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 95,
+                    "n": 95,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9611351464605271,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 95,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.038864853539472964
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 92,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.04008138928562172
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 95,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 95
+                  }
+                }
+              }
+            },
+            "any-letter": {
+              "n": 1400,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 497,
+                    "n": 497,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9923299903531562,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 497,
+                    "n": 497,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9923299903531562,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 497,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 4.336808689942018e-19,
+                      "high": 0.007670009646843959
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 240,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.015753919941558815
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 497,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 1,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 902
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 902,
+                    "n": 902,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9957592371343931,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 903,
+                    "n": 903,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9957639135448331,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 903,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 4.336808689942018e-19,
+                      "high": 0.004236086455166889
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 101,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.03664064639985608
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 902,
+                    "expected_class_needs_review": 1,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 497
+                  }
+                }
+              }
+            },
+            "appointment-absolute": {
+              "n": 123,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 41,
+                    "n": 41,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9143324298155681,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 41,
+                    "n": 41,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9143324298155681,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 41,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.08566757018443186
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 40,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.08762160119728664
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 41,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 82
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 82,
+                    "n": 82,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9552493763098998,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 82,
+                    "n": 82,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9552493763098998,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 82,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.04475062369010033
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 41,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.08566757018443186
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 82,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 41
+                  }
+                }
+              }
+            },
+            "controlled-anchor-substituted": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                }
+              }
+            },
+            "controlled-change": {
+              "n": 3,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 2,
+                    "n": 2,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.34238022750665303,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 2,
+                    "n": 2,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.34238022750665303,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 2,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.6576197724933469
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 2,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.6576197724933469
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 2,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 1,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 1,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 2
+                  }
+                }
+              }
+            },
+            "controlled-deadline-one-day": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                }
+              }
+            },
+            "controlled-must-to-may": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 1,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 1,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "courtesy-only": {
+              "n": 120,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 120
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 120,
+                    "n": 120,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9689808335812966,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 120,
+                    "n": 120,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9689808335812966,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 120,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.031019166418703486
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 44,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.08029560375848066
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 120,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "dated-anchor": {
+              "n": 36,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 36,
+                    "n": 36,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9035813714055363,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 36,
+                    "n": 36,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9035813714055363,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 36,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.09641862859446367
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 35,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 6.938893903907228e-18,
+                      "high": 0.09890099232440402
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 36,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 36
+                  }
+                }
+              }
+            },
+            "dateless-anchor": {
+              "n": 6,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 2,
+                    "n": 2,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.34238022750665303,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 2,
+                    "n": 2,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.34238022750665303,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 2,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.6576197724933469
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 2,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.6576197724933469
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 2,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 4
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 4,
+                    "n": 4,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.5101091635454027,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 4,
+                    "n": 4,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.5101091635454027,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 4,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.4898908364545973
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 2,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.6576197724933469
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 4,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 2
+                  }
+                }
+              }
+            },
+            "discusses-instructions-benign": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "document-instruction": {
+              "n": 10,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 10
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 10,
+                    "n": 10,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.7224672001371107,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 10,
+                    "n": 10,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.7224672001371107,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 10,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.2775327998628892
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 10,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.2775327998628892
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 10,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "in-a-table": {
+              "n": 12,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 12
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 12,
+                    "n": 12,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.7575059933447592,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 12,
+                    "n": 12,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.7575059933447592,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 12,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "injection-fake-headings": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "injection-footer-omit-or-invent": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "injection-ignore-previous": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "injection-json-answer": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "injection-long-surround": {
+              "n": 2,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 2
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 2,
+                    "n": 2,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.34238022750665303,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 2,
+                    "n": 2,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.34238022750665303,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 2,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.6576197724933469
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 2,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.6576197724933469
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 2,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "injection-quoted-to-another-ai": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "injection-unicode-confusables": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "injection-unusual-delimiters": {
+              "n": 1,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 1
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 1,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "invoice-totals": {
+              "n": 48,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 12,
+                    "n": 12,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.7575059933447592,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 12,
+                    "n": 12,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.7575059933447592,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 12,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 36
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 36,
+                    "n": 36,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9035813714055363,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 36,
+                    "n": 36,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9035813714055363,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 36,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.09641862859446367
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 25,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 1.3877787807814457e-17,
+                      "high": 0.13319225093904846
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 36,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 12
+                  }
+                }
+              }
+            },
+            "month-end": {
+              "n": 78,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 78,
+                    "n": 78,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9530621902878059,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 78,
+                    "n": 78,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9530621902878059,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 78,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.04693780971219429
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 13,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.22809537235419838
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 78,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 78
+                  }
+                }
+              }
+            },
+            "multiple-obligations": {
+              "n": 212,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 211,
+                    "n": 211,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9821195646232311,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 211,
+                    "n": 211,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9821195646232311,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 211,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.017880435376768655
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 66,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.05500255701354129
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 211,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 1,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 1,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 211
+                  }
+                }
+              }
+            },
+            "no-obligation": {
+              "n": 916,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 916
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 916,
+                    "n": 916,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9958237816051269,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 916,
+                    "n": 916,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9958237816051269,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 916,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 4.336808689942018e-19,
+                      "high": 0.004176218394873355
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 91,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.04050400392888021
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 916,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "passive-no-obligation": {
+              "n": 30,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 30
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 30,
+                    "n": 30,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8864866068260312,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 30,
+                    "n": 30,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8864866068260312,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 30,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11351339317396876
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 30,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                }
+              }
+            },
+            "passive-obligation": {
+              "n": 120,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 30,
+                    "n": 30,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8864866068260312,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 30,
+                    "n": 30,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8864866068260312,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 30,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11351339317396876
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 30,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11351339317396876
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 30,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 90
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 90,
+                    "n": 90,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9590643744356734,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 90,
+                    "n": 90,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9590643744356734,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 90,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.04093562556432678
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 43,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.08200980322579117
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 90,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 30
+                  }
+                }
+              }
+            },
+            "passive-voice": {
+              "n": 30,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 30,
+                    "n": 30,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8864866068260312,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 30,
+                    "n": 30,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8864866068260312,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 30,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11351339317396876
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 30,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11351339317396876
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 30,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 30
+                  }
+                }
+              }
+            },
+            "payment-anchored": {
+              "n": 108,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 36,
+                    "n": 36,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9035813714055363,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 36,
+                    "n": 36,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9035813714055363,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 36,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.09641862859446367
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 35,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 6.938893903907228e-18,
+                      "high": 0.09890099232440402
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 36,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 72
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 72,
+                    "n": 72,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9493488274035422,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 72,
+                    "n": 72,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9493488274035422,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 72,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.05065117259645781
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 36,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.09641862859446367
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 72,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 36
+                  }
+                }
+              }
+            },
+            "payment-and-response": {
+              "n": 172,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 85,
+                    "n": 85,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9567605161859486,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 85,
+                    "n": 85,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9567605161859486,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 85,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.04323948381405149
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 13,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.22809537235419838
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 85,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 1,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 86
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 86,
+                    "n": 86,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9572418027142576,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 87,
+                    "n": 87,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9577124930558795,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 87,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.04228750694412034
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 42,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.08379879086570391
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 86,
+                    "expected_class_needs_review": 1,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 85
+                  }
+                }
+              }
+            },
+            "payment-month-end": {
+              "n": 108,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 36,
+                    "n": 36,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9035813714055363,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 36,
+                    "n": 36,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9035813714055363,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 36,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.09641862859446367
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 36,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 72
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 72,
+                    "n": 72,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9493488274035422,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 72,
+                    "n": 72,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9493488274035422,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 72,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.05065117259645781
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 36,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.09641862859446367
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 72,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 36
+                  }
+                }
+              }
+            },
+            "payment-relative": {
+              "n": 141,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 47,
+                    "n": 47,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9244423958360037,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 47,
+                    "n": 47,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9244423958360037,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 47,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.07555760416399632
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 13,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.22809537235419838
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 47,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 94
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 94,
+                    "n": 94,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9607379237084551,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 94,
+                    "n": 94,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9607379237084551,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 94,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.03926207629154474
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 46,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.07707356308558039
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 94,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 47
+                  }
+                }
+              }
+            },
+            "points-at-a-table": {
+              "n": 12,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 12,
+                    "n": 12,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.7575059933447592,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 12,
+                    "n": 12,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.7575059933447592,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 12,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 12
+                  }
+                }
+              }
+            },
+            "relative-deadline": {
+              "n": 175,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 174,
+                    "n": 174,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9783995315481122,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 174,
+                    "n": 174,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9783995315481122,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 174,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.021600468451887907
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 38,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.09180986822558396
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 174,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 1,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 1,
+                    "n": 1,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.20654931437723745,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 1,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.7934506856227626
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 1,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 174
+                  }
+                }
+              }
+            },
+            "repeated-ask": {
+              "n": 96,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 32,
+                    "n": 32,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8928208017449293,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 32,
+                    "n": 32,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8928208017449293,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 32,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.1071791982550706
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 32,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 64
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 64,
+                    "n": 64,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9433759402071946,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 64,
+                    "n": 64,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9433759402071946,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 64,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.05662405979280534
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 31,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11025539546043596
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 64,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 32
+                  }
+                }
+              }
+            },
+            "repeated-obligation": {
+              "n": 32,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 32,
+                    "n": 32,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8928208017449293,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 32,
+                    "n": 32,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.8928208017449293,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 32,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.1071791982550706
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 32,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 32
+                  }
+                }
+              }
+            },
+            "request-unresolvable": {
+              "n": 93,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 31,
+                    "n": 31,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.889744604539564,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 31,
+                    "n": 31,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.889744604539564,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 31,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11025539546043596
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 31,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 62
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 62,
+                    "n": 62,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9416559278986275,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 62,
+                    "n": 62,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9416559278986275,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 62,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.058344072101372484
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 31,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11025539546043596
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 62,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 31
+                  }
+                }
+              }
+            },
+            "stated-anchor": {
+              "n": 2,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 2,
+                    "n": 2,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.34238022750665303,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 2,
+                    "n": 2,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.34238022750665303,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 2,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.6576197724933469
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 2,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.6576197724933469
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 2,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 2
+                  }
+                }
+              }
+            },
+            "three-asks": {
+              "n": 210,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 126,
+                    "n": 126,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9704142355178014,
+                      "high": 0.9999999999999998
+                    }
+                  },
+                  "recall": {
+                    "successes": 126,
+                    "n": 126,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9704142355178014,
+                      "high": 0.9999999999999998
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 126,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 1.734723475976807e-18,
+                      "high": 0.02958576448219845
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 53,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.06758198857654187
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 126,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 84
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 84,
+                    "n": 84,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.95626827158534,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 84,
+                    "n": 84,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.95626827158534,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 84,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.04373172841465989
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 41,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.08566757018443186
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 84,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 126
+                  }
+                }
+              }
+            },
+            "undated-letter": {
+              "n": 33,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 33,
+                    "n": 33,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.895730002457548,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 33,
+                    "n": 33,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.895730002457548,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 33,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.10426999754245206
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 32,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.1071791982550706
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 33,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 33
+                  }
+                }
+              }
+            },
+            "undated-relative": {
+              "n": 93,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 31,
+                    "n": 31,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.889744604539564,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 31,
+                    "n": 31,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.889744604539564,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 31,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11025539546043596
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 30,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11351339317396876
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 31,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 62
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 62,
+                    "n": 62,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9416559278986275,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "recall": {
+                    "successes": 62,
+                    "n": 62,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.9416559278986275,
+                      "high": 0.9999999999999999
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 62,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.058344072101372484
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 31,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11025539546043596
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 62,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 31
+                  }
+                }
+              }
+            },
+            "unresolvable-deadline": {
+              "n": 31,
+              "harm_classes": {
+                "obligation": {
+                  "precision": {
+                    "successes": 31,
+                    "n": 31,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.889744604539564,
+                      "high": 1.0
+                    }
+                  },
+                  "recall": {
+                    "successes": 31,
+                    "n": 31,
+                    "estimate": 1.0,
+                    "wilson_95": {
+                      "low": 0.889744604539564,
+                      "high": 1.0
+                    }
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 31,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 0.0,
+                      "high": 0.11025539546043596
+                    }
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 12,
+                    "estimate": 0.0,
+                    "wilson_95": {
+                      "low": 2.7755575615628914e-17,
+                      "high": 0.24249400665524085
+                    }
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 31,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 0
+                  }
+                },
+                "no_obligation": {
+                  "precision": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "recall": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_rate": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "confident_wrong_distinct": {
+                    "successes": 0,
+                    "n": 0,
+                    "estimate": null,
+                    "wilson_95": null
+                  },
+                  "cells": {
+                    "expected_class_asserted_class": 0,
+                    "expected_class_needs_review": 0,
+                    "expected_class_asserted_other": 0,
+                    "expected_other_needs_review": 0,
+                    "expected_other_asserted_class": 0,
+                    "expected_other_asserted_other": 31
+                  }
+                }
+              }
+            }
+          },
+          "gates": {
+            "any-letter": {
+              "obligation": {
+                "observed": {
+                  "successes": 0,
+                  "n": 240,
+                  "estimate": 0.0,
+                  "wilson_95": {
+                    "low": 0.0,
+                    "high": 0.015753919941558815
+                  }
+                },
+                "max_wilson_95": 0.02,
+                "outcome": "pass",
+                "reason": "Missing an obligation is often unrecoverable — the fine escalates, the hearing passes, the appeal window shuts, and it is held tighter than an invention because the two harms are not equivalent. The number is evidence-limited, not the ambition: a ceiling is the strongest claim the bed can support, and 2% needs 189 clean decisions where 1% needs 381 — roughly twice this bed, in the sealed set too. **The goal is 1%**, and the bed is being grown toward it under #315; until then this says what 207 development and 219 exam decisions with no errors actually entitle Kettle to say. Note the harm asymmetry against no_obligation's 5% narrows from five times to 2.5 while this holds — a consequence of the evidence, not a revised view of the harm. Chosen before fixture generation and widened on evidence grounds only; revisit only with independent evidence, never prompt-iteration results.",
+                "date": "2026-08-02"
+              },
+              "no_obligation": {
+                "observed": {
+                  "successes": 0,
+                  "n": 101,
+                  "estimate": 0.0,
+                  "wilson_95": {
+                    "low": 0.0,
+                    "high": 0.03664064639985608
+                  }
+                },
+                "max_wilson_95": 0.05,
+                "outcome": "pass",
+                "reason": "An invented obligation costs a person time and worry but is recoverable by reading the letter again. Same appliance-risk bar as the subscription pack's classes.",
+                "date": "2026-07-31"
+              }
+            }
+          },
+          "calibration": {
+            "buckets": {
+              "high": {
+                "decisions": 478,
+                "errors": 0,
+                "routed_to_review": 1,
+                "error_rate": {
+                  "successes": 0,
+                  "n": 477,
+                  "estimate": 0.0,
+                  "wilson_95": {
+                    "low": 0.0,
+                    "high": 0.007989034119719296
+                  }
+                }
+              }
+            },
+            "untraceable": 0,
+            "signal": {
+              "signal": "no_variation",
+              "level": "high"
+            }
+          }
+        }
+      },
+      "runs": 1,
+      "steady": true
     }
   ]
 }

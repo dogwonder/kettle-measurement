@@ -821,6 +821,25 @@ fn check_baseline(
                 .as_ref()
                 .and_then(|sidecar| sidecar.version.as_ref()),
         );
+
+        // And the bed as it exists *now* (#546). The comparison above
+        // is claim ↔ committed baseline: two frozen values written
+        // together, which therefore agree permanently. Every other
+        // declared trigger is visible that way — a scoring bump changes
+        // how the harness reads a baseline, a model or sidecar change
+        // shows up in a re-recorded report — but a bed changes in the
+        // working tree, on the other side of a comparison that never
+        // looks there. So the trigger read as enforced and was in fact
+        // declarative, failing in the silent direction: green while
+        // stale, at exactly the moment nobody is prompted to
+        // re-measure.
+        //
+        // The bed is recomputable, so validation can reach the input.
+        // A downgrade, never a refusal, per #489: the registry is fine,
+        // the fixtures moved, and someone has to re-measure.
+        if let Some(wanted) = &against.bed {
+            check_bed_on_disk(root, claim_id, scope, report, wanted, reasons);
+        }
     }
 
     // Repeats that disagreed (#533). `--runs` exists to confirm
@@ -908,4 +927,114 @@ fn describe_report(report: &ReportProvenance) -> String {
         .clone()
         .unwrap_or_else(|| "unknown".to_owned());
     format!("{pack}, {model}, {set} set")
+}
+
+/// The bed a claim was recorded against, compared with the pack's bed
+/// as it stands in the working tree (#546).
+///
+/// Silence is reserved for the one case where there is genuinely
+/// nothing to check: a root with no `packs/` at all, which is a test
+/// fixture directory rather than a tree carrying packs. Everywhere else
+/// — pack not found, set not named, fixtures unreadable — says so, and
+/// says it as a downgrade. A check that cannot see its input must not
+/// report the same green as a check that looked and agreed; that is the
+/// failure this whole issue is about.
+fn check_bed_on_disk(
+    root: &Path,
+    claim_id: &str,
+    scope: &Scope,
+    report: &ReportProvenance,
+    wanted: &str,
+    reasons: &mut Vec<String>,
+) {
+    let packs = root.join("packs");
+    if !packs.is_dir() {
+        return;
+    }
+    let Some(pack_id) = scope.pack.as_ref().or(report.pack.as_ref()) else {
+        reasons.push(format!(
+            "{claim_id} is recorded against a bed and names no pack, so the bed it \
+             stands on cannot be found to check",
+        ));
+        return;
+    };
+    // The digest is per eval set (#319): a pack-wide one would retire a
+    // development measurement for an exam-only change. So a claim
+    // recording a bed must say which set, or there is no bed to recompute.
+    let Some(set) = scope.eval_set.as_ref().or(report.eval_set.as_ref()) else {
+        reasons.push(format!(
+            "{claim_id} is recorded against a bed of {pack_id} and names no eval set, \
+             and a bed digest is per set, so it cannot be checked",
+        ));
+        return;
+    };
+    let selection = match set.as_str() {
+        "development" => crate::eval::fixture::EvalSelection::Development,
+        "exam" => crate::eval::fixture::EvalSelection::Exam,
+        "audition" => crate::eval::fixture::EvalSelection::Audition,
+        other => {
+            reasons.push(format!(
+                "{claim_id} names the {other} set of {pack_id}, which is not an eval set \
+                 the harness knows, so its bed cannot be checked",
+            ));
+            return;
+        }
+    };
+
+    match bed_digest_on_disk(&packs, pack_id, selection) {
+        Ok(found) if found == wanted => {}
+        Ok(found) => reasons.push(format!(
+            "{pack_id}'s {set} bed now digests to {found} where this claim was recorded \
+             against {wanted} — the fixtures moved under the measurement, so it was \
+             taken on a bed that no longer exists",
+        )),
+        Err(why) => reasons.push(format!(
+            "{pack_id}'s {set} bed could not be recomputed, so the bed this claim was \
+             recorded against cannot be checked: {why}",
+        )),
+    }
+}
+
+/// Recompute one pack's bed digest from the fixtures on disk, by the
+/// same public path a real run records it (#320) — one computation, so
+/// the recorded digest and the check can never disagree about what a
+/// bed is.
+fn bed_digest_on_disk(
+    packs: &Path,
+    pack_id: &str,
+    selection: crate::eval::fixture::EvalSelection,
+) -> Result<String, String> {
+    let entries = std::fs::read_dir(packs).map_err(|e| format!("{} : {e}", packs.display()))?;
+    let mut dirs: Vec<std::path::PathBuf> = entries
+        .filter_map(|entry| entry.ok().map(|entry| entry.path()))
+        .filter(|path| path.is_dir())
+        .collect();
+    // Directory order is what the filesystem happens to say, and a
+    // reason that names a different pack between two runs is not a
+    // reason anyone can act on.
+    dirs.sort();
+    for dir in dirs {
+        // A pack that will not load is somebody else's refusal — the
+        // pack tests say so far more usefully than a claim's reason
+        // would — so it is skipped rather than reported here.
+        let Ok(pack) = crate::packs::load_pack(&dir) else {
+            continue;
+        };
+        if pack.manifest.id != pack_id {
+            continue;
+        }
+        let fixtures = crate::eval::fixture::fixtures_at_for_eval(
+            &dir.join("fixtures"),
+            &pack.manifest.eval_items.retired,
+            &pack.manifest.eval_items.audition,
+            selection,
+            &pack.manifest.inputs,
+        )?;
+        let bed = crate::eval::fixture::bed_entries(
+            &fixtures,
+            &dir.join("fixtures").join("relations.json"),
+        );
+        return Ok(crate::eval::resume::bed_digest(&bed));
+    }
+    Err(format!("no pack under {} has that id", packs.display()))
 }

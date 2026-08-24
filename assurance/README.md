@@ -67,6 +67,22 @@ and a claim that states the verdict it asserts is downgraded when the
 baseline contradicts it. A trigger the claim records no value for is
 not checked, and validation never guesses one.
 
+The bed is checked twice, and the second check is the one that bites
+(#546). Comparing a claim's recorded digest with the baseline's is
+frozen against frozen — two values written together, which therefore
+agree permanently — so validation also recomputes the pack's bed **from
+the fixtures on disk**. That is where a bed actually changes: it
+regenerates as a side effect of any spec change, `kettle bed` writing
+whatever the generator now says, with no constant to edit and nobody
+prompted. A bed is the fixtures *and* the relations declared over them,
+composed in one place (`eval::fixture::bed_entries`) so the check and
+the run it checks cannot come to disagree about what a bed is. Where
+there is no `packs/` to read, there is nothing to check and validation
+says nothing; everywhere else — pack not found, no eval set named,
+fixtures unreadable — it says so, as a downgrade. A check that cannot
+see its input must not report the same green as one that looked and
+agreed.
+
 What no validation reads is the wording itself. Whether the sentence
 still describes what the evidence says is a human review duty, owed
 along the claim's `review_route` every time its evidence is

@@ -706,12 +706,7 @@ impl FixtureEvaluator {
             Some(dir) => dir.join("relations.json"),
             None => pack.dir.join("fixtures").join("relations.json"),
         };
-        if let Ok(text) = std::fs::read_to_string(&relations_path) {
-            bed.push((
-                "relations.json".to_owned(),
-                format!("blake3:{}", blake3::hash(text.as_bytes()).to_hex()),
-            ));
-        }
+        bed.extend(relations_entry(&relations_path));
         // A single-fixture replay (the mutation harness) judges none:
         // its relations would name fixtures deliberately absent.
         let relations = if only.is_some() {
@@ -872,6 +867,37 @@ pub struct Fixture {
     /// fixture.
     pub expectations: PathBuf,
     pub expected: Expected,
+}
+
+/// The relations half of a bed, or nothing when a set declares none.
+///
+/// A bed is two kinds of thing: the fixtures, and the relations judged
+/// over them (#427). The same fixtures under different declarations are
+/// a different measurement, so both feed the digest — and both must be
+/// composed in exactly one place. #546 recomputes a bed from the working
+/// tree to check a claim's `bed change` trigger, and a second, separate
+/// spelling of "what enters a bed" is how that check would come to
+/// disagree with the run it is checking. It did, on the first attempt:
+/// the fixtures matched and the relations were missing, which reads as
+/// two live claims going stale on a bed that never moved.
+pub fn relations_entry(path: &Path) -> Option<(String, String)> {
+    let text = std::fs::read_to_string(path).ok()?;
+    Some((
+        "relations.json".to_owned(),
+        format!("blake3:{}", blake3::hash(text.as_bytes()).to_hex()),
+    ))
+}
+
+/// A bed's entries, as a run records them: every fixture it scored,
+/// plus the relations declared over them. Feed to
+/// [`crate::eval::resume::bed_digest`].
+pub fn bed_entries(fixtures: &[Fixture], relations_path: &Path) -> Vec<(String, String)> {
+    let mut bed: Vec<(String, String)> = fixtures
+        .iter()
+        .map(|fixture| (fixture.name.clone(), digest_of(fixture)))
+        .collect();
+    bed.extend(relations_entry(relations_path));
+    bed
 }
 
 /// Everything this fixture asks, hashed: every document plus the

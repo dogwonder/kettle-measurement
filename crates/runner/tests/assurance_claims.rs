@@ -1474,3 +1474,340 @@ fn repeats_that_recorded_different_results_downgrade_even_with_flat_spreads() {
         "the fixture that diverged is named"
     );
 }
+
+/// #546: the declared `bed change` trigger is the one the mechanism
+/// cannot see.
+///
+/// Every other trigger is visible in a frozen-versus-frozen comparison:
+/// a scoring bump changes how the harness reads a baseline, a model or
+/// sidecar change shows up in a re-recorded report. A *bed* change
+/// happens in the working tree, and `compare("bed", …)` puts the
+/// claim's recorded digest beside the baseline's — two values written
+/// together, which therefore agree permanently. So the trigger reads as
+/// enforced and is in fact declarative, and it fails in the silent
+/// direction: green while stale, at exactly the moment nobody is
+/// prompted to re-measure.
+///
+/// The bed is recomputable, so validation can reach the input. Here a
+/// claim stands on a bed it names correctly, one fixture is re-authored
+/// exactly as `kettle bed` would rewrite it, and the claim must lose
+/// `proven` — with the pack named, so the reader knows what to
+/// re-measure.
+#[test]
+fn a_claim_recorded_against_a_bed_that_has_since_changed_is_downgraded() {
+    let root = evidence_root("bed-moved");
+    let pack_dir = write_bed_pack(&root);
+    let recorded = current_bed_digest(&pack_dir);
+
+    let baseline = format!(
+        r#"{{
+          "scoring_version": {},
+          "recorded_at": "2026-08-08T12:00:00Z",
+          "reports": [
+            {{
+              "pack": "app.kttl.bed-trigger",
+              "pack_version": "0.0.1",
+              "eval_set": "development",
+              "model": {{ "file": "qwen3.5-4b-q4_k_m.gguf", "params": "4B", "quant": "Q4_K_M", "context": 8192 }},
+              "bed": "{recorded}",
+              "sidecar": {{ "version": "10145 (ad256ded)" }},
+              "verdict": "pass"
+            }}
+          ]
+        }}"#,
+        runner::eval::SCORING_VERSION,
+    );
+    std::fs::write(root.join("evals/baseline-bed.json"), baseline).expect("write baseline");
+
+    let registry = Registry::from_json(&format!(
+        r#"{{
+          "claims": [
+            {{
+              "id": "bed-trigger",
+              "wording": "Qwen3.5-4B clears this pack's ceilings.",
+              "status": "proven",
+              "scope": {{
+                "pack": "app.kttl.bed-trigger",
+                "pack_version": "0.0.1",
+                "model": "qwen3.5-4b-q4_k_m.gguf",
+                "eval_set": "development"
+              }},
+              "evidence": [
+                {{ "kind": "baseline", "path": "evals/baseline-bed.json" }}
+              ],
+              "recorded_against": {{
+                "bed": "{recorded}",
+                "sidecar": "10145 (ad256ded)"
+              }},
+              "recorded": "2026-08-08",
+              "invalidation": ["bed change", "scoring version change", "model or sidecar change"],
+              "surfaces": [],
+              "review_route": "re-measure with kettle eval --write-baseline"
+            }}
+          ]
+        }}"#
+    ))
+    .expect("registry parses");
+
+    // Before anything moves: the claim is about the bed on disk, and
+    // stands. Without this the test could pass for the wrong reason —
+    // a claim downgraded by some other rule proves nothing about beds.
+    let standing = registry.validate(&root, runner::eval::SCORING_VERSION, today());
+    assert!(
+        standing.refusals.is_empty(),
+        "the registry is well formed: {:?}",
+        standing.refusals
+    );
+    assert_eq!(
+        standing.claims[0].effective,
+        Status::Proven,
+        "the claim names the bed that is on disk: {:?}",
+        standing.claims[0].reasons
+    );
+
+    // One fixture re-authored, exactly the side effect a spec change has
+    // when `kettle bed` writes whatever the generator now says. Neither
+    // the claim nor the baseline moves — they still agree with each
+    // other, and both are now stale.
+    std::fs::write(
+        pack_dir.join("fixtures/letter-01.txt"),
+        "Dear Ms Okafor\n\nPlease pay £145.00 to Harborne Parking Services within \
+         14 days of the date of this letter.\n\nThank you for your co-operation.",
+    )
+    .expect("re-author the fixture");
+    assert_ne!(
+        current_bed_digest(&pack_dir),
+        recorded,
+        "the re-authored fixture is a different bed"
+    );
+
+    let assessment = registry.validate(&root, runner::eval::SCORING_VERSION, today());
+
+    assert!(
+        assessment.refusals.is_empty(),
+        "a moved bed is a downgrade, not a structural refusal: {:?}",
+        assessment.refusals
+    );
+    let claim = &assessment.claims[0];
+    assert_eq!(
+        claim.effective,
+        Status::Unproven,
+        "proven must not survive the bed the measurement was taken on"
+    );
+    let reasons = claim.reasons.join("\n");
+    assert!(
+        reasons.contains("app.kttl.bed-trigger") && reasons.contains("bed"),
+        "the reason names the pack whose bed moved, so the reader knows \
+         what to re-measure: {reasons}"
+    );
+}
+
+/// The bed digest of a pack's development set as it exists on disk,
+/// computed through the same public path a real run records (#320), so
+/// the test pins the rule and never a hash.
+fn current_bed_digest(pack_dir: &std::path::Path) -> String {
+    let pack = runner::packs::load_pack(pack_dir).expect("the test pack loads");
+    let fixtures = runner::eval::fixture::fixtures_at_for_eval(
+        &pack_dir.join("fixtures"),
+        &pack.manifest.eval_items.retired,
+        &pack.manifest.eval_items.audition,
+        runner::eval::fixture::EvalSelection::Development,
+        &pack.manifest.inputs,
+    )
+    .expect("the test pack's fixtures load");
+    let bed = runner::eval::fixture::bed_entries(
+        &fixtures,
+        &pack_dir.join("fixtures").join("relations.json"),
+    );
+    runner::eval::resume::bed_digest(&bed)
+}
+
+/// A minimal pack with one scorable development fixture, written under
+/// the evidence root's `packs/` so validation can find it the way it
+/// finds one in the repository.
+fn write_bed_pack(root: &std::path::Path) -> PathBuf {
+    let dir = root.join("packs/bed-trigger");
+    for sub in ["prompts", "schemas", "fixtures"] {
+        std::fs::create_dir_all(dir.join(sub)).expect("create pack dirs");
+    }
+    let write = |relative: &str, content: &str| {
+        std::fs::write(dir.join(relative), content).expect("write pack file");
+    };
+    write(
+        "pack.json",
+        r#"{
+          "id": "app.kttl.bed-trigger",
+          "name": "Bed trigger test",
+          "version": "0.0.1",
+          "min_runner_version": "0.1.0",
+          "inputs": [{ "role": "letter", "label": "Your letters", "accept": ["text/plain"], "multiple": false }],
+          "capabilities": ["read"],
+          "model": { "min_tier": "3b", "recommended_tier": "7b", "context": 8192, "temperature": 0 },
+          "copy": { "time": { "kind": "varies", "estimate": "by file", "on_this_computer": "This test pack has not been timed." }, "will": [], "run_verb": "Run this task" },
+          "pipeline": [
+            { "step": "preprocess", "impl": "builtin:document-text" },
+            { "step": "model", "role": "obligations", "prompt": "prompts/obligations.md", "schema": "schemas/obligations.schema.json", "batch": 8 },
+            { "step": "aggregate", "impl": "builtin:timeline-sort" },
+            { "step": "render", "template": "report.html.tera" }
+          ],
+          "eval_metrics": ["extraction"],
+          "eval_costs": { "review_rate": { "reason": "Tracks how many passages a person reads.", "date": "2026-08-24" } },
+          "eval_strata": {
+            "dated-letter": {
+              "description": "Letters that carry their own date.",
+              "classes": {
+                "obligation": { "max_wilson_95": 0.01, "reason": "A missed deadline is often unrecoverable.", "date": "2026-08-24" }
+              }
+            }
+          },
+          "outputs": ["report.html"]
+        }"#,
+    );
+    write(
+        "prompts/obligations.md",
+        "What does each passage oblige someone to do?\n{{ batch_json }}\n",
+    );
+    write(
+        "schemas/obligations.schema.json",
+        r#"{ "type": "object", "properties": { "results": { "type": "array", "items": {
+            "type": "object", "properties": {
+                "id": { "type": "integer" },
+                "segment": { "type": "string" },
+                "confidence": { "enum": ["high", "medium", "low"] },
+                "obligations": { "type": "array", "items": { "type": "object", "properties": {
+                    "kind": { "enum": ["payment", "response", "attendance", "other"] },
+                    "party": { "type": "string" },
+                    "ask": { "type": "string" },
+                    "deadline": { "type": "string" },
+                    "anchor": { "type": "string" }
+                }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
+            }, "required": ["id", "segment", "confidence", "obligations"] } } },
+            "required": ["results"] }"#,
+    );
+    write("report.html.tera", "<html></html>");
+    write(
+        "fixtures/letter-01.txt",
+        "Dear Ms Okafor\n\nPlease pay £120.00 to Harborne Parking Services within \
+         14 days of the date of this letter.\n\nThank you for your co-operation.",
+    );
+    // A bed is two kinds of thing (#427): the fixtures, and the
+    // relations judged over them. Both feed the digest, so a pack with
+    // only the first would let the check pass while blind to the half
+    // that in fact broke it.
+    write("fixtures/relations.json", r#"{ "relations": [] }"#);
+    write(
+        "fixtures/letter-01.expected.json",
+        r#"{
+          "fixture_id": "bed-trigger-01",
+          "eval_set": "development",
+          "obligations": [
+            {
+              "id": "bed-trigger-payment-01",
+              "strata": ["dated-letter"],
+              "segment": "Please pay £120.00 to Harborne Parking Services within 14 days of the date of this letter.",
+              "expect": {
+                "kind": "payment",
+                "party": "Harborne Parking Services",
+                "deadline": "within 14 days",
+                "anchor": "the date of this letter"
+              }
+            }
+          ]
+        }"#,
+    );
+    dir
+}
+
+/// The near-miss this one exists to pin. A bed is the fixtures *and*
+/// the relations declared over them (#427), and the first cut of #546's
+/// recomputation counted only the fixtures. It matched every fixture
+/// and missed `relations.json`, which reads as two live claims going
+/// stale on a bed that never moved — a false downgrade, and a worse
+/// failure than the silent green the issue set out to fix.
+///
+/// So: nothing but the relations file moves, and the claim must still
+/// lose `proven`.
+#[test]
+fn a_bed_whose_relations_changed_downgrades_though_every_fixture_held() {
+    let root = evidence_root("bed-relations");
+    let pack_dir = write_bed_pack(&root);
+    let recorded = current_bed_digest(&pack_dir);
+
+    let baseline = format!(
+        r#"{{
+          "scoring_version": {},
+          "recorded_at": "2026-08-08T12:00:00Z",
+          "reports": [
+            {{
+              "pack": "app.kttl.bed-trigger",
+              "pack_version": "0.0.1",
+              "eval_set": "development",
+              "model": {{ "file": "qwen3.5-4b-q4_k_m.gguf", "params": "4B", "quant": "Q4_K_M", "context": 8192 }},
+              "bed": "{recorded}",
+              "verdict": "pass"
+            }}
+          ]
+        }}"#,
+        runner::eval::SCORING_VERSION,
+    );
+    std::fs::write(root.join("evals/baseline-bed.json"), baseline).expect("write baseline");
+
+    let registry = Registry::from_json(&format!(
+        r#"{{
+          "claims": [
+            {{
+              "id": "bed-trigger",
+              "wording": "Qwen3.5-4B clears this pack's ceilings.",
+              "status": "proven",
+              "scope": {{
+                "pack": "app.kttl.bed-trigger",
+                "pack_version": "0.0.1",
+                "model": "qwen3.5-4b-q4_k_m.gguf",
+                "eval_set": "development"
+              }},
+              "evidence": [
+                {{ "kind": "baseline", "path": "evals/baseline-bed.json" }}
+              ],
+              "recorded_against": {{ "bed": "{recorded}" }},
+              "recorded": "2026-08-08",
+              "invalidation": ["bed change"],
+              "surfaces": [],
+              "review_route": "re-measure with kettle eval --write-baseline"
+            }}
+          ]
+        }}"#
+    ))
+    .expect("registry parses");
+
+    assert_eq!(
+        registry
+            .validate(&root, runner::eval::SCORING_VERSION, today())
+            .claims[0]
+            .effective,
+        Status::Proven,
+        "the claim names the bed that is on disk"
+    );
+
+    // Every fixture byte-identical; one declared relation added.
+    std::fs::write(
+        pack_dir.join("fixtures/relations.json"),
+        r#"{ "relations": [ { "id": "reorder-holds-bed-trigger-01",
+              "kind": { "invariance": { "projection": "obligations_set" } },
+              "left": "letter-01", "right": "letter-01" } ] }"#,
+    )
+    .expect("re-declare the relations");
+
+    let assessment = registry.validate(&root, runner::eval::SCORING_VERSION, today());
+    let claim = &assessment.claims[0];
+    assert!(
+        assessment.refusals.is_empty(),
+        "a moved bed is a downgrade, not a structural refusal: {:?}",
+        assessment.refusals
+    );
+    assert_eq!(
+        claim.effective,
+        Status::Unproven,
+        "the same fixtures under different declarations are a different \
+         measurement, so the claim cannot keep standing on the old one"
+    );
+}

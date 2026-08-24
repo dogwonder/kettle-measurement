@@ -67,17 +67,17 @@
       "evidence": [
         {
           "kind": "baseline",
-          "path": "evals/baseline-v14-renewal.json"
+          "path": "evals/baseline-v15-renewal.json"
         }
       ],
       "recorded_against": {
         "bed": "blake3:5b52918ea896ba09d28b5e253043ffe85953e802fafb3fd9424138760e0d670e",
-        "sidecar": "10145 (ad256ded)"
+        "sidecar": "10145 (ad256ded3)"
       },
       "expects": {
         "verdict": "pass"
       },
-      "recorded": "2026-08-19",
+      "recorded": "2026-08-24",
       "invalidation": [
         "scoring version change",
         "pack or prompt version change",
@@ -86,8 +86,8 @@
         "repeats disagreeing"
       ],
       "surfaces": [],
-      "review_route": "re-measure and re-record: kettle eval app.kttl.renewal-diff --baseline evals/baseline-v14-renewal.json --write-baseline",
-      "note": "Re-recorded 19 August at scoring 14 on a rented RTX 5090 at **--runs 3**, alongside the letter claim, so neither live claim now stands on a single run (#533). Nothing moved: across all 62 development fixtures, every step score, end-to-end score and review rate reported an identical low and high across the three runs. Validation enforces it — a baseline recording a moved spread downgrades its claim, while an absent one does not. Verdict PASS, 3m51s per repeat: policy-terms pooled 0.98 over 362 decisions, e2e 0.96, review 1%, both harm gates clear (obligation 0.00 over 322 decisions, no_obligation over 385), 6 relations with none failed. Same bed digest (blake3:5b52918e…) and same sidecar version as the run it replaces, so this is the same measurement asked three times; only the GPU's bus address differs, being a different rented box. Like the letter baseline it also corrects the calibration denominator: the 14 August file was recorded hours before ae297db taught the error rate to count only asserted decisions, so it carried n=342 where the 11 routed decisions are now excluded and every run since reads n=331. The number the confidence claim turns on moves with it, and no gate does. Its predecessor, re-recorded 14 August at 4m11s, reported the same verdict, the same pooled 0.98 and the same gate margins on the same bed. Supersedes the 9 August reading of this same claim, which was the opposite sentence: the model answered other for “Insurance amount: £…” and every cover-limit expectation landed in needs-review — a review-burden cost, never a harm. #468's vocabulary edit is what moved it, measured on the four sections_repeat fixtures (review 17.6% → 0%, step 0.93 → 1.00) before the bed settled."
+      "review_route": "re-measure and re-record: kettle eval app.kttl.renewal-diff --baseline evals/baseline-v15-renewal.json --write-baseline",
+      "note": "Re-recorded 24 August at scoring 15 on the **M1 Pro** at --runs 3, because SCORING_VERSION 15 (#554) is a declared invalidation trigger and refused the 19 August v14 recording. Nothing moved: across all 62 development fixtures the three runs agreed on every step score, end-to-end score and review rate, and validation enforces that — a baseline recording a moved spread downgrades its claim. Two things changed with the machine rather than the measurement. The run is local rather than the rented 5090 the v14 recording used, so the *timing* (33m54s) is this machine's and only the scores carry over; evals/RENTED-GPU.md is explicit that cross-backend score equivalence is asserted and never measured, and this is the first of these two claims to stand on Metal. And the sidecar string moved from `10145 (ad256ded)` to `10145 (ad256ded3)` — the same llama.cpp build, printed with one more character of its hash, which the exact-match content check (#489) reads as a change. Recorded here so the next reader does not take it for one. The confidence signal on this pack remains INVERTED: `high` errs at 0.02 over 331 decisions where `low` errs at 0.00 over 339, so routing the less confident decisions to review spends the review on the wrong ones (#429). That is a property this claim does not assert and does not need."
     },
     {
       "id": "letter-harm-ceilings",

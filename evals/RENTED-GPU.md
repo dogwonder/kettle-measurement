@@ -238,7 +238,7 @@ The run directory is the expensive artefact — it is what lets a score be
 re-asked under new scoring with no GPU at all — and until the copy lands
 it exists nowhere else. There is no resume across machines.
 
-Archive per `CLAUDE.md`: a dated directory in the private
+Archive per `CLAUDE.md`: a dated directory in the public
 `dogwonder/kettle-runs` repo with a MANIFEST naming pack, model, eval
 set, scoring version, bed digest, sidecar, machine and what it backs.
 For a pod run, the manifest must also say **that it is a pod run**, on

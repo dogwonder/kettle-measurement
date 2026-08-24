@@ -1,6 +1,6 @@
 {
   "files": 2585,
-  "generated": "2026-08-23",
+  "generated": "2026-08-24",
   "published": [
     "crates/",
     "packs/",
@@ -18,7 +18,7 @@
     "app/src-tauri/models.json",
     "app/src-tauri/tauri.conf.json"
   ],
-  "revision": "c595248",
+  "revision": "04a35b7",
   "schema": "kettle/projection@0",
   "source": "dogwonder/kettle"
 }

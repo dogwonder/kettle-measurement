@@ -41,6 +41,28 @@ it that way.
 - **CUDA 13 is not "newer and therefore safer".** A pinned llama.cpp tag
   predates it and may not compile against it. 12.8/12.9 is the tested
   range.
+
+- **A card that is not a 5090 needs `KETTLE_CUDA_ARCH`.**
+  `vendor-sidecar.sh` builds with
+  `-DCMAKE_CUDA_ARCHITECTURES=${KETTLE_CUDA_ARCH:-120}`, and 120 is
+  `sm_120` — Blackwell, this file's original box. On a 3090 (Ampere,
+  `sm_86`) or a 4090 (Ada, `sm_89`) that default compiles for an
+  architecture the card does not have, and the binary dies at runtime
+  with no kernel image for the device, after the full compile. Set
+  `KETTLE_CUDA_ARCH=86` or `=89` before running anything. The default is
+  not wrong, it is *specific*, and it silently encodes which box this
+  playbook was written on (24 August 2026).
+- **Pre-Blackwell cards widen the CUDA range rather than narrowing it.**
+  The 12.8-or-newer rule above exists only for `sm_120`. Ampere and Ada
+  build fine on 12.4 through 12.9, so a 3090 or 4090 is the *easier*
+  box, not a compromise. Avoid CUDA 13 on any of them.
+- **The GPU is chosen on memory bandwidth, not on compute or VRAM.** An
+  eval is ~95% generation, which is bandwidth-bound; a 4B model in
+  Q4_K_M occupies ~3.5GB, so 24GB is already excessive. Measured
+  24 August: a 3090 runs the letter development bed in ~30 minutes a
+  pass against the M1 Pro's 107, about 3.6x. The 5090's 9.1x (19 August)
+  is the honest comparison for that card and not a general "pod" figure
+  — the box is a variable, not a constant.
 - **Take the provider's own template over a raw Docker Hub image.**
   `nvidia/cuda:*` pulls from Docker Hub, whose anonymous rate limit is
   shared per egress IP and is often already spent by another tenant on
@@ -56,6 +78,15 @@ it that way.
   even pinned to one architecture, and `mktemp` puts it on `/tmp`, which
   on a container is usually the overlay and may be much smaller than the
   data volume. `export TMPDIR=/workspace/tmp` moves it.
+  **Check which way round it is on your pod before following that.**
+  On the 24 August 3090 the advice inverted: `/workspace` was a *network*
+  mount (MooseFS) at 479 MB/s while the container overlay had 30GB free
+  at 1.8 GB/s, so the build, the toolchain and `TMPDIR` all belonged on
+  the overlay and only the weights on `/workspace`. Measure it —
+  `dd if=/dev/zero of=<path>/.probe bs=1M count=512 conv=fsync` on each —
+  rather than assuming the data volume is local. A network mount also
+  makes `df` useless: it reported 929TB free on a volume with a quota,
+  which is the reading `pod-eval.sh` refuses to trust.
 
 ## Credentials
 
@@ -172,6 +203,20 @@ to 0%.
 - **The cheap experiment worth running once**: the same commit, bed and
   weights on both machines. That measures the instrument difference
   directly and would let `evals/README.md` stop asserting it.
+- **It has now been run once, and the scores held** (24 August 2026).
+  The letter development bed at scoring 15, same commit, same bed digest
+  `57b37e87…`, same weights SHA-256, same pinned sidecar tag: M1 Pro
+  (Metal, 23 August) against RTX 3090 (CUDA, 24 August). **All 56
+  comparable extraction strata report identical precision on identical
+  denominators.** Pooled obligations 1.00 (n=509), end-to-end 1.00,
+  review 0%, both harm gates 0.00 at n=240 and n=101, containment 0
+  escaped of 4,036 — on both machines. So on this bed, at this scoring
+  version, score equivalence across backends is measured rather than
+  assumed. It is one pack on one bed and not a general law, but it is
+  no longer only a sentence.
+- **The timings are not equivalent, and that half never was**: 23m15s a
+  pass on the 3090 against 107m12s on the M1 Pro. Which is exactly why a
+  pod timing must not become a `tiers.json` entry.
 
 ## Bringing it back
 
@@ -260,6 +305,24 @@ Found by the first run, all in `scripts/`:
 - The cargo environment is not in a fresh shell's profile, so
   `. "$HOME/.cargo/env"` is needed per shell until it is added to
   `~/.bashrc`.
+
+Added by the fourth run (24 August, a 3090 rather than a 5090):
+
+- **`vendor-sidecar.sh` decides on CUDA with `command -v nvcc`**, and
+  RunPod's PyTorch images ship the toolkit at `/usr/local/cuda/bin`
+  *without putting it on `PATH`*. So it takes the CPU branch and says
+  so — "no nvcc found, building a CPU-only x86_64 sidecar; an eval on
+  this will be correct and extremely slow" — on **stderr**. The script
+  is right and its message is right; what fails is anyone watching a
+  filtered log, because that sentence matches no failure word. Run
+  `export PATH=/usr/local/cuda/bin:$PATH` first, and check the log says
+  `building b10145 with CUDA=ON` before walking away. A CPU-only bed run
+  on a rented GPU is the most expensive way to get correct answers.
+- **`CUDA=ON` at build time does not prove the GPU ran the model.**
+  Verify with `nvidia-smi` once fixtures are scoring: expect the model
+  resident in VRAM (~3.5GB for 4B Q4_K_M) and utilisation in the high
+  tens of percent. A reading of 0% taken during model load means
+  nothing, so take two, a few seconds apart.
 
 Added by the third run, both in `pod-eval.sh` itself:
 

@@ -31,12 +31,21 @@
 # is a sentence about somebody's own laptop. Never merge a pod timing
 # into `tiers.json` as a user-facing tier.
 #
-# Whether scores reproduce across backends is asserted in
-# `evals/README.md` and has not been measured. Until it has, treat a
-# pod baseline and a Mac baseline as measurements on two instruments:
-# fine to compare when the bed moved anyway (the harness refuses that
-# comparison regardless, #320), and not fine as the sole evidence that a
-# prompt edit did nothing.
+# Whether scores reproduce across backends **has now been measured
+# once**, on 24 August 2026: the letter development bed at scoring 15,
+# same commit, same bed digest, same weights, M1 Pro (Metal) against a
+# rented RTX 3090 (CUDA). All 56 comparable extraction strata reported
+# identical precision on identical denominators. So a pod baseline and a
+# Mac baseline are no longer presumed to be two instruments — on that
+# bed, at that scoring version, they agreed exactly.
+#
+# It is one pack on one bed and not a general law. A prompt edit judged
+# solely across machines is still worth a second thought, and #320
+# refuses the comparison outright whenever the bed moved. The full
+# argument and the numbers are in `evals/RENTED-GPU.md`; this header
+# used to say the equivalence was asserted and never measured, which was
+# true until that run and is the kind of drift a playbook read at 2am
+# will not catch on its own.
 
 set -euo pipefail
 

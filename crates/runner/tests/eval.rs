@@ -8,13 +8,13 @@
 //! a quality gate. Fail is anything below a quality threshold.
 
 use chrono::NaiveDate;
-use runner::eval::GateOutcome;
 use runner::eval::{
     classification_metrics, paired_classification_comparison, Classification,
     ClassificationOutcome, ClassificationStratum, ConfidentWrongCeiling, EvalMetric, EvalReport,
     FixtureResult, HarmClass, MachineInfo, MetricReport, ModelInfo, Perf, ProportionEstimate,
     ScoredDecision, ScoredItem, StepScore, Thresholds, Tier, Verdict, END_TO_END_BAR,
 };
+use runner::eval::{decisions_needed, GateOutcome};
 use runner::kinds::KindFrom;
 use std::collections::BTreeMap;
 
@@ -267,6 +267,159 @@ fn a_ceiling_the_bed_cannot_support_is_unproven_not_failed() {
         .with_gates(&declarations)
         .gates["mixed"][&HarmClass::Subscription];
     assert_eq!(gate.outcome, GateOutcome::Fail);
+}
+
+/// A bed too small to *prove* a ceiling may still be large enough to
+/// *disprove* it, and the two are not the same question.
+///
+/// `decisions_needed` is derived for one direction only: with zero
+/// errors Wilson's upper bound is `3.84/(n + 3.84)`, so a ceiling of
+/// `c` is unreachable below `3.84/c - 3.84` decisions however well the
+/// model does. That is the arithmetic of demonstrating *compliance*,
+/// and it is right. It says nothing about demonstrating a *breach* —
+/// which needs far fewer decisions, because a rate three times the
+/// ceiling separates from it much sooner than a rate just under it.
+///
+/// So when the Wilson **lower** bound already exceeds the ceiling, the
+/// evidence has answered the question: at 95% confidence the true rate
+/// is over the line. Reporting that as UNPROVEN tells a reader "we
+/// could not tell", when what happened is that we could, and the answer
+/// was bad. The 24 August subscription recordings are the instance —
+/// the 9B's pooled `subscription` gate read 0.16 over 32 decisions with
+/// a lower bound of 0.069 against a 0.05 ceiling, and said UNPROVEN.
+#[test]
+fn a_ceiling_the_bed_can_disprove_fails_even_when_it_could_not_prove_it() {
+    let declarations = BTreeMap::from([(
+        "mixed".to_owned(),
+        ClassificationStratum {
+            description: "Everything.".to_owned(),
+            classes: BTreeMap::from([(
+                HarmClass::Subscription,
+                ConfidentWrongCeiling {
+                    max_wilson_95: 0.05,
+                    reason: "Appliance-risk ceiling.".to_owned(),
+                    date: NaiveDate::from_ymd_opt(2026, 7, 29).expect("date"),
+                },
+            )]),
+        },
+    )]);
+
+    // Eight distinct decisions, two of them confidently wrong. A 5%
+    // ceiling needs 73 decisions to prove, so this bed can never say
+    // PASS — but 2/8 puts the Wilson lower bound at 0.071, above the
+    // ceiling, so it can say FAIL.
+    let mut breached: Vec<ScoredItem> = (1..=8)
+        .map(|ordinal| {
+            keyed(
+                scored_classification(ordinal, "subscription", Some("subscription"), &["mixed"]),
+                &format!("Merchant {ordinal}"),
+            )
+        })
+        .collect();
+    for (ordinal, slot) in breached.iter_mut().enumerate().take(2) {
+        *slot = keyed(
+            scored_classification(ordinal, "subscription", Some("regular_spend"), &["mixed"]),
+            &format!("Merchant {ordinal}"),
+        );
+    }
+
+    let metrics = classification_metrics(&breached).with_gates(&declarations);
+    let gate = &metrics.gates["mixed"][&HarmClass::Subscription];
+
+    let interval = gate
+        .observed
+        .wilson_95
+        .expect("eight decisions carry an interval");
+    assert!(
+        interval.low > gate.max_wilson_95,
+        "the case only means anything if the lower bound really is above \
+         the ceiling: low {} vs ceiling {}",
+        interval.low,
+        gate.max_wilson_95
+    );
+    assert!(
+        gate.observed.n < decisions_needed(gate.max_wilson_95),
+        "and only if the bed is genuinely too small to prove the ceiling"
+    );
+
+    assert_eq!(
+        gate.outcome,
+        GateOutcome::Fail,
+        "a breach the evidence establishes is a breach, not an absence of evidence"
+    );
+    assert!(!gate.outcome.clears(), "and it certainly does not clear");
+}
+
+/// One error never fails a ceiling, however small the bed.
+///
+/// This is the boundary on the rule above, and it is not a statistical
+/// nicety — it is CLAUDE.md's `kettle mutate` decision of 10 August
+/// 2026 held to: *the gates tolerate single errors at the declared risk
+/// appetite*, and the v13 census enumerates 237 survivors that are
+/// exactly that. A rule letting one wrong decision fail a gate would
+/// rewrite that census as a side effect of a scoring change.
+///
+/// It is also where Wilson is least worth trusting. A single wrong
+/// decision out of one puts the lower bound at 0.207, which would fail
+/// every ceiling Kettle declares — on one observation. A 5% rate is not
+/// expressible in one decision at all: 0% and 100% are the only
+/// readings the denominator can produce.
+#[test]
+fn one_wrong_decision_never_fails_a_ceiling() {
+    let declarations = BTreeMap::from([(
+        "mixed".to_owned(),
+        ClassificationStratum {
+            description: "Everything.".to_owned(),
+            classes: BTreeMap::from([(
+                HarmClass::Subscription,
+                ConfidentWrongCeiling {
+                    max_wilson_95: 0.05,
+                    reason: "Appliance-risk ceiling.".to_owned(),
+                    date: NaiveDate::from_ymd_opt(2026, 7, 29).expect("date"),
+                },
+            )]),
+        },
+    )]);
+
+    // Three decisions, one of them wrong. Wilson's lower bound is 0.061,
+    // over the 0.05 ceiling — so the rule above would fail this gate on
+    // a single error if nothing stopped it.
+    let mut one_error: Vec<ScoredItem> = (1..=3)
+        .map(|ordinal| {
+            keyed(
+                scored_classification(ordinal, "subscription", Some("subscription"), &["mixed"]),
+                &format!("Merchant {ordinal}"),
+            )
+        })
+        .collect();
+    one_error[0] = keyed(
+        scored_classification(0, "subscription", Some("regular_spend"), &["mixed"]),
+        "Merchant 0",
+    );
+
+    let metrics = classification_metrics(&one_error).with_gates(&declarations);
+    let gate = &metrics.gates["mixed"][&HarmClass::Subscription];
+
+    let interval = gate
+        .observed
+        .wilson_95
+        .expect("three decisions carry an interval");
+    assert!(
+        interval.low > gate.max_wilson_95,
+        "the test only bites while the lower bound is over the ceiling: \
+         low {} vs ceiling {}",
+        interval.low,
+        gate.max_wilson_95
+    );
+
+    assert_eq!(
+        gate.outcome,
+        GateOutcome::Unproven {
+            decisions_needed: 73
+        },
+        "a single error is tolerated at the declared risk appetite, so \
+         this bed still has nothing to say about the ceiling"
+    );
 }
 
 /// #272: the confident-wrong cell must say which decisions produced it.

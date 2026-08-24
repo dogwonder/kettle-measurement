@@ -1861,16 +1861,20 @@ fn a_baseline_from_a_different_scoring_version_is_refused_not_compared() {
     );
     assert_eq!(
         eval::baseline::SCORING_VERSION,
-        15,
-        "the scorer now holds one definition of the same obligation (#552). \
-         The pooled join keyed a dated deadline on the day it resolves to, \
-         the harm lens took the deadline verbatim, and the evidence \
-         `support` dimension took deadline and anchor verbatim — so one \
-         faithful reading could be found, confident-wrong and unsupported \
-         at once, and on the 21 August v14 letter bed `support` failed 78 \
-         times per run with every date right. Harm cells, escape counts \
-         and support outcomes move wherever a run resolved the right day \
-         in other words, and no version 14 baseline may be compared"
+        16,
+        "a ceiling the bed can disprove now fails where it reported \
+         UNPROVEN. `decisions_needed` is the arithmetic of proving \
+         compliance — with zero errors Wilson's upper bound is \
+         `3.84/(n + 3.84)` — and applying it to both directions let a \
+         gate be confidently over the line and still say \"not enough \
+         evidence\": the 24 August subscription recordings have the 9B's \
+         pooled `subscription` gate at 0.16 over 32 decisions, Wilson \
+         lower bound 0.069 against a 0.05 ceiling, reading UNPROVEN. One \
+         word covered two states, and only *told, and the answer is bad* \
+         is a safety finding. PASS still needs the full evidence, so a \
+         gate may now be refused on less than it needs to be cleared. \
+         Verdicts move wherever a bed too small to prove a ceiling had \
+         already breached it, and no version 15 baseline may be compared"
     );
     older = older.replace(
         &format!("\"scoring_version\": {}", eval::baseline::SCORING_VERSION),

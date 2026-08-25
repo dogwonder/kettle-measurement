@@ -401,7 +401,10 @@ fn perf_records_what_the_model_actually_cost() {
     };
 
     let report = evaluator.evaluate(&pack).expect("the eval runs");
-    let perf = &report.fixtures[0].perf;
+    let perf = report.fixtures[0]
+        .perf
+        .as_ref()
+        .expect("a receipt carries telemetry");
 
     assert_eq!(perf.model_ms, 10);
     let generation_weighted_rate = (10.0 * 2.0 + 30.0 * 5.0) / (2.0 + 5.0);
@@ -409,10 +412,13 @@ fn perf_records_what_the_model_actually_cost() {
         (perf.tokens_per_second - generation_weighted_rate).abs() < 0.0001,
         "{perf:?}"
     );
-    assert_eq!(perf.retries, 0);
+    assert_eq!(report.fixtures[0].retries, 0);
     assert!(perf.wall_ms >= perf.model_ms, "{perf:?}");
-    assert_eq!(report.fixtures[1].perf.model_ms, 10);
-    assert_eq!(report.fixtures[1].perf.tokens_per_second, 20.0);
+    assert_eq!(report.fixtures[1].perf.as_ref().unwrap().model_ms, 10);
+    assert_eq!(
+        report.fixtures[1].perf.as_ref().unwrap().tokens_per_second,
+        20.0
+    );
 }
 
 /// A model that answers exactly as `expected.json` says it should
@@ -467,10 +473,11 @@ fn a_model_answering_as_expected_passes_its_fixtures_not_unseen_pack_strata() {
     assert_eq!(first.needs_review_rate, 0.0);
     assert_eq!(first.verdict(&pack.thresholds()), Verdict::Pass);
     assert_eq!(
-        first.perf.model_ms, 0,
+        first.perf.as_ref().unwrap().model_ms,
+        0,
         "a server without timings must not produce a partial estimate"
     );
-    assert_eq!(first.perf.tokens_per_second, 0.0);
+    assert_eq!(first.perf.as_ref().unwrap().tokens_per_second, 0.0);
 
     // Both selected fixtures pass. They are still only ten decisions:
     // claiming the full pack passed would silently skip the other

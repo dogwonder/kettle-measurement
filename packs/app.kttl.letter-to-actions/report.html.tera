@@ -75,10 +75,7 @@
   --k-border-drop: 2px dashed var(--k-grey);
   --k-focus: 3px solid var(--k-interactive);
   --k-focus-offset: 2px;
-  --k-tag-quick-bg: var(--k-paper);
-  --k-tag-kettle-bg: var(--k-tint);
-  --k-tag-overnight-bg: var(--k-ink);
-  --k-tag-overnight-fg: var(--k-ground);
+  --k-tag-time-bg: var(--k-paper);
   --k-tag-review-fg: var(--k-grey);
 }
 
@@ -1717,30 +1714,14 @@
   padding: 3px 0;
 }
 
-.govuk-tag.k-tag--overnight {
-  color: var(--k-tag-overnight-fg);
-  background-color: var(--k-tag-overnight-bg);
-  border: var(--k-border-thin);
-}
-
 .govuk-tag.k-tag--time {
   align-self: flex-start;
   border: var(--k-border-thin);
 }
 
-.govuk-tag.k-tag--quick {
-  color: var(--k-ink);
-  background-color: var(--k-tag-quick-bg);
-}
-
-.govuk-tag.k-tag--kettle-worthy {
-  color: var(--k-ink);
-  background-color: var(--k-tag-kettle-bg);
-}
-
 .govuk-tag.k-tag--varies {
   color: var(--k-ink);
-  background-color: var(--k-tag-quick-bg);
+  background-color: var(--k-tag-time-bg);
 }
 
 .govuk-back-link {

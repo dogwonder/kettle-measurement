@@ -665,13 +665,13 @@ impl FixtureEvaluator {
                 &fixture.name,
                 &fixture.expected,
                 &outcome,
-                Perf {
+                Some(Perf {
                     wall_ms,
                     model_ms: model_perf.model_ms,
                     tokens_per_second: model_perf.tokens_per_second,
                     peak_rss_mb: self.peak_rss.as_ref().map(PeakRss::megabytes).unwrap_or(0),
-                    retries: model_perf.retries.total(),
-                },
+                }),
+                model_perf.retries.total(),
                 &ItemProvenance {
                     pack: &pack.manifest.id,
                     pack_version: &pack.manifest.version,
@@ -1438,7 +1438,8 @@ pub fn score_fixture(
         fixture,
         expected,
         outcome,
-        perf,
+        Some(perf),
+        0,
         &ItemProvenance {
             pack: "unversioned-pack",
             pack_version: "unversioned",
@@ -1471,7 +1472,8 @@ fn score_fixture_with_provenance(
     fixture: &str,
     expected: &Expected,
     outcome: &RunOutcome,
-    perf: Perf,
+    perf: Option<Perf>,
+    retries: u32,
     provenance: &ItemProvenance<'_>,
 ) -> FixtureResult {
     let items = match &outcome.payload {
@@ -1545,6 +1547,7 @@ fn score_fixture_with_provenance(
         containment,
         end_to_end,
         needs_review_rate,
+        retries,
         perf,
         // Stability is a property of a *set* of runs, so it cannot be
         // known here: one run scored once. `--runs` fills it in from

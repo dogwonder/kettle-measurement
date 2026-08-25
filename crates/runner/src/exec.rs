@@ -402,11 +402,11 @@ impl std::error::Error for ModelCallError {}
 /// unnoticed mid-call.
 const CANCEL_POLL: Duration = Duration::from_millis(50);
 
-/// The most one HTTP exchange may take before it counts as transport
-/// failure. Generous — a single batch on baseline hardware is well
-/// under a minute — because its real job is bounding two hangs: a
-/// wedged sidecar with nobody around to cancel, and the abandoned
-/// helper thread a cancellation leaves behind.
+/// The liveness budget for one HTTP exchange. Its job is bounding two
+/// hangs: a wedged sidecar with nobody around to cancel, and the abandoned
+/// helper thread a cancellation leaves behind. It is an operational
+/// stopping rule, not evidence that a batch should finish within this
+/// wall clock; hitting it makes the run incomplete and produces no score.
 const CALL_DEADLINE: Duration = Duration::from_secs(600);
 
 /// One constrained call: POST the rendered prompt with the step schema

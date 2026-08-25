@@ -1,23 +1,25 @@
 # Running an eval on a rented GPU
 
-Written 11 August 2026, the day the first one was run, from what it cost
-rather than from what was planned. A full letter run is ~2h on the M1
-Pro; M8's comparisons want more of them than that budget allows, so a
-rented box is worth having. Everything here is what the first attempt
-hit, in the order it hit it.
+Written 11 August 2026 from what the first rented sitting encountered.
+Its elapsed times are historical diagnostics, not forecasts: local and
+rented wall clock both move with ambient conditions, and neither can
+justify an absolute duration carried into a later sitting. Everything
+here is what that attempt hit, in the order it hit it.
 
 `scripts/pod-eval.sh` automates the happy path. This file is why each
 step is what it is, and what to do when it is not happy.
 
 ## Before anything: is it worth it?
 
-The provisioning below took an afternoon the first time and should take
-twenty minutes the second. If a run is ~30 minutes locally, it is not
-worth renting anything. The letter bed (~2h, 794 fixtures) is; the
-renewal bed (~30m, 54 fixtures) is not.
+Do not decide from an elapsed time copied out of an earlier run. Decide
+from the work due in this sitting, the provider's current price and the
+setup already available. If timing alternatives on one box, run them in
+the same sitting and keep the paired receipts; call the result a planning
+observation, never a property of the bed or machine.
 
-**Setup time is not recovered by a faster GPU.** Count the pull, the
-CUDA build and the weights download before deciding.
+**Setup work is not recovered by a faster GPU.** Count the pull, the CUDA
+build and the weights download before deciding, without pretending their
+previous durations predict this sitting.
 
 ## The privacy line
 
@@ -56,13 +58,12 @@ it that way.
   The 12.8-or-newer rule above exists only for `sm_120`. Ampere and Ada
   build fine on 12.4 through 12.9, so a 3090 or 4090 is the *easier*
   box, not a compromise. Avoid CUDA 13 on any of them.
-- **The GPU is chosen on memory bandwidth, not on compute or VRAM.** An
-  eval is ~95% generation, which is bandwidth-bound; a 4B model in
-  Q4_K_M occupies ~3.5GB, so 24GB is already excessive. Measured
-  24 August: a 3090 runs the letter development bed in ~30 minutes a
-  pass against the M1 Pro's 107, about 3.6x. The 5090's 9.1x (19 August)
-  is the honest comparison for that card and not a general "pod" figure
-  — the box is a variable, not a constant.
+- **The original sitting chose the GPU on memory bandwidth, not nominal
+  compute.** Its eval spent most of its observed time generating, while a
+  4B Q4_K_M model occupied about 3.5GB. Treat that as a hypothesis to
+  check on the intended box, not a portable speed ratio. The recorded
+  3090, 5090 and M1 Pro elapsed times were from different sittings and do
+  not form an honest comparative measurement.
 - **Take the provider's own template over a raw Docker Hub image.**
   `nvidia/cuda:*` pulls from Docker Hub, whose anonymous rate limit is
   shared per egress IP and is often already spent by another tenant on
@@ -71,8 +72,10 @@ it that way.
   forever, no error. A provider-hosted image sidesteps it entirely.
   This reverses the intuition that a leaner image is better — cached
   and mirrored beats small.
-- **A stuck initialise is a dead pod.** Give it 15 minutes, then
-  terminate and start one in a different region. You are billed for the
+- **Put a spending limit on initialise.** The original sitting used 15
+  minutes, then terminated and tried another region. That is a declared
+  cost boundary, not evidence that a pod still initialising at that wall
+  clock is dead. Choose the limit before starting; you are billed for the
   wait.
 - **Disk: 50GB+.** The CUDA build tree is several GB of intermediates
   even pinned to one architecture, and `mktemp` puts it on `/tmp`, which
@@ -188,9 +191,10 @@ to 0%.
 
 ## What a pod run can and cannot tell you
 
-- **The score is the model's. The timing is the pod's.** Never merge a
-  pod timing into `tiers.json` as a user-facing tier: that sentence is a
-  claim about somebody's own laptop.
+- **The score is the model's. The timing is the pod's.** Resource fields
+  are structurally absent from `tiers.json`; do not reintroduce them as a
+  user-facing tier. Keep pod timing in the individual run receipt, where
+  it can diagnose that sitting without pretending to predict another.
 - **A pod is a different instrument.** `evals/README.md` says scores are
   machine-independent while timings are not — that is asserted, not
   measured, and a different backend (CUDA vs Metal) is exactly where it
@@ -214,9 +218,10 @@ to 0%.
   version, score equivalence across backends is measured rather than
   assumed. It is one pack on one bed and not a general law, but it is
   no longer only a sentence.
-- **The timings are not equivalent, and that half never was**: 23m15s a
-  pass on the 3090 against 107m12s on the M1 Pro. Which is exactly why a
-  pod timing must not become a `tiers.json` entry.
+- **The timings do not compare.** The 3090 and M1 Pro receipts came from
+  separate sittings, so their elapsed values are diagnostics of those
+  runs, not a speed ratio. This is exactly why a pod timing must not
+  become a `tiers.json` entry or a scheduling promise.
 
 ## Bringing it back
 

@@ -53,7 +53,7 @@ pub mod tiers;
 
 use chrono::{DateTime, Utc};
 use runner::eval::fixture::EvalSelection;
-use runner::eval::{EvalReport, FixtureResult, Perf, Spread, Stability};
+use runner::eval::{EvalReport, FixtureResult, Spread, Stability};
 use std::path::{Path, PathBuf};
 
 pub use models::ModelSpec;
@@ -248,11 +248,14 @@ pub struct Options {
     /// anything got worse
     #[arg(long)]
     pub baseline: Option<PathBuf>,
-    /// Write what this eval measured to a file, to compare against later
+    /// Write what this eval measured to a file, to compare against later.
+    /// Refused with `--replay` by `run`, not by clap, so the reason
+    /// reaches the terminal
     #[arg(long)]
     pub write_baseline: Option<PathBuf>,
     /// Record what this eval measured in each pack's tiers.json, the file
-    /// the model-manager screen quotes. Merges with what is already there
+    /// the model-manager screen quotes. Merges with what is already there.
+    /// Refused with `--replay` by `run`, as `--write-baseline` is
     #[arg(long)]
     pub write_tiers: bool,
     /// Score against statements in this directory instead of the pack's
@@ -309,6 +312,16 @@ pub struct Options {
 /// the order the table prints, and a run stopped halfway has finished
 /// whole packs.
 pub fn run(options: &Options, evaluator: &dyn Evaluator, now: DateTime<Utc>) -> Outcome {
+    if options.replay.is_some() && (options.write_baseline.is_some() || options.write_tiers) {
+        return Outcome::problem(concat!(
+            "A replay can re-score recorded answers, but it cannot mint a baseline or a tier: ",
+            "a baseline says when and on what it was recorded, and a tier names the machine, ",
+            "and the recording does not carry all of the original run provenance ",
+            "for either. Stamping this machine and this moment onto somebody else's answers ",
+            "would be an invention. Re-run for real to write one, or fix the projection ",
+            "so a recording carries its provenance."
+        ));
+    }
     // A replay needs no weights: the answers are already recorded, and
     // naming a model would claim one had been asked (#288).
     let models = if options.no_model || options.replay.is_some() {
@@ -605,7 +618,7 @@ fn stability_of(repeats: &[EvalReport]) -> Vec<Option<Stability>> {
 /// populated here and would be self-referential if it were.
 fn record_digest(fixture: &FixtureResult) -> String {
     let comparable = FixtureResult {
-        perf: Perf::default(),
+        perf: None,
         stability: None,
         ..fixture.clone()
     };

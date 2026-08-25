@@ -14,14 +14,14 @@ the edited prompt against that exact file.
 - `baseline-v14-letter.json` — the letter pack's last recorded floor
   (scoring v14; refused by the v15 runner until re-recorded):
   Qwen3.5-4B on the development bed, scoring v14, recorded 14 August
-  2026 on a rented RTX 5090 (12m47s, verdict PASS). This is the file a
+  2026 on a rented RTX 5090 (verdict PASS). This is the file a
   prompt edit is compared against, and the evidence `letter-harm-ceilings`
   stands on. Its predecessor moved to `history/` when it stopped being
   cited.
 - `baseline-v14-renewal.json` — the renewal pack's last recorded floor
   (scoring v14; refused likewise):
   Qwen3.5-4B on the development bed, scoring v14, recorded 14 August
-  2026 on the same rented RTX 5090 (4m11s, verdict PASS). The evidence
+  2026 on the same rented RTX 5090 (verdict PASS). The evidence
   `renewal-development-verdict` stands on. Its v13 predecessor moved to
   `history/`, where `renewal-v12-fail-verdict` still cites it as the
   record of a withdrawn claim.
@@ -96,9 +96,10 @@ downgrades any claim standing on that baseline.
 Kettle's users run Metal.** llama.cpp's sources of non-determinism are
 backend-specific — batch-split reductions among them — so "byte-identical
 across three runs on an RTX 5090" is what the evidence says, and
-"Kettle is deterministic" is not. A repeat on Apple silicon is 5½ hours
-for the letter bed, which is why it has not happened. Until it does,
-every stability statement here is a statement about one backend.
+"Kettle is deterministic" is not. The Apple-silicon repeat has not been
+made; an earlier sitting's elapsed time is not a forecast for scheduling
+it. Until it is made, every stability statement here is a statement about
+one backend.
 
 The same caveat, from the other direction, applies to scores: this file
 asserts that scores are machine-independent while timings are not, and
@@ -170,10 +171,12 @@ moved. The fixtures are chosen for what a go/no-go needs, concentrated
 rather than sampled: invented unknowable merchants, injection probes
 and their clean twins, nothing-to-find fixtures where a phantom shows,
 multi-value traps, and a benign fixture that merely *discusses*
-instructions. An audition verdict records four numbers — JSON-validity
-rate under the grammar, phantom count on the invented merchants,
-generation speed, and head-to-head agreement with the incumbent on the
-same items.
+instructions. An audition verdict records JSON-validity rate under the
+grammar, phantom count on the invented merchants, and head-to-head
+agreement with the incumbent on the same items. Generation speed may be
+reported only as a paired, same-sitting scheduling observation when the
+candidate and incumbent ran in that sitting on that machine. It is never
+a property of either model and never travels to a later audition.
 
 What it can never say, on purpose: relations never print on a partial
 bed, so an audition cannot confirm an adversarial fix or clear a
@@ -183,6 +186,12 @@ full bed run: yes or no*. An empty or unresolvable declaration is a
 refusal, never a zero-fixture pass; audition draws on development
 fixtures only, and a manifest naming an exam fixture is refused, so
 the holdout stays unseen.
+
+Archive audition recordings by default, whether or not the candidate
+earns a full-bed run. The moment a number is cited, the run is no longer
+scratch; archiving only after that happens is how the recording gets lost.
+A go/no-go finding that keeps only its aggregate cannot be re-asked when
+scoring or the issue's interpretation changes.
 
 Commit a new baseline when the numbers improve, in the same change that
 improved them. A baseline nobody re-records is a floor that drifts away
@@ -320,10 +329,10 @@ development selection only — the exam stays sealed. Scoring v12 refuses
 every baseline recorded before it, so these two runs are measurements
 rather than comparisons, and nothing here is diffed against v11.
 
-| pack | step (pooled) | e2e | review | time | verdict |
-|---|---|---|---|---|---|
-| letter-to-actions v0.2.0 (366 fixtures) | obligations 1.00 (n=462; 95% CI 0.99–1.00) | 1.00 | 0% | 95m09s → 117m24s | FAIL → **PASS** |
-| renewal-diff v0.1.0 (53 fixtures) | policy-terms 0.89 (n=324; 95% CI 0.85–0.92) | 0.97 | 2% | 29m13s | FAIL |
+| pack | step (pooled) | e2e | review | verdict |
+|---|---|---|---|---|
+| letter-to-actions v0.2.0 (366 fixtures) | obligations 1.00 (n=462; 95% CI 0.99–1.00) | 1.00 | 0% | FAIL → **PASS** |
+| renewal-diff v0.1.0 (53 fixtures) | policy-terms 0.89 (n=324; 95% CI 0.85–0.92) | 0.97 | 2% | FAIL |
 
 The two packs failed on **opposite** classes — letters invented, renewal
 missed — which is the most useful thing these runs said:
@@ -612,8 +621,10 @@ numbers are ones you would sign off.
 
 Scoring version 2, dated 29 July 2026, retires review rate as a verdict
 input. The committed baseline and tiers retain their observed scores,
-review rates, timings and model provenance; only the verdicts that can
-be recomputed from those recorded facts were re-scored.
+review rates and model provenance; only the verdicts that can be
+recomputed from those recorded facts were re-scored. Historical files
+once retained timings too; those are now run-receipt telemetry, not tier
+evidence.
 
 Scoring version 3, dated 29 July 2026, retires classification accuracy
 and its general `classify >= 0.90` gate. Classification now means the
@@ -641,7 +652,7 @@ Those defects are fixed (#261) and the bed re-authored (#253, pack
 1.3.0); the floor's margin is measured and stated below. The version-5
 **model** baseline was recorded 31 July 2026: the bartowski 7B over
 the full 80-fixture development selection, normalise pooled 0.70
-(n=861; 95% CI 0.67–0.73), e2e mean 1.00, review 41%, 43m02s — FAIL
+(n=861; 95% CI 0.67–0.73), e2e mean 1.00, review 41% — FAIL
 against the 0.85 normalise bar. Read against the floor below, the
 model's whole contribution today is naming (0.42 → 0.70, still short
 of the bar) and cutting the review pile from 100% to 41%; the end
@@ -649,7 +660,7 @@ result was already perfect without it. That is the margin statement
 working as designed: this pack is deterministic-dominant, and the
 model is an assistant to it, not the auditor.
 
-### What a `SCORING_VERSION` bump costs (learned on v15, #554)
+### What a `SCORING_VERSION` bump costs (learned on v15, amended 25 August 2026)
 
 Four things go stale when the number moves, and each has its own
 mechanism. Budget all four before bumping:
@@ -659,8 +670,20 @@ mechanism. Budget all four before bumping:
    unproven — CI stays green by design. Verify the rule's delta by
    `--replay` over the archived recordings (one `runs/runN` directory at
    a time; `--replay` conflicts with `--runs`), then re-record on the
-   pod with `--runs 3` (#533). A replay must not mint the baseline: it
-   spawns no sidecar, so it carries no runtime policy.
+   pod with `--runs 3` (#533). A replay must not mint the baseline: the
+   current recording does not carry all original run provenance. The CLI
+   refuses `--replay` with either write flag rather than stamping the
+   replaying machine onto somebody else's answers.
+   On 25 August 2026 (#220 amendment) the root baseline projections had
+   their per-fixture `perf` blocks removed by script. Retry counts moved
+   to the fixture because they describe the answers and validation path;
+   other resource telemetry was dropped. The v14 files could not be
+   regenerated (refused at the current scoring version) and a replay
+   may not mint one, so the edit was made in place; their
+   `recorded_at`, `sidecar` and `runtime` still describe the original
+   run, and the archived recordings in `kettle-runs` keep the telemetry.
+   Superseded files under `history/` remain byte-preserved as described
+   above; the reader lifts their legacy `perf.retries` field when needed.
 2. **`crates/cli/tests/eval_cli.rs`** pins the number with the bump's
    reason, so every bump says why. Update it.
 3. **`crates/runner/tests/declared_tiers.rs`** — a pack whose only floor
@@ -671,19 +694,22 @@ mechanism. Budget all four before bumping:
    current-version entries (#254), and `app/src-tauri`'s
    `the_shipped_model_keeps_each_current_pack_verdict` (#549) requires
    the shipped model's letter and subscription entries to be current.
-   Only a real run on a machine somebody owns can write one (#213): a
-   tier carries wall time, which a replay cannot produce. On an M1 Pro
-   that is about 105 minutes for the letter bed. Move `evals/runs/run1`
-   aside first — it accumulates scratch recordings, and a directory that
-   mixes runs refuses `--replay` later. The public demo reads the same
-   file (`app/src/lib/fake.ts`) and cannot know the runner's version, so
-   `app/src/lib/tiers-sync.test.ts` holds the quoted entry to it.
+   A scoring change invalidates score meaning, not resource telemetry;
+   tiers no longer carry wall time, memory, or token rate. Archived
+   answers are sufficient to recompute their score fields. The remaining
+   tooling gap is provenance propagation: recordings currently identify
+   the model and request policy but not every original tier provenance
+   field, so `--write-tiers --replay` refuses instead of inventing them.
+   Fix that projection rather than paying for a live run merely to refresh
+   a duration. The public demo reads the same file (`app/src/lib/fake.ts`)
+   and cannot know the runner's version, so `app/src/lib/tiers-sync.test.ts`
+   holds the quoted entry to it.
 
-Replay verifies the rule in seconds; the tiers run is the floor on how
-fast a bump can merge. And a run that backs a committed baseline or tier
-is archived to `dogwonder/kettle-runs` with a MANIFEST before cleanup —
-the archived recordings are what made the replay verification above
-cost nothing.
+Replay verifies the rule in seconds. A run that backs a committed
+baseline, tier, or cited finding is archived to `dogwonder/kettle-runs`
+with a MANIFEST before cleanup — the archived recordings are what make
+later re-scoring possible. A missing projection path is engineering debt,
+not evidence that another GPU sitting is scientifically required.
 
 ## Repeats
 
@@ -701,8 +727,8 @@ agreed and disagreed about — the ends of the range, never the mean —
 and any number that moved is marked in the table where it is read:
 
 ```
-model                            normalise (pooled)              e2e   review  time  verdict
-qwen2.5-3b-instruct-q4_k_m.gguf  0.71 (n=100; 95% CI 0.62–0.79) ⚠  0.96  12%  4m10s PASS
+model                            normalise (pooled)              e2e   review  verdict
+qwen2.5-3b-instruct-q4_k_m.gguf  0.71 (n=100; 95% CI 0.62–0.79) ⚠  0.96  12%  PASS
 ```
 
 with a sentence underneath naming what moved and by how much. Steps
@@ -717,10 +743,11 @@ either; it is a fault to chase, not the pack scoring worse.
 
 ## tiers.json — the other thing an eval writes
 
-`--write-tiers` records what was measured in `packs/<pack>/tiers.json`,
-which ships with the pack and is read by the model-manager screen to
-make one sentence true: *"on a machine like yours, this task is
-typically 95% automatic"* (#39, brief §6).
+`--write-tiers` records reproducible score evidence in
+`packs/<pack>/tiers.json`, which ships with the pack and is read by the
+model-manager screen to say how much of this pack a measured model kept
+automatic (#39, brief §6). It does not predict how long a future run will
+take.
 
 ```sh
 cargo run -p kettle -- eval --all --models models.toml --write-tiers
@@ -732,20 +759,16 @@ Four things about it are easy to get wrong:
   The brief spells the sentence out both ways — "68% automatic — you'll
   check about 1 in 3 items yourself" — and those two halves only
   reconcile as the review rate.
-- **Every number is the worst run and the worst fixture**, for the same
-  reason the reported run is (above): the screen makes a claim to a
-  person about their own laptop. There is no mean anywhere in the file,
-  so the UI cannot quote the flattering number by accident. This is
-  deliberately more conservative than the eval table, whose binomial
-  step counts are pooled and whose review column is labelled as a
-  fixture mean.
-- **It merges.** An entry is replaced only when the same model file on
-  the same machine is measured again; every other entry is left exactly
-  as it was. Brief §5 keeps an old 8GB laptop as the honesty check, and
-  its numbers are the ones that make the baseline tier claim tested fact
-  rather than assumption — measuring on a 32GB machine must not delete
-  them. A `tiers.json` that cannot be parsed stops the command and is
-  left untouched, for the same reason.
+- **Every score is the worst run and worst fixture**, for the same reason
+  the reported run is (above). Proportions retain their denominators and
+  intervals. Resource scalars are deliberately absent: wall time, model
+  time, token rate and peak memory are not reproducible evidence across
+  sittings, however completely the machine is described.
+- **It merges.** An entry is replaced only when the same model file under
+  the same evidence boundary is measured again; every other entry is left
+  exactly as it was. Machine, sidecar and runtime remain provenance for
+  the answers, not a licence to compare resource telemetry. A `tiers.json`
+  that cannot be parsed stops the command and is left untouched.
 - **Provenance is per entry, not per file.** Each measurement carries the
   `pack_version` it ran against and the `scoring_version` it was scored
   under. A single header cannot be honest in a file that merges: measuring
@@ -753,8 +776,8 @@ Four things about it are easy to get wrong:
   scored under a version they were never scored under — and the
   honesty-check machines are precisely the ones that cannot be
   re-measured on demand. `scoring_version` exists so the app can *refuse*
-  numbers that are no longer comparable, which is a promise only the
-  entry can keep.
+  score meanings that are no longer comparable. It does not version or
+  invalidate resource observations, because tiers do not contain them.
 - **Only current entries are quoted.** Two readers enforce the refusal
   (#254). The model screen quotes an entry only when its
   `scoring_version` is the current one, its `pack_version` is the
@@ -895,14 +918,16 @@ mean one merchant can move that fixture by at most 1.25 percentage
 points, not enough to flip this verdict.
 
 All four Qwen2.5-7B-Instruct Q4_K_M builds were re-ranked on 29 July
-2026, on the same machine and binary, three runs each:
+2026, on the same machine and binary, three runs each (the `time`
+column is that sitting's wall clock, kept as a same-sitting comparison
+of the four builds and comparable to nothing outside it):
 
-| build | classify mean / worst | normalise mean / worst | review mean | time | verdict |
+| build | classify mean / worst | normalise mean / worst | review mean | time (that sitting) | verdict |
 |---|---|---|---|---|---|
 | bartowski | **0.85 / 0.66** | 0.78 / 0.35 | **6%** | 5m03s | fail |
 | Qwen official | 0.82 / **0.67** | **0.85 / 0.55** | 15% | 5m14s | fail |
 | MaziyarPanahi | 0.78 / 0.64 | 0.78 / 0.35 | 10% | 5m08s | fail |
-| lmstudio-community | 0.78 / 0.54 | 0.81 / 0.44 | 18% | **4m51s** | fail |
+| lmstudio-community | 0.78 / 0.54 | 0.81 / 0.44 | 18% | 4m51s | fail |
 
 All score ranges had identical low and high values across the three
 runs, and every build completed with zero retries. Bartowski remains
@@ -929,31 +954,40 @@ complete `timings` block leaves both model timing fields at zero rather
 than presenting a partial measurement as the whole run. `retries`
 counts batches that actually made the second validation attempt.
 
+Those fields are diagnostic telemetry, not score evidence. They may be
+used to compare alternatives run back-to-back within one sitting on one
+machine, where ambient conditions are shared. They must not become a
+cross-sitting regression, acceptance gate, tier field, public score, or
+promise about a future run. A machine or scoring-version stamp does not
+make them reproducible.
+
 `evals/local/` is gitignored: put runs against your own statements
 there, never in this file.
 
-## Timing the app's estimate
+## Why the app has no fixed time estimate
 
-The task card's time estimate comes from the same eval evidence, not a
-separate stopwatch run (#220). The committed expanded baseline records
-`statement-01.csv` — 58 synthetic payments grouped into 6 merchants —
-at 21.742 seconds wall time with the bartowski 7B Q4_K_M model on an
-Apple M1 Pro with 32GB RAM.
+The task card does not turn eval timing into a promise (#220, amended
+25 August 2026). Two consecutive sittings on the same M1 Pro, with the
+same weights and byte-identical answers, differed from seconds to minutes;
+the subscription pack's recorded worst fixture moved 190,772ms →
+2,162,257ms entirely with ambient machine conditions (the 23 August v15
+tiers run, archived as `2026-08-23-subscription-qwen3.5-4b-v15-tiers-m1pro`,
+against the 24 August v16 tiers run, archived as
+`2026-08-24-subscription-qwen3.5-4b-v16-tiers-m1pro`; both values stood
+in `tiers.json` until commit `8b22bb0` removed them). Neither taking the
+worst case nor naming the machine makes an absolute value reproducible.
 
-The broad fixture added for #234 has 80 payments and 80 distinct
-merchants. Its selected three-run report on the same model and machine
-took 4m17s; the complete three-fixture eval took 4m55s. That spread means
-there is no honest single duration to put on a card before a statement
-has been chosen. The app says **time varies with statement size** and
-quotes both measured endpoints on the preview screen. It does not say
-“on this computer”: the measurements came from one named computer, not
-whichever computer is displaying the sentence.
+The app therefore says what duration varies with and shows each progress
+step as it finishes. It does not quote endpoints from an earlier sitting.
+The raw receipt still records timing for diagnosis and for comparisons
+made within that same sitting.
 
 The issue's original 3B/8GB target became obsolete when measurement
 showed the 3B failed the pack and `min_tier` was raised to 7B (#213).
 Kettle no longer promises that configuration as this pack's floor.
 
-Re-measure after changing the model, prompts, batching or fixture size:
+For a same-sitting performance investigation, run both alternatives in
+that sitting and keep the raw receipts:
 
 ```sh
 cargo run -p kettle -- eval app.kttl.subscription-audit \
@@ -961,17 +995,16 @@ cargo run -p kettle -- eval app.kttl.subscription-audit \
   --runs 3
 ```
 
-Record the machine, model, payment count and distinct-merchant count
-with the result. Runtime scales mostly with the number of distinct
-merchants the model must name and sort. Unknown future packs say timing
-varies until their own measurement exists.
+Record the machine, model, payment count, distinct-merchant count and run
+order with the comparison. Report the paired values as observations of
+that sitting, not as absolute properties carried into another one.
 
 ## Iterating without paying for the whole bed
 
-The letter bed is 366 fixtures and 95–117 minutes on an M1 Pro. At that
-price you get one or two attempts an evening, which is enough to start
-guessing and not enough to measure. So iterate on a scratch bed of only
-the fixtures that matter:
+The full letter bed is deliberately too broad for a red-green prompt loop.
+Do not turn a previous sitting's elapsed time into tonight's schedule.
+Iterate on a scratch bed containing the failing fixtures and every clean
+semantic twin, then run the full bed when the change is ready to measure:
 
 ```sh
 mkdir -p /tmp/adv-bed
@@ -983,9 +1016,8 @@ cargo run -p kettle -- eval <pack> --model <weights> --fixture-dir /tmp/adv-bed
 ```
 
 Sixteen fixtures — seven injections, their seven clean twins and the two
-other fixtures holding failing items — ran in about four minutes and
-reproduced all three failures exactly, which is what made a red-green
-cycle possible for #458 at all.
+other fixtures holding failing items — reproduced all three failures
+exactly, which is what made a red-green cycle possible for #458 at all.
 
 Four things to get right:
 

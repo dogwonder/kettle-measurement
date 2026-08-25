@@ -27,9 +27,9 @@
   },
   "copy": {
     "time": {
-      "kind": "quick",
-      "estimate": "under a minute",
-      "on_this_computer": "On the M1 Pro we measured, two one-page letters took 18 and 26 seconds. A slower computer will take longer."
+      "kind": "varies",
+      "estimate": "by letter",
+      "note": "Time depends on the letter and what else this computer is doing. Kettle shows each step as it finishes."
     },
     "will": [
       {

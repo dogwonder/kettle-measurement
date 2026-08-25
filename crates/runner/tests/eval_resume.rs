@@ -1,7 +1,7 @@
 //! #282: a run that was interrupted can pick up where it stopped.
 //!
-//! The value is obvious — a 70-minute letter bed (#242) lost three
-//! times in one afternoon. The danger is not: a cache that reuses a
+//! The value is obvious — a large letter bed (#242) lost three times in
+//! one afternoon. The danger is not: a cache that reuses a
 //! result it should not silently reports numbers nobody measured, and
 //! that is worse than losing the run. So most of what is asserted here
 //! is what must *miss*.
@@ -49,7 +49,8 @@ fn result(score: f32) -> FixtureResult {
         containment: Default::default(),
         end_to_end: score,
         needs_review_rate: 0.25,
-        perf: Perf::default(),
+        retries: 0,
+        perf: Some(Perf::default()),
         stability: None,
     }
 }
@@ -69,6 +70,38 @@ fn a_cached_fixture_is_reused_whole_not_only_its_items() {
     assert_eq!(found.needs_review_rate, 0.25, "and so does the review rate");
     assert_eq!(found.step_scores["normalise"].score, 0.75);
     assert_eq!(found.step_scores["normalise"].expected, 10);
+
+    let _ = std::fs::remove_dir_all(&dir);
+}
+
+#[test]
+fn a_legacy_cached_retry_count_is_not_lost_on_resume() {
+    let dir = cache_dir("legacy-retries");
+    let cache = ResumeCache::at(&dir);
+    cache.put(&key(), &result(0.75)).expect("cached");
+
+    let path = std::fs::read_dir(&dir)
+        .expect("cache dir")
+        .next()
+        .expect("cache entry")
+        .expect("entry")
+        .path();
+    let mut document: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&path).expect("read cache entry"))
+            .expect("cache JSON");
+    document
+        .as_object_mut()
+        .expect("fixture object")
+        .remove("retries");
+    document["perf"]["retries"] = serde_json::json!(2);
+    std::fs::write(
+        &path,
+        serde_json::to_string_pretty(&document).expect("cache serialises"),
+    )
+    .expect("write legacy cache entry");
+
+    let found = cache.get(&key()).expect("legacy cache still hits");
+    assert_eq!(found.retries, 2, "resume retains the recorded retries");
 
     let _ = std::fs::remove_dir_all(&dir);
 }

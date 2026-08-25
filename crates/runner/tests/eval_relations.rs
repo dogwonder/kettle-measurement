@@ -737,7 +737,6 @@ fn perf() -> Perf {
         model_ms: 0,
         tokens_per_second: 0.0,
         peak_rss_mb: 0,
-        retries: 0,
     }
 }
 

@@ -82,9 +82,6 @@ struct PublicScoreValues {
     contained: usize,
     escaped: usize,
     pipeline_introduced: usize,
-    wall_ms: u64,
-    peak_rss_mb: u64,
-    tokens_per_second: f32,
     guardrails: BTreeMap<Guardrail, PublicGuardrail>,
     confidence: BTreeMap<EvalMetric, CalibrationReport>,
 }
@@ -180,7 +177,7 @@ fn project(root: &Path, current_scoring_version: u32) -> Result<PublicScores, St
             .then(policy_name(&a.policy).cmp(policy_name(&b.policy)))
     });
     Ok(PublicScores {
-        schema: "kettle/public-scores@0",
+        schema: "kettle/public-scores@1",
         current_scoring_version,
         measurements,
     })
@@ -342,20 +339,12 @@ fn score_values(report: &EvalReport) -> PublicScoreValues {
     let mut contained = 0;
     let mut escaped = 0;
     let mut pipeline_introduced = 0;
-    let mut wall_ms = 0;
-    let mut peak_rss_mb = 0;
-    let mut tokens_per_second = f32::MAX;
     let mut guardrails: BTreeMap<Guardrail, PublicGuardrail> = BTreeMap::new();
     for fixture in &report.fixtures {
         candidates += fixture.containment.candidates;
         contained += fixture.containment.contained;
         escaped += fixture.containment.escaped;
         pipeline_introduced += fixture.containment.pipeline_introduced;
-        wall_ms = wall_ms.max(fixture.perf.wall_ms);
-        peak_rss_mb = peak_rss_mb.max(fixture.perf.peak_rss_mb);
-        if fixture.perf.tokens_per_second > 0.0 {
-            tokens_per_second = tokens_per_second.min(fixture.perf.tokens_per_second);
-        }
         for (guardrail, boundary) in &fixture.containment.by_guardrail {
             let row = guardrails.entry(*guardrail).or_default();
             row.failed += boundary.failed;
@@ -381,13 +370,6 @@ fn score_values(report: &EvalReport) -> PublicScoreValues {
         contained,
         escaped,
         pipeline_introduced,
-        wall_ms,
-        peak_rss_mb,
-        tokens_per_second: if tokens_per_second == f32::MAX {
-            0.0
-        } else {
-            tokens_per_second
-        },
         guardrails,
         confidence,
     }

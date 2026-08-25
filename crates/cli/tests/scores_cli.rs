@@ -74,7 +74,7 @@ fn scores_are_a_validated_projection_of_measurements_not_page_copy() {
     assert_eq!(outcome.code, cli::scores::ExitCode::Ok, "{}", outcome.text);
     let document: serde_json::Value = serde_json::from_str(&outcome.text).expect("scores JSON");
 
-    assert_eq!(document["schema"], "kettle/public-scores@0");
+    assert_eq!(document["schema"], "kettle/public-scores@1");
     assert_eq!(document["current_scoring_version"], 14);
     let measurements = document["measurements"].as_array().expect("measurements");
     assert_eq!(measurements.len(), 4);
@@ -103,9 +103,9 @@ fn scores_are_a_validated_projection_of_measurements_not_page_copy() {
     assert_eq!(model["scores"]["contained"], 2);
     assert_eq!(model["scores"]["escaped"], 1);
     assert_eq!(model["scores"]["pipeline_introduced"], 1);
-    assert_eq!(model["scores"]["wall_ms"], 1250);
-    assert_eq!(model["scores"]["peak_rss_mb"], 512);
-    assert_eq!(model["scores"]["tokens_per_second"], 20.0);
+    assert!(model["scores"].get("wall_ms").is_none());
+    assert!(model["scores"].get("peak_rss_mb").is_none());
+    assert!(model["scores"].get("tokens_per_second").is_none());
 
     assert!(measurements.iter().any(|row| {
         row["policy"]["kind"] == "deterministic_floor" && row["state"] == "current"

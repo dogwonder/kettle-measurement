@@ -42,7 +42,6 @@ fn perf() -> Perf {
         model_ms: 240_000,
         tokens_per_second: 18.4,
         peak_rss_mb: 3_200,
-        retries: 0,
     }
 }
 
@@ -591,7 +590,8 @@ fn fixture(
         containment: Default::default(),
         end_to_end,
         needs_review_rate,
-        perf: perf(),
+        retries: 0,
+        perf: Some(perf()),
         stability: None,
     }
 }
@@ -672,7 +672,7 @@ fn stage_one_classification_records_remain_readable() {
             "model_ms": 1,
             "tokens_per_second": 1.0,
             "peak_rss_mb": 1,
-            "retries": 0
+            "retries": 2
         }
     });
 
@@ -684,6 +684,34 @@ fn stage_one_classification_records_remain_readable() {
         EvalMetric::Classification
     );
     assert_eq!(result.items[0].raw_input, "NETFLIX.COM");
+    assert_eq!(
+        result.retries, 2,
+        "the durable retry count is lifted out of a legacy perf block"
+    );
+}
+
+#[test]
+fn an_explicit_fixture_retry_count_wins_over_the_legacy_location() {
+    let fixture = serde_json::json!({
+        "fixture": "statement-01.csv",
+        "step_scores": {},
+        "end_to_end": 1.0,
+        "needs_review_rate": 0.0,
+        "retries": 0,
+        "perf": {
+            "wall_ms": 1,
+            "model_ms": 1,
+            "tokens_per_second": 1.0,
+            "peak_rss_mb": 1,
+            "retries": 3
+        }
+    });
+
+    let result: FixtureResult = serde_json::from_value(fixture).expect("fixture reads");
+    assert_eq!(
+        result.retries, 0,
+        "the current wire shape is authoritative when both spellings exist"
+    );
 }
 
 // --- Thresholds --------------------------------------------------------
@@ -1082,7 +1110,8 @@ fn fixture_scoring(step: &str, score: f32) -> FixtureResult {
         containment: Default::default(),
         end_to_end: 1.0,
         needs_review_rate: 0.0,
-        perf: perf(),
+        retries: 0,
+        perf: Some(perf()),
         stability: None,
     }
 }
@@ -1108,7 +1137,8 @@ fn single_decision(correct: bool) -> FixtureResult {
         containment: Default::default(),
         end_to_end: score,
         needs_review_rate: 0.0,
-        perf: perf(),
+        retries: 0,
+        perf: Some(perf()),
         stability: None,
     }
 }
@@ -1316,7 +1346,11 @@ fn an_eval_report_uses_the_field_names_from_the_brief() {
     );
     assert_eq!(fixture["end_to_end"], f64::from(0.96f32));
     assert_eq!(fixture["needs_review_rate"], f64::from(0.12f32));
-    assert_eq!(fixture["perf"]["retries"], 0);
+    assert_eq!(fixture["retries"], 0);
+    assert!(
+        fixture["perf"]["wall_ms"].is_number(),
+        "a receipt carries telemetry: {fixture}"
+    );
 }
 
 #[test]

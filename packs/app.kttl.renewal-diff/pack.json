@@ -39,7 +39,7 @@
     "time": {
       "kind": "varies",
       "estimate": "by document",
-      "on_this_computer": "We haven't timed this task yet, so there's no figure to give you — we'd rather say nothing than guess."
+      "note": "Time depends on the documents and what else this computer is doing. Kettle shows each step as it finishes."
     },
     "will": [
       {

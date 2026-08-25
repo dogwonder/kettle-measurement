@@ -31,7 +31,6 @@
       "measured_at": "2026-08-18T17:45:53Z",
       "verdict": "pass",
       "automatic": 0.8888889,
-      "wall_ms": 24408,
       "steps": {
         "obligations": {
           "score": 0.0,
@@ -3990,7 +3989,6 @@
       "measured_at": "2026-08-23T17:01:00Z",
       "verdict": "pass",
       "automatic": 0.8888889,
-      "wall_ms": 25164,
       "steps": {
         "obligations": {
           "score": 1.0,
@@ -7946,7 +7944,6 @@
       "measured_at": "2026-08-24T17:33:25Z",
       "verdict": "pass",
       "automatic": 0.8888889,
-      "wall_ms": 24250,
       "steps": {
         "obligations": {
           "score": 1.0,

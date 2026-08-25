@@ -373,28 +373,25 @@ pub struct CopyBlock {
     pub run_verb: String,
 }
 
-/// How long a run takes, honestly. A real figure only where a
-/// measurement exists; otherwise the sentence says plainly that the
-/// pack has not been timed yet — #213's lesson applied before it can
-/// repeat.
+/// What makes a run's duration vary and how progress remains visible.
+/// A manifest cannot author an absolute duration class: local wall clock
+/// is not reproducible across sittings (#220).
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct CopyTime {
     pub kind: TimeKind,
     /// Tag-sized, beside the time class: "with statement size".
     pub estimate: String,
-    /// The same honesty as a full sentence — never derived from
-    /// `estimate` by string surgery.
-    pub on_this_computer: String,
+    /// Explains why duration varies and how progress remains visible.
+    /// `on_this_computer` is accepted as the legacy spelling.
+    #[serde(alias = "on_this_computer")]
+    pub note: String,
 }
 
-/// The time classes the task grid sorts by.
+/// The only honest cross-sitting duration class.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum TimeKind {
-    Quick,
-    KettleWorthy,
-    Overnight,
     Varies,
 }
 

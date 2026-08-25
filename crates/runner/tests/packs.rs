@@ -1159,6 +1159,19 @@ fn a_pack_without_copy_is_refused_and_says_what_to_write() {
 }
 
 #[test]
+fn a_pack_cannot_turn_a_past_wall_clock_into_a_duration_class() {
+    let scratch = ScratchPack::valid("absolute-time-class");
+    scratch.amend_manifest(r#""kind": "varies""#, r#""kind": "quick""#);
+
+    let error = load_pack(&scratch.dir).expect_err("quick is not reproducible across sittings");
+    let message = error.to_string();
+    assert!(
+        message.contains("quick") && message.contains("varies"),
+        "the author should be pointed from the refused promise to the honest class: {message}"
+    );
+}
+
+#[test]
 fn a_will_entry_naming_an_unknown_step_is_refused() {
     // References must resolve; coverage is not forced (#244, decision
     // 2). The provenance.test.ts shape: prose is free to group steps,

@@ -23,7 +23,6 @@
       "measured_at": "2026-07-28T17:05:51Z",
       "verdict": "pass",
       "automatic": 0.8333333,
-      "wall_ms": 22106,
       "steps": {
         "classify": 0.9,
         "normalise": 1.0
@@ -55,7 +54,6 @@
       "measured_at": "2026-07-29T17:01:02Z",
       "verdict": "fail",
       "automatic": 0.0,
-      "wall_ms": 258346,
       "steps": {
         "normalise": {
           "score": 0.0,
@@ -14562,7 +14560,6 @@
       "measured_at": "2026-07-28T18:08:51Z",
       "verdict": "fail",
       "automatic": 0.8,
-      "wall_ms": 10739,
       "steps": {
         "classify": 0.8,
         "normalise": 1.0
@@ -14594,7 +14591,6 @@
       "measured_at": "2026-07-28T14:36:19Z",
       "verdict": "fail",
       "automatic": 1.0,
-      "wall_ms": 338782,
       "steps": {
         "classify": 1.0,
         "normalise": 0.8
@@ -14626,7 +14622,6 @@
       "measured_at": "2026-07-28T17:07:51Z",
       "verdict": "fail",
       "automatic": 0.8,
-      "wall_ms": 22287,
       "steps": {
         "classify": 0.8,
         "normalise": 1.0
@@ -14658,7 +14653,6 @@
       "measured_at": "2026-07-28T17:09:56Z",
       "verdict": "fail",
       "automatic": 0.8333333,
-      "wall_ms": 23575,
       "steps": {
         "classify": 0.8,
         "normalise": 1.0
@@ -14690,7 +14684,6 @@
       "measured_at": "2026-07-28T17:12:04Z",
       "verdict": "fail",
       "automatic": 0.8333333,
-      "wall_ms": 23579,
       "steps": {
         "classify": 0.8,
         "normalise": 1.0
@@ -14722,7 +14715,6 @@
       "measured_at": "2026-07-28T18:07:19Z",
       "verdict": "fail",
       "automatic": 0.6666666,
-      "wall_ms": 5842,
       "steps": {
         "classify": 0.7,
         "normalise": 0.8
@@ -14754,7 +14746,6 @@
       "measured_at": "2026-07-29T16:45:15Z",
       "verdict": "fail",
       "automatic": 0.0,
-      "wall_ms": 14648,
       "steps": {
         "normalise": {
           "score": 0.0,
@@ -24457,7 +24448,6 @@
       "measured_at": "2026-08-14T16:29:42Z",
       "verdict": "fail",
       "automatic": 0.0,
-      "wall_ms": 24121,
       "steps": {
         "normalise": {
           "score": 0.0,
@@ -42771,7 +42761,6 @@
       "measured_at": "2026-08-23T18:49:01Z",
       "verdict": "fail",
       "automatic": 0.0,
-      "wall_ms": 190772,
       "steps": {
         "normalise": {
           "score": 0.0,
@@ -61128,7 +61117,6 @@
       "measured_at": "2026-08-24T19:21:04Z",
       "verdict": "fail",
       "automatic": 0.0,
-      "wall_ms": 2162257,
       "steps": {
         "normalise": {
           "score": 0.0,
@@ -79468,7 +79456,6 @@
       "measured_at": "2026-07-31T10:06:03Z",
       "verdict": "fail",
       "automatic": 0.0,
-      "wall_ms": 1,
       "steps": {
         "normalise": {
           "score": 0.0,

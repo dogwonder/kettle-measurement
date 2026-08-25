@@ -58,7 +58,7 @@ struct PublicPack {
 
 #[derive(Debug, Serialize)]
 struct PublicTime {
-    /// The commitment class: quick, kettle-worthy, overnight, varies.
+    /// The non-commitment class: duration varies between sittings.
     kind: TimeKind,
     /// The pack's own words beside it — "by letter", "with statement
     /// size". Never derived from anything by string surgery.

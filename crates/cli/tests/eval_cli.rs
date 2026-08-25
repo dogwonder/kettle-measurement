@@ -87,13 +87,13 @@ fn fixture(name: &str, normalise: f32, classify: f32) -> FixtureResult {
         containment: Default::default(),
         end_to_end: 0.96,
         needs_review_rate: 0.12,
-        perf: Perf {
+        retries: 0,
+        perf: Some(Perf {
             wall_ms: 250_000,
             model_ms: 240_000,
             tokens_per_second: 21.5,
             peak_rss_mb: 3_400,
-            retries: 0,
-        },
+        }),
         stability: None,
     }
 }
@@ -673,6 +673,7 @@ fn write_baseline_records_what_this_eval_measured() {
                 .with_gates(&clean_classification_declarations()),
         ),
     );
+    measured.fixtures[0].retries = 2;
 
     let mut options = options(&packs, PACK);
     let path = dir.join("evals").join("baseline.json");
@@ -687,6 +688,20 @@ fn write_baseline_records_what_this_eval_measured() {
         eval::baseline::to_json(std::slice::from_ref(&measured), at(NOW))
     );
     let json: serde_json::Value = serde_json::from_str(&written).expect("baseline JSON");
+    assert!(
+        json["reports"][0]["fixtures"][0].get("perf").is_none(),
+        "a durable baseline must not serialise sitting-local resource telemetry: {written}"
+    );
+    assert_eq!(
+        json["reports"][0]["fixtures"][0]["retries"], 2,
+        "the answer's retry count remains in the durable projection"
+    );
+    assert!(
+        serde_json::to_value(&measured).expect("raw report JSON")["fixtures"][0]
+            .get("perf")
+            .is_some(),
+        "the individual report still retains its diagnostic telemetry"
+    );
     let recall = &json["reports"][0]["metrics"]["classification"]["overall"]["kinds"]
         ["subscription"]["recall"];
     assert_eq!(recall["n"], 1);
@@ -979,20 +994,24 @@ fn a_model_that_failed_is_recorded_with_its_verdict() {
     assert_close(written["tiers"][0]["automatic"].as_f64(), 1.0 - 0.38);
 }
 
-/// The screen makes a claim to a person about their own laptop, so every
-/// number is the worst run and the worst fixture — never the kinder one,
-/// and never a mean of the two.
+/// A tier carries the worst reproducible result, never the kinder run or
+/// a mean that hides movement. Resource telemetry stays in the run receipt.
 #[test]
-fn a_tier_claims_the_worst_run_and_the_worst_fixture() {
+fn a_tier_claims_the_worst_scores_but_not_runtime() {
     let dir = scratch("write-tiers-worst");
     let packs = packs_dir(&dir, &[PACK]);
 
     let mut good = report(PACK, "qwen2.5-3b-instruct-q4_k_m.gguf");
-    // A second, messier statement: worse everywhere, and slower.
+    // A second, messier statement: worse everywhere, and slower. The
+    // scores belong in the tier; the sitting-local runtime does not.
     let mut messy = fixture("statement-02-messy.csv", 0.79, 0.83);
     messy.end_to_end = 0.90;
     messy.needs_review_rate = 0.22;
-    messy.perf.wall_ms = 310_000;
+    messy
+        .perf
+        .as_mut()
+        .expect("a receipt carries telemetry")
+        .wall_ms = 310_000;
     good.fixtures.push(messy);
 
     // And one repeat that did worse still on classify.
@@ -1013,12 +1032,50 @@ fn a_tier_claims_the_worst_run_and_the_worst_fixture() {
     assert_close(tier["steps"]["normalise"]["score"].as_f64(), 0.79);
     assert_close(tier["end_to_end"].as_f64(), 0.90);
     assert_close(tier["automatic"].as_f64(), 1.0 - 0.22);
-    assert_eq!(tier["wall_ms"], 310_000, "{tier}");
+    assert!(tier.get("wall_ms").is_none(), "{tier}");
     assert_eq!(tier["runs"], 2, "{tier}");
     assert_eq!(
         tier["steady"], false,
         "the repeats disagreed, and the file has to say so: {tier}"
     );
+}
+
+#[test]
+fn a_replay_cannot_mint_a_projection_with_live_machine_provenance() {
+    let dir = scratch("replay-projection-provenance");
+    let packs = packs_dir(&dir, &[PACK]);
+    let mut options = options(&packs, PACK);
+    options.replay = Some(dir.join("recording"));
+    options.write_tiers = true;
+
+    let outcome = run_at(
+        &options,
+        &Canned::new(vec![report(PACK, "qwen2.5-3b-instruct-q4_k_m.gguf")]),
+    );
+
+    assert_eq!(outcome.code, ExitCode::CouldNotRun, "{}", outcome.text);
+    assert!(
+        outcome.text.contains("original run provenance"),
+        "{}",
+        outcome.text
+    );
+    assert!(!packs.join(PACK).join("tiers.json").exists());
+
+    // The same refusal, the same reason, for the other projection.
+    let baseline = dir.join("replayed-baseline.json");
+    options.write_tiers = false;
+    options.write_baseline = Some(baseline.clone());
+    let outcome = run_at(
+        &options,
+        &Canned::new(vec![report(PACK, "qwen2.5-3b-instruct-q4_k_m.gguf")]),
+    );
+    assert_eq!(outcome.code, ExitCode::CouldNotRun, "{}", outcome.text);
+    assert!(
+        outcome.text.contains("original run provenance"),
+        "{}",
+        outcome.text
+    );
+    assert!(!baseline.exists());
 }
 
 /// Repeats that agreed are worth recording as such: "we checked and it
@@ -1143,6 +1200,15 @@ fn the_table_has_a_row_per_model_and_a_column_per_step() {
     assert!(outcome.text.contains("e2e (mean)"), "{}", outcome.text);
     assert!(outcome.text.contains("review (mean)"), "{}", outcome.text);
     assert!(outcome.text.contains("verdict"), "{}", outcome.text);
+    let header = outcome
+        .text
+        .lines()
+        .find(|line| line.contains("model") && line.contains("verdict"))
+        .expect("table header");
+    assert!(
+        !header.split_whitespace().any(|cell| cell == "time"),
+        "the evidence table must not put sitting-local telemetry beside its verdict: {header}"
+    );
     // Step columns are in the order the report holds them, which is
     // alphabetical: a scored report does not record pipeline order.
     let row = outcome
@@ -1154,7 +1220,10 @@ fn the_table_has_a_row_per_model_and_a_column_per_step() {
     assert!(row.contains("0.88 (n=50; 95% CI 0.76–0.94)"), "{row}");
     assert!(row.contains("0.96"), "{row}");
     assert!(row.contains("12%"), "{row}");
-    assert!(row.contains("4m10s"), "{row}");
+    assert!(
+        !row.contains("4m10s"),
+        "wall clock is raw run telemetry, not a table cell beside the verdict: {row}"
+    );
     assert!(row.contains("PASS"), "{row}");
     assert!(outcome.text.contains("0.62"), "{}", outcome.text);
     assert!(outcome.text.contains("38%"), "{}", outcome.text);

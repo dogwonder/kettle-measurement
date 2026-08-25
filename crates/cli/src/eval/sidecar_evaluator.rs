@@ -24,10 +24,9 @@ use runner::sidecar::{Sidecar, SidecarRuntime, DEFAULT_CONTEXT};
 use std::path::PathBuf;
 use std::time::Duration;
 
-/// How long to wait for the weights to load before giving up. Large
-/// models on a cold page cache are slow to start, and an eval that
-/// abandoned a 7B at thirty seconds would report "could not run" for a
-/// model that was merely still reading.
+/// Operational liveness budget for loading weights. Reaching it means
+/// this sitting did not produce a measurement; it is not evidence that
+/// the model can never load or an estimate of ordinary load time.
 const MODEL_LOAD_TIMEOUT: Duration = Duration::from_secs(300);
 
 // CONTRACT (#251): the context an eval runs at now lives beside the

@@ -18,12 +18,14 @@
 //!   measured and this eval did not. Coverage quietly disappearing is
 //!   how a safety net stops catching things.
 //!
-//! Deliberately **not** regressions: needs-review rate, timings, peak
-//! memory and retries. Review is a tracked cost and its movement is
-//! printed as a note; it is not a quality failure or verdict gate.
-//! Those move with the machine, the weather and what else is running,
-//! and a net that cries wolf about them gets switched off. Perf belongs
-//! in the tier tables, which record the machine alongside the number.
+//! Deliberately **not** regressions: needs-review rate and resource
+//! telemetry. Review is a tracked cost and its movement is printed as a
+//! note; it is not a quality failure or verdict gate. Timings, peak
+//! memory and token rate move with the machine, the weather and what else
+//! is running. They stay in individual run receipts for diagnosis and
+//! same-sitting comparisons; the durable baseline omits them rather than
+//! giving bare scalars the shape of comparable evidence. Retries remain:
+//! they describe the answers and validation path, not resource use.
 //! Nor is a *new* pack, model or fixture a regression: measuring more
 //! than last time is not doing worse than last time.
 //!
@@ -150,10 +152,21 @@ impl Baseline {
 /// from the CLI edge, the same way `today` reaches the rest of the
 /// runner.
 pub fn to_json(reports: &[EvalReport], now: DateTime<Utc>) -> String {
+    // Resource telemetry is sitting-local and never durable evidence
+    // (#220): the receipt keeps its `perf` block, the baseline does not.
+    // Dropped here, on the way out, so this is the only place that
+    // knows a projection differs from a receipt; `retries` stays,
+    // being a property of the answers rather than of the sitting.
+    let mut reports = reports.to_vec();
+    for report in &mut reports {
+        for fixture in &mut report.fixtures {
+            fixture.perf = None;
+        }
+    }
     let file = Baseline {
         scoring_version: Some(SCORING_VERSION),
         recorded_at: Some(now),
-        reports: reports.to_vec(),
+        reports,
     };
     // Pretty-printed: baselines get committed, and a diff nobody can
     // read is a diff nobody reviews.

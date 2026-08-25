@@ -866,7 +866,7 @@ fn is_zero(n: &usize) -> bool {
 }
 
 /// One fixture, scored.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct FixtureResult {
     /// The fixture's file name, e.g. "statement-02-messy.csv".
     pub fixture: String,
@@ -876,12 +876,10 @@ pub struct FixtureResult {
     /// Durable per-item records from which aggregate scores are derived
     /// (#237). The runner owns their identity, provenance and exchanges;
     /// [`ScoredDecision`] owns the metric-specific payload.
-    #[serde(default, alias = "classifications")]
     pub items: Vec<ScoredItem>,
     /// What happened between raw model candidates and the scored
     /// assertions: operational dispositions plus review containment
     /// and wrong answers that escaped into an assertion (#425).
-    #[serde(default)]
     pub containment: ContainmentMetrics,
     /// Recurring-set F1 against `expected.json`. `recurring` is
     /// deterministic Rust, so anything below 1.0 here is a Rust bug and
@@ -890,7 +888,18 @@ pub struct FixtureResult {
     /// Share of the statement that ended up in front of a person:
     /// low-confidence findings plus failed batches.
     pub needs_review_rate: f32,
-    pub perf: Perf,
+    /// Batches that failed validation and were retried. Non-zero is
+    /// worth a look even on a pass. A property of the answers rather
+    /// than of the sitting, so it stays in a baseline where `perf`
+    /// does not.
+    pub retries: u32,
+    /// Sitting-local diagnostics. Every run receipt carries this block;
+    /// a durable baseline is written with `None` by `baseline::to_json`,
+    /// the one place that decides what a projection may not carry
+    /// (#220). Whether the key is present depends on which artefact
+    /// this is, never on what the telemetry happened to read.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub perf: Option<Perf>,
     /// What the repeats disagreed about, when there were repeats (#83).
     ///
     /// `None` for a single run — one run cannot disagree with itself,
@@ -898,6 +907,66 @@ pub struct FixtureResult {
     /// claim nobody made.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stability: Option<Stability>,
+}
+
+/// The fixture-result wire shape while `retries` moves out of `perf`.
+///
+/// Baselines and resume caches written before #220 nested the count in
+/// `perf`. Reading one must lift that durable answer fact before the
+/// sitting-local telemetry is discarded; defaulting the new field first
+/// would silently turn a recorded retry into zero.
+#[derive(Deserialize)]
+struct FixtureResultWire {
+    fixture: String,
+    step_scores: BTreeMap<String, StepScore>,
+    #[serde(default, alias = "classifications")]
+    items: Vec<ScoredItem>,
+    #[serde(default)]
+    containment: ContainmentMetrics,
+    end_to_end: f32,
+    needs_review_rate: f32,
+    #[serde(default)]
+    retries: Option<u32>,
+    #[serde(default)]
+    perf: Option<FixturePerfWire>,
+    #[serde(default)]
+    stability: Option<Stability>,
+}
+
+#[derive(Deserialize)]
+struct FixturePerfWire {
+    wall_ms: u64,
+    model_ms: u64,
+    tokens_per_second: f32,
+    peak_rss_mb: u64,
+    #[serde(default)]
+    retries: Option<u32>,
+}
+
+impl<'de> Deserialize<'de> for FixtureResult {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let wire = FixtureResultWire::deserialize(deserializer)?;
+        let legacy_retries = wire.perf.as_ref().and_then(|perf| perf.retries);
+        Ok(Self {
+            fixture: wire.fixture,
+            step_scores: wire.step_scores,
+            items: wire.items,
+            containment: wire.containment,
+            end_to_end: wire.end_to_end,
+            needs_review_rate: wire.needs_review_rate,
+            retries: wire.retries.or(legacy_retries).unwrap_or_default(),
+            perf: wire.perf.map(|perf| Perf {
+                wall_ms: perf.wall_ms,
+                model_ms: perf.model_ms,
+                tokens_per_second: perf.tokens_per_second,
+                peak_rss_mb: perf.peak_rss_mb,
+            }),
+            stability: wire.stability,
+        })
+    }
 }
 
 impl FixtureResult {
@@ -2915,9 +2984,11 @@ impl<'de> Deserialize<'de> for StepScore {
     }
 }
 
-/// What the run cost. The tier tables are as much about "in four
-/// minutes" as about "95% automatic": a model that scores well and takes
-/// an hour has failed the *make tea* promise (brief §5).
+/// Resource telemetry for one run.
+///
+/// These values are useful for diagnosing a run and for comparisons made
+/// within one sitting on one machine. They are not reproducible evidence
+/// and must not be promoted into tiers, gates, or cross-sitting claims.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Perf {
     /// Wall-clock time for the whole run, milliseconds.
@@ -2925,12 +2996,9 @@ pub struct Perf {
     /// Of which was spent waiting on the model.
     pub model_ms: u64,
     pub tokens_per_second: f32,
-    /// Peak resident memory, megabytes — the number that decides
-    /// whether a tier fits an 8GB machine at all.
+    /// Peak resident memory, megabytes. Diagnostic in a run receipt,
+    /// never an absolute tier or machine-fit claim.
     pub peak_rss_mb: u64,
-    /// Batches that failed validation and were retried. Non-zero is
-    /// worth a look even on a pass.
-    pub retries: u32,
 }
 
 // ---------------------------------------------------------------------------
@@ -3012,9 +3080,9 @@ pub struct TiersFile {
     /// thing every tier's margin is read against, and the screen must
     /// not be able to offer it for install by iterating `tiers`.
     ///
-    /// Per machine because the scores are machine-independent but the
-    /// timings are not, and the "in four minutes" half of the sentence
-    /// still has to be true on the machine it is said to.
+    /// Kept per measurement so old evidence remains attributable. Resource
+    /// telemetry is deliberately absent from tiers: a machine description
+    /// cannot make an absolute runtime reproducible.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub baseline: Vec<Tier>,
 }
@@ -3059,14 +3127,10 @@ impl TiersFile {
 
 /// One model, measured against one pack, on one machine.
 ///
-/// **Every number here is the worst run and the worst fixture.** The
-/// screen makes a claim to a person about their own laptop, and the worst
-/// case is the honest basis for that sentence (#83). There is no mean
-/// anywhere in the file, deliberately: one number per field means the UI
-/// cannot quote the flattering one by accident, and a mean would hide
-/// exactly what `--runs` exists to surface — 0.95/0.95/0.95 and
-/// 1.00/1.00/0.85 average the same and only one is a model worth
-/// recommending.
+/// Proportion fields here are the worst run and worst fixture and retain
+/// their denominators and intervals. Resource scalars are not tier evidence:
+/// they vary with ambient conditions and are only sound comparatively within
+/// one sitting on one machine.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Tier {
     /// `None` is the deterministic floor (#73): the same pipeline, no
@@ -3115,10 +3179,6 @@ pub struct Tier {
     /// yourself" — and 68% against 1 in 3 only reconciles as the review
     /// rate.
     pub automatic: f32,
-    /// Wall-clock time for the worst fixture, milliseconds — the "in four
-    /// minutes" half of a tier claim (brief §5). One statement's worth,
-    /// because that is the unit the sentence is about.
-    pub wall_ms: u64,
     /// Per model step, keyed as [`FixtureResult::step_scores`] is.
     /// Version-3 measurements carry the denominator and Wilson interval;
     /// legacy numeric entries remain readable under their older scoring
@@ -3167,8 +3227,8 @@ impl Tier {
     ///
     /// `report` is already the worst *run* — `cli`'s `worst_run` picks it
     /// — so what is left is to take the worst *fixture* on every axis:
-    /// the lowest step score, the lowest end result, the highest share
-    /// sent for review, and the longest a statement took. A model that
+    /// the lowest step score, the lowest end result, and the highest share
+    /// sent for review. A model that
     /// cannot do a messy statement cannot do the pack, which is the same
     /// rule [`EvalReport::overall_verdict`] already applies to the
     /// verdict.
@@ -3216,12 +3276,6 @@ impl Tier {
             measured_at,
             verdict: report.verdict,
             automatic: 1.0 - worst_review_rate,
-            wall_ms: report
-                .fixtures
-                .iter()
-                .map(|fixture| fixture.perf.wall_ms)
-                .max()
-                .unwrap_or(0),
             steps,
             end_to_end: worst_end_to_end,
             metrics: report.metrics.clone(),

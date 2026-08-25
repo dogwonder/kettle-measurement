@@ -18,7 +18,7 @@
     "time": {
       "kind": "varies",
       "estimate": "with statement size",
-      "on_this_computer": "On the M1 Pro we measured, 6 different merchants took 22 seconds and 80 took about 4 minutes. A slower computer will take longer."
+      "note": "Time depends on the statement and what else this computer is doing. Kettle shows each step as it finishes."
     },
     "will": [
       {

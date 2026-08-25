@@ -79,11 +79,10 @@ fn packs_are_a_validated_projection_of_their_manifests_not_page_copy() {
 /// score page marks a current failure. A page that owns a list owns a
 /// claim.
 ///
-/// So the projection carries each pack's own time block. `kind` is the
-/// commitment (quick / kettle-worthy / overnight) and `estimate` is the
-/// pack's own words for it — the same fields the app's TimeTag renders,
-/// from the same manifest, so the public page cannot promise a speed
-/// the product does not.
+/// So the projection carries each pack's own time block. `kind` can only
+/// say that duration varies and `estimate` names why — the same fields
+/// the app's TimeTag renders, from the same manifest, so the public page
+/// cannot promise a speed the product cannot reproduce.
 #[test]
 fn the_projection_carries_each_pack_s_own_time_claim() {
     let outcome = cli::packs::run_json(&repo_root().join("packs"));

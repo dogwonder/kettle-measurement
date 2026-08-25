@@ -281,9 +281,12 @@ inside it:
   (`a_will_entry_naming_an_unknown_step_is_refused`). Coverage is not
   forced — prose stays free to group six steps into three sentences a
   person cares about.
-- `time` carries a real figure only where a measurement exists;
-  otherwise say plainly that the pack has not been timed yet. An
-  invented "about 4 minutes" is #213's defect in a manifest.
+- `time` does not carry an absolute runtime. Runtime, memory and token
+  rate are observations of one sitting, not reproducible evidence: naming
+  the machine or recording more provenance cannot turn them into a promise
+  for a later run. Say what the duration varies with and let progress steps
+  show that work is continuing. Resource measurements may be compared only
+  within one sitting on one machine.
 
 The progress sequence itself is never authored: it derives from the
 pipeline (`run::step_labels`, the same source a run emits from), so the

@@ -3,8 +3,8 @@
 //! ```text
 //! app.kttl.subscription-audit v1.0.0 · 2 fixtures · 3 runs · Apple M1 8GB
 //!
-//! model                             normalise (pooled)              e2e (mean)  review (mean)  time   verdict
-//! qwen2.5-3b-instruct-q4_k_m.gguf   0.88 (n=100; 95% CI 0.80–0.93)  0.96        12%            4m10s  PASS
+//! model                             normalise (pooled)              e2e (mean)  review (mean)  verdict
+//! qwen2.5-3b-instruct-q4_k_m.gguf   0.88 (n=100; 95% CI 0.80–0.93)  0.96        12%            PASS
 //! ```
 //!
 //! One row per model, one column per binomial model-step measure. Counts
@@ -55,7 +55,6 @@ pub fn render(pack: &str, reports: &[&EvalReport], runs: u32) -> String {
     headers.extend([
         "e2e (mean)".to_owned(),
         "review (mean)".to_owned(),
-        "time".to_owned(),
         "verdict".to_owned(),
     ]);
 
@@ -81,13 +80,6 @@ pub fn render(pack: &str, reports: &[&EvalReport], runs: u32) -> String {
                 mean(report.fixtures.iter().map(|f| f.needs_review_rate)) * 100.0
             ),
             moved(report, |stability| stability.needs_review_rate),
-        ));
-        row.push(duration(
-            report
-                .fixtures
-                .iter()
-                .map(|fixture| fixture.perf.wall_ms)
-                .sum(),
         ));
         row.push(report.verdict.label().to_owned());
         rows.push(row);
@@ -539,16 +531,6 @@ fn count(how_many: usize, thing: &str) -> String {
     format!("{how_many} {thing}{plural}")
 }
 
-/// Milliseconds as "4m10s" or "45s" — the "in four minutes" half of a
-/// tier claim (brief §5).
-fn duration(milliseconds: u64) -> String {
-    let seconds = (milliseconds as f64 / 1000.0).round() as u64;
-    if seconds < 60 {
-        return format!("{seconds}s");
-    }
-    format!("{}m{:02}s", seconds / 60, seconds % 60)
-}
-
 /// Rows padded into aligned columns, two spaces between.
 fn columns(rows: &[Vec<String>]) -> String {
     let width = |column: usize| {
@@ -714,13 +696,6 @@ mod tests {
             !out.contains("relations:"),
             "nothing declared, nothing to report: {out}"
         );
-    }
-
-    #[test]
-    fn minutes_and_seconds() {
-        assert_eq!(duration(45_000), "45s");
-        assert_eq!(duration(250_000), "4m10s");
-        assert_eq!(duration(3_605_000), "60m05s");
     }
 
     #[test]

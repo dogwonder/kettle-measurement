@@ -265,7 +265,7 @@ enum Actor {
 /// the test rather than defaulting, because defaulting is how a new
 /// exam sentence would enter the bed unclassified and unnoticed —
 /// which is the defect this test exists to catch.
-const CONSTRUCTIONS: [(&str, Actor); 17] = [
+const CONSTRUCTIONS: [(&str, Actor); 18] = [
     ("Please ", Actor::ReaderNamed),
     ("You have ", Actor::ReaderNamed),
     ("You must ", Actor::ReaderNamed),
@@ -281,6 +281,14 @@ const CONSTRUCTIONS: [(&str, Actor); 17] = [
     ("The amount shown as due ", Actor::ReaderUnnamed),
     ("The enclosed ", Actor::ReaderUnnamed),
     ("The sum of ", Actor::ReaderUnnamed),
+    // #552, and the reason this taxonomy is not the whole story. Both
+    // this and "Payment of " are ReaderUnnamed, so `invoice_totals`
+    // reads as *agreeing* across the two voices and always has — yet
+    // one scores 12 of 12 and the other 5 of 12. The binary cannot see
+    // the difference between an ask stated deontically and the same ask
+    // stated as an outcome, which is the difficulty the exam set plants
+    // and development now plants too.
+    ("The total shown opposite ", Actor::ReaderUnnamed),
     ("We ask that ", Actor::ReaderUnnamed),
     ("We have booked your ", Actor::ReaderUnnamed),
 ];
@@ -442,11 +450,18 @@ fn a_gate_that_cannot_read_this_bed_is_refused_rather_than_applied() {
     // wrong answer can still clear it. Both sets load, with the six
     // reorder twins (#427) and eighteen adversarial twins (#433, the
     // delimiter family included), #456's sixty passive letters,
-    // #465's two dateless-anchor letters and six controlled twins, and
-    // #504's twenty-four invoices — hence 826.
+    // #465's two dateless-anchor letters and six controlled twins,
+    // #504's twenty-four invoices and #552's twelve more.
+    //
+    // The total is read off the bed rather than written here. What this
+    // asserts is that the refusal *names its arithmetic* — a verdict a
+    // person cannot check is as unreadable as the one it replaces — and
+    // a literal turned that into a second assertion about the bed's
+    // size, which every bed growth then failed.
     assert!(
-        error.contains("20 decisions") && error.contains("of 826"),
-        "the refusal must name the arithmetic, got: {error}"
+        error.contains("20 decisions") && error.contains(&format!("of {}", fixtures.len())),
+        "the refusal must name the arithmetic over all {} fixtures, got: {error}",
+        fixtures.len()
     );
 
     // The gate this pack actually declares reads the bed it has.
@@ -1149,6 +1164,13 @@ fn every_committed_invoice_resolves_its_pointer() {
         }
     }
 
-    // Both sets, every fixture, one dated obligation each.
-    assert_eq!(checked, 24, "every committed invoice is checked");
+    // Both sets, every fixture, one dated obligation each. Counted from
+    // the spec rather than written down, so appending invoice families
+    // (#552) grows what this checks instead of failing it.
+    let spec = runner::eval::letters::committed_spec(&pack_dir()).expect("the committed spec");
+    let invoices: usize = [&spec.sets.development, &spec.sets.exam]
+        .iter()
+        .map(|set| set.shapes.get("invoice_totals").map_or(0, Vec::len))
+        .sum();
+    assert_eq!(checked, invoices, "every committed invoice is checked");
 }

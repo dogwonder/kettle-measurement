@@ -2,7 +2,7 @@
   "id": "app.kttl.letter-to-actions",
   "name": "Read a letter",
   "description": "Reads a letter and lists what it asks you to do, and by when.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "min_runner_version": "0.1.0",
   "inputs": [
     {
@@ -237,11 +237,15 @@
       "classes": {}
     },
     "invoice-totals": {
-      "description": "Shape (#406, #504, #544): an invoice whose due date is set in a column beside its totals, sharing print rows with them. The first shape in this bed that is not prose. What is scored is the deadline, not the money — the obligations schema carries no amount, deliberately — so the question is whether an absolute date survives being read out of a table. Its decisions do not join 'any-letter': on the v14 run the twelve development invoices took 'obligation' to 0.05 against a 0.02 ceiling and 'no_obligation' to 0.11 against 0.05, from the two sides of one disagreement about where the obligation sits, while every mature stratum in the bed answered 1.00. #544 settled that disagreement — the ask is scored where the letter makes it, the date is resolved from the row in Rust — and this stays ungated until the settled expectations have been measured on both sets.",
+      "description": "Shape (#406, #504, #544): an invoice whose due date is set in a column beside its totals, sharing print rows with them. The first shape in this bed that is not prose. What is scored is the deadline, not the money — the obligations schema carries no amount, deliberately — so the question is whether an absolute date survives being read out of a table. Its decisions do not join 'any-letter': on the v14 run the twelve development invoices took 'obligation' to 0.05 against a 0.02 ceiling and 'no_obligation' to 0.11 against 0.05, from the two sides of one disagreement about where the obligation sits, while every mature stratum in the bed answered 1.00. #544 settled that disagreement — the ask is scored where the letter makes it, the date is resolved from the row in Rust — and this stayed ungated until the settled expectations had been measured on both sets. They now have been (25 August 2026), and the answer is that it stays ungated. Development reads 12 of 12 on the deontic block and the exam set reads 5 of 12 on the same pointing structure worded as an outcome; #552 appended a development counterpart to that construction, which reads 3 of 12. So the condition is discharged rather than met: the shape is measured on both sets and does not hold on either voice's outcome construction, and a gate encodes a settled judgement. Promotion now waits on 'ask-as-outcome' answering reliably, not on being measured.",
       "classes": {}
     },
     "points-at-a-table": {
       "description": "A passage that defers to a layout rather than restating it: 'due by the date shown beside it'. The date appears once, in the table, so a reader that ignores the layout has nothing to fall back on — which is what stops the shape being answerable without reading the columns. Scored, expecting the obligation (#544): this is where the letter makes the ask, and the deadline is the pointing words themselves, copied exactly as the prompt asks. The date a person is given comes from 'timeline' resolving those words against the due-date row, so the expectation carries a resolved date without expecting the model to have worked anything out. Until #544 this expected nothing, on the position that the obligation belonged on the row — an expectation no model answering the prompt's own question could meet, which is what twelve identical v14 failures were reporting.",
+      "classes": {}
+    },
+    "ask-as-outcome": {
+      "description": "A development-only counterpart to 'points-at-a-table', added 25 August 2026 (#552): the same pointing structure and the same pointer words, differing only in how the ask is stated. Where the deontic block says 'Payment of the total is due', these twelve say 'The total shown opposite is expected' - an inanimate subject described reaching an outcome, with no actor anywhere in the sentence. That construction is what the exam set plants and development had none of: across its 49 distinct ask constructions there was not one, which is why the pack could clear its gate while the sealed set answered the same question 5 times in 12. The 25 August exam run isolated it - 'falls due' (36 decisions) and 'should be completed and returned' (31) both scored 1.00, so neither weak modality nor the word 'should' is the difficulty. Ungated, and diagnostic only: it exists so a prompt change addressing the construction can be developed and measured without any prompt work ever looking at the exam set (#317). Growing development toward the exam's difficulty is the permitted direction; editing the exam down to development's is not.",
       "classes": {}
     },
     "in-a-table": {

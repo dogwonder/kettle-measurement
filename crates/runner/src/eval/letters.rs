@@ -760,6 +760,17 @@ pub const SHAPE_ORDER: [&str; 13] = [
     "invoice_totals",
 ];
 
+/// How many of development's `invoice_totals` letters state the ask
+/// deontically, before the appended block states it as an outcome
+/// (#552).
+///
+/// A count rather than a flag on each family, because the families are
+/// **appended** and never reordered: `invoice_totals` is last in
+/// `SHAPE_ORDER`, so adding to the end of its list leaves every other
+/// shape's running ordinal — and therefore every other letter in the
+/// bed — byte-identical. Twelve new fixtures, no rewrites.
+pub const DEONTIC_INVOICES: usize = 12;
+
 fn shape_of(name: &str) -> Option<Shape> {
     serde_json::from_value(serde_json::Value::String(name.to_owned())).ok()
 }
@@ -1692,11 +1703,50 @@ fn passages(
             } else {
                 "by the date shown beside it"
             };
+            // #552. Three constructions, not two, and the third is the
+            // point of this shape now.
+            //
+            // The 25 August exam run put every other stratum at 1.00
+            // and this one at 0.42 recall with 0.58 confident-wrong, on
+            // twelve letters whose prose is byte-identical bar the
+            // subject noun. What separates them is the ask verb:
+            // development said *"Payment of the total **is due**"* and
+            // scored 12 of 12, exam says *"The amount shown as due
+            // **should reach us**"* and scored 5 of 12. `falls due`
+            // (36 decisions) and `should be completed and returned`
+            // (31) both scored 1.00, so neither weak modality nor the
+            // word "should" is the difficulty: it is an **inanimate
+            // subject described reaching an outcome**, where the
+            // deadline points off the passage.
+            //
+            // Development carried no such construction anywhere — 49
+            // distinct ask constructions and not one of them — so the
+            // gate cleared on a bed that lacked the hard class, and the
+            // only instance lived in the sealed set where no prompt
+            // work may look at it. These twelve appended families give
+            // development its own instance, in a third wording
+            // belonging to neither existing voice, sharing the first
+            // block's pointer so that the ask verb is the only thing
+            // that varies between them. Growing development toward the
+            // exam's difficulty is the move #317 allows; editing the
+            // exam down to development's is the one it forbids.
+            // NB `index` is the caller's `seed`, which carries a +5 offset in
+            // the exam voice — so this must be guarded on `!exam`
+            // rather than compared bare. Getting that wrong moved five
+            // *exam* due dates by six weeks, which is the one edit this
+            // change may not make.
+            let descriptive = exam || (!exam && index >= DEONTIC_INVOICES);
             out.push(Passage {
                 text: if exam {
                     format!(
                         "Our invoice for the {} is set out below. The amount shown as \
                          due should reach us {pointer}.",
+                        sender.subject
+                    )
+                } else if descriptive {
+                    format!(
+                        "Enclosed is our invoice for your {}. The total shown \
+                         opposite is expected {pointer}.",
                         sender.subject
                     )
                 } else {
@@ -1714,7 +1764,16 @@ fn passages(
                     anchor: pointer.trim_start_matches("by ").to_owned(),
                     due: Some(due_on),
                 }),
-                strata: vec!["absolute-deadline", "points-at-a-table"],
+                strata: if descriptive && !exam {
+                    // Its own diagnostic tag, so the appended block can
+                    // be read apart from the deontic one it sits beside
+                    // (#552). Sharing `points-at-a-table` would pool the
+                    // two constructions into one number and hide exactly
+                    // the difference these letters were added to expose.
+                    vec!["absolute-deadline", "points-at-a-table", "ask-as-outcome"]
+                } else {
+                    vec!["absolute-deadline", "points-at-a-table"]
+                },
             });
 
             // run-07's layout: when it is due on the left, what is owed

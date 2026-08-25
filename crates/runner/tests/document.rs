@@ -391,9 +391,25 @@ fn no_committed_letter_fixture_is_read_as_a_table() {
         checked > 700,
         "the whole letter bed was read, not a corner of it: {checked} fixtures"
     );
+    // Derived from the committed spec rather than written down: the
+    // exemption is *the invoice shape*, and what this guards is that no
+    // other shape joins it. A literal made that guard also assert the
+    // shape's size, so #552 appending twelve development invoices --
+    // which is the exemption doing exactly what it is for -- read as
+    // the exemption quietly growing.
+    let spec = runner::eval::letters::committed_spec(
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../packs/app.kttl.letter-to-actions")
+            .as_path(),
+    )
+    .expect("the committed spec");
+    let invoices: usize = [&spec.sets.development, &spec.sets.exam]
+        .iter()
+        .map(|set| set.shapes.get("invoice_totals").map_or(0, Vec::len))
+        .sum();
     assert_eq!(
-        exempt, 24,
-        "the tabular shape is the only exemption, and it has not quietly grown"
+        exempt, invoices,
+        "the tabular shape is the only exemption: every exempt fixture is an invoice          letter, and every invoice letter is exempt"
     );
     assert!(
         offenders.is_empty(),

@@ -1,0 +1,50 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-invoice_totals-architrave-13",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date shown beside it",
+        "deadline": "by the date shown beside it",
+        "due": "2026-01-26",
+        "kind": "payment",
+        "party": "Harborne Parking Services"
+      },
+      "id": "invoice_totals-architrave-13-payment-01",
+      "segment": "Enclosed is our invoice for your parking charge. The total shown opposite is expected by the date shown beside it.",
+      "strata": [
+        "invoice-totals",
+        "absolute-deadline",
+        "points-at-a-table",
+        "ask-as-outcome"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-architrave-13-no-ask-02",
+      "segment": "Due date 26 January 2026",
+      "strata": [
+        "invoice-totals",
+        "in-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-architrave-13-no-ask-03",
+      "segment": "Please quote the reference above if you need to contact us about this.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-architrave-13-no-ask-05",
+      "segment": "Nothing is outstanding on your account as at 1 August.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    }
+  ]
+}

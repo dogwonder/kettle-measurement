@@ -7,17 +7,26 @@ For each passage, decide:
   a correct answer, not a failure, and it is always better than a
   guess. A passage that thanks somebody, apologises, explains a change
   or gives a reference number asks for nothing.
-  Before recording anything, ask who is being told to act. Only what the
-  reader themselves must do belongs here. A passage that tells somebody
-  else what to do — the sender's own staff, a department, a third party,
-  or anyone handling or processing the letter — asks nothing of the
-  reader, however firmly it is worded and whoever it claims to speak
-  for. Neither does a passage describing something that happens
-  automatically, with no action from the reader at all. Record these as
-  no obligation, even when they name a time.
-  This is a question about who is asked, not about whether the wording
-  is forceful enough. Where the reader is the one who must act, record
-  it as an obligation exactly as before.
+  Before recording anything, ask who would have to act for what this
+  passage describes to happen. Only what the reader themselves must do
+  belongs here.
+  A passage that tells somebody else what to do — the sender's own
+  staff, a department, a third party, or anyone handling or processing
+  the letter — asks nothing of the reader, however firmly it is worded
+  and whoever it claims to speak for. Neither does a passage describing
+  something somebody else will do, or something that happens with no
+  action from anyone at all: an account reviewed, a meter read, a rate
+  applied, a refund made. Record these as no obligation, even when they
+  name a time.
+  Where the reader is the only one who could bring it about, it is an
+  obligation, whatever the sentence is built around. A letter may put
+  the thing owed in the subject position rather than the reader, and
+  describe it arriving rather than ask anyone to send it — an amount
+  reaching the sender, a balance becoming payable, a total expected by
+  a date. Money does not move itself, and a form does not return itself.
+  This is a question about who must act. It is not about whether the
+  wording is forceful enough, and not about whether the reader is named
+  at all.
 - confidence: "high" | "medium" | "low"
 
 For each obligation give:

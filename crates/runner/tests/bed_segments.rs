@@ -151,5 +151,18 @@ fn the_tabular_shape_reads_its_due_date_away_from_the_money() {
         }
     }
 
-    assert_eq!(checked, 24, "both voices, twelve families each");
+    // Derived from the committed spec, never a literal: this read 24
+    // until #552 appended twelve development families, and a hard-coded
+    // count turns a bed that grew into a test that failed. What the
+    // assertion is for is that the loop saw *every* invoice letter --
+    // a filter that silently matched none would otherwise pass every
+    // property above vacuously.
+    let spec =
+        runner::eval::letters::committed_spec(fixtures(pack).parent().expect("the pack directory"))
+            .expect("the committed spec");
+    let expected: usize = [&spec.sets.development, &spec.sets.exam]
+        .iter()
+        .map(|set| set.shapes.get("invoice_totals").map_or(0, Vec::len))
+        .sum();
+    assert_eq!(checked, expected, "every invoice letter in both voices");
 }

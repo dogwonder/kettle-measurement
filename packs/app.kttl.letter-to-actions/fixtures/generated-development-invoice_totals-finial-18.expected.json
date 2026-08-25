@@ -1,0 +1,50 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-invoice_totals-finial-18",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "the date shown beside it",
+        "deadline": "by the date shown beside it",
+        "due": "2026-07-28",
+        "kind": "payment",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "invoice_totals-finial-18-payment-01",
+      "segment": "Enclosed is our invoice for your tenancy account. The total shown opposite is expected by the date shown beside it.",
+      "strata": [
+        "invoice-totals",
+        "absolute-deadline",
+        "points-at-a-table",
+        "ask-as-outcome"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-finial-18-no-ask-02",
+      "segment": "Due date 28 July 2026",
+      "strata": [
+        "invoice-totals",
+        "in-a-table"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-finial-18-no-ask-03",
+      "segment": "Please quote the reference above if you need to contact us about this.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "invoice_totals-finial-18-no-ask-05",
+      "segment": "A refund of £74.10 was sent to your bank on 26 April and should have arrived within 3 days.",
+      "strata": [
+        "invoice-totals",
+        "no-obligation"
+      ]
+    }
+  ]
+}

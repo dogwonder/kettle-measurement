@@ -447,13 +447,29 @@ pub fn verdicts(items: &[ScoredItem], traces: &[ClaimTrace]) -> BTreeMap<String,
             .filter(|trace| answers(trace.kind, &item.decision))
             .collect();
         // One scored decision over several candidate values judged the
-        // item, and which of them it judged is not in the recording.
-        // Attributing it to either is a guess in the direction that
-        // flatters whichever guard stopped the other one. The letter
-        // bed produces this never — see [`answers`] — but the rule has
-        // to hold for the pack that does.
+        // item, and which of them it judged is generally not in the
+        // recording. Attributing it to one is a guess in the direction
+        // that flatters whichever guard stopped the other.
+        //
+        // Unless they propose the *same* assertion, and then there is
+        // nothing to attribute: two candidates carrying one value reach
+        // one verdict whichever the decision meant, so judging them
+        // together decides nothing the recording does not already say.
+        // This is not #457's anti-pattern, which is re-deriving a
+        // claim's source from its text — it declines to pick, and
+        // observes that picking cannot matter.
+        //
+        // It is the renewal pack's entire unjudgeable rate. A renewal
+        // reads two documents, so the same passage is read twice and
+        // proposed twice: on the 25 August v16 recording **222 of 222**
+        // ambiguous items link byte-identical candidates and none links
+        // candidates that differ. The letter bed produces neither case
+        // — see [`answers`].
         let verdict = match judged.as_slice() {
             [trace] => item_verdict(item, trace),
+            [first, rest @ ..] if rest.iter().all(|other| other.candidate == first.candidate) => {
+                item_verdict(item, first)
+            }
             _ => CandidateVerdict::Unknown,
         };
         for trace in judged {
@@ -555,6 +571,48 @@ pub struct Recording {
     pub fixture: String,
     pub traces: Vec<ClaimTrace>,
     pub items: Vec<ScoredItem>,
+}
+
+/// Authored expectations the run asserted nothing from (#432, #474).
+///
+/// The other half of the harm, and the half no policy column can carry.
+/// A miss produces no claim: the model asserted nothing, so there is no
+/// candidate for a boundary to inspect and nothing for any guardrail to
+/// stop. Containment operates on assertions, and a miss is the absence
+/// of one. It is therefore **constant across every policy**, which is
+/// exactly why it is returned separately rather than added to
+/// [`PolicyRow`] — a column reading the same number in every row would
+/// suggest the policies had been compared on it when they cannot be.
+///
+/// Reporting it is not optional, though. On 25 August 2026 the letter
+/// pack's `escaped` column read 0 under every policy while the eval
+/// reported seven wrong answers on the sealed set, because every one of
+/// them was a miss (#552's `points-at-a-table` construction). A
+/// scorecard showing only the claim-derived columns would have called
+/// that pipeline clean.
+///
+/// Three things are deliberately not misses:
+///
+/// * a passage that asks nothing, answered with nothing — the correct
+///   answer, and the one a keen extractor gets wrong;
+/// * a decision routed to a person, which reached somebody and is the
+///   honest floor working rather than failing (`expected_review` marks
+///   the cases where that *is* the win, #445);
+/// * an unauthored negative, which exists to calibrate confidence and
+///   is excluded from every metric a gate reads.
+pub fn misses(items: &[ScoredItem]) -> Vec<String> {
+    items
+        .iter()
+        .filter_map(|item| match &item.decision {
+            ScoredDecision::Extraction {
+                expected: Some(_),
+                expected_review: false,
+                unauthored_negative: false,
+                actual: ExtractionOutcome::Absent,
+            } => Some(item.item_id.clone()),
+            _ => None,
+        })
+        .collect()
 }
 
 /// Several recordings, made poolable.

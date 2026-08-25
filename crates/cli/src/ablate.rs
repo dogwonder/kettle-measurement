@@ -137,10 +137,44 @@ fn ablate_report(report: &EvalReport, runs_dir: &Path) -> (String, bool) {
         pooled.traces.len(),
     ));
     text.push_str(&table(&rows));
+    text.push_str(&missed(&walk.recordings));
     text.push_str(&unsettled(&rows));
     text.push_str(&escaped_claims(&rows));
     text.push('\n');
     (text, true)
+}
+
+/// The harm the table cannot show, printed beside it (#432, #474).
+///
+/// A miss is an authored expectation the run asserted nothing from. It
+/// produces no claim, so no boundary sees it and no guardrail can act
+/// on it — it is identical under every policy, which is why it sits
+/// beside the table rather than in a column that would read the same
+/// number in every row and imply a comparison nobody made.
+///
+/// Without it the scorecard tells half a truth. On 25 August 2026 the
+/// letter pack read 0 escaped under every rung while its eval reported
+/// seven wrong answers on the sealed set, all of them misses. "Nothing
+/// escaped" and "a person was told an invoice asked nothing of them"
+/// were both true of the same run, and only the first was on the page.
+fn missed(recordings: &[ablation::Recording]) -> String {
+    let missed: Vec<String> = recordings
+        .iter()
+        .flat_map(|recording| {
+            ablation::misses(&recording.items)
+                .into_iter()
+                .map(|item| format!("{}#{item}", recording.fixture))
+        })
+        .collect();
+    if missed.is_empty() {
+        return String::new();
+    }
+    format!(
+        "\n{} authored expectation(s) the run asserted nothing from. No policy \n\
+         above changes this number: a miss produces no claim, so nothing was \n\
+         stopped and nothing escaped -- it is the harm containment cannot reach.\n",
+        missed.len(),
+    )
 }
 
 /// The gap between what a policy asserted and what the recording can

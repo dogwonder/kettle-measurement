@@ -427,11 +427,23 @@ fn an_assertion_the_eval_scored_right_is_correct_rather_than_unknown() {
 /// either is a guess — and a guess in the direction that flatters
 /// whichever guard stopped the other one.
 #[test]
-fn an_item_linking_two_candidates_attributes_its_verdict_to_neither() {
+fn an_item_linking_two_different_candidates_attributes_its_verdict_to_neither() {
     let mut first = wrong_claim_stopped_by_quote();
     first.id = "claim-a".to_owned();
+    // Genuinely a *different* candidate, which this test previously was
+    // not: it cloned one trace twice and called them two. Two proposals
+    // of the same assertion cannot disagree about a verdict, so that
+    // data exercised the judgeable case while asserting the
+    // unjudgeable one — and the rule it exists to hold is about
+    // candidates that could disagree.
     let mut second = wrong_claim_stopped_by_quote();
     second.id = "claim-b".to_owned();
+    second.candidate = serde_json::json!({
+        "kind": "payment",
+        "party": "A Different Company Entirely",
+        "deadline": "within 7 days",
+        "anchor": "the date of this letter",
+    });
 
     let mut item = scored_item(
         "claim-a",
@@ -1028,5 +1040,112 @@ fn a_row_counts_what_the_policy_got_right_as_well_as_what_it_got_wrong() {
         "one right answer asserted; the wrong one is not delivery and \
          the routed one was handed back to the person: {:?}",
         rows[1]
+    );
+}
+
+/// The half of the harm no policy column can carry (#432, #474).
+///
+/// A miss is an authored expectation the run asserted **nothing** from.
+/// It produces no claim, so the claim-lifecycle trace cannot see it and
+/// no guardrail can act on it: containment operates on assertions, and
+/// there is nothing here to contain. It is therefore constant across
+/// every policy, and belongs beside the table rather than in it — a
+/// column that read the same number in every row would suggest the
+/// policies had been compared on it, and they cannot be.
+///
+/// It has to be reported *somewhere*, though, and that is what this
+/// test is for. On 25 August 2026 the letter pack's escaped-error
+/// columns read 0 across every rung while its eval reported seven wrong
+/// answers on the sealed set, because every one of them was a miss. A
+/// scorecard that showed only the first number would have said the
+/// pipeline was clean on a bed where a person was told an invoice asked
+/// nothing of them.
+#[test]
+fn an_authored_expectation_nothing_was_asserted_from_is_a_miss_outside_every_policy() {
+    let asserted = scored_item(
+        "claim-000001",
+        Some(obligation("Ashcombe Housing Trust")),
+        ExtractionOutcome::Found {
+            extracted: obligation("Ashcombe Housing Trust"),
+        },
+    );
+    let missed = scored_item(
+        "claim-000002",
+        Some(obligation("Belwood Insurance")),
+        ExtractionOutcome::Absent,
+    );
+    // Asks nothing and nothing was asserted: the correct answer, and
+    // never a miss. Counting it would make every courtesy line in the
+    // bed read as harm.
+    let correctly_silent = scored_item("claim-000003", None, ExtractionOutcome::Absent);
+    // Surfaced to a person rather than asserted. Not a miss either:
+    // the decision reached somebody, which is the honest floor working
+    // rather than failing.
+    let referred = scored_item(
+        "claim-000004",
+        Some(obligation("Cranleigh Energy")),
+        ExtractionOutcome::NeedsReview {
+            reason: "two readings disagree".to_owned(),
+        },
+    );
+
+    let items = vec![asserted, missed, correctly_silent, referred];
+    let missed_ids = runner::eval::ablation::misses(&items);
+
+    assert_eq!(
+        missed_ids,
+        vec!["claim-000002".to_owned()],
+        "only the authored expectation the run asserted nothing from is a miss"
+    );
+}
+
+/// The renewal pack's whole unjudgeable rate, and why it is not a guess
+/// to settle it (#432, #457).
+///
+/// A renewal run reads two documents, so the same passage is read
+/// twice and proposes the same value twice. One scored decision then
+/// links both claims, and refusing to judge either cost the renewal
+/// scorecard 62% of its asserted claims — 222 of 222 ambiguous items on
+/// the 25 August v16 recording link candidates that are **byte
+/// identical**, and none links candidates that differ.
+///
+/// Settling those is not #457's anti-pattern. That rule says never
+/// re-derive which claim a decision judged from its text, and this does
+/// the opposite: it declines to pick between them, and observes that
+/// picking cannot matter, because two proposals of the same assertion
+/// reach the same verdict whichever one the decision meant. Where the
+/// candidates differ, the choice would change the answer and Unknown
+/// still stands.
+#[test]
+fn an_item_linking_two_identical_candidates_settles_both() {
+    let mut first = wrong_claim_stopped_by_quote();
+    first.id = "claim-a".to_owned();
+    let mut second = wrong_claim_stopped_by_quote();
+    second.id = "claim-b".to_owned();
+    assert_eq!(
+        first.candidate, second.candidate,
+        "the premise of this test: the same passage read from two documents"
+    );
+
+    let mut item = scored_item(
+        "claim-a",
+        Some(obligation("Harborne Parking Services")),
+        ExtractionOutcome::Found {
+            extracted: obligation("Someone Else Entirely"),
+        },
+    );
+    item.trace_ids = vec!["claim-a".to_owned(), "claim-b".to_owned()];
+
+    let verdicts = runner::eval::ablation::verdicts(&[item], &[first, second]);
+
+    assert_eq!(
+        verdicts.get("claim-a"),
+        Some(&CandidateVerdict::Wrong),
+        "identical candidates cannot disagree, so the decision settles both: {verdicts:?}"
+    );
+    assert_eq!(
+        verdicts.get("claim-b"),
+        Some(&CandidateVerdict::Wrong),
+        "and the same is true of the other: {verdicts:?}"
     );
 }

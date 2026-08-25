@@ -67,17 +67,17 @@
       "evidence": [
         {
           "kind": "baseline",
-          "path": "evals/baseline-v15-renewal.json"
+          "path": "evals/baseline-v16-renewal.json"
         }
       ],
       "recorded_against": {
         "bed": "blake3:5b52918ea896ba09d28b5e253043ffe85953e802fafb3fd9424138760e0d670e",
-        "sidecar": "10145 (ad256ded3)"
+        "sidecar": "10145 (ad256ded)"
       },
       "expects": {
         "verdict": "pass"
       },
-      "recorded": "2026-08-24",
+      "recorded": "2026-08-25",
       "invalidation": [
         "scoring version change",
         "pack or prompt version change",
@@ -86,8 +86,8 @@
         "repeats disagreeing"
       ],
       "surfaces": [],
-      "review_route": "re-measure and re-record: kettle eval app.kttl.renewal-diff --baseline evals/baseline-v15-renewal.json --write-baseline",
-      "note": "Re-recorded 24 August at scoring 15 on the **M1 Pro** at --runs 3, because SCORING_VERSION 15 (#554) is a declared invalidation trigger and refused the 19 August v14 recording. Nothing moved: across all 62 development fixtures the three runs agreed on every step score, end-to-end score and review rate, and validation enforces that — a baseline recording a moved spread downgrades its claim. Two things changed with the machine rather than the measurement. The run is local rather than the rented 5090 the v14 recording used, so the *timing* (33m54s) is this machine's and only the scores carry over; evals/RENTED-GPU.md is explicit that cross-backend score equivalence is asserted and never measured, and this is the first of these two claims to stand on Metal. And the sidecar string moved from `10145 (ad256ded)` to `10145 (ad256ded3)` — the same llama.cpp build, printed with one more character of its hash, which the exact-match content check (#489) reads as a change. Recorded here so the next reader does not take it for one. The confidence signal on this pack remains INVERTED: `high` errs at 0.02 over 331 decisions where `low` errs at 0.00 over 339, so routing the less confident decisions to review spends the review on the wrong ones (#429). That is a property this claim does not assert and does not need."
+      "review_route": "re-measure and re-record: kettle eval app.kttl.renewal-diff --baseline evals/baseline-v16-renewal.json --write-baseline",
+      "note": "Re-recorded 25 August at scoring 16 on a rented RTX 3090 (CUDA), because SCORING_VERSION 16 (#561) is a declared invalidation trigger and refused the 24 August v15 recording. Same commit, same bed digest, same weights digest and the same pinned sidecar b10145, so this is a re-score of the identical bed and not a new measurement of a different one. Verdict pass, and both harm gates clear on evidence rather than absence: obligation 0.00 confident-wrong over 322 decisions against a 0.02 ceiling, no_obligation 0.02 over 385 against 0.05. Relations 5 held, 0 failed, 1 unjudgeable - an injected fixture routed to a person, so there is no assertion to judge. Recorded at --runs 1 rather than the v15 recording's --runs 3, deliberately: v16 changed only how a verdict is derived from answers, and answer stability on this bed, weights and sidecar was established by the 24 August --runs 3 recordings at v15, where all 62 fixtures agreed across three runs on every step score, end-to-end score and review rate. A scoring-only bump does not re-open a question about the answers. The sidecar string moved again, and the other way this time: this recording prints `10145 (ad256ded)` where the v15 Metal one printed `10145 (ad256ded3)`. It is the same llama.cpp build with one fewer character of its hash, and the exact-match content check (#489) reads the difference as a change, so recorded_against was updated to match. Noted here for the same reason as last time - so the next reader does not take it for a real difference. What this claim still does not assert, and still should not. **8 wrong assertions escaped, every one of them in the `excess-unqualified` stratum**, which reads confident-wrong 1.00 over 8; the schema, pairing, quote, quote_identifies_passage and value_shape guardrails contained none of them. That is the label-ambiguity class #432 found no quote rule can catch, unchanged by v16 and outside this gate because those decisions do not join it. And the confidence signal remains INVERTED: `high` errs 0.02 over 337 decisions where `low` errs 0.00 over 325, so routing the less confident decisions to review spends the review on the wrong ones (#429). One further error in `low` would withdraw that reading. Neither property is asserted here and neither is needed. This is a pod run. The score is the model's; the timing is the pod's and enters no tier, baseline, score card or gate (#562). Cross-backend score equivalence has been measured once - on the letter development bed at v15, 56 strata identical - and never on this bed, so a future prompt edit judged solely by comparing a Metal run against this CUDA baseline is still worth a second thought."
     },
     {
       "id": "letter-harm-ceilings",
@@ -102,7 +102,7 @@
       "evidence": [
         {
           "kind": "baseline",
-          "path": "evals/baseline-v15-letter.json"
+          "path": "evals/baseline-v16-letter.json"
         }
       ],
       "recorded_against": {
@@ -112,7 +112,7 @@
       "expects": {
         "verdict": "pass"
       },
-      "recorded": "2026-08-24",
+      "recorded": "2026-08-25",
       "invalidation": [
         "scoring version change",
         "pack or prompt version change",
@@ -122,7 +122,7 @@
       ],
       "surfaces": [],
       "review_route": "re-measure and re-record: kettle eval app.kttl.letter-to-actions --write-baseline",
-      "note": "Re-recorded 24 August at scoring 15 on a rented RTX 3090 at --runs 3, because SCORING_VERSION 15 (#554) is a declared invalidation trigger and refused the 21 August v14 recording. Nothing moved across the three runs: all 413 development fixtures reported an identical low and high on every step score, end-to-end score and review rate. Both ceilings clear on evidence rather than absence — obligation 0.00 confident-wrong over 240 decisions against a 0.02 ceiling, no_obligation 0.00 over 101 against 0.05 — and containment surfaced 1 decision of 4,036 candidates with zero wrong assertions escaped. **This recording also measures something the project had only asserted.** The same commit, bed digest and weights ran on the M1 Pro at v15 the day before (Metal, the tiers run archived as 2026-08-23-letter-qwen3.5-4b-v15-tiers-m1pro): all 56 comparable extraction strata report identical precision and identical denominators on both. evals/RENTED-GPU.md says score equivalence across backends is asserted and never measured; on this bed, at this scoring version, it now is. The timings are not compared: wall time is sitting-local telemetry, kept in each run receipt and carried into no claim. The confidence signal remains absent: all 478 decisions came back `high`, so routing by it separates nothing (#429, #519). That is a property this claim neither asserts nor needs."
+      "note": "Re-recorded 25 August at scoring 16 on a rented RTX 3090 (CUDA), because SCORING_VERSION 16 (#561) is a declared invalidation trigger and refused the 24 August v15 recording. Same commit, same bed digest, same weights digest and the same pinned sidecar b10145 - a re-score of the identical bed rather than a new measurement of a different one. Verdict pass. Both ceilings clear on evidence rather than absence: obligation 0.00 confident-wrong over 240 decisions against a 0.02 ceiling, no_obligation 0.00 over 101 against 0.05. Pooled obligations 1.00 (n=509), end-to-end 1.00, review 0%. Containment surfaced 1 decision of 4,036 candidates with zero wrong assertions escaped, and relations held 14 with 0 failed and 1 unjudgeable - a fixture routed to a person, so there is no assertion to judge. Recorded at --runs 1 rather than the v15 recording's --runs 3, deliberately: v16 changed only how a verdict is derived from answers, not the answers, and stability on this bed and these weights was established by the 24 August --runs 3 recording at v15, where all 413 fixtures reported an identical low and high on every step score, end-to-end score and review rate. **This recording extends the cross-backend measurement to v16.** The same commit, bed digest and weights ran on the M1 Pro at v16 the day before, as the tiers re-measure archived in kettle-runs as 2026-08-24-letter-qwen3.5-4b-v16-tiers-m1pro (Metal). The two agree exactly: obligation precision and recall 1.00 over 509 decisions on both, no_obligation over 938 and 939, confident-wrong 0.00 throughout. At v15 the same comparison held across all 56 extraction strata (23 August Metal against 24 August CUDA). So backend score equivalence on this bed is now measured at two consecutive scoring versions rather than asserted. It remains one pack on one bed and not a general law. The timings are not compared. Wall time is sitting-local telemetry as of #562: it lives in each run receipt, where it can diagnose that sitting, and enters no tier, baseline, score card, gate or duration promise. The confidence signal remains absent: all 476 decisions came back `high`, so routing by it separates nothing (#429, #519). That is a property this claim neither asserts nor needs. What this claim does not cover, and #552 is where it is being pursued: the development set only. The exam set's invoice shape answers the same prose very differently, and a stratum at 42% recall inside a passing pack is exactly the structural blindness a pooled gate cannot see."
     },
     {
       "id": "quote-existence-enforced",

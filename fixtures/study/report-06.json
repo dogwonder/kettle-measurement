@@ -1,0 +1,392 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "study-06",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-06.csv",
+      "rows": 61,
+      "period": {
+        "from": "2025-01-02",
+        "to": "2025-12-27"
+      },
+      "hash": "blake3:42b87cd3240a8652c65297fbf5d20c36be5e63aa66bb22f3bfaa210c92907630"
+    },
+    "model": {
+      "tier": "study",
+      "id": "qwen3.5-4b-q4_k_m.gguf"
+    },
+    "started": "2026-08-25T18:53:17Z",
+    "finished": "2026-08-25T18:53:37Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 5,
+    "annualised_total": "13952.40",
+    "monthly_equivalent": "1162.70",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "Booker Wholesale Account",
+      "raw_merchant": "BOOKER WHOLESALE ACCOUNT",
+      "kind": "regular_spend",
+      "category": "retail",
+      "period": "monthly",
+      "amount_current": "612.40",
+      "annualised": "7348.80",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 27th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-02-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-03-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-04-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-05-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-06-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-07-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-08-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-09-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-10-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-11-27",
+            "amount": "612.40"
+          },
+          {
+            "date": "2025-12-27",
+            "amount": "612.40"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Whittaker Yard Rent",
+      "raw_merchant": "WHITTAKER YARD RENT",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "425.00",
+      "annualised": "5100.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 2nd",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-02-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-03-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-04-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-05-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-06-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-07-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-08-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-09-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-10-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-11-02",
+            "amount": "425.00"
+          },
+          {
+            "date": "2025-12-02",
+            "amount": "425.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Card Fees",
+      "raw_merchant": "SQ *CARD FEES",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "47.80",
+      "annualised": "573.60",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 4th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-02-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-03-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-04-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-05-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-06-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-07-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-08-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-09-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-10-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-11-04",
+            "amount": "47.80"
+          },
+          {
+            "date": "2025-12-04",
+            "amount": "47.80"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Merchant Liability Cover",
+      "raw_merchant": "MERCHANT LIABILITY COVER",
+      "kind": "utility",
+      "category": "insurance",
+      "period": "quarterly",
+      "amount_current": "138.00",
+      "annualised": "552.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "4 payments, roughly 3 months apart",
+        "interval_days": {
+          "median": 91,
+          "spread": 2
+        },
+        "transactions": [
+          {
+            "date": "2025-01-19",
+            "amount": "138.00"
+          },
+          {
+            "date": "2025-04-19",
+            "amount": "138.00"
+          },
+          {
+            "date": "2025-07-19",
+            "amount": "138.00"
+          },
+          {
+            "date": "2025-10-19",
+            "amount": "138.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "EE Mobile",
+      "raw_merchant": "EE MOBILE",
+      "kind": "utility",
+      "category": "telecoms",
+      "period": "monthly",
+      "amount_current": "31.50",
+      "annualised": "378.00",
+      "confidence": "high",
+      "price_rise": {
+        "from": "28.00",
+        "to": "31.50",
+        "month": "2025-07",
+        "extra_per_year": "42.00"
+      },
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 12th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-12",
+            "amount": "28.00"
+          },
+          {
+            "date": "2025-02-12",
+            "amount": "28.00"
+          },
+          {
+            "date": "2025-03-12",
+            "amount": "28.00"
+          },
+          {
+            "date": "2025-04-12",
+            "amount": "28.00"
+          },
+          {
+            "date": "2025-05-12",
+            "amount": "28.00"
+          },
+          {
+            "date": "2025-06-12",
+            "amount": "28.00"
+          },
+          {
+            "date": "2025-07-12",
+            "amount": "31.50"
+          },
+          {
+            "date": "2025-08-12",
+            "amount": "31.50"
+          },
+          {
+            "date": "2025-09-12",
+            "amount": "31.50"
+          },
+          {
+            "date": "2025-10-12",
+            "amount": "31.50"
+          },
+          {
+            "date": "2025-11-12",
+            "amount": "31.50"
+          },
+          {
+            "date": "2025-12-12",
+            "amount": "31.50"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "Redgrave Signwriting",
+      "raw_merchant": "REDGRAVE SIGNWRITING",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "340.00",
+      "typical_visit": "340.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Coldspring Refrigeration",
+      "raw_merchant": "COLDSPRING REFRIGERATION",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "780.00",
+      "typical_visit": "780.00",
+      "confidence": "medium"
+    }
+  ],
+  "income": [],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "Booker Wholesale Account",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "Whittaker Yard Rent",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "Card Fees",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "Merchant Liability Cover",
+      "why": "Payments three months apart look quarterly, but some plans smooth payments differently across the year. Worth checking against your bill."
+    }
+  ]
+}

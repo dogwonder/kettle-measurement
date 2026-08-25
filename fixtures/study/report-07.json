@@ -1,0 +1,420 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "study-07",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-07.csv",
+      "rows": 71,
+      "period": {
+        "from": "2025-01-01",
+        "to": "2025-12-27"
+      },
+      "hash": "blake3:dc43b294f8752678b5ce0600a4e2f240a6d99f80266fd2a7d53a18a90e0adffc"
+    },
+    "model": {
+      "tier": "study",
+      "id": "qwen3.5-4b-q4_k_m.gguf"
+    },
+    "started": "2026-08-25T18:53:37Z",
+    "finished": "2026-08-25T18:54:03Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 5,
+    "annualised_total": "12707.88",
+    "monthly_equivalent": "1058.99",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "Meadowbank Lettings",
+      "raw_merchant": "MEADOWBANK LETTINGS",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "895.00",
+      "annualised": "10740.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 1st",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-02-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-03-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-04-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-05-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-06-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-07-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-08-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-09-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-10-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-11-01",
+            "amount": "895.00"
+          },
+          {
+            "date": "2025-12-01",
+            "amount": "895.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Waterside Physiotherapy",
+      "raw_merchant": "WATERSIDE PHYSIOTHERAPY",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "55.00",
+      "annualised": "660.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "4 payments, one every month on or near the 22nd",
+        "interval_days": {
+          "median": 30,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-02-22",
+            "amount": "55.00"
+          },
+          {
+            "date": "2025-03-22",
+            "amount": "55.00"
+          },
+          {
+            "date": "2025-04-22",
+            "amount": "55.00"
+          },
+          {
+            "date": "2025-05-22",
+            "amount": "55.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Little Acorns Sensory",
+      "raw_merchant": "LITTLE ACORNS SENSORY",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "48.00",
+      "annualised": "576.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 13th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-02-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-03-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-04-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-05-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-06-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-07-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-08-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-09-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-10-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-11-13",
+            "amount": "48.00"
+          },
+          {
+            "date": "2025-12-13",
+            "amount": "48.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Bubble Nappy Subscription",
+      "raw_merchant": "BUBBLE NAPPY SUBSCRIPTION",
+      "kind": "subscription",
+      "category": "unknown",
+      "period": "monthly",
+      "amount_current": "38.99",
+      "annualised": "467.88",
+      "confidence": "low",
+      "price_rise": {
+        "from": "34.99",
+        "to": "38.99",
+        "month": "2025-10",
+        "extra_per_year": "48.00"
+      },
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 5th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-05",
+            "amount": "34.99"
+          },
+          {
+            "date": "2025-02-05",
+            "amount": "34.99"
+          },
+          {
+            "date": "2025-03-05",
+            "amount": "34.99"
+          },
+          {
+            "date": "2025-04-05",
+            "amount": "34.99"
+          },
+          {
+            "date": "2025-05-05",
+            "amount": "34.99"
+          },
+          {
+            "date": "2025-06-05",
+            "amount": "34.99"
+          },
+          {
+            "date": "2025-07-05",
+            "amount": "34.99"
+          },
+          {
+            "date": "2025-08-05",
+            "amount": "34.99"
+          },
+          {
+            "date": "2025-09-05",
+            "amount": "34.99"
+          },
+          {
+            "date": "2025-10-05",
+            "amount": "38.99"
+          },
+          {
+            "date": "2025-11-05",
+            "amount": "38.99"
+          },
+          {
+            "date": "2025-12-05",
+            "amount": "38.99"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Vodafone",
+      "raw_merchant": "VODAFONE",
+      "kind": "utility",
+      "category": "telecoms",
+      "period": "monthly",
+      "amount_current": "22.00",
+      "annualised": "264.00",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 8th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-02-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-03-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-04-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-05-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-06-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-07-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-08-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-09-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-10-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-11-08",
+            "amount": "22.00"
+          },
+          {
+            "date": "2025-12-08",
+            "amount": "22.00"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "Boots",
+      "raw_merchant": "BOOTS 2231",
+      "kind": "regular_spend",
+      "category": "retail",
+      "visits": 4,
+      "total": "156.95",
+      "typical_visit": "37.90",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Mothercare",
+      "raw_merchant": "MOTHERCARE ONLINE",
+      "kind": "one_off",
+      "category": "retail",
+      "visits": 1,
+      "total": "128.00",
+      "typical_visit": "128.00",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Kestrel Photography",
+      "raw_merchant": "KESTREL PHOTOGRAPHY",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "95.00",
+      "typical_visit": "95.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Harlow & Sons Nursery Furniture",
+      "raw_merchant": "HARLOW & SONS NURSERY FURNITURE",
+      "kind": "one_off",
+      "category": "retail",
+      "visits": 1,
+      "total": "310.00",
+      "typical_visit": "310.00",
+      "confidence": "high"
+    }
+  ],
+  "income": [
+    {
+      "merchant": "Statutory Maternity Pay",
+      "raw_merchant": "STATUTORY MATERNITY PAY",
+      "period": "monthly",
+      "amount": "1210.00",
+      "confidence": "medium"
+    }
+  ],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "Meadowbank Lettings",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "Waterside Physiotherapy",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "Little Acorns Sensory",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "Bubble Nappy Subscription",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    }
+  ]
+}

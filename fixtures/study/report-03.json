@@ -1,0 +1,386 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "study-03",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-03.csv",
+      "rows": 60,
+      "period": {
+        "from": "2025-01-02",
+        "to": "2025-12-14"
+      },
+      "hash": "blake3:c058abb2df19166c11a17b7b81c001c2bf401b8f126e67224dd6205b5f4fe3c9"
+    },
+    "model": {
+      "tier": "study",
+      "id": "qwen3.5-4b-q4_k_m.gguf"
+    },
+    "started": "2026-08-25T18:52:03Z",
+    "finished": "2026-08-25T18:52:26Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 5,
+    "annualised_total": "3986.04",
+    "monthly_equivalent": "332.17",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "King's Gate Workspace",
+      "raw_merchant": "KINGSGATE WORKSPACE",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "210.00",
+      "annualised": "2520.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 2nd",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-02-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-03-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-04-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-05-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-06-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-07-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-08-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-09-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-10-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-11-02",
+            "amount": "210.00"
+          },
+          {
+            "date": "2025-12-02",
+            "amount": "210.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Adobe",
+      "raw_merchant": "ADOBE CREATIVE CLOUD",
+      "kind": "subscription",
+      "category": "software",
+      "period": "monthly",
+      "amount_current": "65.98",
+      "annualised": "791.76",
+      "confidence": "high",
+      "price_rise": {
+        "from": "61.30",
+        "to": "65.98",
+        "month": "2025-08",
+        "extra_per_year": "56.16"
+      },
+      "evidence": {
+        "reason": "10 payments, one every month on or near the 7th",
+        "interval_days": {
+          "median": 31,
+          "spread": 33
+        },
+        "transactions": [
+          {
+            "date": "2025-02-07",
+            "amount": "61.30"
+          },
+          {
+            "date": "2025-03-07",
+            "amount": "61.30"
+          },
+          {
+            "date": "2025-04-07",
+            "amount": "61.30"
+          },
+          {
+            "date": "2025-06-07",
+            "amount": "61.30"
+          },
+          {
+            "date": "2025-07-07",
+            "amount": "61.30"
+          },
+          {
+            "date": "2025-08-07",
+            "amount": "65.98"
+          },
+          {
+            "date": "2025-09-07",
+            "amount": "65.98"
+          },
+          {
+            "date": "2025-10-07",
+            "amount": "65.98"
+          },
+          {
+            "date": "2025-11-07",
+            "amount": "65.98"
+          },
+          {
+            "date": "2025-12-07",
+            "amount": "65.98"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Xero",
+      "raw_merchant": "XERO ACCOUNTING",
+      "kind": "subscription",
+      "category": "software",
+      "period": "monthly",
+      "amount_current": "33.00",
+      "annualised": "396.00",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 14th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-02-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-03-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-04-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-05-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-06-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-07-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-08-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-09-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-10-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-11-14",
+            "amount": "33.00"
+          },
+          {
+            "date": "2025-12-14",
+            "amount": "33.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Hiscox",
+      "raw_merchant": "HISCOX PROFESSIONAL",
+      "kind": "utility",
+      "category": "insurance",
+      "period": "quarterly",
+      "amount_current": "39.60",
+      "annualised": "158.40",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "4 payments, roughly 3 months apart",
+        "interval_days": {
+          "median": 91,
+          "spread": 2
+        },
+        "transactions": [
+          {
+            "date": "2025-01-20",
+            "amount": "39.60"
+          },
+          {
+            "date": "2025-04-20",
+            "amount": "39.60"
+          },
+          {
+            "date": "2025-07-20",
+            "amount": "39.60"
+          },
+          {
+            "date": "2025-10-20",
+            "amount": "39.60"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Dropbox",
+      "raw_merchant": "DROPBOX",
+      "kind": "subscription",
+      "category": "software",
+      "period": "monthly",
+      "amount_current": "9.99",
+      "annualised": "119.88",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 9th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-02-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-03-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-04-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-05-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-06-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-07-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-08-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-09-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-10-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-11-09",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-12-09",
+            "amount": "9.99"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "Adobe",
+      "raw_merchant": "STRIPE* ADOBE",
+      "kind": "one_off",
+      "category": "software",
+      "visits": 1,
+      "total": "61.30",
+      "typical_visit": "61.30",
+      "confidence": "high"
+    },
+    {
+      "merchant": "HMRC",
+      "raw_merchant": "HMRC PAYMENT ON ACCOUNT",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 2,
+      "total": "2900.00",
+      "typical_visit": "1450.00",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Adobe",
+      "raw_merchant": "SQ *ADOBE CC",
+      "kind": "one_off",
+      "category": "software",
+      "visits": 1,
+      "total": "61.30",
+      "typical_visit": "61.30",
+      "confidence": "high"
+    }
+  ],
+  "income": [],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "King's Gate Workspace",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "Adobe",
+      "why": "Kettle can see what it costs (£791.76 a year) but not whether you still use it. Only you know that."
+    }
+  ]
+}

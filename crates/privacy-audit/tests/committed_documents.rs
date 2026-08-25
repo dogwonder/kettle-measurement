@@ -72,11 +72,52 @@ fn committed_corpus(root: &Path) -> (String, BTreeSet<String>) {
             }
         }
     }
+    // The study corpus (#431) is committed, synthetic and regenerable
+    // from `fixtures/study/make-statements.py`, exactly as a pack bed
+    // is — it simply does not live under a pack, because it is not an
+    // eval bed and `kettle bed` owns that directory. A `*.private.*`
+    // file is skipped whatever it is called: the data rules keep those
+    // out of the tree, and a corpus that read one would let its text
+    // vouch for an artefact made from somebody's real records.
+    let mut study = Vec::new();
+    collect_documents(&root.join("fixtures"), &mut study);
+    for path in study {
+        if path.to_string_lossy().contains(".private.") {
+            continue;
+        }
+        if let Ok(text) = std::fs::read_to_string(&path) {
+            corpus.push_str(&normalise(&text));
+            corpus.push('\n');
+        }
+        if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+            names.insert(name.to_owned());
+        }
+    }
+
     assert!(
         names.len() > 100,
         "the corpus is nearly empty, so this test would pass anything"
     );
     (corpus, names)
+}
+
+/// Every `.txt`, `.csv` or `.md` under a directory, recursively.
+fn collect_documents(dir: &Path, found: &mut Vec<std::path::PathBuf>) {
+    let Ok(entries) = std::fs::read_dir(dir) else {
+        return;
+    };
+    for entry in entries.filter_map(Result::ok) {
+        let path = entry.path();
+        if path.is_dir() {
+            collect_documents(&path, found);
+        } else if path
+            .extension()
+            .and_then(|e| e.to_str())
+            .is_some_and(|e| matches!(e, "txt" | "csv" | "md"))
+        {
+            found.push(path);
+        }
+    }
 }
 
 /// Fields that carry a document's own words rather than anybody's

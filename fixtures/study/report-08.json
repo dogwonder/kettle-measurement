@@ -1,0 +1,372 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "study-08",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-08.csv",
+      "rows": 68,
+      "period": {
+        "from": "2025-01-01",
+        "to": "2025-12-28"
+      },
+      "hash": "blake3:d96a50e37fc6820b6e0308fd34f189600e948048f4bb32fc9621aa5e204b3c73"
+    },
+    "model": {
+      "tier": "study",
+      "id": "qwen3.5-4b-q4_k_m.gguf"
+    },
+    "started": "2026-08-25T18:54:03Z",
+    "finished": "2026-08-25T18:54:25Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 4,
+    "annualised_total": "5433.48",
+    "monthly_equivalent": "452.79",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "Trainline",
+      "raw_merchant": "TRAINLINE SEASON",
+      "kind": "utility",
+      "category": "transport",
+      "period": "monthly",
+      "amount_current": "331.00",
+      "annualised": "3972.00",
+      "confidence": "high",
+      "price_rise": {
+        "from": "312.00",
+        "to": "331.00",
+        "month": "2025-03",
+        "extra_per_year": "228.00"
+      },
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 1st",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-01",
+            "amount": "312.00"
+          },
+          {
+            "date": "2025-02-01",
+            "amount": "312.00"
+          },
+          {
+            "date": "2025-03-01",
+            "amount": "331.00"
+          },
+          {
+            "date": "2025-04-01",
+            "amount": "331.00"
+          },
+          {
+            "date": "2025-05-01",
+            "amount": "331.00"
+          },
+          {
+            "date": "2025-06-01",
+            "amount": "331.00"
+          },
+          {
+            "date": "2025-07-01",
+            "amount": "331.00"
+          },
+          {
+            "date": "2025-08-01",
+            "amount": "331.00"
+          },
+          {
+            "date": "2025-09-01",
+            "amount": "331.00"
+          },
+          {
+            "date": "2025-10-01",
+            "amount": "331.00"
+          },
+          {
+            "date": "2025-11-01",
+            "amount": "331.00"
+          },
+          {
+            "date": "2025-12-01",
+            "amount": "331.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Octopus Energy",
+      "raw_merchant": "OCTOPUS ENERGY",
+      "kind": "utility",
+      "category": "energy",
+      "period": "monthly",
+      "amount_current": "94.30",
+      "annualised": "1131.60",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 20th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-02-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-03-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-04-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-05-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-06-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-07-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-08-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-09-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-10-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-11-20",
+            "amount": "94.30"
+          },
+          {
+            "date": "2025-12-20",
+            "amount": "94.30"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Halfords",
+      "raw_merchant": "HALFORDS SERVICE PLAN",
+      "kind": "regular_spend",
+      "category": "retail",
+      "period": "monthly",
+      "amount_current": "14.50",
+      "annualised": "174.00",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 6th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-02-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-03-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-04-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-05-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-06-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-07-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-08-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-09-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-10-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-11-06",
+            "amount": "14.50"
+          },
+          {
+            "date": "2025-12-06",
+            "amount": "14.50"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Zwift",
+      "raw_merchant": "ZWIFT",
+      "kind": "subscription",
+      "category": "fitness",
+      "period": "monthly",
+      "amount_current": "12.99",
+      "annualised": "155.88",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 15th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-02-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-03-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-04-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-05-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-06-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-07-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-08-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-09-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-10-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-11-15",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-12-15",
+            "amount": "12.99"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "Lidl",
+      "raw_merchant": "LIDL 0871",
+      "kind": "regular_spend",
+      "category": "retail",
+      "visits": 4,
+      "total": "182.05",
+      "typical_visit": "42.03",
+      "confidence": "high"
+    },
+    {
+      "merchant": "British Cycling",
+      "raw_merchant": "BRITISH CYCLING",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "78.00",
+      "typical_visit": "78.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "The Cog & Spoke Workshop",
+      "raw_merchant": "THE COG & SPOKE WORKSHOP",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 2,
+      "total": "210.50",
+      "typical_visit": "105.25",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Summit Outdoor Supplies",
+      "raw_merchant": "SUMMIT OUTDOOR SUPPLIES",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "205.00",
+      "typical_visit": "205.00",
+      "confidence": "medium"
+    }
+  ],
+  "income": [
+    {
+      "merchant": "Grant Thornton",
+      "raw_merchant": "GRANTHAM & VALE PAYROLL",
+      "period": "monthly",
+      "amount": "2890.00",
+      "confidence": "medium"
+    }
+  ],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "Zwift",
+      "why": "Kettle can see what it costs (£155.88 a year) but not whether you still use it. Only you know that."
+    }
+  ]
+}

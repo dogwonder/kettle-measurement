@@ -1,0 +1,382 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "study-02",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-02.csv",
+      "rows": 68,
+      "period": {
+        "from": "2025-01-04",
+        "to": "2025-12-25"
+      },
+      "hash": "blake3:c51a9f54e943dfdddf445e0ce3c7e2db28baedac58954e83cead9d97341823dc"
+    },
+    "model": {
+      "tier": "study",
+      "id": "qwen3.5-4b-q4_k_m.gguf"
+    },
+    "started": "2026-08-25T18:51:38Z",
+    "finished": "2026-08-25T18:52:03Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 4,
+    "annualised_total": "10061.88",
+    "monthly_equivalent": "838.49",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "Orchard Lane Nursery",
+      "raw_merchant": "ORCHARD LANE NURSERY",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "671.00",
+      "annualised": "8052.00",
+      "confidence": "medium",
+      "price_rise": {
+        "from": "642.00",
+        "to": "671.00",
+        "month": "2025-09",
+        "extra_per_year": "348.00"
+      },
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 6th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-06",
+            "amount": "642.00"
+          },
+          {
+            "date": "2025-02-06",
+            "amount": "642.00"
+          },
+          {
+            "date": "2025-03-06",
+            "amount": "642.00"
+          },
+          {
+            "date": "2025-04-06",
+            "amount": "642.00"
+          },
+          {
+            "date": "2025-05-06",
+            "amount": "642.00"
+          },
+          {
+            "date": "2025-06-06",
+            "amount": "642.00"
+          },
+          {
+            "date": "2025-07-06",
+            "amount": "642.00"
+          },
+          {
+            "date": "2025-08-06",
+            "amount": "642.00"
+          },
+          {
+            "date": "2025-09-06",
+            "amount": "671.00"
+          },
+          {
+            "date": "2025-10-06",
+            "amount": "671.00"
+          },
+          {
+            "date": "2025-11-06",
+            "amount": "671.00"
+          },
+          {
+            "date": "2025-12-06",
+            "amount": "671.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "British Gas",
+      "raw_merchant": "BRITISH GAS",
+      "kind": "utility",
+      "category": "energy",
+      "period": "monthly",
+      "amount_current": "121.50",
+      "annualised": "1458.00",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 15th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-02-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-03-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-04-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-05-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-06-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-07-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-08-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-09-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-10-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-11-15",
+            "amount": "121.50"
+          },
+          {
+            "date": "2025-12-15",
+            "amount": "121.50"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Sky Broadband",
+      "raw_merchant": "SKY BROADBAND",
+      "kind": "utility",
+      "category": "telecoms",
+      "period": "monthly",
+      "amount_current": "38.00",
+      "annualised": "456.00",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 11th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-02-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-03-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-04-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-05-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-06-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-07-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-08-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-09-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-10-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-11-11",
+            "amount": "38.00"
+          },
+          {
+            "date": "2025-12-11",
+            "amount": "38.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Disney+",
+      "raw_merchant": "DISNEY PLUS",
+      "kind": "subscription",
+      "category": "streaming",
+      "period": "monthly",
+      "amount_current": "7.99",
+      "annualised": "95.88",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 4th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-02-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-03-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-04-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-05-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-06-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-07-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-08-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-09-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-10-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-11-04",
+            "amount": "7.99"
+          },
+          {
+            "date": "2025-12-04",
+            "amount": "7.99"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "Sainsbury's",
+      "raw_merchant": "SAINSBURYS 2287",
+      "kind": "regular_spend",
+      "category": "retail",
+      "visits": 4,
+      "total": "416.41",
+      "typical_visit": "96.75",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Halfords",
+      "raw_merchant": "HALFORDS 0912",
+      "kind": "one_off",
+      "category": "retail",
+      "visits": 1,
+      "total": "42.99",
+      "typical_visit": "42.99",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Aviva Motor",
+      "raw_merchant": "AVIVA MOTOR",
+      "kind": "one_off",
+      "category": "insurance",
+      "visits": 1,
+      "total": "486.00",
+      "typical_visit": "486.00",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Kestrel Soft Play",
+      "raw_merchant": "KESTREL SOFT PLAY",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "24.00",
+      "typical_visit": "24.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Wyndham Dental Practice",
+      "raw_merchant": "WYNDHAM DENTAL PRACTICE",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "78.00",
+      "typical_visit": "78.00",
+      "confidence": "medium"
+    }
+  ],
+  "income": [
+    {
+      "merchant": "Penworthy Trust",
+      "raw_merchant": "PENWORTHY TRUST PAYROLL",
+      "period": "monthly",
+      "amount": "3120.00",
+      "confidence": "medium"
+    }
+  ],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "Orchard Lane Nursery",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    }
+  ]
+}

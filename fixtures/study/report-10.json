@@ -1,0 +1,342 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "study-10",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-10.csv",
+      "rows": 58,
+      "period": {
+        "from": "2025-01-01",
+        "to": "2025-12-23"
+      },
+      "hash": "blake3:47f14a1209ed8cdcbcd85132f89bf2b5ab85f2baed5091a0d99434230c83aa28"
+    },
+    "model": {
+      "tier": "study",
+      "id": "qwen3.5-4b-q4_k_m.gguf"
+    },
+    "started": "2026-08-25T18:54:55Z",
+    "finished": "2026-08-25T18:55:20Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 4,
+    "annualised_total": "3643.60",
+    "monthly_equivalent": "303.63",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "Borough Council Tax",
+      "raw_merchant": "BOROUGH COUNCIL TAX",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "168.00",
+      "annualised": "2016.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "10 payments, one every month on or near the 1st",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-01",
+            "amount": "168.00"
+          },
+          {
+            "date": "2025-02-01",
+            "amount": "168.00"
+          },
+          {
+            "date": "2025-03-01",
+            "amount": "168.00"
+          },
+          {
+            "date": "2025-04-01",
+            "amount": "168.00"
+          },
+          {
+            "date": "2025-05-01",
+            "amount": "168.00"
+          },
+          {
+            "date": "2025-06-01",
+            "amount": "168.00"
+          },
+          {
+            "date": "2025-07-01",
+            "amount": "168.00"
+          },
+          {
+            "date": "2025-08-01",
+            "amount": "168.00"
+          },
+          {
+            "date": "2025-09-01",
+            "amount": "168.00"
+          },
+          {
+            "date": "2025-10-01",
+            "amount": "168.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Ashdown Taxi Account",
+      "raw_merchant": "ASHDOWN TAXI ACCOUNT",
+      "kind": "utility",
+      "category": "transport",
+      "period": "monthly",
+      "amount_current": "104.00",
+      "annualised": "1248.00",
+      "confidence": "high",
+      "price_rise": {
+        "from": "96.50",
+        "to": "104.00",
+        "month": "2025-08",
+        "extra_per_year": "90.00"
+      },
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 9th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-09",
+            "amount": "96.50"
+          },
+          {
+            "date": "2025-02-09",
+            "amount": "96.50"
+          },
+          {
+            "date": "2025-03-09",
+            "amount": "96.50"
+          },
+          {
+            "date": "2025-04-09",
+            "amount": "96.50"
+          },
+          {
+            "date": "2025-05-09",
+            "amount": "96.50"
+          },
+          {
+            "date": "2025-06-09",
+            "amount": "96.50"
+          },
+          {
+            "date": "2025-07-09",
+            "amount": "96.50"
+          },
+          {
+            "date": "2025-08-09",
+            "amount": "104.00"
+          },
+          {
+            "date": "2025-09-09",
+            "amount": "104.00"
+          },
+          {
+            "date": "2025-10-09",
+            "amount": "104.00"
+          },
+          {
+            "date": "2025-11-09",
+            "amount": "104.00"
+          },
+          {
+            "date": "2025-12-09",
+            "amount": "104.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Southern Water",
+      "raw_merchant": "SOUTHERN WATER",
+      "kind": "utility",
+      "category": "energy",
+      "period": "quarterly",
+      "amount_current": "58.90",
+      "annualised": "235.60",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "4 payments, roughly 3 months apart",
+        "interval_days": {
+          "median": 91,
+          "spread": 2
+        },
+        "transactions": [
+          {
+            "date": "2025-01-19",
+            "amount": "58.90"
+          },
+          {
+            "date": "2025-04-19",
+            "amount": "58.90"
+          },
+          {
+            "date": "2025-07-19",
+            "amount": "58.90"
+          },
+          {
+            "date": "2025-10-19",
+            "amount": "58.90"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Pharmacy Delivery Service",
+      "raw_merchant": "PHARMACY DELIVERY SERVICE",
+      "kind": "regular_spend",
+      "category": "food_drink",
+      "period": "monthly",
+      "amount_current": "12.00",
+      "annualised": "144.00",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 4th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-02-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-03-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-04-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-05-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-06-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-07-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-08-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-09-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-10-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-11-04",
+            "amount": "12.00"
+          },
+          {
+            "date": "2025-12-04",
+            "amount": "12.00"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "Iceland",
+      "raw_merchant": "ICELAND 0338",
+      "kind": "regular_spend",
+      "category": "retail",
+      "visits": 4,
+      "total": "181.10",
+      "typical_visit": "45.53",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Mobility Direct",
+      "raw_merchant": "MOBILITY DIRECT",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "189.00",
+      "typical_visit": "189.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Carers UK Membership",
+      "raw_merchant": "CARERS UK MEMBERSHIP",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "36.00",
+      "typical_visit": "36.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Briarfield Day Centre",
+      "raw_merchant": "BRIARFIELD DAY CENTRE",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "60.00",
+      "typical_visit": "60.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Hazelmere Chiro",
+      "raw_merchant": "HAZELMERE CHIROPODY",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "42.00",
+      "typical_visit": "42.00",
+      "confidence": "medium"
+    }
+  ],
+  "income": [
+    {
+      "merchant": "Carers Allowance",
+      "raw_merchant": "CARERS ALLOWANCE",
+      "period": "monthly",
+      "amount": "332.00",
+      "confidence": "medium"
+    }
+  ],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "Borough Council Tax",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    }
+  ]
+}

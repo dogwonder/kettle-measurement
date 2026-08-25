@@ -1,0 +1,390 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "study-04",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-04.csv",
+      "rows": 67,
+      "period": {
+        "from": "2025-01-01",
+        "to": "2025-12-30"
+      },
+      "hash": "blake3:ba0653d889706be7095295bfbf99c946be8f2be91d45aa2785f89a9e4b0769da"
+    },
+    "model": {
+      "tier": "study",
+      "id": "qwen3.5-4b-q4_k_m.gguf"
+    },
+    "started": "2026-08-25T18:52:26Z",
+    "finished": "2026-08-25T18:52:51Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 4,
+    "annualised_total": "6401.76",
+    "monthly_equivalent": "533.48",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "Briarwood Halls",
+      "raw_merchant": "BRIARWOOD HALLS",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "498.00",
+      "annualised": "5976.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 1st",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-02-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-03-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-04-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-05-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-06-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-07-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-08-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-09-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-10-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-11-01",
+            "amount": "498.00"
+          },
+          {
+            "date": "2025-12-01",
+            "amount": "498.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Campus Sport",
+      "raw_merchant": "CAMPUS SPORT MEMBERSHIP",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "19.50",
+      "annualised": "234.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 5th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-02-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-03-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-04-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-05-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-06-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-07-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-08-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-09-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-10-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-11-05",
+            "amount": "19.50"
+          },
+          {
+            "date": "2025-12-05",
+            "amount": "19.50"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Amazon Prime",
+      "raw_merchant": "AMAZON PRIME",
+      "kind": "subscription",
+      "category": "streaming",
+      "period": "monthly",
+      "amount_current": "9.99",
+      "annualised": "119.88",
+      "confidence": "high",
+      "price_rise": {
+        "from": "8.99",
+        "to": "9.99",
+        "month": "2025-04",
+        "extra_per_year": "12.00"
+      },
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 8th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-08",
+            "amount": "8.99"
+          },
+          {
+            "date": "2025-02-08",
+            "amount": "8.99"
+          },
+          {
+            "date": "2025-03-08",
+            "amount": "8.99"
+          },
+          {
+            "date": "2025-04-08",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-05-08",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-06-08",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-07-08",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-08-08",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-09-08",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-10-08",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-11-08",
+            "amount": "9.99"
+          },
+          {
+            "date": "2025-12-08",
+            "amount": "9.99"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Spotify",
+      "raw_merchant": "SPOTIFY LTD",
+      "kind": "subscription",
+      "category": "streaming",
+      "period": "monthly",
+      "amount_current": "5.99",
+      "annualised": "71.88",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 16th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-02-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-03-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-04-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-05-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-06-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-07-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-08-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-09-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-10-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-11-16",
+            "amount": "5.99"
+          },
+          {
+            "date": "2025-12-16",
+            "amount": "5.99"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "ALDI",
+      "raw_merchant": "ALDI 1183",
+      "kind": "regular_spend",
+      "category": "retail",
+      "visits": 4,
+      "total": "118.30",
+      "typical_visit": "29.23",
+      "confidence": "high"
+    },
+    {
+      "merchant": "The Paper Moon Bookshop",
+      "raw_merchant": "THE PAPER MOON BOOKSHOP",
+      "kind": "one_off",
+      "category": "retail",
+      "visits": 1,
+      "total": "18.99",
+      "typical_visit": "18.99",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Duolingo",
+      "raw_merchant": "DUOLINGO PLUS",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "59.99",
+      "typical_visit": "59.99",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Northgate Laundry",
+      "raw_merchant": "NORTHGATE LAUNDRY",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "12.00",
+      "typical_visit": "12.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Tideway Coach Travel",
+      "raw_merchant": "TIDEWAY COACH TRAVEL",
+      "kind": "one_off",
+      "category": "transport",
+      "visits": 1,
+      "total": "46.50",
+      "typical_visit": "46.50",
+      "confidence": "high"
+    }
+  ],
+  "income": [
+    {
+      "merchant": "Student Finance England",
+      "raw_merchant": "STUDENT FINANCE ENGLAND",
+      "period": "monthly",
+      "amount": "1420.00",
+      "confidence": "medium"
+    }
+  ],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "Briarwood Halls",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "Campus Sport",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "Amazon Prime",
+      "why": "Kettle can see what it costs (£119.88 a year) but not whether you still use it. Only you know that."
+    }
+  ]
+}

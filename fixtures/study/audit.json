@@ -1,0 +1,24 @@
+{
+ "report-01": [
+  "LABEL Castle Hill Lettings: category other, better housing (rent), shown at medium confidence"
+ ],
+ "report-02": [],
+ "report-03": [],
+ "report-04": [
+  "LABEL Briarwood Halls: category other, better housing (student halls), shown at medium confidence",
+  "LABEL Campus Sport: category other, better fitness (a sport membership), shown at medium confidence"
+ ],
+ "report-05": [],
+ "report-06": [
+  "LABEL Card Fees: category other, better finance (card processing fees), shown at medium confidence"
+ ],
+ "report-07": [
+  "LABEL Meadowbank Lettings: category other, better housing (rent), shown at medium confidence"
+ ],
+ "report-08": [],
+ "report-09": [],
+ "report-10": [
+  "LABEL Borough Council Tax: category other, better housing (council tax), shown at medium confidence",
+  "LABEL Pharmacy Delivery Service: category food_drink, better other (a pharmacy is not food or drink \u2014 and this one is high confidence), shown at high confidence"
+ ]
+}

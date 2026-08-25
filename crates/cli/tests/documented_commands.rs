@@ -29,9 +29,33 @@ fn every_documented_cli_command_names_the_package_and_binary_we_build() {
         .filter_map(|bin| bin["name"].as_str())
         .collect();
 
+    let workspace: toml::Value = toml::from_str(
+        &fs::read_to_string(root.join("Cargo.toml")).expect("workspace manifest is readable"),
+    )
+    .expect("workspace manifest is TOML");
+    // A member is a *path*: `crates/cli` builds the package `kettle`.
+    // Reading each manifest is the only way to learn the name somebody
+    // would type after `-p`.
+    let members: Vec<String> = workspace["workspace"]["members"]
+        .as_array()
+        .expect("the workspace declares its members")
+        .iter()
+        .filter_map(|member| member.as_str())
+        .filter_map(|member| {
+            let manifest: toml::Value =
+                toml::from_str(&fs::read_to_string(root.join(member).join("Cargo.toml")).ok()?)
+                    .ok()?;
+            Some(manifest["package"]["name"].as_str()?.to_owned())
+        })
+        .collect();
+
     assert_eq!(
         package, "kettle",
         "the user-facing package and binary agree"
+    );
+    assert!(
+        members.iter().any(|member| member == "kettle"),
+        "the CLI is a workspace member"
     );
     assert!(
         binaries.contains(&"kettle"),
@@ -56,14 +80,19 @@ fn every_documented_cli_command_names_the_package_and_binary_we_build() {
 
             let words: Vec<&str> = command.split_whitespace().collect();
             if words.first() == Some(&"cargo") && words.get(1) == Some(&"run") {
-                if let Some(index) = words
+                // Any workspace member, not only the CLI. A measurement
+                // harness runs as `-p runner --example …` and is as
+                // real a thing to copy as `-p kettle` — the guard's job
+                // is that the command names something this repository
+                // builds, not that every documented command is the CLI.
+                let named_package = words
                     .iter()
                     .position(|word| *word == "-p" || *word == "--package")
-                {
-                    if words.get(index + 1) != Some(&package) {
+                    .and_then(|index| words.get(index + 1).copied());
+                if let Some(named) = named_package {
+                    if !members.iter().any(|member| member == named) {
                         wrong.push(format!(
-                            "{location}: `{command}` names package {:?}, but Cargo builds `{package}`",
-                            words.get(index + 1).copied().unwrap_or("<missing>")
+                            "{location}: `{command}` names package `{named}`, which is not a workspace member"
                         ));
                     }
                 }
@@ -73,6 +102,25 @@ fn every_documented_cli_command_names_the_package_and_binary_we_build() {
                     if !binaries.contains(&named) {
                         wrong.push(format!(
                             "{location}: `{command}` names binary `{named}`, which the package does not build"
+                        ));
+                    }
+                }
+
+                // The same promise for an example: a documented harness
+                // whose file has been renamed is exactly the wasted
+                // ten minutes #418 exists to prevent, and the check is
+                // one `is_file`.
+                if let Some(index) = words.iter().position(|word| *word == "--example") {
+                    let named = words.get(index + 1).copied().unwrap_or("<missing>");
+                    let owner = named_package.unwrap_or(package);
+                    let file = root
+                        .join("crates")
+                        .join(owner)
+                        .join("examples")
+                        .join(format!("{named}.rs"));
+                    if !file.is_file() {
+                        wrong.push(format!(
+                            "{location}: `{command}` names example `{named}`, which `{owner}` does not build"
                         ));
                     }
                 }

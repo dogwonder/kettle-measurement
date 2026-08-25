@@ -84,3 +84,7 @@ pod-run.out
 pod-run.tgz
 pod-baseline-*.json
 MANIFEST-pod.md
+
+# Python bytecode from the fixture generators
+__pycache__/
+*.pyc

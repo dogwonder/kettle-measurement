@@ -1,0 +1,412 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "study-01",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-01.csv",
+      "rows": 71,
+      "period": {
+        "from": "2025-01-02",
+        "to": "2025-12-28"
+      },
+      "hash": "blake3:9a3fdc29264cb621be61634e4b1daca20e37319be75fbe9bfafe3932b702b8bd"
+    },
+    "model": {
+      "tier": "study",
+      "id": "qwen3.5-4b-q4_k_m.gguf"
+    },
+    "started": "2026-08-25T18:51:12Z",
+    "finished": "2026-08-25T18:51:38Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 5,
+    "annualised_total": "10345.24",
+    "monthly_equivalent": "862.10",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "Castle Hill Lettings",
+      "raw_merchant": "CASTLE HILL LETTINGS",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "780.00",
+      "annualised": "9360.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 2nd",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-02-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-03-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-04-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-05-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-06-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-07-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-08-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-09-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-10-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-11-02",
+            "amount": "780.00"
+          },
+          {
+            "date": "2025-12-02",
+            "amount": "780.00"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Thames Water",
+      "raw_merchant": "THAMES WATER",
+      "kind": "utility",
+      "category": "energy",
+      "period": "quarterly",
+      "amount_current": "96.40",
+      "annualised": "385.60",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "4 payments, roughly 3 months apart",
+        "interval_days": {
+          "median": 91,
+          "spread": 2
+        },
+        "transactions": [
+          {
+            "date": "2025-01-18",
+            "amount": "96.40"
+          },
+          {
+            "date": "2025-04-18",
+            "amount": "96.40"
+          },
+          {
+            "date": "2025-07-18",
+            "amount": "96.40"
+          },
+          {
+            "date": "2025-10-18",
+            "amount": "96.40"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "PureGym",
+      "raw_merchant": "PUREGYM LTD",
+      "kind": "subscription",
+      "category": "fitness",
+      "period": "monthly",
+      "amount_current": "24.99",
+      "annualised": "299.88",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 3rd",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-02-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-03-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-04-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-05-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-06-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-07-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-08-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-09-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-10-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-11-03",
+            "amount": "24.99"
+          },
+          {
+            "date": "2025-12-03",
+            "amount": "24.99"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Netflix",
+      "raw_merchant": "NETFLIX.COM",
+      "kind": "subscription",
+      "category": "streaming",
+      "period": "monthly",
+      "amount_current": "12.99",
+      "annualised": "155.88",
+      "confidence": "high",
+      "price_rise": {
+        "from": "10.99",
+        "to": "12.99",
+        "month": "2025-06",
+        "extra_per_year": "24.00"
+      },
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 5th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-05",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-02-05",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-03-05",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-04-05",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-05-05",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-06-05",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-07-05",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-08-05",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-09-05",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-10-05",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-11-05",
+            "amount": "12.99"
+          },
+          {
+            "date": "2025-12-05",
+            "amount": "12.99"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Spotify",
+      "raw_merchant": "SPOTIFY LTD",
+      "kind": "subscription",
+      "category": "streaming",
+      "period": "monthly",
+      "amount_current": "11.99",
+      "annualised": "143.88",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 12th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-02-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-03-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-04-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-05-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-06-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-07-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-08-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-09-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-10-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-11-12",
+            "amount": "11.99"
+          },
+          {
+            "date": "2025-12-12",
+            "amount": "11.99"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "Tesco",
+      "raw_merchant": "TESCO STORES 3412",
+      "kind": "regular_spend",
+      "category": "retail",
+      "visits": 4,
+      "total": "183.70",
+      "typical_visit": "45.03",
+      "confidence": "high"
+    },
+    {
+      "merchant": "J Henderson Windows",
+      "raw_merchant": "J HENDERSON WINDOWS",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "185.00",
+      "typical_visit": "185.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Coastline Travel",
+      "raw_merchant": "COASTLINE TRAVEL",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "320.00",
+      "typical_visit": "320.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Bramble & Co Hardware",
+      "raw_merchant": "BRAMBLE & CO HARDWARE",
+      "kind": "one_off",
+      "category": "retail",
+      "visits": 1,
+      "total": "63.40",
+      "typical_visit": "63.40",
+      "confidence": "high"
+    }
+  ],
+  "income": [
+    {
+      "merchant": "Meridian Logistics",
+      "raw_merchant": "MERIDIAN LOGISTICS PAYROLL",
+      "period": "monthly",
+      "amount": "2450.00",
+      "confidence": "medium"
+    }
+  ],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "Castle Hill Lettings",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    },
+    {
+      "about": "PureGym",
+      "why": "Kettle can see what it costs (£299.88 a year) but not whether you still use it. Only you know that."
+    }
+  ]
+}

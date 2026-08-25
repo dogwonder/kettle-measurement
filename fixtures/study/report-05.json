@@ -1,0 +1,292 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "study-05",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-05.csv",
+      "rows": 49,
+      "period": {
+        "from": "2025-01-03",
+        "to": "2025-12-26"
+      },
+      "hash": "blake3:46179030bf938caa33b124e509a2d81acc059f747548d80191479e1ff4757ea4"
+    },
+    "model": {
+      "tier": "study",
+      "id": "qwen3.5-4b-q4_k_m.gguf"
+    },
+    "started": "2026-08-25T18:52:51Z",
+    "finished": "2026-08-25T18:53:17Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 3,
+    "annualised_total": "729.60",
+    "monthly_equivalent": "60.80",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "BT Landline",
+      "raw_merchant": "BT LANDLINE",
+      "kind": "utility",
+      "category": "telecoms",
+      "period": "monthly",
+      "amount_current": "35.90",
+      "annualised": "430.80",
+      "confidence": "high",
+      "price_rise": {
+        "from": "32.40",
+        "to": "35.90",
+        "month": "2025-05",
+        "extra_per_year": "42.00"
+      },
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 3rd",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-03",
+            "amount": "32.40"
+          },
+          {
+            "date": "2025-02-03",
+            "amount": "32.40"
+          },
+          {
+            "date": "2025-03-03",
+            "amount": "32.40"
+          },
+          {
+            "date": "2025-04-03",
+            "amount": "32.40"
+          },
+          {
+            "date": "2025-05-03",
+            "amount": "35.90"
+          },
+          {
+            "date": "2025-06-03",
+            "amount": "35.90"
+          },
+          {
+            "date": "2025-07-03",
+            "amount": "35.90"
+          },
+          {
+            "date": "2025-08-03",
+            "amount": "35.90"
+          },
+          {
+            "date": "2025-09-03",
+            "amount": "35.90"
+          },
+          {
+            "date": "2025-10-03",
+            "amount": "35.90"
+          },
+          {
+            "date": "2025-11-03",
+            "amount": "35.90"
+          },
+          {
+            "date": "2025-12-03",
+            "amount": "35.90"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "Severn Trent Water",
+      "raw_merchant": "SEVERN TRENT WATER",
+      "kind": "utility",
+      "category": "energy",
+      "period": "quarterly",
+      "amount_current": "61.20",
+      "annualised": "244.80",
+      "confidence": "high",
+      "price_rise": null,
+      "evidence": {
+        "reason": "4 payments, roughly 3 months apart",
+        "interval_days": {
+          "median": 91,
+          "spread": 2
+        },
+        "transactions": [
+          {
+            "date": "2025-01-24",
+            "amount": "61.20"
+          },
+          {
+            "date": "2025-04-24",
+            "amount": "61.20"
+          },
+          {
+            "date": "2025-07-24",
+            "amount": "61.20"
+          },
+          {
+            "date": "2025-10-24",
+            "amount": "61.20"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "St Cuthberts Parish Magazine",
+      "raw_merchant": "ST CUTHBERTS PARISH MAGAZINE",
+      "kind": "subscription",
+      "category": "other",
+      "period": "monthly",
+      "amount_current": "4.50",
+      "annualised": "54.00",
+      "confidence": "medium",
+      "price_rise": null,
+      "evidence": {
+        "reason": "12 payments, one every month on or near the 6th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2025-01-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-02-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-03-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-04-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-05-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-06-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-07-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-08-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-09-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-10-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-11-06",
+            "amount": "4.50"
+          },
+          {
+            "date": "2025-12-06",
+            "amount": "4.50"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "Morrisons",
+      "raw_merchant": "MORRISONS 0447",
+      "kind": "regular_spend",
+      "category": "retail",
+      "visits": 4,
+      "total": "226.84",
+      "typical_visit": "55.25",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Saga Home Insurance",
+      "raw_merchant": "SAGA HOME INSURANCE",
+      "kind": "one_off",
+      "category": "insurance",
+      "visits": 1,
+      "total": "318.00",
+      "typical_visit": "318.00",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Pennyfield Garden Centre",
+      "raw_merchant": "PENNYFIELD GARDEN CENTRE",
+      "kind": "one_off",
+      "category": "retail",
+      "visits": 1,
+      "total": "38.75",
+      "typical_visit": "38.75",
+      "confidence": "high"
+    },
+    {
+      "merchant": "National Trust",
+      "raw_merchant": "NATIONAL TRUST",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "84.00",
+      "typical_visit": "84.00",
+      "confidence": "medium"
+    },
+    {
+      "merchant": "Elmtree Opticians",
+      "raw_merchant": "ELMTREE OPTICIANS",
+      "kind": "one_off",
+      "category": "retail",
+      "visits": 1,
+      "total": "145.00",
+      "typical_visit": "145.00",
+      "confidence": "high"
+    },
+    {
+      "merchant": "Holloway Coach Tours",
+      "raw_merchant": "HOLLOWAY COACH TOURS",
+      "kind": "one_off",
+      "category": "other",
+      "visits": 1,
+      "total": "265.00",
+      "typical_visit": "265.00",
+      "confidence": "medium"
+    }
+  ],
+  "income": [
+    {
+      "merchant": "Hawkridge Pension Scheme",
+      "raw_merchant": "HAWKRIDGE PENSION SCHEME",
+      "period": "monthly",
+      "amount": "1680.00",
+      "confidence": "medium"
+    }
+  ],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "St Cuthberts Parish Magazine",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    }
+  ]
+}

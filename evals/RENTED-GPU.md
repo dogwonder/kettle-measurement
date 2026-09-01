@@ -11,6 +11,14 @@ step is what it is, and what to do when it is not happy.
 
 ## Before anything: is it worth it?
 
+Since 31 August 2026 the default answer for a full guarded run is
+yes — the pod is where measurement happens, and the question below
+inverts: what stays local is the packaged-app check, real letters
+(the privacy line), and spot re-runs that double-check a pod verdict,
+because the M1 Pro is the hardware the product ships on. The
+paragraphs below still govern the marginal case (one small scratch
+bed, a box already warm locally).
+
 Do not decide from an elapsed time copied out of an earlier run. Decide
 from the work due in this sitting, the provider's current price and the
 setup already available. If timing alternatives on one box, run them in

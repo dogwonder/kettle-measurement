@@ -68,6 +68,12 @@ bytes is a poor trade.
 subscription-audit baseline is written. Its present scoring-v5 contents
 are a historical record and cannot be compared under scoring v14.
 
+**The pod is the default for full runs** (31 August 2026): scores
+matched across backends on every stratum measured, so the guarded
+full bed, tiers and baseline recordings go to the rented GPU, and the
+M1 Pro is for what ships on it — the packaged app, real letters, and
+spot re-runs of a pod verdict that gates a claim.
+
 Running a bed on rented hardware — which box, which credentials, and
 what a cross-machine measurement does and does not license — is
 `RENTED-GPU.md`.

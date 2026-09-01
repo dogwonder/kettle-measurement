@@ -37,7 +37,7 @@ tera = { version = "2", default-features = false }
 # schema is exactly the undeclared path the boundary file exists to
 # refuse. `resolve-file` is off for the same reason in the other
 # direction: it would resolve `file://` refs out of a pack.
-jsonschema = { version = "0.49", default-features = false }
+jsonschema = { version = "0.52", default-features = false }
 # TLS is on deliberately (#49). Model weights come from https, and a
 # build without it downloads nothing real while every mock test — all
 # http — still passes. The rest of ureq's defaults stay off.

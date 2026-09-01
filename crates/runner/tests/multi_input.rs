@@ -187,6 +187,70 @@ fn a_relative_deadline_resolves_against_its_own_document_date() {
     );
 }
 
+/// Two photographs can be pages of one letter rather than two letters.
+/// The date is only on page one and the ask only on page two: treating
+/// them as separate documents leaves the deadline unresolved.
+#[test]
+fn ordered_files_are_one_letter_and_keep_their_page_numbers() {
+    let dir = letter_pack("ordered-pages");
+    let manifest = std::fs::read_to_string(dir.join("pack.json")).unwrap();
+    std::fs::write(
+        dir.join("pack.json"),
+        manifest.replace(
+            r#""multiple": true"#,
+            r#""count": { "min": 1 }, "file_semantics": "pages""#,
+        ),
+    )
+    .unwrap();
+    std::fs::write(dir.join("fixtures/march.txt"), "12 March 2026").unwrap();
+    let ask = "Please pay £120.00 to Harborne Parking Services within 14 days of the date of this letter.";
+    std::fs::write(dir.join("fixtures/june.txt"), ask).unwrap();
+
+    let pack = load_pack(&dir).expect("an ordered-page letter pack loads");
+    let mock = MockModel::respond_sequence(vec![(
+        "200 OK",
+        completion_envelope(
+            &serde_json::json!({
+                "results": [
+                    { "id": 0, "segment": "12 March 2026", "confidence": "high", "obligations": [] },
+                    { "id": 1, "segment": ask, "confidence": "high", "obligations": [{
+                        "kind": "payment",
+                        "party": "Harborne Parking Services",
+                        "ask": "Pay £120.00",
+                        "deadline": "within 14 days",
+                        "anchor": "the date of this letter"
+                    }] }
+                ]
+            })
+            .to_string(),
+        ),
+    )]);
+
+    let outcome = run_pack(
+        &pack,
+        &[
+            dir.join("fixtures/march.txt"),
+            dir.join("fixtures/june.txt"),
+        ],
+        &Answers::FromModel(mock.endpoint()),
+        &AtomicBool::new(false),
+        &mut |_| {},
+        &NoLog,
+    )
+    .expect("the page group runs");
+
+    let Payload::Extraction(extraction) = outcome.payload else {
+        panic!("expected extraction");
+    };
+    let obligation = extraction.obligations.first().expect("one obligation");
+    assert_eq!(
+        obligation.due.map(|due| due.date.to_string()),
+        Some("2026-03-26".to_owned())
+    );
+    assert_eq!(obligation.evidence[0].document, 0);
+    assert_eq!(obligation.evidence[0].page, 2);
+}
+
 /// The same ask, sent twice: evidence stays in document order.
 ///
 /// An ordinal counts within its own document, so two documents both

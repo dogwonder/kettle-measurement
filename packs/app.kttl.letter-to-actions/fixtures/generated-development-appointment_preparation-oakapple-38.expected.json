@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-oakapple-38",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "25 March 2026",
+        "deadline": "for 25 March 2026 at 10.40am",
+        "due": "2026-03-25",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-oakapple-38-attendance-01",
+      "segment": "Your appointment about your council tax account with Kelsford Borough Council is booked for 25 March 2026 at 10.40am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-oakapple-38-no-ask-02",
+      "segment": "Please park in the visitor bays rather than the staff bays.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-oakapple-38-other-03",
+      "segment": "Please wait outside the room until you are invited in, and bring the signed authority form when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-oakapple-38-no-ask-04",
+      "segment": "Please arrive promptly, as late arrivals cannot always be seen.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-oakapple-38-other-05",
+      "segment": "Please allow for roadworks on the approach, and take a meter reading before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-oakapple-38-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-oakapple-38-no-ask-08",
+      "segment": "We have arranged for the outstanding £12.50 to be written off.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

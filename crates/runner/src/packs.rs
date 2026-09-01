@@ -28,6 +28,52 @@ pub struct Pack {
     pub manifest: Manifest,
 }
 
+/// Why a pack is measured and not offered (#545). Every field is
+/// required and non-blank: a withdrawal is a decision, and a decision
+/// without its reason and its record is a rumour.
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct Withdrawal {
+    /// The day it was decided, ISO `YYYY-MM-DD`.
+    pub on: String,
+    /// One or two plain sentences: what the measurement said.
+    pub why: String,
+    /// Where the decision is recorded — an issue, `#545`.
+    pub record: String,
+}
+
+/// What a pack is for, in a person's terms — the sentence every
+/// stratum is downstream of (30 August 2026). Stated before the bed is
+/// authored, because a bed with no goal to be aimed at measures itself:
+/// the letter pack had forty-three strata and no sentence saying what a
+/// person should be able to do, and was measured to three decimal
+/// places on a route nobody uses.
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct Goal {
+    /// Who this is for: "someone who has just photographed a letter".
+    pub who: String,
+    /// What they can do when it works: "see the dates, the amounts and
+    /// the asks it makes of them".
+    pub can: String,
+    /// The test of *done*, in real-use terms and ideally with its
+    /// record: "the nine items of #399's matrix pass on real
+    /// photographs through the packaged app". A bed threshold is not a
+    /// done; a person's outcome is.
+    pub done_when: String,
+}
+
+impl Manifest {
+    /// Whether this pack may be put in front of a person: not withdrawn
+    /// (#545) and stating its [`Goal`]. One definition, read by the
+    /// app's grid and by the public `packs --json`, so the two cannot
+    /// disagree about what Kettle offers. The shell adds its own
+    /// binding constraint on top (one file per role, #342).
+    pub fn offerable(&self) -> bool {
+        self.withdrawn.is_none() && self.goal.is_some()
+    }
+}
+
 /// `pack.json`, worked example in brief §3.
 #[derive(Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -46,6 +92,24 @@ pub struct Manifest {
     pub inputs: Vec<InputSpec>,
     pub capabilities: Vec<String>,
     pub model: ModelConfig,
+    /// Withdrawn from the product surface: **measured but not offered**
+    /// (#545, decided 30 August 2026). The lab still loads and evals a
+    /// withdrawn pack — the subscription bed is the one that separates
+    /// models — but the app shows no card for it, the no-pack dialog
+    /// does not accept its kinds, and the public `packs --json` omits
+    /// it. The withdrawal carries its date, reason and record here,
+    /// where `kettle packs list` can print them: a retirement
+    /// remembered from a PR body is the failure #466 refused for
+    /// mutation survivors, and it is the same failure here.
+    #[serde(default)]
+    pub withdrawn: Option<Withdrawal>,
+    /// The user goal (see [`Goal`]). A pack without one still loads and
+    /// can be measured; it cannot be **offered** — the app shows no
+    /// card for it and the public `packs --json` refuses it — because
+    /// nothing says what a person is being promised. The same door a
+    /// withdrawn pack goes through, for the same reason.
+    #[serde(default)]
+    pub goal: Option<Goal>,
     /// What a run of this pack says for itself on the app's screens
     /// (#244): how long it takes, what it will do, and the words on the
     /// Run button. `Option` only so the absence can be refused with a
@@ -178,6 +242,20 @@ pub struct InputSpec {
     /// from either `count` or the older `multiple`, so every reader
     /// asks one question of one field.
     pub count: Count,
+    /// What several files supplied to this role mean. By default they
+    /// are separate documents. `pages` says they are ordered parts of
+    /// one logical document (#399), so a date on the first photograph
+    /// can anchor an obligation on the second.
+    pub file_semantics: FileSemantics,
+}
+
+/// The relationship between several files supplied to one role.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum FileSemantics {
+    #[default]
+    Documents,
+    Pages,
 }
 
 /// How many files a role takes.
@@ -307,6 +385,8 @@ impl<'de> Deserialize<'de> for InputSpec {
             multiple: Option<bool>,
             #[serde(default)]
             count: Option<CountSpec>,
+            #[serde(default)]
+            file_semantics: FileSemantics,
         }
 
         let raw = Raw::deserialize(deserializer)?;
@@ -331,6 +411,7 @@ impl<'de> Deserialize<'de> for InputSpec {
             label: raw.label,
             accept: raw.accept,
             count,
+            file_semantics: raw.file_semantics,
         })
     }
 }
@@ -543,6 +624,15 @@ pub enum PackError {
     Refused {
         capabilities: Vec<String>,
     },
+    /// A `goal` block with a blank field.
+    InvalidGoal {
+        field: &'static str,
+    },
+    /// A `withdrawn` block missing a field's substance (#545): a date,
+    /// a reason and a record are what make a withdrawal a decision.
+    InvalidWithdrawal {
+        field: &'static str,
+    },
     /// The `kinds` map cannot answer the question the runner will ask
     /// it (#253): missing, incomplete against the classify categories,
     /// or naming a kind nothing downstream understands.
@@ -583,6 +673,10 @@ pub enum PackError {
     UnsatisfiableCount {
         role: String,
         reason: String,
+    },
+    /// Ordered page files only have meaning to document preprocessing.
+    PagesNeedDocumentText {
+        role: String,
     },
 }
 
@@ -679,10 +773,26 @@ impl std::fmt::Display for PackError {
                 f,
                 "the pack asks for a number of files it can never be given for “{role}”: {reason}"
             ),
+            PackError::PagesNeedDocumentText { role } => write!(
+                f,
+                "the input “{role}” calls its files pages, but this pack does not use \
+                 builtin:document-text"
+            ),
             PackError::AmbiguousComparison { role } => write!(
                 f,
                 "this pack compares two documents but lets you give it several \
                  for “{role}”, so it can't say which one it compared"
+            ),
+            PackError::InvalidGoal { field } => write!(
+                f,
+                "the manifest's `goal` leaves `{field}` blank — a goal names who it is for, what \
+                 they can do and when it is done"
+            ),
+            PackError::InvalidWithdrawal { field } => write!(
+                f,
+                "the manifest's `withdrawn` block leaves `{field}` blank — a withdrawal says when \
+                 it was decided (`on`), what the measurement said (`why`) and where that is \
+                 recorded (`record`)"
             ),
             PackError::Refused { capabilities } => {
                 write!(
@@ -1043,6 +1153,8 @@ pub fn load_pack(dir: &Path) -> Result<Pack, PackError> {
     //      `will` reference to a progress step must resolve — prose may
     //      group steps, but a name that resolves to nothing is a bug.
     validate_copy(&manifest)?;
+    validate_withdrawal(&manifest)?;
+    validate_goal(&manifest)?;
 
     // 11. a classify-role step needs the kinds map, complete both ways
     //     against its category enum (#253). The runner derives every
@@ -1089,11 +1201,34 @@ pub fn load_pack(dir: &Path) -> Result<Pack, PackError> {
     //     can never be filled is a pack that cannot run, and finding
     //     that out at bind time costs a person their file picker.
     validate_counts(&manifest)?;
+    validate_file_semantics(&manifest)?;
 
     Ok(Pack {
         dir: dir.to_path_buf(),
         manifest,
     })
+}
+
+fn validate_file_semantics(manifest: &Manifest) -> Result<(), PackError> {
+    let reads_documents = manifest.pipeline.iter().any(|step| {
+        matches!(
+            step,
+            PipelineStep::Preprocess { implementation }
+                if implementation == "builtin:document-text"
+        )
+    });
+    if !reads_documents {
+        if let Some(input) = manifest
+            .inputs
+            .iter()
+            .find(|input| input.file_semantics == FileSemantics::Pages)
+        {
+            return Err(PackError::PagesNeedDocumentText {
+                role: input.role.clone(),
+            });
+        }
+    }
+    Ok(())
 }
 
 /// Refuse a count no set of files can satisfy (#334 §1).
@@ -1150,6 +1285,41 @@ const RECURRING_KINDS: &[&str] = &["subscription", "utility", "regular_spend"];
 /// Hold `kinds` complete against the classify step's category enum.
 /// The copy block is present, and every `will` reference names a real
 /// progress step (#244).
+/// A goal, when stated, is stated in full. Whether one is required is
+/// decided where a pack is offered — see [`Manifest::offerable`].
+fn validate_goal(manifest: &Manifest) -> Result<(), PackError> {
+    let Some(goal) = &manifest.goal else {
+        return Ok(());
+    };
+    for (field, value) in [
+        ("who", &goal.who),
+        ("can", &goal.can),
+        ("done_when", &goal.done_when),
+    ] {
+        if value.trim().is_empty() {
+            return Err(PackError::InvalidGoal { field });
+        }
+    }
+    Ok(())
+}
+
+/// A withdrawal is a record or it is nothing (#545).
+fn validate_withdrawal(manifest: &Manifest) -> Result<(), PackError> {
+    let Some(withdrawal) = &manifest.withdrawn else {
+        return Ok(());
+    };
+    for (field, value) in [
+        ("on", &withdrawal.on),
+        ("why", &withdrawal.why),
+        ("record", &withdrawal.record),
+    ] {
+        if value.trim().is_empty() {
+            return Err(PackError::InvalidWithdrawal { field });
+        }
+    }
+    Ok(())
+}
+
 fn validate_copy(manifest: &Manifest) -> Result<(), PackError> {
     let Some(copy) = &manifest.copy else {
         return Err(PackError::MissingCopy);

@@ -42,6 +42,16 @@ fn blake3_of(path: &Path) -> String {
     hasher.finalize().to_hex().to_string()
 }
 
+/// `chrono` is built here without its `clock` feature — the same pin the
+/// CLI documents — so the reading comes from `std` and is converted.
+fn now() -> chrono::DateTime<chrono::Utc> {
+    let since_epoch = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .expect("the system clock is set after 1970");
+    chrono::DateTime::from_timestamp(since_epoch.as_secs() as i64, 0)
+        .expect("a timestamp the system clock can produce is in range")
+}
+
 fn main() {
     let mut argv = std::env::args().skip(1);
     let (mut model, mut out) = (None::<PathBuf>, PathBuf::from("fixtures/study"));
@@ -100,7 +110,7 @@ fn main() {
             .file_stem()
             .map(|s| s.to_string_lossy().into_owned())
             .unwrap_or_default();
-        let started = chrono::Utc::now();
+        let started = now();
         let clock = Instant::now();
         let mut last = String::new();
         let outcome: RunOutcome = match run_pack(
@@ -152,7 +162,7 @@ fn main() {
                 id: model_file.clone(),
             },
             started: started.to_rfc3339_opts(chrono::SecondsFormat::Secs, true),
-            finished: chrono::Utc::now().to_rfc3339_opts(chrono::SecondsFormat::Secs, true),
+            finished: now().to_rfc3339_opts(chrono::SecondsFormat::Secs, true),
             currency: "GBP".to_owned(),
         };
 

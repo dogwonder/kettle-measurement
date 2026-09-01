@@ -1,0 +1,92 @@
+{
+  "actions": {
+    "actions": [
+      {
+        "detail": "Harrowdene Housing Association asked for this, but the letter does not give a date Kettle could work out — it says \"as soon as possible\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "Harrowdene Housing Association",
+          "in_the_letter": "as soon as possible",
+          "passage_1": "Any medical condition that means noise or dust would affect you should be notified to us as soon as possible so that the work can be planned around it."
+        },
+        "export": {
+          "text": "Notify Harrowdene Housing Association of any medical condition affecting noise or dust (Harrowdene Housing Association) — as soon as possible"
+        },
+        "id": "act-01",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Notify Harrowdene Housing Association of any medical condition affecting noise or dust"
+      },
+      {
+        "detail": "Harrowdene Housing Association asked for this, but the letter does not give a date Kettle could work out — it says \"in all correspondence\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "Harrowdene Housing Association",
+          "in_the_letter": "in all correspondence",
+          "passage_1": "Please quote the reference printed at the top of this letter in all correspondence. Without it we may be unable to trace your account and a reply will take longer."
+        },
+        "export": {
+          "text": "Quote the reference printed at the top of this letter in all correspondence (Harrowdene Housing Association) — in all correspondence"
+        },
+        "id": "act-02",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Quote the reference printed at the top of this letter in all correspondence"
+      },
+      {
+        "detail": "the organisation asked for this, but the letter does not give a date Kettle could work out — it says \"at your earliest convenience\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "the organisation",
+          "in_the_letter": "at your earliest convenience",
+          "passage_1": "This letter can be provided in large print, braille, audio or another language. Please tell us which format you need and we will arrange it at no cost."
+        },
+        "export": {
+          "text": "Tell us which format you need (the organisation) — at your earliest convenience"
+        },
+        "id": "act-03",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Tell us which format you need"
+      },
+      {
+        "detail": "the organisation asked for this, but the letter does not give a date Kettle could work out — it says \"as soon as it happens\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "the organisation",
+          "in_the_letter": "as soon as it happens",
+          "passage_1": "Moving home, a change of name, a change in who lives at the property, or a change in your income can all affect an account of this kind. Tell us about a change as soon as it happens; a change reported late may not be applied from the date it occurred."
+        },
+        "export": {
+          "text": "Tell us about a change (the organisation) — as soon as it happens"
+        },
+        "id": "act-04",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Tell us about a change"
+      }
+    ],
+    "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+    "run_id": "letter-16",
+    "schema": "kettle/proposed-actions@0"
+  },
+  "expected": [
+    {
+      "anchor": "no particular date",
+      "deadline": "as soon as possible",
+      "due": null,
+      "id": "planned_works_notice-032-03",
+      "kind": "response",
+      "party": "Harrowdene Housing Association",
+      "segment": "Any medical condition that means noise or dust would affect you should be notified to us as soon as possible so that the work can be planned around it."
+    }
+  ],
+  "id": "letter-16",
+  "model": "qwen3.5-4b-q4_k_m.gguf",
+  "pack": {
+    "id": "app.kttl.letter-to-actions",
+    "version": "0.3.0"
+  },
+  "schema": "kettle/study-letter@0",
+  "source": {
+    "file": "planned_works_notice-032.txt",
+    "hash": "blake3:19b17287303ea3e027eff47322492548aa29ff0997fbfd7823cd8f7f996f1de1",
+    "text": "8 May 2026\nHarrowdene Housing Association\nOur reference: P028439-5\n\nDear Barbara,\n\nWe are writing to let you know that external redecoration and gutter replacement will begin at your building on 21 May 2026. Scaffolding will be erected the week before.\n\nYou do not need to do anything for the works to go ahead. Our contractor, Wilkins Heating, will knock before working near your windows.\n\nAny medical condition that means noise or dust would affect you should be notified to us as soon as possible so that the work can be planned around it.\n\nWork is expected to take 8 weeks, weather permitting.\n\nKind regards,\nRaymond Mitchell\nHarrowdene Housing Association\n\nHOW WE USE YOUR INFORMATION\n\nWe hold the details on this letter to administer your account and to meet our legal duties. We do not sell personal information. Our full privacy notice sets out what we hold, how long we keep it and who we share it with, and is available on request from the address at the head of this letter.\n\nWhere we share information with another organisation it is because the law requires it or because that organisation acts for us under a written agreement. We keep records for as long as the account is open and for six years afterwards.\n\n\nWAYS TO CONTACT US\n\nOur office hours are 9am to 5pm, Monday to Friday, excluding bank holidays. Calls are answered in the order received and may be recorded for training and quality purposes. Written correspondence is acknowledged within ten working days.\n\nPlease quote the reference printed at the top of this letter in all correspondence. Without it we may be unable to trace your account and a reply will take longer.\n\n\nWAYS TO PAY\n\nDirect Debit is the simplest way to pay and can be set up over the telephone or online. Instalments are collected on the date shown on the schedule; where a collection fails we will write to you before trying again.\n\nBank transfer, standing order, debit card over the telephone, and cash or cheque at any of our offices are also accepted. Cheques should be made payable to the organisation named at the head of this letter, with the reference written on the back.\n\nA payment made by post is treated as received on the working day it reaches us, not the day it was sent. Allow five working days for a cheque to be cleared.\n\n\nIF YOU ARE STRUGGLING\n\nFree, independent advice on money and debt is available from national advice charities. Telling us early about a difficulty gives us the widest range of options to help.\n\nA payment arrangement can spread an amount over a longer period. Arrangements are reviewed every six months and can be changed if your circumstances change.\n\n\nACCESSIBILITY\n\nThis letter can be provided in large print, braille, audio or another language. Please tell us which format you need and we will arrange it at no cost.\n\nOur offices have step-free access and a hearing loop at reception. A British Sign Language interpreter can be booked for appointments with three working days' notice.\n\n\nCOMPLAINTS\n\nIf you are unhappy with the service you have received, tell us and we will look into it. Our complaints procedure has two stages and is explained in full on request. If you remain dissatisfied at the end of it, you may refer the matter to the relevant independent scheme.\n\nA complaint does not change any amount or date stated in the letter it concerns unless we write to say so.\n\n\nFREQUENTLY ASKED QUESTIONS\n\nWhy have I received this letter? Because our records show the account or matter described is in your name. If you believe that is wrong, contact us with the reference and we will check.\n\nWhat happens if I do nothing? The amounts and dates in the letter stand. Where there is a consequence for missing a date it is stated in the letter itself, not on these pages.\n\nCan I get a copy? Yes. A duplicate of any letter we have sent can be requested by telephone or in writing and is normally issued within five working days.\n\nIs this a scam? We will never ask you for your full bank details or a one-time code by telephone. If you are unsure, call the number printed at the head of this letter, not one given to you by a caller.\n\n\nGLOSSARY\n\nReference: the identifier printed at the top of this letter, which uniquely identifies your account or case with us.\n\nInstalment: one of a series of equal payments that together settle an annual amount.\n\nWorking day: Monday to Friday, excluding bank holidays in England and Wales.\n\nRegistered keeper, leaseholder, account holder: the person our records name as responsible for the matter described.\n\n\nYOUR RIGHTS\n\nYou have the right to see the information we hold about you, to have inaccurate information corrected and, in some circumstances, to have it deleted. Requests are handled within one calendar month.\n\nYou have the right to complain to the Information Commissioner if you believe we have handled your information unlawfully.\n\n\nWHAT HAPPENS NEXT\n\nOnce the matter described in the letter is settled, we will update our records within ten working days. You will not normally receive a further letter unless something changes.\n\nIf we do not hear from you where the letter asks for a reply, the position stated in the letter stands and any later step it describes may follow. We will always write again before taking a step not already described.\n\n\nCHANGES IN YOUR CIRCUMSTANCES\n\nMoving home, a change of name, a change in who lives at the property, or a change in your income can all affect an account of this kind. Tell us about a change as soon as it happens; a change reported late may not be applied from the date it occurred.\n\nWhere a change reduces what you owe, any overpayment is refunded to the account it was paid from, or credited against the next amount due if you prefer.\n\n\nCHECKLIST\n\nCheck the name and address on the first page are yours and are spelt correctly. Check the reference matches any earlier letters you hold. Keep this letter with your records for at least six years.\n\nIf you act on this letter — pay, reply, or attend — make a note of the date you did so and, where you paid, the method and any confirmation number.\n\n"
+  }
+}

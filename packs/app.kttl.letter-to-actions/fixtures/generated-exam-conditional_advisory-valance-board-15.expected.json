@@ -1,0 +1,60 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-conditional_advisory-valance-board-15",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "conditional_advisory-valance-board-15-no-ask-01",
+      "segment": "This notice concerns your energy account and is sent for information. No reply is needed.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-valance-board-15-no-ask-02",
+      "segment": "If you have moved abroad, notify the office of your new address.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-valance-board-15-no-ask-03",
+      "segment": "Should the tenancy end early, return all keys to the managing agent.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-valance-board-15-no-ask-04",
+      "segment": "Ask for help with reading this letter if you need it.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-valance-board-15-no-ask-05",
+      "segment": "Move valuables before the survey begins.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-valance-board-15-no-ask-07",
+      "segment": "Retain this letter as you see fit; the file copy is definitive.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    }
+  ]
+}

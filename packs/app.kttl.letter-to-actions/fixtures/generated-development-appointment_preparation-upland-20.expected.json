@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-upland-20",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "16 September 2026",
+        "deadline": "for 16 September 2026 at 5.30pm",
+        "due": "2026-09-16",
+        "kind": "attendance",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_preparation-upland-20-attendance-01",
+      "segment": "Your appointment about your energy account with Cranleigh Energy is booked for 16 September 2026 at 5.30pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-upland-20-no-ask-02",
+      "segment": "Please allow for roadworks on the approach.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_preparation-upland-20-other-03",
+      "segment": "Please bring the completed consent form with you when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-upland-20-no-ask-04",
+      "segment": "Please take a ticket from the machine as you come in.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_preparation-upland-20-other-05",
+      "segment": "Please make a note of the dates you were away before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-upland-20-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-upland-20-no-ask-08",
+      "segment": "We have already passed your details to the billing team, who will make the change within 10 days.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

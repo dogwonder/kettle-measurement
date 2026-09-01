@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-lantern-11",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "18 January 2027",
+        "deadline": "for 18 January 2027 at 4.05pm",
+        "due": "2027-01-18",
+        "kind": "attendance",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-lantern-11-attendance-01",
+      "segment": "Your appointment about your check-up with Fenwick Dental Practice is booked for 18 January 2027 at 4.05pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-lantern-11-no-ask-02",
+      "segment": "Please arrive ten minutes early.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-lantern-11-other-03",
+      "segment": "Please write out a list of the questions you want to raise and bring it with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-lantern-11-no-ask-04",
+      "segment": "Please allow fifteen minutes for parking.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-lantern-11-other-05",
+      "segment": "Please obtain a copy of your last statement before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-lantern-11-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-lantern-11-no-ask-08",
+      "segment": "The 14 days we mentioned in our previous letter no longer apply, as the matter is settled.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

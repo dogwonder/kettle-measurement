@@ -88,7 +88,7 @@ fn run_info() -> LetterRunInfo {
 
 #[test]
 fn a_dated_obligation_becomes_one_approvable_calendar_action() {
-    let actions = propose_letter_actions(&outcome(), date("2026-03-03"), "run-01");
+    let actions = propose_letter_actions(&outcome(), "run-01");
 
     // One card per obligation — including the undated one, which a
     // person still has to deal with.
@@ -117,8 +117,12 @@ fn a_dated_obligation_becomes_one_approvable_calendar_action() {
     );
 
     // The .ics sits on the day it falls due, not on today.
-    assert_eq!(pay.export.ics.date, date("2026-03-17"));
-    let ics = &pay.export.ics;
+    let ics = pay
+        .export
+        .ics
+        .as_ref()
+        .expect("a dated obligation exports to a calendar");
+    assert_eq!(ics.date, date("2026-03-17"));
     assert!(!ics.summary.is_empty());
 }
 
@@ -126,12 +130,13 @@ fn a_dated_obligation_becomes_one_approvable_calendar_action() {
 fn a_disputed_deadline_reaches_its_approvable_action() {
     let mut disputed = outcome();
     disputed.obligations[0].disputed = vec![Disagreement {
+        page: 1,
         top: 0.60,
         read: "Please pay £120.00 by 28 April 2026.".to_owned(),
         also_read: "Please pay £120.00 by 28 April 2028.".to_owned(),
     }];
 
-    let actions = propose_letter_actions(&disputed, date("2026-03-03"), "run-01");
+    let actions = propose_letter_actions(&disputed, "run-01");
     let shown = &actions.actions[0].disputed;
 
     assert_eq!(
@@ -154,12 +159,13 @@ fn a_disputed_deadline_reaches_its_approvable_action() {
 fn a_line_the_second_reading_missed_says_that_it_was_not_confirmed() {
     let mut disputed = outcome();
     disputed.obligations[0].disputed = vec![Disagreement {
+        page: 1,
         top: 0.60,
         read: "Please pay £120.00 by 28 April 2026.".to_owned(),
         also_read: String::new(),
     }];
 
-    let actions = propose_letter_actions(&disputed, date("2026-03-03"), "run-01");
+    let actions = propose_letter_actions(&disputed, "run-01");
     let shown = &actions.actions[0].disputed[0];
 
     assert_eq!(
@@ -174,7 +180,7 @@ fn a_line_the_second_reading_missed_says_that_it_was_not_confirmed() {
 
 #[test]
 fn an_undated_obligation_is_offered_without_a_date_being_invented() {
-    let actions = propose_letter_actions(&outcome(), date("2026-03-03"), "run-01");
+    let actions = propose_letter_actions(&outcome(), "run-01");
     let reading = &actions.actions[1];
 
     // It is visible — never dropped for being awkward.
@@ -190,6 +196,18 @@ fn an_undated_obligation_is_offered_without_a_date_being_invented() {
         !reading.detail.contains("2026-03-03"),
         "an undated obligation must not be dated by default: {}",
         reading.detail
+    );
+    // Nor may the export invent one. A calendar event needs a day and
+    // the letter gave none, so there is no calendar event — only text.
+    assert!(
+        reading.export.ics.is_none(),
+        "an undated obligation has no calendar export: {:?}",
+        reading.export
+    );
+    assert!(reading.export.text.contains("at your earliest convenience"));
+    assert!(
+        actions.actions[0].export.ics.is_some(),
+        "the dated one still exports to a calendar"
     );
 }
 
@@ -315,13 +333,13 @@ fn the_actions_keep_the_order_the_timeline_decided() {
     // with undated last, and a second sort here could disagree with
     // it — two orderings of the same list is how a screen and a
     // report end up telling a person different things.
-    let actions = propose_letter_actions(&outcome(), date("2026-03-03"), "run-01");
+    let actions = propose_letter_actions(&outcome(), "run-01");
     let titles: Vec<&str> = actions.actions.iter().map(|a| a.title.as_str()).collect();
     assert_eq!(titles, vec!["Pay £120.00", "Send a meter reading"]);
 
     let mut reversed = outcome();
     reversed.obligations.reverse();
-    let reversed_actions = propose_letter_actions(&reversed, date("2026-03-03"), "run-01");
+    let reversed_actions = propose_letter_actions(&reversed, "run-01");
     let reversed_titles: Vec<&str> = reversed_actions
         .actions
         .iter()
@@ -370,6 +388,6 @@ fn proposed_letter_actions_carry_the_run_they_belong_to() {
     // marker, dropped every completed letter run because of it. An
     // actions document that cannot say which run proposed it is not a
     // complete document.
-    let actions = propose_letter_actions(&outcome(), date("2026-03-03"), "run-07");
+    let actions = propose_letter_actions(&outcome(), "run-07");
     assert_eq!(actions.run_id, "run-07");
 }

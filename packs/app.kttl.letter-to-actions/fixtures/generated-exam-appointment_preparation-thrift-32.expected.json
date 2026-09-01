@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-thrift-32",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "10 February 2026",
+        "deadline": "for 10 February 2026 at 9.10am",
+        "due": "2026-02-10",
+        "kind": "attendance",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-thrift-32-attendance-01",
+      "segment": "An appointment concerning your parking charge has been arranged with Harborne Parking Services for 10 February 2026 at 9.10am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-thrift-32-no-ask-02",
+      "segment": "You must report to the main desk when you arrive.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-thrift-32-other-03",
+      "segment": "You must remain in the waiting area until you are called, and obtain a copy of the most recent statement before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-thrift-32-no-ask-04",
+      "segment": "You must use the side entrance while the main doors are closed.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-thrift-32-other-05",
+      "segment": "You must take the lift to the second floor and obtain proof of identity in advance.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-thrift-32-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-thrift-32-no-ask-08",
+      "segment": "An overpayment of £61.90 is carried forward against the next invoice.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

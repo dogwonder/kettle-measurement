@@ -4,6 +4,7 @@ node_modules/
 app/dist/
 # The public browser demo build (#269) — deployed, never committed
 app/dist-demo/
+app/dist-study/
 
 # Vendored sidecar binaries (see sidecars/README.md)
 sidecars/*

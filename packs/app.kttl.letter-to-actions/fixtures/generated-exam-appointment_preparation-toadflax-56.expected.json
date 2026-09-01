@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-toadflax-56",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "18 February 2026",
+        "deadline": "for 18 February 2026 at 9.10am",
+        "due": "2026-02-18",
+        "kind": "attendance",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-toadflax-56-attendance-01",
+      "segment": "An appointment concerning your parking charge has been arranged with Harborne Parking Services for 18 February 2026 at 9.10am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-toadflax-56-no-ask-02",
+      "segment": "You must switch your telephone off in the waiting area.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-toadflax-56-other-03",
+      "segment": "You must ring the bell if the desk is unattended, and take a meter reading before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-toadflax-56-no-ask-04",
+      "segment": "You must allow additional time if you travel by public transport.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-toadflax-56-other-05",
+      "segment": "You must use the visitor bays rather than the staff bays and obtain a copy of the agreement from the other party in advance.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-toadflax-56-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-toadflax-56-no-ask-08",
+      "segment": "The matter was concluded on 3 March and papers are retained for 7 years.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-teasel-20",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "6 February 2026",
+        "deadline": "for 6 February 2026 at 2.15pm",
+        "due": "2026-02-06",
+        "kind": "attendance",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-teasel-20-attendance-01",
+      "segment": "An appointment concerning your parking charge has been arranged with Harborne Parking Services for 6 February 2026 at 2.15pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-teasel-20-no-ask-02",
+      "segment": "You must allow for delays on the approach road.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-teasel-20-other-03",
+      "segment": "You must register for an online account before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-teasel-20-no-ask-04",
+      "segment": "You must take a ticket from the machine as you enter.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-teasel-20-other-05",
+      "segment": "You must order a replacement card in advance.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-teasel-20-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-teasel-20-no-ask-08",
+      "segment": "The statement for the period ending 31 March accompanies this letter for information.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

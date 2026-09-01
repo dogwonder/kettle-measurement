@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-betony-51",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "8 May 2026",
+        "deadline": "for 8 May 2026 at 4.05pm",
+        "due": "2026-05-08",
+        "kind": "attendance",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_preparation-betony-51-attendance-01",
+      "segment": "Your appointment about your annual review with Marlow Ridge Surgery is booked for 8 May 2026 at 4.05pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-betony-51-no-ask-02",
+      "segment": "Please allow fifteen minutes for parking.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_preparation-betony-51-other-03",
+      "segment": "Please arrive ten minutes early and bring a list of the questions you want to raise with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-betony-51-no-ask-04",
+      "segment": "Please report to the front desk when you arrive.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_preparation-betony-51-other-05",
+      "segment": "Please use the side entrance, and obtain a copy of your last statement before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-betony-51-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-betony-51-no-ask-08",
+      "segment": "Your complaint was upheld on 20 May and the compensation has been paid.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

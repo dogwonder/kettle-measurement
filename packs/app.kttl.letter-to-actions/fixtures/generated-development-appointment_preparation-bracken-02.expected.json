@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-bracken-02",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "13 March 2026",
+        "deadline": "for 13 March 2026 at 3.50pm",
+        "due": "2026-03-13",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-bracken-02-attendance-01",
+      "segment": "Your appointment about your council tax account with Kelsford Borough Council is booked for 13 March 2026 at 3.50pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-bracken-02-no-ask-02",
+      "segment": "Please report to the front desk when you arrive.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-bracken-02-other-03",
+      "segment": "Please complete the enclosed questionnaire and hand it in when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-bracken-02-no-ask-04",
+      "segment": "Please use the side entrance, as the main doors are closed for works.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-bracken-02-other-05",
+      "segment": "Please have your account number written down before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-bracken-02-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-bracken-02-no-ask-08",
+      "segment": "You may keep this letter for your records; a copy is also held on your file.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

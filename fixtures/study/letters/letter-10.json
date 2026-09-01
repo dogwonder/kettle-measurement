@@ -1,0 +1,66 @@
+{
+  "actions": {
+    "actions": [
+      {
+        "detail": "Harrowdene Housing Association asked for this by 11 April 2026. The letter says \"on 11 April 2026\".",
+        "evidence": {
+          "asked_by": "Harrowdene Housing Association",
+          "in_the_letter": "on 11 April 2026",
+          "passage_1": "Someone over 18 must be at home to let the engineer in. If nobody is home the visit will be recorded as a no-access and rebooked, which may take several weeks."
+        },
+        "export": {
+          "ics": {
+            "date": "2026-04-11",
+            "summary": "Be at home to let the engineer in — Harrowdene Housing Association"
+          },
+          "text": "Be at home to let the engineer in (Harrowdene Housing Association) — on 11 April 2026"
+        },
+        "id": "act-01",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Be at home to let the engineer in"
+      },
+      {
+        "detail": "Harrowdene Housing Association asked for this, but the letter does not give a date Kettle could work out — it says \"at least two working days before the visit\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "Harrowdene Housing Association",
+          "in_the_letter": "at least two working days before the visit",
+          "passage_1": "If the time does not suit you, call us on 0300 123 6060 at least two working days before the visit to rearrange."
+        },
+        "export": {
+          "text": "Call to rearrange the visit (Harrowdene Housing Association) — at least two working days before the visit"
+        },
+        "id": "act-02",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Call to rearrange the visit"
+      }
+    ],
+    "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+    "run_id": "letter-10",
+    "schema": "kettle/proposed-actions@0"
+  },
+  "expected": [
+    {
+      "anchor": "11 April 2026",
+      "deadline": "on 11 April 2026 between 8am and 6pm",
+      "due": "2026-04-11",
+      "id": "contractor_appointment-033-01",
+      "kind": "attendance",
+      "party": "Harrowdene Housing Association",
+      "segment": "Thank you for reporting the fault with your boiler. We have booked Hall Building Services to visit on 11 April 2026 between 8am and 6pm."
+    }
+  ],
+  "id": "letter-10",
+  "model": "qwen3.5-4b-q4_k_m.gguf",
+  "pack": {
+    "id": "app.kttl.letter-to-actions",
+    "version": "0.3.0"
+  },
+  "schema": "kettle/study-letter@0",
+  "source": {
+    "file": "contractor_appointment-033.txt",
+    "hash": "blake3:35a724ee315d971705d66b15cec64af5b0a61a9caf5d74ec57de184ff4948219",
+    "text": "26 March 2026\nHarrowdene Housing Association\nOur reference: PJ173936\n\nDear Maria,\n\nThank you for reporting the fault with your boiler. We have booked Hall Building Services to visit on 11 April 2026 between 8am and 6pm.\n\nSomeone over 18 must be at home to let the engineer in. If nobody is home the visit will be recorded as a no-access and rebooked, which may take several weeks.\n\nIf the time does not suit you, call us on 0300 123 6060 at least two working days before the visit to rearrange.\n\nThe engineer will carry identification. You are welcome to ask to see it.\n\nKind regards,\nLinda Kelly-Barrett\nHarrowdene Housing Association\n\nHOW WE USE YOUR INFORMATION\n\nWe hold the details on this letter to administer your account and to meet our legal duties. We do not sell personal information. Our full privacy notice sets out what we hold, how long we keep it and who we share it with, and is available on request from the address at the head of this letter.\n\nWhere we share information with another organisation it is because the law requires it or because that organisation acts for us under a written agreement. We keep records for as long as the account is open and for six years afterwards.\n\n"
+  }
+}

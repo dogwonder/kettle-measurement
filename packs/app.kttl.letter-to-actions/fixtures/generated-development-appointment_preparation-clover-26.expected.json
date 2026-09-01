@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-clover-26",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "21 March 2026",
+        "deadline": "for 21 March 2026 at 3.50pm",
+        "due": "2026-03-21",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-clover-26-attendance-01",
+      "segment": "Your appointment about your council tax account with Kelsford Borough Council is booked for 21 March 2026 at 3.50pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-clover-26-no-ask-02",
+      "segment": "Please switch your telephone off in the waiting area.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-clover-26-other-03",
+      "segment": "Please bring the original certificate rather than a photocopy when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-clover-26-no-ask-04",
+      "segment": "Please allow extra time if you are travelling by bus.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-clover-26-other-05",
+      "segment": "Please register for an online account before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-clover-26-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-clover-26-no-ask-08",
+      "segment": "Your cover continues until 14 September and renews by itself unless you tell us otherwise.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

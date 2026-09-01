@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-furrow-06",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "28 August 2026",
+        "deadline": "for 28 August 2026 at 10.40am",
+        "due": "2026-08-28",
+        "kind": "attendance",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "appointment_preparation-furrow-06-attendance-01",
+      "segment": "Your appointment about your tenancy account with Ashcombe Housing Trust is booked for 28 August 2026 at 10.40am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-furrow-06-no-ask-02",
+      "segment": "Please switch your telephone off in the waiting area.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "appointment_preparation-furrow-06-other-03",
+      "segment": "Please bring the original certificate rather than a photocopy when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-furrow-06-no-ask-04",
+      "segment": "Please allow extra time if you are travelling by bus.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "appointment_preparation-furrow-06-other-05",
+      "segment": "Please register for an online account before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-furrow-06-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-furrow-06-no-ask-08",
+      "segment": "There is no charge for this service and none will be raised.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

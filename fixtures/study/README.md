@@ -85,6 +85,28 @@ here without anybody seeding it.
 participant who flagged a natural label error from one who raised a
 false alarm.
 
+## The letters (27 August 2026)
+
+`letters/letter-NN.json`: synthetic letters from the `kettle-examples`
+generator (a sibling directory; `python -m synth_letters bed out --bed
+out-bed` writes the `.txt` and `.expected.json` pairs this reads), run
+through the letter pack **for real** by
+`crates/runner/examples/study_letters.rs` on Qwen3.5-4B Q4_K_M, one
+sidecar for all of them. Each file carries the letter's text and hash,
+the proposed actions exactly as `propose_letter_actions` emitted them,
+and the bed's expected obligations as the audit's reference. The
+harness seeds against what the run showed, as it does for statements.
+
+`audit-letters.py` reads every letter against its expectation and
+writes `audit-letters.json`; a letter is a clean control only once a
+person has read its notes and said so there. The generator's letters
+are the reason a self-run pilot is worth anything (see
+`app/study/PILOT.md`): the author has not read them.
+
+```sh
+scripts/study-pilot.sh corpus 14      # generate + audit
+```
+
 ## Regenerating
 
 ```sh

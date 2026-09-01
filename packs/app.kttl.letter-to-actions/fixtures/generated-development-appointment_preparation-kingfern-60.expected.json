@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-kingfern-60",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "17 February 2027",
+        "deadline": "for 17 February 2027 at 5.30pm",
+        "due": "2027-02-17",
+        "kind": "attendance",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-kingfern-60-attendance-01",
+      "segment": "Your appointment about your case file with Grantley Legal Aid is booked for 17 February 2027 at 5.30pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-kingfern-60-no-ask-02",
+      "segment": "Please allow for roadworks on the approach.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-kingfern-60-other-03",
+      "segment": "Please arrive promptly, and bring the completed consent form with you when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-kingfern-60-no-ask-04",
+      "segment": "Please take a ticket from the machine as you come in.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-kingfern-60-other-05",
+      "segment": "Please allow extra time if you are travelling by bus, and make a note of the dates you were away before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-kingfern-60-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-kingfern-60-no-ask-08",
+      "segment": "The next inspection is due in 18 months and we will arrange it.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

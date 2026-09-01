@@ -52,7 +52,52 @@ struct PublicScore {
     sidecar: Option<SidecarInfo>,
     runtime: Option<RuntimePolicy>,
     verdict: Verdict,
+    /// What the fixtures were — typed text, photographs, or both (#585).
+    /// Every committed measurement to date was read as text, and the
+    /// route people use is a photograph; a card that did not say which
+    /// let a text figure stand for a photographed letter it never
+    /// measured. Derived from each fixture's file name, which is the one
+    /// fact a recording cannot be wrong about, and never declared.
+    route: Route,
     scores: PublicScoreValues,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+enum Route {
+    /// Every fixture was typed text: plain text, Markdown, CSV or PDF.
+    Text,
+    /// Every fixture was a photograph read by the vision path.
+    Photographs,
+    /// Both, in one report — the paired bed's shape.
+    Mixed,
+}
+
+/// The photographed extensions the letter pack accepts (`image/jpeg`,
+/// `image/heic`), plus PNG, which the vision path also reads.
+const PHOTOGRAPH_EXTENSIONS: [&str; 6] = ["jpg", "jpeg", "heic", "heif", "png", "webp"];
+
+fn route_of(report: &EvalReport) -> Route {
+    let is_photograph = |fixture: &str| {
+        Path::new(fixture)
+            .extension()
+            .and_then(|extension| extension.to_str())
+            .is_some_and(|extension| {
+                PHOTOGRAPH_EXTENSIONS
+                    .iter()
+                    .any(|known| known.eq_ignore_ascii_case(extension))
+            })
+    };
+    let photographs = report
+        .fixtures
+        .iter()
+        .filter(|fixture| is_photograph(&fixture.fixture))
+        .count();
+    match photographs {
+        0 => Route::Text,
+        n if n == report.fixtures.len() => Route::Photographs,
+        _ => Route::Mixed,
+    }
 }
 
 #[derive(Debug, Serialize)]
@@ -275,6 +320,7 @@ fn public_score(
         sidecar: report.sidecar.clone(),
         runtime: report.runtime.clone(),
         verdict: report.verdict,
+        route: route_of(&report),
         scores: score_values(&report),
     }
 }

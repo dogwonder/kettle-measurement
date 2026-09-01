@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-inkcap-09",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "17 March 2026",
+        "deadline": "for 17 March 2026 at 10.40am",
+        "due": "2026-03-17",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-inkcap-09-attendance-01",
+      "segment": "An appointment concerning your council tax account has been arranged with Kelsford Borough Council for 17 March 2026 at 10.40am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-inkcap-09-no-ask-02",
+      "segment": "You must arrive on time, as late arrivals cannot always be seen.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-inkcap-09-other-03",
+      "segment": "You must package the item this enquiry concerns ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-inkcap-09-no-ask-04",
+      "segment": "You must present yourself at the desk marked Appointments.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-inkcap-09-other-05",
+      "segment": "You must write out a record of your previous addresses on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-inkcap-09-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-inkcap-09-no-ask-08",
+      "segment": "The residual sum of £8.40 has been written off.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

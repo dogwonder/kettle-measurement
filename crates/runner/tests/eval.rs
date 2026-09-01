@@ -1143,6 +1143,92 @@ fn single_decision(correct: bool) -> FixtureResult {
     }
 }
 
+/// A single-decision letter fixture tagged with the strata it belongs
+/// to, so a gate can tell a gated letter from an ungated one.
+fn single_decision_in(ordinal: usize, correct: bool, strata: &[&str]) -> FixtureResult {
+    let mut fixture = single_decision(correct);
+    // The item is right either way: the miss lives in the fixture's
+    // step score and end-to-end, so the harm ceilings stay clear and
+    // the verdict turns on pooling alone. Distinct ordinals, because a
+    // ceiling counts distinct decisions (#310).
+    fixture.items = vec![scored_extraction(ordinal, true, strata)];
+    fixture
+}
+
+/// A report whose harm metrics are computed from its fixtures' items,
+/// as a real run's are.
+fn report_with_items(fixtures: Vec<FixtureResult>) -> EvalReport {
+    let items: Vec<ScoredItem> = fixtures.iter().flat_map(|f| f.items.clone()).collect();
+    let mut report = report_of(fixtures);
+    report.metrics.insert(
+        EvalMetric::Extraction,
+        MetricReport::Extraction(runner::eval::extraction_metrics(&items)),
+    );
+    report
+}
+
+/// `any-letter` gated, `conditional-advisory` declared and ungated —
+/// the letter bed's shape on 30 August 2026.
+fn letter_gate() -> Thresholds {
+    let mut strata = obligation_ceiling(0.05).classification_strata;
+    strata.insert(
+        "conditional-advisory".to_owned(),
+        ClassificationStratum {
+            description:
+                "Measured, not yet gating; promotes once real letters of this shape read correctly."
+                    .to_owned(),
+            classes: BTreeMap::new(),
+        },
+    );
+    obligation_ceiling(0.05).with_classification_strata(strata)
+}
+
+#[test]
+fn an_ungated_stratum_does_not_decide_the_pooled_verdict() {
+    // #581, decided 30 August 2026. Sixty hard letters were added to
+    // the bed in a stratum declared ungated, and the pack failed on
+    // main's own prompt — 0.977 on the 425 fixtures before them, 0.926
+    // on 455 — because the pooled end-to-end read every fixture
+    // regardless of what its stratum declared. A bar that falls every
+    // time a harm is measured inverts the incentive: measuring well
+    // fails the pack. So the pool is the gated strata, and an ungated
+    // stratum is reported beside its promotion condition until it is
+    // promoted on purpose.
+    let gate = letter_gate();
+
+    let mut bed: Vec<FixtureResult> = (1..=445)
+        .map(|n| single_decision_in(n, true, &["any-letter", "absolute-deadline"]))
+        .collect();
+    bed.extend((446..=505).map(|n| single_decision_in(n, false, &["conditional-advisory"])));
+    assert_eq!(
+        report_with_items(bed).overall_verdict(&gate),
+        Verdict::Pass,
+        "sixty ungated misses do not move a verdict the gated strata clear"
+    );
+
+    // The control: the same sixty letters, gated, fail it — the bar is
+    // unchanged; only what it is read over.
+    let mut gated: Vec<FixtureResult> = (1..=445)
+        .map(|n| single_decision_in(n, true, &["any-letter"]))
+        .collect();
+    gated.extend(
+        (446..=505).map(|n| single_decision_in(n, false, &["any-letter", "conditional-advisory"])),
+    );
+    assert_eq!(
+        report_with_items(gated).overall_verdict(&gate),
+        Verdict::Fail
+    );
+
+    // And a bed with nothing in a gated stratum has shown nothing.
+    let unpooled: Vec<FixtureResult> = (1..=100)
+        .map(|n| single_decision_in(n, true, &["conditional-advisory"]))
+        .collect();
+    assert_eq!(
+        report_with_items(unpooled).overall_verdict(&gate),
+        Verdict::Fail
+    );
+}
+
 fn obligations_bar(bar: f32, gate: runner::eval::Gate) -> Thresholds {
     Thresholds::from_eval(&BTreeMap::from([("obligations".to_string(), bar)])).with_gate(gate)
 }
@@ -1220,6 +1306,7 @@ fn the_pooled_gate_is_read_by_its_wilson_lower_bound_not_its_point_estimate() {
 
 fn report_of(fixtures: Vec<FixtureResult>) -> EvalReport {
     EvalReport {
+        unrunnable: Vec::new(),
         reused_fixtures: 0,
         pack: "app.kttl.subscription-audit".to_string(),
         pack_version: "1.0.0".to_string(),

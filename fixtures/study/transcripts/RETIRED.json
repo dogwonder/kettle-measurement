@@ -1,0 +1,18 @@
+{
+  "schema": "kettle/study-retired@0",
+  "note": "Participant numbers that were issued and sat, and whose transcript is not published. An id here is never issued again: the sitting happened, it is in the history and on #431, and two different sessions under one number would make the published record ambiguous. `scripts/study-pilot.sh next` reads this.",
+  "retired": [
+    {
+      "participant": "a01",
+      "at": "2026-08-28",
+      "commit": "417edf7",
+      "why": "Sat and scored, then superseded the same day: #577 made `planLetters` draw its clean controls only from letters the audit calls clean, which moves the draw. Clean is drawn last, so the eight seeded tasks were untouched and only the two clean slots moved — enough that a01's answers to tasks 4 and 10 would score against letters it never showed. An author pilot cannot produce a quotable rate, and its findings are recorded on #431."
+    },
+    {
+      "participant": "a02",
+      "at": "2026-08-28",
+      "commit": "not committed",
+      "why": "Sat under the repaired instrument and detected 8 of 8 seeds. Retired the same day for the same reason as a01: it flagged a dropped time window on `letter-10`, which the audit had called clean because it matches on party and due date only. Marking that letter unclean moves the draw, and a02's answers would then score against a letter it never showed. It is the last transcript this can happen to silently — the session now records the ten documents it drew, and `rebuild` refuses a plan that disagrees."
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-meadow-12",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "1 March 2027",
+        "deadline": "for 1 March 2027 at 5.30pm",
+        "due": "2027-03-01",
+        "kind": "attendance",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-meadow-12-attendance-01",
+      "segment": "Your appointment about your case file with Grantley Legal Aid is booked for 1 March 2027 at 5.30pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-meadow-12-no-ask-02",
+      "segment": "Please report to the front desk when you arrive.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-meadow-12-other-03",
+      "segment": "Please complete the enclosed questionnaire and hand it in when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-meadow-12-no-ask-04",
+      "segment": "Please use the side entrance, as the main doors are closed for works.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-meadow-12-other-05",
+      "segment": "Please have your account number written down before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-meadow-12-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-meadow-12-no-ask-08",
+      "segment": "Your booking on 3 September was cancelled by us and refunded in full.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

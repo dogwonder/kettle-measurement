@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-umbel-44",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "24 September 2026",
+        "deadline": "for 24 September 2026 at 5.30pm",
+        "due": "2026-09-24",
+        "kind": "attendance",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_preparation-umbel-44-attendance-01",
+      "segment": "Your appointment about your energy account with Cranleigh Energy is booked for 24 September 2026 at 5.30pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-umbel-44-no-ask-02",
+      "segment": "Please take the lift to the second floor.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_preparation-umbel-44-other-03",
+      "segment": "Please come to the reception on the ground floor first, and bring your last three statements when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-umbel-44-no-ask-04",
+      "segment": "Please follow the signs for the outpatient wing.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_preparation-umbel-44-other-05",
+      "segment": "Please switch your telephone off in the waiting area, and arrange an interpreter through the booking line before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-umbel-44-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-umbel-44-no-ask-08",
+      "segment": "We are told the works on your street will finish by 30 September; the contractor is handling it.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

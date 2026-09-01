@@ -1,0 +1,51 @@
+{
+  "actions": {
+    "actions": [
+      {
+        "detail": "Harrowdene Housing Association asked for this by 20 May 2026. The letter says \"within 28 days\".",
+        "evidence": {
+          "asked_by": "Harrowdene Housing Association",
+          "in_the_letter": "within 28 days",
+          "passage_1": "If you have a medical condition that means noise or dust would affect you, please tell us within 28 days so we can plan around it."
+        },
+        "export": {
+          "ics": {
+            "date": "2026-05-20",
+            "summary": "Tell us if you have a medical condition affecting noise or dust — Harrowdene Housing Association"
+          },
+          "text": "Tell us if you have a medical condition affecting noise or dust (Harrowdene Housing Association) — within 28 days"
+        },
+        "id": "act-01",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Tell us if you have a medical condition affecting noise or dust"
+      }
+    ],
+    "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+    "run_id": "letter-07",
+    "schema": "kettle/proposed-actions@0"
+  },
+  "expected": [
+    {
+      "anchor": "the date of this letter",
+      "deadline": "within 28 days",
+      "due": null,
+      "id": "planned_works_notice-023-03",
+      "kind": "response",
+      "party": "Harrowdene Housing Association",
+      "segment": "If you have a medical condition that means noise or dust would affect you, please tell us within 28 days so we can plan around it."
+    }
+  ],
+  "id": "letter-07",
+  "model": "qwen3.5-4b-q4_k_m.gguf",
+  "pack": {
+    "id": "app.kttl.letter-to-actions",
+    "version": "0.3.0"
+  },
+  "schema": "kettle/study-letter@0",
+  "source": {
+    "file": "planned_works_notice-023.txt",
+    "hash": "blake3:7c448f8348188ca2719b465b668f678d673216c84757604ef306276f77d7adba",
+    "text": "Harrowdene Housing Association\nOur reference: HX539621\n\nDear Pamela,\n\nWe are writing to let you know that external redecoration and gutter replacement will begin at your building on 22 April 2026. Scaffolding will be erected the week before.\n\nYou do not need to do anything for the works to go ahead. Our contractor, O'Sullivan & Sons, will knock before working near your windows.\n\nIf you have a medical condition that means noise or dust would affect you, please tell us within 28 days so we can plan around it.\n\nWork is expected to take 7 weeks, weather permitting.\n\nKind regards,\nSteven Harris-Winter\nHarrowdene Housing Association\n\nHOW WE USE YOUR INFORMATION\n\nWe hold the details on this letter to administer your account and to meet our legal duties. We do not sell personal information. Our full privacy notice sets out what we hold, how long we keep it and who we share it with, and is available on request from the address at the head of this letter.\n\nWhere we share information with another organisation it is because the law requires it or because that organisation acts for us under a written agreement. We keep records for as long as the account is open and for six years afterwards.\n\n"
+  }
+}

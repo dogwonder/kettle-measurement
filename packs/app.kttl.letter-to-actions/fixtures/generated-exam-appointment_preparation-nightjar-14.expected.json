@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-nightjar-14",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "4 August 2026",
+        "deadline": "for 4 August 2026 at 4.05pm",
+        "due": "2026-08-04",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-nightjar-14-attendance-01",
+      "segment": "An appointment concerning your policy renewal has been arranged with Belwood Insurance for 4 August 2026 at 4.05pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-nightjar-14-no-ask-02",
+      "segment": "You must take the lift to the second floor.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-nightjar-14-other-03",
+      "segment": "You must request a written summary from your previous provider before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-nightjar-14-no-ask-04",
+      "segment": "You must follow the signs to the outpatient wing.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-nightjar-14-other-05",
+      "segment": "You must book an interpreter through the office in advance.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-nightjar-14-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-nightjar-14-no-ask-08",
+      "segment": "A reduction of £6.00 each month has been applied for the next 12 months.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

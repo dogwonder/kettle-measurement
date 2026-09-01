@@ -18,17 +18,25 @@ fn root(name: &str) -> PathBuf {
 }
 
 fn write_baseline(root: &Path, name: &str, scoring_version: u32, recorded_at: &str) {
+    write_baseline_read_from(root, name, scoring_version, recorded_at, &["one.txt"]);
+}
+
+/// A baseline whose fixtures carry the given file names — the route a
+/// measurement was read on is derived from nothing else.
+fn write_baseline_read_from(
+    root: &Path,
+    name: &str,
+    scoring_version: u32,
+    recorded_at: &str,
+    fixtures: &[&str],
+) {
     let report = |model: &str, sidecar: &str, runtime: &str, end_to_end: f32| {
-        format!(
-            r#"{{
-              "pack":"app.kttl.letter-to-actions",
-              "pack_version":"0.2.0",
-              "eval_set":"development",
-              {model}
-              "machine":{{"cpu":"Test CPU","ram_gb":32,"os":"Test OS"}},
-              {sidecar}
-              "fixtures":[{{
-                "fixture":"one.txt",
+        let fixtures = fixtures
+            .iter()
+            .map(|fixture| {
+                format!(
+                    r#"{{
+                "fixture":"{fixture}",
                 "step_scores":{{}},
                 "items":[],
                 "containment":{{
@@ -40,7 +48,20 @@ fn write_baseline(root: &Path, name: &str, scoring_version: u32, recorded_at: &s
                 "end_to_end":{end_to_end},
                 "needs_review_rate":0.2,
                 "perf":{{"wall_ms":1250,"model_ms":1000,"tokens_per_second":20.0,"peak_rss_mb":512,"retries":0}}
-              }}],
+              }}"#
+                )
+            })
+            .collect::<Vec<_>>()
+            .join(",");
+        format!(
+            r#"{{
+              "pack":"app.kttl.letter-to-actions",
+              "pack_version":"0.2.0",
+              "eval_set":"development",
+              {model}
+              "machine":{{"cpu":"Test CPU","ram_gb":32,"os":"Test OS"}},
+              {sidecar}
+              "fixtures":[{fixtures}],
               "metrics":{{}},
               "bed":"blake3:bed",
               {runtime}
@@ -164,4 +185,52 @@ fn a_malformed_measurement_stops_the_public_projection() {
         "{}",
         outcome.text
     );
+}
+
+/// #585: every committed measurement so far was read as text, and the
+/// public page never said so. The route people actually use is a
+/// photograph, and a score card that does not name its route lets a
+/// text-bed figure stand for the photographed letter it never measured.
+/// The route is derived from what each fixture was — a file name is
+/// the one thing a recording cannot be wrong about — never declared.
+#[test]
+fn a_score_names_the_route_its_fixtures_were_read_on() {
+    let dir = root("route");
+    write_baseline_read_from(
+        &dir,
+        "baseline-text.json",
+        17,
+        "2026-08-30T20:00:00Z",
+        &["one.txt", "two.md", "three.pdf"],
+    );
+    write_baseline_read_from(
+        &dir,
+        "measured-photographs.json",
+        17,
+        "2026-08-30T21:00:00Z",
+        &["one.jpg", "two.jpeg", "three.heic"],
+    );
+    write_baseline_read_from(
+        &dir,
+        "measured-paired.json",
+        17,
+        "2026-08-30T22:00:00Z",
+        &["one.txt", "one.jpg"],
+    );
+
+    let outcome = cli::scores::run_json(&dir, 17);
+    assert_eq!(outcome.code, cli::scores::ExitCode::Ok, "{}", outcome.text);
+    let document: serde_json::Value = serde_json::from_str(&outcome.text).expect("scores JSON");
+    let route_of = |source: &str| {
+        document["measurements"]
+            .as_array()
+            .expect("measurements")
+            .iter()
+            .find(|row| row["source"] == source && row["policy"]["kind"] == "model")
+            .map(|row| row["route"].clone())
+            .expect("a row for the source")
+    };
+    assert_eq!(route_of("evals/baseline-text.json"), "text");
+    assert_eq!(route_of("evals/measured-photographs.json"), "photographs");
+    assert_eq!(route_of("evals/measured-paired.json"), "mixed");
 }

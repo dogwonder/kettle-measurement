@@ -16,7 +16,9 @@
 use super::{Correction, Line, OcrError, Placed, Reading};
 use objc2::rc::Retained;
 use objc2::AnyThread;
+use objc2_core_graphics::CGImage;
 use objc2_foundation::{NSDictionary, NSString, NSURL};
+use objc2_image_io::CGImageSource;
 use objc2_vision::{
     VNImageRequestHandler, VNRecognizeTextRequest, VNRecognizedTextObservation,
     VNRequestTextRecognitionLevel,
@@ -26,6 +28,12 @@ use std::path::Path;
 /// Read every line of text Vision finds in one picture.
 pub fn recognise(path: &Path, correction: Correction) -> Result<Reading, OcrError> {
     let url = NSURL::fileURLWithPath(&NSString::from_str(&path.to_string_lossy()));
+    let source = unsafe { CGImageSource::with_url(url.as_ref(), None) }
+        .ok_or_else(|| OcrError::Unreadable("ImageIO could not open the file".to_owned()))?;
+    let image = unsafe { source.image_at_index(0, None) }.ok_or_else(|| {
+        OcrError::Unreadable("ImageIO could not decode the first image".to_owned())
+    })?;
+    super::check_dimensions(CGImage::width(Some(&image)), CGImage::height(Some(&image)))?;
 
     let request: Retained<VNRecognizeTextRequest> = VNRecognizeTextRequest::new();
     // Accurate, not fast: a wrong digit in a date is the failure this
@@ -83,6 +91,8 @@ pub fn recognise(path: &Path, correction: Correction) -> Result<Reading, OcrErro
                 confidence: best.confidence(),
                 top: box_.origin.y + box_.size.height,
                 left: box_.origin.x,
+                right: box_.origin.x + box_.size.width,
+                bottom: box_.origin.y,
             },
         });
     }

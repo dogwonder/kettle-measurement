@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-nettlebank-50",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "16 August 2026",
+        "deadline": "for 16 August 2026 at 11.20am",
+        "due": "2026-08-16",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-nettlebank-50-attendance-01",
+      "segment": "An appointment concerning your policy renewal has been arranged with Belwood Insurance for 16 August 2026 at 11.20am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-nettlebank-50-no-ask-02",
+      "segment": "You must allow for delays on the approach road.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-nettlebank-50-other-03",
+      "segment": "You must arrive on time and register for an online account before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-nettlebank-50-no-ask-04",
+      "segment": "You must take a ticket from the machine as you enter.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-nettlebank-50-other-05",
+      "segment": "You must allow additional time if you travel by public transport and order a replacement card in advance.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-nettlebank-50-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-nettlebank-50-no-ask-08",
+      "segment": "Cover runs to 30 November and continues automatically thereafter.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

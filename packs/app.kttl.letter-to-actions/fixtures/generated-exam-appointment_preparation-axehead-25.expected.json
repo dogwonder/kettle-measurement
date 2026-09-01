@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-axehead-25",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "8 August 2026",
+        "deadline": "for 8 August 2026 at 10.40am",
+        "due": "2026-08-08",
+        "kind": "attendance",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "appointment_preparation-axehead-25-attendance-01",
+      "segment": "An appointment concerning your tenancy account has been arranged with Ashcombe Housing Trust for 8 August 2026 at 10.40am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-axehead-25-no-ask-02",
+      "segment": "You must not arrive more than thirty minutes early.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "appointment_preparation-axehead-25-other-03",
+      "segment": "You must print statements covering three months ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-axehead-25-no-ask-04",
+      "segment": "You must visit the ground floor reception first.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "appointment_preparation-axehead-25-other-05",
+      "segment": "You must bring the signed authority form on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-axehead-25-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-axehead-25-no-ask-08",
+      "segment": "Both parties executed the renewal on 5 July.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

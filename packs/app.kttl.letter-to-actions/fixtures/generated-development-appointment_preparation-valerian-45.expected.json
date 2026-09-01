@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-valerian-45",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "6 November 2026",
+        "deadline": "for 6 November 2026 at 9.10am",
+        "due": "2026-11-06",
+        "kind": "attendance",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-valerian-45-attendance-01",
+      "segment": "Your appointment about your pet health plan with Denholm Veterinary Group is booked for 6 November 2026 at 9.10am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-valerian-45-no-ask-02",
+      "segment": "Please do not arrive more than half an hour early.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-valerian-45-other-03",
+      "segment": "Please allow fifteen minutes for parking, and bring your address history with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-valerian-45-no-ask-04",
+      "segment": "Please come to the reception on the ground floor first.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-valerian-45-other-05",
+      "segment": "Please keep to the marked walkway from the car park, and obtain a copy of the agreement from the other party before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-valerian-45-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-valerian-45-no-ask-08",
+      "segment": "Your membership number has not changed and your card remains valid until March 2028.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

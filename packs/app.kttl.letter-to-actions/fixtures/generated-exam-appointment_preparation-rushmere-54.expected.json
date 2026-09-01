@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-rushmere-54",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "6 January 2027",
+        "deadline": "for 6 January 2027 at 4.05pm",
+        "due": "2027-01-06",
+        "kind": "attendance",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-rushmere-54-attendance-01",
+      "segment": "An appointment concerning your check-up has been arranged with Fenwick Dental Practice for 6 January 2027 at 4.05pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-rushmere-54-no-ask-02",
+      "segment": "You must take the lift to the second floor.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-rushmere-54-other-03",
+      "segment": "You must visit the ground floor reception first, and request a written summary from your previous provider before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-rushmere-54-no-ask-04",
+      "segment": "You must follow the signs to the outpatient wing.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-rushmere-54-other-05",
+      "segment": "You must switch your telephone off in the waiting area and book an interpreter through the office in advance.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-rushmere-54-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-rushmere-54-no-ask-08",
+      "segment": "The revised address supplied on 9 June is now recorded throughout.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

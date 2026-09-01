@@ -1,5 +1,5 @@
 mod doctor;
-mod plan;
+use cli::plan;
 mod table;
 
 use clap::{Parser, Subcommand};
@@ -235,6 +235,8 @@ fn main() {
                 // somewhere a test can read it.
                 log_dir: cli::eval::default_log_dir(),
                 runs_dir: cli::eval::default_runs_dir(),
+                // The same directory `parse` and `doctor` default to.
+                sidecars_dir: PathBuf::from("sidecars"),
                 resume_dir: options.resume.then(cli::eval::default_resume_dir),
                 machine: cli::eval::machine::detect(),
             };

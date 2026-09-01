@@ -11,7 +11,7 @@ use crate::exec::{
     run_batch, BatchContext, BatchItem, Endpoint, ModelCallError, ModelMetrics, NeedsReview,
     ReviewReason, StepError,
 };
-use crate::packs::{step_batches, InputSpec, Manifest, Pack, PipelineStep};
+use crate::packs::{step_batches, FileSemantics, InputSpec, Manifest, Pack, PipelineStep};
 use crate::parse::{parse_input_file, ParseError, Transaction};
 use crate::recurrence::{detect_income, detect_recurring, looks_periodic, Period, PriceRise};
 use crate::run_dir::RunLog;
@@ -433,7 +433,9 @@ pub fn mark_disputed(
                 .iter()
                 .filter(|dispute| {
                     obligation.evidence.iter().any(|passage| {
-                        passage.document == document && dispute.lands_in(&passage.text)
+                        passage.document == document
+                            && passage.page == dispute.page
+                            && dispute.lands_in(&passage.text)
                     })
                 })
                 .cloned()
@@ -913,28 +915,60 @@ fn run_bound(
                 // letter" was a comparison run telling somebody it was
                 // doing something it was not.
                 let label = step_label(step, inputs.len()).expect("document-text has a label");
-                for (index, input) in inputs.iter().enumerate() {
-                    progress(Progress {
-                        step: label,
-                        current: index + 1,
-                        total: inputs.len(),
-                    });
-                    let read = crate::document::read_document(input, index, resources.pdfium_dir)
-                        .map_err(RunError::Parse)?;
+                let mut logical_document = 0;
+                let mut files_read = 0;
+                let mut grouped_page_roles: Vec<&str> = Vec::new();
+                for (given, input) in bound.iter().zip(inputs) {
+                    let declared = pack
+                        .manifest
+                        .inputs
+                        .iter()
+                        .find(|declared| declared.role == given.role)
+                        .expect("binding was checked before preprocessing");
+                    let group: Vec<&Path> = match declared.file_semantics {
+                        FileSemantics::Documents => vec![input.as_path()],
+                        FileSemantics::Pages => {
+                            if grouped_page_roles.contains(&given.role.as_str()) {
+                                continue;
+                            }
+                            grouped_page_roles.push(&given.role);
+                            bound
+                                .iter()
+                                .zip(inputs)
+                                .filter(|(candidate, _)| candidate.role == given.role)
+                                .map(|(_, path)| path.as_path())
+                                .collect()
+                        }
+                    };
+                    for _ in &group {
+                        files_read += 1;
+                        progress(Progress {
+                            step: label,
+                            current: files_read,
+                            total: inputs.len(),
+                        });
+                    }
+                    let read = crate::document::read_document_parts(
+                        &group,
+                        logical_document,
+                        resources.pdfium_dir,
+                    )
+                    .map_err(RunError::Parse)?;
                     // Per document, because "the date of this letter" is
                     // a different date in each (#330) — so a dispute
                     // about one letter's date must not be reported
                     // against another's.
                     if let Some(dispute) = read.date_dispute {
-                        date_disputes.push((index, dispute));
+                        date_disputes.push((logical_document, dispute));
                     }
                     // Kept with the document they came from: the model
                     // has not run yet, so there are no obligations to
                     // mark until it has (#412 step 6).
                     if !read.disagreements.is_empty() {
-                        disagreements.push((index, read.disagreements));
+                        disagreements.push((logical_document, read.disagreements));
                     }
                     segments.extend(read.segments);
+                    logical_document += 1;
                 }
             }
             PipelineStep::Preprocess { implementation } => {

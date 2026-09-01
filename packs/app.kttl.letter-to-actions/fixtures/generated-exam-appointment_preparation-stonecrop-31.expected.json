@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-stonecrop-31",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "9 February 2027",
+        "deadline": "for 9 February 2027 at 5.30pm",
+        "due": "2027-02-09",
+        "kind": "attendance",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-stonecrop-31-attendance-01",
+      "segment": "An appointment concerning your case file has been arranged with Grantley Legal Aid for 9 February 2027 at 5.30pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-stonecrop-31-no-ask-02",
+      "segment": "You must allow fifteen minutes for parking.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-stonecrop-31-other-03",
+      "segment": "You must arrive ten minutes ahead of the stated time and prepare a written list of the points you want to raise ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-stonecrop-31-no-ask-04",
+      "segment": "You must report to the main desk when you arrive.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-stonecrop-31-other-05",
+      "segment": "You must use the side entrance and hand in the completed form on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-stonecrop-31-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-stonecrop-31-no-ask-08",
+      "segment": "A further inspection falls due in 18 months and will be arranged by us.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

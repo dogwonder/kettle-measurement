@@ -1,0 +1,90 @@
+{
+  "actions": {
+    "actions": [
+      {
+        "detail": "National Revenue Assessment Office asked for this by 23 February 2026. The letter says \"within 14 days\".",
+        "evidence": {
+          "asked_by": "National Revenue Assessment Office",
+          "in_the_letter": "within 14 days",
+          "passage_1": "Your return must reach us within 14 days of 9 February 2026. A return received after that date attracts an automatic penalty of £100.00 even if no tax is owed."
+        },
+        "export": {
+          "ics": {
+            "date": "2026-02-23",
+            "summary": "Reach the return — National Revenue Assessment Office"
+          },
+          "text": "Reach the return (National Revenue Assessment Office) — within 14 days"
+        },
+        "id": "act-01",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Reach the return"
+      },
+      {
+        "detail": "National Revenue Assessment Office asked for this, but the letter does not give a date Kettle could work out — it says \"by the same date\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "National Revenue Assessment Office",
+          "in_the_letter": "by the same date",
+          "passage_1": "Any tax you owe for the year is payable by the same date. If you cannot pay in full, call us on 0300 200 0000 before the date passes."
+        },
+        "export": {
+          "text": "Pay any tax owed (National Revenue Assessment Office) — by the same date"
+        },
+        "id": "act-02",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Pay any tax owed"
+      },
+      {
+        "detail": "National Revenue Assessment Office asked for this, but the letter does not give a date Kettle could work out — it says \"at your earliest convenience\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "National Revenue Assessment Office",
+          "in_the_letter": "at your earliest convenience",
+          "passage_1": "If you no longer need to complete a return — for instance you have stopped being self-employed — write to us and we will review your record."
+        },
+        "export": {
+          "text": "Write to us (National Revenue Assessment Office) — at your earliest convenience"
+        },
+        "id": "act-03",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Write to us"
+      }
+    ],
+    "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+    "run_id": "letter-18",
+    "schema": "kettle/proposed-actions@0"
+  },
+  "expected": [
+    {
+      "anchor": "9 February 2026",
+      "deadline": "within 14 days",
+      "due": "2026-02-23",
+      "id": "tax_notice-030-03",
+      "kind": "response",
+      "party": "National Revenue Assessment Office",
+      "segment": "Your return must reach us within 14 days of 9 February 2026. A return received after that date attracts an automatic penalty of £100.00 even if no tax is owed."
+    },
+    {
+      "anchor": "the same date",
+      "deadline": "by the same date",
+      "due": "2026-02-23",
+      "id": "tax_notice-030-04",
+      "kind": "payment",
+      "party": "National Revenue Assessment Office",
+      "segment": "Any tax you owe for the year is payable by the same date. If you cannot pay in full, call us on 0300 200 0000 before the date passes."
+    }
+  ],
+  "id": "letter-18",
+  "model": "qwen3.5-4b-q4_k_m.gguf",
+  "pack": {
+    "id": "app.kttl.letter-to-actions",
+    "version": "0.3.0"
+  },
+  "schema": "kettle/study-letter@0",
+  "source": {
+    "file": "tax_notice-030.txt",
+    "hash": "blake3:8560ff7724407ff30a331703907d61b3548d7cb5e3fa06870194557119618768",
+    "text": "9 February 2026\nNational Revenue Assessment Office\nOur reference: QY227530\n\nDear B O'Connor,\n\nOur records show you are required to complete a return for the year ending 5 April 2026. Your unique taxpayer reference is 54990 45301. Please keep it safe and quote it whenever you contact us.\n\nA paper return has an earlier deadline than one filed online. The general filing dates for every year are printed in the box below; where this letter gives you a date, that date applies.\n\nYour return must reach us within 14 days of 9 February 2026. A return received after that date attracts an automatic penalty of £100.00 even if no tax is owed.\n\nAny tax you owe for the year is payable by the same date. If you cannot pay in full, call us on 0300 200 0000 before the date passes.\n\nIf you no longer need to complete a return — for instance you have stopped being self-employed — write to us and we will review your record.\n\nPaper returns: 31 October following the end of the tax year. Online returns and any balancing payment: 31 January following the end of the tax year. Interest runs from the day after a payment date.\n\nYours sincerely,\nSuzanne King\nNational Revenue Assessment Office\n\nHOW WE USE YOUR INFORMATION\n\nWe hold the details on this letter to administer your account and to meet our legal duties. We do not sell personal information. Our full privacy notice sets out what we hold, how long we keep it and who we share it with, and is available on request from the address at the head of this letter.\n\nWhere we share information with another organisation it is because the law requires it or because that organisation acts for us under a written agreement. We keep records for as long as the account is open and for six years afterwards.\n\n"
+  }
+}

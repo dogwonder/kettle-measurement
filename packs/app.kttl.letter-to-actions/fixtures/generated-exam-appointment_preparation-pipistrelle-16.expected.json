@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-pipistrelle-16",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "29 October 2026",
+        "deadline": "for 29 October 2026 at 9.10am",
+        "due": "2026-10-29",
+        "kind": "attendance",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-pipistrelle-16-attendance-01",
+      "segment": "An appointment concerning your pet health plan has been arranged with Denholm Veterinary Group for 29 October 2026 at 9.10am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-pipistrelle-16-no-ask-02",
+      "segment": "You must switch your telephone off in the waiting area.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-pipistrelle-16-other-03",
+      "segment": "You must take a meter reading and note it down before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-pipistrelle-16-no-ask-04",
+      "segment": "You must allow additional time if you travel by public transport.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-pipistrelle-16-other-05",
+      "segment": "You must obtain a copy of the agreement from the other party in advance.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-pipistrelle-16-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-pipistrelle-16-no-ask-08",
+      "segment": "Membership remains valid to March 2029 under the existing number.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

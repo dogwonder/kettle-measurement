@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-quillwort-17",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "10 December 2026",
+        "deadline": "for 10 December 2026 at 10.40am",
+        "due": "2026-12-10",
+        "kind": "attendance",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_preparation-quillwort-17-attendance-01",
+      "segment": "An appointment concerning your membership has been arranged with Eastvale Library Service for 10 December 2026 at 10.40am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-quillwort-17-no-ask-02",
+      "segment": "You must keep to the marked walkway from the car park.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_preparation-quillwort-17-other-03",
+      "segment": "You must make a note of the dates you spent away ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-quillwort-17-no-ask-04",
+      "segment": "You must ring the bell if the desk is unattended.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_preparation-quillwort-17-other-05",
+      "segment": "You must hand over the completed consent form on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-quillwort-17-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-quillwort-17-no-ask-08",
+      "segment": "Reimbursement of £88.75 was despatched on 23 April and clears within 3 days.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

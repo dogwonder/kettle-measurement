@@ -320,6 +320,7 @@ fn evaluate(dir: &Path, answer: String) -> runner::eval::EvalReport {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
     evaluator.evaluate(&pack).expect("the eval runs")
 }

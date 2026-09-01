@@ -1,0 +1,48 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_confirmed-yellowhammer-15",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "9 December 2026",
+        "deadline": "on 9 December 2026 at 4.05pm",
+        "due": "2026-12-09",
+        "kind": "attendance",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_confirmed-yellowhammer-15-attendance-01",
+      "segment": "This letter confirms your appointment about your annual review with Marlow Ridge Surgery on 9 December 2026 at 4.05pm.",
+      "strata": [
+        "appointment-confirmed",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-yellowhammer-15-no-ask-02",
+      "segment": "Please arrive ten minutes early and bring this letter with you.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-yellowhammer-15-no-ask-03",
+      "segment": "If you can no longer attend, our reception team will be glad to offer the time to somebody else.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-yellowhammer-15-no-ask-05",
+      "segment": "We are told the works on your street will finish by 30 September; the contractor is handling it.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_confirmed-bramble-01",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "16 September 2026",
+        "deadline": "on 16 September 2026 at 3.50pm",
+        "due": "2026-09-16",
+        "kind": "attendance",
+        "party": "Ashcombe Housing Trust"
+      },
+      "id": "appointment_confirmed-bramble-01-attendance-01",
+      "segment": "We are writing to confirm your tenancy account appointment with Ashcombe Housing Trust on 16 September 2026 at 3.50pm.",
+      "strata": [
+        "appointment-confirmed",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-bramble-01-no-ask-02",
+      "segment": "Please allow fifteen minutes for parking, and bring a list of anything you are currently taking.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-bramble-01-no-ask-03",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-bramble-01-no-ask-05",
+      "segment": "This office does not operate between 25 December and 1 January.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    }
+  ]
+}

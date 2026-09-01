@@ -3,6 +3,11 @@
   "name": "See what changed in a renewal",
   "description": "Reads last year's policy and this year's renewal, and says what changed.",
   "version": "0.1.0",
+  "goal": {
+    "who": "someone holding this year's insurance renewal and last year's schedule",
+    "can": "see what changed — premium, excess, cover — and by when they must respond, each quoted from the documents",
+    "done_when": "a real renewal, photographed, is read through the letter pathway as the amounts route; until then, the development bed's verdict holds and the sealed set is unspent"
+  },
   "min_runner_version": "0.1.0",
   "inputs": [
     {

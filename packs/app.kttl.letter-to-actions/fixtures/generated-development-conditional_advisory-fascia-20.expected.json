@@ -1,0 +1,60 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-conditional_advisory-fascia-20",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "conditional_advisory-fascia-20-no-ask-01",
+      "segment": "We are writing about your energy account for information only. There is nothing you need to send us.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-fascia-20-no-ask-02",
+      "segment": "If a solicitor is acting for you, ask them to confirm they hold the deeds.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-fascia-20-no-ask-03",
+      "segment": "Where the garden is shared, agree access with your neighbours before the visit.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-fascia-20-no-ask-04",
+      "segment": "Check the expiry date on your certificate each year.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-fascia-20-no-ask-05",
+      "segment": "Ask a friend or relative to help you read this if you would find it easier.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-fascia-20-no-ask-07",
+      "segment": "Your direct debit of £115.00 will continue to be collected on the 15th of each month as before.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    }
+  ]
+}

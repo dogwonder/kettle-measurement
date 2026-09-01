@@ -117,6 +117,7 @@ fn scored_classifications_are_emitted_as_diffable_items() {
         fixtures_dir: Some(fixtures.0.clone()),
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     let report = evaluator.evaluate(&pack).expect("the eval runs");
@@ -201,6 +202,7 @@ fn a_scored_item_says_which_decision_produced_its_kind() {
         fixtures_dir: Some(fixtures.0.clone()),
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     let report = evaluator.evaluate(&pack).expect("the eval runs");
@@ -246,6 +248,7 @@ fn scored_item_metrics_must_be_declared_by_the_pack() {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     let error = evaluator
@@ -269,6 +272,7 @@ fn review_cost_must_have_pack_provenance_before_it_is_reported() {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     let error = evaluator
@@ -327,6 +331,7 @@ fn item_records_carry_the_derived_kind_after_aggregation() {
         fixtures_dir: Some(fixtures.0.clone()),
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     }
     .evaluate(&pack)
     .expect("the eval runs");
@@ -398,6 +403,7 @@ fn perf_records_what_the_model_actually_cost() {
         fixtures_dir: Some(fixtures.0.clone()),
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     let report = evaluator.evaluate(&pack).expect("the eval runs");
@@ -445,6 +451,7 @@ fn a_model_answering_as_expected_passes_its_fixtures_not_unseen_pack_strata() {
         fixtures_dir: Some(fixtures.0.clone()),
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     let report = evaluator.evaluate(&pack).expect("the eval runs");
@@ -570,6 +577,7 @@ fn a_measurement_records_the_device_the_sidecar_answered_on() {
             fixtures_dir: Some(fixtures.0.clone()),
             runs_dir: None,
             resume_dir: None,
+            pdfium_dir: None,
         }
         .evaluate(&pack)
         .expect("the eval runs")
@@ -663,6 +671,7 @@ fn eval_runs_keep_their_model_exchanges_when_given_somewhere_to_put_them() {
         fixtures_dir: Some(fixtures.0.clone()),
         runs_dir: Some(scratch.0.clone()),
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     evaluator.evaluate(&pack).expect("the eval runs");
@@ -725,6 +734,7 @@ fn re_running_an_eval_replaces_its_exchanges_rather_than_mixing_them() {
             fixtures_dir: Some(fixtures.0.clone()),
             runs_dir: Some(scratch.0.clone()),
             resume_dir: None,
+            pdfium_dir: None,
         }
         .evaluate(&pack)
         .expect("the eval runs");
@@ -802,6 +812,7 @@ fn a_run_directory_names_the_model_so_a_replay_can_say_whose_answers_it_serves()
         fixtures_dir: Some(fixtures.0.clone()),
         runs_dir: Some(runs.clone()),
         resume_dir: None,
+        pdfium_dir: None,
     };
     evaluator.evaluate(&pack).expect("the eval runs");
 
@@ -882,6 +893,7 @@ fn a_classification_lands_in_the_bucket_its_answer_declared() {
         fixtures_dir: Some(fixtures.0.clone()),
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     let report = evaluator.evaluate(&pack).expect("the eval runs");

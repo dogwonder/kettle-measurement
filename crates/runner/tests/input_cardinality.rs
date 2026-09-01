@@ -18,7 +18,7 @@
 mod support;
 
 use runner::document;
-use runner::packs::{load_pack, Count, PackError};
+use runner::packs::{load_pack, Count, FileSemantics, PackError};
 use runner::run::{run_pack_bound, Answers, InputBindingError, RunError};
 use runner::run_dir::NoLog;
 use std::path::{Path, PathBuf};
@@ -188,6 +188,44 @@ fn multiple_still_means_what_it_always_meant() {
         let pack = load_pack(&dir).expect("the pack loads");
         assert_eq!(pack.manifest.inputs[0].count, *expected, "{declaration:?}");
     }
+}
+
+#[test]
+fn several_files_are_separate_documents_unless_a_pack_calls_them_pages() {
+    let ordinary = pack_with_role(
+        "ordinary-files",
+        r#"{ "role": "letter", "label": "Your letters", "accept": ["text/plain"], "count": { "min": 1 } }"#,
+    );
+    let pages = pack_with_role(
+        "ordered-pages",
+        r#"{ "role": "letter", "label": "Your letter", "accept": ["text/plain"], "count": { "min": 1 }, "file_semantics": "pages" }"#,
+    );
+
+    assert_eq!(
+        load_pack(&ordinary).unwrap().manifest.inputs[0].file_semantics,
+        FileSemantics::Documents
+    );
+    assert_eq!(
+        load_pack(&pages).unwrap().manifest.inputs[0].file_semantics,
+        FileSemantics::Pages
+    );
+}
+
+#[test]
+fn page_semantics_are_refused_for_a_non_document_preprocessor() {
+    let dir = pack_with_role(
+        "pages-on-statements",
+        r#"{ "role": "statement", "label": "Your statement", "accept": ["text/plain"], "count": { "min": 1 }, "file_semantics": "pages" }"#,
+    );
+    let manifest = std::fs::read_to_string(dir.join("pack.json")).unwrap();
+    std::fs::write(
+        dir.join("pack.json"),
+        manifest.replace("builtin:document-text", "builtin:statement-parse"),
+    )
+    .unwrap();
+
+    let error = load_pack(&dir).expect_err("statement files are not pages of one document");
+    assert!(matches!(error, PackError::PagesNeedDocumentText { .. }));
 }
 
 /// Two fields saying the same thing can disagree, and then nothing

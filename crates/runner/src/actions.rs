@@ -330,10 +330,10 @@ pub fn card(kind: ActionKind, facts: &CardFacts) -> ProposedAction {
         evidence: BTreeMap::new(),
         disputed: Vec::new(),
         export: ActionExport {
-            ics: IcsExport {
+            ics: Some(IcsExport {
                 summary,
                 date: facts.ics_date,
-            },
+            }),
             text,
         },
         status: STATUS_PROPOSED.to_owned(),
@@ -510,15 +510,15 @@ pub fn cadence_phrase(period: Period) -> &'static str {
 ///
 /// The read-only rule is unchanged (CLAUDE.md). Kettle never writes to
 /// a calendar; it exports .ics or copyable text and a person decides.
-/// `today` is taken as a parameter for the same reason it is in
-/// [`propose_actions`]: a function that read the clock could not be
-/// tested at a month end. `run_id` is taken because the extraction
+/// Unlike [`propose_actions`], this takes no `today`: every date on a
+/// letter card comes from the letter, and an undated ask exports as
+/// text with no event, so there is nothing for a clock to fill in and
+/// no way for one to (#399). `run_id` is taken because the extraction
 /// outcome does not know which run produced it, and an actions
 /// document that cannot say is one restart hydration rightly refuses
 /// (#389).
 pub fn propose_letter_actions(
     outcome: &crate::run::ExtractionOutcome,
-    today: NaiveDate,
     run_id: &str,
 ) -> ProposedActions {
     let actions = outcome
@@ -560,10 +560,12 @@ pub fn propose_letter_actions(
                 evidence,
                 disputed: obligation.disputed.iter().map(Into::into).collect(),
                 export: ActionExport {
-                    ics: IcsExport {
+                    // No due date, no event: a calendar entry dated today
+                    // would be a deadline the letter never set.
+                    ics: obligation.due.map(|due| IcsExport {
                         summary: format!("{} — {}", obligation.ask, obligation.party),
-                        date: obligation.due.map(|due| due.date).unwrap_or(today),
-                    },
+                        date: due.date,
+                    }),
                     text: format!(
                         "{} ({}) — {}",
                         obligation.ask, obligation.party, obligation.deadline

@@ -660,6 +660,27 @@ result was already perfect without it. That is the margin statement
 working as designed: this pack is deterministic-dominant, and the
 model is an assistant to it, not the auditor.
 
+### Version 17 — the pool is the gated strata (#581, 30 August 2026)
+
+A pooled verdict (`Gate::Pooled`) reads its step rates and end-to-end
+over the fixtures whose items sit in a stratum carrying gate classes.
+A fixture whose items all sit in ungated strata is reported and never
+pooled, until its stratum is promoted on purpose by the real-use
+condition it names. A fixture with no items pools, as does every
+fixture when a pack declares no gated stratum.
+
+Why: sixty hard letters added in an ungated stratum failed the letter
+pack on main's own prompt — 0.977 on the 425 fixtures before them,
+0.926 on 455 — because the pooled bar read every fixture regardless. A
+bar that falls every time a harm is measured inverts the incentive, and
+the real-letter loop adds shapes *selected for being hard*.
+
+What moves on the committed beds: `invoice-totals` (24 obligation
+decisions, out of `any-letter` since #508 on #504's condition) leaves
+the letter pool for the first time. `any-letter`'s harm ceilings are
+untouched. The ungated strata and their promotion conditions are listed
+in `CHECKLIST.md` until the milestone carries them.
+
 ### What a `SCORING_VERSION` bump costs (learned on v15, amended 25 August 2026)
 
 Four things go stale when the number moves, and each has its own
@@ -1079,3 +1100,33 @@ Worth knowing while you read them: the table pools binomial step counts
 across fixtures, while `tiers.json` records the **worst fixture** and
 its denominator. The two files answer different questions and must not
 be expected to show the same proportion (#214).
+
+## Scratch beds from `kettle-examples`
+
+The sibling `../kettle-examples/` repository generates synthetic UK
+letters — nine kinds, as flat text, PDF and photographed JPEG, with an
+`expected.json` beside each — and turns a set into a fixture directory
+the letter-pack eval reads as it is:
+
+```sh
+cd ../kettle-examples
+python -m synth_letters generate --count 36 --seed 42     # out/
+python -m synth_letters bed out --bed out-bed             # text route
+python -m synth_letters bed out --bed out-pdf --pdf       # pdfium route
+python -m synth_letters bed out --bed out-photos --photos # one-page photos
+cd ../kettle
+cargo run -p kettle --features pdf -- eval app.kttl.letter-to-actions \
+  --model <weights> --fixture-dir ../kettle-examples/out-pdf
+```
+
+`--no-model` scores the deterministic floor without weights. Roughly
+half a minute a letter on the M1 Pro for text; photos slower.
+
+This is the everyday-use regression net for the letter pack — deadline
+style, voice, injection, page count and photo severity are all
+generator flags — and the only bed an OCR or PDF change can be scored
+on. It is a scratch `--fixture-dir` loop, not a gate: the committed bed
+and its ceilings remain the claim-backing evidence, relations never
+print on a partial bed, and a bed authored by the same hand as the
+prompts carries the author-bias caveat from the data rules. Read
+`confident-wrong` and `stopped_short`, not the UNPROVEN gates.

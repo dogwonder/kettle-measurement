@@ -2,11 +2,15 @@
 
 A desktop app that runs read-only "task packs" against local files using a
 local model, producing reports and proposed actions. Task data stays on
-this machine by design; nothing is written automatically. Three packs
-ship: a subscription & recurring-spend audit of a bank statement, a
-letter-to-actions extraction (what a letter asks of you, and by when),
-and an insurance renewal diff (what moved between last year's policy
-and this year's).
+this machine by design; nothing is written automatically. What it is
+for, since 30 August 2026: **a person photographs a letter and Kettle
+tells them what it needs — the dates, the amounts, the asks.** Two
+packs are offered: a letter-to-actions extraction (what a letter asks
+of you, and by when) and an insurance renewal diff (what moved between
+last year's policy and this year's), which folds into the letter
+pathway as the amounts route. A third, the subscription & recurring-
+spend audit of a bank statement, is withdrawn from the product and kept
+in the lab as the one bed on which models differ (#545).
 
 - **Working conventions:** [`CLAUDE.md`](CLAUDE.md) — the engineering
   decisions that are locked, and why
@@ -53,6 +57,18 @@ not treated as synonyms:
 
 ## Status
 
+**30 August 2026 — the photo route, measured for the first time.** The
+same 22 synthetic letters as text and as photographs, Qwen3.5-4B:
+obligation recall 0.86 as text, 0.48 as photographs, and seven of the
+eleven decisions lost were Rust's after a correct model answer — a
+totals table read row-wise, a letterhead date merged into the address.
+Fixed the same day in the segmenter with no prompt edit: 14 → 21 of 29
+on photographs, text byte-identical. Every pack now states its user
+goal in its manifest, the subscription pack is withdrawn, and a pooled
+verdict reads only the gated strata (`SCORING_VERSION` 17, #581). The
+working list is `CHECKLIST.md`; the plan is `PLAN-2026-08-30.html`.
+What follows is the history that led here.
+
 **M1 — runner and CLI · M2 — eval harness · M3 — desktop app ·
 M4 — model manager and packaging · M5 — GOV.UK Frontend rebase: all
 complete.** Every issue in those five milestones is closed.
@@ -75,7 +91,8 @@ real HSBC Advance statements — text-layer, that exact column order —
 are refused, because their details column is headed "Payment type and
 details" and the parser requires the word "Description"
 ([#343](https://github.com/dogwonder/kettle/issues/343)). Scanned,
-image-only PDFs still need OCR
+image-only PDFs still need OCR; on macOS the letter task can read the
+original JPG or HEIC photo directly
 ([#71](https://github.com/dogwonder/kettle/issues/71)), and a layout
 Kettle does not recognise fails closed, which is the right failure:
 guessing which column is money is how you silently invert someone's

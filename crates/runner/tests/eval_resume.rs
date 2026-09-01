@@ -264,6 +264,7 @@ fn a_resumed_run_scores_the_same_and_says_it_was_resumed() {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: Some(dir.clone()),
+        pdfium_dir: None,
     };
 
     let cold = evaluator().evaluate(&pack).expect("the first run");

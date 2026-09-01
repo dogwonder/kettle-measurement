@@ -1,0 +1,48 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_confirmed-hornbeam-10",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "9 December 2026",
+        "deadline": "on 9 December 2026 at 4.05pm",
+        "due": "2026-12-09",
+        "kind": "attendance",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_confirmed-hornbeam-10-attendance-01",
+      "segment": "We are writing to confirm your annual review appointment with Marlow Ridge Surgery on 9 December 2026 at 4.05pm.",
+      "strata": [
+        "appointment-confirmed",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-hornbeam-10-no-ask-02",
+      "segment": "Please allow fifteen minutes for parking, and bring a list of anything you are currently taking.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-hornbeam-10-no-ask-03",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-hornbeam-10-no-ask-05",
+      "segment": "The repair carried out on 16 January was signed off with no further works identified.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    }
+  ]
+}

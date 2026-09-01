@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-quillrush-53",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "24 November 2026",
+        "deadline": "for 24 November 2026 at 3.50pm",
+        "due": "2026-11-24",
+        "kind": "attendance",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_preparation-quillrush-53-attendance-01",
+      "segment": "An appointment concerning your membership has been arranged with Eastvale Library Service for 24 November 2026 at 3.50pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-quillrush-53-no-ask-02",
+      "segment": "You must remain in the waiting area until you are called.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_preparation-quillrush-53-other-03",
+      "segment": "You must arrive punctually and locate the original certificate ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-quillrush-53-no-ask-04",
+      "segment": "You must take the lift to the second floor.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_preparation-quillrush-53-other-05",
+      "segment": "You must follow the signs to the outpatient wing and produce a recent utility bill on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-quillrush-53-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-quillrush-53-no-ask-08",
+      "segment": "This account has carried a credit balance of £47.05 since 12 February.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

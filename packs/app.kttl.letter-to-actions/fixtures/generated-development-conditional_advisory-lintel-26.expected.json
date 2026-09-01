@@ -1,0 +1,60 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-conditional_advisory-lintel-26",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-26-no-ask-01",
+      "segment": "We are writing about your council tax account for information only. There is nothing you need to send us.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-26-no-ask-02",
+      "segment": "If you hold a permit for a second vehicle, it must be displayed as well.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-26-no-ask-03",
+      "segment": "Should you disagree with the reading, photograph the dial before it is changed.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-26-no-ask-04",
+      "segment": "Do not leave keys in an obvious place outside the property.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-26-no-ask-05",
+      "segment": "Report a smell of gas immediately on the national emergency number.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-26-no-ask-07",
+      "segment": "We wrote to your landlord on 2 March and they have 28 days to reply to us, not to you.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    }
+  ]
+}

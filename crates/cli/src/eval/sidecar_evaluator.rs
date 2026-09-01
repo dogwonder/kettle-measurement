@@ -46,6 +46,9 @@ pub struct SidecarEvaluator {
     /// measurement can be picked up rather than lost (#282). `None`
     /// measures everything.
     pub resume_dir: Option<PathBuf>,
+    /// Where libpdfium lives, so a PDF fixture in a bed is read through
+    /// the same reader the app uses (#256).
+    pub sidecars_dir: PathBuf,
     pub machine: MachineInfo,
 }
 
@@ -107,6 +110,7 @@ impl Evaluator for SidecarEvaluator {
                 fixtures_dir: request.fixture_dir.map(PathBuf::from),
                 runs_dir: None,
                 resume_dir: None,
+                pdfium_dir: Some(self.sidecars_dir.clone()),
             };
             return run_selected(&evaluator, &pack, request.selection);
         }
@@ -128,6 +132,7 @@ impl Evaluator for SidecarEvaluator {
                 fixtures_dir: request.fixture_dir.map(PathBuf::from),
                 runs_dir: Some(self.runs_dir.join(format!("run{}", request.run))),
                 resume_dir: self.resume_dir.clone(),
+                pdfium_dir: Some(self.sidecars_dir.clone()),
             };
             return run_selected(&evaluator, &pack, request.selection);
         };
@@ -181,6 +186,7 @@ impl Evaluator for SidecarEvaluator {
             fixtures_dir: request.fixture_dir.map(PathBuf::from),
             runs_dir: Some(self.runs_dir.join(format!("run{}", request.run))),
             resume_dir: self.resume_dir.clone(),
+            pdfium_dir: Some(self.sidecars_dir.clone()),
         };
         let mut report = run_selected(&evaluator, &pack, request.selection)?;
         // The policy the report claims is the policy the sidecar above

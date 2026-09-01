@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-hoarhound-57",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "13 October 2026",
+        "deadline": "for 13 October 2026 at 2.15pm",
+        "due": "2026-10-13",
+        "kind": "attendance",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-hoarhound-57-attendance-01",
+      "segment": "Your appointment about your pet health plan with Denholm Veterinary Group is booked for 13 October 2026 at 2.15pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-hoarhound-57-no-ask-02",
+      "segment": "Please keep to the marked walkway from the car park.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-hoarhound-57-other-03",
+      "segment": "Please arrive in good time and bring the item this enquiry concerns with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-hoarhound-57-no-ask-04",
+      "segment": "Please ring the bell at the door if reception is unattended.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-hoarhound-57-other-05",
+      "segment": "Please come to the desk marked Appointments, and ask your bank for a statement covering the last three months before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-hoarhound-57-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-hoarhound-57-no-ask-08",
+      "segment": "Everything discussed on 22 April has now been actioned by us.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

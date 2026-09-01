@@ -12,6 +12,24 @@ worth hiding behind a paragraph.
 
 ## The order
 
+0. **State the user goal, in a person's terms, before anything else.**
+   Who it is for, what they can do when it works, and what *done*
+   means in real use — as the manifest's `goal` block. A pack without
+   one still loads and can be measured, and is **never offered**: no
+   card on the app's grid, and the public `packs --json` refuses it
+   (`a_pack_without_a_goal_loads_but_is_not_offerable`,
+   `the_public_projection_carries_each_packs_goal_verbatim`). The same
+   door a withdrawn pack goes through (#545). This is the sentence
+   every stratum is downstream of, and it is step 0 because of what
+   happened without it: the letter pack had forty-three strata and no
+   sentence saying what a person should be able to do, and was
+   measured to three decimal places on a route nobody uses (text)
+   while the route everybody uses (a photograph) went unrun until
+   30 August 2026. A bed with no goal to be aimed at measures itself.
+   `done_when` is a real-use outcome — "the nine items of #399's
+   matrix pass on real photographs through the packaged app" — never
+   a bed threshold; a bed says how far you are from done, it is not
+   done.
 1. Decide the typology and the harm model — what the pack asserts, and
    what it costs a person when it is wrong. That decides everything
    downstream, including how big the bed has to be.
@@ -82,6 +100,18 @@ gate with no gradient cannot tell improvement from disaster.
 ## The traps with no test
 
 Nothing stops these, so they are the ones to hold in your head.
+
+- **Scoring the scorer.** Every stratum, ceiling and claim below
+  measures the model on the bed; none of them measures whether a
+  person got what the `goal` promised. The instrument can only be
+  aimed, so aim it: every goal has a real-document test (a
+  photograph through the packaged app, logged privately) and a
+  synthetic twin in the bed, and new measurement is proposed only
+  when a real document raised the question. A stratum, claim or
+  scoring bump that traces to no real failure is parked on sight,
+  however rigorous it sounds. Thirteen of the letter pack's strata
+  carried twenty-two decisions between them and none scored what a
+  page looked like.
 
 - **A threshold chosen to fit the number you just measured.** The whole
   point of a bar is that it precedes the result. The letter pack's 0.95
@@ -192,6 +222,13 @@ dropped files are refused rather than read (#334 §1). The older
 manifest that declares both is refused — two fields that can disagree
 is one assertion nobody checks. Prefer `count` in new packs; the
 shipped packs still carry the older spelling.
+
+Several files normally remain several documents. When they are ordered
+page images or parts of one logical document, declare
+`"file_semantics": "pages"`. The runner then continues page and passage
+numbering across the files in the order supplied; the app shows that
+order and lets the person correct it. Use this only with
+`builtin:document-text` — it is not a way to pool unrelated documents.
 
 **How does a pack compare two documents?** Declare the two inputs in
 the order they are compared — the *earlier* document first — a

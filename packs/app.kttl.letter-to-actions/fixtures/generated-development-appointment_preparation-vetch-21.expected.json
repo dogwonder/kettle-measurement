@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-vetch-21",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "29 October 2026",
+        "deadline": "for 29 October 2026 at 9.10am",
+        "due": "2026-10-29",
+        "kind": "attendance",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-vetch-21-attendance-01",
+      "segment": "Your appointment about your pet health plan with Denholm Veterinary Group is booked for 29 October 2026 at 9.10am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-vetch-21-no-ask-02",
+      "segment": "Please arrive ten minutes early.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-vetch-21-other-03",
+      "segment": "Please write out a list of the questions you want to raise and bring it with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-vetch-21-no-ask-04",
+      "segment": "Please allow fifteen minutes for parking.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "appointment_preparation-vetch-21-other-05",
+      "segment": "Please obtain a copy of your last statement before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-vetch-21-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-vetch-21-no-ask-08",
+      "segment": "The £25.00 charge applied in error on 7 March has been refunded to your account.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

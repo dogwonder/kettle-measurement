@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-wallwort-35",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "16 June 2026",
+        "deadline": "for 16 June 2026 at 12.00pm",
+        "due": "2026-06-16",
+        "kind": "attendance",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-wallwort-35-attendance-01",
+      "segment": "An appointment concerning your estate matter has been arranged with Trentham & Yale Solicitors for 16 June 2026 at 12.00pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-wallwort-35-no-ask-02",
+      "segment": "You must not arrive more than thirty minutes early.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-wallwort-35-other-03",
+      "segment": "You must allow fifteen minutes for parking and print statements covering three months ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-wallwort-35-no-ask-04",
+      "segment": "You must visit the ground floor reception first.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-wallwort-35-other-05",
+      "segment": "You must keep to the marked walkway from the car park and bring the signed authority form on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-wallwort-35-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-wallwort-35-no-ask-08",
+      "segment": "The 21 days referred to previously are no longer applicable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-kingcup-11",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "8 June 2026",
+        "deadline": "for 8 June 2026 at 12.00pm",
+        "due": "2026-06-08",
+        "kind": "attendance",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-kingcup-11-attendance-01",
+      "segment": "An appointment concerning your estate matter has been arranged with Trentham & Yale Solicitors for 8 June 2026 at 12.00pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-kingcup-11-no-ask-02",
+      "segment": "You must arrive ten minutes ahead of the stated time.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-kingcup-11-other-03",
+      "segment": "You must prepare a written list of the points you want to raise ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-kingcup-11-no-ask-04",
+      "segment": "You must allow fifteen minutes for parking.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-kingcup-11-other-05",
+      "segment": "You must complete the enclosed form and hand it in on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-kingcup-11-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-kingcup-11-no-ask-08",
+      "segment": "The certificate dated 2 October remains in force for a further 12 months.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

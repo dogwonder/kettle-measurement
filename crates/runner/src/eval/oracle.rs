@@ -55,6 +55,7 @@ pub fn recording(pack: &Pack) -> Result<Recording, String> {
         fixtures_dir: None,
         runs_dir: Some(runs.clone()),
         resume_dir: None,
+        pdfium_dir: None,
     };
     let outcome = evaluator.evaluate(pack);
     drop(answers);

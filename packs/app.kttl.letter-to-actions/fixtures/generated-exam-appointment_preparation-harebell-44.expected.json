@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-harebell-44",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "14 February 2026",
+        "deadline": "for 14 February 2026 at 2.15pm",
+        "due": "2026-02-14",
+        "kind": "attendance",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-harebell-44-attendance-01",
+      "segment": "An appointment concerning your parking charge has been arranged with Harborne Parking Services for 14 February 2026 at 2.15pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-harebell-44-no-ask-02",
+      "segment": "You must take the lift to the second floor.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-harebell-44-other-03",
+      "segment": "You must visit the ground floor reception first, and request a written summary from your previous provider before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-harebell-44-no-ask-04",
+      "segment": "You must follow the signs to the outpatient wing.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-harebell-44-other-05",
+      "segment": "You must switch your telephone off in the waiting area and book an interpreter through the office in advance.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-harebell-44-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-harebell-44-no-ask-08",
+      "segment": "Instructions have been issued internally and will take effect within 7 days.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

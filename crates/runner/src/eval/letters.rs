@@ -166,6 +166,70 @@ pub enum Shape {
     /// through the quote rules (#460), whether the evidence offered for
     /// it is a passage that actually reads.
     InvoiceTotals,
+    /// A notice that asks nothing, written the way one that asks
+    /// something is: a **conditional** whose trigger the letter cannot
+    /// resolve, and **standing advice** addressed to anybody reading
+    /// (#399).
+    ///
+    /// The first real photographed letter through the app produced two
+    /// obligations at `high` from exactly these two constructions —
+    /// *"if you rent it out, notify your tenants"* and *"ask to see
+    /// their ID"* — neither of which this reader must do because of
+    /// this letter. The prompt's worked example 903 teaches that a
+    /// dateless request is still an obligation, which is true of *"send
+    /// us a meter reading"* and generalises past it: a guarded
+    /// imperative and a general one both read as asks.
+    ///
+    /// This is the invention the `no_obligation` ceiling exists to
+    /// bound, and until now the bed contained no instance of it, so no
+    /// ceiling this pack cleared said anything about either
+    /// construction.
+    ConditionalAdvisory,
+    /// An appointment stated as a confirmation, with its time: *"This
+    /// letter confirms your appointment with the practice nurse on 9
+    /// March 2026 at 3.50pm"* (#399, 31 August 2026).
+    ///
+    /// The first real photographed appointment letter through the
+    /// packaged app (`gp_appointment-025-p1.jpg`) reached the model
+    /// verbatim — OCR clean, Rust untouched — and the model answered
+    /// *no obligation* at high confidence on the one dated ask the
+    /// letter made, while promoting the arrival advice beside it. The
+    /// paired 30 August archive reads the same template 1 of 4 across
+    /// text and photo, so the loss is not the camera's.
+    ///
+    /// Every appointment this bed planted until today told the reader
+    /// something — *"You have an appointment"*, *"We have booked"* —
+    /// and a confirmation tells them nothing they must do; it reports a
+    /// booking, and the attendance is implied. That is the construction
+    /// a practice, a hospital or a court actually uses, and no ceiling
+    /// this pack cleared had seen it. Both voices confirm, deliberately:
+    /// the difficulty is the mood, not the wording around it.
+    AppointmentConfirmed,
+    /// A confirmed appointment carrying both kinds of sentence that
+    /// sit beside one — *how to attend*, and *what to do before you do*
+    /// (#399, 1 September 2026).
+    ///
+    /// `appointment_confirmed` settled that a booking is an ask and
+    /// that the advice beside it is not, and it settled it on a
+    /// development voice whose every instance was *"bring this letter
+    /// with you"* — a thing nobody can fail, being the page in their
+    /// hand. The second real photographed letter through the packaged
+    /// app carried *"Please arrive ten minutes early and bring a list
+    /// of any medicines you are currently taking"*, and the run
+    /// answered no obligation at high confidence, correctly by the
+    /// prompt and correctly by this bed. Making a list of your
+    /// medicines is an act with its own failure mode, done at another
+    /// time and place, and turning up without it wastes the
+    /// appointment.
+    ///
+    /// So the rule was true of the sentences it was written on and too
+    /// broad for the ones it meets — example 903's over-generalisation
+    /// wearing appointment clothes. This shape plants the pair *in one
+    /// letter*: two manner lines that ask nothing and two preparation
+    /// lines that do. A model that records both scores half, and so
+    /// does one that records neither; only reading the difference
+    /// scores.
+    AppointmentPreparation,
 }
 
 impl Shape {
@@ -186,6 +250,36 @@ impl Shape {
             // condition: measured on a full run, with enough decisions
             // for a Wilson bound to say something.
             Self::InvoiceTotals => false,
+            // #399: contested, not settled. That a conditional ask is
+            // no obligation is this project's reading and a defensible
+            // one — but a reader who *does* rent the property out is
+            // owed the notification, and someone will argue the letter
+            // makes the ask conditionally rather than not at all. A
+            // gate encodes a settled judgement, so this shape is
+            // measured in its own strata and gates nothing. Promotion
+            // wants the prompt work landed and a full run behind it,
+            // with the 60 decisions per construction a 5% Wilson bound
+            // needs before it can say anything.
+            Self::ConditionalAdvisory => false,
+            // #399, 31 August 2026: selected for being hard, by a real
+            // letter that failed. #581's reason applies exactly — a
+            // pooled bar that falls each time a harm is measured
+            // inverts the incentive — so it is measured in its own
+            // stratum until the condition CHECKLIST.md names promotes
+            // it: the confirmation-phrased shape reading correctly on
+            // real letters through the packaged app.
+            Self::AppointmentConfirmed => false,
+            // #399, 1 September 2026: contested, and more openly than
+            // its neighbours. That "bring a list of your medicines" is
+            // an ask and "arrive ten minutes early" is not is a line
+            // drawn on separability, and photographic identification
+            // sits close enough to it that a reasonable person would
+            // put it on the other side. A gate encodes a settled
+            // judgement; this is not one yet. Promotion wants the
+            // prompt work landed, a full run behind it, and the
+            // distinction holding on real letters through the packaged
+            // app.
+            Self::AppointmentPreparation => false,
             _ => true,
         }
     }
@@ -223,6 +317,25 @@ impl Voice {
         match self {
             Self::Development => "development",
             Self::Exam => "exam",
+        }
+    }
+
+    /// What is added to a family's position to make the seed
+    /// [`passages`] is handed, so the two voices never draw the same
+    /// sender and date for the same position.
+    ///
+    /// Named, and read by `letter` and by `passages` alike, because the
+    /// parameter `passages` calls `index` is really this seed — and a
+    /// shape doing bare arithmetic on it to recover the family's
+    /// position silently edits the exam set by five. That is not
+    /// hypothetical: `appointment_preparation`'s two layouts split the
+    /// exam set 35/25 instead of 30/30 on exactly this, and
+    /// `a_shape_plants_each_of_its_constructions_evenly` is what now
+    /// catches it.
+    fn seed_offset(self) -> usize {
+        match self {
+            Self::Development => 0,
+            Self::Exam => 5,
         }
     }
 }
@@ -736,7 +849,7 @@ fn controlled_twin(
 /// A name here with no families in a set is skipped; a spec key this
 /// list does not know is silently generated for by nothing, which is
 /// what `every_spec_shape_is_in_the_written_order` exists to catch.
-pub const SHAPE_ORDER: [&str; 13] = [
+pub const SHAPE_ORDER: [&str; 16] = [
     "appointment_absolute",
     "courtesy_only",
     "payment_anchored",
@@ -758,6 +871,16 @@ pub const SHAPE_ORDER: [&str; 13] = [
     // Appended 13 August 2026 (#504): the first shape in this bed that
     // is not prose. Append only, as ever.
     "invoice_totals",
+    // Appended 29 August 2026 (#399): the constructions a real
+    // photographed letter invented obligations from. Append only, as
+    // ever — the running ordinal decides every letter's planted values.
+    "conditional_advisory",
+    // Appended 31 August 2026 (#399): the real-letter miss. Append only,
+    // as ever.
+    "appointment_confirmed",
+    // Appended 1 September 2026 (#399): the miss inside the fix. Append
+    // only, as ever.
+    "appointment_preparation",
 ];
 
 /// How many of development's `invoice_totals` letters state the ask
@@ -980,11 +1103,7 @@ fn letter(
     // sets (#299); this keeps the incidental detail from lining up too,
     // which is what made the duplication easy to miss by eye.
     let set = voice.set();
-    let seed = index
-        + match voice {
-            Voice::Development => 0,
-            Voice::Exam => 5,
-        };
+    let seed = index + voice.seed_offset();
     let sender = &spec.senders[seed % spec.senders.len()];
     let stem = format!("generated-{set}-{shape_name}-{family}");
     // Dates are computed from the family's position, never a clock, so
@@ -1109,7 +1228,429 @@ fn scored_tag(passage: &Passage) -> Option<&'static str> {
 /// having no fixture strata to inherit — so twelve inventions counted
 /// against `any-letter` in the v14 run from a passage no gate was
 /// meant to be reading.
-const SCORED_NEGATIVE: [&str; 2] = ["no-obligation", "in-a-table"];
+/// #399's conditional pool: a guarded imperative whose trigger the
+/// letter cannot resolve. The reader may or may not rent the property
+/// out, and the letter does not know — so there is no obligation on
+/// *this* reader to record, and one recorded anyway is asserted at the
+/// confidence Kettle prints beside it.
+///
+/// Written in the imperative and the deontic *must* on purpose. The
+/// difficulty is that these read exactly like asks; a counter-example
+/// set written mildly would measure a lower invention rate without the
+/// model having improved, which is `courtesy_only`'s argument against a
+/// harder construction.
+const CONDITIONAL_DEVELOPMENT: [&str; 20] = [
+    "If you rent this property out, you must tell your tenants that the works are taking place.",
+    "Should you decide to appeal, send your grounds to the tribunal rather than to us.",
+    "If you have already moved out, pass this letter to the current occupier.",
+    "Where a second named driver is on the policy, they must be added before any claim is made.",
+    "If you receive Pension Credit, ask us about the reduced rate.",
+    "If the meter is inside a locked cupboard, leave it accessible on the day.",
+    "Should the property be unoccupied for more than 30 days, tell your insurer.",
+    "If you are the executor rather than the beneficiary, return the enclosed form instead.",
+    "If your circumstances have changed since April, you must let the office know.",
+    "Where scaffolding blocks your access, arrange alternative parking with the warden.",
+    "If you hold a permit for a second vehicle, it must be displayed as well.",
+    "Should you disagree with the reading, photograph the dial before it is changed.",
+    "If you have a water meter, check the standing charge, which is billed separately.",
+    "If anyone at the address is registered disabled, apply for the priority service register.",
+    "Where the account is held jointly, both parties must sign the enclosed authority.",
+    "If you no longer keep a vehicle at this address, cancel the permit online.",
+    "Should you be away on the date shown, arrange for someone to be present.",
+    "If you pay by standing order rather than direct debit, update the amount yourself.",
+    "If a solicitor is acting for you, ask them to confirm they hold the deeds.",
+    "Where the garden is shared, agree access with your neighbours before the visit.",
+];
+
+/// The exam voice's conditionals. Disjoint from development's by
+/// construction, and in the same grammatical mood: an exam voice that
+/// stated its conditions more mildly would be an easier set wearing a
+/// sealed label, which is the #552 divergence in the direction nobody
+/// notices.
+const CONDITIONAL_EXAM: [&str; 20] = [
+    "If the vehicle is kept off the road, a declaration must be made instead.",
+    "Where a repayment plan is already in place, follow the terms it sets out.",
+    "If you are acting under a power of attorney, enclose a certified copy with any reply.",
+    "Should the occupier be a full-time student, an exemption must be claimed separately.",
+    "If the boiler was installed before 2010, arrange for its flue to be inspected.",
+    "Where more than one adult lives at the address, each must be named on the account.",
+    "If you have already paid within the last five working days, disregard the balance shown.",
+    "Should access be through a shared entrance, tell the caretaker in advance.",
+    "If the roof space is used for storage, clear it before the survey.",
+    "Where a guarantor was named, they must be told of any change to the sum.",
+    "If you hold a concessionary pass, present it at the desk on arrival.",
+    "Should the appliance be under warranty, contact the manufacturer rather than this office.",
+    "If the account is in credit at the end of the year, request a refund in writing.",
+    "Where an interpreter is needed, book one at least a week beforehand.",
+    "If you are self-employed, supply the last two years of accounts.",
+    "Should the property be listed, consent must be obtained before any external work.",
+    "If a claim is outstanding on the policy, settle it before the renewal date.",
+    "Where the supply is shared with a business, check the rate, which is calculated differently.",
+    "If you have moved abroad, notify the office of your new address.",
+    "Should the tenancy end early, return all keys to the managing agent.",
+];
+
+/// #399's advice pool: an imperative addressed to anybody reading, not
+/// an ask this letter makes of this reader. *"Always ask to see
+/// identification"* is a rule for life, and recording it as a task with
+/// a deadline puts a thing on somebody's list that the sender never
+/// asked for.
+const ADVICE_DEVELOPMENT: [&str; 20] = [
+    "Always ask to see identification before letting anyone into your home.",
+    "Never give your account number to a caller you did not ring yourself.",
+    "Keep this reference number somewhere safe; you will need it if you write to us.",
+    "Check that any contractor calling at your door is wearing a visible badge.",
+    "Take a meter reading regularly so your bills stay accurate.",
+    "Read the enclosed leaflet before making any decision about your cover.",
+    "Store the certificate with your other household papers.",
+    "Be wary of emails asking you to confirm your bank details.",
+    "Make sure smoke alarms are tested every month.",
+    "Keep a note of the date and time of any call you make to this office.",
+    "Do not leave keys in an obvious place outside the property.",
+    "Report a smell of gas immediately on the national emergency number.",
+    "Look after your card and do not write your PIN on it.",
+    "Consider setting up an online account so you can see your balance at any time.",
+    "Always shred documents showing your name and address before throwing them away.",
+    "Remember that we will never ask you for your password.",
+    "Keep pets in another room while the engineer is working.",
+    "Take care on the pavement while the works are in progress.",
+    "Check the expiry date on your certificate each year.",
+    "Ask a friend or relative to help you read this if you would find it easier.",
+];
+
+/// The exam voice's advice, in the same imperative mood as
+/// development's and sharing no sentence with it.
+const ADVICE_EXAM: [&str; 20] = [
+    "Ask anyone calling at the door to show identification before you let them in.",
+    "Never give bank details to a caller you did not ring.",
+    "Quote this reference on everything you send us.",
+    "Check that contractors are carrying photographic identification.",
+    "Take readings regularly to keep the account accurate.",
+    "Read the enclosed leaflet before deciding anything.",
+    "Keep certificates with your other household documents.",
+    "Treat messages asking you to confirm bank details with caution.",
+    "Test smoke alarms once a month.",
+    "Note the date and time of any telephone call to this office.",
+    "Do not leave keys anywhere accessible outside.",
+    "Report a smell of gas at once on the emergency number.",
+    "Remember that passwords are never requested by this office.",
+    "Open an online account to check the balance at any time.",
+    "Destroy papers showing your name and address securely.",
+    "Move pets to another room while work is carried out.",
+    "Take care near the works while they continue.",
+    "Check expiry dates once a year.",
+    "Ask for help with reading this letter if you need it.",
+    "Move valuables before the survey begins.",
+];
+
+/// The preparation asks: an act with its own failure mode, done before
+/// the appointment and away from it (#399).
+///
+/// Each entry is a sentence and the words it uses for when — never a
+/// date, and never anything `timeline::resolve` can turn into one. The
+/// obligation is real and its date honestly is not, exactly as
+/// `request_unresolvable` plants one. Reaching across to the
+/// appointment's own date to give this ask a due date is the
+/// cross-passage inference #544 refused, so the expectation carries
+/// `due: None` and the report shows it undated rather than borrowing a
+/// date the sentence does not make.
+///
+/// **The phrases alternate on purpose.** Two are picked per letter, at
+/// adjacent positions, and `timeline::same_obligation` keys on kind,
+/// party, deadline and anchor — not on `ask`. Two preparation asks
+/// sharing all four would merge into one and the bed would score the
+/// second as a miss the model never made. Alternating the wording keeps
+/// this shape measuring the prompt rule and nothing else; that the
+/// merge can silently drop a distinct ask is a separate finding, and
+/// wants its own failing test rather than a stratum that confounds two
+/// causes.
+///
+/// **Sender-neutral, deliberately.** The real letter asked for a list
+/// of medicines, and a construction list is picked against twelve
+/// senders, so a clinical sentence lands on a parking service as often
+/// as on a surgery. What is under test is the construction — an act
+/// completed before the appointment and away from it — not its
+/// subject, the same call `appointment_confirmed` made in taking the
+/// real letter's shape and not its words. Photographic identification
+/// is the contestable member and is kept for that reason: a reader who
+/// argues it is no more separable than the letter in their hand is
+/// arguing about where this line falls, which is why the shape gates
+/// nothing.
+const PREPARATION_DEVELOPMENT: [(&str, &str); 20] = [
+    ("Please write out a list of the questions you want to raise and bring it with you on the day.", "on the day"),
+    ("Please obtain a copy of your last statement before your appointment.", "before your appointment"),
+    ("Please complete the enclosed questionnaire and hand it in when you come in.", "when you come in"),
+    ("Please have your account number written down before you attend.", "before you attend"),
+    ("Please bring photographic identification with you on the day.", "on the day"),
+    ("Please ask your previous provider for a written summary before your appointment.", "before your appointment"),
+    ("Please print your last three statements and bring them when you come in.", "when you come in"),
+    ("Please arrange an interpreter through the booking line before you attend.", "before you attend"),
+    ("Please write out your address history and bring it with you on the day.", "on the day"),
+    ("Please obtain a copy of the agreement from the other party before your appointment.", "before your appointment"),
+    ("Please bring the original certificate rather than a photocopy when you come in.", "when you come in"),
+    ("Please register for an online account before you attend.", "before you attend"),
+    ("Please bring the item this enquiry concerns with you on the day.", "on the day"),
+    ("Please ask your bank for a statement covering the last three months before your appointment.", "before your appointment"),
+    ("Please bring the signed authority form with you when you come in.", "when you come in"),
+    ("Please take a meter reading and write it down before you attend.", "before you attend"),
+    ("Please bring a recent proof of your address with you on the day.", "on the day"),
+    ("Please order a replacement card before your appointment so that you have it with you.", "before your appointment"),
+    ("Please bring the completed consent form with you when you come in.", "when you come in"),
+    ("Please make a note of the dates you were away before you attend.", "before you attend"),
+];
+
+/// The exam voice's preparation asks. Disjoint from development's by
+/// construction, and deontic where development is polite — the harder
+/// wording, never the milder one, for the reason `CONDITIONAL_EXAM`
+/// gives. The *actor* is the same in both voices, which is what
+/// `both_voices_of_a_shape_ask_in_the_same_construction_unless_staged`
+/// holds: #552's divergence is a hazard to avoid adding to, not a
+/// pattern to copy, and the difficulty here is separability rather than
+/// mood.
+const PREPARATION_EXAM: [(&str, &str); 20] = [
+    (
+        "You must prepare a written list of the points you want to raise ahead of the visit.",
+        "ahead of the visit",
+    ),
+    (
+        "You must complete the enclosed form and hand it in on arrival.",
+        "on arrival",
+    ),
+    (
+        "You must obtain a copy of the most recent statement before you are seen.",
+        "before you are seen",
+    ),
+    (
+        "You must obtain proof of identity in advance.",
+        "in advance",
+    ),
+    (
+        "You must locate the original certificate ahead of the visit.",
+        "ahead of the visit",
+    ),
+    (
+        "You must produce a recent utility bill on arrival.",
+        "on arrival",
+    ),
+    (
+        "You must request a written summary from your previous provider before you are seen.",
+        "before you are seen",
+    ),
+    (
+        "You must book an interpreter through the office in advance.",
+        "in advance",
+    ),
+    (
+        "You must print statements covering three months ahead of the visit.",
+        "ahead of the visit",
+    ),
+    (
+        "You must bring the signed authority form on arrival.",
+        "on arrival",
+    ),
+    (
+        "You must take a meter reading and note it down before you are seen.",
+        "before you are seen",
+    ),
+    (
+        "You must obtain a copy of the agreement from the other party in advance.",
+        "in advance",
+    ),
+    (
+        "You must make a note of the dates you spent away ahead of the visit.",
+        "ahead of the visit",
+    ),
+    (
+        "You must hand over the completed consent form on arrival.",
+        "on arrival",
+    ),
+    (
+        "You must write down any change of circumstances before you are seen.",
+        "before you are seen",
+    ),
+    (
+        "You must supply a passport-sized photograph in advance.",
+        "in advance",
+    ),
+    (
+        "You must package the item this enquiry concerns ahead of the visit.",
+        "ahead of the visit",
+    ),
+    (
+        "You must write out a record of your previous addresses on arrival.",
+        "on arrival",
+    ),
+    (
+        "You must register for an online account before you are seen.",
+        "before you are seen",
+    ),
+    (
+        "You must order a replacement card in advance.",
+        "in advance",
+    ),
+];
+
+/// How many of this shape's families give the manner line and the ask
+/// as separate passages, before the rest join them into one sentence.
+///
+/// Half of 60, so each construction is planted 60 times a set — what a
+/// 5% Wilson upper bound needs before it can say anything, and the size
+/// #588 settled on for the same reason.
+const SPLIT_LAYOUT_FAMILIES: usize = 30;
+
+/// The compound asks: one sentence, a manner clause and then a
+/// preparation ask (#399).
+///
+/// **This is the construction the real letter actually used** —
+/// *"Please arrive ten minutes early and bring a list of any medicines
+/// you are currently taking"* — and the one run-14 answered `no
+/// obligation` at high confidence on. The split layout above measures
+/// something easier: given the two clauses as separate passages the
+/// 4B records two thirds of the asks, and given them joined it recorded
+/// none. A shape that planted only the split version would report the
+/// easier number as though it were the real one, which is the
+/// `courtesy_only` failure in a new place.
+///
+/// The manner clause comes first in every sentence, deliberately: that
+/// is the order the letter used, and it is the order in which the
+/// prompt's rule — advice about arriving early belongs to the
+/// appointment — reaches the sentence and takes the ask down with it.
+///
+/// The ask keeps its own timing phrase, so the deadline is still the
+/// letter's own words rather than a judgement. The real letter gave
+/// none at all, which is a harder case again and one the prompt as
+/// written cannot answer: it requires a deadline string and the page
+/// has no words for when. That is worth its own shape once this one
+/// has been read.
+const COMPOUND_DEVELOPMENT: [(&str, &str); 20] = [
+    ("Please arrive ten minutes early and bring a list of the questions you want to raise with you on the day.", "on the day"),
+    ("Please use the side entrance, and obtain a copy of your last statement before your appointment.", "before your appointment"),
+    ("Please wait in the seating area until your name is called, and hand in the enclosed questionnaire when you come in.", "when you come in"),
+    ("Please take the lift to the second floor, and have your account number written down before you attend.", "before you attend"),
+    ("Please arrive ten minutes early and bring photographic identification with you on the day.", "on the day"),
+    ("Please follow the signs for the outpatient wing, and ask your previous provider for a written summary before your appointment.", "before your appointment"),
+    ("Please come to the reception on the ground floor first, and bring your last three statements when you come in.", "when you come in"),
+    ("Please switch your telephone off in the waiting area, and arrange an interpreter through the booking line before you attend.", "before you attend"),
+    ("Please allow fifteen minutes for parking, and bring your address history with you on the day.", "on the day"),
+    ("Please keep to the marked walkway from the car park, and obtain a copy of the agreement from the other party before your appointment.", "before your appointment"),
+    ("Please ring the bell at the door if reception is unattended, and bring the original certificate rather than a photocopy when you come in.", "when you come in"),
+    ("Please park in the visitor bays rather than the staff bays, and register for an online account before you attend.", "before you attend"),
+    ("Please arrive in good time and bring the item this enquiry concerns with you on the day.", "on the day"),
+    ("Please come to the desk marked Appointments, and ask your bank for a statement covering the last three months before your appointment.", "before your appointment"),
+    ("Please wait outside the room until you are invited in, and bring the signed authority form when you come in.", "when you come in"),
+    ("Please allow for roadworks on the approach, and take a meter reading before you attend.", "before you attend"),
+    ("Please take a ticket from the machine as you come in, and bring a recent proof of your address with you on the day.", "on the day"),
+    ("Please do not arrive more than half an hour early, and order a replacement card before your appointment.", "before your appointment"),
+    ("Please arrive promptly, and bring the completed consent form with you when you come in.", "when you come in"),
+    ("Please allow extra time if you are travelling by bus, and make a note of the dates you were away before you attend.", "before you attend"),
+];
+
+/// The exam voice's compound asks, sharing no sentence with
+/// development's and opening as its own manner lines do.
+const COMPOUND_EXAM: [(&str, &str); 20] = [
+    ("You must arrive ten minutes ahead of the stated time and prepare a written list of the points you want to raise ahead of the visit.", "ahead of the visit"),
+    ("You must use the side entrance and hand in the completed form on arrival.", "on arrival"),
+    ("You must remain in the waiting area until you are called, and obtain a copy of the most recent statement before you are seen.", "before you are seen"),
+    ("You must take the lift to the second floor and obtain proof of identity in advance.", "in advance"),
+    ("You must arrive punctually and locate the original certificate ahead of the visit.", "ahead of the visit"),
+    ("You must follow the signs to the outpatient wing and produce a recent utility bill on arrival.", "on arrival"),
+    ("You must visit the ground floor reception first, and request a written summary from your previous provider before you are seen.", "before you are seen"),
+    ("You must switch your telephone off in the waiting area and book an interpreter through the office in advance.", "in advance"),
+    ("You must allow fifteen minutes for parking and print statements covering three months ahead of the visit.", "ahead of the visit"),
+    ("You must keep to the marked walkway from the car park and bring the signed authority form on arrival.", "on arrival"),
+    ("You must ring the bell if the desk is unattended, and take a meter reading before you are seen.", "before you are seen"),
+    ("You must use the visitor bays rather than the staff bays and obtain a copy of the agreement from the other party in advance.", "in advance"),
+    ("You must not arrive more than thirty minutes early, and make a note of the dates you spent away ahead of the visit.", "ahead of the visit"),
+    ("You must present yourself at the desk marked Appointments and hand over the completed consent form on arrival.", "on arrival"),
+    ("You must wait outside the room until you are invited in, and write down any change of circumstances before you are seen.", "before you are seen"),
+    ("You must allow for delays on the approach road and supply a passport-sized photograph in advance.", "in advance"),
+    ("You must take a ticket from the machine as you enter and package the item this enquiry concerns ahead of the visit.", "ahead of the visit"),
+    ("You must report to the main desk when you arrive, and write out a record of your previous addresses on arrival.", "on arrival"),
+    ("You must arrive on time and register for an online account before you are seen.", "before you are seen"),
+    ("You must allow additional time if you travel by public transport and order a replacement card in advance.", "in advance"),
+];
+
+/// The manner lines: how to attend, and nothing else (#399).
+///
+/// **Every sentence opens exactly as its voice's preparation asks
+/// do** — `Please …` in development, `You must …` in exam. That is
+/// the whole design. A shape whose asks were deontic and whose
+/// counter-examples were polite would be scored perfectly by a model
+/// that had learnt the word *must* and read nothing, and it would
+/// report that as evidence of reading separability. With the opening
+/// uninformative, the only thing left to read is whether the sentence
+/// names an act you could arrive without having done.
+///
+/// `ADVICE_DEVELOPMENT` makes half of this argument — counter-examples
+/// written mildly measure a lower invention rate without the model
+/// having improved. The other half is that the asks must not be
+/// written *strongly* either, or the pair is a mood test wearing a
+/// separability label.
+const MANNER_DEVELOPMENT: [&str; 20] = [
+    "Please arrive ten minutes early.",
+    "Please allow fifteen minutes for parking.",
+    "Please report to the front desk when you arrive.",
+    "Please use the side entrance, as the main doors are closed for works.",
+    "Please wait in the seating area until your name is called.",
+    "Please arrive in good time.",
+    "Please take the lift to the second floor.",
+    "Please follow the signs for the outpatient wing.",
+    "Please do not arrive more than half an hour early.",
+    "Please come to the reception on the ground floor first.",
+    "Please switch your telephone off in the waiting area.",
+    "Please allow extra time if you are travelling by bus.",
+    "Please keep to the marked walkway from the car park.",
+    "Please ring the bell at the door if reception is unattended.",
+    "Please wait outside the room until you are invited in.",
+    "Please park in the visitor bays rather than the staff bays.",
+    "Please arrive promptly, as late arrivals cannot always be seen.",
+    "Please come to the desk marked Appointments.",
+    "Please allow for roadworks on the approach.",
+    "Please take a ticket from the machine as you come in.",
+];
+
+/// The exam voice's manner lines, sharing no sentence with
+/// development's. Several carry a timing phrase the preparation asks
+/// also use — "on arrival" among them — deliberately: where development
+/// hides its distractor in the wording, exam plants its own rather than
+/// going without.
+const MANNER_EXAM: [&str; 20] = [
+    "You must arrive ten minutes ahead of the stated time.",
+    "You must allow fifteen minutes for parking.",
+    "You must report to the main desk when you arrive.",
+    "You must use the side entrance while the main doors are closed.",
+    "You must remain in the waiting area until you are called.",
+    "You must arrive punctually.",
+    "You must take the lift to the second floor.",
+    "You must follow the signs to the outpatient wing.",
+    "You must not arrive more than thirty minutes early.",
+    "You must visit the ground floor reception first.",
+    "You must switch your telephone off in the waiting area.",
+    "You must allow additional time if you travel by public transport.",
+    "You must keep to the marked walkway from the car park.",
+    "You must ring the bell if the desk is unattended.",
+    "You must wait outside the room until you are invited in.",
+    "You must use the visitor bays rather than the staff bays.",
+    "You must arrive on time, as late arrivals cannot always be seen.",
+    "You must present yourself at the desk marked Appointments.",
+    "You must allow for delays on the approach road.",
+    "You must take a ticket from the machine as you enter.",
+];
+
+/// `conditional-ask` and `standing-advice` are #399's pair. Both are
+/// sentences in the imperative that ask this reader for nothing — one
+/// because its condition is unresolved, one because it is addressed to
+/// anybody at all — and both are scored, because a passage the bed does
+/// not score is synthesised as an unauthored item carrying every gated
+/// stratum of the pack (#442). Unscored here would put these inventions
+/// straight into `any-letter`, which is the opposite of the intent.
+const SCORED_NEGATIVE: [&str; 5] = [
+    "no-obligation",
+    "in-a-table",
+    "conditional-ask",
+    "standing-advice",
+    "attendance-manner",
+];
 
 fn month_name(month: usize) -> &'static str {
     [
@@ -1213,6 +1754,211 @@ fn passages(
             } else {
                 "If you have any questions about this letter, our reception team \
                  will be glad to help."
+            }));
+        }
+        Shape::AppointmentConfirmed => {
+            // The same rotation as `AppointmentAbsolute`, offset so a
+            // confirmed letter never names the day its told twin does.
+            let when = format!("{} 2026", appointment_day(index + 3));
+            let time = appointment_time(index);
+            // The confirmation is the whole difficulty: nothing in the
+            // sentence tells the reader to do anything, and the
+            // arrival advice that follows is the distractor the real
+            // letter carried — the run promoted it and dropped the
+            // date. It is scored as asking nothing, the same call the
+            // #399 record made for standing advice.
+            out.push(Passage {
+                text: if exam {
+                    format!(
+                        "We are writing to confirm your {} appointment with {} on \
+                         {when} at {time}.",
+                        sender.subject, sender.name
+                    )
+                } else {
+                    format!(
+                        "This letter confirms your appointment about your {} with {} on \
+                         {when} at {time}.",
+                        sender.subject, sender.name
+                    )
+                },
+                reads_as: None,
+                expect: Some(Obligation {
+                    kind: "attendance",
+                    party: sender.name.clone(),
+                    deadline: format!("on {when} at {time}"),
+                    anchor: when.clone(),
+                    due: Some(appointment_on(index + 3)),
+                }),
+                strata: vec!["absolute-deadline"],
+            });
+            out.push(Passage {
+                text: if exam {
+                    "Please allow fifteen minutes for parking, and bring a list of \
+                     anything you are currently taking."
+                        .to_owned()
+                } else {
+                    "Please arrive ten minutes early and bring this letter with you.".to_owned()
+                },
+                reads_as: None,
+                expect: None,
+                strata: vec!["no-obligation"],
+            });
+            out.push(closing(if exam {
+                "Should you need to rearrange, our booking line is open on weekdays."
+            } else {
+                "If you can no longer attend, our reception team will be glad to \
+                 offer the time to somebody else."
+            }));
+        }
+        Shape::AppointmentPreparation => {
+            // Counted forward from the letter's own date, not from
+            // the family's position — the way `invoice_totals` dates
+            // its due date, and unlike the appointment shapes before
+            // it. `appointment_day` is a function of the index alone,
+            // so half of `appointment_confirmed`'s letters confirm an
+            // appointment dated *before* the letter announcing it (18
+            // of 36; 31 of 82 in `appointment_absolute`). That was
+            // harmless while the prompt said nothing about tense. It
+            // is not harmless now that it distinguishes an appointment
+            // "still to come" from "one that has already taken place",
+            // and it is a document a person would never receive, which
+            // matters on a route scored from a photograph.
+            let day = after(letter_on, 28 + 7 * (index % 6) as u64);
+            let when = format!(
+                "{} {} {}",
+                day.format("%-d"),
+                month_name(day.month() as usize),
+                day.format("%Y")
+            );
+            let time = appointment_time(index + 4);
+            out.push(Passage {
+                text: if exam {
+                    format!(
+                        "An appointment concerning your {} has been arranged with {} \
+                         for {when} at {time}.",
+                        sender.subject, sender.name
+                    )
+                } else {
+                    format!(
+                        "Your appointment about your {} with {} is booked for {when} \
+                         at {time}.",
+                        sender.subject, sender.name
+                    )
+                },
+                reads_as: None,
+                expect: Some(Obligation {
+                    kind: "attendance",
+                    party: sender.name.clone(),
+                    deadline: format!("for {when} at {time}"),
+                    anchor: when.clone(),
+                    due: Some(day),
+                }),
+                strata: vec!["absolute-deadline"],
+            });
+            let preparation = if exam {
+                PREPARATION_EXAM
+            } else {
+                PREPARATION_DEVELOPMENT
+            };
+            let manner = if exam {
+                MANNER_EXAM
+            } else {
+                MANNER_DEVELOPMENT
+            };
+            let compound = if exam {
+                COMPOUND_EXAM
+            } else {
+                COMPOUND_DEVELOPMENT
+            };
+            // Two layouts, half the families each. The first half gives
+            // the manner line and the ask as separate passages; the
+            // second joins them into the one sentence the real letter
+            // used. Both are needed and neither substitutes: split, the
+            // 4B recorded 40 of 60 asks; joined, it recorded none of the
+            // one it met. A shape carrying only the split layout would
+            // publish the easier number as though it were the real one.
+            //
+            // By family half rather than alternating, so each half
+            // spends its own 30 families against 20 constructions and
+            // plants every one of them three times.
+            // `index` here is the *seed*, so the voice's offset comes
+            // back off before it can be read as a family position.
+            let joined = index - voice.seed_offset() >= SPLIT_LAYOUT_FAMILIES;
+            // Interleaved rather than blocked. Position carries no
+            // information a batch could read — each passage is its own
+            // closed question — but a letter that listed its manner
+            // lines and then its preparation asks would read like a
+            // bed and not like a letter, and the photograph route
+            // scores what a page looks like.
+            let (source, stratum) = if joined {
+                (compound, "compound-ask")
+            } else {
+                (preparation, "preparation-ask")
+            };
+            let family = index - voice.seed_offset();
+            let asks: Vec<(&str, &str)> = (0..2)
+                .map(|offset| source[(family * 2 + offset) % source.len()])
+                .collect();
+            // Walking past a collision can land on the line the other
+            // offset already took, and a letter that says "Please allow
+            // fifteen minutes for parking" twice is a letter nobody
+            // posted — and two identical passages are one expectation
+            // the segment join cannot tell apart.
+            let mut taken: Vec<usize> = Vec::new();
+            for offset in 0..2 {
+                // A compound sentence *opens* with a manner clause, and
+                // the manner lines are drawn from the same stock. Landing
+                // the standalone line and the clause that opens the ask
+                // beside it in one letter makes a document no sender
+                // would post — and the photograph route scores what a
+                // page looks like. So the pick walks on until it does
+                // not open either of this letter's asks. Deterministic,
+                // and a no-op in the split half.
+                let mut pick = (family * 2 + offset) % manner.len();
+                while taken.contains(&pick)
+                    || asks
+                        .iter()
+                        .any(|(ask, _)| ask.starts_with(manner[pick].trim_end_matches('.')))
+                {
+                    pick = (pick + 1) % manner.len();
+                }
+                taken.push(pick);
+                out.push(Passage {
+                    text: manner[pick].to_owned(),
+                    reads_as: None,
+                    expect: None,
+                    strata: vec!["attendance-manner"],
+                });
+                let (text, deadline) = asks[offset];
+                out.push(Passage {
+                    text: text.to_owned(),
+                    reads_as: None,
+                    expect: Some(Obligation {
+                        // `other` is authored, and it is the weakest
+                        // part of this shape. The prompt lists the four
+                        // kinds and defines none of them, and `other`
+                        // had never been planted in this bed before — so
+                        // on the first run the 4B answered `response` 31
+                        // times and `other` 9 for the same
+                        // constructions, and 36 of 40 correctly-read
+                        // asks scored as misses on a field no person
+                        // ever sees. `kind` is a member of
+                        // `ObligationIdentity`, so it cannot simply be
+                        // dropped here; the fix is upstream of the bed
+                        // and the stratum records it.
+                        kind: "other",
+                        party: sender.name.clone(),
+                        deadline: deadline.to_owned(),
+                        anchor: "no particular date".to_owned(),
+                        due: None,
+                    }),
+                    strata: vec![stratum],
+                });
+            }
+            out.push(closing(if exam {
+                "An alternative date can be offered if the one above is unsuitable."
+            } else {
+                "If the date no longer suits you, our reception team can offer another."
             }));
         }
         Shape::PaymentRelative => {
@@ -1822,6 +2568,60 @@ fn passages(
             // what makes an absolute due date a fortnight away read as
             // a deadline rather than as a bare number.
         }
+        Shape::ConditionalAdvisory => {
+            // A "for information only" notice, which is what the real
+            // letter was. It opens by saying so, then plants two
+            // guarded imperatives and two pieces of general advice.
+            //
+            // Every sentence here is in the imperative or the deontic
+            // *must*, because that is the whole difficulty: a rule that
+            // fired on "sentences that sound like asks" would fire on
+            // these, and a bed whose counter-examples were written
+            // mildly would measure a lower invention rate without the
+            // model having improved. The same argument `courtesy_only`
+            // makes, against a harder construction.
+            let conditional = if exam {
+                CONDITIONAL_EXAM
+            } else {
+                CONDITIONAL_DEVELOPMENT
+            };
+            let advice = if exam {
+                ADVICE_EXAM
+            } else {
+                ADVICE_DEVELOPMENT
+            };
+            out.push(closing(&if exam {
+                format!(
+                    "This notice concerns your {} and is sent for information. \
+                     No reply is needed.",
+                    sender.subject
+                )
+            } else {
+                format!(
+                    "We are writing about your {} for information only. There is \
+                     nothing you need to send us.",
+                    sender.subject
+                )
+            }));
+            for offset in 0..2 {
+                let pick = (index * 2 + offset) % conditional.len();
+                out.push(Passage {
+                    text: conditional[pick].to_owned(),
+                    reads_as: None,
+                    expect: None,
+                    strata: vec!["conditional-ask"],
+                });
+            }
+            for offset in 0..2 {
+                let pick = (index * 2 + offset) % advice.len();
+                out.push(Passage {
+                    text: advice[pick].to_owned(),
+                    reads_as: None,
+                    expect: None,
+                    strata: vec!["standing-advice"],
+                });
+            }
+        }
         Shape::CourtesyOnly => {
             // Every passage here is scored for asking nothing, so the
             // exam voice has to be as tempting as the development one:
@@ -1996,6 +2796,16 @@ fn appointment_day(index: usize) -> String {
 /// disagree (#287).
 fn appointment_on(index: usize) -> NaiveDate {
     on(2 + (index * 5) % 26, 1 + (index * 7) % 12)
+}
+
+/// A clock time for a confirmed appointment, in the form a practice
+/// prints it (`3.50pm`), cycling with the family so the bed never
+/// repeats a sender's letter exactly.
+fn appointment_time(index: usize) -> String {
+    const TIMES: [&str; 8] = [
+        "9.10am", "10.40am", "11.20am", "12.00pm", "2.15pm", "3.50pm", "4.05pm", "5.30pm",
+    ];
+    TIMES[index % TIMES.len()].to_owned()
 }
 
 /// A day in the bed's fixed year. Every date is computed from a

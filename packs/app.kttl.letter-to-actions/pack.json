@@ -3,6 +3,11 @@
   "name": "Read a letter",
   "description": "Reads a letter and lists what it asks you to do, and by when.",
   "version": "0.3.0",
+  "goal": {
+    "who": "someone who has just photographed a letter that asks something of them",
+    "can": "see the dates, the amounts and the asks the letter makes, each quoted from the page, and export the dates",
+    "done_when": "the nine items of #399's acceptance matrix pass on real photographs through the packaged app, and the paired synthetic bed reads photographs within a stated margin of text"
+  },
   "min_runner_version": "0.1.0",
   "inputs": [
     {
@@ -11,9 +16,14 @@
       "accept": [
         "text/plain",
         "text/markdown",
-        "application/pdf"
+        "application/pdf",
+        "image/jpeg",
+        "image/heic"
       ],
-      "count": 1
+      "count": {
+        "min": 1
+      },
+      "file_semantics": "pages"
     }
   ],
   "capabilities": [
@@ -34,7 +44,7 @@
     "will": [
       {
         "doing": "Read your letter",
-        "detail": "the one document you choose, and nothing else.",
+        "detail": "the document or ordered page photos you choose, and nothing else.",
         "steps": [
           "Reading your document"
         ]
@@ -146,6 +156,10 @@
     },
     "appointment-absolute": {
       "description": "Shape: an appointment on a named date.",
+      "classes": {}
+    },
+    "appointment-confirmed": {
+      "description": "Shape: an appointment stated as a confirmation, with its time (#399). Ungated until real confirmation letters read correctly through the packaged app; see CHECKLIST.md.",
       "classes": {}
     },
     "payment-relative": {
@@ -274,6 +288,34 @@
     },
     "controlled-anchor-substituted": {
       "description": "Controlled-change family (#465, #292): the stated dateless anchor becomes a semantically false one; visible only through the obligations_with_anchors projection.",
+      "classes": {}
+    },
+    "conditional-advisory": {
+      "description": "Shape (#399): a 'for information only' notice carrying two constructions this bed had no instance of before — a conditional whose trigger the letter cannot resolve ('if you rent this property out, you must tell your tenants'), and standing advice addressed to anybody reading ('always ask to see identification'). Both are imperatives, deliberately: a counter-example set written mildly would measure a lower invention rate without the model having improved. Its decisions do not join 'any-letter'. The reading that neither is an obligation is this project's and a defensible one, but a reader who does rent the property out is owed the notification, and a gate encodes a settled judgement rather than a live one. Promotion condition: the prompt work lands (the worked example teaches that a dateless request is an obligation, which is true of 'send us a meter reading' and generalises past it), and the shape then holds on a full run of both sets — 60 decisions per construction per set, which is what a 5% Wilson upper bound needs before it can say anything at all.",
+      "classes": {}
+    },
+    "conditional-ask": {
+      "description": "The guarded imperative, scored for asking nothing. The condition is something the letter cannot resolve about this reader, so no obligation on them can be read out of the passage alone, and one read out anyway is an invention asserted at whatever confidence the report prints beside it. Evidence: the first real photographed letter through the app returned 'notify your tenants' at high confidence from exactly this construction. Ungated with its shape.",
+      "classes": {}
+    },
+    "standing-advice": {
+      "description": "General advice addressed to anybody reading, scored for asking nothing. 'Always ask to see identification' is a rule for life rather than a thing this letter asks this reader to do, and recording it as a task puts an item on somebody's list the sender never asked for. The second of the two constructions the first real photographed letter invented an obligation from. Ungated with its shape.",
+      "classes": {}
+    },
+    "appointment-preparation": {
+      "description": "Shape (#399): a confirmed appointment carrying both kinds of sentence that sit beside one — how to attend, and what to do before you do. 'appointment-confirmed' settled that the advice beside a booking asks nothing, and settled it on a development voice whose every instance was 'bring this letter with you', a thing no reader can fail. A second real photographed letter asked its reader to write down the medicines they take; the run answered no obligation at high confidence, correct by the prompt and correct by the bed. Both kinds are planted in one letter, in the same mood and opening as each other, so a model that had learnt a word rather than read a sentence scores half. Its decisions do not join 'any-letter'. Promotion condition: the prompt work lands, the shape holds on a full run of both sets at 60 decisions per construction per set, and preparation asks read correctly on real letters through the packaged app.",
+      "classes": {}
+    },
+    "preparation-ask": {
+      "description": "An act with its own failure mode, completed before the appointment and away from it: obtaining a statement, completing a form, making a list. Scored as an obligation. Its deadline is the letter's own words for when ('on the day', 'before you attend') and resolves to no date, which is honest — the passage names none, and reaching across to the appointment's date is the cross-passage inference #544 refused. Its `kind` is authored as `other` and that is the weakest part of the stratum: the prompt lists the four kinds and defines none of them, `other` had never been planted in this bed before, and on the first run the 4B answered `response` 31 times and `other` 9 for the same constructions — 36 of 40 correctly-read asks scored as misses on a field no person ever sees. `kind` is a member of ObligationIdentity, the tuple the pooled join matches on, so it cannot be unpinned in a fixture; the fix is either a definition of the four kinds in the prompt or a scoring change, and until one lands this stratum's recall reads low for a reason that is not the model. Photographic identification is the contestable member, kept deliberately: a reader who argues it is no more separable than the letter in their hand is arguing about where this line falls, which is why the shape gates nothing. Ungated with its shape.",
+      "classes": {}
+    },
+    "compound-ask": {
+      "description": "The construction the real letter used: one sentence, a manner clause and then a preparation ask — 'Please arrive ten minutes early and bring a list of any medicines you are currently taking'. run-14 answered no obligation at high confidence on exactly this, and the split layout measures something easier (the 4B recorded 40 of 60 asks given the two clauses as separate passages, and none of the one it met joined). The manner clause comes first in every sentence because that is the order the letter used, and the order in which the prompt's rule about arrival advice reaches the sentence and takes the ask down with it. Scored as an obligation, sharing preparation-ask's caveat about `kind`. Ungated with its shape.",
+      "classes": {}
+    },
+    "attendance-manner": {
+      "description": "How to attend, and nothing else: arrive ten minutes early, allow fifteen minutes for parking, report to the front desk. Scored for asking nothing. There is no act here a person can fail except turning up, so a task recorded from one is a task nobody was given. Written in the same mood and with the same opening as this shape's preparation asks ('Please …' in development, 'You must …' in exam), so the only thing left to read is separability rather than force. Ungated with its shape.",
       "classes": {}
     }
   },

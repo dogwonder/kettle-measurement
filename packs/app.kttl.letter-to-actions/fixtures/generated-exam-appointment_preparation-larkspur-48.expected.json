@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-larkspur-48",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "4 July 2026",
+        "deadline": "for 4 July 2026 at 9.10am",
+        "due": "2026-07-04",
+        "kind": "attendance",
+        "party": "Northgate Water"
+      },
+      "id": "appointment_preparation-larkspur-48-attendance-01",
+      "segment": "An appointment concerning your water account has been arranged with Northgate Water for 4 July 2026 at 9.10am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-larkspur-48-no-ask-02",
+      "segment": "You must use the visitor bays rather than the staff bays.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Northgate Water"
+      },
+      "id": "appointment_preparation-larkspur-48-other-03",
+      "segment": "You must wait outside the room until you are invited in, and write down any change of circumstances before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-larkspur-48-no-ask-04",
+      "segment": "You must arrive on time, as late arrivals cannot always be seen.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Northgate Water"
+      },
+      "id": "appointment_preparation-larkspur-48-other-05",
+      "segment": "You must allow for delays on the approach road and supply a passport-sized photograph in advance.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-larkspur-48-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-larkspur-48-no-ask-08",
+      "segment": "Representations closed on 5 April; the decision notice is published.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

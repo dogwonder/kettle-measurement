@@ -39,7 +39,48 @@ fn floor_evaluator() -> FixtureEvaluator {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     }
+}
+
+/// #575 put a PDF in the subscription bed so that the PDF path is
+/// measured rather than assumed (#256). Reading one needs the `pdf`
+/// feature *and* a pdfium binary the repository does not ship, so on a
+/// machine without it — every CI runner, and this test whatever the
+/// machine, since the floor evaluator names no pdfium directory — the
+/// fixture cannot be read at all.
+///
+/// Erroring the whole eval was the honest first answer and the wrong
+/// one: it made the deterministic floor untestable everywhere rather
+/// than only where the library is missing. `cargo test` was red on
+/// main for a day, and the failure read like a broken pipeline instead
+/// of an absent library.
+///
+/// Scoring the rest quietly would be worse — a denominator that shrank
+/// without saying so. So the fixture is named in the report, and the
+/// CLI refuses to write or compare a baseline from a report that names
+/// any.
+#[test]
+fn a_fixture_this_build_cannot_read_is_named_rather_than_fatal() {
+    let pack = load_pack(&pack_dir()).expect("pack loads");
+    let report = floor_evaluator().evaluate(&pack).expect("the floor runs");
+
+    assert_eq!(
+        report.unrunnable,
+        vec!["statement-04.pdf".to_owned()],
+        "the one fixture this build cannot read is named"
+    );
+    assert!(
+        !report.fixtures.is_empty(),
+        "and the rest of the bed still ran"
+    );
+    assert!(
+        report
+            .fixtures
+            .iter()
+            .all(|scored| scored.fixture != "statement-04.pdf"),
+        "a fixture that could not be read is not scored as though it had been"
+    );
 }
 
 /// The issue's named first test. Running the eval with model steps
@@ -141,10 +182,25 @@ fn the_floor_asks_no_model_anything() {
     // thing quietly.
     let report = floor_evaluator().evaluate(&pack).expect("the floor runs");
 
+    // Every development fixture this build can read is scored, and the
+    // exam remains sealed. The one it cannot read is the PDF, which is
+    // named in `unrunnable` rather than missing from both — a count
+    // that quietly dropped it would be the same number as a bed that
+    // never held it.
+    // The absolute number is a guard against a bed quietly shrinking,
+    // so it moves only in a commit that says why. It moved from 84 to
+    // 86 when #575 gave `statement-04` a PDF route beside its CSV, and
+    // nobody noticed because the run had started erroring rather than
+    // counting.
     assert_eq!(
-        report.fixtures.len(),
-        84,
-        "every development fixture is still scored; exam remains sealed"
+        report.fixtures.len() + report.unrunnable.len(),
+        86,
+        "every development fixture is either scored or named unreadable; exam remains sealed"
+    );
+    assert_eq!(
+        report.unrunnable.len(),
+        1,
+        "and only the PDF is unreadable on a build with no pdfium"
     );
     let broad = report
         .fixtures

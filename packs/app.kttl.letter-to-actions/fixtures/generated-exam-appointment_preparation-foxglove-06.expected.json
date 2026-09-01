@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-foxglove-06",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "18 January 2027",
+        "deadline": "for 18 January 2027 at 4.05pm",
+        "due": "2027-01-18",
+        "kind": "attendance",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-foxglove-06-attendance-01",
+      "segment": "An appointment concerning your check-up has been arranged with Fenwick Dental Practice for 18 January 2027 at 4.05pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-foxglove-06-no-ask-02",
+      "segment": "You must switch your telephone off in the waiting area.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-foxglove-06-other-03",
+      "segment": "You must take a meter reading and note it down before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-foxglove-06-no-ask-04",
+      "segment": "You must allow additional time if you travel by public transport.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-foxglove-06-other-05",
+      "segment": "You must obtain a copy of the agreement from the other party in advance.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-foxglove-06-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-foxglove-06-no-ask-08",
+      "segment": "The most recent payment on this account is dated 30 May.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

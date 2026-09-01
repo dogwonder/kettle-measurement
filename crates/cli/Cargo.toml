@@ -24,6 +24,11 @@ toml = { workspace = true }
 
 [features]
 pdf = ["runner/pdf"]
+# The eval could always *find* a photograph fixture and never read one:
+# `document.rs` gates the image path on `feature = "vision"`, the app
+# turns it on by default, and the CLI had no way to. #399's acceptance
+# item 8 — a scored photo run — was unmeetable for want of this line.
+vision = ["runner/vision"]
 
 [dev-dependencies]
 rust_decimal = { workspace = true }

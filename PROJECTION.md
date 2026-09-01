@@ -1,6 +1,6 @@
 # This tree is a projection
 
-Generated from `dogwonder/kettle` at `13c2878` on 2026-08-25, carrying 2638 files. It is not edited here: every file is a copy, and a change made in this repository would be overwritten by the next projection rather than reaching the product.
+Generated from `dogwonder/kettle` at `89ba066` on 2026-09-01, carrying 3156 files. It is not edited here: every file is a copy, and a change made in this repository would be overwritten by the next projection rather than reaching the product.
 
 ## What it carries
 
@@ -17,6 +17,10 @@ Generated from `dogwonder/kettle` at `13c2878` on 2026-08-25, carrying 2638 file
 - `NOTICE`
 - `README.md`
 - `.gitignore`
+- `app/src/lib/format.ts`
+- `app/src/lib/types.ts`
+- `app/src/lib/study-`
+- `app/study/`
 - `app/src-tauri/models.json`
 - `app/src-tauri/tauri.conf.json`
 

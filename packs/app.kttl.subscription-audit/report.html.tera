@@ -1575,6 +1575,21 @@
   line-height: var(--k-lh-small);
 }
 
+.govuk-label,
+.govuk-hint,
+.govuk-fieldset__legend,
+.govuk-input,
+.govuk-textarea,
+.govuk-error-message {
+  font-size: var(--k-t-body);
+  line-height: var(--k-lh-body);
+}
+
+.govuk-fieldset__legend--m {
+  font-size: var(--k-t-section);
+  line-height: var(--k-lh-section);
+}
+
 .govuk-heading-xl {
   margin-bottom: var(--k-space-l);
 }
@@ -1601,6 +1616,10 @@
 .govuk-caption-l,
 .govuk-caption-m {
   margin-bottom: var(--k-space-3xs);
+}
+
+.govuk-form-group {
+  margin-bottom: var(--k-space-m);
 }
 
 .govuk-button {
@@ -1840,7 +1859,9 @@
 .govuk-link:focus,
 .govuk-button:focus,
 .govuk-back-link:focus,
-.govuk-details__summary:focus {
+.govuk-details__summary:focus,
+.govuk-input:focus,
+.govuk-textarea:focus {
   outline: var(--k-focus);
   outline-offset: var(--k-focus-offset);
   box-shadow: none;

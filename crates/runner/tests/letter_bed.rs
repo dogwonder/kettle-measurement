@@ -265,7 +265,7 @@ enum Actor {
 /// the test rather than defaulting, because defaulting is how a new
 /// exam sentence would enter the bed unclassified and unnoticed —
 /// which is the defect this test exists to catch.
-const CONSTRUCTIONS: [(&str, Actor); 18] = [
+const CONSTRUCTIONS: [(&str, Actor); 22] = [
     ("Please ", Actor::ReaderNamed),
     ("You have ", Actor::ReaderNamed),
     ("You must ", Actor::ReaderNamed),
@@ -291,6 +291,18 @@ const CONSTRUCTIONS: [(&str, Actor); 18] = [
     ("The total shown opposite ", Actor::ReaderUnnamed),
     ("We ask that ", Actor::ReaderUnnamed),
     ("We have booked your ", Actor::ReaderUnnamed),
+    // #399, 31 August 2026: a confirmation names the reader ("your
+    // appointment") and tells nobody to do anything. Both voices of
+    // `appointment_confirmed` open this way on purpose — the real
+    // letter that missed did — so the shape plants no divergence.
+    ("This letter confirms your ", Actor::ReaderNamed),
+    ("We are writing to confirm your ", Actor::ReaderNamed),
+    // #399, 1 September 2026: `appointment_preparation`'s booking
+    // sentence, in both voices. A booking names the reader's own
+    // appointment and instructs nobody, exactly as the two confirmation
+    // openings above do, so the shape plants no divergence here either.
+    ("Your appointment about your ", Actor::ReaderNamed),
+    ("An appointment concerning your ", Actor::ReaderNamed),
 ];
 
 /// The sentences of a passage, split on a full stop that ends one.
@@ -869,7 +881,7 @@ fn strata_by_item(expected: &str) -> BTreeMap<String, Vec<String>> {
         .collect()
 }
 
-/// #406: the invoice shape's reading is contested, so it must not gate.
+/// #406, #399: a shape whose reading is contested must not gate.
 ///
 /// The bed puts the payment obligation on the table row carrying the
 /// due date; the v14 run put it on the prose that says *pay*. Both are
@@ -880,26 +892,62 @@ fn strata_by_item(expected: &str) -> BTreeMap<String, Vec<String>> {
 /// `no_obligation` to 0.11 against 0.05, from the two sides of the same
 /// disagreement, while every mature stratum in the bed answered 1.00.
 ///
-/// Ungated is not unmeasured. Every item here still carries
-/// `invoice-totals` and its passage tag, which is where the shape is
-/// watched until `in-a-table` earns its promotion (#504).
+/// Ungated is not unmeasured. Every item still carries its own shape's
+/// stratum and its passage tag, which is where the shape is watched
+/// until it earns promotion — `in-a-table` under #504, and #399's pair
+/// once the prompt work lands.
+///
+/// The list below is the whole point: opting out is a deliberate,
+/// named act, and a shape that dropped out of the ceilings by being
+/// forgotten would weaken them silently.
 #[test]
-fn the_invoice_shape_is_measured_but_does_not_gate() {
+fn a_contested_shape_is_measured_but_does_not_gate() {
     let spec = runner::eval::letters::committed_spec(&pack_dir()).expect("the committed spec");
     let letters = runner::eval::letters::generate(&spec);
 
-    let mut invoices = 0;
+    // Every shape that deliberately does not gate, with the reason it
+    // does not and the date it was staged. A list rather than a rule
+    // read off `Shape::gates()`, on purpose and for the same reason
+    // `STAGED_GOVUK_COMPONENTS` is a list: a shape that opted out of
+    // the ceilings by being *forgotten* would weaken them silently,
+    // and this test is what makes that impossible. Adding a name here
+    // is the deliberate act.
+    const UNGATED: [(&str, &str); 4] = [
+        // #406/#504, 13 August 2026: the bed and the v14 run disagree
+        // about which passage of an invoice carries the obligation.
+        ("invoice_totals", "invoice-totals"),
+        // #399, 29 August 2026: whether a conditional ask is an
+        // obligation is a contested reading, not a settled one.
+        ("conditional_advisory", "conditional-advisory"),
+        // #399, 31 August 2026: an appointment stated as a confirmation,
+        // from `gp_appointment-025-p1.jpg` reading as no ask at high
+        // confidence. Selected for being hard by a real letter that
+        // failed, which is #581's reason: a pooled bar that falls each
+        // time a harm is measured inverts the incentive. Promotes on the
+        // condition CHECKLIST.md names.
+        ("appointment_confirmed", "appointment-confirmed"),
+        // #399, 1 September 2026: where the line between "how to
+        // attend" and "what to do before you do" falls is contested by
+        // construction — photographic identification sits close enough
+        // to it that a reasonable reader would put it on the other
+        // side. Staged for that reason and not only for being new.
+        ("appointment_preparation", "appointment-preparation"),
+    ];
+
+    let mut ungated_items = 0;
     for letter in &letters {
-        let invoice = letter.stem.contains("invoice_totals");
+        let staged = UNGATED
+            .iter()
+            .find(|(shape, _)| letter.stem.contains(shape));
         for (id, strata) in strata_by_item(&letter.expected) {
-            if invoice {
-                invoices += 1;
+            if let Some((_, stratum)) = staged {
+                ungated_items += 1;
                 assert!(
                     !strata.contains(&"any-letter".to_owned()),
                     "{id}: a contested reading is inside the gated stratum (strata: {strata:?})"
                 );
                 assert!(
-                    strata.contains(&"invoice-totals".to_owned()),
+                    strata.contains(&(*stratum).to_owned()),
                     "{id}: ungated and untagged is unmeasured (strata: {strata:?})"
                 );
             } else {
@@ -910,7 +958,10 @@ fn the_invoice_shape_is_measured_but_does_not_gate() {
             }
         }
     }
-    assert!(invoices > 0, "the bed plants no invoices to check");
+    assert!(
+        ungated_items > 0,
+        "the bed plants none of the staged ungated shapes to check"
+    );
 }
 
 /// #406, settled by #544: both passages of an invoice are scored, and
@@ -1173,4 +1224,233 @@ fn every_committed_invoice_resolves_its_pointer() {
         .map(|set| set.shapes.get("invoice_totals").map_or(0, Vec::len))
         .sum();
     assert_eq!(checked, invoices, "every committed invoice is checked");
+}
+
+/// #399: a conditional ask and standing advice are not obligations, and
+/// the bed had no way to say so.
+///
+/// The first real photographed letter through the app — a housing
+/// association's *"for information only"* notice — read cleanly and
+/// then produced two asks, both at `high` confidence, that the letter
+/// never made: a conditional (*"if you rent it out, notify your
+/// tenants"*) and standing advice (*"ask to see their ID"*). Neither is
+/// something this reader must do because of this letter.
+///
+/// The prompt is why. Its worked example 903 — *"Please send us a
+/// reading from your meter at your earliest convenience"* — teaches
+/// that a request with no date is still an obligation, which is true
+/// and too broad: it generalises to any sentence in the imperative,
+/// including one guarded by a condition the letter cannot know the
+/// answer to, and one offering general advice to anybody reading.
+///
+/// Every ceiling this pack has cleared was cleared on a bed containing
+/// neither construction, so a green run said nothing about either. This
+/// shape is the counter-example set, and it is deliberately **ungated**:
+/// whether a conditional is an obligation is a contested reading, not a
+/// settled one, and a gate encodes a settled judgement (#504's
+/// precedent). It is measured in its own strata until the prompt work
+/// lands and a full run gives a Wilson bound something to say.
+#[test]
+fn a_conditional_ask_and_standing_advice_are_scored_as_asking_nothing() {
+    let spec = runner::eval::letters::committed_spec(&pack_dir()).expect("the committed spec");
+    let letters = runner::eval::letters::generate(&spec);
+
+    let mut by_set: BTreeMap<String, BTreeMap<&str, usize>> = BTreeMap::new();
+    let mut checked = 0usize;
+    for letter in &letters {
+        if !letter.stem.contains("conditional_advisory") {
+            continue;
+        }
+        let expected: serde_json::Value =
+            serde_json::from_str(&letter.expected).expect("expectations are json");
+        let set = expected["eval_set"].as_str().expect("a set").to_owned();
+        for item in expected["obligations"].as_array().expect("obligations") {
+            let id = item["id"].as_str().expect("an item id");
+            let strata: Vec<&str> = item["strata"]
+                .as_array()
+                .expect("a strata list")
+                .iter()
+                .map(|s| s.as_str().expect("a stratum name"))
+                .collect();
+
+            // Every passage of this shape asks nothing. A conditional
+            // whose condition the letter cannot resolve, and advice
+            // addressed to anyone at all, are both answers of "no
+            // obligation" — asserting one is the invention the
+            // `no_obligation` ceiling exists to bound.
+            assert!(
+                item["expect"].is_null(),
+                "{id}: this shape plants no obligations, and this item expects one"
+            );
+            // Contested, so it must not gate — the #504 rule.
+            assert!(
+                !strata.contains(&"any-letter"),
+                "{id}: a contested reading is inside the gated stratum (strata: {strata:?})"
+            );
+            assert!(
+                strata.contains(&"conditional-advisory"),
+                "{id}: ungated and untagged is unmeasured (strata: {strata:?})"
+            );
+            for tag in ["conditional-ask", "standing-advice"] {
+                if strata.contains(&tag) {
+                    *by_set
+                        .entry(set.clone())
+                        .or_default()
+                        .entry(tag)
+                        .or_default() += 1;
+                }
+            }
+            checked += 1;
+        }
+    }
+
+    assert!(
+        checked > 0,
+        "the bed plants no conditional or advisory letters"
+    );
+
+    // 60 decisions per construction per set. Sized to what it must be
+    // able to do rather than to what looks tidy: 12 was enough to
+    // *show* #552's failure and not enough to *measure* its fix, and a
+    // 5% Wilson upper bound — the `no_obligation` ceiling this stratum
+    // would be promoted into — needs 59 clean decisions before it can
+    // say anything at all.
+    const WANTED: usize = 60;
+    let mut failures: Vec<String> = Vec::new();
+    for set in ["development", "exam"] {
+        let counts = by_set.get(set).cloned().unwrap_or_default();
+        for tag in ["conditional-ask", "standing-advice"] {
+            let seen = counts.get(tag).copied().unwrap_or(0);
+            if seen < WANTED {
+                failures.push(format!(
+                    "{set}/{tag}: {seen} decisions, {WANTED} wanted — too few to bound the \
+                     rate this stratum exists to measure"
+                ));
+            }
+        }
+    }
+    assert!(failures.is_empty(), "{}", failures.join("\n  "));
+}
+
+/// #399, 31 August 2026: the bed carries the construction the real
+/// letter used. `gp_appointment-025-p1.jpg` through the packaged app:
+/// OCR delivered *"This letter confirms your appointment with the
+/// practice nurse on 9 March 2026 at 3.50pm"* verbatim and the model
+/// answered no obligation at high confidence — the one dated ask in the
+/// letter. The paired 30 August archive reads the same template 1 of 4
+/// across text and photo. Every appointment this bed planted before
+/// today said *"You have an appointment"* or *"We have booked"*; none
+/// confirmed one.
+///
+/// Positive evidence in both voices — an appointment stated as a
+/// confirmation, with its time, and no imperative anywhere in the
+/// sentence that carries the deadline.
+#[test]
+fn letter_bed_carries_confirmation_phrased_appointments() {
+    let spec = runner::eval::letters::committed_spec(&pack_dir()).expect("the committed spec");
+    let mut by_set: BTreeMap<String, usize> = BTreeMap::new();
+    for letter in runner::eval::letters::generate(&spec) {
+        if !letter.stem.contains("-appointment_confirmed-") {
+            continue;
+        }
+        let expected: serde_json::Value =
+            serde_json::from_str(&letter.expected).expect("expectations are json");
+        let set = expected["eval_set"].as_str().expect("a set").to_owned();
+        for item in expected["obligations"].as_array().expect("obligations") {
+            let Some(deadline) = item["expect"]["deadline"].as_str() else {
+                continue;
+            };
+            let segment = item["segment"].as_str().expect("a segment");
+            let lower = segment.to_lowercase();
+            assert!(
+                lower.contains("confirm"),
+                "{}: the ask is not a confirmation: {segment:?}",
+                letter.stem
+            );
+            assert!(
+                !lower.contains("please") && !lower.contains("you must"),
+                "{}: the ask sentence tells the reader to act, which is the shape \
+                 the bed already had: {segment:?}",
+                letter.stem
+            );
+            assert!(
+                deadline.contains(" at ") && segment.contains(deadline),
+                "{}: the deadline {deadline:?} must name the time and be copied from \
+                 the passage {segment:?}",
+                letter.stem
+            );
+            assert_eq!(item["expect"]["kind"], "attendance", "{}", letter.stem);
+            *by_set.entry(set.clone()).or_default() += 1;
+        }
+    }
+    for set in ["development", "exam"] {
+        let n = by_set.get(set).copied().unwrap_or(0);
+        assert!(
+            n >= 12,
+            "{set}: {n} confirmation-phrased appointments, 12 wanted — enough to see \
+             the #399 miss again, not enough to claim a bounded rate"
+        );
+    }
+}
+
+/// A shape that spends its families on two layouts must spend them
+/// evenly, in both voices (#399, 1 September 2026).
+///
+/// `appointment_preparation` splits its 60 families in half: the first
+/// 30 give the manner line and the preparation ask as separate
+/// passages, the second 30 join them into the one sentence the real
+/// letter used. The halves are the comparison the shape exists to
+/// make, so an uneven split does not merely lose decisions — it makes
+/// the two numbers incomparable while both still print.
+///
+/// It went in uneven. The parameter `passages` calls `index` is really
+/// the *seed*, which carries `Voice::seed_offset()` — five in the exam
+/// voice — so `index >= 30` cut the exam set 35/25 and the development
+/// set 30/30. Nothing failed: every fixture generated, every stratum
+/// was declared, the byte-for-byte test passed on a bed that was wrong
+/// in one voice only. A census caught it, and a census is not a
+/// control.
+#[test]
+fn a_shape_plants_each_of_its_constructions_evenly() {
+    let spec = runner::eval::letters::committed_spec(&pack_dir()).expect("the committed spec");
+    let letters = runner::eval::letters::generate(&spec);
+
+    // Constructions that must be planted in equal number, per set.
+    const PAIRED: [(&str, &str); 1] = [("preparation-ask", "compound-ask")];
+
+    let mut counted: BTreeMap<(String, String), usize> = BTreeMap::new();
+    for letter in &letters {
+        let set = if letter.stem.starts_with("generated-exam-") {
+            "exam"
+        } else {
+            "development"
+        };
+        for (_, strata) in strata_by_item(&letter.expected) {
+            for stratum in strata {
+                *counted.entry((set.to_owned(), stratum)).or_default() += 1;
+            }
+        }
+    }
+
+    for (left, right) in PAIRED {
+        for set in ["development", "exam"] {
+            let a = counted
+                .get(&(set.to_owned(), left.to_owned()))
+                .copied()
+                .unwrap_or(0);
+            let b = counted
+                .get(&(set.to_owned(), right.to_owned()))
+                .copied()
+                .unwrap_or(0);
+            assert!(a > 0, "{set}: {left} plants nothing");
+            assert_eq!(
+                a, b,
+                "{set}: {left} plants {a} decisions and {right} plants {b}. \
+                 These are the two halves of one comparison, so an uneven \
+                 split makes both numbers unreadable. Check the layout \
+                 arithmetic against `Voice::seed_offset` — the `index` \
+                 `passages` receives is a seed, not a family position."
+            );
+        }
+    }
 }

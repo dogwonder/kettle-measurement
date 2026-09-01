@@ -27,9 +27,11 @@ fn packs_are_a_validated_projection_of_their_manifests_not_page_copy() {
     assert_eq!(document["schema"], "kettle/public-packs@0");
 
     let packs = document["packs"].as_array().expect("packs array");
+    // Two offered packs since #545 withdrew the subscription audit
+    // (30 August 2026); `tests/withdrawn.rs` holds the other half.
     assert!(
-        packs.len() >= 3,
-        "the shipped packs should all project: {}",
+        packs.len() >= 2,
+        "the offered packs should all project: {}",
         outcome.text
     );
 

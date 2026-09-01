@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-marram-36",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "9 February 2027",
+        "deadline": "for 9 February 2027 at 5.30pm",
+        "due": "2027-02-09",
+        "kind": "attendance",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-marram-36-attendance-01",
+      "segment": "Your appointment about your case file with Grantley Legal Aid is booked for 9 February 2027 at 5.30pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-marram-36-no-ask-02",
+      "segment": "Please switch your telephone off in the waiting area.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-marram-36-other-03",
+      "segment": "Please ring the bell at the door if reception is unattended, and bring the original certificate rather than a photocopy when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-marram-36-no-ask-04",
+      "segment": "Please allow extra time if you are travelling by bus.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-marram-36-other-05",
+      "segment": "Please park in the visitor bays rather than the staff bays, and register for an online account before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-marram-36-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-marram-36-no-ask-08",
+      "segment": "The interest rate on your account changed on 1 April, and we applied it for you.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

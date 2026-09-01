@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-dovecote-04",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "4 June 2026",
+        "deadline": "for 4 June 2026 at 5.30pm",
+        "due": "2026-06-04",
+        "kind": "attendance",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-dovecote-04-attendance-01",
+      "segment": "Your appointment about your estate matter with Trentham & Yale Solicitors is booked for 4 June 2026 at 5.30pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-dovecote-04-no-ask-02",
+      "segment": "Please take the lift to the second floor.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-dovecote-04-other-03",
+      "segment": "Please print your last three statements and bring them when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-dovecote-04-no-ask-04",
+      "segment": "Please follow the signs for the outpatient wing.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-dovecote-04-other-05",
+      "segment": "Please arrange an interpreter through the booking line before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-dovecote-04-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-dovecote-04-no-ask-08",
+      "segment": "Everything discussed on 22 April has now been actioned by us.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

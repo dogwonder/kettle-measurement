@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-willow-22",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "10 December 2026",
+        "deadline": "for 10 December 2026 at 10.40am",
+        "due": "2026-12-10",
+        "kind": "attendance",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_preparation-willow-22-attendance-01",
+      "segment": "Your appointment about your membership with Eastvale Library Service is booked for 10 December 2026 at 10.40am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-willow-22-no-ask-02",
+      "segment": "Please report to the front desk when you arrive.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_preparation-willow-22-other-03",
+      "segment": "Please complete the enclosed questionnaire and hand it in when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-willow-22-no-ask-04",
+      "segment": "Please use the side entrance, as the main doors are closed for works.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Eastvale Library Service"
+      },
+      "id": "appointment_preparation-willow-22-other-05",
+      "segment": "Please have your account number written down before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-willow-22-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-willow-22-no-ask-08",
+      "segment": "Your appointment on 12 May was attended and the notes have been added to your record.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

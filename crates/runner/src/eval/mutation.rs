@@ -598,6 +598,7 @@ impl MutationHarness {
             fixtures_dir: None,
             runs_dir: None,
             resume_dir: None,
+            pdfium_dir: None,
         }
     }
 }

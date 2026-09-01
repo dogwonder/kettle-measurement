@@ -45,6 +45,9 @@ struct PublicPack {
     /// The pack's own one-line promise. Rendered verbatim: a page that
     /// paraphrases it has invented a claim the pack does not make.
     description: String,
+    /// What the pack is for, in a person's terms — `who`, `can`,
+    /// `done_when` — verbatim from the manifest (30 August 2026).
+    goal: PublicGoal,
     inputs: Vec<PublicInput>,
     capabilities: Vec<String>,
     /// What the pack says a run costs in time. Published because the
@@ -54,6 +57,13 @@ struct PublicPack {
     /// page. A promise about time is a claim like any other, and the
     /// pack is the only thing entitled to make it.
     time: PublicTime,
+}
+
+#[derive(Debug, Serialize)]
+struct PublicGoal {
+    who: String,
+    can: String,
+    done_when: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -81,6 +91,15 @@ fn project(manifest: &Manifest) -> PublicPack {
         name: manifest.name.clone(),
         version: manifest.version.clone(),
         description: manifest.description.clone(),
+        goal: manifest
+            .goal
+            .as_ref()
+            .map(|goal| PublicGoal {
+                who: goal.who.clone(),
+                can: goal.can.clone(),
+                done_when: goal.done_when.clone(),
+            })
+            .expect("run_json refuses an offered pack without a goal before projecting it"),
         inputs: manifest
             .inputs
             .iter()
@@ -120,6 +139,23 @@ pub fn run_json(packs_dir: &Path) -> Outcome {
     let mut packs = Vec::new();
     for dir in dirs {
         match load_pack(&dir) {
+            // Measured but not offered (#545): a public page describing
+            // a task the app does not offer is the misdescription this
+            // command exists to prevent. `packs list` still names it.
+            Ok(pack) if pack.manifest.withdrawn.is_some() => continue,
+            // A pack with no user goal cannot be described to the
+            // public: the page would have to invent what it is for.
+            Ok(pack) if pack.manifest.goal.is_none() => {
+                return Outcome {
+                    text: format!(
+                        "{} states no `goal`, so the public page cannot say what it is for — \
+                         add who it is for, what they can do and when it is done \
+                         (packs/AUTHORING.md, step 0)",
+                        pack.manifest.id
+                    ),
+                    code: ExitCode::Broken,
+                };
+            }
             Ok(pack) => packs.push(project(&pack.manifest)),
             Err(e) => {
                 return Outcome {
@@ -147,4 +183,23 @@ pub fn run_json(packs_dir: &Path) -> Outcome {
             code: ExitCode::Broken,
         },
     }
+}
+
+/// `kettle packs list` — every pack under `packs_dir` that loads, in
+/// directory order, withdrawn ones included and marked. A pack that
+/// fails to load is skipped: a listing is a run doing its best.
+pub fn run_list(packs_dir: &Path) -> String {
+    let mut dirs: Vec<PathBuf> = std::fs::read_dir(packs_dir)
+        .map(|entries| {
+            entries
+                .filter_map(|entry| entry.ok())
+                .map(|entry| entry.path())
+                .filter(|path| path.is_dir())
+                .collect()
+        })
+        .unwrap_or_default();
+    dirs.sort();
+    let packs: Vec<runner::packs::Pack> =
+        dirs.iter().filter_map(|dir| load_pack(dir).ok()).collect();
+    crate::plan::list_packs(&packs)
 }

@@ -51,6 +51,8 @@ pdfium-render = "0.9"
 objc2 = "0.6"
 objc2-foundation = { version = "0.3", features = ["NSString", "NSArray", "NSURL", "NSDictionary", "NSError"] }
 objc2-vision = { version = "0.3", features = ["VNRequest", "VNRequestHandler", "VNObservation", "VNTypes", "VNRecognizeTextRequest"] }
+objc2-core-graphics = { version = "0.3", features = ["CGImage"] }
+objc2-image-io = { version = "0.3", features = ["CGImageSource"] }
 html5ever = "0.39"
 cssparser = "0.37"
 

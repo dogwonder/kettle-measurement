@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-thicket-19",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "4 August 2026",
+        "deadline": "for 4 August 2026 at 4.05pm",
+        "due": "2026-08-04",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-thicket-19-attendance-01",
+      "segment": "Your appointment about your policy renewal with Belwood Insurance is booked for 4 August 2026 at 4.05pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-thicket-19-no-ask-02",
+      "segment": "Please arrive promptly, as late arrivals cannot always be seen.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-thicket-19-other-03",
+      "segment": "Please bring a recent proof of your address with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-thicket-19-no-ask-04",
+      "segment": "Please come to the desk marked Appointments.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-thicket-19-other-05",
+      "segment": "Please order a replacement card before your appointment so that you have it with you.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-thicket-19-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-thicket-19-no-ask-08",
+      "segment": "Your direct debit of £115.00 will continue to be collected on the 15th of each month as before.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

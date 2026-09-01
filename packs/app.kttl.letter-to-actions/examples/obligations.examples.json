@@ -47,6 +47,32 @@
           "anchor": "no particular date"
         }
       ]
+    },
+    {
+      "id": 904,
+      "segment": "If you are claiming a single person discount, you must tell us before the end of the billing year.",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 905,
+      "segment": "Never give your bank details to anyone who telephones you claiming to be from this office.",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 906,
+      "segment": "This letter confirms your appointment with the housing officer on 3 June 2026 at 10.30am.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "attendance",
+          "party": "Redhill District Council",
+          "ask": "Attend the appointment with the housing officer",
+          "deadline": "on 3 June 2026 at 10.30am",
+          "anchor": "3 June 2026"
+        }
+      ]
     }
   ]
 }

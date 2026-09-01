@@ -212,6 +212,7 @@ fn evaluate(dir: &std::path::Path) -> runner::eval::EvalReport {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
     evaluator.evaluate(&pack).expect("the eval runs")
 }
@@ -337,6 +338,7 @@ fn an_uninterpretable_relation_is_refused_not_skipped() {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
     let refusal = evaluator
         .evaluate(&pack)
@@ -374,6 +376,7 @@ fn a_relation_across_the_set_boundary_is_refused() {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
     let refusal = evaluator
         .evaluate(&pack)
@@ -574,6 +577,7 @@ fn evaluate_classification(
         fixtures_dir: Some(dir.to_path_buf()),
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
     evaluator.evaluate(&pack).expect("the eval runs")
 }
@@ -1187,6 +1191,7 @@ fn an_audition_carrying_one_half_of_a_twin_judges_no_relation() {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     let report = evaluator

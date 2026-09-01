@@ -96,11 +96,70 @@ pub fn read_document(
     Ok(read)
 }
 
+/// Read several files as ordered parts of one logical document.
+///
+/// A phone produces one file per photographed page, while the letter's
+/// date and its ask may sit on different pages. Page and passage
+/// numbering therefore continue across file boundaries; `document`
+/// stays the same for every part.
+pub fn read_document_parts(
+    paths: &[&Path],
+    document: usize,
+    pdfium_dir: Option<&Path>,
+) -> Result<DocumentRead, ParseError> {
+    let parts = paths
+        .iter()
+        .map(|path| read_document(path, document, pdfium_dir))
+        .collect::<Result<Vec<_>, _>>()?;
+    Ok(combine_parts(parts))
+}
+
+/// Join already-read parts into one document, in the order given.
+///
+/// Page numbers advance by each part's *physical* page count, never by
+/// the last page that yielded a passage: a blank trailing page produces
+/// no segment, and a person following a citation into the next part
+/// would otherwise land one page early.
+pub fn combine_parts(parts: Vec<DocumentRead>) -> DocumentRead {
+    let mut combined = DocumentRead::from(Vec::new());
+    combined.pages = 0;
+    let mut ordinal_offset = 0;
+
+    for (part_index, mut part) in parts.into_iter().enumerate() {
+        let page_offset = combined.pages;
+        for segment in &mut part.segments {
+            segment.page += page_offset;
+            segment.ordinal += ordinal_offset;
+        }
+        for dispute in &mut part.disagreements {
+            dispute.page += page_offset;
+        }
+        combined.pages += part.pages;
+        ordinal_offset += part.segments.len();
+        // A letter's own date is an opening-page fact. Later pages may
+        // contain appointment or deadline dates; treating one of those
+        // as a disputed letter date would stop every relative deadline
+        // for the wrong reason.
+        if part_index == 0 {
+            combined.date_dispute = part.date_dispute;
+        }
+        combined.segments.extend(part.segments);
+        combined.disagreements.extend(part.disagreements);
+    }
+
+    combined
+}
+
 /// One document, read — and what reading it a second time disagreed
 /// about.
 #[derive(Debug, Clone, PartialEq)]
 pub struct DocumentRead {
     pub segments: Vec<Segment>,
+    /// Physical pages in the file, whether or not each produced a
+    /// segment. A text file or a photograph is one page; a PDF is as
+    /// many as pdfium counted. This, not the highest cited page, is
+    /// what the next part of a page group offsets by.
+    pub pages: usize,
     /// Only a photograph produces this (#412). A file with a text layer
     /// is read once, because reading it twice would give the same bytes
     /// twice — there is nothing to disagree about, and pretending to
@@ -122,6 +181,7 @@ impl From<Vec<Segment>> for DocumentRead {
     fn from(segments: Vec<Segment>) -> Self {
         DocumentRead {
             segments,
+            pages: 1,
             date_dispute: None,
             disagreements: Vec::new(),
         }
@@ -163,7 +223,6 @@ pub fn media_type(path: &Path) -> Option<&'static str> {
         // iPhone produces without being asked, so leaving it out would
         // refuse the commonest file of all.
         "jpg" | "jpeg" => Some("image/jpeg"),
-        "png" => Some("image/png"),
         "heic" | "heif" => Some("image/heic"),
         _ => None,
     }
@@ -171,7 +230,29 @@ pub fn media_type(path: &Path) -> Option<&'static str> {
 
 /// Is this a picture of a document rather than a document?
 fn is_image(extension: &str) -> bool {
-    matches!(extension, "jpg" | "jpeg" | "png" | "heic" | "heif")
+    matches!(extension, "jpg" | "jpeg" | "heic" | "heif")
+}
+
+/// Can this build read this document at all?
+///
+/// Not "is the file valid" — that is the reader's job and its failure
+/// is a measurement. This asks whether the machinery exists here: a
+/// PDF needs the `pdf` feature *and* a pdfium binary the repository
+/// does not ship, and a photograph needs macOS Vision. A bed that
+/// holds one is not scoreable on a build that lacks it, and the eval
+/// says which rather than either failing wholesale or quietly
+/// shrinking its denominator (#256).
+pub fn readable_here(path: &Path, pdfium_dir: Option<&Path>) -> bool {
+    let extension = path
+        .extension()
+        .and_then(|extension| extension.to_str())
+        .map(str::to_ascii_lowercase)
+        .unwrap_or_default();
+    match extension.as_str() {
+        "pdf" => cfg!(feature = "pdf") && pdfium_dir.is_some(),
+        image if is_image(image) => cfg!(all(target_os = "macos", feature = "vision")),
+        _ => true,
+    }
 }
 
 /// One document's segments, numbered from 0 within itself. Every caller
@@ -199,7 +280,9 @@ fn read_one(path: &Path, pdfium_dir: Option<&Path>) -> Result<DocumentRead, Pars
                 // is the point: the scan message is already written and
                 // already tested.
                 let pages = crate::pdf::extract_pages(path, pdfium_dir)?;
-                Ok(segments_from_pages(&pages).into())
+                let mut read = DocumentRead::from(segments_from_pages(&pages));
+                read.pages = pages.len().max(1);
+                Ok(read)
             }
             #[cfg(not(feature = "pdf"))]
             {
@@ -227,11 +310,18 @@ fn read_one(path: &Path, pdfium_dir: Option<&Path>) -> Result<DocumentRead, Pars
             // first — it is the check being unavailable, and the honest
             // answer is that nothing confirmed the date.
             let literal_page = read(Correction::Literal).ok();
-            let corrected = segments_from_text(&corrected_page.text().map_err(ParseError::Ocr)?);
+            // `text()` is the gate — nothing readable, or too much of
+            // it doubtful, refuses the page — and its string is then
+            // discarded: the segments come from the page's geometry,
+            // the way a PDF page's do, because a wrap rule that counts
+            // characters split 26 of 29 asks on the synthetic photo
+            // bed. The camera saw where every line sat; use it.
+            corrected_page.text().map_err(ParseError::Ocr)?;
+            let corrected = segments_from_pages(&[corrected_page.page()]);
             let literal = literal_page
                 .as_ref()
-                .and_then(|page| page.text().ok())
-                .map(|text| segments_from_text(&text))
+                .filter(|page| page.text().is_ok())
+                .map(|page| segments_from_pages(&[page.page()]))
                 .unwrap_or_default();
             let date_dispute = crate::timeline::date_dispute(&corrected, &literal);
             // Line by line, from the readings rather than the segments:
@@ -243,6 +333,7 @@ fn read_one(path: &Path, pdfium_dir: Option<&Path>) -> Result<DocumentRead, Pars
                 .unwrap_or_default();
             Ok(DocumentRead {
                 segments: corrected,
+                pages: 1,
                 date_dispute,
                 disagreements,
             })
@@ -412,7 +503,10 @@ fn passages_of(fragments: &[Fragment]) -> Vec<Passage> {
 fn fragments_from_text(block: &str) -> Vec<Fragment> {
     let mut fragments = Vec::new();
     for (index, line) in block.lines().enumerate() {
-        let y = -(index as f32) * (ROW_TOLERANCE + 1.0);
+        // Rows set further apart than [`NEIGHBOURING_ROW`]: typed text
+        // has no skew, and its words must not be offered as channel
+        // candidates against the words on the line below.
+        let y = -(index as f32) * (NEIGHBOURING_ROW + 1.0);
         let mut column = 0usize;
         for part in line.split(' ') {
             let width = part.chars().count();
@@ -513,7 +607,7 @@ fn paragraphs_of(fragments: &[Fragment]) -> Vec<Passage> {
     }
 
     let gaps = line_gaps(fragments);
-    let Some(usual) = median(&gaps) else {
+    let Some(usual) = usual_leading(&gaps) else {
         // One line, so no gap to measure and nothing to split.
         return vec![Passage::from_rows(lines)];
     };
@@ -597,8 +691,6 @@ fn rows_of_cells(fragments: &[Fragment]) -> Vec<Vec<String>> {
 /// block, wide enough to separate columns.
 #[derive(Debug, Clone, Copy)]
 struct Channel {
-    /// How wide the corridor is.
-    width: f32,
     /// The x it cuts at — the rightmost content edge to its left.
     at: f32,
 }
@@ -627,10 +719,7 @@ fn channels(placed: &[&Fragment]) -> Vec<Channel> {
     let mut reach = first_right;
     for (x, right) in spans.iter().skip(1) {
         if *x > reach && *x - reach > width * COLUMN_CHANNEL {
-            found.push(Channel {
-                width: *x - reach,
-                at: reach,
-            });
+            found.push(Channel { at: reach });
         }
         reach = reach.max(*right);
     }
@@ -656,81 +745,208 @@ const COLUMN_CHANNEL: f32 = 0.05;
 /// a column.
 const COLUMN_ROWS: usize = 2;
 
-/// Cut a page into blocks down its widest full-height whitespace
-/// channel (#406).
+/// Cut a page into blocks down its whitespace channels (#406).
 ///
-/// Deliberately **one cut, never recursive**. The invoice that prompted
-/// this sets its due date on the left and `Sub total / VAT / Total` on
-/// the right, and the right-hand block contains a second channel of its
-/// own — between those labels and their amounts. Cutting again would
-/// separate every label from its value and produce `Sub total VAT
-/// Total` beside `£300 £60 £360`, which is the original defect wearing
-/// different clothes. One cut separates the blocks; row-wise assembly
-/// within a block is correct and stays.
+/// A channel is a corridor of whitespace that runs down a **run of
+/// consecutive rows** — not the whole page. #406 asked for a channel no
+/// fragment crossed anywhere on the page, and on a letter there is no
+/// such channel: the prose lines span the page, so on every
+/// photographed invoice the cut never fired and the totals table came
+/// back row-wise, `Due date Sub total £361.17`, the very defect it was
+/// written to fix. The paired text/photo run of 30 August 2026 lost all
+/// four invoice due dates to that, with the model's answer identical
+/// in both arms. So a channel need only be clear for the rows it
+/// separates, and the prose above and below stays whole.
 ///
-/// Conservative in the direction that matters. A channel qualifies only
-/// if **no fragment crosses it anywhere on the page** and both sides are
-/// at least [`COLUMN_ROWS`] deep, so a page of prose — where the long
-/// lines span every candidate channel — is never cut, and neither is a
-/// lone right-aligned figure. Failing to cut leaves today's behaviour;
-/// cutting wrongly reorders a document a person is relying on.
+/// Within a run the rule is #406's, unchanged. **Width alone does not
+/// choose the cut**: a table's rows all reach both sides of a channel;
+/// two blocks set side by side do not. So a channel whose sides pair
+/// row for row — the one inside a label/value table, between the
+/// labels and their amounts — is passed over, because cutting there
+/// separates every label from its value and gives `Sub total VAT
+/// Total` beside `£300 £60 £360`. Both sides must be at least
+/// [`COLUMN_ROWS`] deep, so a lone right-aligned figure beside prose is
+/// never moved. And a run is cut once: the right-hand block of the
+/// invoice holds its own label/value channel, and cutting again would
+/// be the original defect wearing different clothes.
+///
+/// Conservative in the direction that matters. Failing to cut leaves
+/// row-wise reading, which a person can still follow; cutting wrongly
+/// reorders a document they are relying on. So candidates come only
+/// from gaps the page actually set between two fragments on one row,
+/// never from the empty paper beside a short line.
 fn blocks(fragments: &[Fragment]) -> Vec<Vec<Fragment>> {
     let placed: Vec<&Fragment> = fragments
         .iter()
         .filter(|f| !f.text.trim().is_empty())
         .collect();
-    let whole = |fragments: &[&Fragment]| vec![fragments.iter().map(|f| (*f).clone()).collect()];
-
-    // Widest first, but **width alone does not choose the cut**. A
-    // table's rows all reach both sides of a channel; two blocks set
-    // side by side do not. So the boundary is the widest channel whose
-    // sides do not pair row for row, and a channel that merely happens
-    // to be wide — the one inside a label/value table, between the
-    // labels and their amounts — is passed over rather than taken and
-    // then regretted.
-    //
-    // Choosing on width alone was wrong on a real fixture within hours
-    // of shipping. An invoice whose due date read `14 September 2026`
-    // left a five-column channel beside it, exactly tying the channel
-    // inside its totals table; the tie resolved to the wrong one, the
-    // sides paired, and the page was read row-wise after all —
-    // `Due date Sub total £325.00 14 September 2026 VAT £65.00 ...`,
-    // the original defect, on the very shape written to catch it.
-    let mut candidates = channels(&placed);
-    candidates.sort_by(|a, b| b.width.total_cmp(&a.width));
-
-    for channel in candidates {
-        let (left, right): (Vec<&Fragment>, Vec<&Fragment>) =
-            placed.iter().partition(|f| f.right <= channel.at);
-        if rows_in(&left) < COLUMN_ROWS || rows_in(&right) < COLUMN_ROWS {
-            continue;
-        }
-        // Both sides as deep as the whole means every row reaches
-        // across: one table, not two blocks.
-        if rows_in(&left) == rows_in(&placed) && rows_in(&right) == rows_in(&placed) {
-            continue;
-        }
-        return vec![
-            left.iter().map(|f| (*f).clone()).collect(),
-            right.iter().map(|f| (*f).clone()).collect(),
-        ];
+    let rows = visual_rows(&placed);
+    let clone = |row: &[&Fragment]| row.iter().map(|f| (*f).clone()).collect::<Vec<_>>();
+    if rows.is_empty() {
+        return vec![Vec::new()];
     }
 
-    whole(&placed)
+    let left_edge = placed.iter().map(|f| f.x).fold(f32::MAX, f32::min);
+    let width = placed.iter().map(|f| f.right).fold(f32::MIN, f32::max) - left_edge;
+    if width <= 0.0 {
+        return vec![clone(&placed)];
+    }
+    let corridor = width * COLUMN_CHANNEL;
+
+    // Every gap the page sets between a fragment and the nearest text
+    // to its right on the same or a neighbouring row, widest first.
+    // Neighbouring, because a photograph is never quite square: on a
+    // skewed page the recipient's lines and the letter's date sit a
+    // few points apart in y, no visual row holds two fragments, and a
+    // rule that only looked within a row proposed no channel at all.
+    let mut candidates: Vec<(f32, usize, f32)> = Vec::new();
+    for (index, row) in rows.iter().enumerate() {
+        for fragment in row {
+            let nearest = placed
+                .iter()
+                .filter(|g| (g.y - fragment.y).abs() <= NEIGHBOURING_ROW)
+                .filter(|g| g.x > fragment.right + corridor)
+                .map(|g| g.x - fragment.right)
+                .fold(f32::MAX, f32::min);
+            if nearest < f32::MAX {
+                candidates.push((nearest, index, fragment.right));
+            }
+        }
+    }
+    candidates.sort_by(|a, b| b.0.total_cmp(&a.0));
+
+    // A row is clear at x when nothing on it occupies the corridor —
+    // and it is not prose, which belongs to no column. A wrapped line's
+    // short tail can sit clear of a table's inner channel by accident
+    // (invoice-036 on the photo bed), join the run, unpair the sides
+    // and put the cut between the labels and their amounts.
+    let prose = prose_rows(&rows, left_edge, width);
+    let clear = |index: usize, at: f32| {
+        !prose[index]
+            && !rows[index]
+                .iter()
+                .any(|f| f.x < at + corridor && f.right > at)
+    };
+
+    let mut cut: Vec<Option<(usize, f32)>> = vec![None; rows.len()]; // run start → (end, x)
+    let mut taken = vec![false; rows.len()];
+    for (_, origin, at) in candidates {
+        // The proposing row must itself be clear: its nearest neighbour
+        // beyond the corridor may not be its nearest neighbour.
+        if taken[origin] || !clear(origin, at) {
+            continue;
+        }
+        let mut start = origin;
+        while start > 0 && !taken[start - 1] && clear(start - 1, at) {
+            start -= 1;
+        }
+        let mut end = origin;
+        while end + 1 < rows.len() && !taken[end + 1] && clear(end + 1, at) {
+            end += 1;
+        }
+        let run = &rows[start..=end];
+        let left = run
+            .iter()
+            .filter(|row| row.iter().any(|f| f.right <= at))
+            .count();
+        let right = run
+            .iter()
+            .filter(|row| row.iter().any(|f| f.x >= at))
+            .count();
+        if left < COLUMN_ROWS || right < COLUMN_ROWS {
+            continue;
+        }
+        // Both sides as deep as the run means every row reaches
+        // across: one table, not two blocks.
+        if left == run.len() && right == run.len() {
+            continue;
+        }
+        cut[start] = Some((end, at));
+        taken[start..=end].iter_mut().for_each(|t| *t = true);
+    }
+
+    let mut blocks: Vec<Vec<Fragment>> = Vec::new();
+    let mut current: Vec<Fragment> = Vec::new();
+    let mut index = 0;
+    while index < rows.len() {
+        match cut[index] {
+            Some((end, at)) => {
+                if !current.is_empty() {
+                    blocks.push(std::mem::take(&mut current));
+                }
+                let run: Vec<&Fragment> = rows[index..=end].iter().flatten().copied().collect();
+                let (left, right): (Vec<&Fragment>, Vec<&Fragment>) =
+                    run.iter().partition(|f| f.right <= at);
+                blocks.push(clone(&left));
+                blocks.push(clone(&right));
+                index = end + 1;
+            }
+            None => {
+                current.extend(clone(&rows[index]));
+                index += 1;
+            }
+        }
+    }
+    if !current.is_empty() {
+        blocks.push(current);
+    }
+    blocks
 }
 
-/// How many distinct visual rows these fragments occupy.
-fn rows_in(placed: &[&Fragment]) -> usize {
-    let mut baselines: Vec<f32> = Vec::new();
+/// Which rows are the continuation of a paragraph: a single fragment
+/// starting at the same left edge as the row above, where that row
+/// either spans the page or is itself such a continuation.
+///
+/// Only the tail of a wrapped paragraph qualifies. The first line of a
+/// paragraph is not marked — it may be a table's first row for all
+/// this knows — and neither is any row set in more than one fragment.
+fn prose_rows(rows: &[Vec<&Fragment>], left_edge: f32, width: f32) -> Vec<bool> {
+    let spans = |row: &[&Fragment]| row.iter().any(|f| f.right - f.x >= width * SPANNING_LINE);
+    let mut prose = vec![false; rows.len()];
+    for index in 1..rows.len() {
+        let row = &rows[index];
+        let above = &rows[index - 1];
+        let continues = row.len() == 1
+            && above.len() == 1
+            && (row[0].x - above[0].x).abs() <= ROW_TOLERANCE
+            && (row[0].x - left_edge).abs() <= ROW_TOLERANCE;
+        prose[index] = continues && (spans(above) || prose[index - 1]);
+    }
+    prose
+}
+
+/// Fragments this far apart in y are on the same or an adjacent row
+/// for the purpose of proposing a channel between them. About one
+/// line: enough to bridge the skew of a hand-held photograph, and a
+/// proposal is only a proposal — the run it opens is still judged row
+/// by row against [`ROW_TOLERANCE`].
+const NEIGHBOURING_ROW: f32 = 12.0;
+
+/// A line this fraction of the content width or wider spans the page:
+/// it is a line of prose that wrapped, not a table cell. Well above
+/// any cell and below a short last line of a paragraph, which the rule
+/// then reads as the continuation it is.
+const SPANNING_LINE: f32 = 0.6;
+
+/// The page's visual rows, top first, each left to right.
+fn visual_rows<'a>(placed: &[&'a Fragment]) -> Vec<Vec<&'a Fragment>> {
+    let mut rows: Vec<(f32, Vec<&'a Fragment>)> = Vec::new();
     for fragment in placed {
-        if !baselines
-            .iter()
-            .any(|y| (fragment.y - y).abs() <= ROW_TOLERANCE)
+        match rows
+            .iter_mut()
+            .find(|(y, _)| (fragment.y - y).abs() <= ROW_TOLERANCE)
         {
-            baselines.push(fragment.y);
+            Some((_, row)) => row.push(fragment),
+            None => rows.push((fragment.y, vec![fragment])),
         }
     }
-    baselines.len()
+    rows.sort_by(|a, b| b.0.total_cmp(&a.0));
+    rows.into_iter()
+        .map(|(_, mut row)| {
+            row.sort_by(|a, b| a.x.total_cmp(&b.x));
+            row
+        })
+        .collect()
 }
 
 /// The vertical distance between each pair of adjacent lines, top of
@@ -755,13 +971,24 @@ fn line_gaps(fragments: &[Fragment]) -> Vec<f32> {
 /// same reason: baseline jitter is not a new line.
 const ROW_TOLERANCE: f32 = 3.0;
 
-fn median(values: &[f32]) -> Option<f32> {
+/// The block's usual line spacing: the tightest spacing that is common,
+/// not the middle one.
+///
+/// The median was right for prose and wrong for a letter. A letter's
+/// paragraphs are one, two or three lines, so on a photographed council
+/// tax demand half of all line gaps were paragraph gaps — the median
+/// *was* a paragraph gap, and nothing on the page was 1.4× it. The lower
+/// quartile is the leading whenever at least a quarter of the gaps are
+/// within paragraphs, which a page with any wrapped line satisfies; a
+/// page of nothing but single-line paragraphs has no leading to read
+/// and is one line per segment either way.
+fn usual_leading(values: &[f32]) -> Option<f32> {
     if values.is_empty() {
         return None;
     }
     let mut sorted = values.to_vec();
     sorted.sort_by(f32::total_cmp);
-    Some(sorted[sorted.len() / 2])
+    Some(sorted[sorted.len() / 4])
 }
 
 /// Rejoin a paragraph's lines into running prose.

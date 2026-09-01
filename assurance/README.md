@@ -171,6 +171,22 @@ projects the tree and runs its whole suite there, in its own target
 directory. A public repository that does not build is worse than none:
 it invites a reader to check the claims and hands them a failure.
 
+**The study instrument is published, and its tests are not run there
+(27 August 2026, #431).** `app/src/lib/study-*`, `app/study/`, and the
+two modules the scorer imports at runtime — `format.ts` and `types.ts`
+— sit inside the boundary so that the twenty published transcripts in
+`fixtures/study/transcripts/` can be **re-scored** rather than taken on
+trust. A published rate nobody can recompute is decoration, which is
+the same argument that put the recordings beside the prompts.
+
+Two honest limits go with it. These are vitest tests and the
+`public-tree` job runs a Cargo suite, so they are published but not
+exercised there — the status of any published fixture. And the harness's
+Svelte files import the product's report components, which stay closed:
+the published tree can be read and re-scored in full, and **building**
+it would need the closed `app/` tree. Widening that far is a decision
+about the product surface, not a consequence of this one.
+
 ### A projection is validated slightly differently, and says so
 
 A few claims cite surfaces or tests inside the half that stays closed —

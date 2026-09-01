@@ -3,6 +3,11 @@
   "name": "Audit a bank statement",
   "description": "Finds every subscription, price rise and regular cost, and what they add up to over a year.",
   "version": "1.5.0",
+  "withdrawn": {
+    "on": "2026-08-30",
+    "why": "No model has cleared its normalise bar since scoring 14 (0.69 development, 0.64 exam against 0.85), and the Companies House test showed the model adds nothing over Rust on the money. Kept in the lab: it is the one bed on which 4B, 9B and 27B differ.",
+    "record": "#545"
+  },
   "min_runner_version": "0.1.0",
   "inputs": [
     { "role": "statement", "label": "Your bank statements", "accept": ["text/csv", "application/pdf"], "multiple": true }

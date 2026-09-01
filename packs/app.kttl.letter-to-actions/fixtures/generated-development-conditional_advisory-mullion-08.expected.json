@@ -1,0 +1,60 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-conditional_advisory-mullion-08",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "conditional_advisory-mullion-08-no-ask-01",
+      "segment": "We are writing about your energy account for information only. There is nothing you need to send us.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-mullion-08-no-ask-02",
+      "segment": "Where the account is held jointly, both parties must sign the enclosed authority.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-mullion-08-no-ask-03",
+      "segment": "If you no longer keep a vehicle at this address, cancel the permit online.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-mullion-08-no-ask-04",
+      "segment": "Always shred documents showing your name and address before throwing them away.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-mullion-08-no-ask-05",
+      "segment": "Remember that we will never ask you for your password.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-mullion-08-no-ask-07",
+      "segment": "The next inspection is due in 18 months and we will arrange it.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    }
+  ]
+}

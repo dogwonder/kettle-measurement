@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-fernhollow-42",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "2 January 2027",
+        "deadline": "for 2 January 2027 at 11.20am",
+        "due": "2027-01-02",
+        "kind": "attendance",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-fernhollow-42-attendance-01",
+      "segment": "An appointment concerning your check-up has been arranged with Fenwick Dental Practice for 2 January 2027 at 11.20am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-fernhollow-42-no-ask-02",
+      "segment": "You must report to the main desk when you arrive.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you are seen",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-fernhollow-42-other-03",
+      "segment": "You must remain in the waiting area until you are called, and obtain a copy of the most recent statement before you are seen.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-fernhollow-42-no-ask-04",
+      "segment": "You must use the side entrance while the main doors are closed.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "in advance",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-fernhollow-42-other-05",
+      "segment": "You must take the lift to the second floor and obtain proof of identity in advance.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-fernhollow-42-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-fernhollow-42-no-ask-08",
+      "segment": "This office does not operate between 25 December and 1 January.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

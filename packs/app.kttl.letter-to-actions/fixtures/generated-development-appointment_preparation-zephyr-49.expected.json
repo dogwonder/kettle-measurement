@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-zephyr-49",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "14 February 2026",
+        "deadline": "for 14 February 2026 at 2.15pm",
+        "due": "2026-02-14",
+        "kind": "attendance",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-zephyr-49-attendance-01",
+      "segment": "Your appointment about your parking charge with Harborne Parking Services is booked for 14 February 2026 at 2.15pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-zephyr-49-no-ask-02",
+      "segment": "Please arrive promptly, as late arrivals cannot always be seen.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-zephyr-49-other-03",
+      "segment": "Please take a ticket from the machine as you come in, and bring a recent proof of your address with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-zephyr-49-no-ask-04",
+      "segment": "Please come to the desk marked Appointments.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-zephyr-49-other-05",
+      "segment": "Please do not arrive more than half an hour early, and order a replacement card before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-zephyr-49-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-zephyr-49-no-ask-08",
+      "segment": "Your annual statement for the year ending 31 March is enclosed for your information.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

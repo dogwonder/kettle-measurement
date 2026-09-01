@@ -12,7 +12,14 @@ fn main() {
     match runner::ocr::read_page(std::path::Path::new(&path)) {
         Ok(reading) => {
             for line in &reading.lines {
-                println!("{:.3}  {}", line.confidence, line.text);
+                println!(
+                    "{:.3}  x{:.3}-{:.3} y{:.3}  {}",
+                    line.confidence, line.left, line.right, line.top, line.text
+                );
+            }
+            println!("\n--- by geometry ---");
+            for segment in runner::document::segments_from_pages(&[reading.page()]) {
+                println!("[{}] {}", segment.ordinal, segment.text);
             }
             println!("\n--- as text ---");
             match reading.text() {

@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-willowherb-59",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "27 May 2026",
+        "deadline": "for 27 May 2026 at 12.00pm",
+        "due": "2026-05-27",
+        "kind": "attendance",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-willowherb-59-attendance-01",
+      "segment": "An appointment concerning your estate matter has been arranged with Trentham & Yale Solicitors for 27 May 2026 at 12.00pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-willowherb-59-no-ask-02",
+      "segment": "You must arrive on time, as late arrivals cannot always be seen.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-willowherb-59-other-03",
+      "segment": "You must take a ticket from the machine as you enter and package the item this enquiry concerns ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-willowherb-59-no-ask-04",
+      "segment": "You must present yourself at the desk marked Appointments.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "appointment_preparation-willowherb-59-other-05",
+      "segment": "You must report to the main desk when you arrive, and write out a record of your previous addresses on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-willowherb-59-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-willowherb-59-no-ask-08",
+      "segment": "The most recent payment on this account is dated 30 May.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

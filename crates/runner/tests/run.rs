@@ -97,7 +97,7 @@ fn text_layer_pdf_reaches_recurring_findings_and_report_totals() {
     let pack = load_pack(&pack_dir()).expect("pack loads");
     let pdf = pack_dir().join("fixtures/statement-04.pdf");
     let expected: serde_json::Value = serde_json::from_str(
-        &std::fs::read_to_string(pack_dir().join("fixtures/statement-04.pdf.expected.json"))
+        &std::fs::read_to_string(pack_dir().join("fixtures/statement-04.expected.json"))
             .expect("PDF expectations"),
     )
     .expect("expectations are JSON");

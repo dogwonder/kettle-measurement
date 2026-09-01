@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-gable-07",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "31 July 2026",
+        "deadline": "for 31 July 2026 at 11.20am",
+        "due": "2026-07-31",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-gable-07-attendance-01",
+      "segment": "Your appointment about your policy renewal with Belwood Insurance is booked for 31 July 2026 at 11.20am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-gable-07-no-ask-02",
+      "segment": "Please keep to the marked walkway from the car park.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-gable-07-other-03",
+      "segment": "Please bring the item this enquiry concerns with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-gable-07-no-ask-04",
+      "segment": "Please ring the bell at the door if reception is unattended.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-gable-07-other-05",
+      "segment": "Please ask your bank for a statement covering the last three months before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-gable-07-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-gable-07-no-ask-08",
+      "segment": "The next inspection is due in 18 months and we will arrange it.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

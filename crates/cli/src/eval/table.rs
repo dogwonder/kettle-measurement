@@ -569,6 +569,7 @@ mod tests {
 
     fn report(relations: Vec<RelationResult>) -> EvalReport {
         EvalReport {
+            unrunnable: Vec::new(),
             reused_fixtures: 0,
             pack: "app.kttl.letter-to-actions".to_owned(),
             pack_version: "0.2.0".to_owned(),

@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-inkberry-45",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "29 March 2026",
+        "deadline": "for 29 March 2026 at 3.50pm",
+        "due": "2026-03-29",
+        "kind": "attendance",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-inkberry-45-attendance-01",
+      "segment": "An appointment concerning your council tax account has been arranged with Kelsford Borough Council for 29 March 2026 at 3.50pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-inkberry-45-no-ask-02",
+      "segment": "You must not arrive more than thirty minutes early.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-inkberry-45-other-03",
+      "segment": "You must allow fifteen minutes for parking and print statements covering three months ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-inkberry-45-no-ask-04",
+      "segment": "You must visit the ground floor reception first.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Kelsford Borough Council"
+      },
+      "id": "appointment_preparation-inkberry-45-other-05",
+      "segment": "You must keep to the marked walkway from the car park and bring the signed authority form on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-inkberry-45-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-inkberry-45-no-ask-08",
+      "segment": "A duplicate charge of £33.00 raised on 2 May has been reversed.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

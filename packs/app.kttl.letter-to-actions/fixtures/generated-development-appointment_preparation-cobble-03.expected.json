@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-cobble-03",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "22 April 2026",
+        "deadline": "for 22 April 2026 at 4.05pm",
+        "due": "2026-04-22",
+        "kind": "attendance",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_preparation-cobble-03-attendance-01",
+      "segment": "Your appointment about your annual review with Marlow Ridge Surgery is booked for 22 April 2026 at 4.05pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-cobble-03-no-ask-02",
+      "segment": "Please wait in the seating area until your name is called.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_preparation-cobble-03-other-03",
+      "segment": "Please bring photographic identification with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-cobble-03-no-ask-04",
+      "segment": "Please arrive in good time.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_preparation-cobble-03-other-05",
+      "segment": "Please ask your previous provider for a written summary before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-cobble-03-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-cobble-03-no-ask-08",
+      "segment": "The scheme closes to new applications on 31 October, and you joined some years before that.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -53,7 +53,7 @@ const PERMISSION: [&str; 7] = [
 /// stands aside — an over-broad list here makes the rule quieter,
 /// which is the safe direction: a passage wrongly left alone is scored
 /// exactly as it was before this existed.
-const REQUIREMENT: [&str; 13] = [
+const REQUIREMENT: [&str; 19] = [
     "must",
     "shall",
     // Covers *required* and *requirement* too, which is why neither is
@@ -69,6 +69,16 @@ const REQUIREMENT: [&str; 13] = [
     "to be returned",
     "failure to",
     "obliged to",
+    // An amount stated as owed requires as surely as "must" does. The
+    // first photographed parking notice put the charge, a discount and
+    // an optional appeal in one passage, and "you may appeal" sent a
+    // correctly read payment to review (#399).
+    "the charge is",
+    "amount due",
+    "the amount is",
+    "balance of",
+    "is payable",
+    "you owe",
 ];
 
 /// Does this passage offer something to its reader and require nothing?
@@ -122,6 +132,34 @@ mod tests {
         assert!(!grants_without_requiring(
             "You may pay by card or cheque, but the balance must reach us by \
              3 March 2026."
+        ));
+    }
+
+    /// A charge stated is a charge owed. The first photographed parking
+    /// notice put the amount, a prompt-payment discount and an optional
+    /// appeal in one passage; "you may appeal" fired the rule and the
+    /// payment went to review, though the model had read it correctly.
+    /// An amount owed requires as surely as "must" does, however the
+    /// sentence is built around it.
+    #[test]
+    fn an_amount_stated_as_owed_is_a_requirement_an_offer_cannot_disarm() {
+        assert!(!grants_without_requiring(
+            "The charge is £87.44. If you pay within 7 days of the date of this \
+             letter the amount is reduced to £52.46. If you believe the notice was \
+             issued in error you may appeal in writing to the address above, \
+             quoting the reference. An appeal received after 14 September 2026 \
+             will not be considered."
+        ));
+        assert!(!grants_without_requiring(
+            "The amount due is £40.00. You can pay online or by post."
+        ));
+        assert!(!grants_without_requiring(
+            "A balance of £312.10 is payable. You may spread this over three \
+             instalments if you wish."
+        ));
+        // The same offer with nothing owed beside it is still an offer.
+        assert!(grants_without_requiring(
+            "You may appeal in writing to the address above, quoting the reference."
         ));
     }
 

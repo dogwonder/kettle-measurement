@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-birch-25",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "6 February 2026",
+        "deadline": "for 6 February 2026 at 2.15pm",
+        "due": "2026-02-06",
+        "kind": "attendance",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-birch-25-attendance-01",
+      "segment": "Your appointment about your parking charge with Harborne Parking Services is booked for 6 February 2026 at 2.15pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-birch-25-no-ask-02",
+      "segment": "Please do not arrive more than half an hour early.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-birch-25-other-03",
+      "segment": "Please write out your address history and bring it with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-birch-25-no-ask-04",
+      "segment": "Please come to the reception on the ground floor first.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Harborne Parking Services"
+      },
+      "id": "appointment_preparation-birch-25-other-05",
+      "segment": "Please obtain a copy of the agreement from the other party before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-birch-25-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-birch-25-no-ask-08",
+      "segment": "We wrote to your landlord on 2 March and they have 28 days to reply to us, not to you.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

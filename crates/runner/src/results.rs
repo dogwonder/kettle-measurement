@@ -308,7 +308,12 @@ pub const STATUS_PROPOSED: &str = "proposed";
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ActionExport {
-    pub ics: IcsExport,
+    /// Absent when the action has no day to sit on: a letter's undated
+    /// ask gets a card and a line of text, never an event dated by
+    /// Kettle (#399). RFC 5545 needs a DTSTART and the only date to
+    /// hand would be today's, which the letter never wrote.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ics: Option<IcsExport>,
     /// The same action as a line of text, for copying.
     pub text: String,
 }

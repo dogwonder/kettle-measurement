@@ -47,6 +47,7 @@ fn packs_dir(dir: &Path, packs: &[&str]) -> PathBuf {
 /// A report every fixture of which passes cleanly.
 fn report(pack: &str, model: &str) -> EvalReport {
     EvalReport {
+        unrunnable: Vec::new(),
         reused_fixtures: 0,
         pack: pack.to_owned(),
         pack_version: "1.0.0".to_owned(),
@@ -1918,6 +1919,38 @@ fn a_written_baseline_says_when_and_by_which_harness() {
 }
 
 #[test]
+fn a_run_that_could_not_read_part_of_the_bed_is_not_evidence() {
+    // #256, found by a person sitting the study on 28 August 2026. A
+    // PDF fixture needs the `pdf` feature and a pdfium the repository
+    // does not ship, so a build without it reads a smaller bed than the
+    // bed. Reading such a run is fine and useful. Recording it as a
+    // baseline is not: it would pin a denominator nobody declared, and
+    // comparing against one recorded over the whole bed would score a
+    // fixture that never ran as neither a drop nor a hold.
+    //
+    // Refused, in the same voice as a scoring-version mismatch, rather
+    // than quietly measuring less.
+    let mut short = report(PACK, "qwen3.5-4b-q4_k_m.gguf");
+    short.unrunnable = vec!["statement-04.pdf".to_owned()];
+
+    let refusal = eval::baseline::write(
+        std::path::Path::new("/dev/null/never-written.json"),
+        &[short.clone()],
+        at("2026-08-28T12:00:00Z"),
+    )
+    .expect_err("a short run is refused, not recorded");
+    assert!(refusal.contains("statement-04.pdf"), "{refusal}");
+    assert!(
+        refusal.contains("not a measurement of the bed"),
+        "{refusal}"
+    );
+
+    // And the whole run is unaffected when nothing was skipped.
+    let complete = report(PACK, "qwen3.5-4b-q4_k_m.gguf");
+    assert!(eval::baseline::unrunnable_in(&[complete]).is_empty());
+}
+
+#[test]
 fn a_baseline_from_a_different_scoring_version_is_refused_not_compared() {
     let dir = scratch("baseline-scoring-version");
     let packs = packs_dir(&dir, &[PACK]);
@@ -1930,21 +1963,20 @@ fn a_baseline_from_a_different_scoring_version_is_refused_not_compared() {
     );
     assert_eq!(
         eval::baseline::SCORING_VERSION,
-        16,
-        "a ceiling the bed can disprove now fails where it reported \
-         UNPROVEN. `decisions_needed` is the arithmetic of proving \
-         compliance — with zero errors Wilson's upper bound is \
-         `3.84/(n + 3.84)` — and applying it to both directions let a \
-         gate be confidently over the line and still say \"not enough \
-         evidence\": the 24 August subscription recordings have the 9B's \
-         pooled `subscription` gate at 0.16 over 32 decisions, Wilson \
-         lower bound 0.069 against a 0.05 ceiling, reading UNPROVEN. One \
-         word covered two states, and only *told, and the answer is bad* \
-         is a safety finding. PASS still needs the full evidence, so a \
-         gate may now be refused on less than it needs to be cleared. \
-         Verdicts move wherever a bed too small to prove a ceiling had \
-         already breached it, and no version 15 baseline may be compared"
+        17,
+        "a pooled verdict is read over the gated strata only (#581, \
+         decided 30 August 2026). Sixty hard letters added to the bed in \
+         a stratum declared ungated failed the letter pack on main's own \
+         prompt — 0.977 on the 425 fixtures before them, 0.926 on 455 — \
+         because the pooled end-to-end read every fixture regardless of \
+         what its stratum declared. A bar that falls every time a harm is \
+         measured inverts the incentive, so a fixture whose items all sit \
+         in ungated strata is reported and never pooled until its stratum \
+         is promoted on purpose. Verdicts move wherever an ungated stratum \
+         was carrying the pooled score, and no version 16 baseline may be \
+         compared"
     );
+
     older = older.replace(
         &format!("\"scoring_version\": {}", eval::baseline::SCORING_VERSION),
         "\"scoring_version\": 3",

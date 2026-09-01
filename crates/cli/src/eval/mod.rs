@@ -443,6 +443,24 @@ pub fn run(options: &Options, evaluator: &dyn Evaluator, now: DateTime<Utc>) -> 
     }
 
     let mut code = ExitCode::Ok;
+    // A run that could not read part of the bed has nothing to say
+    // about a baseline recorded over all of it: the fixtures that never
+    // ran would read as neither a drop nor a hold. Refused in the same
+    // voice as a scoring-version mismatch, and for the same reason
+    // (#256).
+    let missing = baseline::unrunnable_in(&measured);
+    if recorded.is_some() && !missing.is_empty() {
+        text.push_str(&format!(
+            "\nRefusing to compare: this run could not read {} of the bed's fixtures, so a \
+             baseline recorded over the whole bed is not comparable with it.\n  {}\n",
+            missing.len(),
+            missing.join("\n  ")
+        ));
+        return Outcome {
+            text,
+            code: ExitCode::CouldNotRun,
+        };
+    }
     if let Some(recorded) = recorded {
         let comparison = baseline::compare(&recorded, &measured);
         text.push('\n');

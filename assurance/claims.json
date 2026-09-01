@@ -15,6 +15,10 @@
     "NOTICE",
     "README.md",
     ".gitignore",
+    "app/src/lib/format.ts",
+    "app/src/lib/types.ts",
+    "app/src/lib/study-",
+    "app/study/",
     "app/src-tauri/models.json",
     "app/src-tauri/tauri.conf.json"
   ],
@@ -67,17 +71,17 @@
       "evidence": [
         {
           "kind": "baseline",
-          "path": "evals/baseline-v16-renewal.json"
+          "path": "evals/baseline-v17-renewal.json"
         }
       ],
       "recorded_against": {
         "bed": "blake3:5b52918ea896ba09d28b5e253043ffe85953e802fafb3fd9424138760e0d670e",
-        "sidecar": "10145 (ad256ded)"
+        "sidecar": "10145 (ad256ded3)"
       },
       "expects": {
         "verdict": "pass"
       },
-      "recorded": "2026-08-25",
+      "recorded": "2026-08-30",
       "invalidation": [
         "scoring version change",
         "pack or prompt version change",
@@ -86,8 +90,8 @@
         "repeats disagreeing"
       ],
       "surfaces": [],
-      "review_route": "re-measure and re-record: kettle eval app.kttl.renewal-diff --baseline evals/baseline-v16-renewal.json --write-baseline",
-      "note": "Re-recorded 25 August at scoring 16 on a rented RTX 3090 (CUDA), because SCORING_VERSION 16 (#561) is a declared invalidation trigger and refused the 24 August v15 recording. Same commit, same bed digest, same weights digest and the same pinned sidecar b10145, so this is a re-score of the identical bed and not a new measurement of a different one. Verdict pass, and both harm gates clear on evidence rather than absence: obligation 0.00 confident-wrong over 322 decisions against a 0.02 ceiling, no_obligation 0.02 over 385 against 0.05. Relations 5 held, 0 failed, 1 unjudgeable - an injected fixture routed to a person, so there is no assertion to judge. Recorded at --runs 1 rather than the v15 recording's --runs 3, deliberately: v16 changed only how a verdict is derived from answers, and answer stability on this bed, weights and sidecar was established by the 24 August --runs 3 recordings at v15, where all 62 fixtures agreed across three runs on every step score, end-to-end score and review rate. A scoring-only bump does not re-open a question about the answers. The sidecar string moved again, and the other way this time: this recording prints `10145 (ad256ded)` where the v15 Metal one printed `10145 (ad256ded3)`. It is the same llama.cpp build with one fewer character of its hash, and the exact-match content check (#489) reads the difference as a change, so recorded_against was updated to match. Noted here for the same reason as last time - so the next reader does not take it for a real difference. What this claim still does not assert, and still should not. **8 wrong assertions escaped, every one of them in the `excess-unqualified` stratum**, which reads confident-wrong 1.00 over 8; the schema, pairing, quote, quote_identifies_passage and value_shape guardrails contained none of them. That is the label-ambiguity class #432 found no quote rule can catch, unchanged by v16 and outside this gate because those decisions do not join it. And the confidence signal remains INVERTED: `high` errs 0.02 over 337 decisions where `low` errs 0.00 over 325, so routing the less confident decisions to review spends the review on the wrong ones (#429). One further error in `low` would withdraw that reading. Neither property is asserted here and neither is needed. This is a pod run. The score is the model's; the timing is the pod's and enters no tier, baseline, score card or gate (#562). Cross-backend score equivalence has been measured once - on the letter development bed at v15, 56 strata identical - and never on this bed, so a future prompt edit judged solely by comparing a Metal run against this CUDA baseline is still worth a second thought."
+      "review_route": "re-measure and re-record: kettle eval app.kttl.renewal-diff --baseline evals/baseline-v17-renewal.json --write-baseline",
+      "note": "Re-recorded 30 August at scoring 17 (#581) on the M1 Pro, Metal, same bed digest as the 25 August recording. Verdict pass — pooled 0.98 (n=362), both any-schedule ceilings clear, 5 relations held. One run; #533's --runs 3 on the pod is still owed. Archived as 2026-08-30-renewal-qwen3.5-4b-v17-baseline-m1pro."
     },
     {
       "id": "letter-harm-ceilings",
@@ -102,17 +106,17 @@
       "evidence": [
         {
           "kind": "baseline",
-          "path": "evals/baseline-v16-letter.json"
+          "path": "evals/baseline-v17-letter.json"
         }
       ],
       "recorded_against": {
-        "bed": "blake3:4b84b701735475ab9987398f71b5aa96ec98824520fe355e10f4e50058a7a34f",
-        "sidecar": "10145 (ad256ded)"
+        "bed": "blake3:1ab11f364af6337101a851121989277ca8592728793698778ad9b78aa66bb6cf",
+        "sidecar": "10145 (ad256ded3)"
       },
       "expects": {
         "verdict": "pass"
       },
-      "recorded": "2026-08-25",
+      "recorded": "2026-08-31",
       "invalidation": [
         "scoring version change",
         "pack or prompt version change",
@@ -122,7 +126,7 @@
       ],
       "surfaces": [],
       "review_route": "re-measure and re-record: kettle eval app.kttl.letter-to-actions --write-baseline",
-      "note": "Re-recorded 25 August at scoring 16 against pack v0.3.0 on a rented RTX 3090 (CUDA). Two declared invalidation triggers fired in one sitting - the bed changed and the prompt changed (#552) - so the morning's v16 recording no longer describes this pack. Verdict pass. Both ceilings clear on evidence rather than absence: obligation 0.00 confident-wrong over 240 decisions against a 0.02 ceiling, no_obligation 0.00 over 101 against 0.05. Pooled obligations 0.98 (n=521), end-to-end 0.98, review 0%. **What changed under it, and what this claim must not be read as saying.** The development bed grew by twelve invoice letters stating their ask as an outcome - 'The total shown opposite is expected by the date shown beside it' - because the 25 August exam run showed that construction failing at 5 of 12 while every other exam stratum answered 1.00, and development carried no instance of it anywhere among its 49 ask constructions. The pack had been clearing this gate on a bed that lacked its hard class. It still clears it, because those decisions do not join `any-letter`: the new `ask-as-outcome` stratum reads **0.25 recall and 0.75 confident-wrong over 12 decisions** and sits outside both ceilings. So a reader should take this claim as exactly what it says - the two harm classes it names, on the decisions that join them - and not as a statement that the pack reads every letter well. It does not read this construction well and the registry should say so. **The prompt edit that accompanied it is measured and null.** `obligations.md` had contained two tests that disagree - an actor test ('who is being told to act') and an agency test ('where the reader is the one who must act') - with no precedence between them, which is what a deterministic 5-of-12 split at `high` confidence looks like. v0.3.0 makes agency govern. On the target stratum that moved 1 of 12 to 3 of 12, whose intervals (0.01-0.35 against 0.09-0.53) overlap so heavily that this bed cannot distinguish the two prompts; it is recorded as resolving a specification contradiction, not as a fix. Every guard against the opposite failure held: `passive-no-obligation` 1.00 over 30, `courtesy-only` 1.00 over 120, `passive-obligation` no_obligation 1.00 over 90, and the no_obligation gate 0.00 over 101 - so the wider rule did not start reading the sender's own actions as the reader's. #552 stays open. **A change of practice worth naming**: this is the first tiers entry and baseline for this pack measured on a rented GPU rather than the M1 Pro. Defensible now that resource fields left tiers.json entirely (#562) and backend score equivalence has been measured on this bed at two consecutive scoring versions - but it is a change, not a continuation, and a reader comparing it with the three M1 Pro entries beside it should know which. The timings are not compared. The confidence signal remains absent: every decision came back `high`, so routing by it separates nothing (#429, #519). That is a property this claim neither asserts nor needs. The exam set has not been re-read since the prompt changed, deliberately: prompt work does not get to see the holdout (#317), and one reading as a verdict belongs after the development picture is settled."
+      "note": "Re-recorded 30 August at scoring 17 (#581: the pooled verdict reads the gated strata only) on the M1 Pro, Metal, same bed digest and sidecar build as the 25 August recording. Verdict pass; both any-letter ceilings at 0.00. One run — #533's --runs 3 on the pod is still owed. Archived as 2026-08-30-letter-qwen3.5-4b-v17-baseline-tiers-m1pro."
     },
     {
       "id": "quote-existence-enforced",
@@ -481,6 +485,56 @@
       "surfaces": [],
       "review_route": "the two owning tests, and `crates/runner/src/sidecar.rs` for what the process is actually asked to do. Both scans are deliberately dumb — markers on lines of shipped source — so a reviewer can believe the answer without reading the scanner.",
       "note": "Recorded because the question is asked of everything in this category and Kettle had never answered it in public. The trigger was an article describing on-device models as ones that \"learn your habits\" — a privacy promise pointing the wrong way, since a thing that learns your habits has to keep them. Kettle's answer is mechanical rather than a policy: `models.json` pins a sha256 the downloader checks, the file is opened to be read, and the process reading it is llama-server, an inference server given a model and a port. **What this does not prove**: it is a source scan, the same instrument and the same limits as the network boundary next door (#233). It shows that no call site was added; it cannot see what a dependency does on its own thread, and it says nothing about a packaged release's runtime behaviour. Scope is macOS because that is the only platform with a shipped sidecar. The claim is deliberately about learning, not about privacy in general — what leaves the machine is `no-non-loopback-network`'s question, and it remains unproven at runtime for want of a packaged capture. No public surface cites this yet: the sentence goes on kttl.app only once somebody wants it there, and this entry is what makes it citable rather than merely true."
+    },
+    {
+      "id": "photographed-letter-reads-like-text",
+      "wording": "A photographed letter's dates and asks are read within a stated margin of the same letter as text.",
+      "status": "unproven",
+      "scope": {
+        "pack": "app.kttl.letter-to-actions"
+      },
+      "evidence": [
+        {
+          "kind": "issue",
+          "number": 399
+        }
+      ],
+      "recorded": "2026-08-30",
+      "invalidation": [
+        "scoring version change",
+        "pack or prompt version change",
+        "model or sidecar change",
+        "a change to the photograph reader or the page segmenter",
+        "paired bed change"
+      ],
+      "surfaces": [],
+      "review_route": "run the paired bed — the same synthetic letters as text and as photographs (kettle-examples out-bed and out-photos) — with --write-baseline on both arms, commit both reports under evals/ as measured-*, state the margin, and re-record this claim against them",
+      "note": "The route people use is a photograph, and no committed measurement is of one: every score card on the public page was read as text. The first paired run, 30 August 2026 (22 synthetic letters as text and as photographs, Qwen3.5-4B, scoring 16, archived in kettle-runs as 2026-08-30-letter-qwen3.5-4b-v16-paired-*), found obligation recall 0.86 as text and 0.48 as photographs; 7 of the 11 lost decisions were the page segmenter dropping a correct model answer, and after the layout fix the photo arm read 0.59. No baseline was written from either arm, so the number is a finding in an archive, not evidence this registry can check — which is what unproven says. A claim about the photo route enters here the day both arms are committed as reports with a stated margin, and not before."
+    },
+    {
+      "id": "real-letter-reads-correctly",
+      "wording": "A real letter, photographed and read through the packaged app, has its dates and asks read correctly.",
+      "status": "unproven",
+      "scope": {
+        "pack": "app.kttl.letter-to-actions",
+        "platform": "macos-arm64"
+      },
+      "evidence": [
+        {
+          "kind": "issue",
+          "number": 399
+        }
+      ],
+      "recorded": "2026-08-30",
+      "invalidation": [
+        "pack or prompt version change",
+        "model or sidecar change",
+        "a change to the photograph reader or the page segmenter",
+        "a real letter misread through the packaged app"
+      ],
+      "surfaces": [],
+      "review_route": "every week ends with a real letter through the packaged app, logged privately (real-post.private.md: date, kind of letter, what Kettle said, right or wrong, why); the number is letters read correctly this week, and a misread is the strongest falsifier this registry has — measurement follows it, never the other way round: a new stratum, claim, scoring bump or exam run is proposed only when a real letter raised the question",
+      "note": "The strongest falsifier is not on the bed. Forty-three strata, harm ceilings and a mutation census could not see that the product dropped the due date on every photographed invoice, because every stratum scores what the model said and none scores what the page looked like. So this claim stands on a real letter through the shipped app, never on a fixture, and the bed is the regression net under that loop: a real failure becomes a synthetic shape in kettle-examples, and the paired bed keeps it fixed. It is unproven because the log is private by the data rules — a real person's post never enters the repository — so what can be published is the rule and the count, never the letter. It enters as manual evidence with a date and an expiry when a week's log is recorded."
     }
   ]
 }

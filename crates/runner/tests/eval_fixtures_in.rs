@@ -18,12 +18,19 @@ fn pairs_each_statement_with_the_expectations_beside_it() {
     let fixtures = fixtures_in(&pack).expect("fixtures readable");
 
     let names: Vec<&str> = fixtures.iter().map(|f| f.name.as_str()).collect();
-    // 165: the generated bed with its twins — reorder and one-removed
-    // (#427), descriptor-command-text (#433) — plus the legacy trio.
-    assert_eq!(names.len(), 165);
+    // 167: the generated bed with its twins — reorder and one-removed
+    // (#427), descriptor-command-text (#433) — plus the legacy trio and
+    // statement-04 in both its forms. The PDF is rendered from the CSV
+    // by make-statement-04.py, so one expected.json is true of both,
+    // and the PDF is the bed's first fixture to travel the pdfium path
+    // into the eval (#256) — it was `statement-04.pdf.expected.json`
+    // before, a name discovery never pairs.
+    assert_eq!(names.len(), 167);
     for legacy in [
         "statement-01.csv",
         "statement-02-messy.csv",
+        "statement-04.csv",
+        "statement-04.pdf",
         "statement-06-broad.csv",
     ] {
         assert!(names.contains(&legacy), "{legacy} is still scorable");
@@ -172,7 +179,7 @@ fn fixtures_can_be_read_from_somewhere_other_than_the_pack() {
     let fixtures = fixtures_at(elsewhere).expect("fixtures readable");
 
     let names: Vec<&str> = fixtures.iter().map(|f| f.name.as_str()).collect();
-    assert_eq!(names.len(), 165);
+    assert_eq!(names.len(), 167);
     assert!(names.contains(&"statement-01.csv"));
     assert!(names.contains(&"generated-exam-clean-no-subscriptions-glacier-path.csv"));
 }

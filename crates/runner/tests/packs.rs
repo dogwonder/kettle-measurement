@@ -47,6 +47,11 @@ impl ScratchPack {
               "min_runner_version": "0.1.0",
               "inputs": [{{ "role": "statement", "label": "Your bank statements", "accept": ["text/csv"], "multiple": false }}],
               "capabilities": ["read"],
+              "goal": {{
+                "who": "someone with a year of bank statements",
+                "can": "see which payments recur and which look like subscriptions",
+                "done_when": "a real statement set audits without a merchant invented (#342)"
+              }},
               "model": {{ "min_tier": "3b", "recommended_tier": "7b", "context": 8192, "temperature": 0 }},
               {SCRATCH_COPY}
               "pipeline": [
@@ -1205,4 +1210,153 @@ fn a_will_entry_need_not_name_any_step() {
     let scratch = ScratchPack::valid("free-will");
     scratch.amend_manifest(r#", "steps": ["Grouping payments by merchant"]"#, "");
     load_pack(&scratch.dir).expect("a will entry with no steps reference loads");
+}
+
+// ── #545: measured but not offered ──────────────────────────────────
+
+#[test]
+fn a_withdrawn_pack_loads_and_says_why() {
+    // A pack the lab still measures and the product no longer offers.
+    // The withdrawal travels in the manifest — date, reason, record —
+    // because a retirement remembered from a PR body is the failure
+    // #466 refused for survivors, and it is the same failure here.
+    let pack = ScratchPack::valid("withdrawn");
+    pack.amend_manifest(
+        r##""outputs": ["report.html"]"##,
+        r##""withdrawn": {
+              "on": "2026-08-30",
+              "why": "No model has cleared its bar since scoring 14, and the bed showed a model is not what it is waiting for.",
+              "record": "#545"
+            },
+            "outputs": ["report.html"]"##,
+    );
+
+    let loaded = load_pack(&pack.dir).expect("a withdrawn pack still loads — the lab measures it");
+    let withdrawal = loaded
+        .manifest
+        .withdrawn
+        .as_ref()
+        .expect("the withdrawal is carried");
+    assert_eq!(withdrawal.on, "2026-08-30");
+    assert_eq!(withdrawal.record, "#545");
+    assert!(withdrawal.why.contains("scoring 14"));
+}
+
+#[test]
+fn a_withdrawal_without_its_reason_is_refused() {
+    let pack = ScratchPack::valid("withdrawn-blank");
+    pack.amend_manifest(
+        r##""outputs": ["report.html"]"##,
+        r##""withdrawn": { "on": "2026-08-30", "why": "  ", "record": "#545" },
+            "outputs": ["report.html"]"##,
+    );
+
+    let problem = load_pack(&pack.dir).expect_err("a withdrawal with no reason is not a record");
+    assert!(
+        matches!(problem, PackError::InvalidWithdrawal { .. }),
+        "expected InvalidWithdrawal, got: {problem}"
+    );
+    assert!(problem.to_string().contains("why"), "{problem}");
+}
+
+#[test]
+fn the_subscription_pack_is_withdrawn_in_this_repo() {
+    // The decision on #545, 30 August 2026: retired from the product,
+    // kept in the lab as the one bed that separates models.
+    let pack = load_pack(&subscription_audit_dir()).expect("loads");
+    let withdrawal = pack.manifest.withdrawn.as_ref().expect("withdrawn");
+    assert_eq!(withdrawal.record, "#545");
+}
+
+// ── A pack states its user goal first (30 August 2026) ───────────────
+
+#[test]
+fn a_pack_without_a_goal_loads_but_is_not_offerable() {
+    // Forty-three strata and no sentence saying what a person should
+    // be able to do: that is how the letter pack came to be measured
+    // to three decimal places on a route nobody uses. The goal is step
+    // 0 of the order in `packs/AUTHORING.md`. A pack without one still
+    // loads — the lab may measure anything — but it cannot be offered:
+    // the app's grid and the public listing both read this one answer.
+    let pack = ScratchPack::valid("no-goal");
+    let manifest = std::fs::read_to_string(pack.dir.join("pack.json")).expect("manifest");
+    let start = manifest
+        .find(r#""goal": {"#)
+        .expect("the scratch pack states a goal");
+    let end = manifest[start..].find("},").expect("goal block closes") + start + 2;
+    std::fs::write(
+        pack.dir.join("pack.json"),
+        format!("{}{}", &manifest[..start], &manifest[end..]),
+    )
+    .expect("rewrite");
+
+    let loaded = load_pack(&pack.dir).expect("loads for measurement");
+    assert!(!loaded.manifest.offerable(), "no goal, no card");
+
+    let stated = load_pack(&ScratchPack::valid("with-goal").dir).expect("loads");
+    assert!(
+        stated.manifest.offerable(),
+        "a goal and not withdrawn: offered"
+    );
+}
+
+#[test]
+fn a_goal_with_a_blank_field_is_refused() {
+    let pack = ScratchPack::valid("blank-goal");
+    pack.amend_manifest(
+        r#""done_when": "a real statement set audits without a merchant invented (#342)""#,
+        r#""done_when": "   ""#,
+    );
+    let problem = load_pack(&pack.dir).expect_err("a goal without a done_when is a wish");
+    assert!(
+        matches!(problem, PackError::InvalidGoal { field: "done_when" }),
+        "expected InvalidGoal, got: {problem}"
+    );
+}
+
+#[test]
+fn a_withdrawn_pack_may_leave_its_goal_unstated() {
+    // Measured, not offered (#545): nobody is promised anything.
+    let pack = ScratchPack::valid("withdrawn-no-goal");
+    let manifest = std::fs::read_to_string(pack.dir.join("pack.json")).expect("manifest");
+    let start = manifest.find(r#""goal": {"#).expect("goal");
+    let end = manifest[start..].find("},").expect("closes") + start + 2;
+    let without = format!(
+        "{}{}",
+        &manifest[..start],
+        manifest[end..].replacen(
+            r#""outputs": ["report.html"]"#,
+            r##""withdrawn": { "on": "2026-08-30", "why": "Measured only.", "record": "#545" },
+            "outputs": ["report.html"]"##,
+            1
+        )
+    );
+    std::fs::write(pack.dir.join("pack.json"), without).expect("rewrite");
+    let loaded = load_pack(&pack.dir).expect("a withdrawn pack loads without a goal");
+    assert!(!loaded.manifest.offerable());
+}
+
+#[test]
+fn every_offered_pack_in_this_repo_states_its_goal() {
+    let packs = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../packs");
+    for entry in std::fs::read_dir(&packs).expect("packs dir").flatten() {
+        if !entry.path().join("pack.json").exists() {
+            continue;
+        }
+        let pack = load_pack(&entry.path()).expect("loads");
+        if pack.manifest.withdrawn.is_some() {
+            continue;
+        }
+        let goal = pack
+            .manifest
+            .goal
+            .as_ref()
+            .unwrap_or_else(|| panic!("{} states no goal", pack.manifest.id));
+        assert!(
+            goal.done_when.contains("real"),
+            "{}'s done is a real-use outcome, not a bed threshold: {:?}",
+            pack.manifest.id,
+            goal.done_when
+        );
+    }
 }

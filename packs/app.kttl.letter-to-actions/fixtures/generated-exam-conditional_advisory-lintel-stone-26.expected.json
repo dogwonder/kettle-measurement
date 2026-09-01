@@ -1,0 +1,60 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-conditional_advisory-lintel-stone-26",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-stone-26-no-ask-01",
+      "segment": "This notice concerns your policy renewal and is sent for information. No reply is needed.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-stone-26-no-ask-02",
+      "segment": "If the vehicle is kept off the road, a declaration must be made instead.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-stone-26-no-ask-03",
+      "segment": "Where a repayment plan is already in place, follow the terms it sets out.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-stone-26-no-ask-04",
+      "segment": "Ask anyone calling at the door to show identification before you let them in.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-stone-26-no-ask-05",
+      "segment": "Never give bank details to a caller you did not ring.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-stone-26-no-ask-07",
+      "segment": "This notice is issued under our regulatory obligations and invites no reply.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -193,7 +193,37 @@ pub fn read(path: &Path) -> Result<Baseline, String> {
 }
 
 /// Write a baseline file, creating its directory if need be.
+/// Every fixture the reports say this build could not read.
+///
+/// A report that names one measured a smaller bed than the bed. Reading
+/// it is fine — that is how a person on a machine without pdfium sees
+/// the rest of the run — but it cannot become evidence: a baseline
+/// recorded from it would pin a denominator nobody declared, and a
+/// comparison against one would call a fixture that never ran an
+/// improvement or a drop (#256).
+pub fn unrunnable_in(reports: &[EvalReport]) -> Vec<String> {
+    reports
+        .iter()
+        .flat_map(|report| {
+            report
+                .unrunnable
+                .iter()
+                .map(move |fixture| format!("{}: {fixture}", report.pack))
+        })
+        .collect()
+}
+
 pub fn write(path: &Path, reports: &[EvalReport], now: DateTime<Utc>) -> Result<(), String> {
+    let missing = unrunnable_in(reports);
+    if !missing.is_empty() {
+        return Err(format!(
+            "This run could not read {} of the bed's fixtures, so it is not a measurement of \
+             the bed and must not be recorded as one:\n  {}\nInstall what reads them (a PDF \
+             fixture needs the `pdf` feature and a pdfium directory) and record again.",
+            missing.len(),
+            missing.join("\n  ")
+        ));
+    }
     if let Some(parent) = path
         .parent()
         .filter(|parent| !parent.as_os_str().is_empty())

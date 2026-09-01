@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-pennywort-39",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "4 May 2026",
+        "deadline": "for 4 May 2026 at 11.20am",
+        "due": "2026-05-04",
+        "kind": "attendance",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_preparation-pennywort-39-attendance-01",
+      "segment": "Your appointment about your annual review with Marlow Ridge Surgery is booked for 4 May 2026 at 11.20am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-pennywort-39-no-ask-02",
+      "segment": "Please arrive promptly, as late arrivals cannot always be seen.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_preparation-pennywort-39-other-03",
+      "segment": "Please take a ticket from the machine as you come in, and bring a recent proof of your address with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-pennywort-39-no-ask-04",
+      "segment": "Please come to the desk marked Appointments.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "appointment_preparation-pennywort-39-other-05",
+      "segment": "Please do not arrive more than half an hour early, and order a replacement card before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-pennywort-39-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-pennywort-39-no-ask-08",
+      "segment": "This is the last letter you will receive about the works, which finished on 6 February.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

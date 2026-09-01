@@ -1,0 +1,48 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_confirmed-blackthorn-03",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "26 November 2026",
+        "deadline": "on 26 November 2026 at 5.30pm",
+        "due": "2026-11-26",
+        "kind": "attendance",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_confirmed-blackthorn-03-attendance-01",
+      "segment": "We are writing to confirm your energy account appointment with Cranleigh Energy on 26 November 2026 at 5.30pm.",
+      "strata": [
+        "appointment-confirmed",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-blackthorn-03-no-ask-02",
+      "segment": "Please allow fifteen minutes for parking, and bring a list of anything you are currently taking.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-blackthorn-03-no-ask-03",
+      "segment": "Should you need to rearrange, our booking line is open on weekdays.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_confirmed-blackthorn-03-no-ask-05",
+      "segment": "Instructions have been issued internally and will take effect within 7 days.",
+      "strata": [
+        "appointment-confirmed",
+        "no-obligation"
+      ]
+    }
+  ]
+}

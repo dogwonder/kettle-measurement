@@ -77,7 +77,13 @@ fn every_action_is_only_ever_proposed() {
             action.id
         );
         assert!(
-            !action.export.ics.summary.is_empty(),
+            !action
+                .export
+                .ics
+                .as_ref()
+                .expect("audit actions are always dated")
+                .summary
+                .is_empty(),
             "{} has no summary",
             action.id
         );
@@ -98,22 +104,42 @@ fn calendar_dates_come_from_the_run_never_from_now() {
 
     // A monthly-bill decision belongs at the start of a month.
     assert_eq!(
-        by_kind(ActionKind::ReviewPriceRise).export.ics.date,
+        by_kind(ActionKind::ReviewPriceRise)
+            .export
+            .ics
+            .as_ref()
+            .expect("dated")
+            .date,
         NaiveDate::from_ymd_opt(2026, 8, 1).expect("valid date")
     );
     // A week to think about it.
     assert_eq!(
-        by_kind(ActionKind::ReviewSubscription).export.ics.date,
+        by_kind(ActionKind::ReviewSubscription)
+            .export
+            .ics
+            .as_ref()
+            .expect("dated")
+            .date,
         NaiveDate::from_ymd_opt(2026, 7, 27).expect("valid date")
     );
     // Seven days before Amazon Prime's next yearly charge.
     assert_eq!(
-        by_kind(ActionKind::CheckRenewal).export.ics.date,
+        by_kind(ActionKind::CheckRenewal)
+            .export
+            .ics
+            .as_ref()
+            .expect("dated")
+            .date,
         NaiveDate::from_ymd_opt(2027, 3, 7).expect("valid date")
     );
     // Two days before British Gas's next quarterly payment.
     assert_eq!(
-        by_kind(ActionKind::CalendarReminder).export.ics.date,
+        by_kind(ActionKind::CalendarReminder)
+            .export
+            .ics
+            .as_ref()
+            .expect("dated")
+            .date,
         NaiveDate::from_ymd_opt(2026, 10, 13).expect("valid date")
     );
 }

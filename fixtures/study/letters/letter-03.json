@@ -1,0 +1,47 @@
+{
+  "actions": {
+    "actions": [
+      {
+        "detail": "Fernbank Medical Practice asked for this, but the letter does not give a date Kettle could work out — it says \"no particular date\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "Fernbank Medical Practice",
+          "in_the_letter": "no particular date",
+          "passage_1": "Please arrive ten minutes early and bring a list of any medicines you are currently taking."
+        },
+        "export": {
+          "text": "Arrive ten minutes early and bring a list of any medicines you are currently taking (Fernbank Medical Practice) — no particular date"
+        },
+        "id": "act-01",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Arrive ten minutes early and bring a list of any medicines you are currently taking"
+      }
+    ],
+    "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+    "run_id": "letter-03",
+    "schema": "kettle/proposed-actions@0"
+  },
+  "expected": [
+    {
+      "anchor": "9 March 2026",
+      "deadline": "on 9 March 2026 at 3.50pm",
+      "due": "2026-03-09",
+      "id": "gp_appointment-025-01",
+      "kind": "attendance",
+      "party": "Fernbank Medical Practice",
+      "segment": "NHS number: 829 114 6786. This letter confirms your appointment with the practice nurse on 9 March 2026 at 3.50pm at Fernbank Medical Practice."
+    }
+  ],
+  "id": "letter-03",
+  "model": "qwen3.5-4b-q4_k_m.gguf",
+  "pack": {
+    "id": "app.kttl.letter-to-actions",
+    "version": "0.3.0"
+  },
+  "schema": "kettle/study-letter@0",
+  "source": {
+    "file": "gp_appointment-025.txt",
+    "hash": "blake3:a9e9cd1d78c0609acb66ac8fff53b8130d7bea9d3f11158986fbe8410e701ded",
+    "text": "1 February 2026\nFernbank Medical Practice\nOur reference: TK551884\n\nDear Miss,\n\nNHS number: 829 114 6786. This letter confirms your appointment with the practice nurse on 9 March 2026 at 3.50pm at Fernbank Medical Practice.\n\nPlease arrive ten minutes early and bring a list of any medicines you are currently taking.\n\nIf you can no longer attend, let us know as soon as possible so the slot can be offered to another patient.\n\nOur reception is open from 8am to 6.30pm, Monday to Friday.\n\nMissed appointments cost the practice time that could be offered to another patient. Patients who miss three appointments in a year without letting us know may be asked to register elsewhere. If you need this letter in large print, another language or another format, please tell reception.\n\nKind regards,\nMelissa Turner\nFernbank Medical Practice\n\nHOW WE USE YOUR INFORMATION\n\nWe hold the details on this letter to administer your account and to meet our legal duties. We do not sell personal information. Our full privacy notice sets out what we hold, how long we keep it and who we share it with, and is available on request from the address at the head of this letter.\n\nWhere we share information with another organisation it is because the law requires it or because that organisation acts for us under a written agreement. We keep records for as long as the account is open and for six years afterwards.\n\n"
+  }
+}

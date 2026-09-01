@@ -123,6 +123,7 @@ fn floor_evaluator() -> FixtureEvaluator {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     }
 }
 
@@ -171,7 +172,11 @@ fn single_document_fixtures_are_discovered_exactly_as_before() {
 
     let fixtures = fixtures_in(&pack).expect("fixtures readable");
 
-    assert_eq!(fixtures.len(), 165);
+    // 165 → 167 with #575, which gave `statement-04` a PDF route beside
+    // its CSV. The number moves only in a commit that says why, which
+    // is the whole point of pinning it; this one did not, and the
+    // failure sat unseen because CI had no minutes to report it.
+    assert_eq!(fixtures.len(), 167);
     for legacy in [
         "statement-01.csv",
         "statement-02-messy.csv",
@@ -318,4 +323,23 @@ fn a_fixture_directory_outside_a_pack_still_reads() {
             .all(|fixture| fixture.documents() == vec![fixture.path.clone()]),
         "and each fixture is still exactly the one document it was"
     );
+}
+
+#[test]
+fn photographed_letters_are_discovered_as_eval_fixtures() {
+    let dir = std::env::temp_dir().join(format!("kettle-photo-fixtures-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).expect("fixture directory");
+    std::fs::write(
+        dir.join("invented-letter.jpg"),
+        b"invented test image bytes",
+    )
+    .expect("photo fixture");
+    std::fs::write(dir.join("invented-letter.expected.json"), "{}").expect("expectations");
+
+    let fixtures = fixtures_at(&dir).expect("photo fixtures are discoverable");
+    assert_eq!(fixtures.len(), 1);
+    assert_eq!(fixtures[0].name, "invented-letter.jpg");
+
+    let _ = std::fs::remove_dir_all(dir);
 }

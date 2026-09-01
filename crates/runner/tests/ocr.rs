@@ -6,7 +6,7 @@
 //! macOS-only and thin by design — exactly the split `pdf` uses, where
 //! extraction is gated and reconstruction is arithmetic anyone can run.
 
-use runner::ocr::{Line, OcrError, Placed, Reading};
+use runner::ocr::{check_dimensions, Line, OcrError, Placed, Reading};
 
 fn line(text: &str, confidence: f32) -> Line {
     at_line(text, confidence, 0.0)
@@ -21,7 +21,11 @@ fn placed_line(text: &str, confidence: f32, top: f64, left: f64) -> Line {
         text: text.to_owned(),
         confidence,
         top,
+        // Width guessed from the text, as `at` guesses it below.
+        right: left + 0.012 * text.chars().count() as f64,
         left,
+        // A line of ordinary print stands about 0.012 of the page tall.
+        bottom: top - 0.012,
     }
 }
 
@@ -213,6 +217,14 @@ fn a_photograph_of_nothing_says_so_in_the_words_scans_already_use() {
 
     let refused = empty.text().expect_err("no text is not a reading");
     assert!(matches!(refused, OcrError::NoText), "{refused:?}");
+}
+
+#[test]
+fn a_thumbnail_is_refused_with_a_full_size_photo_instruction() {
+    let error = check_dimensions(612, 792).expect_err("the known-bad rendition is too small");
+    assert!(matches!(error, OcrError::TooSmall { .. }));
+    assert!(error.to_string().contains("full-size"));
+    check_dimensions(1855, 2400).expect("the known-good phone photo is large enough");
 }
 
 /// A page read twice, as `Correction::Applied` and `Correction::Literal`
@@ -469,4 +481,152 @@ fn a_disputed_line_is_found_in_the_passage_that_contains_it() {
         !disputes[0].lands_in("Dear Ms Okafor"),
         "a passage the dispute never touched"
     );
+}
+
+/// Vision reads a printed `£` as `E` about a third of the time on the
+/// synthetic photo bed (17 of 50 amounts), sometimes both ways in one
+/// line. A quote saying `E87.44` cannot evidence £87.44 (#460), so the
+/// glyph is put back wherever an `E` stands exactly where a pound sign
+/// would — start of a word, straight before an amount with pence. A
+/// postcode (`E3 8ZA`, `E8S 9YF`) has no pence and is left alone.
+#[test]
+fn a_pound_sign_read_as_e_is_put_back_before_an_amount() {
+    let reading = Reading::from_placed(vec![
+        at(
+            0.9,
+            0.1,
+            "The charge is E87.44. If you pay within 7 days it is reduced to E52.46.",
+        ),
+        at(
+            0.8,
+            0.1,
+            "Your excess remains £89.24 except escape of water, where it is E196.58.",
+        ),
+        at(0.7, 0.1, "Sub total E1,967.41"),
+        at(0.6, 0.1, "LONDON E3 8ZA and E8S 9YF; ref E12; grade E2.1"),
+    ]);
+    let text = reading.text().expect("readable");
+    assert!(text.contains("£87.44") && text.contains("£52.46"), "{text}");
+    assert!(
+        text.contains("£89.24") && text.contains("£196.58"),
+        "{text}"
+    );
+    assert!(text.contains("£1,967.41"), "{text}");
+    assert!(
+        text.contains("E3 8ZA")
+            && text.contains("E8S 9YF")
+            && text.contains("ref E12")
+            && text.contains("grade E2.1"),
+        "no pence, no pound: {text}"
+    );
+}
+
+/// A photographed paragraph is one paragraph however its lines wrapped.
+///
+/// The synthetic photo bed found 26 of 29 asks split at a line wrap:
+/// the OCR text went through `segments_from_text`, whose wrap rule
+/// counts characters, and a proportionally-set line that wraps before
+/// `May` is short *in characters* while being full *in width*. The page
+/// has geometry — Vision reports every line's box — so a photograph is
+/// segmented the way a PDF page is: by the gap between lines, against
+/// the page's own leading, never by how many letters fitted.
+#[test]
+fn a_photographed_paragraph_is_split_by_its_line_spacing_not_by_a_short_line() {
+    // Leading 0.02 of the page; a blank line's worth (0.04) between
+    // paragraphs. The first paragraph wraps before a date, leaving a
+    // line far shorter than the measure.
+    let reading = Reading {
+        lines: vec![
+            placed_line("Dear Malcolm,", 0.99, 0.70, 0.08),
+            placed_line(
+                "Thank you for reporting the fault with your boiler. We have booked Edwards Maintenance to visit on 10",
+                0.99,
+                0.66,
+                0.08,
+            ),
+            placed_line("May 2026 between 8am and 6pm.", 0.99, 0.64, 0.08),
+            placed_line("Please arrive ten minutes early and bring this letter with you.", 0.99, 0.62, 0.08),
+            placed_line(
+                "Someone over 18 must be at home to let the engineer in. If nobody is home the visit will be",
+                0.99,
+                0.58,
+                0.08,
+            ),
+            placed_line("recorded as a no-access and rebooked, which may take several weeks. The engineer will", 0.99, 0.56, 0.08),
+            placed_line("carry identification.", 0.99, 0.54, 0.08),
+            placed_line("Yours sincerely,", 0.99, 0.50, 0.08),
+        ],
+    };
+
+    let segments = runner::document::segments_from_pages(&[reading.page()]);
+    let texts: Vec<&str> = segments.iter().map(|s| s.text.as_str()).collect();
+    assert_eq!(
+        texts,
+        vec![
+            "Dear Malcolm,",
+            "Thank you for reporting the fault with your boiler. We have booked Edwards Maintenance to visit on 10 May 2026 between 8am and 6pm. Please arrive ten minutes early and bring this letter with you.",
+            "Someone over 18 must be at home to let the engineer in. If nobody is home the visit will be recorded as a no-access and rebooked, which may take several weeks. The engineer will carry identification.",
+            "Yours sincerely,",
+        ],
+        "the wrapped date stays in the sentence that asks; paragraphs still split at the wider gap"
+    );
+}
+
+#[test]
+fn a_narrow_column_gap_that_lines_up_is_a_column_not_a_word_space() {
+    // The invoice totals table as a camera sees it (30 August 2026,
+    // paired text/photo run). Its columns are set a fiftieth of the
+    // page apart — under `COLUMN_GAP` — so `18 October 2026` and `VAT`
+    // merged into one line, and no segmentation downstream could give
+    // the due date back its own row. What says these are columns is
+    // not the width of the gap but that it lines up: `VAT` starts
+    // exactly where `Sub total` and `Total` start on the rows beside
+    // it. A word space in prose does not do that.
+    // Widths as `at` guesses them: `18 October 2026` ends at 0.388 and
+    // `VAT` starts at 0.412, a gap of 0.024 — half `COLUMN_GAP`.
+    let reading = Reading::from_placed(vec![
+        at(0.579, 0.208, "Due date"),
+        at(0.577, 0.412, "Sub total"),
+        at(0.577, 0.545, "£967.41"),
+        at(0.558, 0.208, "18 October 2026"),
+        at(0.558, 0.412, "VAT"),
+        at(0.554, 0.545, "£193.48"),
+        at(0.533, 0.412, "Total"),
+        at(0.533, 0.530, "£1,160.89"),
+    ]);
+
+    let text: Vec<&str> = reading.lines.iter().map(|l| l.text.as_str()).collect();
+    assert_eq!(
+        text,
+        vec![
+            "Due date",
+            "Sub total",
+            "£967.41",
+            "18 October 2026",
+            "VAT",
+            "£193.48",
+            "Total",
+            "£1,160.89",
+        ],
+        "a gap that lines up with the rows beside it is a column"
+    );
+}
+
+#[test]
+fn prose_that_happens_to_line_up_still_joins() {
+    // The counter-example: two lines of prose whose words start at the
+    // same x by coincidence. A word space is a word space, and the
+    // alignment rule must not fragment a sentence to honour it.
+    let reading = Reading::from_placed(vec![
+        at(0.900, 0.10, "We (Anytown"),
+        at(
+            0.901,
+            0.245,
+            "Housing Limited) hereby authorise an inspection.",
+        ),
+        at(0.880, 0.10, "The surveyor"),
+        at(0.881, 0.245, "will carry identification."),
+    ]);
+
+    assert_eq!(reading.lines.len(), 2, "{reading:#?}");
 }

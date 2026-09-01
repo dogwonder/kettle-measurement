@@ -555,7 +555,9 @@ fn a_photograph_is_a_kind_of_document_a_pack_can_ask_for() {
     // at the picker.
     assert_eq!(media_type(Path::new("letter.jpg")), Some("image/jpeg"));
     assert_eq!(media_type(Path::new("letter.jpeg")), Some("image/jpeg"));
-    assert_eq!(media_type(Path::new("letter.png")), Some("image/png"));
+    // PNG stays unadvertised until the alpha-channel case that returns
+    // an empty Vision reading is fixed (#399).
+    assert_eq!(media_type(Path::new("letter.png")), None);
     // What an iPhone actually produces, which is the whole point.
     assert_eq!(media_type(Path::new("IMG_4471.HEIC")), Some("image/heic"));
 
@@ -574,7 +576,9 @@ fn a_photograph_reaches_segments_by_its_line_rhythm() {
         text: text.to_owned(),
         confidence,
         top,
+        bottom: top - 0.012,
         left: 0.08,
+        right: 0.90,
     };
     let reading = Reading {
         lines: vec![
@@ -642,4 +646,283 @@ fn an_unsupported_document_says_so_in_the_words_statements_already_use() {
     );
 
     let _ = std::fs::remove_dir_all(&dir);
+}
+
+/// A physical page that produced no passage is still a page. A
+/// three-page text-layer PDF whose last page is blank yields segments
+/// on pages 1 and 2 only; the next part of a page group must start on
+/// page 4, not page 3, or every citation after it points one page too
+/// early.
+#[test]
+fn a_blank_trailing_page_still_counts_towards_the_next_parts_page_number() {
+    use runner::document::{combine_parts, segments_from_text, DocumentRead};
+
+    let mut first = DocumentRead::from(segments_from_text("Dear Ms Example,\n\nYour reference."));
+    first.segments[0].page = 1;
+    first.segments[1].page = 2;
+    first.pages = 3;
+    let second = DocumentRead::from(segments_from_text("Please reply within 14 days."));
+
+    let combined = combine_parts(vec![first, second]);
+
+    let pages: Vec<usize> = combined.segments.iter().map(|s| s.page).collect();
+    assert_eq!(pages, vec![1, 2, 4]);
+    assert_eq!(combined.pages, 4);
+}
+
+/// A letter whose paragraphs are mostly one or two lines still splits
+/// at its paragraph gaps.
+///
+/// Found on the photographed council tax demand: with short paragraphs,
+/// half of all line gaps are paragraph gaps, so the *median* gap was a
+/// paragraph gap and nothing on the page exceeded 1.4× it — the whole
+/// body became one segment. The usual leading is the tightest common
+/// spacing, and this is the shape that tells the two apart.
+#[test]
+fn a_letter_of_short_paragraphs_splits_at_its_paragraph_gaps() {
+    // Leading 15pt, paragraph gap 22pt (1.47×): six paragraphs, only two
+    // of them wrapped, so four of the seven gaps are paragraph gaps.
+    let page = Page {
+        fragments: vec![
+            line("Dear Ms Okafor", 700.0),
+            line(
+                "This is your demand for the year. The amount payable is",
+                678.0,
+            ),
+            line("£2,006.04, and your reference is 863/79402/S.", 663.0),
+            line("The balance is payable in 10 instalments.", 641.0),
+            line("Your first instalment is due within 30 days of 22", 619.0),
+            line("February 2026, quoting the reference above.", 604.0),
+            line("Details of discounts are printed overleaf.", 582.0),
+            line("Yours sincerely,", 560.0),
+        ],
+    };
+    let segments = segments_from_pages(&[page]);
+    let texts: Vec<&str> = segments.iter().map(|s| s.text.as_str()).collect();
+    assert_eq!(
+        texts,
+        vec![
+            "Dear Ms Okafor",
+            "This is your demand for the year. The amount payable is £2,006.04, and your reference is 863/79402/S.",
+            "The balance is payable in 10 instalments.",
+            "Your first instalment is due within 30 days of 22 February 2026, quoting the reference above.",
+            "Details of discounts are printed overleaf.",
+            "Yours sincerely,",
+        ]
+    );
+}
+
+/// The invoice as a camera sees it: the same totals table as
+/// [`invoice_totals`], but set on a page of prose — one full-width
+/// sentence above it and one below, as every letter has.
+fn photographed_invoice() -> Page {
+    let mut fragments = vec![
+        at(
+            "Enclosed is our invoice. The total shown opposite is",
+            72.0,
+            460.0,
+        ),
+        at("expected by the date shown beside it.", 72.0, 445.0),
+    ];
+    fragments.extend(invoice_totals().fragments);
+    fragments.push(at(
+        "Invoice number P193745-2. Tax point 29 April 2026. VAT is",
+        72.0,
+        325.0,
+    ));
+    fragments.push(at("charged at the standard rate of 20%.", 72.0, 310.0));
+    Page { fragments }
+}
+
+#[test]
+fn a_table_on_a_page_of_prose_is_still_read_by_its_columns() {
+    // #406 cut a page down a channel *no fragment crosses anywhere on
+    // the page*. A letter has no such channel: its prose lines span the
+    // page, so on every photographed invoice the rule never fired and
+    // the table came back row-wise — `Due date Sub total £361.17` /
+    // `23 May 2026 VAT £72.23` — which is the defect #406 was written
+    // to fix, on the one route letters actually arrive by. The paired
+    // text/photo run of 30 August 2026 lost all four invoice due dates
+    // to exactly this: the model answered `by the date shown beside
+    // it` identically in both arms and Rust found no due-date row.
+    //
+    // A channel only has to be clear for the rows it separates.
+    let segments = segments_from_pages(&[photographed_invoice()]);
+    let whole: String = segments
+        .iter()
+        .map(|segment| segment.text.as_str())
+        .collect::<Vec<_>>()
+        .join("\n");
+
+    assert!(
+        whole.contains("Due date 1 September 2026"),
+        "the due date keeps its own label: {whole:?}"
+    );
+    assert!(
+        whole.contains("Sub total £300"),
+        "the sub total keeps its own value: {whole:?}"
+    );
+    assert!(
+        whole.contains("Total £360"),
+        "the total keeps its own value: {whole:?}"
+    );
+    // The prose around it is untouched — one passage each, in order.
+    let first = whole
+        .find("Enclosed is our invoice")
+        .expect("the opening is read");
+    let due = whole.find("Due date").expect("the table is read");
+    let last = whole.find("Invoice number").expect("the closing is read");
+    assert!(first < due && due < last, "reading order: {whole:?}");
+    assert!(
+        whole.contains("The total shown opposite is expected by the date shown beside it."),
+        "the wrapped sentence is rejoined: {whole:?}"
+    );
+}
+
+#[test]
+fn a_letterhead_date_beside_the_address_is_its_own_line() {
+    // The other half of the same photo finding. A letter sets the
+    // recipient's address on the left and its own date on the right,
+    // sharing print rows; read row-wise that is `Dr Bradley Mitchell
+    // Date 29 April 2026 Flat 7 Our reference P193745-2`, and the
+    // dateline rule — rightly — refuses a line that long as a
+    // sentence. Three `the date of this letter` deadlines went undated
+    // on photographs for want of the date the page plainly shows.
+    let page = Page {
+        fragments: vec![
+            at("Dr Bradley Mitchell", 72.0, 700.0),
+            at("Date 29 April 2026", 420.0, 700.0),
+            at("Flat 7", 72.0, 685.0),
+            at("Our reference P193745-2", 420.0, 685.0),
+            at("Sheila Center", 72.0, 670.0),
+            at("Francisland", 72.0, 655.0),
+            at("Dear D Mitchell,", 72.0, 610.0),
+            at(
+                "Enclosed is our invoice for replacing a leaking radiator valve at Flat 7. The total shown",
+                72.0,
+                565.0,
+            ),
+            at("opposite is expected by the date shown beside it.", 72.0, 550.0),
+        ],
+    };
+    let segments = segments_from_pages(&[page]);
+    let texts: Vec<&str> = segments.iter().map(|s| s.text.as_str()).collect();
+
+    assert!(
+        texts.iter().any(|t| t.starts_with("Date 29 April 2026")),
+        "the letter's own date opens a passage of its own: {texts:?}"
+    );
+    assert!(
+        texts
+            .iter()
+            .any(|t| t.starts_with("Dr Bradley Mitchell Flat 7")),
+        "the address block holds together: {texts:?}"
+    );
+    assert_eq!(
+        runner::timeline::letter_date(&segments),
+        Some(chrono::NaiveDate::from_ymd_opt(2026, 4, 29).unwrap()),
+        "the letter dates itself off its letterhead: {texts:?}"
+    );
+}
+
+#[test]
+fn a_wrapped_line_above_a_table_does_not_join_its_columns() {
+    // invoice-036 on the photo bed. The sentence above the table wraps,
+    // and its short second line sits clear of the channel between the
+    // labels and their amounts — so that channel's run swallowed the
+    // prose line, the sides no longer paired row for row, and the cut
+    // fell between `Sub total` and `£113.92`: labels on one side,
+    // money on the other, the very thing #406 warned a second cut would
+    // do. A line that wraps from a full-width line is prose; it belongs
+    // to no column and cannot make a run.
+    let page = Page {
+        fragments: vec![
+            at(
+                "Enclosed is our invoice for boiler servicing. The total shown opposite is expected by",
+                72.0,
+                500.0,
+            ),
+            at("the date shown beside it.", 72.0, 485.0),
+            at("Due date", 72.0, 455.0),
+            at("Sub total", 210.0, 455.0),
+            at("£113.92", 330.0, 455.0),
+            at("8 May 2026", 72.0, 435.0),
+            at("VAT", 210.0, 435.0),
+            at("£22.79", 330.0, 435.0),
+            at("Total", 210.0, 415.0),
+            at("£136.71", 330.0, 415.0),
+            at(
+                "Invoice number JE224447. Tax point 11 April 2026. VAT is charged at the standard",
+                72.0,
+                385.0,
+            ),
+        ],
+    };
+    let segments = segments_from_pages(&[page]);
+    let whole: String = segments
+        .iter()
+        .map(|segment| segment.text.as_str())
+        .collect::<Vec<_>>()
+        .join("\n");
+
+    assert!(
+        whole.contains("Due date 8 May 2026"),
+        "the due date keeps its own label: {whole:?}"
+    );
+    assert!(
+        whole.contains("Sub total £113.92"),
+        "the sub total keeps its own value: {whole:?}"
+    );
+    assert!(
+        whole.contains("Total £136.71"),
+        "the total keeps its own value: {whole:?}"
+    );
+    assert!(
+        whole.contains("The total shown opposite is expected by the date shown beside it."),
+        "the wrapped sentence is rejoined and left alone: {whole:?}"
+    );
+}
+
+#[test]
+fn a_skewed_photograph_still_finds_its_columns() {
+    // invoice-018 on the photo bed. A camera is never quite square to
+    // the page, so the recipient's lines and the letter's own date sit
+    // six points apart in y — twice the row tolerance — and no visual
+    // row holds two fragments. With candidates drawn only from gaps
+    // *within* a row, no channel was ever proposed, the header was read
+    // row by row, and the letter's date came out mid-sentence.
+    let page =
+        Page {
+            fragments: vec![
+            at("Dr Marc Sanderson", 72.0, 700.0),
+            at("Date 14 September 2026", 420.0, 694.0),
+            at("Studio 5", 72.0, 685.0),
+            at("Our reference P165604-9", 420.0, 679.0),
+            at("Patel Drives", 72.0, 670.0),
+            at("Riceland", 72.0, 655.0),
+            at("IMPORTANT", 440.0, 661.0),
+            at("S1 2XB", 72.0, 640.0),
+            at("Dear D Sanderson,", 72.0, 610.0),
+            at(
+                "Enclosed is our invoice for bathroom tap replacement at Studio 5. The total shown",
+                72.0,
+                565.0,
+            ),
+            at("opposite is expected by the date shown beside it.", 72.0, 550.0),
+        ],
+        };
+    let segments = segments_from_pages(&[page]);
+    let texts: Vec<&str> = segments.iter().map(|s| s.text.as_str()).collect();
+
+    assert!(
+        texts
+            .iter()
+            .any(|t| t.starts_with("Date 14 September 2026")),
+        "the letter's own date opens a passage of its own: {texts:?}"
+    );
+    assert_eq!(
+        runner::timeline::letter_date(&segments),
+        Some(chrono::NaiveDate::from_ymd_opt(2026, 9, 14).unwrap()),
+        "the letter dates itself off its skewed letterhead: {texts:?}"
+    );
 }

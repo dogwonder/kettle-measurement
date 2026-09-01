@@ -24,6 +24,14 @@ pub fn list_packs(packs: &[Pack]) -> String {
             "{} — {} ({})\n",
             manifest.id, manifest.name, manifest.version
         ));
+        // Measured, not offered (#545): say so where the decision was
+        // made, so nobody has to remember it.
+        if let Some(withdrawal) = &manifest.withdrawn {
+            out.push_str(&format!(
+                "  withdrawn {}: {} ({})\n",
+                withdrawal.on, withdrawal.why, withdrawal.record
+            ));
+        }
         // Each declared document on its own line, in the pack's own
         // words (#334 §3). Flattening every role's `accept` into one
         // list said a two-document pack "reads" its types twice and

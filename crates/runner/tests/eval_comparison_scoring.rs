@@ -233,6 +233,7 @@ fn evaluator(answer: String) -> (FixtureEvaluator, MockModel) {
             fixtures_dir: None,
             runs_dir: None,
             resume_dir: None,
+            pdfium_dir: None,
         },
         mock,
     )

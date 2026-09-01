@@ -12,6 +12,7 @@ pub mod claims;
 pub mod eval;
 pub mod mutate;
 pub mod packs;
+pub mod plan;
 pub mod project;
 pub mod render;
 pub mod scores;

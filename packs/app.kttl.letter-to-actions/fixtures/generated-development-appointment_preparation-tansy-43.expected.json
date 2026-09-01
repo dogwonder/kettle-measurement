@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-tansy-43",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "12 August 2026",
+        "deadline": "for 12 August 2026 at 4.05pm",
+        "due": "2026-08-12",
+        "kind": "attendance",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-tansy-43-attendance-01",
+      "segment": "Your appointment about your policy renewal with Belwood Insurance is booked for 12 August 2026 at 4.05pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-tansy-43-no-ask-02",
+      "segment": "Please wait in the seating area until your name is called.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-tansy-43-other-03",
+      "segment": "Please arrive ten minutes early and bring photographic identification with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-tansy-43-no-ask-04",
+      "segment": "Please arrive in good time.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Belwood Insurance"
+      },
+      "id": "appointment_preparation-tansy-43-other-05",
+      "segment": "Please follow the signs for the outpatient wing, and ask your previous provider for a written summary before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-tansy-43-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-tansy-43-no-ask-08",
+      "segment": "The £5.00 monthly discount has been applied and will continue for 12 months.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

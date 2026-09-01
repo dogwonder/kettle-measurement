@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-alder-24",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "5 February 2027",
+        "deadline": "for 5 February 2027 at 12.00pm",
+        "due": "2027-02-05",
+        "kind": "attendance",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-alder-24-attendance-01",
+      "segment": "Your appointment about your case file with Grantley Legal Aid is booked for 5 February 2027 at 12.00pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-alder-24-no-ask-02",
+      "segment": "Please take the lift to the second floor.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "when you come in",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-alder-24-other-03",
+      "segment": "Please print your last three statements and bring them when you come in.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-alder-24-no-ask-04",
+      "segment": "Please follow the signs for the outpatient wing.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before you attend",
+        "due": null,
+        "kind": "other",
+        "party": "Grantley Legal Aid"
+      },
+      "id": "appointment_preparation-alder-24-other-05",
+      "segment": "Please arrange an interpreter through the booking line before you attend.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-alder-24-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-alder-24-no-ask-08",
+      "segment": "The consultation period closed on 30 April and the results are published on our website.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

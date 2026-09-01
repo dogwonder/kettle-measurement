@@ -271,6 +271,7 @@ fn an_audition_report_names_its_set_honestly() {
         fixtures_dir: Some(dir.clone()),
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
 
     let report = evaluator

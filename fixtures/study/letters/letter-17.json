@@ -1,0 +1,52 @@
+{
+  "actions": {
+    "actions": [
+      {
+        "detail": "Ashcombe & Vale Property Management asked for this by 31 August 2026. The letter says \"by the end of the month\".",
+        "evidence": {
+          "asked_by": "Ashcombe & Vale Property Management",
+          "in_the_letter": "by the end of the month",
+          "passage_1": "On behalf of the freeholder we enclose the service charge demand for 5 Clark Ford for the period beginning 25 August 2026. The amount demanded is £1,187.57.",
+          "passage_2": "Payment is due by the end of the month. Interest may be charged on late payment under the terms of your lease."
+        },
+        "export": {
+          "ics": {
+            "date": "2026-08-31",
+            "summary": "Pay £1,187.57 for the service charge — Ashcombe & Vale Property Management"
+          },
+          "text": "Pay £1,187.57 for the service charge (Ashcombe & Vale Property Management) — by the end of the month"
+        },
+        "id": "act-01",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Pay £1,187.57 for the service charge"
+      }
+    ],
+    "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+    "run_id": "letter-17",
+    "schema": "kettle/proposed-actions@0"
+  },
+  "expected": [
+    {
+      "anchor": "the date of this letter",
+      "deadline": "by the end of the month",
+      "due": "2026-08-31",
+      "id": "service_charge_demand-031-02",
+      "kind": "payment",
+      "party": "Ashcombe & Vale Property Management",
+      "segment": "Payment is due by the end of the month. Interest may be charged on late payment under the terms of your lease."
+    }
+  ],
+  "id": "letter-17",
+  "model": "qwen3.5-4b-q4_k_m.gguf",
+  "pack": {
+    "id": "app.kttl.letter-to-actions",
+    "version": "0.3.0"
+  },
+  "schema": "kettle/study-letter@0",
+  "source": {
+    "file": "service_charge_demand-031.txt",
+    "hash": "blake3:5f9098ac7f18a1975c7333369bc2968147294fa33a2f37ce18fea72a9a15f75f",
+    "text": "14 August 2026\nAshcombe & Vale Property Management\nOur reference: P406403-9\n\nDear K Clark,\n\nOn behalf of the freeholder we enclose the service charge demand for 5 Clark Ford for the period beginning 25 August 2026. The amount demanded is £1,187.57.\n\nPayment is due by the end of the month. Interest may be charged on late payment under the terms of your lease.\n\nThis demand is accompanied by a summary of tenants' rights and obligations under section 21B of the Landlord and Tenant Act 1985. A demand that is not accompanied by the summary is not payable until it is. Costs incurred more than 18 months before a demand cannot normally be recovered.\n\nThe budget for the coming year is available on request from our office on 01632 960 877.\n\nYours sincerely,\nMatthew Doherty\nAshcombe & Vale Property Management\n"
+  }
+}

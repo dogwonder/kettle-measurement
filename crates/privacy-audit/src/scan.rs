@@ -72,6 +72,7 @@ const NOT_SOURCE: &[&str] = &[
     "gen",
     "dist",
     "dist-demo",
+    "dist-study",
     "runs",
     "crates/privacy-audit",
     "reference",
@@ -415,40 +416,50 @@ mod tests {
         found.into_iter().map(|site| site.calls).collect()
     }
 
-    /// Build output is not source (#269). `app/dist-demo/` is the public
-    /// demo's bundle: minified Svelte, whose error messages carry
+    /// Build output is not source (#269, #431). `app/dist-demo/` is the
+    /// public demo's bundle and `app/dist-study/` the participant
+    /// harness's: minified Svelte, whose error messages carry
     /// `https://svelte.dev/e/...` URLs, plus whatever the page itself
     /// links to. Reporting those as application network paths would
     /// declare the same call site twice — once where it is written and
     /// once where it was compiled — and the second copy is unreviewable.
     ///
     /// Pinned here rather than left to the boundary test, because CI's
-    /// Rust job never builds the frontend: the directory does not exist
-    /// there, so a regression would only ever appear on a machine that
-    /// had run `bun run demo:build`.
+    /// Rust job never builds the frontend: the directories do not exist
+    /// there, so a regression only ever appears on a machine that has
+    /// run `bun run demo:build` or `bun run study:build`. That is not
+    /// hypothetical — the study harness's first build turned the
+    /// boundary test red locally while CI would have stayed green.
     #[test]
-    fn a_demo_build_is_not_scanned() {
-        let root = std::env::temp_dir().join("kettle-scan-dist-demo");
-        let _ = std::fs::remove_dir_all(&root);
-        let built = root.join("app/dist-demo/assets");
-        std::fs::create_dir_all(&built).expect("a temp tree");
-        std::fs::write(built.join("index.js"), "fetch(\"https://example.com\")")
-            .expect("a built bundle");
+    fn a_frontend_build_is_not_scanned() {
+        for (built_dir, source_dir) in [
+            ("app/dist-demo/assets", "app/demo"),
+            ("app/dist-study/assets", "app/study"),
+        ] {
+            let root =
+                std::env::temp_dir().join(format!("kettle-scan-{}", built_dir.replace('/', "-")));
+            let _ = std::fs::remove_dir_all(&root);
+            let built = root.join(built_dir);
+            std::fs::create_dir_all(&built).expect("a temp tree");
+            std::fs::write(built.join("index.js"), "fetch(\"https://example.com\")")
+                .expect("a built bundle");
 
-        assert_eq!(scan(&root), Vec::new());
+            assert_eq!(scan(&root), Vec::new(), "{built_dir} was scanned");
 
-        let authored = root.join("app/demo");
-        std::fs::create_dir_all(&authored).expect("a source dir");
-        std::fs::write(
-            authored.join("Site.svelte"),
-            "fetch(\"https://example.com\")",
-        )
-        .expect("a source file");
+            let authored = root.join(source_dir);
+            std::fs::create_dir_all(&authored).expect("a source dir");
+            std::fs::write(
+                authored.join("Site.svelte"),
+                "fetch(\"https://example.com\")",
+            )
+            .expect("a source file");
 
-        // The same line, authored rather than built, is still seen —
-        // otherwise this test would pass on a scanner that walks nothing.
-        assert_eq!(scan(&root).len(), 1);
-        let _ = std::fs::remove_dir_all(&root);
+            // The same line, authored rather than built, is still seen —
+            // otherwise this test would pass on a scanner that walks
+            // nothing.
+            assert_eq!(scan(&root).len(), 1, "{source_dir} was not scanned");
+            let _ = std::fs::remove_dir_all(&root);
+        }
     }
 
     #[test]

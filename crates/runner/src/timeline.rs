@@ -83,7 +83,15 @@ fn resolve_kinded(
     // Whether the phrase asks for arithmetic at all is the first
     // question, because it decides how a date *inside* the phrase is
     // read. Asked before anything else, and only once (#435).
-    let Some(counted) = counted_from(&deadline.to_lowercase()) else {
+    let lowered = deadline.to_lowercase();
+    // A refused phrase is refused whatever else it carries. Without
+    // this the fall-through below reads "within 14 working days of 6
+    // March 2026" as *6 March* — the anchor returned as the answer,
+    // which is the confidently-wrong shape refusing exists to avoid.
+    if refuses(&lowered) {
+        return None;
+    }
+    let Some(counted) = counted_from(&lowered) else {
         // Nothing to count, so a date written here is the answer and the
         // page wrote it: nothing was computed.
         return first_full_date(deadline).map(|date| Resolved {
@@ -108,6 +116,7 @@ fn resolve_kinded(
     // present it in the same voice as one that did.
     let date = match counted {
         Counted::Days(days) => base.checked_add_days(Days::new(days))?,
+        Counted::Months(months) => base.checked_add_months(Months::new(months))?,
         Counted::MonthEnd => end_of_month(base)?,
     };
     Some(Resolved { date, kind })
@@ -122,16 +131,126 @@ fn resolve_kinded(
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub(crate) enum Counted {
     Days(u64),
+    /// Calendar months, which are not a fixed number of days: "within
+    /// one month" of 31 January is 28 February, and chrono's
+    /// `checked_add_months` clamps to the month's last day exactly as a
+    /// person would.
+    Months(u32),
     MonthEnd,
 }
 
 fn counted_from(lowered: &str) -> Option<Counted> {
-    if let Some(days) = within_days(lowered) {
-        return Some(Counted::Days(days));
+    if refuses(lowered) {
+        return None;
     }
-    lowered
-        .contains("end of the month")
-        .then_some(Counted::MonthEnd)
+    interval(lowered).or_else(|| month_end_phrase(lowered).then_some(Counted::MonthEnd))
+}
+
+/// Phrases Kettle declines to count, and why.
+///
+/// A refusal is a design decision, not a gap: it displays the letter's
+/// own words with no date beside them, which is honest, where a guess
+/// would be a claim the page does not support. Both entries here are
+/// cases where the arithmetic is *available* and wrong.
+///
+/// Checked before any counting and before any date is looked for, so a
+/// phrase carrying both a refusal and a date — "within 14 working days
+/// of 6 March 2026" — cannot fall through and return the anchor as
+/// though it were the answer.
+fn refuses(lowered: &str) -> bool {
+    // Working days need a bank-holiday calendar Kettle does not have.
+    // Counting them as calendar days is wrong by up to a week, and
+    // wrong in the direction that makes a person late.
+    lowered.contains("working day")
+        || lowered.contains("business day")
+        // Receipt is a day the letter does not state. Counting from the
+        // letter's own date answers a question the page did not ask,
+        // and presents it as worked out.
+        || lowered.contains("of receipt")
+        || lowered.contains("from receipt")
+        || lowered.contains("receipt of")
+}
+
+/// Whether the phrase names the end of the month it counts in.
+fn month_end_phrase(lowered: &str) -> bool {
+    [
+        "end of the month",
+        "end of this month",
+        "month end",
+        "last day of the month",
+    ]
+    .iter()
+    .any(|form| lowered.contains(form))
+}
+
+/// The interval a phrase counts, in whatever unit it names.
+///
+/// Scans for a count followed by its unit rather than keying on
+/// "within", because a letter says the same thing many ways — "no later
+/// than 14 days", "in the next 14 days", "14 days from the date of this
+/// letter" — and the word before the number carries none of the
+/// meaning. The unit does.
+///
+/// Keeps scanning past a count whose next word is not a unit, so a
+/// phrase naming a day as well as an interval does not stop on the day.
+fn interval(lowered: &str) -> Option<Counted> {
+    let words: Vec<&str> = lowered.split_whitespace().collect();
+    for (at, word) in words.iter().enumerate() {
+        let Some(count) = count_word(word) else {
+            continue;
+        };
+        // "calendar" and "clear" qualify the unit without changing it:
+        // both mean every day, which is what Kettle counts anyway.
+        let mut unit = match words.get(at + 1) {
+            Some(&"calendar") | Some(&"clear") => words.get(at + 2),
+            other => other,
+        };
+        let unit = match unit.take() {
+            Some(word) => word.trim_matches(|c: char| !c.is_alphabetic()),
+            None => continue,
+        };
+        match unit {
+            "day" | "days" => return Some(Counted::Days(count)),
+            "week" | "weeks" => return Some(Counted::Days(count * 7)),
+            "fortnight" | "fortnights" => return Some(Counted::Days(count * 14)),
+            "month" | "months" => return Some(Counted::Months(count as u32)),
+            _ => continue,
+        }
+    }
+    None
+}
+
+/// A count written as digits or as a word.
+///
+/// "a fortnight" and "one month" are the same construction as "14
+/// days", and a letter picks between them by rhythm rather than by
+/// meaning. The word list stops at the counts a letter actually uses:
+/// nothing says "within eighty-three days".
+fn count_word(word: &str) -> Option<u64> {
+    let word = word.trim_matches(|c: char| !c.is_alphanumeric());
+    if let Ok(number) = word.parse::<u64>() {
+        return (number > 0).then_some(number);
+    }
+    Some(match word {
+        "a" | "an" | "one" => 1,
+        "two" => 2,
+        "three" => 3,
+        "four" => 4,
+        "five" => 5,
+        "six" => 6,
+        "seven" => 7,
+        "eight" => 8,
+        "nine" => 9,
+        "ten" => 10,
+        "eleven" => 11,
+        "twelve" => 12,
+        "fourteen" => 14,
+        "twenty" => 20,
+        "thirty" => 30,
+        "sixty" => 60,
+        "ninety" => 90,
+        _ => return None,
+    })
 }
 
 /// What a deadline phrase does, read from its words alone (#554).
@@ -218,19 +337,6 @@ pub(crate) fn deadline_signature(deadline: &str, anchor: &str) -> DeadlineSignat
     }
 }
 
-/// "within 14 days" -> 14. Calendar days only: "working days" needs a
-/// bank-holiday calendar nobody has declared, and a wrong resolution
-/// presented as arithmetic is worse than an honest phrase.
-fn within_days(lowered: &str) -> Option<u64> {
-    let rest = lowered.split("within").nth(1)?;
-    let mut words = rest.split_whitespace();
-    let count: u64 = words.next()?.parse().ok()?;
-    match words.next()? {
-        "days" | "day" => Some(count),
-        _ => None,
-    }
-}
-
 /// The last day of `date`'s month — a leap-year February included,
 /// because it is computed as the day before the next month's first.
 fn end_of_month(date: NaiveDate) -> Option<NaiveDate> {
@@ -243,20 +349,97 @@ fn end_of_month(date: NaiveDate) -> Option<NaiveDate> {
 /// write the day first and the month as a word; this reads exactly
 /// that, and nothing looser — "03/04/2026" is ambiguous on purpose.
 pub(crate) fn first_full_date(text: &str) -> Option<NaiveDate> {
-    let words: Vec<&str> = text
-        .split(|c: char| c.is_whitespace() || matches!(c, ',' | '.' | ';' | ':' | '(' | ')'))
+    find_full_date(&date_words(text)).map(|(date, _)| date)
+}
+
+/// The words a date is looked for in, split the way a date is written.
+fn date_words(text: &str) -> Vec<&str> {
+    text.split(|c: char| c.is_whitespace() || matches!(c, ',' | '.' | ';' | ':' | '(' | ')'))
         .filter(|w| !w.is_empty())
         .flat_map(split_run_together_day)
-        .collect();
-    words.windows(3).find_map(|window| {
-        let day: u32 = day_number(window[0])?;
-        let month = month_number(window[1])?;
+        .collect()
+}
+
+/// The first full date and where in `words` it starts, so a caller can
+/// ask what else is on the line with it.
+fn find_full_date(words: &[&str]) -> Option<(NaiveDate, usize)> {
+    // ISO first, because it is one word and the windows below cannot
+    // see inside it. Unambiguous by definition, which is why it is read
+    // where the all-numeric British and American forms are refused.
+    if let Some(found) = words.iter().enumerate().find_map(|(at, word)| {
+        NaiveDate::parse_from_str(word, "%Y-%m-%d")
+            .ok()
+            .map(|date| (date, at))
+    }) {
+        return Some(found);
+    }
+    words.windows(3).enumerate().find_map(|(at, window)| {
+        // Day first — "6 March 2026" — is how a British letter writes
+        // it, and month first — "March 6, 2026" — is how imported
+        // stationery and some software do. The month is a word in both,
+        // so neither can be read as the other and taking both costs no
+        // ambiguity.
+        let (day, month) = match (day_number(window[0]), month_number(window[1])) {
+            (Some(day), Some(month)) => (day, month),
+            _ => (day_number(window[1])?, month_number(window[0])?),
+        };
         let year: i32 = window[2]
             .parse()
             .ok()
             .filter(|y| (1900..=2200).contains(y))?;
-        NaiveDate::from_ymd_opt(year, month, day)
+        NaiveDate::from_ymd_opt(year, month, day).map(|date| (date, at))
     })
+}
+
+/// The words a dateline may carry besides the date itself.
+const DATELINE_WORDS: [&str; 10] = [
+    "date",
+    "dated",
+    "issue",
+    "issued",
+    "of",
+    "on",
+    "our",
+    "ref",
+    "reference",
+    "your",
+];
+
+/// The document dating *itself*, as opposed to a sentence that happens
+/// to name a day (#578).
+///
+/// A letter writes its own date on a line of its own — "3 March 2026",
+/// "Date: 3 March 2026", "Thursday 28th April 2022", or beside the
+/// sender's name on a letterhead. A sentence about something else —
+/// "works will begin at your building on 22 April 2026" — is not the
+/// letter dating itself, and taking it as one hands every relative
+/// deadline in the document an anchor the letter never offered.
+///
+/// The test is prose, and prose is lowercase: every word on the line
+/// that is not part of the date must be capitalised, or one of the few
+/// lowercase words a dateline uses. A line long enough to be a sentence
+/// is refused whatever its case, because a run of capitals is a
+/// heading, not a date.
+fn dateline(line: &str) -> Option<NaiveDate> {
+    let words = date_words(line);
+    let (date, at) = find_full_date(&words)?;
+    let rest: Vec<&&str> = words
+        .iter()
+        .enumerate()
+        .filter(|(index, _)| *index < at || *index >= at + 3)
+        .map(|(_, word)| word)
+        .collect();
+    if rest.len() > 6 {
+        return None;
+    }
+    rest.iter()
+        .all(|word| {
+            let bare = word.trim_matches(|c: char| !c.is_alphanumeric());
+            bare.is_empty()
+                || bare.chars().next().is_some_and(char::is_uppercase)
+                || DATELINE_WORDS.contains(&bare.to_lowercase().as_str())
+        })
+        .then_some(date)
 }
 
 /// Split a day that has run into its month: `28thApril` → `28th`,
@@ -309,8 +492,25 @@ fn day_number(word: &str) -> Option<u32> {
     digits.parse().ok().filter(|day| (1..=31).contains(day))
 }
 
+/// A month written as a word, in full or abbreviated.
+///
+/// Numbers are deliberately absent. Reading "3" as March would make
+/// "6.3.2026" resolve, and day-first and month-first cannot be told
+/// apart — the refusal in `reading_vocabulary.rs` is what this omission
+/// implements.
 fn month_number(word: &str) -> Option<u32> {
     let month = match word.to_lowercase().as_str() {
+        "jan" => 1,
+        "feb" => 2,
+        "mar" => 3,
+        "apr" => 4,
+        "jun" => 6,
+        "jul" => 7,
+        "aug" => 8,
+        "sep" | "sept" => 9,
+        "oct" => 10,
+        "nov" => 11,
+        "dec" => 12,
         "january" => 1,
         "february" => 2,
         "march" => 3,
@@ -361,9 +561,13 @@ pub fn letter_date(segments: &[Segment]) -> Option<NaiveDate> {
     for segment in segments {
         // The first segment is always searched, however long it is: a
         // document that is one segment must still be able to date
-        // itself.
-        if let Some(date) = first_full_date(&segment.text) {
-            return Some(date);
+        // itself. Line by line, because a dateline is a line — a
+        // segment may hold a whole header, and the sentence below the
+        // date is not the date.
+        for line in segment.text.lines() {
+            if let Some(date) = dateline(line) {
+                return Some(date);
+            }
         }
         read += segment.text.chars().count();
         if read >= OPENING_CHARS {

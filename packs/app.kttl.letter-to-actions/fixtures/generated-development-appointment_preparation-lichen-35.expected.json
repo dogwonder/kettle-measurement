@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-lichen-35",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "29 December 2026",
+        "deadline": "for 29 December 2026 at 4.05pm",
+        "due": "2026-12-29",
+        "kind": "attendance",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-lichen-35-attendance-01",
+      "segment": "Your appointment about your check-up with Fenwick Dental Practice is booked for 29 December 2026 at 4.05pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-lichen-35-no-ask-02",
+      "segment": "Please do not arrive more than half an hour early.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-lichen-35-other-03",
+      "segment": "Please allow fifteen minutes for parking, and bring your address history with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-lichen-35-no-ask-04",
+      "segment": "Please come to the reception on the ground floor first.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "appointment_preparation-lichen-35-other-05",
+      "segment": "Please keep to the marked walkway from the car park, and obtain a copy of the agreement from the other party before your appointment.",
+      "strata": [
+        "appointment-preparation",
+        "compound-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-lichen-35-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-lichen-35-no-ask-08",
+      "segment": "Our records show your last contribution was made on 29 May.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

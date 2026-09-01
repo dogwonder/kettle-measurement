@@ -11,11 +11,15 @@ use super::{
     FixtureResult, MachineInfo, MetricReport, ModelExchange, ModelInfo, Perf, ScoredDecision,
     ScoredItem, SidecarInfo, StepScore, Verdict,
 };
+use crate::document;
 use crate::exec::BatchItem;
 use crate::kinds::KindFrom;
 use crate::packs::{InputSpec, Pack};
 use crate::recurrence::Period;
-use crate::run::{run_pack, run_pack_bound, Answers, AuditOutcome, Payload, RunOutcome};
+use crate::run::{
+    run_pack_bound_with_resources, run_pack_with_resources, Answers, AuditOutcome, Payload,
+    RunOutcome, RunResources,
+};
 use crate::run_dir::{RunDir, RunLog};
 use crate::scoring::{keyed_accuracy, set_f1, Tolerance};
 use crate::sidecar::PeakRss;
@@ -425,6 +429,12 @@ pub struct FixtureEvaluator {
     /// a cache whose job is to survive the next run cannot live
     /// somewhere built to be replaced by it.
     pub resume_dir: Option<PathBuf>,
+    /// Where libpdfium is, so a PDF fixture is read the way the app
+    /// reads one (#256). `None` means a PDF fixture cannot be run — and
+    /// the eval says so, rather than scoring the bed as if it held only
+    /// text. Before this field every eval ran with `RunResources::default()`,
+    /// so the PDF path was unmeasured by construction whatever a bed held.
+    pub pdfium_dir: Option<PathBuf>,
 }
 
 impl FixtureEvaluator {
@@ -560,6 +570,7 @@ impl FixtureEvaluator {
             .as_ref()
             .map(|dir| super::resume::ResumeCache::at(dir));
         let mut reused = 0usize;
+        let mut unrunnable: Vec<String> = Vec::new();
         let mut results = Vec::new();
         // Which questions this set was asked (#320), collected as they
         // are scored so it can only ever describe the fixtures that
@@ -600,6 +611,21 @@ impl FixtureEvaluator {
                     continue;
                 }
             }
+            // A document this build has no reader for is not a
+            // measurement and not a crash: it is a fixture this machine
+            // cannot ask about. Named in the report and skipped here,
+            // because failing the whole run made the deterministic
+            // floor untestable on any machine without pdfium, which is
+            // every CI runner (#256).
+            if !document::readable_here(&fixture.path, self.pdfium_dir.as_deref())
+                || fixture
+                    .inputs
+                    .iter()
+                    .any(|(_, path)| !document::readable_here(path, self.pdfium_dir.as_deref()))
+            {
+                unrunnable.push(fixture.name.clone());
+                continue;
+            }
             // An endpoint is shared across this evaluator's fixtures;
             // each report row must start at zero rather than inheriting
             // the statement before it.
@@ -610,11 +636,15 @@ impl FixtureEvaluator {
             // Bound by role where the fixture says which document is
             // which (#354); otherwise the sole-role binding `run_pack`
             // has always made, which is every single-document fixture.
+            let resources = RunResources {
+                pdfium_dir: self.pdfium_dir.as_deref(),
+            };
             let outcome = match fixture.inputs.as_slice() {
-                [] => run_pack(
+                [] => run_pack_with_resources(
                     pack,
                     std::slice::from_ref(&fixture.path),
                     &self.answers,
+                    resources,
                     &AtomicBool::new(false),
                     &mut |_| {},
                     &log,
@@ -624,10 +654,11 @@ impl FixtureEvaluator {
                         .iter()
                         .map(|(role, path)| (role.as_str(), path.clone()))
                         .collect();
-                    run_pack_bound(
+                    run_pack_bound_with_resources(
                         pack,
                         &named,
                         &self.answers,
+                        resources,
                         &AtomicBool::new(false),
                         &mut |_| {},
                         &log,
@@ -788,6 +819,7 @@ impl FixtureEvaluator {
         let thresholds = pack.thresholds();
         let mut report = EvalReport {
             reused_fixtures: reused,
+            unrunnable,
             pack: pack.manifest.id.clone(),
             pack_version: pack.manifest.version.clone(),
             eval_set: selection,
@@ -1129,10 +1161,23 @@ pub fn fixtures_at_with_roles(
             // fixture the runner could run but the harness would not
             // discover is a bed that silently scores less than it
             // holds (#279).
-            matches!(
-                path.extension().and_then(|e| e.to_str()),
-                Some("csv") | Some("pdf") | Some("txt") | Some("md") | Some("markdown")
-            )
+            path.extension()
+                .and_then(|extension| extension.to_str())
+                .map(str::to_ascii_lowercase)
+                .is_some_and(|extension| {
+                    matches!(
+                        extension.as_str(),
+                        "csv"
+                            | "pdf"
+                            | "txt"
+                            | "md"
+                            | "markdown"
+                            | "jpg"
+                            | "jpeg"
+                            | "heic"
+                            | "heif"
+                    )
+                })
         })
         .collect();
     entries.sort();

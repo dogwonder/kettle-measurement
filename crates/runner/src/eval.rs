@@ -208,7 +208,7 @@ pub const MAX_REVIEW_RATE_KEY: &str = "max_review_rate";
 /// itself a reading of the bed, not a defect in the rule. Verdicts move
 /// wherever a bed too small to prove a ceiling already breached it, so
 /// version 15 baselines are refused.
-pub const SCORING_VERSION: u32 = 16;
+pub const SCORING_VERSION: u32 = 17;
 
 pub use crate::timeline::DeadlineShape;
 
@@ -543,6 +543,15 @@ pub struct EvalReport {
     /// *visible*.
     #[serde(default, skip_serializing_if = "is_zero")]
     pub reused_fixtures: usize,
+    /// Fixtures this build could not read at all — a PDF with no
+    /// pdfium on the machine, a photograph without Vision (#256).
+    ///
+    /// Named, never dropped. A score whose denominator shrank without
+    /// saying so is the silent cap this project refuses, so the CLI
+    /// will not write or compare a baseline from a report that names
+    /// any: an incomplete run may be read, and may not be evidence.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub unrunnable: Vec<String>,
     /// Runner-owned metric reports derived from the durable item
     /// records. Empty only for legacy reports or packs with no scored
     /// item metrics.
@@ -640,15 +649,28 @@ impl EvalReport {
     /// A scored step the pack sets no bar for still fails, exactly as
     /// under [`Gate::PerFixture`]: judging it against nothing would
     /// report an unmeasured model as good.
+    ///
+    /// **Pooled over the gated strata only** (#581, decided 30 August
+    /// 2026). A pack declares which strata gate; the rest are measured
+    /// and reported beside their promotion condition. Sixty hard
+    /// letters added in an ungated stratum failed the pack on main's
+    /// own prompt — 0.977 on the 425 fixtures before them, 0.926 on
+    /// 455 — because this pooled every fixture regardless. A bar that
+    /// falls every time a harm is measured inverts the incentive, so a
+    /// fixture joins the pool only if one of its items sits in a
+    /// stratum carrying gate classes. A pack declaring no gated strata
+    /// pools everything, as before.
     fn pooled_verdict(&self, thresholds: &Thresholds) -> Verdict {
-        if self.fixtures.is_empty() {
-            // Nothing ran, so nothing was shown to work — the same
-            // answer `Verdict::worst` gives an empty set.
+        let pooled = self.pooled_fixtures(thresholds);
+        if pooled.is_empty() {
+            // Nothing ran — or nothing in a gated stratum did — so
+            // nothing was shown to work: the same answer
+            // `Verdict::worst` gives an empty set.
             return Verdict::Fail;
         }
 
         let mut totals: BTreeMap<&str, (usize, usize)> = BTreeMap::new();
-        for fixture in &self.fixtures {
+        for fixture in &pooled {
             for (step, scored) in &fixture.step_scores {
                 let entry = totals.entry(step.as_str()).or_insert((0, 0));
                 entry.0 += scored.correct;
@@ -676,17 +698,41 @@ impl EvalReport {
         // End to end is the promise about a finished report, so it holds
         // under either gate. Pooled, it is the mean across fixtures
         // rather than the worst one.
-        let mean_end_to_end: f32 = self
-            .fixtures
-            .iter()
-            .map(|fixture| fixture.end_to_end)
-            .sum::<f32>()
-            / self.fixtures.len() as f32;
+        let mean_end_to_end: f32 =
+            pooled.iter().map(|fixture| fixture.end_to_end).sum::<f32>() / pooled.len() as f32;
         if mean_end_to_end < END_TO_END_BAR {
             return Verdict::Fail;
         }
 
         Verdict::Pass
+    }
+
+    /// The fixtures a pooled verdict is read over (#581): every fixture
+    /// except one whose items all sit in ungated strata. A fixture with
+    /// no items cannot say which stratum it is in and pools, as does
+    /// every fixture when the pack declares no gated stratum — the
+    /// conservative direction, since a fixture wrongly pooled fails a
+    /// pack and a fixture wrongly excluded hides a harm.
+    pub fn pooled_fixtures(&self, thresholds: &Thresholds) -> Vec<&FixtureResult> {
+        let gated: BTreeSet<&str> = thresholds
+            .classification_strata
+            .iter()
+            .filter(|(_, stratum)| !stratum.classes.is_empty())
+            .map(|(name, _)| name.as_str())
+            .collect();
+        if gated.is_empty() {
+            return self.fixtures.iter().collect();
+        }
+        self.fixtures
+            .iter()
+            .filter(|fixture| {
+                fixture.items.is_empty()
+                    || fixture
+                        .items
+                        .iter()
+                        .any(|item| item.strata.iter().any(|s| gated.contains(s.as_str())))
+            })
+            .collect()
     }
 
     /// Whether every declared ceiling clears, read from **whichever

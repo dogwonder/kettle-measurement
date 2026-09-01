@@ -366,6 +366,37 @@ fn a_letter_date_below_an_address_block_is_still_the_letter_date() {
 }
 
 #[test]
+fn a_date_inside_a_sentence_does_not_date_the_letter() {
+    // #578, found on the #431 study corpus by a person sitting the
+    // study, not by a test. `planned_works_notice-023` carries no date
+    // of its own; its only date is the works commencement, written mid
+    // sentence. The opening window took it as the letter's date, and
+    // "within 28 days" then resolved to 20 May 2026 — a deadline the
+    // letter never set, asserted as "asked for this by 20 May 2026",
+    // exported as a calendar reminder, with an honest quote beside it.
+    //
+    // Every quote guardrail passed, because the invention was in the
+    // anchor and no quote rule looks there.
+    let sentence = vec![
+        segment(0, "Harrowdene Housing Association"),
+        segment(1, "Our reference: HX539621"),
+        segment(2, "Dear Pamela,"),
+        segment(
+            3,
+            "We are writing to let you know that external redecoration and gutter \
+             replacement will begin at your building on 22 April 2026.",
+        ),
+    ];
+    assert_eq!(letter_date(&sentence), None);
+
+    // And so the ask that counts from it stays undated, which is the
+    // honest answer: 28 days from nothing is nothing.
+    let ask = obligation("within 28 days", "", sentence[3].clone());
+    let sorted = sort_timeline(vec![ask], &sentence);
+    assert_eq!(sorted[0].due, None);
+}
+
+#[test]
 fn a_letter_dates_itself_the_way_letters_actually_write_dates() {
     // Found on the first real photographed letter (#399): a housing
     // association dated it "Thursday 28th April 2022", and Kettle read

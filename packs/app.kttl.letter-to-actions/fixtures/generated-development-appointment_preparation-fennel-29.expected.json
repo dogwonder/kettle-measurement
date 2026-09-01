@@ -1,0 +1,87 @@
+{
+  "eval_set": "development",
+  "fixture_id": "development-appointment_preparation-fennel-29",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "26 June 2026",
+        "deadline": "for 26 June 2026 at 9.10am",
+        "due": "2026-06-26",
+        "kind": "attendance",
+        "party": "Northgate Water"
+      },
+      "id": "appointment_preparation-fennel-29-attendance-01",
+      "segment": "Your appointment about your water account with Northgate Water is booked for 26 June 2026 at 9.10am.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-fennel-29-no-ask-02",
+      "segment": "Please arrive promptly, as late arrivals cannot always be seen.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on the day",
+        "due": null,
+        "kind": "other",
+        "party": "Northgate Water"
+      },
+      "id": "appointment_preparation-fennel-29-other-03",
+      "segment": "Please bring a recent proof of your address with you on the day.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-fennel-29-no-ask-04",
+      "segment": "Please come to the desk marked Appointments.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "before your appointment",
+        "due": null,
+        "kind": "other",
+        "party": "Northgate Water"
+      },
+      "id": "appointment_preparation-fennel-29-other-05",
+      "segment": "Please order a replacement card before your appointment so that you have it with you.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-fennel-29-no-ask-06",
+      "segment": "If the date no longer suits you, our reception team can offer another.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-fennel-29-no-ask-08",
+      "segment": "Your account has been in credit by £31.75 since 5 February.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

@@ -36,9 +36,12 @@ readable payments stops the run honestly. Contract tests:
 
 ### `builtin:document-text`
 
-Reads a document (text, Markdown, or text-layer PDF via the same
-pdfium path) into ordered paragraph `Segment`s, each carrying its page
-and position as a person would cite it (#239, #240). Segmentation is
+Reads a document (text, Markdown, text-layer PDF via the same pdfium
+path, or on macOS a full-size JPEG/HEIC photograph) into ordered
+paragraph `Segment`s, each carrying its page and position as a person
+would cite it (#239, #240, #399). A role declaring
+`file_semantics: "pages"` joins several chosen files as ordered parts
+of one document. Segmentation is
 measured against the page's own line spacing, so letters and agreements
 set at different sizes both split at paragraphs. Contract tests:
 `crates/runner/tests/document.rs`.

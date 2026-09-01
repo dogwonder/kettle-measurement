@@ -1,0 +1,66 @@
+{
+  "actions": {
+    "actions": [
+      {
+        "detail": "Kestrel Plumbing & Heating Ltd asked for this by 8 May 2026. The letter says \"by the date shown beside it\".",
+        "evidence": {
+          "asked_by": "Kestrel Plumbing & Heating Ltd",
+          "in_the_letter": "by the date shown beside it",
+          "passage_1": "Enclosed is our invoice for boiler servicing at 1 Naylor Ranch. The total shown opposite is expected by the date shown beside it."
+        },
+        "export": {
+          "ics": {
+            "date": "2026-05-08",
+            "summary": "Pay the total shown opposite — Kestrel Plumbing & Heating Ltd"
+          },
+          "text": "Pay the total shown opposite (Kestrel Plumbing & Heating Ltd) — by the date shown beside it"
+        },
+        "id": "act-01",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Pay the total shown opposite"
+      },
+      {
+        "detail": "Kestrel Plumbing & Heating Ltd asked for this, but the letter does not give a date Kettle could work out — it says \"no particular date\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "Kestrel Plumbing & Heating Ltd",
+          "in_the_letter": "no particular date",
+          "passage_1": "Please quote the invoice number if you need to contact us. Payment can be made by bank transfer to sort code 56-92-45, account 93752654, using the invoice number as the reference."
+        },
+        "export": {
+          "text": "Quote the invoice number if contacting us (Kestrel Plumbing & Heating Ltd) — no particular date"
+        },
+        "id": "act-02",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Quote the invoice number if contacting us"
+      }
+    ],
+    "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+    "run_id": "letter-14",
+    "schema": "kettle/proposed-actions@0"
+  },
+  "expected": [
+    {
+      "anchor": "the date shown beside it",
+      "deadline": "by the date shown beside it",
+      "due": "2026-05-08",
+      "id": "invoice-036-01",
+      "kind": "payment",
+      "party": "Kestrel Plumbing & Heating Ltd",
+      "segment": "Enclosed is our invoice for boiler servicing at 1 Naylor Ranch. The total shown opposite is expected by the date shown beside it."
+    }
+  ],
+  "id": "letter-14",
+  "model": "qwen3.5-4b-q4_k_m.gguf",
+  "pack": {
+    "id": "app.kttl.letter-to-actions",
+    "version": "0.3.0"
+  },
+  "schema": "kettle/study-letter@0",
+  "source": {
+    "file": "invoice-036.txt",
+    "hash": "blake3:e96740dd2fc6c57b6bac9cbbc608d9d8d34df58ab5e2b7d2c7db79ef66630f8d",
+    "text": "11 April 2026\nKestrel Plumbing & Heating Ltd\nOur reference: JE224447\n\nDear R Duffy,\n\nEnclosed is our invoice for boiler servicing at 1 Naylor Ranch. The total shown opposite is expected by the date shown beside it.\n\nDue date              Sub total     £113.92\n8 May 2026            VAT           £22.79\n                      Total         £136.71\n\nInvoice number JE224447. Tax point 11 April 2026. VAT is charged at the standard rate of 20% and our VAT registration number is shown at the foot of this page.\n\nPlease quote the invoice number if you need to contact us. Payment can be made by bank transfer to sort code 56-92-45, account 93752654, using the invoice number as the reference.\n\nThank you for your business.\n\nYours sincerely,\nGraham Richardson\nKestrel Plumbing & Heating Ltd\n"
+  }
+}

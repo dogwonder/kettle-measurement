@@ -51,19 +51,25 @@ fn readings() -> (Reading, Reading) {
                 text: "Anytown Housing Association".to_owned(),
                 confidence: 0.99,
                 top: 0.90,
+                bottom: 0.888,
                 left: 0.08,
+                right: 0.90,
             },
             runner::ocr::Line {
                 text: format!("Please pay £120.00 by 28 April {year}."),
                 confidence: 0.97,
                 top: 0.60,
+                bottom: 0.588,
                 left: 0.08,
+                right: 0.90,
             },
             runner::ocr::Line {
                 text: "Please also send a meter reading.".to_owned(),
                 confidence: 0.98,
                 top: 0.50,
+                bottom: 0.488,
                 left: 0.08,
+                right: 0.90,
             },
         ],
     };
@@ -121,13 +127,17 @@ fn a_dispute_in_the_letterhead_marks_nothing() {
                 text: "Registered office: London EC1M 5LA".to_owned(),
                 confidence: 0.88,
                 top: 0.95,
+                bottom: 0.938,
                 left: 0.08,
+                right: 0.90,
             },
             runner::ocr::Line {
                 text: "Please pay £120.00 by 28 April 2026.".to_owned(),
                 confidence: 0.97,
                 top: 0.60,
+                bottom: 0.588,
                 left: 0.08,
+                right: 0.90,
             },
         ],
     };
@@ -137,13 +147,17 @@ fn a_dispute_in_the_letterhead_marks_nothing() {
                 text: "Registered office: London ECIM SLA".to_owned(),
                 confidence: 0.88,
                 top: 0.95,
+                bottom: 0.938,
                 left: 0.08,
+                right: 0.90,
             },
             runner::ocr::Line {
                 text: "Please pay £120.00 by 28 April 2026.".to_owned(),
                 confidence: 0.97,
                 top: 0.60,
+                bottom: 0.588,
                 left: 0.08,
+                right: 0.90,
             },
         ],
     };
@@ -227,6 +241,7 @@ mod report {
             segment(1, "Please pay £120.00 by 28 April 2026."),
         );
         paying.disputed = vec![Disagreement {
+            page: 1,
             top: 0.60,
             read: "Please pay £120.00 by 28 April 2026.".to_owned(),
             also_read: "Please pay £120.00 by 28 April 2028.".to_owned(),
@@ -267,6 +282,7 @@ mod report {
             segment(1, "Please pay £120.00 by 28 April 2026."),
         );
         paying.disputed = vec![Disagreement {
+            page: 1,
             top: 0.60,
             read: "Please pay £120.00 by 28 April 2026.".to_owned(),
             also_read: "Please pay £120.00 by 28 April 2028.".to_owned(),

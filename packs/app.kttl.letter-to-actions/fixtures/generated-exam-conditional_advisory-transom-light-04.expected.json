@@ -1,0 +1,60 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-conditional_advisory-transom-light-04",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "conditional_advisory-transom-light-04-no-ask-01",
+      "segment": "This notice concerns your pet health plan and is sent for information. No reply is needed.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-transom-light-04-no-ask-02",
+      "segment": "If a claim is outstanding on the policy, settle it before the renewal date.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-transom-light-04-no-ask-03",
+      "segment": "Where the supply is shared with a business, check the rate, which is calculated differently.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-transom-light-04-no-ask-04",
+      "segment": "Take care near the works while they continue.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-transom-light-04-no-ask-05",
+      "segment": "Check expiry dates once a year.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-transom-light-04-no-ask-07",
+      "segment": "The contractor is programmed to complete by 15 September; no action falls to you.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    }
+  ]
+}

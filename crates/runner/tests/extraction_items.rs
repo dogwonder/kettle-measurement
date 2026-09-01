@@ -191,6 +191,7 @@ fn evaluate(dir: &Path, answer: String) -> runner::eval::EvalReport {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
     evaluator.evaluate(&pack).expect("the eval runs")
 }
@@ -349,6 +350,7 @@ fn a_segment_routed_to_a_person_is_neither_a_hit_nor_a_miss() {
         fixtures_dir: None,
         runs_dir: None,
         resume_dir: None,
+        pdfium_dir: None,
     };
     let report = evaluator.evaluate(&pack).expect("the floor runs");
 

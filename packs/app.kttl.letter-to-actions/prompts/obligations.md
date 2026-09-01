@@ -24,9 +24,36 @@ For each passage, decide:
   describe it arriving rather than ask anyone to send it — an amount
   reaching the sender, a balance becoming payable, a total expected by
   a date. Money does not move itself, and a form does not return itself.
+  An appointment still to come is the same: a letter that confirms or
+  books one for the reader is asking them to attend it, though no
+  sentence tells them to — the booking is the ask, and the day and time
+  it names are when. One that has already taken place asks nothing.
+  Advice about arriving early or what to bring belongs to the
+  appointment and is not a further ask.
   This is a question about who must act. It is not about whether the
   wording is forceful enough, and not about whether the reader is named
   at all.
+  Then ask whether this letter is asking it of them *now*. Two kinds of
+  sentence read like asks and are not. A request made conditional on
+  something the letter does not settle — on renting the property out,
+  on holding a second permit, on disagreeing with a reading — asks
+  nothing of this reader, because whether the condition holds is not
+  something the letter knows. Record no obligation, and do not record
+  the thing the condition would require. General advice is not an ask
+  either: what to do about callers at the door, what to keep somewhere
+  safe, what to check each year, what never to give out over the
+  telephone. It is addressed to anybody reading and arises from no
+  particular letter. Both are worth reading and neither is a task, and
+  a task recorded from either is one this person was never given.
+  A polite softening is not a condition. "We would be grateful if you
+  could send a reading", "if you would kindly return the form", "please
+  confirm when you are able" — the "if" there is manners, and what is
+  being asked is being asked. What makes a condition is a fact about
+  the reader that the letter cannot settle and they can: whether they
+  rent the place out, whether they hold a second permit, whether they
+  disagree with a figure. Ask whether the sentence would still be
+  asking something of a reader for whom nothing special is true. If it
+  would, it is an obligation.
 - confidence: "high" | "medium" | "low"
 
 For each obligation give:

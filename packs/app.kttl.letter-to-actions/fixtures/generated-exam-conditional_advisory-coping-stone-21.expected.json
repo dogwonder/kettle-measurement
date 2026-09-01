@@ -1,0 +1,60 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-conditional_advisory-coping-stone-21",
+  "obligations": [
+    {
+      "expect": null,
+      "id": "conditional_advisory-coping-stone-21-no-ask-01",
+      "segment": "This notice concerns your council tax account and is sent for information. No reply is needed.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-coping-stone-21-no-ask-02",
+      "segment": "If you hold a concessionary pass, present it at the desk on arrival.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-coping-stone-21-no-ask-03",
+      "segment": "Should the appliance be under warranty, contact the manufacturer rather than this office.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-coping-stone-21-no-ask-04",
+      "segment": "Do not leave keys anywhere accessible outside.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-coping-stone-21-no-ask-05",
+      "segment": "Report a smell of gas at once on the emergency number.",
+      "strata": [
+        "conditional-advisory",
+        "standing-advice"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-coping-stone-21-no-ask-07",
+      "segment": "An overpayment of £61.90 is carried forward against the next invoice.",
+      "strata": [
+        "conditional-advisory",
+        "no-obligation"
+      ]
+    }
+  ]
+}

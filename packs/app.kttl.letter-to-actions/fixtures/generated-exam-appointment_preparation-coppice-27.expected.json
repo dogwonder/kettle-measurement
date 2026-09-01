@@ -1,0 +1,87 @@
+{
+  "eval_set": "exam",
+  "fixture_id": "exam-appointment_preparation-coppice-27",
+  "obligations": [
+    {
+      "expect": {
+        "anchor": "20 September 2026",
+        "deadline": "for 20 September 2026 at 12.00pm",
+        "due": "2026-09-20",
+        "kind": "attendance",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_preparation-coppice-27-attendance-01",
+      "segment": "An appointment concerning your energy account has been arranged with Cranleigh Energy for 20 September 2026 at 12.00pm.",
+      "strata": [
+        "appointment-preparation",
+        "absolute-deadline"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-coppice-27-no-ask-02",
+      "segment": "You must keep to the marked walkway from the car park.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "ahead of the visit",
+        "due": null,
+        "kind": "other",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_preparation-coppice-27-other-03",
+      "segment": "You must make a note of the dates you spent away ahead of the visit.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-coppice-27-no-ask-04",
+      "segment": "You must ring the bell if the desk is unattended.",
+      "strata": [
+        "appointment-preparation",
+        "attendance-manner"
+      ]
+    },
+    {
+      "expect": {
+        "anchor": "no particular date",
+        "deadline": "on arrival",
+        "due": null,
+        "kind": "other",
+        "party": "Cranleigh Energy"
+      },
+      "id": "appointment_preparation-coppice-27-other-05",
+      "segment": "You must hand over the completed consent form on arrival.",
+      "strata": [
+        "appointment-preparation",
+        "preparation-ask"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-coppice-27-no-ask-06",
+      "segment": "An alternative date can be offered if the one above is unsuitable.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "appointment_preparation-coppice-27-no-ask-08",
+      "segment": "The scheme is closed to entrants after 31 October and your entry predates this.",
+      "strata": [
+        "appointment-preparation",
+        "no-obligation"
+      ]
+    }
+  ]
+}

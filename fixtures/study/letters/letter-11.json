@@ -1,0 +1,110 @@
+{
+  "actions": {
+    "actions": [
+      {
+        "detail": "Brackenfield District Council asked for this by 29 September 2026. The letter says \"by 29 September 2026\".",
+        "evidence": {
+          "asked_by": "Brackenfield District Council",
+          "in_the_letter": "by 29 September 2026",
+          "passage_1": "The first instalment of £137.18 is to be paid by 29 September 2026. Where a Direct Debit is held, collection is made on that date and no action is needed."
+        },
+        "export": {
+          "ics": {
+            "date": "2026-09-29",
+            "summary": "Pay the first instalment of £137.18 — Brackenfield District Council"
+          },
+          "text": "Pay the first instalment of £137.18 (Brackenfield District Council) — by 29 September 2026"
+        },
+        "id": "act-01",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Pay the first instalment of £137.18"
+      },
+      {
+        "detail": "Brackenfield District Council asked for this by 29 September 2026. The letter says \"by 29 September 2026\".",
+        "evidence": {
+          "asked_by": "Brackenfield District Council",
+          "in_the_letter": "by 29 September 2026",
+          "passage_1": "Any change in your circumstances — for example someone moving in or out — is to be notified to us by 29 September 2026 so that the bill can be corrected."
+        },
+        "export": {
+          "ics": {
+            "date": "2026-09-29",
+            "summary": "Notify any change in circumstances — Brackenfield District Council"
+          },
+          "text": "Notify any change in circumstances (Brackenfield District Council) — by 29 September 2026"
+        },
+        "id": "act-02",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Notify any change in circumstances"
+      },
+      {
+        "detail": "Brackenfield District Council asked for this, but the letter does not give a date Kettle could work out — it says \"no particular date\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "Brackenfield District Council",
+          "in_the_letter": "no particular date",
+          "passage_1": "This is your Council Tax demand for the property at Studio 0, which is in valuation band B. The amount payable for the year is £1,371.81, and your account reference is SH962309.",
+          "passage_2": "The balance is payable in 10 instalments of £137.18 on the first of each month, as set out in the schedule printed with this notice."
+        },
+        "export": {
+          "text": "Pay £1,371.81 for the Council Tax demand (Brackenfield District Council) — no particular date"
+        },
+        "id": "act-03",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Pay £1,371.81 for the Council Tax demand"
+      },
+      {
+        "detail": "Brackenfield District Council asked for this, but the letter does not give a date Kettle could work out — it says \"no particular date\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "Brackenfield District Council",
+          "in_the_letter": "no particular date",
+          "passage_1": "Please quote the reference printed at the top of this letter in all correspondence. Without it we may be unable to trace your account and a reply will take longer."
+        },
+        "export": {
+          "text": "Quote the reference printed at the top of this letter in all correspondence (Brackenfield District Council) — no particular date"
+        },
+        "id": "act-04",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Quote the reference printed at the top of this letter in all correspondence"
+      }
+    ],
+    "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+    "run_id": "letter-11",
+    "schema": "kettle/proposed-actions@0"
+  },
+  "expected": [
+    {
+      "anchor": "29 September 2026",
+      "deadline": "by 29 September 2026",
+      "due": "2026-09-29",
+      "id": "council_tax_demand-028-03",
+      "kind": "payment",
+      "party": "Brackenfield District Council",
+      "segment": "The first instalment of £137.18 is to be paid by 29 September 2026. Where a Direct Debit is held, collection is made on that date and no action is needed."
+    },
+    {
+      "anchor": "29 September 2026",
+      "deadline": "by 29 September 2026",
+      "due": "2026-09-29",
+      "id": "council_tax_demand-028-04",
+      "kind": "response",
+      "party": "Brackenfield District Council",
+      "segment": "Any change in your circumstances — for example someone moving in or out — is to be notified to us by 29 September 2026 so that the bill can be corrected."
+    }
+  ],
+  "id": "letter-11",
+  "model": "qwen3.5-4b-q4_k_m.gguf",
+  "pack": {
+    "id": "app.kttl.letter-to-actions",
+    "version": "0.3.0"
+  },
+  "schema": "kettle/study-letter@0",
+  "source": {
+    "file": "council_tax_demand-028.txt",
+    "hash": "blake3:881b6d1e34c2077749d23a1b4383c45b51c0d1647bdb4f024fe97c073b86b946",
+    "text": "30 August 2026\nBrackenfield District Council\nOur reference: SH962309\n\nDear M Holt,\n\nThis is your Council Tax demand for the property at Studio 0, which is in valuation band B. The amount payable for the year is £1,371.81, and your account reference is SH962309.\n\nThe balance is payable in 10 instalments of £137.18 on the first of each month, as set out in the schedule printed with this notice.\n\nThe first instalment of £137.18 is to be paid by 29 September 2026. Where a Direct Debit is held, collection is made on that date and no action is needed.\n\nAny change in your circumstances — for example someone moving in or out — is to be notified to us by 29 September 2026 so that the bill can be corrected.\n\nDetails of discounts, exemptions and how bands are set are printed on the reverse of this notice.\n\nIf you think your property is in the wrong band you can ask the Valuation Office to review it; this notice remains payable while a review is open. Appeals about liability go to the Valuation Tribunal.\n\nYours sincerely,\nMarian Johnson\nBrackenfield District Council\n\nHOW WE USE YOUR INFORMATION\n\nWe hold the details on this letter to administer your account and to meet our legal duties. We do not sell personal information. Our full privacy notice sets out what we hold, how long we keep it and who we share it with, and is available on request from the address at the head of this letter.\n\nWhere we share information with another organisation it is because the law requires it or because that organisation acts for us under a written agreement. We keep records for as long as the account is open and for six years afterwards.\n\n\nWAYS TO CONTACT US\n\nOur office hours are 9am to 5pm, Monday to Friday, excluding bank holidays. Calls are answered in the order received and may be recorded for training and quality purposes. Written correspondence is acknowledged within ten working days.\n\nPlease quote the reference printed at the top of this letter in all correspondence. Without it we may be unable to trace your account and a reply will take longer.\n\n\nWAYS TO PAY\n\nDirect Debit is the simplest way to pay and can be set up over the telephone or online. Instalments are collected on the date shown on the schedule; where a collection fails we will write to you before trying again.\n\nBank transfer, standing order, debit card over the telephone, and cash or cheque at any of our offices are also accepted. Cheques should be made payable to the organisation named at the head of this letter, with the reference written on the back.\n\nA payment made by post is treated as received on the working day it reaches us, not the day it was sent. Allow five working days for a cheque to be cleared.\n\n\nIF YOU ARE STRUGGLING\n\nFree, independent advice on money and debt is available from national advice charities. Telling us early about a difficulty gives us the widest range of options to help.\n\nA payment arrangement can spread an amount over a longer period. Arrangements are reviewed every six months and can be changed if your circumstances change.\n\n\nACCESSIBILITY\n\nThis letter can be provided in large print, braille, audio or another language. Please tell us which format you need and we will arrange it at no cost.\n\nOur offices have step-free access and a hearing loop at reception. A British Sign Language interpreter can be booked for appointments with three working days' notice.\n\n\nCOMPLAINTS\n\nIf you are unhappy with the service you have received, tell us and we will look into it. Our complaints procedure has two stages and is explained in full on request. If you remain dissatisfied at the end of it, you may refer the matter to the relevant independent scheme.\n\nA complaint does not change any amount or date stated in the letter it concerns unless we write to say so.\n\n\nFREQUENTLY ASKED QUESTIONS\n\nWhy have I received this letter? Because our records show the account or matter described is in your name. If you believe that is wrong, contact us with the reference and we will check.\n\nWhat happens if I do nothing? The amounts and dates in the letter stand. Where there is a consequence for missing a date it is stated in the letter itself, not on these pages.\n\nCan I get a copy? Yes. A duplicate of any letter we have sent can be requested by telephone or in writing and is normally issued within five working days.\n\nIs this a scam? We will never ask you for your full bank details or a one-time code by telephone. If you are unsure, call the number printed at the head of this letter, not one given to you by a caller.\n\n\nGLOSSARY\n\nReference: the identifier printed at the top of this letter, which uniquely identifies your account or case with us.\n\nInstalment: one of a series of equal payments that together settle an annual amount.\n\nWorking day: Monday to Friday, excluding bank holidays in England and Wales.\n\nRegistered keeper, leaseholder, account holder: the person our records name as responsible for the matter described.\n\n\nYOUR RIGHTS\n\nYou have the right to see the information we hold about you, to have inaccurate information corrected and, in some circumstances, to have it deleted. Requests are handled within one calendar month.\n\nYou have the right to complain to the Information Commissioner if you believe we have handled your information unlawfully.\n\n\nWHAT HAPPENS NEXT\n\nOnce the matter described in the letter is settled, we will update our records within ten working days. You will not normally receive a further letter unless something changes.\n\nIf we do not hear from you where the letter asks for a reply, the position stated in the letter stands and any later step it describes may follow. We will always write again before taking a step not already described.\n\n\nCHANGES IN YOUR CIRCUMSTANCES\n\nMoving home, a change of name, a change in who lives at the property, or a change in your income can all affect an account of this kind. Tell us about a change as soon as it happens; a change reported late may not be applied from the date it occurred.\n\nWhere a change reduces what you owe, any overpayment is refunded to the account it was paid from, or credited against the next amount due if you prefer.\n\n\nCHECKLIST\n\nCheck the name and address on the first page are yours and are spelt correctly. Check the reference matches any earlier letters you hold. Keep this letter with your records for at least six years.\n\nIf you act on this letter — pay, reply, or attend — make a note of the date you did so and, where you paid, the method and any confirmation number.\n\n\nTERMS THAT APPLY TO THIS LETTER\n\nThis letter is issued under the terms that apply to your account or agreement with us, copies of which are available on request. Where this letter and those terms differ, the terms prevail unless the letter says otherwise.\n\nNothing in these notes creates a new obligation. They describe how we work and what you can expect of us.\n\nThis letter is governed by the law of England and Wales.\n\n"
+  }
+}

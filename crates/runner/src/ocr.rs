@@ -88,6 +88,18 @@ pub struct Line {
     /// an address block sets the recipient left and the sender right,
     /// so two lines share a row and only `left` tells them apart.
     pub left: f64,
+    /// Where the line ended. Carried so the segmenter can see the
+    /// page's geometry — a line's *width*, not its character count, is
+    /// what says whether it wrapped or stopped, and a column channel
+    /// is a gap between one line's right and the next's left.
+    pub right: f64,
+    /// Where the line's box ended, 0.0 at the foot. With `top` this
+    /// gives the line's centre, which is what the segmenter measures
+    /// gaps from: a box's top moves with whether the line has capitals
+    /// and its bottom with whether it has descenders, by a few points
+    /// each way, and on a photograph a few points is a third of the
+    /// leading. The centre moves half as much.
+    pub bottom: f64,
 }
 
 /// Everything one photograph gave up.
@@ -135,6 +147,38 @@ const SAME_LINE: f64 = 0.01;
 /// awkward order, which a person can still read.
 const COLUMN_GAP: f64 = 0.05;
 
+/// A gap narrower than `COLUMN_GAP` is still a column boundary when
+/// the text after it **lines up** with text on a neighbouring line.
+///
+/// Found on the photo bed's invoices (30 August 2026): the totals table
+/// sets its columns a fiftieth of the page apart, under `COLUMN_GAP`,
+/// so `18 October 2026` and `VAT` merged into one line and the due
+/// date could never get its own row back. Width alone cannot tell a
+/// tight column from a word space; alignment can. A word space in
+/// prose does not start where the words on the rows beside it start,
+/// except by coincidence — which is why the gap must also be wider
+/// than a word space, [`WORD_GAP`], and the aligned line must be
+/// within a few lines, [`NEARBY_LINES`].
+const ALIGNED: f64 = 0.01;
+
+/// Narrower than this is a word space whatever lines up with it.
+/// Ordinary word spaces run about 0.006–0.01 of the page.
+const WORD_GAP: f64 = 0.015;
+
+/// How far up or down the page an aligned line may sit — three lines,
+/// which is a table's reach and not a coincidence's.
+const NEARBY_LINES: f64 = 0.06;
+
+/// Does some text on a nearby, different line start where this one
+/// does?
+fn lines_up(item: &Placed, placed: &[(f64, f64)]) -> bool {
+    placed.iter().any(|(top, left)| {
+        (top - item.top).abs() > SAME_LINE
+            && (top - item.top).abs() <= NEARBY_LINES
+            && (left - item.left).abs() <= ALIGNED
+    })
+}
+
 impl Reading {
     /// Assemble a page from placed observations: reading order first,
     /// then one line per line.
@@ -164,13 +208,18 @@ impl Reading {
             }
         });
 
+        let edges: Vec<(f64, f64)> = placed.iter().map(|p| (p.top, p.left)).collect();
         let mut lines: Vec<(f64, f64, Line)> = Vec::new();
         for item in placed {
+            let column_edge = |right: f64| {
+                let gap = item.left - right;
+                gap > COLUMN_GAP || (gap > WORD_GAP && lines_up(&item, &edges))
+            };
             match lines.last_mut() {
                 // Same line, and near enough to be the same sentence:
                 // join with the space the page put there.
                 Some((top, right, line))
-                    if (*top - item.top).abs() <= SAME_LINE && item.left - *right <= COLUMN_GAP =>
+                    if (*top - item.top).abs() <= SAME_LINE && !column_edge(*right) =>
                 {
                     line.text.push(' ');
                     line.text.push_str(item.line.text.trim());
@@ -179,21 +228,77 @@ impl Reading {
                     // the doubt — the floor exists to catch exactly the
                     // doubtful part, and an average would hide it.
                     line.confidence = line.confidence.min(item.line.confidence);
+                    line.right = item.right;
                     *right = item.right;
                 }
-                _ => lines.push((item.top, item.right, item.line)),
+                _ => {
+                    let mut line = item.line;
+                    line.right = item.right;
+                    lines.push((item.top, item.right, line));
+                }
             }
         }
 
         Reading {
-            lines: lines.into_iter().map(|(_, _, line)| line).collect(),
+            lines: lines
+                .into_iter()
+                .map(|(_, _, mut line)| {
+                    line.text = read_pound_sign(&line.text);
+                    line
+                })
+                .collect(),
         }
     }
+}
+
+/// Put back a `£` the reader saw as `E`.
+///
+/// Vision reads a printed pound sign as a capital E about a third of
+/// the time on the synthetic photo bed, sometimes both ways in one
+/// line, and no language setting changes it. An `E` at the start of a
+/// word, directly before digits with pence (`E87.44`, `E1,967.41`), is
+/// a pound sign: no British letter writes an amount that way. A
+/// postcode (`E3 8ZA`), a reference (`E12`) or a grade (`E2.1`) has no
+/// pence and is left exactly as read. Applied to both readings, because
+/// it is a glyph the reader cannot draw, not a word it might correct —
+/// so it never manufactures a disagreement (#412).
+fn read_pound_sign(text: &str) -> String {
+    let chars: Vec<char> = text.chars().collect();
+    let mut out = String::with_capacity(text.len());
+    for (i, &c) in chars.iter().enumerate() {
+        let word_start = i == 0 || matches!(chars[i - 1], ' ' | '(' | '[' | '\u{a0}');
+        if c == 'E' && word_start && amount_with_pence_follows(&chars[i + 1..]) {
+            out.push('£');
+        } else {
+            out.push(c);
+        }
+    }
+    out
+}
+
+/// `\d[\d,]*\.\d\d` and then not another digit.
+fn amount_with_pence_follows(rest: &[char]) -> bool {
+    let mut i = 0;
+    while i < rest.len() && (rest[i].is_ascii_digit() || (i > 0 && rest[i] == ',')) {
+        i += 1;
+    }
+    if i == 0 || rest.get(i) != Some(&'.') {
+        return false;
+    }
+    let pence = &rest[i + 1..];
+    pence.len() >= 2
+        && pence[0].is_ascii_digit()
+        && pence[1].is_ascii_digit()
+        && !pence.get(2).is_some_and(|c| c.is_ascii_digit())
 }
 
 /// One line two readings of the same page did not agree about.
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Disagreement {
+    /// 1-based page within the logical document. A photographed page
+    /// starts at one and ordered page groups offset it when combined.
+    #[serde(default = "first_page")]
+    pub page: usize,
     /// Where on the page, so the dispute can be attached to the passage
     /// it lands in rather than to a line number nobody can see.
     pub top: f64,
@@ -201,6 +306,10 @@ pub struct Disagreement {
     pub read: String,
     /// What the second made of it — empty if it saw nothing there.
     pub also_read: String,
+}
+
+fn first_page() -> usize {
+    1
 }
 
 impl Disagreement {
@@ -222,7 +331,39 @@ impl Disagreement {
     }
 }
 
+/// The page a normalised reading is laid onto, in points: A4. A
+/// photograph states no paper size, and the segmenter's tolerances —
+/// a 3pt row, a gap measured against the page's own leading — were
+/// written for a page in points. A4 is the paper every letter in the
+/// bed is printed on, and the only thing the choice changes is the
+/// unit `ROW_TOLERANCE` is read in.
+const PAGE_WIDTH_PT: f64 = 595.0;
+const PAGE_HEIGHT_PT: f64 = 842.0;
+
 impl Reading {
+    /// The reading as a positioned page, so a photograph is segmented
+    /// by the same geometry a PDF page is (#399, #256).
+    ///
+    /// `text()` flattened the lines to a string and left the segmenter
+    /// to guess, from character counts, which lines had wrapped; on the
+    /// synthetic photo bed that guess split 26 of 29 asks at a line
+    /// break. The camera saw where every line sat. This keeps it.
+    pub fn page(&self) -> crate::pdf::Page {
+        crate::pdf::Page {
+            fragments: self
+                .lines
+                .iter()
+                .filter(|line| !line.text.trim().is_empty())
+                .map(|line| crate::pdf::Fragment {
+                    text: line.text.trim().to_owned(),
+                    x: (line.left * PAGE_WIDTH_PT) as f32,
+                    right: (line.right * PAGE_WIDTH_PT) as f32,
+                    y: ((line.top + line.bottom) / 2.0 * PAGE_HEIGHT_PT) as f32,
+                })
+                .collect(),
+        }
+    }
+
     /// Where this reading and another disagree about the same page.
     ///
     /// The reason this exists rather than a higher confidence
@@ -264,11 +405,13 @@ impl Reading {
                 match against {
                     Some(found) if same_reading(&found.text, &line.text) => None,
                     Some(found) => Some(Disagreement {
+                        page: 1,
                         top: line.top,
                         read: line.text.clone(),
                         also_read: found.text.clone(),
                     }),
                     None => Some(Disagreement {
+                        page: 1,
                         top: line.top,
                         read: line.text.clone(),
                         also_read: String::new(),
@@ -324,11 +467,31 @@ const LINE_FLOOR: f32 = 0.5;
 /// eight is refused.
 const PAGE_TOLERANCE: f32 = 0.25;
 
+/// The shortest edge a photographed page needs before its characters
+/// are large enough for a deadline to be trusted. The first field
+/// measurements bracketed the boundary: 612×792 failed while
+/// 1855×2400 read cleanly (#399). 1200 refuses the known-bad rendition
+/// with room for ordinary phone photographs.
+const MIN_SHORT_EDGE: usize = 1200;
+
+/// Refuse a small rendition before OCR can turn a fuzzy digit into a
+/// tidy but wrong deadline.
+pub fn check_dimensions(width: usize, height: usize) -> Result<(), OcrError> {
+    if width.min(height) < MIN_SHORT_EDGE {
+        Err(OcrError::TooSmall { width, height })
+    } else {
+        Ok(())
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum OcrError {
     /// Nothing resolved at all — a photograph of a desk, or a page so
     /// dark no text came out of it.
     NoText,
+    /// The picture is a preview or thumbnail rather than a full-size
+    /// camera image.
+    TooSmall { width: usize, height: usize },
     /// Enough of the page read badly that none of it can be trusted.
     TooUncertain {
         /// How many lines fell below the floor, and out of how many.
@@ -354,6 +517,10 @@ impl std::fmt::Display for OcrError {
                 f,
                 "found no text in this picture — check the letter fills the frame \
                  and the light is even, then take it again"
+            ),
+            OcrError::TooSmall { .. } => write!(
+                f,
+                "this picture is too small to read safely — choose the original, full-size photo"
             ),
             // Says what they did and what to do about it. No score, no
             // threshold, no "OCR": the fix is in their hands and it

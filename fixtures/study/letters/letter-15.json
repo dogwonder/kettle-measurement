@@ -1,0 +1,90 @@
+{
+  "actions": {
+    "actions": [
+      {
+        "detail": "Pelham Parking Enforcement asked for this by 22 March 2026. The letter says \"within 30 days\".",
+        "evidence": {
+          "asked_by": "Pelham Parking Enforcement",
+          "in_the_letter": "within 30 days",
+          "passage_1": "The charge is £97.45. If you pay within 30 days of the date of this letter the amount is reduced to £58.47."
+        },
+        "export": {
+          "ics": {
+            "date": "2026-03-22",
+            "summary": "Pay the parking charge — Pelham Parking Enforcement"
+          },
+          "text": "Pay the parking charge (Pelham Parking Enforcement) — within 30 days"
+        },
+        "id": "act-01",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Pay the parking charge"
+      },
+      {
+        "detail": "Pelham Parking Enforcement asked for this, but the letter does not give a date Kettle could work out — it says \"no particular date\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "Pelham Parking Enforcement",
+          "in_the_letter": "no particular date",
+          "passage_1": "Please quote the reference printed at the top of this letter in all correspondence. Without it we may be unable to trace your account and a reply will take longer."
+        },
+        "export": {
+          "text": "Quote the reference in all correspondence (Pelham Parking Enforcement) — no particular date"
+        },
+        "id": "act-02",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Quote the reference in all correspondence"
+      },
+      {
+        "detail": "the organisation named at the head of this letter asked for this, but the letter does not give a date Kettle could work out — it says \"no particular date\". Choose a date that suits you.",
+        "evidence": {
+          "asked_by": "the organisation named at the head of this letter",
+          "in_the_letter": "no particular date",
+          "passage_1": "This letter can be provided in large print, braille, audio or another language. Please tell us which format you need and we will arrange it at no cost."
+        },
+        "export": {
+          "text": "Tell us which format you need (the organisation named at the head of this letter) — no particular date"
+        },
+        "id": "act-03",
+        "kind": "calendar_reminder",
+        "status": "proposed",
+        "title": "Tell us which format you need"
+      }
+    ],
+    "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+    "run_id": "letter-15",
+    "schema": "kettle/proposed-actions@0"
+  },
+  "expected": [
+    {
+      "anchor": "the date of this letter",
+      "deadline": "within 30 days",
+      "due": "2026-03-22",
+      "id": "parking_charge-029-02",
+      "kind": "payment",
+      "party": "Pelham Parking Enforcement",
+      "segment": "The charge is £97.45. If you pay within 30 days of the date of this letter the amount is reduced to £58.47."
+    },
+    {
+      "anchor": "3 April 2026",
+      "deadline": "after 3 April 2026 will not be considered",
+      "due": "2026-04-03",
+      "id": "parking_charge-029-03",
+      "kind": "response",
+      "party": "Pelham Parking Enforcement",
+      "segment": "If you believe the notice was issued in error you may appeal in writing to the address above, quoting the reference. An appeal received after 3 April 2026 will not be considered."
+    }
+  ],
+  "id": "letter-15",
+  "model": "qwen3.5-4b-q4_k_m.gguf",
+  "pack": {
+    "id": "app.kttl.letter-to-actions",
+    "version": "0.3.0"
+  },
+  "schema": "kettle/study-letter@0",
+  "source": {
+    "file": "parking_charge-029.txt",
+    "hash": "blake3:84186f50fa0eb99d3bc7d58e096744e8c8be6aef064d71aed4731a82dd1e0804",
+    "text": "20 February 2026\nPelham Parking Enforcement\nOur reference: P330833-0\n\nDear D Blake,\n\nA vehicle registered to you was recorded at Amy Isle on 6 February 2026 at 3.50pm without a valid ticket or permit. This is a Parking Charge Notice, reference P330833-0.\n\nThe charge is £97.45. If you pay within 30 days of the date of this letter the amount is reduced to £58.47.\n\nIf you believe the notice was issued in error you may appeal in writing to the address above, quoting the reference. An appeal received after 3 April 2026 will not be considered.\n\nPhotographs taken at the time are held on file and can be requested.\n\nThis notice is issued under Schedule 4 of the Protection of Freedoms Act 2012. If the driver is not identified within the period stated, the registered keeper may become liable. If your appeal to us is unsuccessful you will be given a code to take it to the independent appeals service.\n\nYours sincerely,\nCheryl Cox\nPelham Parking Enforcement\n\nHOW WE USE YOUR INFORMATION\n\nWe hold the details on this letter to administer your account and to meet our legal duties. We do not sell personal information. Our full privacy notice sets out what we hold, how long we keep it and who we share it with, and is available on request from the address at the head of this letter.\n\nWhere we share information with another organisation it is because the law requires it or because that organisation acts for us under a written agreement. We keep records for as long as the account is open and for six years afterwards.\n\n\nWAYS TO CONTACT US\n\nOur office hours are 9am to 5pm, Monday to Friday, excluding bank holidays. Calls are answered in the order received and may be recorded for training and quality purposes. Written correspondence is acknowledged within ten working days.\n\nPlease quote the reference printed at the top of this letter in all correspondence. Without it we may be unable to trace your account and a reply will take longer.\n\n\nWAYS TO PAY\n\nDirect Debit is the simplest way to pay and can be set up over the telephone or online. Instalments are collected on the date shown on the schedule; where a collection fails we will write to you before trying again.\n\nBank transfer, standing order, debit card over the telephone, and cash or cheque at any of our offices are also accepted. Cheques should be made payable to the organisation named at the head of this letter, with the reference written on the back.\n\nA payment made by post is treated as received on the working day it reaches us, not the day it was sent. Allow five working days for a cheque to be cleared.\n\n\nIF YOU ARE STRUGGLING\n\nFree, independent advice on money and debt is available from national advice charities. Telling us early about a difficulty gives us the widest range of options to help.\n\nA payment arrangement can spread an amount over a longer period. Arrangements are reviewed every six months and can be changed if your circumstances change.\n\n\nACCESSIBILITY\n\nThis letter can be provided in large print, braille, audio or another language. Please tell us which format you need and we will arrange it at no cost.\n\nOur offices have step-free access and a hearing loop at reception. A British Sign Language interpreter can be booked for appointments with three working days' notice.\n\n\nCOMPLAINTS\n\nIf you are unhappy with the service you have received, tell us and we will look into it. Our complaints procedure has two stages and is explained in full on request. If you remain dissatisfied at the end of it, you may refer the matter to the relevant independent scheme.\n\nA complaint does not change any amount or date stated in the letter it concerns unless we write to say so.\n\n\nFREQUENTLY ASKED QUESTIONS\n\nWhy have I received this letter? Because our records show the account or matter described is in your name. If you believe that is wrong, contact us with the reference and we will check.\n\nWhat happens if I do nothing? The amounts and dates in the letter stand. Where there is a consequence for missing a date it is stated in the letter itself, not on these pages.\n\nCan I get a copy? Yes. A duplicate of any letter we have sent can be requested by telephone or in writing and is normally issued within five working days.\n\nIs this a scam? We will never ask you for your full bank details or a one-time code by telephone. If you are unsure, call the number printed at the head of this letter, not one given to you by a caller.\n\n"
+  }
+}

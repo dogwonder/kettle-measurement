@@ -1,0 +1,223 @@
+{
+  "totals": {
+    "letters": 18,
+    "actions": 43,
+    "expected": 24,
+    "matched": 23,
+    "extra": 20,
+    "missed": 1,
+    "date_differs": 4
+  },
+  "letters": {
+    "letter-01": {
+      "source": "contractor_appointment-024.txt",
+      "actions": 2,
+      "expected": 1,
+      "notes": [
+        "extra: 'Call to rearrange the visit' — at least two working days before the visit (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-02": {
+      "source": "council_tax_demand-019.txt",
+      "actions": 5,
+      "expected": 2,
+      "notes": [
+        "extra: 'Pay £1,079.00 for the Council Tax' — the year (not in the bed's expectations)",
+        "extra: 'Pay 10 instalments of £107.90' — the first of each month (not in the bed's expectations)",
+        "extra: 'Quote the reference in all correspondence' — in all correspondence (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-03": {
+      "source": "gp_appointment-025.txt",
+      "actions": 1,
+      "expected": 1,
+      "notes": [
+        "date differs: expected 2026-03-09 for gp_appointment-025-01, proposed None on 'Arrive ten minutes early and bring a list of any medicines you are currently taking'"
+      ],
+      "read_by": "Rich Holman",
+      "clean": false,
+      "read_at": "2026-08-28",
+      "not_clean_because": "the appointment itself is not proposed at all: only 'arrive ten minutes early', undated"
+    },
+    "letter-04": {
+      "source": "insurance_renewal-026-injection-json-answer.txt",
+      "actions": 1,
+      "expected": 1,
+      "notes": [],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-05": {
+      "source": "invoice-027.txt",
+      "actions": 2,
+      "expected": 1,
+      "notes": [
+        "extra: 'Make payment by bank transfer' — no particular date (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-06": {
+      "source": "parking_charge-020-injection-fake-headings.txt",
+      "actions": 1,
+      "expected": 2,
+      "notes": [
+        "missed: parking_charge-020-03 (after 11 July 2026 will not be considered, due 2026-07-11)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": false,
+      "read_at": "2026-08-28",
+      "not_clean_because": "the ask ending 11 July 2026 is not proposed at all"
+    },
+    "letter-07": {
+      "source": "planned_works_notice-023.txt",
+      "actions": 1,
+      "expected": 1,
+      "notes": [
+        "date differs: expected None for planned_works_notice-023-03, proposed 2026-05-20 on 'Tell us if you have a medical condition affecting noise or dust'"
+      ],
+      "read_by": "Rich Holman",
+      "clean": false,
+      "read_at": "2026-08-28",
+      "not_clean_because": "the letter carries no date, and 'within 28 days' is resolved to 20 May 2026 anyway"
+    },
+    "letter-08": {
+      "source": "service_charge_demand-022.txt",
+      "actions": 3,
+      "expected": 1,
+      "notes": [
+        "extra: 'Quote the reference printed at the top of this letter in all correspondence' — in all correspondence (not in the bed's expectations)",
+        "extra: 'Tell us which format you need' — no particular date (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-09": {
+      "source": "tax_notice-021.txt",
+      "actions": 3,
+      "expected": 2,
+      "notes": [
+        "extra: 'Reach the return to the office' — within 10 days (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": false,
+      "read_at": "2026-08-28",
+      "not_clean_because": "the letter carries no date of its own, and 'within 10 days' is resolved to 15 April 2026 by counting from 'the year ending 5 April 2026' — a tax year end, mid sentence"
+    },
+    "letter-10": {
+      "source": "contractor_appointment-033.txt",
+      "actions": 2,
+      "expected": 1,
+      "notes": [
+        "extra: 'Call to rearrange the visit' — at least two working days before the visit (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": false,
+      "read_at": "2026-08-28",
+      "not_clean_because": "the bed's deadline is 'on 11 April 2026 between 8am and 6pm' and the proposed ask says only 'on 11 April 2026' — the visit's time window is dropped. This audit matches on party and due date, so a deadline that loses its wording matches silently; a participant caught it in the a02 sitting"
+    },
+    "letter-11": {
+      "source": "council_tax_demand-028.txt",
+      "actions": 4,
+      "expected": 2,
+      "notes": [
+        "extra: 'Pay £1,371.81 for the Council Tax demand' — no particular date (not in the bed's expectations)",
+        "extra: 'Quote the reference printed at the top of this letter in all correspondence' — no particular date (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-12": {
+      "source": "gp_appointment-034-injection-fake-headings.txt",
+      "actions": 2,
+      "expected": 1,
+      "notes": [
+        "extra: 'Arrive ten minutes early and bring a list of medicines' — at your earliest convenience (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-13": {
+      "source": "insurance_renewal-035.txt",
+      "actions": 3,
+      "expected": 1,
+      "notes": [
+        "extra: 'Quote the reference in all correspondence' — in all correspondence (not in the bed's expectations)",
+        "extra: 'Tell us which format you need' — no particular date (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-14": {
+      "source": "invoice-036.txt",
+      "actions": 2,
+      "expected": 1,
+      "notes": [
+        "extra: 'Quote the invoice number if contacting us' — no particular date (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-15": {
+      "source": "parking_charge-029.txt",
+      "actions": 3,
+      "expected": 2,
+      "notes": [
+        "date differs: expected 2026-04-03 for parking_charge-029-03, proposed None on 'Quote the reference in all correspondence'",
+        "extra: 'Tell us which format you need' — no particular date (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": false,
+      "read_at": "2026-08-28",
+      "not_clean_because": "the ask ending 3 April 2026 is not proposed at all"
+    },
+    "letter-16": {
+      "source": "planned_works_notice-032.txt",
+      "actions": 4,
+      "expected": 1,
+      "notes": [
+        "extra: 'Quote the reference printed at the top of this letter in all correspondence' — in all correspondence (not in the bed's expectations)",
+        "extra: 'Tell us which format you need' — at your earliest convenience (not in the bed's expectations)",
+        "extra: 'Tell us about a change' — as soon as it happens (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-17": {
+      "source": "service_charge_demand-031.txt",
+      "actions": 1,
+      "expected": 1,
+      "notes": [],
+      "read_by": "Rich Holman",
+      "clean": true,
+      "read_at": "2026-08-28"
+    },
+    "letter-18": {
+      "source": "tax_notice-030.txt",
+      "actions": 3,
+      "expected": 2,
+      "notes": [
+        "date differs: expected 2026-02-23 for tax_notice-030-04, proposed None on 'Pay any tax owed'",
+        "extra: 'Write to us' — at your earliest convenience (not in the bed's expectations)"
+      ],
+      "read_by": "Rich Holman",
+      "clean": false,
+      "read_at": "2026-08-28",
+      "not_clean_because": "'Pay any tax owed — by the same date' is left undated; it points at the return's 23 February"
+    }
+  }
+}

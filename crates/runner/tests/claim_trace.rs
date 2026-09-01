@@ -159,10 +159,10 @@ fn an_accepted_obligation_links_to_its_report_row_and_exportable_action() {
             )]),
             disputed: Vec::new(),
             export: ActionExport {
-                ics: IcsExport {
+                ics: Some(IcsExport {
                     summary: "Send proof".to_owned(),
                     date: chrono::NaiveDate::from_ymd_opt(2026, 9, 14).unwrap(),
-                },
+                }),
                 text: "Send proof within 14 days".to_owned(),
             },
             status: STATUS_PROPOSED.to_owned(),

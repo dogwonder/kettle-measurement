@@ -34,7 +34,7 @@ enum Command {
     },
     /// Run a pack against your files
     Run {
-        /// The pack's id, e.g. app.kttl.subscription-audit
+        /// The pack's id, e.g. app.kttl.letter-to-actions
         pack: String,
         /// The files to read
         inputs: Vec<PathBuf>,
@@ -67,7 +67,7 @@ enum Command {
     /// Regenerate a pack's generated eval bed from its committed spec
     Bed {
         /// The pack whose bed to regenerate
-        #[arg(long, default_value = "packs/app.kttl.subscription-audit")]
+        #[arg(long, default_value = "packs/app.kttl.letter-to-actions")]
         pack_dir: PathBuf,
         /// Say what would change and write nothing
         #[arg(long)]

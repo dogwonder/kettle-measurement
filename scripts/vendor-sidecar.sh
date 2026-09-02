@@ -101,8 +101,9 @@ case "$(uname -sm)" in
     # above exist because those binaries go in an installer and must
     # start on a stranger's machine. This one runs on a box that is
     # destroyed afterwards, so the machine it was built on is the only
-    # machine it needs to start on. `GGML_NATIVE=ON` follows from the
-    # same fact — tune for the host, since there is no other host.
+    # machine it needs to start on. (`GGML_NATIVE` is still OFF below:
+    # it does not configure alongside `GGML_BACKEND_DL`, as the build
+    # step explains, and the accelerator does the work anyway.)
     PLATFORM="linux-x86_64"
     MODE="source"
     ARCHIVE="llama.cpp-$BUILD.tar.gz"

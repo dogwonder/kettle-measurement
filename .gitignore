@@ -56,6 +56,9 @@ pod-*.tgz
 *.private.png
 *.private.heic
 *.private.heif
+*.private.webp
+*.private.tif
+*.private.tiff
 # A phone does not name files in lower case. `core.ignorecase` hides
 # this on macOS and does not on Linux or in CI, and the failure mode is
 # a real letter that was ignored on the machine it was taken on and
@@ -65,6 +68,9 @@ pod-*.tgz
 *.private.PNG
 *.private.HEIC
 *.private.HEIF
+*.private.WEBP
+*.private.TIF
+*.private.TIFF
 
 # OS noise
 .DS_Store

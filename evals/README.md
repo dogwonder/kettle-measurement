@@ -1,30 +1,33 @@
 # evals/
 
-The runner scores at version 15 (#554, 22 August 2026) and no v15
-baseline has been recorded yet: the `baseline-v14-*.json` files below
-are refused by `--baseline` (exit 2) until the pod re-records them with
-`--runs 3`, and the claims standing on them read unproven meanwhile.
-The v15 rule was verified by replaying the archived v14 recordings —
-zero metric lines moved on either committed bed. Before a prompt edit,
-write a fresh baseline under the current scoring version, then compare
-the edited prompt against that exact file.
+The runner scores at version 17 (#581, 30 August 2026), and the
+`baseline-v17-*.json` files below are the floors recorded under it.
+Before a prompt edit, write a fresh baseline under the current scoring
+version, then compare the edited prompt against that exact file — and
+on the same backend it was recorded on, since #596 (2 September 2026)
+`--baseline` refuses a comparison across backends (exit 2), exactly as
+it refuses a scoring-version or bed mismatch.
 
 ## What is in this directory
 
-- `baseline-v14-letter.json` — the letter pack's last recorded floor
-  (scoring v14; refused by the v15 runner until re-recorded):
-  Qwen3.5-4B on the development bed, scoring v14, recorded 14 August
-  2026 on a rented RTX 5090 (verdict PASS). This is the file a
-  prompt edit is compared against, and the evidence `letter-harm-ceilings`
-  stands on. Its predecessor moved to `history/` when it stopped being
-  cited.
-- `baseline-v14-renewal.json` — the renewal pack's last recorded floor
-  (scoring v14; refused likewise):
-  Qwen3.5-4B on the development bed, scoring v14, recorded 14 August
-  2026 on the same rented RTX 5090 (verdict PASS). The evidence
-  `renewal-development-verdict` stands on. Its v13 predecessor moved to
-  `history/`, where `renewal-v12-fail-verdict` still cites it as the
-  record of a withdrawn claim.
+- `baseline-v17-letter.json` — the letter pack's current floor:
+  Qwen3.5-4B on the development bed, scoring v17, recorded 31 August
+  2026 on the M1 Pro (Metal; verdict PASS). This is the file a prompt
+  edit is compared against, and the evidence `letter-harm-ceilings`
+  stands on. Recorded on Metal, so it compares against local runs; a
+  pod run needs a pod-recorded baseline.
+- `baseline-v17-renewal.json` — the renewal pack's current floor:
+  Qwen3.5-4B on the development bed, scoring v17, recorded 30 August
+  2026 on the M1 Pro (Metal; verdict PASS). The evidence
+  `renewal-development-verdict` stands on.
+- `baseline-v16-letter.json`, `baseline-v16-renewal.json` — the v16
+  floors, recorded 25 August 2026 on a rented RTX 3090 (CUDA; both
+  PASS). Superseded by the v17 files and refused by the runner; kept
+  here rather than moved because a published path is a stability
+  commitment (#478) and the v16 disprovable-ceiling record cites them.
+- `baseline-v14-letter.json`, `baseline-v14-renewal.json` — the v14
+  floors, recorded 14 August 2026 on a rented RTX 5090 (both PASS).
+  Kept for the same reason; `history/` holds the rest.
 - `baseline.json` — the subscription-audit pack's baseline (scoring v5,
   recorded 31 July 2026). Superseded like the files in `history/`, and
   kept here anyway because it is the path `app/RELEASE-CHECKS.md` and
@@ -79,13 +82,18 @@ bytes is a poor trade.
 `baseline.json` deliberately stays put: it is the stable path
 `app/RELEASE-CHECKS.md`, `CLAUDE.md` and this file all name when a new
 subscription-audit baseline is written. Its present scoring-v5 contents
-are a historical record and cannot be compared under scoring v14.
+are a historical record and cannot be compared under scoring v17.
 
-**The pod is the default for full runs** (31 August 2026): scores
-matched across backends on every stratum measured, so the guarded
-full bed, tiers and baseline recordings go to the rented GPU, and the
-M1 Pro is for what ships on it — the packaged app, real letters, and
-spot re-runs of a pod verdict that gates a claim.
+**The pod is the default for full runs, compared against pod
+baselines** (31 August 2026, amended 2 September on #596). Aggregate
+strata matched across backends; decisions did not — Metal and CUDA
+disagreed on 53 of 852 passages on one build and one set of weights —
+so a baseline is compared only on the backend it was recorded on, and
+`--baseline` refuses otherwise. Guarded full-bed and baseline
+recordings go to the rented GPU; tiers stay local, being a sentence
+about somebody's own laptop; and the M1 Pro keeps what ships on it —
+the packaged app, real letters, and a local re-run against a local
+baseline as the double-check of a pod verdict that gates a claim.
 
 Running a bed on rented hardware — which box, which credentials, and
 what a cross-machine measurement does and does not license — is

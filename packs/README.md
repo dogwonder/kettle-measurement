@@ -110,11 +110,14 @@ diff the same way. Contract tests: `crates/runner/tests/terms.rs`.
 
 | Pack | Typology | Pipeline |
 |---|---|---|
-| `app.kttl.subscription-audit` | Audit | `statement-parse` → `normalise` → `classify` → `recurrence-detect` → render |
 | `app.kttl.letter-to-actions` | Extraction | `document-text` → `obligations` → `timeline-sort` → render |
 | `app.kttl.renewal-diff` | Comparison | `document-text` → `policy-terms` → `term-diff` → render |
+| `app.kttl.subscription-audit` — **withdrawn** 30 August 2026 (#545): measured, never offered | Audit | `statement-parse` → `normalise` → `classify` → `recurrence-detect` → render |
 
-All three are data only: every step above is a builtin or a declared
+The subscription audit carries a `withdrawn { on, why, record }` block
+in its manifest, so `kettle eval` still runs it and the app never shows
+it; it stays as the one bed on which 4B, 9B and 27B differ. All three
+are data only: every step above is a builtin or a declared
 model role, and `the_pack_directory_contains_no_executable_code` holds
 them to it. The letter and renewal packs' bed generators live in
 `crates/runner` beside the statement one — a generator is development

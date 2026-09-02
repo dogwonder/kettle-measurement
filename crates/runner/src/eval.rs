@@ -828,12 +828,40 @@ pub struct SidecarInfo {
     ///
     /// `None` means "not recorded" — a report from before the field
     /// existed, or a startup output that never said — and never means
-    /// "no accelerator": a CPU run says "CPU". Compared with a note
-    /// rather than refused, exactly as an absent `runtime` or `bed` is;
-    /// whether two devices' scores are comparable at all is
-    /// `evals/RENTED-GPU.md`'s open question, not this field's claim.
+    /// "no accelerator": a CPU run says "CPU". An absent device is
+    /// compared with a note, exactly as an absent `runtime` or `bed`
+    /// is.
+    ///
+    /// Whether two devices' scores are comparable was
+    /// `evals/RENTED-GPU.md`'s open question until 1 September 2026
+    /// (#596): on one build and one set of weights, Metal and CUDA
+    /// disagreed on 53 of 852 passages at the decision level — 32 of
+    /// them on whether an obligation existed at all — while two CUDA
+    /// runs were byte-identical. So the [`backend`](Self::backend) is
+    /// provenance a comparison refuses to cross, and the resume key
+    /// carries the whole device string so an interrupted run can never
+    /// splice one runtime's answers into another's.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub device: Option<String>,
+}
+
+impl SidecarInfo {
+    /// Which backend answered: the device name shorn of its index and
+    /// its card — `MTL0 (Apple M1 Pro)` is `MTL`, `CUDA0 (NVIDIA
+    /// GeForce RTX 5090)` is `CUDA`, `CPU` is `CPU`, and several cards
+    /// on one backend are that backend.
+    ///
+    /// The line a baseline comparison refuses to cross (#596). A
+    /// different card on the same backend is the case that measurement
+    /// could not separate — every Metal run was one laptop and every
+    /// CUDA run one pod — so it is said out loud and not refused.
+    /// `None` when the device was never recorded: nothing to claim.
+    pub fn backend(&self) -> Option<&str> {
+        let device = self.device.as_deref()?;
+        let first = device.split([' ', ',']).next()?;
+        let name = first.trim_end_matches(|c: char| c.is_ascii_digit());
+        (!name.is_empty()).then_some(name)
+    }
 }
 
 /// The runtime policy a measurement ran under (#232): what the sidecar

@@ -294,7 +294,7 @@ impl Comparison {
             let count = self.refusals.len();
             let plural = if count == 1 { "" } else { "s" };
             out.push_str(&format!(
-                "{count} comparison{plural} refused — the bed moved under the baseline:\n"
+                "{count} comparison{plural} refused — the instrument moved under the baseline:\n"
             ));
             for refusal in &self.refusals {
                 out.push_str(&format!("  - {refusal}\n"));
@@ -763,19 +763,25 @@ fn note_sidecar_change(what: &str, was: &EvalReport, is: &EvalReport, comparison
     ));
 }
 
-/// Say so when the device that answered changed between the two
-/// measurements, or when one of them never said (#490).
+/// Refuse across backends; say so across cards; say so when one side
+/// never said (#490, #596).
 ///
-/// A note and never a refusal, deliberately — the same treatment an
-/// absent `runtime` or `bed` gets. A refusal hands someone a reason
-/// they cannot act on cheaply (re-recording a baseline costs a GPU
-/// run), and whether two devices' scores are comparable at all is the
-/// open question `evals/RENTED-GPU.md` records, not a call this
-/// comparison is entitled to make. What it *is* entitled to do is stop
-/// a cross-device hold being read as a same-instrument one: a CPU-only
-/// fallback build (`scripts/vendor-sidecar.sh`) is correct and many
-/// times slower, and without this line its timings would be read
-/// against a GPU baseline as a mystery.
+/// Until 1 September 2026 this was a note and never a refusal, because
+/// whether two devices' scores were comparable was
+/// `evals/RENTED-GPU.md`'s open question. It is answered: on one build
+/// and one set of weights, Metal and CUDA disagreed on 53 of 852
+/// passages at the decision level, 32 of them on whether an obligation
+/// existed at all, while two CUDA runs were byte-identical. Aggregates
+/// had hidden it — 56 strata, 0 differences — because presence changes
+/// cancel inside a rate. So a hold read across a backend is not a hold,
+/// and this refuses it the way a bed or policy change is refused.
+///
+/// A different card on the same backend stays a note: every Metal run
+/// was one laptop and every CUDA run one pod, so that case was never
+/// separated, and a note says "unmeasured" where a refusal would claim
+/// "different" and a silence would claim "same". An unrecorded device
+/// stays a note for the reason a pre-bed report does — refusing would
+/// retire every baseline on disk for a property none could carry.
 fn note_device_change(what: &str, was: &EvalReport, is: &EvalReport, comparison: &mut Comparison) {
     // No sidecar means no device to speak of — a mock endpoint or a
     // replay makes no claim about hardware, and chat about a device
@@ -784,11 +790,21 @@ fn note_device_change(what: &str, was: &EvalReport, is: &EvalReport, comparison:
         return;
     };
     match (&was_sidecar.device, &is_sidecar.device) {
+        (Some(before), Some(after)) if was_sidecar.backend() != is_sidecar.backend() => {
+            comparison.refusals.push(format!(
+                "{what}: the baseline was answered on {before} and this eval on {after}. \
+                 Two backends on the same build and weights disagreed on 6.2% of \
+                 decisions (#596), so a hold or a drop across that line would be \
+                 movement that is only the runtime changing. Compare against a \
+                 baseline recorded on this backend, or re-record one here with \
+                 --write-baseline.",
+            ))
+        }
         (Some(before), Some(after)) if before != after => comparison.notes.push(format!(
-            "Note: {what} was answered on a different device this time — the baseline \
-             ran on {before} and this eval on {after}. The device moves timings and \
-             can move scores; read anything above against that, and read a clean hold \
-             as a cross-device one.",
+            "Note: {what} was answered on a different card this time — the baseline \
+             ran on {before} and this eval on {after}. The same backend, so the \
+             comparison goes ahead; whether two cards answer identically has not \
+             been measured, so read a clean hold as a cross-card one.",
         )),
         (None, _) | (_, None) => comparison.notes.push(format!(
             "Note: {what}: one side does not say which device answered, so this \

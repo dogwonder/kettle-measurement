@@ -39,6 +39,14 @@ pub struct ResumeKey {
     /// The weights are pinned; the sidecar is not, and a version bump
     /// can change grammar-constrained sampling on its own (#74).
     pub sidecar: String,
+    /// What the sidecar loaded the model on, in its own words, or
+    /// "unrecorded". The same build answers differently on Metal and
+    /// on CUDA — 53 of 852 passages on 1 September 2026 — and a run
+    /// interrupted on one runtime and resumed on another would present
+    /// both sets of answers as one recording (#596). The whole device
+    /// string, not only the backend: resume is a promise of
+    /// byte-identity, and only the same runtime keeps it.
+    pub device: String,
     pub scoring_version: u32,
     /// The sealed exam selection must never be spent by accident.
     pub eval_set: EvalSet,
@@ -63,6 +71,7 @@ impl ResumeKey {
             self.prompt_version.as_str(),
             self.model.as_str(),
             self.sidecar.as_str(),
+            self.device.as_str(),
             &self.scoring_version.to_string(),
             self.eval_set.as_str(),
             self.fixture.as_str(),

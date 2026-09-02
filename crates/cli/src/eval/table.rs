@@ -85,8 +85,16 @@ pub fn render(pack: &str, reports: &[&EvalReport], runs: u32) -> String {
         rows.push(row);
     }
 
+    // A run assembled across sittings says so where the fixture count
+    // is, because that count is what it qualifies (#596): 539 fixtures
+    // with 32 resumed is 507 asked this sitting, and the pod's first
+    // full run learnt that from counting directories.
+    let resumed = match first.reused_fixtures {
+        0 => String::new(),
+        n => format!(" ({n} resumed)"),
+    };
     let mut out = format!(
-        "{pack} v{} · {} set · {} · {} · {} {}GB\n\n",
+        "{pack} v{} · {} set · {}{resumed} · {} · {} {}GB\n\n",
         first.pack_version,
         first.eval_set.as_str(),
         count(first.fixtures.len(), "fixture"),
@@ -689,6 +697,28 @@ mod tests {
 
     /// A pack that declares no relations says nothing about them. The
     /// subscription table must not grow a line of zeroes.
+    /// #596: a run assembled across two sittings says so in its own
+    /// output. The pod's first full run had 507 run directories for
+    /// 539 fixtures, and the only way to learn that was to count them
+    /// during an archive check.
+    #[test]
+    fn a_run_that_reused_fixtures_says_how_many_in_its_header() {
+        let mut resumed = report(Vec::new());
+        resumed.reused_fixtures = 32;
+        let out = render("app.kttl.letter-to-actions", &[&resumed], 1);
+        assert!(
+            out.lines().next().unwrap_or("").contains("32 resumed"),
+            "the header names what was not measured this sitting:\n{out}"
+        );
+
+        let fresh = report(Vec::new());
+        let out = render("app.kttl.letter-to-actions", &[&fresh], 1);
+        assert!(
+            !out.contains("resumed"),
+            "a run measured in one sitting has nothing to add:\n{out}"
+        );
+    }
+
     #[test]
     fn a_pack_with_no_relations_prints_no_relation_block() {
         let out = render("app.kttl.letter-to-actions", &[&report(Vec::new())], 1);

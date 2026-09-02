@@ -600,6 +600,10 @@ trusted rather than merely believed (#84, #74, #303, #320, #232):
   sidecar is not, and a version bump can change grammar-constrained
   sampling on its own. When it differs between baseline and run, the
   comparison says so, so a drop isn't blamed on the last prompt edit.
+  Its `device` is which backend answered, and that is refused rather
+  than noted (#596): Metal and CUDA on one build disagreed on 6.2% of
+  decisions, so a baseline is compared only on the backend it was
+  recorded on. A different card on the same backend is a note.
 - `model` — *whose answers these are*, and it now survives a replay
   (#303). `baseline::compare` joins on the model, so a replayed report
   that could not name one could never be compared against a live

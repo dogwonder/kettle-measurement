@@ -70,7 +70,9 @@ function finished(participant = "p07"): Transcript {
  * draws: `begin` records the whole pool so `rebuild` can refuse a corpus
  * that is not the one the participant saw.
  */
-function letterCorpus(): StudyCorpus {
+/** Typed as the letters member, not the union: the caller reads
+ * `.letters` off it, and a union hides that from the type checker. */
+function letterCorpus(): Extract<StudyCorpus, { material: "letters" }> {
   const dir = join(repoRoot, "fixtures/study/letters");
   const letters = readdirSync(dir)
     .filter((name) => /^letter-\d{2}\.json$/.test(name))

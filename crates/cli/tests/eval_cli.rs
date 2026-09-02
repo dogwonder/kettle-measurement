@@ -2199,16 +2199,18 @@ fn the_same_sidecar_is_not_worth_mentioning() {
 }
 
 // ---------------------------------------------------------------------------
-// #490: the device that answered travels with the score
+// #490: the device that answered travels with the score.
+// #596: and across backends, the score is a different measurement.
 
-/// The same weights, the same scores, a different device — a note,
-/// never a refusal. Whether two devices' scores are comparable at all
-/// is `evals/RENTED-GPU.md`'s open question; the comparison's job is
-/// only to make sure nobody reads a cross-device hold as a same-
-/// instrument one without being told.
+/// The same weights, the same build, a different backend — refused,
+/// exit 2, the way a scoring-version or bed mismatch is. Measured on
+/// 1 September 2026: Metal and CUDA disagreed on 53 of 852 passages at
+/// the decision level, 32 of them on whether an obligation existed at
+/// all, while two CUDA runs were byte-identical. A hold or a drop read
+/// across that line is movement that is only the runtime changing.
 #[test]
-fn a_comparison_across_devices_says_so_without_refusing() {
-    let dir = scratch("device-differs");
+fn a_comparison_across_backends_is_refused() {
+    let dir = scratch("backend-differs");
     let packs = packs_dir(&dir, &[PACK]);
 
     let mut was = report(PACK, "qwen3.5-4b-q4_k_m.gguf");
@@ -2242,14 +2244,76 @@ fn a_comparison_across_devices_says_so_without_refusing() {
 
     assert_eq!(
         outcome.code,
-        ExitCode::Ok,
-        "a device change alone is never a regression or a refusal: {}",
+        ExitCode::CouldNotRun,
+        "a backend change is a refusal, never a hold or a drop: {}",
         outcome.text
     );
     assert!(
         outcome.text.contains("MTL0 (Apple M1 Pro)")
             && outcome.text.contains("CUDA0 (NVIDIA GeForce RTX 5090)"),
-        "both devices are named, so a held score is read as cross-device: {}",
+        "both devices are named so the reader knows which line was crossed: {}",
+        outcome.text
+    );
+    let refused = outcome
+        .text
+        .find("refused")
+        .expect("the refusal is printed");
+    let held = outcome.text.find("Nothing got worse").unwrap_or(usize::MAX);
+    assert!(
+        refused < held,
+        "the refusal is read before any line that could pass for a hold: {}",
+        outcome.text
+    );
+}
+
+/// A different card on the same backend is the case #596 could not
+/// measure — every Metal run was one laptop and every CUDA run one
+/// pod — so it stays a note: named out loud, never refused, and never
+/// read as proven equivalent either.
+#[test]
+fn a_comparison_across_cards_on_one_backend_says_so_without_refusing() {
+    let dir = scratch("card-differs");
+    let packs = packs_dir(&dir, &[PACK]);
+
+    let mut was = report(PACK, "qwen3.5-4b-q4_k_m.gguf");
+    was.sidecar = Some(SidecarInfo {
+        version: "10145 (ad256ded3)".to_owned(),
+        file: "llama-server".to_owned(),
+        device: Some("CUDA0 (NVIDIA GeForce RTX 3090)".to_owned()),
+    });
+    let path = dir.join("baseline.json");
+    std::fs::write(
+        &path,
+        eval::baseline::to_json(std::slice::from_ref(&was), at("2026-08-11T09:00:00Z")),
+    )
+    .expect("write baseline");
+
+    let mut now = was.clone();
+    now.sidecar = Some(SidecarInfo {
+        version: "10145 (ad256ded3)".to_owned(),
+        file: "llama-server".to_owned(),
+        device: Some("CUDA0 (NVIDIA GeForce RTX 5090)".to_owned()),
+    });
+
+    let mut options = options(&packs, PACK);
+    options.baseline = Some(path);
+
+    let outcome = eval::run(
+        &options,
+        &Canned::new(vec![now]),
+        at("2026-08-12T09:30:00Z"),
+    );
+
+    assert_eq!(
+        outcome.code,
+        ExitCode::Ok,
+        "a card change on one backend is unmeasured, so it is a note and not a refusal: {}",
+        outcome.text
+    );
+    assert!(
+        outcome.text.contains("NVIDIA GeForce RTX 3090")
+            && outcome.text.contains("NVIDIA GeForce RTX 5090"),
+        "both cards are named, so a held score is read as cross-card: {}",
         outcome.text
     );
 }

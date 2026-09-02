@@ -35,11 +35,14 @@
 # once**, on 24 August 2026: the letter development bed at scoring 15,
 # same commit, same bed digest, same weights, M1 Pro (Metal) against a
 # rented RTX 3090 (CUDA). All 56 comparable extraction strata reported
-# identical precision on identical denominators. So a pod baseline and a
-# Mac baseline are no longer presumed to be two instruments — on that
-# bed, at that scoring version, they agreed exactly.
+# identical precision on identical denominators. Then it was measured
+# again on 1 September at the decision level (#596) and the aggregate
+# was found to have hidden 53 disagreements in 852 passages: a pod
+# baseline and a Mac baseline ARE two instruments. `--baseline` now
+# refuses to compare across backends, so compare this file against pod
+# runs only, and never let it fill tiers.json.
 #
-# It is one pack on one bed and not a general law. A prompt edit judged
+# The aggregate equivalence is one pack on one bed and not a general law. A prompt edit judged
 # solely across machines is still worth a second thought, and #320
 # refuses the comparison outright whenever the bed moved. The full
 # argument and the numbers are in `evals/RENTED-GPU.md`; this header
@@ -217,7 +220,9 @@ echo "→ running the eval: $PACK"
 # and adopted deliberately or not at all.
 out="pod-baseline-$(basename "$PACK").json"
 # `--resume` reuses fixtures already scored under an identical key —
-# same model, pack version, bed digest and scoring version — so a run
+# same model, pack version, prompt, sidecar build and device, bed digest
+# and scoring version (#596: a CPU-only attempt must never be spliced
+# into the CUDA run that replaces it) — so a run
 # killed at fixture 700 of 794 picks up rather than starting over. It is
 # a no-op on a first run, and the moment a person reaches for this
 # script a second time is exactly the moment they want it. The 11 August

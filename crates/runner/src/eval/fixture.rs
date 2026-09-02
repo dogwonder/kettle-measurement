@@ -599,6 +599,11 @@ impl FixtureEvaluator {
                     .as_ref()
                     .map(|sidecar| sidecar.version.clone())
                     .unwrap_or_else(|| "none".to_owned()),
+                device: self
+                    .sidecar
+                    .as_ref()
+                    .and_then(|sidecar| sidecar.device.clone())
+                    .unwrap_or_else(|| "unrecorded".to_owned()),
                 scoring_version: super::SCORING_VERSION,
                 eval_set: fixture.expected.eval_set,
                 fixture: fixture.name.clone(),

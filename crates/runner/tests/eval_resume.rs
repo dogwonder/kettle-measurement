@@ -25,6 +25,7 @@ fn key() -> ResumeKey {
         prompt_version: "blake3:abc123".to_owned(),
         model: "qwen2.5-7b-instruct-q4_k_m.gguf".to_owned(),
         sidecar: "10050 (b15ca938a)".to_owned(),
+        device: "MTL0 (Apple M1 Pro)".to_owned(),
         scoring_version: runner::eval::SCORING_VERSION,
         eval_set: EvalSet::Development,
         fixture: "statement-02-messy.csv".to_owned(),
@@ -163,6 +164,14 @@ fn every_field_of_the_key_independently_forces_a_miss() {
             "a llama-server bump changes grammar-constrained sampling on its own (#74)",
             ResumeKey {
                 sidecar: "10100 (deadbeef)".to_owned(),
+                ..key()
+            },
+        ),
+        (
+            "one backend's answers spliced into a run on another — 53 of 852 passages \
+             disagreed between Metal and CUDA on the same build (#596)",
+            ResumeKey {
+                device: "CUDA0 (NVIDIA GeForce RTX 3090)".to_owned(),
                 ..key()
             },
         ),

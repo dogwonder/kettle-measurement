@@ -225,8 +225,15 @@ cargo run --locked -p kettle -- eval <pack> --model <weights> \
 ```
 
 `--resume` reuses fixtures already scored under an identical key — same
-model, pack version, bed digest and scoring version — so a killed run
-picks up rather than starting over. Confirm it worked by watching
+model, pack version, prompt, sidecar build **and device**, bed digest
+and scoring version — so a killed run picks up rather than starting
+over. The device joined the key on 2 September 2026 (#596): the first
+full pod run had scored 32 fixtures on a CPU-only sidecar before it was
+killed, the relaunch cleared `evals/runs` but not `evals/resume`, and
+the CUDA run that followed reported 539 fixtures with 507 run
+directories, presenting two runtimes' answers as one recording. Now a
+resume across runtimes is a miss, and the eval header says
+`(N resumed)` whenever a run was assembled across sittings. Confirm it worked by watching
 `ls evals/runs/run1 | wc -l` continue from where it stopped rather than
 resetting.
 
@@ -258,7 +265,24 @@ to 0%.
 - **The cheap experiment worth running once**: the same commit, bed and
   weights on both machines. That measures the instrument difference
   directly and would let `evals/README.md` stop asserting it.
-- **It has now been run once, and the scores held** (24 August 2026).
+- **It has been run twice, and the second reading overturned the
+  first** (1 September 2026, #596). Same commit, weights, pinned sidecar
+  tag and 84 letter fixtures at scoring 17, compared *decision by
+  decision* — every passage's `(kind, deadline, anchor)` tuple read out
+  of `raw/*.response.json`: pod CUDA against pod CUDA, runs cleared
+  between, **852 of 852 identical**; M1 Pro Metal against pod CUDA,
+  **53 of 852 differ (6.2%)**, 32 of them on whether an obligation was
+  recorded at all. Thread count was then separated and cleared; it is
+  the backend. So: within a runtime a score is byte-exact, across
+  runtimes it is not, and the 24 August aggregate below was never
+  evidence of decision-level equality — presence changes cancel inside
+  a rate. The mechanism since 2 September: `--baseline` refuses a
+  cross-backend comparison (exit 2), a different card on the same
+  backend is a note (unmeasured, not proven either way), and the
+  device is in the resume key. A pod baseline is compared against pod
+  runs; a Mac baseline against Mac runs; a pod score never fills
+  `tiers.json`.
+- **It was run once before, and the aggregates held** (24 August 2026).
   The letter development bed at scoring 15, same commit, same bed digest
   `57b37e87…`, same weights SHA-256, same pinned sidecar tag: M1 Pro
   (Metal, 23 August) against RTX 3090 (CUDA, 24 August). **All 56

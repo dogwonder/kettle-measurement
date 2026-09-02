@@ -34,8 +34,21 @@ the edited prompt against that exact file.
   compares (see "Scores in the committed baseline"). #234 is closed;
   the file stays because `app/src-tauri/models.md` documents
   re-obtaining those builds and this is the runnable half of it.
-- `pi5-models.toml` — the same `--models` file shape, for the Raspberry
-  Pi 5 measurement set (#97, open).
+  Note for a reader of the public tree: `models.md` is **not** inside
+  the published boundary, so out here this is the runnable half of
+  instructions you cannot read. Kept rather than removed because the
+  pairing is real on the inside, and a published path is a stability
+  commitment; said plainly rather than left to puzzle over.
+- `letter-bench.toml` — the #415 bench: Gemma 4 E4B, the presumptive
+  ship model, against its size peer Qwen3.5-4B on the letter bed. Its
+  comment carries the finding as well as the configuration — 3 phantom
+  obligations against 28 on identical fixtures — which is why it is a
+  record and not a leftover config.
+- `pi5-models.toml` — the floor-finding set: the smallest model that
+  can still do a pack's job. Rewritten 1 September 2026 (#595) after
+  #97 closed and the pack it named was withdrawn (#545); it now
+  measures the letter pack, because attention may not need the scale
+  that knowledge does.
 - `runs/` and `resume/` (both gitignored) — every eval's raw model
   exchanges, and where an interrupted run keeps what it already
   measured; see "When a score is bad, read the answers".

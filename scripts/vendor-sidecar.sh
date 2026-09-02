@@ -122,6 +122,10 @@ case "$(uname -sm)" in
     else
       echo "note: no nvcc found, building a CPU-only x86_64 sidecar" >&2
       echo "an eval on this will be correct and extremely slow" >&2
+      echo "if this is a rented GPU box, stop: nvcc is usually at" >&2
+      echo "/usr/local/cuda-*/bin, and a non-login shell (nohup, a" >&2
+      echo "script, CI) does not have it on PATH the way your terminal" >&2
+      echo "does" >&2
     fi
     ;;
   *)
@@ -227,6 +231,31 @@ if [[ "$MODE" == "source" ]]; then
   cmake --build "$source_root/build" --config Release --target llama-server \
     --parallel "$(nproc)"
   src="$source_root/build/bin"
+  # A CUDA build that produced no CUDA backend is the worst outcome
+  # available here, because everything downstream still works: the
+  # sidecar starts, the eval runs, every score is correct, and the whole
+  # thing crawls on the CPU while the rented GPU sits at 0%. On
+  # 1 September 2026 that cost two builds and about an hour before
+  # anyone looked at `nvidia-smi`.
+  #
+  # The check above — `command -v nvcc` — is necessary and not
+  # sufficient, and this is the difference. CMake does not find the
+  # toolkit through PATH; it wants `CUDAToolkit_ROOT`, `CUDA_PATH` or
+  # `CUDACXX`. With nvcc on PATH and none of those set, this script
+  # reports `CUDA=ON`, cmake prints "Could NOT find CUDAToolkit",
+  # llama.cpp carries on without it, and nothing fails.
+  #
+  # `GGML_BACKEND_DL=ON` above means backends are separate shared
+  # objects, so `ldd llama-server` shows nothing about CUDA either way
+  # and is not the test. The artefact is.
+  if [[ "$CUDA" == "ON" ]] && ! compgen -G "$src/libggml-cuda.so*" >/dev/null; then
+    echo "CUDA was requested and no CUDA backend was built." >&2
+    echo "cmake found nvcc on PATH but not the toolkit. Set these and retry:" >&2
+    echo "  export CUDA_PATH=/usr/local/cuda-<version>" >&2
+    echo "  export CUDACXX=\"\$CUDA_PATH/bin/nvcc\"" >&2
+    echo "  export CUDAToolkit_ROOT=\"\$CUDA_PATH\"" >&2
+    exit 1
+  fi
   cp "$source_root/LICENSE" "$src/LICENSE"
 else
   src="$(dirname "$(find "$work" -name llama-server -type f -print -quit)")"

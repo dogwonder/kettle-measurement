@@ -1,26 +1,50 @@
-# Models to measure on a Raspberry Pi 5 (#97).
+# Where the floor is: the smallest model that can still do a pack's job.
 #
-# Two sizes, because the question is where the floor is, not whether one
-# particular model clears it. The pack declares min_tier "3b", so 3B is
-# the sanctioned answer and 1.5B is the interesting one: if enum-
-# constrained JSON Schema output at temperature 0 holds at 1.5B, the
-# floor is lower than the brief assumes.
+# Rewritten 1 September 2026 (#595). The original asked this question of
+# the subscription-audit pack against Qwen2.5, and both halves have since
+# moved: that pack is withdrawn (#545, no model has cleared its normalise
+# bar since scoring 14) and it no longer declares the `min_tier` this
+# file's comment used to quote. A file describing a field that does not
+# exist, on a pack nobody is offered, is worse than no file.
 #
-# Fill in the paths for whatever you downloaded — the file names below
-# are the Qwen2.5 instruct GGUFs that match the 7B this project has
-# already measured, but any instruct-tuned model of the same size is a
-# fair test. The pack constrains the output with a schema, so what is
-# being measured is grammar-following, not world knowledge.
+# The question it was asking is not stale, and is now the live one. The
+# letter pack's work is *attention*, not knowledge: find the date, copy
+# the words, decide whether a passage asks something. Every failure
+# measured on 1 September was judgement, never reading — the 4B scored
+# 84/84 on dates. Knowledge is what needs scale (#257's merchants,
+# where 4B/9B/27B genuinely differ); attention may not. So a pack with
+# a narrow band of asks might run well below the shipped tier, and
+# "local models with a good harness" stops being a preference and
+# becomes a measured claim.
 #
-#   cargo run --release -p kettle -- eval app.kttl.subscription-audit \
-#     --models evals/pi5-models.toml --runs 3 --write-tiers
+# Measure the letter pack, because it is the offerable one and the one a
+# real letter is read by. Fill in whatever you downloaded: only
+# `qwen3.5-4b-q4_k_m.gguf` is pinned in `app/src-tauri/models.json`, so
+# the smaller entries below are deliberately not named as though they
+# were sanctioned — any instruct-tuned GGUF of that size is a fair test.
+# What is under test is grammar-following at temperature 0 under an
+# enum-constrained JSON Schema, not world knowledge.
+#
+#   cargo run --release -p kettle -- eval app.kttl.letter-to-actions \
+#     --models evals/pi5-models.toml --runs 3
+#
+# Read `confident-wrong` and the harm ceilings, never the pooled verdict
+# alone. And note what a small model cannot be excused: a ceiling is a
+# ceiling whatever the parameter count, and a floor found by lowering
+# the bar is not a floor.
+#
+# The Raspberry Pi 5 keeps its place in the filename because it is the
+# honest floor hardware — no discrete GPU, the machine a person might
+# actually leave running — and because a published path is a stability
+# commitment (#478). The file is not limited to it: the same set run on
+# any box answers the same question about size.
 
 [[model]]
-file = "models/qwen2.5-3b-instruct-q4_k_m.gguf"
-params = "3B"
+file = "models/qwen3.5-4b-q4_k_m.gguf"
+params = "4B"
 quant = "Q4_K_M"
 
 [[model]]
-file = "models/qwen2.5-1.5b-instruct-q4_k_m.gguf"
-params = "1.5B"
+file = "models/qwen3.5-1.7b-instruct-q4_k_m.gguf"
+params = "1.7B"
 quant = "Q4_K_M"

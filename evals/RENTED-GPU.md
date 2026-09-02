@@ -62,6 +62,49 @@ it that way.
   `KETTLE_CUDA_ARCH=86` or `=89` before running anything. The default is
   not wrong, it is *specific*, and it silently encodes which box this
   playbook was written on (24 August 2026).
+- **`KETTLE_CUDA_ARCH` is not the whole precaution, and `nvcc` on PATH
+  is not either.** Added 1 September 2026 after a 3090 sitting spent
+  about an hour and two builds producing CPU-only sidecars while the
+  card sat at 0%.
+
+  Two separate traps, and the second survives the first being fixed.
+
+  1. **A non-login shell has a different PATH.** `nvcc` lives at
+     `/usr/local/cuda-*/bin`, which an interactive login shell picks up
+     from the image's profile and `nohup bash script.sh` does not. So
+     checking `nvcc --version` in your terminal proves nothing about the
+     shell that will run the build. `vendor-sidecar.sh` correctly said
+     *"no nvcc found, building a CPU-only x86_64 sidecar"* and carried
+     on; the eval then ran, scored correctly, and crawled.
+  2. **CMake does not find the toolkit through PATH.** With `nvcc` on
+     PATH and nothing else set, `vendor-sidecar.sh` reports `CUDA=ON`,
+     cmake prints *"Could NOT find CUDAToolkit"*, and llama.cpp builds
+     without it. Set all three before anything:
+
+     ```
+     export CUDA_PATH=/usr/local/cuda-12.8
+     export CUDACXX="$CUDA_PATH/bin/nvcc"
+     export CUDAToolkit_ROOT="$CUDA_PATH"
+     export PATH="$CUDA_PATH/bin:$PATH"
+     export KETTLE_CUDA_ARCH=86      # 3090. 89 for a 4090, 120 for a 5090.
+     ```
+
+  **The test is the artefact, not the flag.** `libggml-cuda.so*` in the
+  vendored directory is the only reliable check: the build flag lies,
+  `command -v nvcc` is necessary and not sufficient, and because
+  `GGML_BACKEND_DL=ON` makes backends separate shared objects, `ldd
+  llama-server` shows nothing about CUDA either way. `vendor-sidecar.sh`
+  now refuses a `CUDA=ON` build that emitted no CUDA backend, so this
+  should fail at the build rather than at the invoice.
+
+  **Why it is worth this much text.** Nothing breaks. The sidecar
+  starts, every answer is a valid answer, and the only symptom is that
+  a rented GPU is idle and the run takes as long as the laptop it was
+  rented to replace. It costs money and reads as success. (It is also a
+  third runtime — CPU — and #596 found that runtimes disagree at the
+  decision level, so a CPU-only run is not even the same measurement.) Check `nvidia-smi` once the model is
+  loaded and expect a few GB in use; 1 MiB means the model is on the CPU.
+
 - **Pre-Blackwell cards widen the CUDA range rather than narrowing it.**
   The 12.8-or-newer rule above exists only for `sm_120`. Ampere and Ada
   build fine on 12.4 through 12.9, so a 3090 or 4090 is the *easier*

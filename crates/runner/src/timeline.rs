@@ -349,27 +349,86 @@ fn end_of_month(date: NaiveDate) -> Option<NaiveDate> {
 /// write the day first and the month as a word; this reads exactly
 /// that, and nothing looser — "03/04/2026" is ambiguous on purpose.
 pub(crate) fn first_full_date(text: &str) -> Option<NaiveDate> {
-    find_full_date(&date_words(text)).map(|(date, _)| date)
+    find_full_date(&date_words(text)).map(|(date, _, _)| date)
 }
 
 /// The words a date is looked for in, split the way a date is written.
+///
+/// A stop between two digits is a separator inside one date —
+/// `20.8.2026` — and not the end of a word, so it stays. A stop after
+/// a letter (`Sept. 2026`) still splits.
 fn date_words(text: &str) -> Vec<&str> {
-    text.split(|c: char| c.is_whitespace() || matches!(c, ',' | '.' | ';' | ':' | '(' | ')'))
-        .filter(|w| !w.is_empty())
-        .flat_map(split_run_together_day)
-        .collect()
+    let bytes = text.as_bytes();
+    let boundary = |at: usize, c: char| {
+        if c.is_whitespace() || matches!(c, ',' | ';' | ':' | '(' | ')') {
+            return true;
+        }
+        c == '.'
+            && !(at > 0
+                && bytes[at - 1].is_ascii_digit()
+                && bytes.get(at + 1).is_some_and(u8::is_ascii_digit))
+    };
+    let mut words = Vec::new();
+    let mut start = 0;
+    for (at, c) in text.char_indices() {
+        if boundary(at, c) {
+            if start < at {
+                words.push(&text[start..at]);
+            }
+            start = at + c.len_utf8();
+        }
+    }
+    if start < text.len() {
+        words.push(&text[start..]);
+    }
+    words.into_iter().flat_map(split_run_together_day).collect()
 }
 
-/// The first full date and where in `words` it starts, so a caller can
-/// ask what else is on the line with it.
-fn find_full_date(words: &[&str]) -> Option<(NaiveDate, usize)> {
+/// An all-numeric date, read only where its own digits settle the
+/// order (#613).
+///
+/// `06/03/2026` is 6 March to a British reader and 3 June to an
+/// American one, and guessing wrong moves every deadline in the letter
+/// by up to eleven months — so it is refused. But a day over twelve
+/// cannot be a month: `20/08/2026` is 20 August in both forms, and so
+/// is `08/20/2026`. That half is unambiguous by the same argument as
+/// ISO and is read. The rule depends on the value rather than the
+/// form, so one letterhead reads in August and refuses in April; that
+/// is a refusal being claim-local, which is the honest shape — the
+/// April letter is genuinely ambiguous and the August one is not.
+///
+/// Four-digit years only. A two-digit year names no century, and the
+/// day-over-twelve rule cannot then say which field is the year.
+fn numeric_date(word: &str) -> Option<NaiveDate> {
+    let parts: Vec<&str> = word.split(['/', '-', '.']).collect();
+    let [first, second, year] = parts[..] else {
+        return None;
+    };
+    if year.len() != 4 || !parts.iter().all(|p| p.bytes().all(|b| b.is_ascii_digit())) {
+        return None;
+    }
+    let year: i32 = year.parse().ok().filter(|y| (1900..=2200).contains(y))?;
+    let (first, second): (u32, u32) = (first.parse().ok()?, second.parse().ok()?);
+    let (day, month) = match (first > 12, second > 12) {
+        (true, false) => (first, second),
+        (false, true) => (second, first),
+        // Both could be the month: refused. Neither could: not a date.
+        _ => return None,
+    };
+    NaiveDate::from_ymd_opt(year, month, day)
+}
+
+/// The first full date, where in `words` it starts and how many words
+/// it spans, so a caller can ask what else is on the line with it.
+fn find_full_date(words: &[&str]) -> Option<(NaiveDate, usize, usize)> {
     // ISO first, because it is one word and the windows below cannot
     // see inside it. Unambiguous by definition, which is why it is read
     // where the all-numeric British and American forms are refused.
     if let Some(found) = words.iter().enumerate().find_map(|(at, word)| {
         NaiveDate::parse_from_str(word, "%Y-%m-%d")
             .ok()
-            .map(|date| (date, at))
+            .or_else(|| numeric_date(word))
+            .map(|date| (date, at, 1))
     }) {
         return Some(found);
     }
@@ -387,7 +446,7 @@ fn find_full_date(words: &[&str]) -> Option<(NaiveDate, usize)> {
             .parse()
             .ok()
             .filter(|y| (1900..=2200).contains(y))?;
-        NaiveDate::from_ymd_opt(year, month, day).map(|date| (date, at))
+        NaiveDate::from_ymd_opt(year, month, day).map(|date| (date, at, 3))
     })
 }
 
@@ -422,11 +481,11 @@ const DATELINE_WORDS: [&str; 10] = [
 /// heading, not a date.
 fn dateline(line: &str) -> Option<NaiveDate> {
     let words = date_words(line);
-    let (date, at) = find_full_date(&words)?;
+    let (date, at, span) = find_full_date(&words)?;
     let rest: Vec<&&str> = words
         .iter()
         .enumerate()
-        .filter(|(index, _)| *index < at || *index >= at + 3)
+        .filter(|(index, _)| *index < at || *index >= at + span)
         .map(|(_, word)| word)
         .collect();
     if rest.len() > 6 {
@@ -453,11 +512,12 @@ fn dateline(line: &str) -> Option<NaiveDate> {
 /// stopped to adjudicate a dispute that is nothing but a missing space.
 /// The gate has to fire on wrong dates, not on the reader's habits.
 ///
-/// Only a leading run of digits is split off, so `M14` and `18521R` are
-/// untouched — neither begins with the shape a day does.
+/// Only a leading run of digits followed by a letter is split off, so
+/// `M14` and `18521R` are untouched — neither begins with the shape a
+/// day does — and `20/08/2026` stays one word for the all-numeric rule.
 fn split_run_together_day(word: &str) -> Vec<&str> {
     let digits = word.chars().take_while(char::is_ascii_digit).count();
-    if digits == 0 || digits > 2 || digits == word.len() {
+    if digits == 0 || digits > 2 || !word[digits..].starts_with(|c: char| c.is_ascii_alphabetic()) {
         return vec![word];
     }
     // An ordinal suffix belongs with the day, not with the month.

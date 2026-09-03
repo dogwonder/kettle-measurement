@@ -435,6 +435,59 @@ fn a_letter_dates_itself_the_way_letters_actually_write_dates() {
 }
 
 #[test]
+fn a_letter_dating_itself_all_numerically_is_read_where_its_digits_settle_the_order() {
+    // #613. The first real letter through the packaged app dated itself
+    // `20/08/2026`, alone on its line, read at confidence 1.000 — and
+    // was refused, because all-numeric British and American forms
+    // cannot be told apart. So "within 7 calendar days" had no anchor
+    // and the ask showed as *Not stated*.
+    //
+    // A day over twelve is not ambiguous: `20/08/2026` cannot be month
+    // twenty, whichever side of the Atlantic printed it. That half is
+    // read. The other half — both fields twelve or under — keeps
+    // refusing, because guessing wrong there moves every deadline in
+    // the letter by up to eleven months.
+    for written in [
+        "20/08/2026",
+        "Date: 20/08/2026",
+        "20.08.2026",
+        "20-08-2026",
+        "08/20/2026",
+    ] {
+        assert_eq!(
+            letter_date(&[segment(0, written)]),
+            Some(date("2026-08-20")),
+            "{written}"
+        );
+    }
+    // Still refused: nothing on the page settles the order.
+    assert_eq!(letter_date(&[segment(0, "06/03/2026")]), None);
+    assert_eq!(letter_date(&[segment(0, "Date: 3/6/2026")]), None);
+    // A two-digit year names no century.
+    assert_eq!(letter_date(&[segment(0, "20/08/26")]), None);
+    // A reference number is not a date.
+    assert_eq!(
+        letter_date(&[segment(0, "Our ref: 3001-249696-11463")]),
+        None
+    );
+
+    // The point of reading it: the relative deadline now resolves.
+    let letter = vec![segment(0, "20/08/2026")];
+    let resolved = sort_timeline(
+        vec![obligation(
+            "within 7 calendar days",
+            "no particular date",
+            letter[0].clone(),
+        )],
+        &letter,
+    );
+    assert_eq!(
+        resolved[0].due.as_ref().map(|r| r.date),
+        Some(date("2026-08-27"))
+    );
+}
+
+#[test]
 fn two_readings_that_date_the_letter_differently_are_a_dispute() {
     // #412, step 4. Every relative deadline in a letter is counted from
     // the letter's own date, so one wrong digit here moves every date in

@@ -39,7 +39,7 @@ const LETTER_DATE: (i32, u32, u32) = (2026, 3, 10);
 /// letter. Phrases naming their own day ignore it.
 const FROM_LETTER: &str = "the date of this letter";
 
-const VOCABULARY: [(&str, &str, Reading); 28] = [
+const VOCABULARY: [(&str, &str, Reading); 33] = [
     // ---- a day named outright -------------------------------------
     ("day-first, month in words", "on 6 March 2026", Day("2026-03-06")),
     ("day-first with an ordinal", "on 6th March 2026", Day("2026-03-06")),
@@ -50,15 +50,29 @@ const VOCABULARY: [(&str, &str, Reading); 28] = [
     ("ISO 8601", "on 2026-03-06", Day("2026-03-06")),
     ("a time before the day", "before 5pm on 6 March 2026", Day("2026-03-06")),
     ("on or before", "on or before 6 March 2026", Day("2026-03-06")),
+    // An all-numeric date is read only where its own digits settle the
+    // order (#613): a day over twelve cannot be a month, so `20/08/2026`
+    // is 20 August in both the British and the American form. The first
+    // real letter through the packaged app dated itself this way and
+    // lost every relative deadline to the refusal below.
+    ("all-numeric, day over twelve", "on 20/08/2026", Day("2026-08-20")),
+    ("all-numeric, month-first, day over twelve", "on 08/20/2026", Day("2026-08-20")),
+    ("all-numeric, stops, day over twelve", "on 20.8.2026", Day("2026-08-20")),
+    ("all-numeric, hyphens, day over twelve", "on 20-08-2026", Day("2026-08-20")),
     (
-        "all-numeric, slashes",
+        "all-numeric, both fields twelve or under",
         "on 06/03/2026",
         Refused("day-first and month-first cannot be told apart, and guessing wrong moves a deadline by up to eleven months"),
     ),
     (
-        "all-numeric, stops",
+        "all-numeric, stops, both fields twelve or under",
         "on 6.3.2026",
         Refused("ambiguous for the same reason as slashes"),
+    ),
+    (
+        "all-numeric, two-digit year",
+        "on 20/08/26",
+        Refused("a two-digit year names no century, and the day-over-twelve rule cannot settle which field is the year"),
     ),
     // ---- an interval counted from the letter -----------------------
     ("plain days", "within 14 days", Day("2026-03-24")),

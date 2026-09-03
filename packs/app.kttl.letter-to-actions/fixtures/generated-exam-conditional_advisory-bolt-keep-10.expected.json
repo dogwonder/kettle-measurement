@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-bolt-keep-10-no-ask-06",
+      "segment": "Should the form have crossed with this letter in the post, please contact us so it can be matched to your file.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-bolt-keep-10-no-ask-07",
+      "segment": "If you have already set up a direct debit, please tell us the date it was arranged to avoid duplicate collection.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-bolt-keep-10-no-ask-09",
       "segment": "A nil balance is shown, confirming the account is settled.",
       "strata": [
         "conditional-advisory",

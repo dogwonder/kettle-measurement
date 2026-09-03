@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-verge-22-no-ask-06",
+      "segment": "If you have recently settled this balance, please let us have the date and reference of your payment to avoid any further action.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-verge-22-no-ask-07",
+      "segment": "If you have already submitted the meter reading, please disregard this reminder and accept our apologies.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-verge-22-no-ask-09",
       "segment": "The £25.00 charge applied in error on 7 March has been refunded to your account.",
       "strata": [
         "conditional-advisory",

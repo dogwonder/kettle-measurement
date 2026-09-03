@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-latch-gate-25-no-ask-06",
+      "segment": "If you have already paid the reduced amount within the discount period, please send the receipt so the discount stands.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-latch-gate-25-no-ask-07",
+      "segment": "Should you have already arranged access for the engineer, please confirm the date agreed so it is not rebooked.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-latch-gate-25-no-ask-09",
       "segment": "The reservation held for 9 September was cancelled by us and refunded.",
       "strata": [
         "conditional-advisory",

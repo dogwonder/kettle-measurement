@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-mullion-08-no-ask-06",
+      "segment": "If you have already registered the vehicle at your new address, please send a copy of the updated logbook.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-mullion-08-no-ask-07",
+      "segment": "If you have already agreed a payment plan with our office, please continue with it and quote the plan number.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-mullion-08-no-ask-09",
       "segment": "The next inspection is due in 18 months and we will arrange it.",
       "strata": [
         "conditional-advisory",

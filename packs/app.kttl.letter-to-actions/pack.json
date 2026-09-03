@@ -298,6 +298,10 @@
       "description": "The guarded imperative, scored for asking nothing. The condition is something the letter cannot resolve about this reader, so no obligation on them can be read out of the passage alone, and one read out anyway is an invention asserted at whatever confidence the report prints beside it. Evidence: the first real photographed letter through the app returned 'notify your tenants' at high confidence from exactly this construction. Ungated with its shape.",
       "classes": {}
     },
+    "conditional-done": {
+      "description": "A condition on something the reader may already have done — 'if you have already paid this amount in full, please complete the enclosed form' — scored for asking nothing (#614). The first real letter through the packaged app, 3 September 2026, conditioned a form on a payment the letter was written to chase, and the model recorded the form as a task at high confidence, on clean text as well as on the OCR'd page. By the prompt's own test it is a condition: whether the reader has already paid is what the letter cannot settle, and a reader for whom nothing special is true is not being asked for the form. The twenty general conditionals held one sentence of this shape and the rule measured well on them; this stratum holds only the shape, two passages per conditional-advisory letter, so its rate reads on its own. Every sentence keeps the 'please' and the purpose clause the real one carried. Ungated with its shape, promoted with it: a real letter of this shape reads correctly through the packaged app, on a full run of both sets.",
+      "classes": {}
+    },
     "standing-advice": {
       "description": "General advice addressed to anybody reading, scored for asking nothing. 'Always ask to see identification' is a rule for life rather than a thing this letter asks this reader to do, and recording it as a task puts an item on somebody's list the sender never asked for. The second of the two constructions the first real photographed letter invented an obligation from. Ungated with its shape.",
       "classes": {}

@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-fascia-20-no-ask-06",
+      "segment": "If you have already replied to our previous letter, please accept our apologies and send a copy of your reply.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-fascia-20-no-ask-07",
+      "segment": "If you have already cleared this balance at the counter, please keep your receipt and telephone the number above.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-fascia-20-no-ask-09",
       "segment": "Your direct debit of £115.00 will continue to be collected on the 15th of each month as before.",
       "strata": [
         "conditional-advisory",

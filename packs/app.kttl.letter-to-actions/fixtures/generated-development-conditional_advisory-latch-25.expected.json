@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-latch-25-no-ask-06",
+      "segment": "If you have already renewed, please forward your renewal confirmation and we will close this reminder.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-latch-25-no-ask-07",
+      "segment": "If you sent the documents by post last week, please email us the tracking number to prevent further reminders.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-latch-25-no-ask-09",
       "segment": "The consultation period closed on 30 April and the results are published on our website.",
       "strata": [
         "conditional-advisory",

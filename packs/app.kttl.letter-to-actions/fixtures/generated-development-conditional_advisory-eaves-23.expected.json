@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-eaves-23-no-ask-06",
+      "segment": "If you have already told us about your change of address, please send a copy of that letter so we can trace it.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-eaves-23-no-ask-07",
+      "segment": "If you have already booked your appointment online, please ring reception so the booking can be matched to this letter.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-eaves-23-no-ask-09",
       "segment": "Your appointment on 12 May was attended and the notes have been added to your record.",
       "strata": [
         "conditional-advisory",

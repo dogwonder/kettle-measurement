@@ -1295,6 +1295,70 @@ const CONDITIONAL_EXAM: [&str; 20] = [
 /// identification"* is a rule for life, and recording it as a task with
 /// a deadline puts a thing on somebody's list that the sender never
 /// asked for.
+/// A condition on something the reader may already have done (#614).
+///
+/// The first real letter through the packaged app, 3 September 2026: a
+/// courier chasing overdue invoices wrote *"If you have recently paid
+/// this invoice(s) in full, please complete our Invoice and Payments
+/// form"*, and the model recorded the form as a task at high
+/// confidence — on the OCR'd page and, re-run in isolation, on clean
+/// text. By the prompt's own test it is a condition: whether the reader
+/// has already paid is exactly what the letter cannot settle, and a
+/// reader for whom nothing special is true is not being asked to fill
+/// in the form. The lists above hold one sentence of this shape among
+/// twenty; this list holds only it, in its own stratum, so the rate is
+/// readable rather than diluted. Every sentence carries the *please*
+/// and the purpose clause the real one did, because a rule that only
+/// caught the shape without them would not have caught the letter.
+const CONDITIONAL_DONE_DEVELOPMENT: [&str; 20] = [
+    "If you have already paid this amount in full, please complete the enclosed form so that we can update our records.",
+    "If you have already sent the form back, please telephone us so that we can confirm it has arrived.",
+    "If you have recently settled this balance, please let us have the date and reference of your payment to avoid any further action.",
+    "If you have already submitted the meter reading, please disregard this reminder and accept our apologies.",
+    "If you have already told us about your change of address, please send a copy of that letter so we can trace it.",
+    "If you have already booked your appointment online, please ring reception so the booking can be matched to this letter.",
+    "If your payment has been made in the last five days, please quote the reference number on your receipt when you contact us.",
+    "If you have already cancelled the permit, please return the paper copy so that it can be destroyed.",
+    "If you have already renewed, please forward your renewal confirmation and we will close this reminder.",
+    "If you sent the documents by post last week, please email us the tracking number to prevent further reminders.",
+    "If you have already paid by bank transfer, please send the transfer confirmation so the payment can be matched.",
+    "If you have already returned the signed tenancy pages, please let us know which office you sent them to.",
+    "If you have recently updated your direct debit details, please confirm the date the change was made.",
+    "If you have already received a refund for this charge, please quote the refund reference in any reply.",
+    "If you have already registered the vehicle at your new address, please send a copy of the updated logbook.",
+    "If you have already agreed a payment plan with our office, please continue with it and quote the plan number.",
+    "If you have already attended a review this year, please tell us the date so that a second is not arranged.",
+    "If you have already provided your nomination form, please contact us so we can check it was received.",
+    "If you have already replied to our previous letter, please accept our apologies and send a copy of your reply.",
+    "If you have already cleared this balance at the counter, please keep your receipt and telephone the number above.",
+];
+
+/// The exam voice's already-done conditionals. Disjoint from
+/// development's and in the same mood, for the reason `CONDITIONAL_EXAM`
+/// gives.
+const CONDITIONAL_DONE_EXAM: [&str; 20] = [
+    "Should you have paid this in full already, please forward proof of payment so that no further action is taken.",
+    "If the reading has already been submitted, please telephone the number above so we can withdraw this reminder.",
+    "If you have already provided the certificate, please send it again marked for the attention of the compliance team.",
+    "Where the balance has already been cleared, please quote the payment reference when you contact us.",
+    "If you have already returned the signed authority, please let us know the date it was posted.",
+    "If you have already completed the online declaration, please ignore this notice and accept our apologies.",
+    "If the vehicle has already been sold, please send the new keeper's details so the charge can be transferred.",
+    "If you have already appealed, please quote your appeal reference to stop further letters being issued.",
+    "Should the form have crossed with this letter in the post, please contact us so it can be matched to your file.",
+    "If you have already set up a direct debit, please tell us the date it was arranged to avoid duplicate collection.",
+    "If you have already supplied the documents at the counter, please give us the date of your visit so they can be traced.",
+    "Where a payment was made in the last seven days, please allow for it and disregard the balance shown.",
+    "If you have already cancelled the booking by telephone, please let us have the name of the person you spoke to.",
+    "If you have already moved your account to another supplier, please send the transfer date so this notice can be withdrawn.",
+    "Should you already hold the exemption certificate, please quote its number in any reply.",
+    "If you have already confirmed attendance by email, please forward that email so the two records can be joined.",
+    "If the deposit has already been returned to you, please tell us the amount so our ledger can be corrected.",
+    "If you have already notified the change to another department, please send us their acknowledgement.",
+    "If you have already paid the reduced amount within the discount period, please send the receipt so the discount stands.",
+    "Should you have already arranged access for the engineer, please confirm the date agreed so it is not rebooked.",
+];
+
 const ADVICE_DEVELOPMENT: [&str; 20] = [
     "Always ask to see identification before letting anyone into your home.",
     "Never give your account number to a caller you did not ring yourself.",
@@ -2619,6 +2683,23 @@ fn passages(
                     reads_as: None,
                     expect: None,
                     strata: vec!["standing-advice"],
+                });
+            }
+            // Appended after the original four so the picks above are
+            // unchanged: a construction added to those lists would
+            // reshuffle every committed fixture through `% len`.
+            let done = if exam {
+                CONDITIONAL_DONE_EXAM
+            } else {
+                CONDITIONAL_DONE_DEVELOPMENT
+            };
+            for offset in 0..2 {
+                let pick = (index * 2 + offset) % done.len();
+                out.push(Passage {
+                    text: done[pick].to_owned(),
+                    reads_as: None,
+                    expect: None,
+                    strata: vec!["conditional-ask", "conditional-done"],
                 });
             }
         }

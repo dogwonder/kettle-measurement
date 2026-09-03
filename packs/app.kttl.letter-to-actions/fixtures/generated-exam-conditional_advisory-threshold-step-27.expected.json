@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-threshold-step-27-no-ask-06",
+      "segment": "If you have already provided the certificate, please send it again marked for the attention of the compliance team.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-threshold-step-27-no-ask-07",
+      "segment": "Where the balance has already been cleared, please quote the payment reference when you contact us.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-threshold-step-27-no-ask-09",
       "segment": "The sum of £96.15 was credited to this account on 8 March.",
       "strata": [
         "conditional-advisory",

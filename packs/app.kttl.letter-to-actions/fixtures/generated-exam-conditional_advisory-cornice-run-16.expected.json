@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-cornice-run-16-no-ask-06",
+      "segment": "Should you have paid this in full already, please forward proof of payment so that no further action is taken.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-cornice-run-16-no-ask-07",
+      "segment": "If the reading has already been submitted, please telephone the number above so we can withdraw this reminder.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-cornice-run-16-no-ask-09",
       "segment": "The scheme is closed to entrants after 31 October and your entry predates this.",
       "strata": [
         "conditional-advisory",

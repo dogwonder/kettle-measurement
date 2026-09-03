@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-hinge-plate-09-no-ask-06",
+      "segment": "If the vehicle has already been sold, please send the new keeper's details so the charge can be transferred.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-hinge-plate-09-no-ask-07",
+      "segment": "If you have already appealed, please quote your appeal reference to stop further letters being issued.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-hinge-plate-09-no-ask-09",
       "segment": "The statement for the period ending 31 March accompanies this letter for information.",
       "strata": [
         "conditional-advisory",

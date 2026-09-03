@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-gable-end-11-no-ask-06",
+      "segment": "If you have already supplied the documents at the counter, please give us the date of your visit so they can be traced.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-gable-end-11-no-ask-07",
+      "segment": "Where a payment was made in the last seven days, please allow for it and disregard the balance shown.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-gable-end-11-no-ask-09",
       "segment": "The complaint was determined in your favour on 18 May and redress has been paid.",
       "strata": [
         "conditional-advisory",

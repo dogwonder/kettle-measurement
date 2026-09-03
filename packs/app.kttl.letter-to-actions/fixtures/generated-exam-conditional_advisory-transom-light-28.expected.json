@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-transom-light-28-no-ask-06",
+      "segment": "If you have already returned the signed authority, please let us know the date it was posted.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-transom-light-28-no-ask-07",
+      "segment": "If you have already completed the online declaration, please ignore this notice and accept our apologies.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-transom-light-28-no-ask-09",
       "segment": "Documentation received on 14 April has been logged and requires no addition.",
       "strata": [
         "conditional-advisory",

@@ -1291,7 +1291,7 @@ fn a_conditional_ask_and_standing_advice_are_scored_as_asking_nothing() {
                 strata.contains(&"conditional-advisory"),
                 "{id}: ungated and untagged is unmeasured (strata: {strata:?})"
             );
-            for tag in ["conditional-ask", "standing-advice"] {
+            for tag in ["conditional-ask", "conditional-done", "standing-advice"] {
                 if strata.contains(&tag) {
                     *by_set
                         .entry(set.clone())
@@ -1317,9 +1317,17 @@ fn a_conditional_ask_and_standing_advice_are_scored_as_asking_nothing() {
     // say anything at all.
     const WANTED: usize = 60;
     let mut failures: Vec<String> = Vec::new();
+    // `conditional-done` (#614, 3 September 2026): the first real
+    // letter through the packaged app conditioned an ask on something
+    // the reader may already have done — *"if you have recently paid
+    // this invoice, please complete our form"* — and it was recorded
+    // as a task at high confidence, on clean text as well as on the
+    // OCR'd page. The bed's twenty conditionals held one of that shape
+    // and the rule measured well on them; this stratum holds only that
+    // shape, so the rate is readable on its own.
     for set in ["development", "exam"] {
         let counts = by_set.get(set).cloned().unwrap_or_default();
-        for tag in ["conditional-ask", "standing-advice"] {
+        for tag in ["conditional-ask", "conditional-done", "standing-advice"] {
             let seen = counts.get(tag).copied().unwrap_or(0);
             if seen < WANTED {
                 failures.push(format!(

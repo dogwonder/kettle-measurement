@@ -73,6 +73,12 @@
           "anchor": "3 June 2026"
         }
       ]
+    },
+    {
+      "id": 907,
+      "segment": "If you have already paid this amount in full, please complete the enclosed form so that we can update our records.",
+      "confidence": "high",
+      "obligations": []
     }
   ]
 }

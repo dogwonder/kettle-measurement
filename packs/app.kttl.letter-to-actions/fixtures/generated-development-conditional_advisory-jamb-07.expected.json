@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-jamb-07-no-ask-06",
+      "segment": "If you have recently updated your direct debit details, please confirm the date the change was made.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-jamb-07-no-ask-07",
+      "segment": "If you have already received a refund for this charge, please quote the refund reference in any reply.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-jamb-07-no-ask-09",
       "segment": "There is no charge for this service and none will be raised.",
       "strata": [
         "conditional-advisory",

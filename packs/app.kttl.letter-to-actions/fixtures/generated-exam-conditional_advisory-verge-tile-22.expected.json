@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-verge-tile-22-no-ask-06",
+      "segment": "If you have already cancelled the booking by telephone, please let us have the name of the person you spoke to.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-verge-tile-22-no-ask-07",
+      "segment": "If you have already moved your account to another supplier, please send the transfer date so this notice can be withdrawn.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-verge-tile-22-no-ask-09",
       "segment": "Conduct of this matter passed to our Bristol office on 1 March under the same reference.",
       "strata": [
         "conditional-advisory",

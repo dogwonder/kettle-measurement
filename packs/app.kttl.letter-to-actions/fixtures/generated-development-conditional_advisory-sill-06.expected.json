@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-sill-06-no-ask-06",
+      "segment": "If you have already paid by bank transfer, please send the transfer confirmation so the payment can be matched.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-sill-06-no-ask-07",
+      "segment": "If you have already returned the signed tenancy pages, please let us know which office you sent them to.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-sill-06-no-ask-09",
       "segment": "Your name was removed from the mailing list on 10 June.",
       "strata": [
         "conditional-advisory",

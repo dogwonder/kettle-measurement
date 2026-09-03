@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-lintel-02-no-ask-06",
+      "segment": "If you have recently settled this balance, please let us have the date and reference of your payment to avoid any further action.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-lintel-02-no-ask-07",
+      "segment": "If you have already submitted the meter reading, please disregard this reminder and accept our apologies.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-02-no-ask-09",
       "segment": "The tenancy renewal was signed on both sides on 1 July.",
       "strata": [
         "conditional-advisory",

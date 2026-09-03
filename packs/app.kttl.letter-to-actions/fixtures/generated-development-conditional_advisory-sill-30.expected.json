@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-sill-30-no-ask-06",
+      "segment": "If you have already replied to our previous letter, please accept our apologies and send a copy of your reply.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-sill-30-no-ask-07",
+      "segment": "If you have already cleared this balance at the counter, please keep your receipt and telephone the number above.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-sill-30-no-ask-09",
       "segment": "Your account has been in credit by £31.75 since 5 February.",
       "strata": [
         "conditional-advisory",

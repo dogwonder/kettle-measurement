@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-lintel-stone-26-no-ask-06",
+      "segment": "Should you have paid this in full already, please forward proof of payment so that no further action is taken.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-lintel-stone-26-no-ask-07",
+      "segment": "If the reading has already been submitted, please telephone the number above so we can withdraw this reminder.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-lintel-stone-26-no-ask-09",
       "segment": "This notice is issued under our regulatory obligations and invites no reply.",
       "strata": [
         "conditional-advisory",

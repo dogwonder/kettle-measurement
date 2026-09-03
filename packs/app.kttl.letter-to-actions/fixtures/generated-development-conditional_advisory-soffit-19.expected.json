@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-soffit-19-no-ask-06",
+      "segment": "If you have already attended a review this year, please tell us the date so that a second is not arranged.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-soffit-19-no-ask-07",
+      "segment": "If you have already provided your nomination form, please contact us so we can check it was received.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-soffit-19-no-ask-09",
       "segment": "Our offices will be closed from 24 December to 2 January, though the online account remains available.",
       "strata": [
         "conditional-advisory",

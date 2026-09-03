@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-sill-board-06-no-ask-06",
+      "segment": "Should you have paid this in full already, please forward proof of payment so that no further action is taken.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-sill-board-06-no-ask-07",
+      "segment": "If the reading has already been submitted, please telephone the number above so we can withdraw this reminder.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-sill-board-06-no-ask-09",
       "segment": "Reimbursement of £88.75 was despatched on 23 April and clears within 3 days.",
       "strata": [
         "conditional-advisory",

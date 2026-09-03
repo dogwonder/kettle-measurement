@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-jamb-post-07-no-ask-06",
+      "segment": "If you have already provided the certificate, please send it again marked for the attention of the compliance team.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-jamb-post-07-no-ask-07",
+      "segment": "Where the balance has already been cleared, please quote the payment reference when you contact us.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-jamb-post-07-no-ask-09",
       "segment": "The responsible team has been instructed to reply within 5 days.",
       "strata": [
         "conditional-advisory",

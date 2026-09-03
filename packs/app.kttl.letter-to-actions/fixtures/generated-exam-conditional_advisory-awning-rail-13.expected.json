@@ -49,7 +49,27 @@
     },
     {
       "expect": null,
+      "id": "conditional_advisory-awning-rail-13-no-ask-06",
+      "segment": "Should you already hold the exemption certificate, please quote its number in any reply.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
       "id": "conditional_advisory-awning-rail-13-no-ask-07",
+      "segment": "If you have already confirmed attendance by email, please forward that email so the two records can be joined.",
+      "strata": [
+        "conditional-advisory",
+        "conditional-ask",
+        "conditional-done"
+      ]
+    },
+    {
+      "expect": null,
+      "id": "conditional_advisory-awning-rail-13-no-ask-09",
       "segment": "An inspection on 24 March identified nothing requiring your involvement.",
       "strata": [
         "conditional-advisory",

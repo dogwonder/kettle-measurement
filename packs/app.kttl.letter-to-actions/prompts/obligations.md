@@ -54,6 +54,15 @@ For each passage, decide:
   disagree with a figure. Ask whether the sentence would still be
   asking something of a reader for whom nothing special is true. If it
   would, it is an obligation.
+  The commonest condition on a reminder is something the reader may
+  already have done: "if you have already paid, please complete the
+  enclosed form", "if you have recently sent the reading, please ring
+  us". The letter was written because it believes they have not, and
+  whether they have is exactly what it cannot settle. The "please" that
+  follows is not manners softening an ask — it is the thing the
+  condition governs, and a reader who has not already paid is not being
+  asked to fill in that form. Record nothing from it, however the
+  sentence ends.
 - confidence: "high" | "medium" | "low"
 
 For each obligation give:

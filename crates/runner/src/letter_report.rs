@@ -13,12 +13,51 @@
 //! deadline it declined arrives with `due: None` — which this carries
 //! through as an obligation to *check*, never as one due today.
 
+use crate::document::Segment;
 use crate::fmt::count;
 use crate::results::{
     CellOut, Confidence, LetterReport, LetterRunInfo, LetterSummary, NeedsReviewPassage,
     ObligationOut, PassageOut, LETTER_REPORT_SCHEMA,
 };
 use crate::run::{ExtractionOutcome, ReviewItem};
+
+/// The deadline phrase, but only if the letter actually wrote it.
+///
+/// `ObligationOut::deadline` is documented as "the letter's own words
+/// for when", and the report renders it inside *the letter says "…"*.
+/// Nothing checked that it was. Found on real post (3 September 2026):
+/// an ask carrying no deadline was shown as *the letter says "no
+/// particular date"*, which the letter did not say — the prompt tells
+/// the model to write that phrase when no **anchor** is given, and says
+/// nothing about `deadline` when the letter states none, so the model
+/// borrowed the neighbouring field's sentinel.
+///
+/// This is #460's rule one applied one field further along: what the
+/// report attributes to the page has to be on the page. The same
+/// whitespace-insensitive containment, for the same reason — a line
+/// break is an artefact of the page, not of the sentence.
+///
+/// Blanked rather than repaired, and the caller renders "Not stated"
+/// alone: the runner cannot know what words the letter would have used,
+/// and inventing a replacement is the failure being fixed. The check is
+/// against the claim's own passages, not the whole document, so a
+/// phrase lifted from somewhere else in the letter does not qualify
+/// either.
+fn letters_own_words(deadline: &str, evidence: &[Segment]) -> String {
+    let squash = |text: &str| text.split_whitespace().collect::<Vec<_>>().join(" ");
+    let wanted = squash(deadline);
+    if wanted.is_empty() {
+        return String::new();
+    }
+    let written = evidence
+        .iter()
+        .any(|segment| squash(&segment.text).contains(&wanted));
+    if written {
+        deadline.to_owned()
+    } else {
+        String::new()
+    }
+}
 
 /// Build the letter run's report document.
 ///
@@ -43,7 +82,7 @@ pub fn build_letter_report_with_review(
             kind: obligation.kind.clone(),
             party: obligation.party.clone(),
             ask: obligation.ask.clone(),
-            deadline: obligation.deadline.clone(),
+            deadline: letters_own_words(&obligation.deadline, &obligation.evidence),
             due: obligation.due.map(Into::into),
             confidence: Confidence::parse(&obligation.confidence),
             evidence: obligation

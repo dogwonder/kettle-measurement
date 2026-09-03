@@ -391,3 +391,71 @@ fn proposed_letter_actions_carry_the_run_they_belong_to() {
     let actions = propose_letter_actions(&outcome(), "run-07");
     assert_eq!(actions.run_id, "run-07");
 }
+
+/// A deadline the letter never wrote is not shown as the letter's words.
+///
+/// Found on real post, 3 September 2026. The report showed
+/// *Not stated — the letter says "no particular date"* for an ask that
+/// carried no deadline, and the letter says no such thing:
+/// `prompts/obligations.md` tells the model to **write** "no particular
+/// date" when no *anchor* is given, and says nothing at all about what
+/// `deadline` should be when the letter states none. So the model
+/// borrowed the neighbouring field's sentinel, and
+/// `report.html.tera` — whose slot is unconditional — attributed it to
+/// the page.
+///
+/// The rule is #460's, applied one field further along: what the report
+/// puts in the letter's mouth has to be in the letter. `ObligationOut`
+/// documents `deadline` as "the letter's own words for when", so a
+/// phrase that appears in none of the passages the claim rests on is
+/// not that, whatever it says. Blanked here rather than repaired,
+/// because the runner cannot know which words the letter would have
+/// used — and "Not stated" alone is true.
+///
+/// This matters more than its size. The page's promise is that
+/// everything on it quotes the letter so a person can check it, and a
+/// reader who goes looking for this phrase will not find it.
+#[test]
+fn a_deadline_the_letter_never_wrote_is_not_shown_as_its_words() {
+    let mut outcome = outcome();
+    let ask = &mut outcome.obligations[1];
+    // Exactly what the real letter produced: the anchor's sentinel in
+    // the deadline field, on a passage that contains neither.
+    ask.deadline = "no particular date".to_owned();
+    ask.evidence = vec![segment(
+        1,
+        "If you have recently paid, please complete our form.",
+    )];
+
+    let report = build_letter_report(&outcome, run_info());
+    let shown = &report.obligations[1];
+
+    assert!(
+        shown.deadline.is_empty(),
+        "a phrase in none of the claim's passages is not the letter's \
+         words, so the report must not offer it as a quotation: {:?}",
+        shown.deadline,
+    );
+    assert!(
+        shown.due.is_none(),
+        "and nothing was resolved from it either",
+    );
+}
+
+/// The other side of the same rule: a deadline the letter *did* write
+/// survives untouched. A guard that blanked real phrases would be worse
+/// than the defect it fixes.
+#[test]
+fn a_deadline_the_letter_wrote_is_kept_exactly() {
+    let report = build_letter_report(&outcome(), run_info());
+
+    assert_eq!(
+        report.obligations[0].deadline, "within 14 days",
+        "the phrase is in the passage, so it is the letter's own words"
+    );
+    assert_eq!(
+        report.obligations[1].deadline, "at your earliest convenience",
+        "so is this one, and it resolves to no date — which is not the \
+         same as the letter saying nothing"
+    );
+}

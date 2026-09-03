@@ -2137,7 +2137,7 @@ body {
           {# The kind is decided by the resolver and only shown here (#367): a
              date the letter wrote out can be checked against the page, and a
              date Kettle counted can only be checked against its arithmetic. #}
-          {% if item.due %}{{ item.due.date }}<span class="govuk-hint">{% if item.due.kind == "worked_out" %}Worked out from &ldquo;{{ item.deadline }}&rdquo;{% elif item.due.kind == "yours" %}Counted from the date you gave{% else %}Read from the letter{% endif %}</span>{% else %}<span class="govuk-hint">Not stated — the letter says &ldquo;{{ item.deadline }}&rdquo;</span>{% endif %}
+          {% if item.due %}{{ item.due.date }}<span class="govuk-hint">{% if item.due.kind == "worked_out" %}Worked out from &ldquo;{{ item.deadline }}&rdquo;{% elif item.due.kind == "yours" %}Counted from the date you gave{% else %}Read from the letter{% endif %}</span>{% else %}<span class="govuk-hint">Not stated{% if item.deadline %} — the letter says &ldquo;{{ item.deadline }}&rdquo;{% endif %}</span>{% endif %}
         </td>
         <td class="govuk-table__cell">{{ item.ask }}</td>
         <td class="govuk-table__cell">{{ item.party }}</td>

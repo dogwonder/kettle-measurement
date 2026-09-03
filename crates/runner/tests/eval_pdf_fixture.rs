@@ -62,11 +62,30 @@ fn a_pdf_fixture_is_scored_through_pdfium_when_the_reader_is_named() {
     )
     .unwrap();
 
-    let without = evaluator(&bed, None).evaluate(&pack);
-    let err = without.expect_err("no reader named, so the PDF cannot be read");
+    // Naming no reader does not fail the run: #256 made a document this
+    // build cannot open an *unrunnable fixture* rather than an error,
+    // because failing the whole eval made the deterministic floor
+    // untestable on any machine without pdfium — which is every CI
+    // runner. What must still hold is that it is not quietly scored: it
+    // is named, and it contributes nothing.
+    //
+    // This assertion used to expect an `Err`, and had been failing on
+    // any machine with a vendored libpdfium since #575 while passing in
+    // CI, where the body above skips. That is #603 from the other side,
+    // and the reason the skip is now declared rather than merely
+    // written.
+    let without = evaluator(&bed, None)
+        .evaluate(&pack)
+        .expect("an unreadable fixture is reported, not raised");
+    assert_eq!(
+        without.unrunnable,
+        vec!["statement-04.pdf".to_owned()],
+        "the fixture this build cannot open is named in the report"
+    );
     assert!(
-        err.contains("PDF reader"),
-        "the refusal names the missing reader, not something else: {err}"
+        without.fixtures.is_empty(),
+        "and nothing was scored from it: {:?}",
+        without.fixtures
     );
 
     let report = evaluator(&bed, Some(sidecars))

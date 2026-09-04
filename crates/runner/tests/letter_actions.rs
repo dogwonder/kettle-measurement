@@ -54,6 +54,7 @@ fn outcome() -> ExtractionOutcome {
                     "Please pay £120.00 within 14 days of the date of this letter.",
                 )],
                 dated_by: None,
+                priced_by: None,
                 disputed: vec![],
             },
             Obligation {
@@ -70,6 +71,7 @@ fn outcome() -> ExtractionOutcome {
                     "Please send a reading at your earliest convenience.",
                 )],
                 dated_by: None,
+                priced_by: None,
                 disputed: vec![],
             },
         ],
@@ -485,5 +487,26 @@ fn the_sum_is_reported_only_in_the_letters_own_words() {
         with("€120.00"),
         "",
         "the reader's currency sign, not the page's"
+    );
+}
+
+/// #612, second half: a sum read off the letter's own row reaches the
+/// report with the row beside it, and passes #460's rule one against
+/// that row rather than against the ask's passage.
+#[test]
+fn a_sum_read_off_a_row_is_reported_with_the_row() {
+    let mut outcome = outcome();
+    outcome.obligations.truncate(1);
+    let row = segment(9, "Amount Due 41.21 GBP 009422");
+    outcome.obligations[0].amount = "41.21 GBP".to_owned();
+    outcome.obligations[0].priced_by = Some(row);
+    let report = build_letter_report(&outcome, run_info());
+    assert_eq!(report.obligations[0].amount, "41.21 GBP");
+    assert_eq!(
+        report.obligations[0]
+            .priced_by
+            .as_ref()
+            .map(|p| p.text.as_str()),
+        Some("Amount Due 41.21 GBP 009422")
     );
 }

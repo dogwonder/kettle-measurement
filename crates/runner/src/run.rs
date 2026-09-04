@@ -382,6 +382,14 @@ pub struct Obligation {
     /// row is that quote.
     #[serde(default)]
     pub dated_by: Option<crate::document::Segment>,
+    /// The row the sum was read out of, when the ask's own passage
+    /// printed none and the letter labelled one — an amount-due, total
+    /// or balance row (#612, second half). #544's shape, for the same
+    /// reason: `evidence` is what the model was asked about, and a row
+    /// added there would read downstream as an obligation asserted on
+    /// an amount row. Rust read it; nothing was computed.
+    #[serde(default)]
+    pub priced_by: Option<crate::document::Segment>,
     /// Lines within those passages the two readings of the photograph
     /// did not agree about (#412 step 6).
     ///
@@ -2118,6 +2126,7 @@ fn segment_obligations(
                 // have been compared — the model's answer knows nothing
                 // about how the page was read.
                 dated_by: None,
+                priced_by: None,
                 disputed: Vec::new(),
             }
         });

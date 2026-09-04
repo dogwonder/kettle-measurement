@@ -781,6 +781,15 @@ pub fn sort_timeline(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<
                 obligation.dated_by = Some(row);
             }
         }
+        // The same shape for the sum (#612, second half): a payment
+        // ask whose passage printed none takes the figure from the
+        // letter's own labelled row, and the row travels with it.
+        if obligation.kind == "payment" && obligation.amount == crate::run::NO_AMOUNT {
+            if let Some((figure, row)) = priced_at(&obligation, segments) {
+                obligation.amount = figure;
+                obligation.priced_by = Some(row);
+            }
+        }
         match merged
             .iter_mut()
             .find(|kept| same_obligation(kept, &obligation))
@@ -877,6 +886,125 @@ fn pointed_at(obligation: &Obligation, segments: &[Segment]) -> Option<(Resolved
                 segment.clone(),
             ))
         })
+}
+
+/// The sum a payment ask is for, read off the same document's own
+/// labelled row when the ask's passage printed none (#612).
+///
+/// Found on the first real letter after the field shipped: the ask
+/// sentence named no figure and the page printed *Amount Due 41.21
+/// GBP* two passages away. The passage wanted is a row that labels the
+/// sum the page wants paid and prints it — nothing else. Labels are
+/// tried in order of how specifically they name *what is owed*, and
+/// the first label the document uses decides; if that label appears
+/// with two different figures the page is ambiguous and nothing is
+/// read, because a wrong sum is worse than a blank one. The figure is
+/// copied exactly as printed — `£360.00`, `41.21 GBP` — and never
+/// parsed here, so it is read-and-verified, not worked out.
+fn priced_at(obligation: &Obligation, segments: &[Segment]) -> Option<(String, Segment)> {
+    const LABELS: [&str; 7] = [
+        "amount due",
+        "total due",
+        "balance due",
+        "amount payable",
+        "outstanding balance",
+        "total",
+        "balance",
+    ];
+    let document = obligation.evidence.first()?.document;
+    let on_page: Vec<&Segment> = segments
+        .iter()
+        .filter(|segment| segment.document == document)
+        .collect();
+    for label in LABELS {
+        let mut found: Option<(String, Segment)> = None;
+        for segment in &on_page {
+            let lower = segment.text.to_lowercase();
+            let mut from = 0;
+            while let Some(at) = lower[from..].find(label) {
+                let start = from + at + label.len();
+                from = start;
+                // A label inside a longer word ("subtotal") is not this
+                // label, and neither is "sub total": a sub total is
+                // what the page prints *before* the sum it wants.
+                let before = &lower[..from - label.len()];
+                let preceded_by_letter = before
+                    .chars()
+                    .next_back()
+                    .is_some_and(char::is_alphanumeric);
+                if preceded_by_letter || before.trim_end().ends_with("sub") {
+                    continue;
+                }
+                let Some(figure) = money_figure(&segment.text[start..]) else {
+                    continue;
+                };
+                match &found {
+                    Some((seen, _)) if seen != &figure => return None,
+                    Some(_) => {}
+                    None => found = Some((figure, (*segment).clone())),
+                }
+            }
+        }
+        if found.is_some() {
+            return found;
+        }
+    }
+    None
+}
+
+/// A printed sum at the start of `text`, after any label punctuation:
+/// `£360.00`, `£1,250`, `41.21 GBP`, `€12.00`. Returned verbatim.
+fn money_figure(text: &str) -> Option<String> {
+    let text = text.trim_start_matches(|c: char| c.is_whitespace() || c == ':' || c == '-');
+    let bytes = text.as_bytes();
+    let mut at = 0;
+    let mut sign = 0;
+    for symbol in ["£", "€", "$"] {
+        if text.starts_with(symbol) {
+            sign = symbol.len();
+        }
+    }
+    at += sign;
+    if sign > 0 {
+        at += text[at..].len() - text[at..].trim_start().len();
+    }
+    let digits_start = at;
+    while at < bytes.len() && (bytes[at].is_ascii_digit() || bytes[at] == b',') {
+        at += 1;
+    }
+    if at == digits_start || !bytes[digits_start].is_ascii_digit() {
+        return None;
+    }
+    if at + 2 < bytes.len() + 1
+        && bytes.get(at) == Some(&b'.')
+        && bytes.get(at + 1).is_some_and(u8::is_ascii_digit)
+        && bytes.get(at + 2).is_some_and(u8::is_ascii_digit)
+    {
+        at += 3;
+    }
+    // A figure with neither a currency sign nor pence is a count, not a
+    // sum — unless a currency code follows it.
+    let rest = &text[at..];
+    let code = ["GBP", "EUR", "USD"]
+        .iter()
+        .find(|code| rest.trim_start().starts_with(**code) && rest.starts_with(' '));
+    let end = match code {
+        Some(code) => at + (rest.len() - rest.trim_start().len()) + code.len(),
+        None => at,
+    };
+    let has_pence = text[digits_start..at].contains('.');
+    if sign == 0 && code.is_none() && !has_pence {
+        return None;
+    }
+    // Must end at a word boundary: "41.215" is not "41.21".
+    if text[end..]
+        .chars()
+        .next()
+        .is_some_and(char::is_alphanumeric)
+    {
+        return None;
+    }
+    Some(text[..end].to_owned())
 }
 
 /// One ask, however many segments said it: identity is what is being

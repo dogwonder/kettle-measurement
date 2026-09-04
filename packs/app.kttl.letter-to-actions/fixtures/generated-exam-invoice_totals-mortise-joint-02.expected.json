@@ -4,7 +4,7 @@
   "obligations": [
     {
       "expect": {
-        "amount": "no amount",
+        "amount": "£360.00",
         "anchor": "the date given against it",
         "deadline": "by the date given against it",
         "due": "2026-08-02",

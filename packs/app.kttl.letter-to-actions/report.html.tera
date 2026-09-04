@@ -2202,6 +2202,24 @@ body {
     <div class="govuk-inset-text">{{ item.dated_by.text }}<span class="govuk-hint">Page {{ item.dated_by.page }}</span></div>
     {% endif %}
     {% endif %}
+    {# #612: the same for a sum read off the letter's own amount row. #}
+    {% if item.priced_by %}
+    <p class="govuk-body">The amount comes from this, on page {{ item.priced_by.page }}:</p>
+    {% if item.priced_by.rows %}
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-visually-hidden">Quoted from page {{ item.priced_by.page }}</caption>
+      <tbody class="govuk-table__body">
+        {% for row in item.priced_by.rows %}
+        <tr class="govuk-table__row">
+          {% for cell in row %}<td class="govuk-table__cell{% if cell.numeric %} govuk-table__cell--numeric{% endif %}">{{ cell.text }}</td>{% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="govuk-inset-text">{{ item.priced_by.text }}<span class="govuk-hint">Page {{ item.priced_by.page }}</span></div>
+    {% endif %}
+    {% endif %}
     {# #412 step 6: a photographed page is read twice, and where the two
        readings differ is the only signal that finds a wrong character —
        confidence cannot, having read the same reference number two ways

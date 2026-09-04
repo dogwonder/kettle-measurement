@@ -198,6 +198,7 @@ fn obligation(deadline: &str, anchor: &str, evidence: Segment) -> Obligation {
         due: None,
         evidence: vec![evidence],
         dated_by: None,
+        priced_by: None,
         disputed: vec![],
     }
 }
@@ -919,4 +920,106 @@ fn a_pointer_is_recognised_by_what_it_does_not_by_its_wording() {
         sorted[0].due, None,
         "another document's date is not beside anything here: {sorted:#?}"
     );
+}
+
+/// #612, second half — found on the same real letter the field was
+/// built for. The ask sentence, *"Unless payment of all overdue
+/// invoices is received within 7 calendar days…"*, prints no sum; the
+/// sum sits two passages away in the letter's own row, *Amount Due
+/// 41.21 GBP*. The model answered `no amount` for its passage, which
+/// was right, and the report showed nothing, which was not what the
+/// letter said.
+///
+/// #544's shape: where a payment ask's passage prints no sum and the
+/// document labels one — an amount-due, total or balance row — Rust
+/// reads that row and it travels with the claim in `priced_by`, never
+/// in `evidence`. Nothing is computed, so it is read-and-verified.
+#[test]
+fn the_row_a_payment_asks_sum_was_read_from_travels_with_the_claim() {
+    let ask = segment(
+        14,
+        "All outstanding transactions are detailed below. Unless payment of all          overdue invoices is received within 7 calendar days, we may commence          immediate legal action without further notice.",
+    );
+    let segments = vec![
+        segment(6, "20/08/2026"),
+        segment(9, "Amount Due 41.21 GBP 009422"),
+        ask.clone(),
+        segment(
+            18,
+            "Transaction Details (GBP) Original (GBP) Amount Due (GBP) Invoice Number              Invoice Type Invoice Date Invoice Age",
+        ),
+        segment(19, "EXPD 30/06/2026 51 41.21 41.21 396636183"),
+    ];
+    let mut asked = obligation("within 7 calendar days", "no particular date", ask);
+    asked.amount = "no amount".to_owned();
+    let sorted = sort_timeline(vec![asked], &segments);
+
+    assert_eq!(sorted[0].amount, "41.21 GBP");
+    let priced_by = sorted[0]
+        .priced_by
+        .as_ref()
+        .expect("the row the sum was read out of");
+    assert_eq!(priced_by.ordinal, 9);
+    assert_eq!(
+        sorted[0].evidence.len(),
+        1,
+        "the passage the model answered about is the only one it asserted on"
+    );
+}
+
+/// The refusals. A sum the passage prints itself is left alone; an ask
+/// that is not a payment gets no sum; a document whose best label names
+/// two different figures is ambiguous and stays blank; and the bed's
+/// invoice table, where the labels sit mid-text after the reader took
+/// each column in turn, gives the total and not the sub total.
+#[test]
+fn a_sum_is_read_off_a_row_only_where_the_page_labels_exactly_one() {
+    let total_row = |text: &str| segment(3, text);
+    let ask = || {
+        segment(
+            2,
+            "Payment of the total is due by the date shown beside it.",
+        )
+    };
+
+    // Printed in the passage: untouched.
+    let mut own = obligation("within 14 days", "the date of this letter", ask());
+    own.amount = "£120.00".to_owned();
+    let own = sort_timeline(vec![own], &[ask(), total_row("Total £360.00")]);
+    assert_eq!(own[0].amount, "£120.00");
+    assert!(own[0].priced_by.is_none());
+
+    // Not a payment: no sum is looked for.
+    let mut reply = obligation("within 14 days", "the date of this letter", ask());
+    reply.kind = "response".to_owned();
+    reply.amount = "no amount".to_owned();
+    let reply = sort_timeline(vec![reply], &[ask(), total_row("Total £360.00")]);
+    assert_eq!(reply[0].amount, "no amount");
+
+    // Two totals: ambiguous, so blank.
+    let mut two = obligation("within 14 days", "the date of this letter", ask());
+    two.amount = "no amount".to_owned();
+    let two = sort_timeline(
+        vec![two],
+        &[
+            ask(),
+            total_row("Total £360.00"),
+            segment(4, "Total £400.00"),
+        ],
+    );
+    assert_eq!(two[0].amount, "no amount");
+    assert!(two[0].priced_by.is_none());
+
+    // The bed's invoice table, read column by column.
+    let mut invoice = obligation("within 14 days", "the date of this letter", ask());
+    invoice.amount = "no amount".to_owned();
+    let invoice = sort_timeline(
+        vec![invoice],
+        &[
+            ask(),
+            total_row("Due date 6 March 2026 Sub total £300.00 VAT £60.00 Total £360.00"),
+        ],
+    );
+    assert_eq!(invoice[0].amount, "£360.00");
+    assert_eq!(invoice[0].priced_by.as_ref().map(|s| s.ordinal), Some(3));
 }

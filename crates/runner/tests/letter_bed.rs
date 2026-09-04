@@ -1189,6 +1189,7 @@ fn every_committed_invoice_resolves_its_pointer() {
                 due: None,
                 evidence: vec![evidence],
                 dated_by: None,
+                priced_by: None,
                 disputed: vec![],
             };
 
@@ -1499,20 +1500,21 @@ fn every_payment_expectation_carries_the_sum_its_own_passage_prints() {
             if expect["kind"] == "payment" {
                 payments += 1;
                 // The invoice shape's ask points at a table row and
-                // prints no sum in the pointing prose (#544); its
-                // sentinel is right, and a row lookup for the figure is
-                // a decision for a real letter to raise. Any other
-                // payment passage prints its sum and must expect it.
-                let prints_a_sum = segment.contains('£');
+                // prints no sum in the pointing prose (#544); the sum is
+                // read off the letter's own total row and travels with
+                // the claim (#612, second half), so the expectation
+                // carries the total, which the letter prints even where
+                // the passage does not. Every other payment passage
+                // prints its sum and must expect it.
                 if amount == "no amount" {
-                    if prints_a_sum {
-                        failures.push(format!(
-                            "{id}: the passage prints a sum and the expectation carries the sentinel"
-                        ));
-                    }
-                } else if !segment.contains(amount) {
                     failures.push(format!(
-                        "{id}: payment amount {amount:?} is not printed in its passage"
+                        "{id}: a payment ask carries the sentinel; the letter prints its sum \
+                         somewhere and the expectation must say where it lands"
+                    ));
+                } else if !segment.contains(amount) && !letter.text.contains(amount) {
+                    failures.push(format!(
+                        "{id}: payment amount {amount:?} is printed neither in its passage nor \
+                         anywhere in its letter"
                     ));
                 }
             } else if amount != "no amount" {

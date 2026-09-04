@@ -411,6 +411,10 @@ pub struct ObligationOut {
     /// because the answer said where to look.
     #[serde(default)]
     pub dated_by: Option<PassageOut>,
+    /// The row the sum was read out of, when the ask's passage printed
+    /// none (#612). Shown beside the sum, labelled as where it comes
+    /// from, for the same reason `dated_by` is.
+    pub priced_by: Option<PassageOut>,
     /// Where the two readings of a photographed page did not agree
     /// about the passage this was read from (#412 step 6).
     ///

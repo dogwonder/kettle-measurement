@@ -76,6 +76,7 @@ fn html_dated_by(evidence: Vec<Segment>, dated_by: Option<Segment>) -> String {
             }),
             evidence,
             dated_by,
+            priced_by: None,
             disputed: vec![],
         }],
     };
@@ -272,5 +273,68 @@ fn a_date_read_out_of_a_row_is_shown_with_the_row() {
     assert!(
         rows.iter().any(|row| row.contains("1 September 2026")),
         "and reaches it as the table it was set as: {rows:#?}"
+    );
+}
+
+/// #612: the row a sum was read off is shown with the sum, as the
+/// table it was set as, labelled as where the figure comes from.
+#[test]
+fn a_sum_read_out_of_a_row_is_shown_with_the_row() {
+    let ask = Segment {
+        document: 0,
+        page: 1,
+        ordinal: 2,
+        text: "Unless payment of all overdue invoices is received within 7 calendar days, \
+                we may commence legal action."
+            .to_owned(),
+        rows: Vec::new(),
+    };
+    let row = Segment {
+        document: 0,
+        page: 1,
+        ordinal: 3,
+        text: "Amount Due 41.21 GBP".to_owned(),
+        rows: vec![vec!["Amount Due".to_owned()], vec!["41.21 GBP".to_owned()]],
+    };
+    let mut outcome = ExtractionOutcome {
+        date_disputes: vec![],
+        obligations: vec![Obligation {
+            kind: "payment".to_owned(),
+            party: "Halverson Parcels Ltd".to_owned(),
+            ask: "Pay all overdue invoices".to_owned(),
+            deadline: "within 7 calendar days".to_owned(),
+            anchor: "no particular date".to_owned(),
+            amount: "41.21 GBP".to_owned(),
+            confidence: "high".to_owned(),
+            due: None,
+            evidence: vec![ask],
+            dated_by: None,
+            priced_by: Some(row),
+            disputed: vec![],
+        }],
+    };
+    outcome.obligations[0].ask = "Pay all overdue invoices".to_owned();
+    let run = LetterRunInfo {
+        id: "letter-08".to_owned(),
+        pack: "app.kttl.letter-to-actions".to_owned(),
+        pack_version: "0.1.0".to_owned(),
+        file: "reminder.jpg".to_owned(),
+        passages: 5,
+        started: "2026-09-04T09:00:00Z".to_owned(),
+        finished: "2026-09-04T09:00:12Z".to_owned(),
+    };
+    let rendered = runner::render::render_letter_report(
+        &letter_template(),
+        &build_letter_report(&outcome, run),
+    )
+    .expect("the letter report renders");
+    assert!(
+        rendered.contains("The amount comes from this"),
+        "the row is labelled as where the figure comes from: {rendered}"
+    );
+    let rows = table_rows(&rendered);
+    assert!(
+        rows.iter().any(|row| row.contains("41.21 GBP")),
+        "and reaches the page as the table it was set as: {rows:#?}"
     );
 }

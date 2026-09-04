@@ -82,7 +82,16 @@ pub fn build_letter_report_with_review(
             kind: obligation.kind.clone(),
             party: obligation.party.clone(),
             ask: obligation.ask.clone(),
-            amount: letters_own_words(&obligation.amount, &obligation.evidence),
+            amount: letters_own_words(
+                &obligation.amount,
+                obligation
+                    .evidence
+                    .iter()
+                    .chain(obligation.priced_by.iter())
+                    .cloned()
+                    .collect::<Vec<_>>()
+                    .as_slice(),
+            ),
             deadline: letters_own_words(&obligation.deadline, &obligation.evidence),
             due: obligation.due.map(Into::into),
             confidence: Confidence::parse(&obligation.confidence),
@@ -96,6 +105,11 @@ pub fn build_letter_report_with_review(
                 })
                 .collect(),
             dated_by: obligation.dated_by.as_ref().map(|segment| PassageOut {
+                page: segment.page,
+                text: segment.text.clone(),
+                rows: cells(&segment.rows),
+            }),
+            priced_by: obligation.priced_by.as_ref().map(|segment| PassageOut {
                 page: segment.page,
                 text: segment.text.clone(),
                 rows: cells(&segment.rows),

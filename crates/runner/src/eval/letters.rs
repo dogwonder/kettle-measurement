@@ -2593,7 +2593,10 @@ fn passages(
                     party: sender.name.clone(),
                     deadline: pointer.to_owned(),
                     anchor: pointer.trim_start_matches("by ").to_owned(),
-                    amount: "no amount".to_owned(),
+                    // The total the ask points at, read off the table row (#612):
+                    // the expectation carries where the sum lands, not
+                    // what the pointing prose prints.
+                    amount: pounds(sub_pence + vat_pence),
                     due: Some(due_on),
                 }),
                 strata: if descriptive && !exam {

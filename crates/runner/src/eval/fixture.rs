@@ -2932,6 +2932,7 @@ mod tests {
                 }),
                 evidence: Vec::new(),
                 dated_by: None,
+                priced_by: None,
                 disputed: Vec::new(),
             };
         let declared = BTreeMap::from([(

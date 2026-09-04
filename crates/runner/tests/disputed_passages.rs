@@ -39,6 +39,7 @@ fn obligation(ask: &str, deadline: &str, evidence: Segment) -> Obligation {
         due: None,
         evidence: vec![evidence],
         dated_by: None,
+        priced_by: None,
         disputed: vec![],
     }
 }

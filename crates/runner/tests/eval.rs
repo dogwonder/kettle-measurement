@@ -1041,6 +1041,7 @@ fn scored_extraction(ordinal: usize, found: bool, strata: &[&str]) -> ScoredItem
         party: "Example Council".to_owned(),
         deadline: "within 14 days".to_owned(),
         anchor: "the date of this letter".to_owned(),
+        amount: "no amount".to_owned(),
         due: None,
     };
     ScoredItem {
@@ -1489,4 +1490,39 @@ fn different_pack_or_scoring_versions_are_distinct_tier_measurements() {
 
     assert!(!current.same_measurement(&older_pack));
     assert!(!current.same_measurement(&older_scoring));
+}
+
+/// #612: the sum is part of what an obligation *is*. A found obligation
+/// that names the right party, the right day, the right way and the
+/// wrong figure is a different assertion — confident-wrong, never a
+/// near miss — because the person acts on the figure.
+#[test]
+fn an_obligation_with_a_different_sum_is_a_different_assertion() {
+    use runner::eval::ExpectedObligation;
+    let expected = |amount: &str| ExpectedObligation {
+        kind: "payment".to_owned(),
+        party: "Elmswood Lettings".to_owned(),
+        deadline: "within 14 days".to_owned(),
+        anchor: "the date of this letter".to_owned(),
+        due: None,
+        amount: amount.to_owned(),
+    };
+    let found = |amount: &str| runner::run::Obligation {
+        kind: "payment".to_owned(),
+        party: "Elmswood Lettings".to_owned(),
+        ask: "Pay the arrears".to_owned(),
+        deadline: "within 14 days".to_owned(),
+        anchor: "the date of this letter".to_owned(),
+        amount: amount.to_owned(),
+        confidence: "high".to_owned(),
+        due: None,
+        evidence: Vec::new(),
+        dated_by: None,
+        disputed: Vec::new(),
+    };
+    assert_eq!(expected("£84.00").identity(), found("£84.00").identity());
+    assert_ne!(expected("£84.00").identity(), found("£48.00").identity());
+    assert_ne!(expected("£84.00").identity(), found("no amount").identity());
+    // A sum invented on an ask that names none is the same kind of wrong.
+    assert_ne!(expected("no amount").identity(), found("£84.00").identity());
 }

@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "12 August 2026",
         "deadline": "for 12 August 2026 at 3.50pm",
         "due": "2026-08-12",
@@ -28,6 +29,7 @@
     },
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "no particular date",
         "deadline": "when you come in",
         "due": null,
@@ -52,6 +54,7 @@
     },
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "no particular date",
         "deadline": "before you attend",
         "due": null,

@@ -208,7 +208,17 @@ pub const MAX_REVIEW_RATE_KEY: &str = "max_review_rate";
 /// itself a reading of the bed, not a defect in the rule. Verdicts move
 /// wherever a bed too small to prove a ceiling already breached it, so
 /// version 15 baselines are refused.
-pub const SCORING_VERSION: u32 = 17;
+/// Version 18 (#612): the sum is part of the obligation. The first real
+/// letter through the packaged app demanded money and Kettle reported
+/// the ask without the figure — the schema had nowhere to put it. The
+/// obligations schema, the bed and [`ObligationIdentity`] now carry
+/// `amount`, verbatim from the passage or the sentinel `no amount`, so
+/// a found obligation with the right party, the right day and the
+/// wrong figure is a different assertion — confident-wrong, never a
+/// near miss — and a sum copied onto an ask whose passage prints none
+/// is an invention. Harm cells and verdicts move wherever a run misread
+/// or invented a figure, so version 17 baselines are refused.
+pub const SCORING_VERSION: u32 = 18;
 
 pub use crate::timeline::DeadlineShape;
 
@@ -1303,6 +1313,15 @@ pub struct ExpectedObligation {
     /// reads and so is what gets compared.
     #[serde(default)]
     pub due: Option<NaiveDate>,
+    /// The sum the passage prints for this ask, verbatim, or `no
+    /// amount` (#612). Part of identity: the right party, the right day
+    /// and the wrong figure is a different assertion, because the
+    /// figure is what the person acts on. Defaults to the sentinel so a
+    /// bed authored before the field existed scores a sum the model
+    /// copies as an invention — which, against a bed that never said
+    /// one was there, is the honest reading.
+    #[serde(default = "crate::run::no_amount_string")]
+    pub amount: String,
 }
 
 impl ExpectedObligation {
@@ -1314,6 +1333,7 @@ impl ExpectedObligation {
             &self.party,
             &self.deadline,
             &self.anchor,
+            &self.amount,
             self.due,
         )
     }
@@ -1328,6 +1348,7 @@ impl From<&crate::run::Obligation> for ExpectedObligation {
         Self {
             kind: found.kind.clone(),
             party: found.party.clone(),
+            amount: found.amount.clone(),
             deadline: found.deadline.clone(),
             anchor: found.anchor.clone(),
             due: found.due.map(|d| d.date),
@@ -1366,6 +1387,8 @@ pub struct ObligationIdentity {
     kind: String,
     party: String,
     when: When,
+    /// Verbatim but for surrounding whitespace (#612).
+    amount: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -1386,6 +1409,7 @@ impl ObligationIdentity {
         party: &str,
         deadline: &str,
         anchor: &str,
+        amount: &str,
         due: Option<NaiveDate>,
     ) -> Self {
         let when = match due {
@@ -1402,6 +1426,7 @@ impl ObligationIdentity {
             kind: kind.to_owned(),
             party: party.to_ascii_lowercase(),
             when,
+            amount: amount.trim().to_owned(),
         }
     }
 

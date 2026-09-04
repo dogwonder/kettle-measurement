@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "26 April 2026",
         "deadline": "for 26 April 2026 at 11.20am",
         "due": "2026-04-26",
@@ -28,6 +29,7 @@
     },
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "no particular date",
         "deadline": "on the day",
         "due": null,
@@ -52,6 +54,7 @@
     },
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "no particular date",
         "deadline": "before your appointment",
         "due": null,

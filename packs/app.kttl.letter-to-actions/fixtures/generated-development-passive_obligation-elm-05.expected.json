@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "the date of this letter",
         "deadline": "within 42 days",
         "due": "2026-07-02",

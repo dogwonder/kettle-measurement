@@ -280,6 +280,7 @@ fn obligation() -> ExpectedObligation {
         party: "the council".to_owned(),
         deadline: "within 14 days".to_owned(),
         anchor: "You must respond within 14 days.".to_owned(),
+        amount: "no amount".to_owned(),
         due: chrono::NaiveDate::from_ymd_opt(2026, 8, 14),
     }
 }
@@ -1963,18 +1964,17 @@ fn a_baseline_from_a_different_scoring_version_is_refused_not_compared() {
     );
     assert_eq!(
         eval::baseline::SCORING_VERSION,
-        17,
-        "a pooled verdict is read over the gated strata only (#581, \
-         decided 30 August 2026). Sixty hard letters added to the bed in \
-         a stratum declared ungated failed the letter pack on main's own \
-         prompt — 0.977 on the 425 fixtures before them, 0.926 on 455 — \
-         because the pooled end-to-end read every fixture regardless of \
-         what its stratum declared. A bar that falls every time a harm is \
-         measured inverts the incentive, so a fixture whose items all sit \
-         in ungated strata is reported and never pooled until its stratum \
-         is promoted on purpose. Verdicts move wherever an ungated stratum \
-         was carrying the pooled score, and no version 16 baseline may be \
-         compared"
+        18,
+        "the sum is part of the obligation (#612, 3 September 2026). The \
+         first real letter through the packaged app demanded money and \
+         Kettle reported the ask without the figure, because the schema \
+         had nowhere to put it. `amount` now travels with every \
+         obligation, verbatim from the passage or the sentinel `no \
+         amount`, and joins its identity: the right party, the right day \
+         and the wrong figure is a different assertion, and a sum copied \
+         onto an ask whose passage prints none is an invention. Harm \
+         cells and verdicts move wherever a run misread or invented a \
+         figure, so no version 17 baseline may be compared"
     );
 
     older = older.replace(

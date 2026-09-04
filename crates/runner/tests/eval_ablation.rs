@@ -59,6 +59,7 @@ fn obligation(party: &str) -> runner::eval::Extracted {
         party: party.to_owned(),
         deadline: "within 14 days".to_owned(),
         anchor: "14 days".to_owned(),
+        amount: "no amount".to_owned(),
         due: None,
     })
 }
@@ -88,6 +89,7 @@ fn a_stopped_candidate_worded_like_the_letter_is_not_booked_as_prevented() {
         party: "Elmswood Lettings".to_owned(),
         deadline: "within 45 days".to_owned(),
         anchor: "23 August 2026".to_owned(),
+        amount: "no amount".to_owned(),
         due: Some(chrono::NaiveDate::from_ymd_opt(2026, 10, 7).expect("a date")),
     });
     assert_eq!(
@@ -301,6 +303,7 @@ fn a_stopped_candidate_naming_the_wrong_party_is_wrong_without_any_derivation() 
         party: "Harborne Parking Services".to_owned(),
         deadline: "within 14 days".to_owned(),
         anchor: "14 days".to_owned(),
+        amount: "no amount".to_owned(),
         due: None,
     });
 

@@ -42,6 +42,7 @@ fn outcome() -> ExtractionOutcome {
                 ask: "Pay £120.00".to_owned(),
                 deadline: "within 14 days".to_owned(),
                 anchor: "the date of this letter".to_owned(),
+                amount: "no amount".to_owned(),
                 confidence: "high".to_owned(),
                 // Counted from the letter's date, not written on it.
                 due: Some(Resolved {
@@ -61,6 +62,7 @@ fn outcome() -> ExtractionOutcome {
                 ask: "Send a meter reading".to_owned(),
                 deadline: "at your earliest convenience".to_owned(),
                 anchor: "no particular date".to_owned(),
+                amount: "no amount".to_owned(),
                 confidence: "high".to_owned(),
                 due: None,
                 evidence: vec![segment(
@@ -457,5 +459,31 @@ fn a_deadline_the_letter_wrote_is_kept_exactly() {
         report.obligations[1].deadline, "at your earliest convenience",
         "so is this one, and it resolves to no date — which is not the \
          same as the letter saying nothing"
+    );
+}
+
+/// #612: the sum reaches the report only in the letter's own words.
+/// A figure the passage prints is shown; the sentinel is not a figure;
+/// and a figure the model copied from somewhere the claim's own
+/// passages do not contain is blanked rather than repaired — #460's
+/// rule one, on the field the photo route is likeliest to misread
+/// (OCR turns `£` into `€` and drops it).
+#[test]
+fn the_sum_is_reported_only_in_the_letters_own_words() {
+    let with = |amount: &str| {
+        let mut outcome = outcome();
+        outcome.obligations.truncate(1);
+        outcome.obligations[0].amount = amount.to_owned();
+        build_letter_report(&outcome, run_info()).obligations[0]
+            .amount
+            .clone()
+    };
+    assert_eq!(with("£120.00"), "£120.00");
+    assert_eq!(with("no amount"), "");
+    assert_eq!(with("£12.00"), "", "a figure the passage does not print");
+    assert_eq!(
+        with("€120.00"),
+        "",
+        "the reader's currency sign, not the page's"
     );
 }

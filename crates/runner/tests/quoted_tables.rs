@@ -68,6 +68,7 @@ fn html_dated_by(evidence: Vec<Segment>, dated_by: Option<Segment>) -> String {
             ask: "Pay the invoice".to_owned(),
             deadline: "within 14 days".to_owned(),
             anchor: "the date of this letter".to_owned(),
+            amount: "no amount".to_owned(),
             confidence: "high".to_owned(),
             due: Some(Resolved {
                 date: "2026-09-01".parse().expect("a real day"),

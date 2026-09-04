@@ -381,6 +381,12 @@ pub struct ObligationOut {
     pub kind: String,
     pub party: String,
     pub ask: String,
+    /// The sum, in the letter's own words, or empty (#612). Empty when
+    /// the passage names none and when the figure the model copied is
+    /// not on the claim's own passages — #460's rule one: a sum the
+    /// report attributes to the page has to be on the page, and a
+    /// blank is honest where a repaired figure would be a guess.
+    pub amount: String,
     /// The letter's own words for when.
     pub deadline: String,
     /// Resolved in Rust (#241), or `None` when the words could not be

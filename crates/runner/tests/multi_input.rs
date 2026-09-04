@@ -274,6 +274,7 @@ fn merged_evidence_stays_in_document_order() {
         ask: "Pay £120.00".to_owned(),
         deadline: "by 12 August 2026".to_owned(),
         anchor: "12 August 2026".to_owned(),
+        amount: "no amount".to_owned(),
         confidence: "high".to_owned(),
         due: None,
         evidence,

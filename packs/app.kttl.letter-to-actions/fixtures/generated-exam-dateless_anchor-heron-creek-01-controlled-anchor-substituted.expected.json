@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "the date of the hearing",
         "deadline": "within 21 days",
         "due": null,

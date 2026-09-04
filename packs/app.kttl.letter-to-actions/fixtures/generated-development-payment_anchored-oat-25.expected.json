@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "£120.00",
         "anchor": "12 May 2026",
         "deadline": "within 30 days",
         "due": "2026-06-11",

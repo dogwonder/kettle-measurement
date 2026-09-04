@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "2 January 2027",
         "deadline": "for 2 January 2027 at 11.20am",
         "due": "2027-01-02",
@@ -28,6 +29,7 @@
     },
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "no particular date",
         "deadline": "on the day",
         "due": null,
@@ -52,6 +54,7 @@
     },
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "no particular date",
         "deadline": "before your appointment",
         "due": null,

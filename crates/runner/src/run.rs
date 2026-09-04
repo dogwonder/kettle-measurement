@@ -339,6 +339,14 @@ pub struct Obligation {
     /// What the deadline counts from, as written ("the date of this
     /// letter", "12 August 2026").
     pub anchor: String,
+    /// The sum this ask is for, copied from the passage as written
+    /// ("£84.00"), or the sentinel `no amount` (#612). Never parsed and
+    /// never operated on here: reading a figure off the page is the
+    /// same act as reading a deadline phrase, and anything done with it
+    /// afterwards is Rust's. Defaults on deserialisation so recordings
+    /// and results written before the field existed still load.
+    #[serde(default = "no_amount")]
+    pub amount: String,
     /// The model's confidence about this segment's reading. Low means
     /// "check this yourself", exactly as it does for a classification.
     pub confidence: String,
@@ -392,6 +400,18 @@ pub struct Obligation {
     pub disputed: Vec<crate::ocr::Disagreement>,
 }
 
+/// The sentinel an obligation carries where its passage names no sum.
+pub const NO_AMOUNT: &str = "no amount";
+
+fn no_amount() -> String {
+    NO_AMOUNT.to_owned()
+}
+
+/// The same default, reachable from the eval's expectation type.
+pub fn no_amount_string() -> String {
+    no_amount()
+}
+
 impl Obligation {
     /// What this obligation *is*, for every comparison the eval harness
     /// makes (#554) — the same identity a bed's expectation carries.
@@ -401,6 +421,7 @@ impl Obligation {
             &self.party,
             &self.deadline,
             &self.anchor,
+            &self.amount,
             self.due.map(|d| d.date),
         )
     }
@@ -2087,6 +2108,9 @@ fn segment_obligations(
                 ask: text(obligation, "ask"),
                 deadline: text(obligation, "deadline"),
                 anchor: text(obligation, "anchor"),
+                amount: obligation["amount"]
+                    .as_str()
+                    .map_or_else(no_amount, str::to_owned),
                 confidence: confidence.clone(),
                 due: None,
                 evidence: vec![segment.clone()],

@@ -1184,6 +1184,7 @@ fn every_committed_invoice_resolves_its_pointer() {
                 ask: "Pay the total".to_owned(),
                 deadline: want["deadline"].as_str().expect("a deadline").to_owned(),
                 anchor: want["anchor"].as_str().expect("an anchor").to_owned(),
+                amount: "no amount".to_owned(),
                 confidence: "high".to_owned(),
                 due: None,
                 evidence: vec![evidence],
@@ -1461,4 +1462,84 @@ fn a_shape_plants_each_of_its_constructions_evenly() {
             );
         }
     }
+}
+
+/// #612, 3 September 2026: the first real letter through the packaged
+/// app demanded money, and Kettle reported the ask and dropped the sum.
+/// Not a reading failure — the reader pulled the figure off the
+/// photograph cleanly — but a schema one: the obligations schema had
+/// `kind, party, ask, deadline, anchor` and nowhere to put it. The
+/// product sentence promises *the amounts*.
+///
+/// Reading a sum off the page is the same act as reading a deadline
+/// phrase: copy what is written, verbatim, and let Rust do anything that
+/// follows. So the bed authors it the same way — every payment
+/// expectation carries the sum exactly as its own passage prints it,
+/// and every other expectation carries the sentinel, so a sum invented
+/// on a response ask is scored as the invention it is.
+#[test]
+fn every_payment_expectation_carries_the_sum_its_own_passage_prints() {
+    let spec = runner::eval::letters::committed_spec(&pack_dir()).expect("the committed spec");
+    let letters = runner::eval::letters::generate(&spec);
+    let mut payments = 0usize;
+    let mut failures: Vec<String> = Vec::new();
+    for letter in &letters {
+        let expected: serde_json::Value =
+            serde_json::from_str(&letter.expected).expect("expectations are json");
+        for item in expected["obligations"].as_array().expect("obligations") {
+            let Some(expect) = item["expect"].as_object() else {
+                continue;
+            };
+            let id = item["id"].as_str().expect("an item id");
+            let segment = item["segment"].as_str().expect("a segment");
+            let Some(amount) = expect.get("amount").and_then(|a| a.as_str()) else {
+                failures.push(format!("{id}: no amount field"));
+                continue;
+            };
+            if expect["kind"] == "payment" {
+                payments += 1;
+                // The invoice shape's ask points at a table row and
+                // prints no sum in the pointing prose (#544); its
+                // sentinel is right, and a row lookup for the figure is
+                // a decision for a real letter to raise. Any other
+                // payment passage prints its sum and must expect it.
+                let prints_a_sum = segment.contains('£');
+                if amount == "no amount" {
+                    if prints_a_sum {
+                        failures.push(format!(
+                            "{id}: the passage prints a sum and the expectation carries the sentinel"
+                        ));
+                    }
+                } else if !segment.contains(amount) {
+                    failures.push(format!(
+                        "{id}: payment amount {amount:?} is not printed in its passage"
+                    ));
+                }
+            } else if amount != "no amount" {
+                failures.push(format!(
+                    "{id}: a {} ask carries amount {amount:?}",
+                    expect["kind"]
+                ));
+            }
+        }
+    }
+    assert!(payments > 0, "the bed plants no payment asks");
+    assert!(failures.is_empty(), "{}", failures.join("\n  "));
+
+    // The schema is where the field was missing, so the schema is
+    // checked too: a bed that scores a field the model cannot answer
+    // measures a hole.
+    let schema: serde_json::Value = serde_json::from_str(
+        &std::fs::read_to_string(pack_dir().join("schemas/obligations.schema.json"))
+            .expect("the obligations schema"),
+    )
+    .expect("schema is json");
+    let required =
+        &schema["properties"]["results"]["items"]["properties"]["obligations"]["items"]["required"];
+    assert!(
+        required
+            .as_array()
+            .is_some_and(|r| r.iter().any(|f| f == "amount")),
+        "the obligations schema does not require `amount`: {required}"
+    );
 }

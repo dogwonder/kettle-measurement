@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "26 January 2026",
         "deadline": "on 26 January 2026",
         "due": "2026-01-26",

@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "£480.00",
         "anchor": "the date of this letter",
         "deadline": "within 21 days",
         "due": "2026-05-11",
@@ -21,6 +22,7 @@
     },
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "8 November 2026",
         "deadline": "on 8 November 2026",
         "due": "2026-11-08",
@@ -38,6 +40,7 @@
     },
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "the date of this letter",
         "deadline": "by the end of the month",
         "due": "2026-04-30",

@@ -370,6 +370,10 @@ struct ProposedObligation {
     party: String,
     deadline: String,
     anchor: String,
+    /// Absent in recordings made before #612; the sentinel then, so an
+    /// old trace still compares.
+    #[serde(default = "crate::run::no_amount_string")]
+    amount: String,
 }
 
 /// The candidate as the shape an expectation is compared against.
@@ -393,6 +397,7 @@ fn proposed_assertion(trace: &ClaimTrace) -> Option<Extracted> {
                         party: proposed.party,
                         deadline: proposed.deadline,
                         anchor: proposed.anchor,
+                        amount: proposed.amount,
                         due: None,
                     })
                 })

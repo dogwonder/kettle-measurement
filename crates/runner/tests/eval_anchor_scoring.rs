@@ -53,6 +53,7 @@ fn found(anchor: &str, due: Option<NaiveDate>) -> RunOutcome {
                 ask: "Settle the balance".to_owned(),
                 deadline: "by the end of the month".to_owned(),
                 anchor: anchor.to_owned(),
+                amount: "no amount".to_owned(),
                 confidence: "high".to_owned(),
                 // A month-end deadline is always Rust's arithmetic;
                 // scoring joins on the date, never on the kind.

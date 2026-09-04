@@ -82,6 +82,7 @@ pub fn build_letter_report_with_review(
             kind: obligation.kind.clone(),
             party: obligation.party.clone(),
             ask: obligation.ask.clone(),
+            amount: letters_own_words(&obligation.amount, &obligation.evidence),
             deadline: letters_own_words(&obligation.deadline, &obligation.evidence),
             due: obligation.due.map(Into::into),
             confidence: Confidence::parse(&obligation.confidence),

@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "£214.60",
         "anchor": "the date of this letter",
         "deadline": "within 21 days",
         "due": "2026-03-03",

@@ -83,6 +83,13 @@ For each obligation give:
 - anchor: what the deadline counts from, in the letter's own words —
   "the date of this letter", or a date the letter states. If nothing is
   given, write "no particular date".
+- amount: the sum this ask is for, copied exactly as this passage
+  writes it — "£84.00", "£1,250.00", "41.21 GBP". Only a sum this
+  passage itself prints, and only the sum being asked for: not a
+  previous balance, not a reduced rate, not a figure from elsewhere in
+  the letter. If the passage names no sum, write "no amount". Never
+  add up, convert or round: a figure you work out is a figure somebody
+  pays wrongly.
 
 You are not asked to work out when anything actually falls due. That is
 done separately, from the words you copy. Copying the deadline exactly

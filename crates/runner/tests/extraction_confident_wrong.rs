@@ -58,6 +58,7 @@ fn obligation(deadline: &str, anchor: &str, due: Option<&str>) -> Extracted {
         party: "Harborne Parking Services".to_owned(),
         deadline: deadline.to_owned(),
         anchor: anchor.to_owned(),
+        amount: "no amount".to_owned(),
         due: due.map(|d| d.parse().expect("an authored date")),
     })
 }

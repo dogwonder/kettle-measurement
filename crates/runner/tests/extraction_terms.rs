@@ -174,6 +174,7 @@ fn an_obligation_recording_survives_the_decoupling() {
         party: "Harborne Parking Services".to_owned(),
         deadline: "within 14 days".to_owned(),
         anchor: "the date of this letter".to_owned(),
+        amount: "no amount".to_owned(),
         due: None,
     };
 
@@ -230,9 +231,10 @@ fn an_obligation_recording_survives_the_decoupling() {
          is a scoring change, and scoring changes bump SCORING_VERSION"
     );
 
-    // And the expected half serialises back to exactly the bytes it
-    // came from: an obligation is written as an obligation, not as a
-    // wrapper around one.
+    // And the expected half serialises back to the bytes it came from
+    // plus the one field added since (#612, scoring v18): an obligation
+    // is written as an obligation, not as a wrapper around one, and a
+    // recording made before the sum was scored reads with the sentinel.
     assert_eq!(
         serde_json::to_value(Extracted::Obligation(obligation)).expect("serialises"),
         serde_json::json!({
@@ -240,7 +242,8 @@ fn an_obligation_recording_survives_the_decoupling() {
             "party": "Harborne Parking Services",
             "deadline": "within 14 days",
             "anchor": "the date of this letter",
-            "due": null
+            "due": null,
+            "amount": "no amount"
         }),
     );
 }

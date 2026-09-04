@@ -6,27 +6,69 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer" },
-          "segment": { "type": "string" },
-          "confidence": { "enum": ["high", "medium", "low"] },
+          "id": {
+            "type": "integer"
+          },
+          "segment": {
+            "type": "string"
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
           "obligations": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "kind": { "enum": ["payment", "response", "attendance", "other"] },
-                "party": { "type": "string" },
-                "ask": { "type": "string" },
-                "deadline": { "type": "string" },
-                "anchor": { "type": "string" }
+                "kind": {
+                  "enum": [
+                    "payment",
+                    "response",
+                    "attendance",
+                    "other"
+                  ]
+                },
+                "party": {
+                  "type": "string"
+                },
+                "ask": {
+                  "type": "string"
+                },
+                "deadline": {
+                  "type": "string"
+                },
+                "anchor": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "string"
+                }
               },
-              "required": ["kind", "party", "ask", "deadline", "anchor"]
+              "required": [
+                "kind",
+                "party",
+                "ask",
+                "deadline",
+                "anchor",
+                "amount"
+              ]
             }
           }
         },
-        "required": ["id", "segment", "confidence", "obligations"]
+        "required": [
+          "id",
+          "segment",
+          "confidence",
+          "obligations"
+        ]
       }
     }
   },
-  "required": ["results"]
+  "required": [
+    "results"
+  ]
 }

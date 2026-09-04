@@ -2914,6 +2914,7 @@ mod tests {
             party: "Elmswood Lettings".to_owned(),
             deadline: deadline.to_owned(),
             anchor: anchor.to_owned(),
+            amount: "no amount".to_owned(),
             due: due.map(date),
         };
         let found =
@@ -2923,6 +2924,7 @@ mod tests {
                 ask: "Pay the arrears".to_owned(),
                 deadline: deadline.to_owned(),
                 anchor: anchor.to_owned(),
+                amount: "no amount".to_owned(),
                 confidence: "high".to_owned(),
                 due: due.map(|d| Resolved {
                     date: date(d),

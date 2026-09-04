@@ -10,7 +10,8 @@
           "party": "Redhill District Council",
           "ask": "Pay £84.00 for the garden waste licence",
           "deadline": "within 14 days",
-          "anchor": "the date of this letter"
+          "anchor": "the date of this letter",
+          "amount": "£84.00"
         }
       ]
     },
@@ -30,7 +31,8 @@
           "party": "Redhill District Council",
           "ask": "Attend the tribunal hearing",
           "deadline": "on 14 September 2026",
-          "anchor": "14 September 2026"
+          "anchor": "14 September 2026",
+          "amount": "no amount"
         }
       ]
     },
@@ -44,7 +46,8 @@
           "party": "Redhill District Council",
           "ask": "Send a meter reading",
           "deadline": "at your earliest convenience",
-          "anchor": "no particular date"
+          "anchor": "no particular date",
+          "amount": "no amount"
         }
       ]
     },
@@ -70,7 +73,8 @@
           "party": "Redhill District Council",
           "ask": "Attend the appointment with the housing officer",
           "deadline": "on 3 June 2026 at 10.30am",
-          "anchor": "3 June 2026"
+          "anchor": "3 June 2026",
+          "amount": "no amount"
         }
       ]
     },

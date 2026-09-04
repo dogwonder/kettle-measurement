@@ -796,6 +796,7 @@ fn deadline_outcome(deadline: &str, anchor: &str, due: Option<&str>) -> RunOutco
                 ask: "Pay £120.00".to_owned(),
                 deadline: deadline.to_owned(),
                 anchor: anchor.to_owned(),
+                amount: "no amount".to_owned(),
                 confidence: "high".to_owned(),
                 due: due.map(|date| runner::timeline::Resolved {
                     date: date.parse().expect("a date"),
@@ -973,6 +974,7 @@ fn a_reading_that_moves_more_than_the_edit_fails_the_controlled_change() {
             ask: "Confirm in writing".to_owned(),
             deadline: "within 28 days".to_owned(),
             anchor: "the date of this letter".to_owned(),
+            amount: "no amount".to_owned(),
             confidence: "high".to_owned(),
             due: None,
             evidence: Vec::new(),

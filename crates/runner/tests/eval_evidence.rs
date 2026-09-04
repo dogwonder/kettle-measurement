@@ -231,6 +231,7 @@ fn a_deadline_carrying_its_own_anchor_is_the_same_assertion() {
             party: "Elmswood Lettings".to_owned(),
             deadline: deadline.to_owned(),
             anchor: anchor.to_owned(),
+            amount: "no amount".to_owned(),
             due: due.map(|d| NaiveDate::parse_from_str(d, "%Y-%m-%d").expect("a date")),
         })
     };

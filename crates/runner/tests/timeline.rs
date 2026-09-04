@@ -193,6 +193,7 @@ fn obligation(deadline: &str, anchor: &str, evidence: Segment) -> Obligation {
         ask: "Pay £120.00".to_owned(),
         deadline: deadline.to_owned(),
         anchor: anchor.to_owned(),
+        amount: "no amount".to_owned(),
         confidence: "high".to_owned(),
         due: None,
         evidence: vec![evidence],

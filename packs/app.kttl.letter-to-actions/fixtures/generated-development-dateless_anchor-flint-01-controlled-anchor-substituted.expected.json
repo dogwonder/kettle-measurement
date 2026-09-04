@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "the invoice date",
         "deadline": "within 14 days",
         "due": null,

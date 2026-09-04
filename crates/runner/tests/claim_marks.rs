@@ -103,6 +103,7 @@ fn letter_html(template: &str, kind: Kind) -> String {
             ask: "Pay £120.00".to_owned(),
             deadline: "within 14 days".to_owned(),
             anchor: "the date of this letter".to_owned(),
+            amount: "no amount".to_owned(),
             confidence: "high".to_owned(),
             due: Some(Resolved {
                 date: "2026-03-17".parse().expect("a real day"),

@@ -4,6 +4,7 @@
   "obligations": [
     {
       "expect": {
+        "amount": "no amount",
         "anchor": "no particular date",
         "deadline": "as soon as you are able",
         "due": null,

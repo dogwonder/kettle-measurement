@@ -34,6 +34,7 @@ fn obligation(ask: &str, deadline: &str, evidence: Segment) -> Obligation {
         ask: ask.to_owned(),
         deadline: deadline.to_owned(),
         anchor: "28 April 2026".to_owned(),
+        amount: "no amount".to_owned(),
         confidence: "high".to_owned(),
         due: None,
         evidence: vec![evidence],

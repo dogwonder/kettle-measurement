@@ -347,6 +347,18 @@ pub struct Obligation {
     /// and results written before the field existed still load.
     #[serde(default = "no_amount")]
     pub amount: String,
+    /// The passage the model says the sum is printed in, as a batch id
+    /// (an index into the run's segments), when it is not this one.
+    /// Rust verifies the figure is there and carries the passage as
+    /// `priced_by`; it never searches for one itself (CLAUDE.md, *Rust
+    /// verifies; it never discovers*).
+    #[serde(default)]
+    pub amount_from: Option<usize>,
+    /// The passage the model says the deadline's date is printed in,
+    /// when the deadline points elsewhere on the page. Rust reads one
+    /// full date from it and carries the passage as `dated_by`.
+    #[serde(default)]
+    pub deadline_from: Option<usize>,
     /// The model's confidence about this segment's reading. Low means
     /// "check this yourself", exactly as it does for a classification.
     pub confidence: String,
@@ -2119,6 +2131,8 @@ fn segment_obligations(
                 amount: obligation["amount"]
                     .as_str()
                     .map_or_else(no_amount, str::to_owned),
+                amount_from: obligation["amount_from"].as_u64().map(|id| id as usize),
+                deadline_from: obligation["deadline_from"].as_u64().map(|id| id as usize),
                 confidence: confidence.clone(),
                 due: None,
                 evidence: vec![segment.clone()],

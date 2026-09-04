@@ -776,18 +776,57 @@ pub fn sort_timeline(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<
             // answered, and a row added there reads downstream as an
             // obligation asserted on a due-date row, which is what the
             // bed measures as an invention.
-            if let Some((resolved, row)) = pointed_at(&obligation, segments) {
-                obligation.due = Some(resolved);
-                obligation.dated_by = Some(row);
+            // The model names where the date is printed; Rust reads
+            // one full date off that passage and nothing else. The
+            // staged finder behind it is the fallback only while the
+            // weekly run has not yet shown the naming is reliable.
+            match named_passage(&obligation, obligation.deadline_from, segments) {
+                Some(row) => {
+                    if let Some(date) = first_full_date(&row.text) {
+                        obligation.due = Some(Resolved {
+                            date,
+                            kind: Kind::ReadAndVerified,
+                        });
+                        obligation.dated_by = Some(row);
+                    }
+                }
+                None => {
+                    if let Some((resolved, row)) = pointed_at(&obligation, segments) {
+                        obligation.due = Some(resolved);
+                        obligation.dated_by = Some(row);
+                    }
+                }
             }
         }
-        // The same shape for the sum (#612, second half): a payment
-        // ask whose passage printed none takes the figure from the
-        // letter's own labelled row, and the row travels with it.
-        if obligation.kind == "payment" && obligation.amount == crate::run::NO_AMOUNT {
-            if let Some((figure, row)) = priced_at(&obligation, segments) {
-                obligation.amount = figure;
-                obligation.priced_by = Some(row);
+        // The same shape for the sum (#612): the model names the
+        // passage the figure is printed in, and Rust checks the figure
+        // is there — #460 rule one against the named passage. A named
+        // passage that does not contain it is a wrong claim, refused;
+        // the staged finder runs only where nothing was named.
+        if obligation.kind == "payment" {
+            if obligation.amount != crate::run::NO_AMOUNT {
+                if let Some(row) = named_passage(&obligation, obligation.amount_from, segments) {
+                    if contains_ignoring_whitespace(&row.text, &obligation.amount) {
+                        obligation.priced_by = Some(row);
+                    } else {
+                        obligation.amount = crate::run::NO_AMOUNT.to_owned();
+                    }
+                }
+            }
+            // "Named nothing" includes naming its own passage with no
+            // sum: the model has not pointed anywhere else, and the
+            // staged finder is the fallback until naming is reliable.
+            // The first scratch loop (4 September) found the 4B names
+            // the due-date row 27 times in 36 and the total row 4 in
+            // 24, so the date finder is nearly retired and the amount
+            // finder is not.
+            if obligation.amount == crate::run::NO_AMOUNT
+                && named_passage(&obligation, obligation.amount_from, segments).is_none()
+            {
+                if let Some((figure, row)) = priced_at(&obligation, segments) {
+                    obligation.amount = figure;
+                    obligation.priced_by = Some(row);
+                }
             }
         }
         match merged
@@ -888,8 +927,37 @@ fn pointed_at(obligation: &Obligation, segments: &[Segment]) -> Option<(Resolved
         })
 }
 
+/// The passage a claim says its value lives in, when that is not the
+/// passage the claim was read from (CLAUDE.md, *Rust verifies; it never
+/// discovers*). A batch id indexes the run's segments; an id off the
+/// page, in another document, or naming the claim's own passage is
+/// `None`, and the caller then has nothing to verify.
+fn named_passage(
+    obligation: &Obligation,
+    id: Option<usize>,
+    segments: &[Segment],
+) -> Option<Segment> {
+    let own = obligation.evidence.first()?;
+    let row = segments.get(id?)?;
+    if row.document != own.document || row.ordinal == own.ordinal {
+        return None;
+    }
+    Some(row.clone())
+}
+
+/// #460 rule one, whitespace-insensitive: a line break is an artefact
+/// of the page, not of the figure.
+fn contains_ignoring_whitespace(text: &str, wanted: &str) -> bool {
+    let squash = |s: &str| s.split_whitespace().collect::<Vec<_>>().join(" ");
+    squash(text).contains(&squash(wanted))
+}
+
 /// The sum a payment ask is for, read off the same document's own
 /// labelled row when the ask's passage printed none (#612).
+///
+/// **Staged phrasebook** (tests/phrasebooks.rs): the fallback behind
+/// `amount_from`, to go when the weekly run shows the model names the
+/// row reliably.
 ///
 /// Found on the first real letter after the field shipped: the ask
 /// sentence named no figure and the page printed *Amount Due 41.21

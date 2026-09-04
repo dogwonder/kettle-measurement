@@ -280,6 +280,8 @@ fn merged_evidence_stays_in_document_order() {
         evidence,
         dated_by: None,
         priced_by: None,
+        amount_from: None,
+        deadline_from: None,
         disputed: vec![],
     };
 

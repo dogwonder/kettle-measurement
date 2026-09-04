@@ -886,7 +886,9 @@ fn apply(
                 "ask": "Pay an amount this passage never asked for",
                 "deadline": "within 7 days",
                 "anchor": "the date of this letter",
-                "amount": "no amount"
+                "amount": "no amount",
+                "amount_from": content["results"][result_index]["id"].clone(),
+                "deadline_from": content["results"][result_index]["id"].clone()
             });
             if let Some(obligations) =
                 mutated["results"][result_index]["obligations"].as_array_mut()

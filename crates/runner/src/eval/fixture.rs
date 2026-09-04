@@ -2933,6 +2933,8 @@ mod tests {
                 evidence: Vec::new(),
                 dated_by: None,
                 priced_by: None,
+                amount_from: None,
+                deadline_from: None,
                 disputed: Vec::new(),
             };
         let declared = BTreeMap::from([(

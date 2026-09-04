@@ -85,11 +85,25 @@ For each obligation give:
   given, write "no particular date".
 - amount: the sum this ask is for, copied exactly as this passage
   writes it — "£84.00", "£1,250.00", "41.21 GBP". Only a sum this
-  passage itself prints, and only the sum being asked for: not a
-  previous balance, not a reduced rate, not a figure from elsewhere in
-  the letter. If the passage names no sum, write "no amount". Never
-  add up, convert or round: a figure you work out is a figure somebody
-  pays wrongly.
+  page prints, and only the sum being asked for: not a previous
+  balance, not a reduced rate. If no passage names the sum, write "no
+  amount". Never add up, convert or round: a figure you work out is a
+  figure somebody pays wrongly.
+- amount_from: the id of the passage the amount is printed in. Usually
+  this passage's own id. A letter often states the ask in one sentence
+  and prints the sum in a row elsewhere — "Amount due £41.21", a totals
+  table — and then the id is that row's, and amount is the figure that
+  row prints. An ask for "the total", "the amount shown", "the balance"
+  or "the sum below" is this case: find the row that prints it, give
+  its id, and copy its figure into amount. With "no amount", give this
+  passage's own id.
+- deadline_from: the id of the passage the date is printed in. This
+  passage's own id when the deadline is written here, whether as a day
+  or as a period. When the words point elsewhere — "by the date shown
+  beside it", "the date given below" — the id of the passage that
+  prints that date, usually a due-date row. You are naming where the
+  date is, not reading it: copy nothing from that passage into
+  deadline.
 
 You are not asked to work out when anything actually falls due. That is
 done separately, from the words you copy. Copying the deadline exactly

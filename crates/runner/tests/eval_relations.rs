@@ -805,6 +805,8 @@ fn deadline_outcome(deadline: &str, anchor: &str, due: Option<&str>) -> RunOutco
                 evidence: Vec::new(),
                 dated_by: None,
                 priced_by: None,
+                amount_from: None,
+                deadline_from: None,
                 disputed: vec![],
             }],
         }),
@@ -981,6 +983,8 @@ fn a_reading_that_moves_more_than_the_edit_fails_the_controlled_change() {
             evidence: Vec::new(),
             dated_by: None,
             priced_by: None,
+            amount_from: None,
+            deadline_from: None,
             disputed: vec![],
         });
     }

@@ -199,6 +199,8 @@ fn obligation(deadline: &str, anchor: &str, evidence: Segment) -> Obligation {
         evidence: vec![evidence],
         dated_by: None,
         priced_by: None,
+        amount_from: None,
+        deadline_from: None,
         disputed: vec![],
     }
 }
@@ -1022,4 +1024,63 @@ fn a_sum_is_read_off_a_row_only_where_the_page_labels_exactly_one() {
     );
     assert_eq!(invoice[0].amount, "£360.00");
     assert_eq!(invoice[0].priced_by.as_ref().map(|s| s.ordinal), Some(3));
+}
+
+/// *Rust verifies; it never discovers* (CLAUDE.md, 4 September 2026).
+/// The model names the passage a value lives in; Rust checks the named
+/// passage and refuses a wrong naming. No label list is consulted when
+/// a passage is named.
+#[test]
+fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
+    let ask = segment(
+        14,
+        "Unless payment of all overdue invoices is received within 7 calendar days, we \
+         may commence legal action.",
+    );
+    // No labels the finder knows: the row says "Sum owing".
+    let segments: Vec<Segment> = (0..20)
+        .map(|n| match n {
+            9 => segment(9, "Sum owing 41.21 GBP 009422"),
+            11 => segment(11, "Pay by 27/08/2026"),
+            14 => ask.clone(),
+            _ => segment(n, "Lorem ipsum."),
+        })
+        .collect();
+
+    // Named and verified: the figure is in the named passage.
+    let mut named = obligation("within 7 calendar days", "no particular date", ask.clone());
+    named.amount = "41.21 GBP".to_owned();
+    named.amount_from = Some(9);
+    let named = sort_timeline(vec![named], &segments)[0].clone();
+    assert_eq!(named.amount, "41.21 GBP");
+    assert_eq!(named.priced_by.as_ref().map(|s| s.ordinal), Some(9));
+
+    // Named and wrong: the figure is not in the named passage, so the
+    // claim is refused rather than hunted for elsewhere.
+    let mut wrong = obligation("within 7 calendar days", "no particular date", ask.clone());
+    wrong.amount = "41.21 GBP".to_owned();
+    wrong.amount_from = Some(11);
+    let wrong = sort_timeline(vec![wrong], &segments)[0].clone();
+    assert_eq!(wrong.amount, "no amount");
+    assert!(wrong.priced_by.is_none());
+
+    // A deadline whose date is printed elsewhere: the model names the
+    // passage, Rust reads one full date from it, read-and-verified.
+    let mut pointed = obligation("by the date below", "no particular date", ask.clone());
+    pointed.amount = "no amount".to_owned();
+    pointed.deadline_from = Some(11);
+    let pointed = sort_timeline(vec![pointed], &segments)[0].clone();
+    assert_eq!(
+        pointed.due.as_ref().map(|r| (r.date, r.kind)),
+        Some((date("2026-08-27"), Kind::ReadAndVerified))
+    );
+    assert_eq!(pointed.dated_by.as_ref().map(|s| s.ordinal), Some(11));
+    assert_eq!(pointed.evidence.len(), 1);
+
+    // Naming its own passage is not naming another: nothing to carry.
+    let mut own = obligation("within 7 calendar days", "no particular date", ask.clone());
+    own.amount = "no amount".to_owned();
+    own.amount_from = Some(14);
+    let own = sort_timeline(vec![own], &segments)[0].clone();
+    assert!(own.priced_by.is_none());
 }

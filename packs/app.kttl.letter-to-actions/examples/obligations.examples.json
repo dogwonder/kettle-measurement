@@ -11,7 +11,9 @@
           "ask": "Pay £84.00 for the garden waste licence",
           "deadline": "within 14 days",
           "anchor": "the date of this letter",
-          "amount": "£84.00"
+          "amount": "£84.00",
+          "amount_from": 900,
+          "deadline_from": 900
         }
       ]
     },
@@ -32,7 +34,9 @@
           "ask": "Attend the tribunal hearing",
           "deadline": "on 14 September 2026",
           "anchor": "14 September 2026",
-          "amount": "no amount"
+          "amount": "no amount",
+          "amount_from": 902,
+          "deadline_from": 902
         }
       ]
     },
@@ -47,7 +51,9 @@
           "ask": "Send a meter reading",
           "deadline": "at your earliest convenience",
           "anchor": "no particular date",
-          "amount": "no amount"
+          "amount": "no amount",
+          "amount_from": 903,
+          "deadline_from": 903
         }
       ]
     },
@@ -74,7 +80,9 @@
           "ask": "Attend the appointment with the housing officer",
           "deadline": "on 3 June 2026 at 10.30am",
           "anchor": "3 June 2026",
-          "amount": "no amount"
+          "amount": "no amount",
+          "amount_from": 906,
+          "deadline_from": 906
         }
       ]
     },

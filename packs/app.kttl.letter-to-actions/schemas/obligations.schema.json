@@ -46,6 +46,12 @@
                 },
                 "amount": {
                   "type": "string"
+                },
+                "amount_from": {
+                  "type": "integer"
+                },
+                "deadline_from": {
+                  "type": "integer"
                 }
               },
               "required": [
@@ -54,7 +60,9 @@
                 "ask",
                 "deadline",
                 "anchor",
-                "amount"
+                "amount",
+                "amount_from",
+                "deadline_from"
               ]
             }
           }

@@ -112,6 +112,8 @@ fn letter_html(template: &str, kind: Kind) -> String {
             evidence: vec![segment("Please pay £120.00 within 14 days.")],
             dated_by: None,
             priced_by: None,
+            amount_from: None,
+            deadline_from: None,
             disputed: vec![],
         }],
     };

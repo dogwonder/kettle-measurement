@@ -77,6 +77,8 @@ fn html_dated_by(evidence: Vec<Segment>, dated_by: Option<Segment>) -> String {
             evidence,
             dated_by,
             priced_by: None,
+            amount_from: None,
+            deadline_from: None,
             disputed: vec![],
         }],
     };
@@ -310,6 +312,8 @@ fn a_sum_read_out_of_a_row_is_shown_with_the_row() {
             evidence: vec![ask],
             dated_by: None,
             priced_by: Some(row),
+            amount_from: None,
+            deadline_from: None,
             disputed: vec![],
         }],
     };

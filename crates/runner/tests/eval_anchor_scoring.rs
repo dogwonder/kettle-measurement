@@ -64,6 +64,8 @@ fn found(anchor: &str, due: Option<NaiveDate>) -> RunOutcome {
                 evidence: Vec::new(),
                 dated_by: None,
                 priced_by: None,
+                amount_from: None,
+                deadline_from: None,
                 disputed: vec![],
             }],
         }),

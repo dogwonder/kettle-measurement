@@ -55,6 +55,8 @@ fn outcome() -> ExtractionOutcome {
                 )],
                 dated_by: None,
                 priced_by: None,
+                amount_from: None,
+                deadline_from: None,
                 disputed: vec![],
             },
             Obligation {
@@ -72,6 +74,8 @@ fn outcome() -> ExtractionOutcome {
                 )],
                 dated_by: None,
                 priced_by: None,
+                amount_from: None,
+                deadline_from: None,
                 disputed: vec![],
             },
         ],

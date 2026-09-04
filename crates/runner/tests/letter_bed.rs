@@ -1190,6 +1190,8 @@ fn every_committed_invoice_resolves_its_pointer() {
                 evidence: vec![evidence],
                 dated_by: None,
                 priced_by: None,
+                amount_from: None,
+                deadline_from: None,
                 disputed: vec![],
             };
 

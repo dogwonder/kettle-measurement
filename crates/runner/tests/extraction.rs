@@ -300,25 +300,27 @@ fn the_timeline_step_dates_merges_and_orders_the_obligations() {
         panic!("a document pipeline produces the Extraction payload");
     };
 
-    // Three readings, two obligations: the repeated payment merged,
-    // keeping both passages as evidence.
-    assert_eq!(extraction.obligations.len(), 2, "{extraction:?}");
+    // Three readings, three obligations: the payment the letter makes
+    // twice is shown twice, each from its own passage (review of #626,
+    // Task 2 — a merge on four strings was a judgement, not a check).
+    assert_eq!(extraction.obligations.len(), 3, "{extraction:?}");
 
-    let pay = &extraction.obligations[0];
-    assert_eq!(pay.kind, "payment");
-    assert_eq!(
-        pay.due.map(|d| d.date),
-        Some(chrono::NaiveDate::from_ymd_opt(2026, 3, 17).expect("a real day")),
-        "within 14 days of 3 March is 17 March — Rust's arithmetic, not the model's"
-    );
-    assert_eq!(
-        pay.deadline, "within 14 days",
-        "the phrase survives beside the date"
-    );
-    let ordinals: Vec<usize> = pay.evidence.iter().map(|s| s.ordinal).collect();
-    assert_eq!(ordinals, vec![2, 3], "both passages kept as evidence");
+    for (pay, ordinal) in extraction.obligations[..2].iter().zip([2, 3]) {
+        assert_eq!(pay.kind, "payment");
+        assert_eq!(
+            pay.due.map(|d| d.date),
+            Some(chrono::NaiveDate::from_ymd_opt(2026, 3, 17).expect("a real day")),
+            "within 14 days of 3 March is 17 March — Rust's arithmetic, not the model's"
+        );
+        assert_eq!(
+            pay.deadline, "within 14 days",
+            "the phrase survives beside the date"
+        );
+        let ordinals: Vec<usize> = pay.evidence.iter().map(|s| s.ordinal).collect();
+        assert_eq!(ordinals, vec![ordinal], "each keeps its own passage");
+    }
 
-    let confirm = &extraction.obligations[1];
+    let confirm = &extraction.obligations[2];
     assert_eq!(confirm.kind, "response");
     assert_eq!(
         confirm.due.map(|d| d.date),

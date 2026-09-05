@@ -1494,6 +1494,25 @@ fn validate_value_kinds(dir: &Path, manifest: &Manifest) -> Result<(), PackError
     Ok(())
 }
 
+/// `step_batches` for pooled segments: the same size, but a boundary
+/// between two units starts a batch (#624; see `run::batch_units`).
+pub fn step_batches_by_unit(
+    step: &PipelineStep,
+    items: &[String],
+    units: &[usize],
+) -> Option<Vec<Vec<crate::exec::BatchItem>>> {
+    match step {
+        PipelineStep::Model {
+            batch: Some(size), ..
+        } => Some(crate::exec::batch_items_by_unit(
+            items,
+            units,
+            *size as usize,
+        )),
+        _ => None,
+    }
+}
+
 /// Split items for a batched model step at the size its manifest
 /// declares (#21). `None` for non-model steps and for unbatched model
 /// steps — the summary step makes one call over the aggregate, not a

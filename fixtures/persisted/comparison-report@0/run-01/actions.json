@@ -1,0 +1,6 @@
+{
+  "schema": "kettle/proposed-actions@0",
+  "run_id": "run-01",
+  "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+  "actions": []
+}

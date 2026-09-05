@@ -116,6 +116,7 @@ fn guardrail_label(guardrail: &Guardrail) -> &'static str {
         Guardrail::Pairing => "pairing",
         Guardrail::Quote => "quote",
         Guardrail::QuoteIdentifiesPassage => "quote-identifies-passage",
+        Guardrail::PassageShown => "passage-shown",
         Guardrail::ValueShape => "value-shape",
         Guardrail::PackCoverage => "pack-coverage",
         Guardrail::DeterministicDerivation => "deterministic-derivation",

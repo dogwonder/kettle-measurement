@@ -1,0 +1,14 @@
+{
+  "inputs": [
+    {
+      "file": "generated-development-excess_rose-amber-01-previous.txt",
+      "size": 400,
+      "hash": "blake3:9c1a989e977bd298c4aec7cc8940e700c462af6949836de1b09293e7313e234b"
+    },
+    {
+      "file": "generated-development-excess_rose-amber-01-renewal.txt",
+      "size": 401,
+      "hash": "blake3:81be6324866264caa89d880f54e9ea3fba616a70f577c6b5afe1d9a79c14e7f8"
+    }
+  ]
+}

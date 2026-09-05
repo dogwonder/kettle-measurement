@@ -66,6 +66,7 @@ fn found(anchor: &str, due: Option<NaiveDate>) -> RunOutcome {
                 priced_by: None,
                 amount_from: None,
                 deadline_from: None,
+                shown: Default::default(),
                 disputed: vec![],
             }],
         }),

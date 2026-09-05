@@ -8,6 +8,7 @@
 
 mod support;
 
+use runner::claim_trace::{CheckOutcome, ClaimKind, Guardrail, TerminalDisposition};
 use runner::document::Segment;
 use runner::packs::load_pack;
 use runner::run::{run_pack, Answers, Obligation, Payload};
@@ -76,7 +77,9 @@ fn letter_pack(name: &str) -> PathBuf {
                     "party": { "type": "string" },
                     "ask": { "type": "string" },
                     "deadline": { "type": "string" },
-                    "anchor": { "type": "string" }
+                    "anchor": { "type": "string" },
+                    "amount": { "type": "string" },
+                    "amount_from": { "type": "integer" }
                 }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
             "required": ["results"] }"#,
@@ -87,46 +90,43 @@ fn letter_pack(name: &str) -> PathBuf {
     dir
 }
 
-/// The mock's answer for the one batch covering both letters: four
-/// segments, a date line and a body from each. Only the bodies carry an
-/// obligation, and each cites its own letter's phrasing verbatim — the
-/// model never computes a date (#240).
-fn obligations_answer() -> String {
+/// The mock's answers, one batch per letter (#624): a date line and a
+/// body from each. Only the bodies carry an obligation, and each cites
+/// its own letter's phrasing verbatim — the model never computes a date
+/// (#240). Ids number across the step, so the second letter's date line
+/// is id 2 even though it opens its own batch.
+fn obligations_answers() -> Vec<(&'static str, String)> {
     let march: Vec<&str> = MARCH_LETTER.split("\n\n").collect();
     let june: Vec<&str> = JUNE_LETTER.split("\n\n").collect();
-    completion_envelope(
-        &serde_json::json!({
-            "results": [
-                { "id": 0, "segment": march[0], "confidence": "high", "obligations": [] },
-                {
-                    "id": 1,
-                    "segment": march[1],
-                    "confidence": "high",
-                    "obligations": [{
-                        "kind": "payment",
-                        "party": "Harborne Parking Services",
-                        "ask": "Pay £120.00",
-                        "deadline": "within 14 days",
-                        "anchor": "the date of this letter"
-                    }]
-                },
-                { "id": 2, "segment": june[0], "confidence": "high", "obligations": [] },
-                {
-                    "id": 3,
-                    "segment": june[1],
-                    "confidence": "high",
-                    "obligations": [{
-                        "kind": "payment",
-                        "party": "Selly Oak Water",
-                        "ask": "Pay £80.00",
-                        "deadline": "within 14 days",
-                        "anchor": "the date of this letter"
-                    }]
-                }
-            ]
-        })
-        .to_string(),
-    )
+    let letter = |first: usize, lines: &[&str], party: &str, ask: &str| {
+        completion_envelope(
+            &serde_json::json!({
+                "results": [
+                    { "id": first, "segment": lines[0], "confidence": "high", "obligations": [] },
+                    {
+                        "id": first + 1,
+                        "segment": lines[1],
+                        "confidence": "high",
+                        "obligations": [{
+                            "kind": "payment",
+                            "party": party,
+                            "ask": ask,
+                            "deadline": "within 14 days",
+                            "anchor": "the date of this letter"
+                        }]
+                    }
+                ]
+            })
+            .to_string(),
+        )
+    };
+    vec![
+        (
+            "200 OK",
+            letter(0, &march, "Harborne Parking Services", "Pay £120.00"),
+        ),
+        ("200 OK", letter(2, &june, "Selly Oak Water", "Pay £80.00")),
+    ]
 }
 
 /// "The date of this letter" means the date of *the letter it is in*.
@@ -144,7 +144,7 @@ fn obligations_answer() -> String {
 fn a_relative_deadline_resolves_against_its_own_document_date() {
     let dir = letter_pack("own-date");
     let pack = load_pack(&dir).expect("a multi-input letter pack loads");
-    let mock = MockModel::respond_sequence(vec![("200 OK", obligations_answer())]);
+    let mock = MockModel::respond_sequence(obligations_answers());
 
     let outcome = run_pack(
         &pack,
@@ -251,16 +251,15 @@ fn ordered_files_are_one_letter_and_keep_their_page_numbers() {
     assert_eq!(obligation.evidence[0].page, 2);
 }
 
-/// The same ask, sent twice: evidence stays in document order.
-///
-/// An ordinal counts within its own document, so two documents both
-/// have an ordinal 0. Sorting merged evidence on the ordinal alone
-/// interleaves them — the second letter's opening line sorts above the
-/// first letter's closing one, as though one document continued the
-/// other. A person following the citations then reads the chase before
-/// the letter it chases.
+/// Identical wording in two documents is two readings (review of #626,
+/// Task 2). A chaser that repeats the original letter's ask is a second
+/// letter making it, and a person is shown both, each citing its own
+/// document. The order is the documents' own: the original before the
+/// chaser that refers back to it, never the chaser's ordinal 0 sorting
+/// above the original's closing line as though one document continued
+/// the other.
 #[test]
-fn merged_evidence_stays_in_document_order() {
+fn identical_asks_in_two_documents_are_both_shown_in_document_order() {
     let segment = |document: usize, ordinal: usize, text: &str| Segment {
         document,
         page: 1,
@@ -282,13 +281,10 @@ fn merged_evidence_stays_in_document_order() {
         priced_by: None,
         amount_from: None,
         deadline_from: None,
+        shown: Default::default(),
         disputed: vec![],
     };
 
-    // The first letter says it late in the page; the chaser says it
-    // first thing. `same_obligation` merges them — same ask, same
-    // party, same deadline — so the two documents' evidence lands in
-    // one obligation and has to be ordered.
     let sorted = sort_timeline(
         vec![
             ask(vec![segment(
@@ -301,17 +297,515 @@ fn merged_evidence_stays_in_document_order() {
         &[],
     );
 
-    assert_eq!(sorted.len(), 1, "one ask, said twice: {sorted:#?}");
-    let cited: Vec<(usize, usize)> = sorted[0]
-        .evidence
+    assert_eq!(
+        sorted.len(),
+        2,
+        "one ask in two letters is shown twice: {sorted:#?}"
+    );
+    let cited: Vec<(usize, usize)> = sorted
         .iter()
-        .map(|segment| (segment.document, segment.ordinal))
+        .map(|o| (o.evidence[0].document, o.evidence[0].ordinal))
         .collect();
     assert_eq!(
         cited,
         vec![(0, 4), (1, 0)],
-        "the original letter is cited before the chaser that refers back \
-         to it; ordinal 0 of the second document is not the start of the \
-         first"
+        "the original letter before the chaser"
+    );
+}
+
+/// The batch ids a request put in front of the model, read back out of
+/// the rendered prompt the mock received.
+fn ids_shown(request_body: &str) -> Vec<usize> {
+    let body: serde_json::Value = serde_json::from_str(request_body).expect("request is JSON");
+    let content: String = body["messages"]
+        .as_array()
+        .expect("messages")
+        .iter()
+        .filter_map(|message| message["content"].as_str())
+        .collect();
+    let from = content
+        .find('[')
+        .expect("the prompt carries the batch JSON");
+    let to = content.rfind(']').expect("the batch JSON closes");
+    let batch: Vec<serde_json::Value> =
+        serde_json::from_str(&content[from..=to]).expect("batch JSON parses");
+    batch
+        .iter()
+        .map(|item| item["id"].as_u64().unwrap() as usize)
+        .collect()
+}
+
+/// A mock answer that echoes every passage of one batch and finds no
+/// obligation in any of them.
+fn empty_answer(ids: std::ops::Range<usize>, passages: &[&str]) -> String {
+    completion_envelope(
+        &serde_json::json!({
+            "results": ids
+                .map(|id| serde_json::json!({
+                    "id": id, "segment": passages[id], "confidence": "high", "obligations": []
+                }))
+                .collect::<Vec<_>>()
+        })
+        .to_string(),
+    )
+}
+
+/// The batch is the window the model sees, and the window should be
+/// the letter (#624; `app/METHOD.md` §1.4 item 4). Two letters of eight
+/// passages each, batched in twenties, were one batch of sixteen: the
+/// second letter began at id 8 of a window that started with somebody
+/// else's letterhead. A document that fits in a batch starts one.
+#[test]
+fn a_document_that_fits_in_a_batch_starts_one() {
+    let dir = letter_pack("own-batch");
+    let manifest = std::fs::read_to_string(dir.join("pack.json")).unwrap();
+    std::fs::write(
+        dir.join("pack.json"),
+        manifest.replace(r#""batch": 8"#, r#""batch": 20"#),
+    )
+    .unwrap();
+    let passages: Vec<String> = (1..=8)
+        .map(|n| format!("Paragraph {n} of the first letter."))
+        .chain((1..=8).map(|n| format!("Paragraph {n} of the second letter.")))
+        .collect();
+    let borrowed: Vec<&str> = passages.iter().map(String::as_str).collect();
+    std::fs::write(dir.join("fixtures/march.txt"), borrowed[..8].join("\n\n")).unwrap();
+    std::fs::write(dir.join("fixtures/june.txt"), borrowed[8..].join("\n\n")).unwrap();
+
+    let pack = load_pack(&dir).expect("the pack loads");
+    let mock = MockModel::respond_sequence(vec![
+        ("200 OK", empty_answer(0..8, &borrowed)),
+        ("200 OK", empty_answer(8..16, &borrowed)),
+    ]);
+    run_pack(
+        &pack,
+        &[
+            dir.join("fixtures/march.txt"),
+            dir.join("fixtures/june.txt"),
+        ],
+        &Answers::FromModel(mock.endpoint()),
+        &AtomicBool::new(false),
+        &mut |_| {},
+        &NoLog,
+    )
+    .expect("the run completes");
+
+    assert_eq!(
+        ids_shown(&mock.request_body()),
+        (0..8).collect::<Vec<_>>(),
+        "the first batch is the first letter and nothing else"
+    );
+    assert_eq!(
+        ids_shown(&mock.request_body()),
+        (8..16).collect::<Vec<_>>(),
+        "the second letter starts a batch of its own, still numbered across the step"
+    );
+}
+
+/// A named passage must be one the model was shown (#624; `app/METHOD.md`
+/// §0 outcome 1). The batch is the window: a model answering ids 2–5
+/// can write `amount_from: 6`, and if 6 is a row of the same letter the
+/// naming was accepted and "verified" against a passage the model never
+/// saw. The page cannot vouch for it, so the reading is refused — no
+/// `priced_by`, the amount stays `no amount`, and the staged finder
+/// does not go looking either, because a refused naming is not "named
+/// nothing". The obligation itself stands, and its trace says why the
+/// sum does not.
+///
+/// The second letter has more passages than the batch holds, so it is
+/// the one shape that still straddles a boundary after a document
+/// boundary starts a batch.
+#[test]
+fn a_named_passage_outside_the_batch_answered_is_refused() {
+    let dir = letter_pack("outside-window");
+    let manifest = std::fs::read_to_string(dir.join("pack.json")).unwrap();
+    std::fs::write(
+        dir.join("pack.json"),
+        manifest.replace(r#""batch": 8"#, r#""batch": 4"#),
+    )
+    .unwrap();
+    let march: Vec<&str> = MARCH_LETTER.split("\n\n").collect();
+    let june = [
+        "20 June 2026",
+        "Please pay the total shown below to Selly Oak Water within 14 days of the date of \
+         this letter.",
+        "Your account number is 0044 2210.",
+        "Charges for the period 1 April to 30 June 2026.",
+        "Total £80.00",
+    ];
+    std::fs::write(dir.join("fixtures/june.txt"), june.join("\n\n")).unwrap();
+
+    let ask = |id: usize, segment: &str, party: &str, amount: serde_json::Value| {
+        let mut obligation = serde_json::json!({
+            "kind": "payment", "party": party, "ask": "Pay what is owed",
+            "deadline": "within 14 days", "anchor": "the date of this letter",
+        });
+        for (field, value) in amount.as_object().expect("amount fields") {
+            obligation[field] = value.clone();
+        }
+        serde_json::json!({
+            "id": id, "segment": segment, "confidence": "high", "obligations": [obligation]
+        })
+    };
+    let quiet = |id: usize, segment: &str| serde_json::json!({ "id": id, "segment": segment, "confidence": "high", "obligations": [] });
+    let envelope = |results: Vec<serde_json::Value>| {
+        (
+            "200 OK",
+            completion_envelope(&serde_json::json!({ "results": results }).to_string()),
+        )
+    };
+    // Batches: the March letter (ids 0–1); the June letter's first four
+    // passages (2–5); its totals row alone (6). The June ask, answered
+    // in the second batch, names the row in the third.
+    let mock = MockModel::respond_sequence(vec![
+        envelope(vec![
+            quiet(0, march[0]),
+            ask(
+                1,
+                march[1],
+                "Harborne Parking Services",
+                serde_json::json!({ "amount": "£120.00" }),
+            ),
+        ]),
+        envelope(vec![
+            quiet(2, june[0]),
+            ask(
+                3,
+                june[1],
+                "Selly Oak Water",
+                serde_json::json!({ "amount": "£80.00", "amount_from": 6 }),
+            ),
+            quiet(4, june[2]),
+            quiet(5, june[3]),
+        ]),
+        envelope(vec![quiet(6, june[4])]),
+    ]);
+
+    let outcome = run_pack(
+        &pack_at(&dir),
+        &[
+            dir.join("fixtures/march.txt"),
+            dir.join("fixtures/june.txt"),
+        ],
+        &Answers::FromModel(mock.endpoint()),
+        &AtomicBool::new(false),
+        &mut |_| {},
+        &NoLog,
+    )
+    .expect("the run completes");
+    let Payload::Extraction(extraction) = &outcome.payload else {
+        panic!("an obligations pack produces the Extraction payload");
+    };
+    let water = extraction
+        .obligations
+        .iter()
+        .find(|obligation| obligation.party == "Selly Oak Water")
+        .unwrap_or_else(|| panic!("the obligation stands: {:#?}", extraction.obligations));
+
+    // The reading is refused, never the obligation.
+    assert_eq!(
+        water.amount, "no amount",
+        "a sum read off a passage the model never saw"
+    );
+    assert!(
+        water.priced_by.is_none(),
+        "nothing vouches for the row, and nothing goes looking: {:?}",
+        water.priced_by
+    );
+    assert_eq!(
+        water.due.map(|due| due.date.to_string()),
+        Some("2026-07-04".to_owned()),
+        "the ask itself is untouched"
+    );
+    // The March ask's own passage carried its sum: no naming, nothing refused.
+    let parking = extraction
+        .obligations
+        .iter()
+        .find(|obligation| obligation.party == "Harborne Parking Services")
+        .expect("the first letter's obligation");
+    assert_eq!(parking.amount, "£120.00");
+
+    // The trace records the check on the claim that named the passage.
+    let trace = outcome
+        .claim_traces
+        .iter()
+        .find(|trace| trace.kind == ClaimKind::Obligation && trace.item == 3)
+        .expect("the June ask has a trace");
+    assert_eq!(
+        trace.check(Guardrail::PassageShown),
+        Some(CheckOutcome::Failed),
+        "the trace says the named passage was outside the batch answered: {trace:#?}"
+    );
+    assert_eq!(trace.terminal, TerminalDisposition::Accepted);
+    let march_trace = outcome
+        .claim_traces
+        .iter()
+        .find(|trace| trace.kind == ClaimKind::Obligation && trace.item == 1)
+        .expect("the March ask has a trace");
+    assert_eq!(march_trace.check(Guardrail::PassageShown), None);
+}
+
+fn pack_at(dir: &std::path::Path) -> runner::packs::Pack {
+    load_pack(dir).expect("the pack loads")
+}
+
+/// One invented letter whose ask names its sum elsewhere on the page,
+/// with a second figure printed on another row so a naming that
+/// slipped its window would find one to accept. Ids 0–3 in one batch.
+const NAMED_LETTER: [&str; 4] = [
+    "Dated 20 June 2026.",
+    "Please pay the total shown below to Selly Oak Water within 14 days of the date of this \
+     letter.",
+    "Balance brought forward £80.00",
+    "Total £80.00",
+];
+
+fn named_letter_pack(name: &str) -> PathBuf {
+    let dir = letter_pack(name);
+    std::fs::write(dir.join("fixtures/named.txt"), NAMED_LETTER.join("\n\n")).unwrap();
+    dir
+}
+
+fn quiet_result(id: usize) -> serde_json::Value {
+    serde_json::json!({
+        "id": id, "segment": NAMED_LETTER[id], "confidence": "high", "obligations": []
+    })
+}
+
+fn ask_result(
+    id: usize,
+    confidence: &str,
+    obligations: Vec<serde_json::Value>,
+) -> serde_json::Value {
+    serde_json::json!({
+        "id": id, "segment": NAMED_LETTER[id], "confidence": confidence,
+        "obligations": obligations
+    })
+}
+
+fn payment(party: &str, amount_from: usize) -> serde_json::Value {
+    serde_json::json!({
+        "kind": "payment", "party": party, "ask": "Pay what is owed",
+        "deadline": "within 14 days", "anchor": "the date of this letter",
+        "amount": "£80.00", "amount_from": amount_from,
+    })
+}
+
+fn results_envelope(results: Vec<serde_json::Value>) -> (&'static str, String) {
+    (
+        "200 OK",
+        completion_envelope(&serde_json::json!({ "results": results }).to_string()),
+    )
+}
+
+fn run_named_letter(dir: &std::path::Path, mock: &MockModel) -> runner::run::RunOutcome {
+    run_pack(
+        &pack_at(dir),
+        &[dir.join("fixtures/named.txt")],
+        &Answers::FromModel(mock.endpoint()),
+        &AtomicBool::new(false),
+        &mut |_| {},
+        &NoLog,
+    )
+    .expect("the run completes")
+}
+
+fn obligation_of<'a>(outcome: &'a runner::run::RunOutcome, party: &str) -> &'a Obligation {
+    let Payload::Extraction(extraction) = &outcome.payload else {
+        panic!("an obligations pack produces the Extraction payload");
+    };
+    extraction
+        .obligations
+        .iter()
+        .find(|obligation| obligation.party == party)
+        .unwrap_or_else(|| panic!("the obligation stands: {:#?}", extraction.obligations))
+}
+
+fn passage_shown(
+    outcome: &runner::run::RunOutcome,
+    item: usize,
+    named: usize,
+) -> Option<CheckOutcome> {
+    outcome
+        .claim_traces
+        .iter()
+        .find(|trace| {
+            trace.kind == ClaimKind::Obligation
+                && trace.item == item
+                && trace.candidate["amount_from"].as_u64() == Some(named as u64)
+        })
+        .unwrap_or_else(|| {
+            panic!(
+                "the ask naming {named} has a trace: {:#?}",
+                outcome.claim_traces
+            )
+        })
+        .check(Guardrail::PassageShown)
+}
+
+/// The window is the request the answer came from, not the batch it
+/// was first asked in (review of #626). A pairing retry re-asks only
+/// the items that failed, so an answer produced from passage 1 alone
+/// cannot vouch for passage 3, even though the abandoned first request
+/// showed both.
+#[test]
+fn a_pairing_retry_answer_is_checked_against_the_retry_request() {
+    let dir = named_letter_pack("retry-window");
+    let mock = MockModel::respond_sequence(vec![
+        // Passage 1 left out of the results: re-asked alone.
+        results_envelope(vec![quiet_result(0), quiet_result(2), quiet_result(3)]),
+        results_envelope(vec![ask_result(
+            1,
+            "high",
+            vec![payment("Selly Oak Water", 3)],
+        )]),
+    ]);
+    let outcome = run_named_letter(&dir, &mock);
+
+    let first = mock.request_body();
+    assert!(
+        first.contains("Total £80.00"),
+        "the first ask showed the row: {first}"
+    );
+    let retry = mock.request_body();
+    assert!(
+        retry.contains("Please pay the total") && !retry.contains("Total £80.00"),
+        "the retry showed passage 1 alone: {retry}"
+    );
+
+    let water = obligation_of(&outcome, "Selly Oak Water");
+    assert_eq!(
+        water.amount, "no amount",
+        "a sum read off a row the retry never showed"
+    );
+    assert!(water.priced_by.is_none());
+    assert_eq!(
+        water.due.map(|due| due.date.to_string()),
+        Some("2026-07-04".to_owned()),
+        "the ask itself is untouched"
+    );
+    assert_eq!(passage_shown(&outcome, 1, 3), Some(CheckOutcome::Failed));
+}
+
+/// A truncated batch is halved and each half is its own request: an
+/// answer from the left half was shown the left half's passages only.
+#[test]
+fn a_split_answer_is_checked_against_its_own_half() {
+    let dir = named_letter_pack("split-window");
+    let mock = MockModel::respond_sequence(vec![
+        (
+            "200 OK",
+            support::truncated_envelope(r#"{"results": [{"id": 0, "segment": "Dated"#),
+        ),
+        // Left half: ids 0–1. The ask names the row in the right half.
+        results_envelope(vec![
+            quiet_result(0),
+            ask_result(1, "high", vec![payment("Selly Oak Water", 3)]),
+        ]),
+        // Right half: ids 2–3.
+        results_envelope(vec![quiet_result(2), quiet_result(3)]),
+    ]);
+    let outcome = run_named_letter(&dir, &mock);
+
+    let _first = mock.request_body();
+    let left = mock.request_body();
+    assert!(
+        left.contains("Please pay the total") && !left.contains("Total £80.00"),
+        "the left half showed ids 0–1: {left}"
+    );
+
+    let water = obligation_of(&outcome, "Selly Oak Water");
+    assert_eq!(
+        water.amount, "no amount",
+        "the abandoned first request does not count"
+    );
+    assert!(water.priced_by.is_none());
+    assert_eq!(passage_shown(&outcome, 1, 3), Some(CheckOutcome::Failed));
+}
+
+/// A retry can carry ids with a gap — here 1 and 3 — and the set is
+/// exactly those: a range from 1 to 3 would vouch for passage 2, which
+/// prints a figure the ask could then be priced off.
+#[test]
+fn a_noncontiguous_retry_is_exactly_its_ids() {
+    let dir = named_letter_pack("gap-window");
+    let mock = MockModel::respond_sequence(vec![
+        // Passages 1 and 3 left out: re-asked together.
+        results_envelope(vec![quiet_result(0), quiet_result(2)]),
+        results_envelope(vec![
+            ask_result(
+                1,
+                "high",
+                vec![
+                    payment("Selly Oak Water", 2),
+                    payment("Selly Oak Council", 3),
+                ],
+            ),
+            quiet_result(3),
+        ]),
+    ]);
+    let outcome = run_named_letter(&dir, &mock);
+
+    let _first = mock.request_body();
+    let retry = mock.request_body();
+    assert!(
+        retry.contains("Please pay the total")
+            && retry.contains("Total £80.00")
+            && !retry.contains("Balance brought forward"),
+        "the retry showed ids 1 and 3 and not 2: {retry}"
+    );
+
+    let gap = obligation_of(&outcome, "Selly Oak Water");
+    assert_eq!(
+        gap.amount, "no amount",
+        "passage 2 sits inside the range and outside the set"
+    );
+    assert!(gap.priced_by.is_none());
+    assert_eq!(passage_shown(&outcome, 1, 2), Some(CheckOutcome::Failed));
+
+    let shown = obligation_of(&outcome, "Selly Oak Council");
+    assert_eq!(
+        shown.amount, "£80.00",
+        "passage 3 was in the retry, and prints the sum"
+    );
+    assert_eq!(
+        shown.priced_by.as_ref().map(|row| row.text.as_str()),
+        Some("Total £80.00")
+    );
+    assert_eq!(passage_shown(&outcome, 1, 3), Some(CheckOutcome::Passed));
+}
+
+/// A low-confidence answer travels through review rather than
+/// `answers`, and carries its provenance just the same: its naming is
+/// refused, and it stays a reading to check.
+#[test]
+fn a_low_confidence_retry_keeps_its_review_status_and_is_checked() {
+    let dir = named_letter_pack("low-window");
+    let mock = MockModel::respond_sequence(vec![
+        results_envelope(vec![quiet_result(0), quiet_result(2), quiet_result(3)]),
+        results_envelope(vec![ask_result(
+            1,
+            "low",
+            vec![payment("Selly Oak Water", 3)],
+        )]),
+    ]);
+    let outcome = run_named_letter(&dir, &mock);
+
+    let water = obligation_of(&outcome, "Selly Oak Water");
+    assert_eq!(water.confidence, "low");
+    assert_eq!(water.amount, "no amount");
+    assert!(water.priced_by.is_none());
+    assert_eq!(passage_shown(&outcome, 1, 3), Some(CheckOutcome::Failed));
+    // The passage's own reading is routed for review, as any
+    // low-confidence answer is; the naming check does not change that.
+    let reading = outcome
+        .claim_traces
+        .iter()
+        .find(|trace| trace.kind == ClaimKind::Decision && trace.item == 1)
+        .expect("the passage has a reading trace");
+    assert_eq!(reading.terminal, TerminalDisposition::NeedsReview);
+    assert_eq!(
+        reading.check(Guardrail::ReviewRouting),
+        Some(CheckOutcome::Passed)
     );
 }

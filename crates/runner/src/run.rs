@@ -11,7 +11,9 @@ use crate::exec::{
     run_batch, BatchContext, BatchItem, Endpoint, ModelCallError, ModelMetrics, NeedsReview,
     ReviewReason, StepError,
 };
-use crate::packs::{step_batches, FileSemantics, InputSpec, Manifest, Pack, PipelineStep};
+use crate::packs::{
+    step_batches, step_batches_by_unit, FileSemantics, InputSpec, Manifest, Pack, PipelineStep,
+};
 use crate::parse::{parse_input_file, ParseError, Transaction};
 use crate::recurrence::{detect_income, detect_recurring, looks_periodic, Period, PriceRise};
 use crate::run_dir::RunLog;
@@ -359,6 +361,19 @@ pub struct Obligation {
     /// full date from it and carries the passage as `dated_by`.
     #[serde(default)]
     pub deadline_from: Option<usize>,
+    /// The ids the model was shown in the request it answered this
+    /// passage in (#624; `app/METHOD.md` §1.4 item 4) — the set a named
+    /// passage must fall inside, because the page cannot vouch for a
+    /// passage the model never saw. The *request*, not the batch the
+    /// passage was first asked in: a pairing retry re-asks only the
+    /// items that failed and a truncation split halves the batch, so
+    /// the answer that stands may have been produced with a gap in what
+    /// it saw (ids 0 and 2), which is why this is a set and not a
+    /// range. Empty on a result written before the field existed, and
+    /// an empty set refuses every naming: honest, since nothing
+    /// recorded what was shown.
+    #[serde(default)]
+    pub shown: std::collections::BTreeSet<usize>,
     /// The model's confidence about this segment's reading. Low means
     /// "check this yourself", exactly as it does for a classification.
     pub confidence: String,
@@ -372,9 +387,10 @@ pub struct Obligation {
     /// is the only step that knows which, so it travels from there
     /// rather than being re-guessed by a template.
     pub due: Option<crate::timeline::Resolved>,
-    /// The passages it came from, cited as a person would find them.
-    /// More than one when overlapping segments said the same thing and
-    /// the duplicates merged.
+    /// The passage it came from, cited as a person would find it. One
+    /// reading per passage: two passages that say one ask are two
+    /// obligations, not one with two citations (review of #626, Task
+    /// 2). A `Vec` still, because the durable shape is a list.
     pub evidence: Vec<crate::document::Segment>,
     /// The passage the due date was read out of, when the deadline
     /// pointed at one instead of stating it (#544).
@@ -481,9 +497,9 @@ pub fn mark_disputed(
                 })
                 .cloned()
                 .collect();
-            // Appended, not assigned: an obligation merged from two
-            // documents (#330) is marked by each of them in turn, and
-            // the second call must not erase the first's finding.
+            // Appended, not assigned: each document marks the
+            // obligations it evidences in turn, and the second call
+            // must not erase the first's finding.
             obligation.disputed.extend(landed);
             obligation
         })
@@ -932,6 +948,9 @@ fn run_bound(
     // Disputed lines, by the document they were read from (#412 step
     // 6). Applied to the obligations once the model has produced them.
     let mut disagreements: Vec<(usize, Vec<crate::ocr::Disagreement>)> = Vec::new();
+    // The role each logical document was bound to, by document index:
+    // what `batch_units` reads to keep pooled letters apart (#624).
+    let mut document_roles: Vec<String> = Vec::new();
     let mut document_run = false;
     // The comparison typology's subjects and answers (#350). Set by the
     // `policy-terms` step rather than by the preprocess, because both
@@ -1009,6 +1028,7 @@ fn run_bound(
                         disagreements.push((logical_document, read.disagreements));
                     }
                     segments.extend(read.segments);
+                    document_roles.push(given.role.clone());
                     logical_document += 1;
                 }
             }
@@ -1053,6 +1073,7 @@ fn run_bound(
                             pack,
                             step,
                             &segments,
+                            &batch_units(&segments, &document_roles),
                             answers,
                             cancel,
                             progress,
@@ -1069,6 +1090,7 @@ fn run_bound(
                             pack,
                             step,
                             &segments,
+                            &batch_units(&segments, &document_roles),
                             answers,
                             cancel,
                             progress,
@@ -1208,6 +1230,9 @@ fn run_bound(
                         needs_review: reviews,
                         mut attempts,
                         rejected,
+                        // A group answer names no passage, so what the
+                        // model was shown vouches for nothing here.
+                        shown: _,
                     } = outcome;
                     trace_rejected_candidates(&mut claim_ledger, label, index + 1, rejected);
                     for (id, answer) in answers {
@@ -1292,22 +1317,32 @@ fn run_bound(
                 if implementation == "builtin:timeline-sort" =>
             {
                 // #241: deadlines resolved in Rust against the letter's
-                // own date, duplicates merged, soonest first. The model
-                // read the phrases; the arithmetic is never its to do.
+                // own date, soonest first. The model read the phrases;
+                // the arithmetic is never its to do.
                 progress(Progress {
                     step: step_label(step, inputs.len())
                         .expect("aggregate and render steps have labels"),
                     current: 1,
                     total: 1,
                 });
-                obligations =
-                    crate::timeline::sort_timeline(std::mem::take(&mut obligations), &segments);
-                // After the sort, not before: it merges duplicates
-                // (#330) and a merged obligation cites the passages of
-                // every document it was found in. Marking first would
-                // hand the merge two half-marked copies to reconcile;
-                // marking last asks each document about the evidence
-                // that survived.
+                let mut namings = Vec::new();
+                obligations = crate::timeline::sort_timeline_noting(
+                    std::mem::take(&mut obligations),
+                    &segments,
+                    &mut namings,
+                );
+                // A naming is checked against the ids the model was
+                // shown in the request it answered from (#624); the
+                // obligation's own trace says so.
+                for naming in namings {
+                    if let Some(item) = segments.iter().position(|s| *s == naming.passage) {
+                        claim_ledger.record_passage_shown(item, &naming);
+                    }
+                }
+                // After the sort, not before: the sort folds a
+                // candidate read twice out of one passage, and marking
+                // last asks each document about the evidence that
+                // survived rather than about a copy that did not.
                 for (document, disputes) in &disagreements {
                     obligations =
                         mark_disputed(std::mem::take(&mut obligations), *document, disputes);
@@ -1683,6 +1718,7 @@ fn run_obligations_step(
     pack: &Pack,
     step: &PipelineStep,
     segments: &[crate::document::Segment],
+    units: &[usize],
     answers: &Answers,
     cancel: &AtomicBool,
     progress: &mut dyn FnMut(Progress),
@@ -1695,6 +1731,7 @@ fn run_obligations_step(
         pack,
         step,
         segments,
+        units,
         answers,
         cancel,
         progress,
@@ -1722,6 +1759,7 @@ fn run_terms_step(
     pack: &Pack,
     step: &PipelineStep,
     segments: &[crate::document::Segment],
+    units: &[usize],
     answers: &Answers,
     cancel: &AtomicBool,
     progress: &mut dyn FnMut(Progress),
@@ -1734,6 +1772,7 @@ fn run_terms_step(
         pack,
         step,
         segments,
+        units,
         answers,
         cancel,
         progress,
@@ -1771,11 +1810,43 @@ struct SegmentStep {
 /// Where a schema-valid, correctly paired segment answer sat. Nested
 /// obligation/term candidates inherit these two passed guards from the
 /// parent decision rather than asserting them again by convention.
+/// The unit a batch may not split (#624), per pooled segment.
+///
+/// Several documents bound to one role — a pile of letters — are read
+/// one document per batch, so no letter begins inside another letter's
+/// window and a row it names is one the model was shown. Documents
+/// bound one per role — a previous and a renewal schedule — stay one
+/// unit, read together: that is how the comparison packs have always
+/// been measured, and the renewal mutation census (a proven registry
+/// claim, #466) plants its cross-document harms inside that one answer.
+/// The window check on a named passage holds either way; this only
+/// decides what the window contains.
+fn batch_units(segments: &[crate::document::Segment], document_roles: &[String]) -> Vec<usize> {
+    let pooled = |document: usize| {
+        document_roles
+            .get(document)
+            .is_some_and(|role| document_roles.iter().filter(|r| *r == role).count() > 1)
+    };
+    segments
+        .iter()
+        .map(|segment| {
+            if pooled(segment.document) {
+                1 + segment.document
+            } else {
+                0
+            }
+        })
+        .collect()
+}
+
 struct SegmentTrace {
     parent_id: String,
     step: String,
     batch: usize,
     item: usize,
+    /// The ids in the request this answer came from (#624) — the
+    /// retry or split that produced it, not the batch it began in.
+    shown: std::collections::BTreeSet<usize>,
 }
 
 type SegmentReader<'a> = dyn FnMut(
@@ -1800,6 +1871,7 @@ fn run_segment_step(
     pack: &Pack,
     step: &PipelineStep,
     segments: &[crate::document::Segment],
+    units: &[usize],
     answers: &Answers,
     cancel: &AtomicBool,
     progress: &mut dyn FnMut(Progress),
@@ -1838,7 +1910,7 @@ fn run_segment_step(
     };
 
     let items: Vec<String> = segments.iter().map(|s| s.text.clone()).collect();
-    let mut batches = step_batches(step, &items).unwrap_or_else(|| {
+    let mut batches = step_batches_by_unit(step, &items, units).unwrap_or_else(|| {
         vec![items
             .iter()
             .enumerate()
@@ -1891,7 +1963,19 @@ fn run_segment_step(
             needs_review: reviews,
             mut attempts,
             rejected,
+            shown,
         } = outcome;
+        // What the model was shown when it gave each answer, per
+        // answer: `exec::rejoin` already refuses a *result* id outside
+        // the request, and a *named* passage outside it is refused
+        // downstream (#624). Never the batch: a retry or a split
+        // re-asked with fewer ids than the batch began with.
+        let shown_to = |id: usize| {
+            shown
+                .get(&id)
+                .cloned()
+                .unwrap_or_else(|| panic!("item {id} has an answer and no request it came from"))
+        };
         trace_rejected_candidates(claim_ledger, label, index + 1, rejected);
         for (id, answer) in answers {
             if let Some(segment) = segments.get(id) {
@@ -1927,6 +2011,7 @@ fn run_segment_step(
                         step: label.to_owned(),
                         batch: index + 1,
                         item: id,
+                        shown: shown_to(id),
                     },
                 );
             }
@@ -1979,6 +2064,7 @@ fn run_segment_step(
                         step: label.to_owned(),
                         batch: index + 1,
                         item: review.item.id,
+                        shown: shown_to(review.item.id),
                     },
                 );
                 continue;
@@ -2133,6 +2219,7 @@ fn segment_obligations(
                     .map_or_else(no_amount, str::to_owned),
                 amount_from: obligation["amount_from"].as_u64().map(|id| id as usize),
                 deadline_from: obligation["deadline_from"].as_u64().map(|id| id as usize),
+                shown: trace.shown.clone(),
                 confidence: confidence.clone(),
                 due: None,
                 evidence: vec![segment.clone()],

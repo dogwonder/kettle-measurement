@@ -2935,6 +2935,7 @@ mod tests {
                 priced_by: None,
                 amount_from: None,
                 deadline_from: None,
+                shown: Default::default(),
                 disputed: Vec::new(),
             };
         let declared = BTreeMap::from([(

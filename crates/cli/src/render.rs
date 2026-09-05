@@ -45,6 +45,27 @@ pub fn report_from_files(results: &Path, template: &Path) -> Result<String, Stri
             .map_err(|e| format!("Could not render {}: {e}", results.display()));
     }
 
+    if schema != runner::results::RUN_REPORT_SCHEMA {
+        // A family this build knows at a version it does not read is
+        // another Kettle's document, not a broken file (#419, the
+        // persisted-schema policy in `runner::results::schema_version`).
+        if let Some((family, version)) = runner::results::schema_version(&schema) {
+            if ["run-report", "letter-report", "comparison-report"].contains(&family) {
+                return Err(format!(
+                    "{} was written by another version of Kettle ({schema}, version {version}); \
+                     this build reads {}, {} and {}",
+                    results.display(),
+                    runner::results::RUN_REPORT_SCHEMA,
+                    LETTER_REPORT_SCHEMA,
+                    COMPARISON_REPORT_SCHEMA
+                ));
+            }
+        }
+        return Err(format!(
+            "{} is not a Kettle results file: unknown schema {schema:?}",
+            results.display()
+        ));
+    }
     let report: RunReport = serde_json::from_str(&raw_results)
         .map_err(|e| format!("{} is not a Kettle results file: {e}", results.display()))?;
     runner::render::render_report(&template_source, &report, None)

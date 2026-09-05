@@ -1,4 +1,5 @@
-//! Deadlines resolved in Rust, duplicates merged (#241).
+//! Deadlines resolved in Rust, soonest first (#241); one reading per
+//! passage, never merged across passages (review of #626, Task 2).
 //!
 //! A letter says "within 14 days of the date of this letter", "by the
 //! end of the month", "on 3 March 2026". The model reads those phrases
@@ -754,6 +755,57 @@ pub fn document_dates(segments: &[Segment]) -> Vec<Option<NaiveDate>> {
 /// the ones a person can still act on, and an undated one must survive
 /// to where they will see it.
 pub fn sort_timeline(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<Obligation> {
+    sort_timeline_noting(obligations, segments, &mut Vec::new())
+}
+
+/// One naming a claim made — `amount_from` or `deadline_from` — and
+/// whether the named id lay inside the batch the model answered (#624).
+/// Reported so the claim trace can carry the check; the sort itself has
+/// no ledger.
+#[derive(Debug, Clone, PartialEq)]
+pub struct Naming {
+    /// The passage the claim was read from.
+    pub passage: Segment,
+    /// Which field named it.
+    pub field: &'static str,
+    /// The id named.
+    pub named: usize,
+    /// The ids the model was shown in the request it answered from.
+    pub window: std::collections::BTreeSet<usize>,
+    /// Whether the id lay inside it.
+    pub shown: bool,
+}
+
+impl Naming {
+    /// The check's detail, for the trace.
+    pub fn detail(&self) -> String {
+        let window = self
+            .window
+            .iter()
+            .map(usize::to_string)
+            .collect::<Vec<_>>()
+            .join(", ");
+        if self.shown {
+            format!(
+                "{} names passage {}, one of those shown in the request answered ({window})",
+                self.field, self.named
+            )
+        } else {
+            format!(
+                "{} names passage {}, not one shown in the request answered ({window}): the \
+                 model never saw it, so the reading is refused",
+                self.field, self.named
+            )
+        }
+    }
+}
+
+/// [`sort_timeline`], reporting every naming it checked.
+pub fn sort_timeline_noting(
+    obligations: Vec<Obligation>,
+    segments: &[Segment],
+    namings: &mut Vec<Naming>,
+) -> Vec<Obligation> {
     let document_dates = document_dates(segments);
     let mut merged: Vec<Obligation> = Vec::new();
     for mut obligation in obligations {
@@ -780,8 +832,8 @@ pub fn sort_timeline(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<
             // one full date off that passage and nothing else. The
             // staged finder behind it is the fallback only while the
             // weekly run has not yet shown the naming is reliable.
-            match named_passage(&obligation, obligation.deadline_from, segments) {
-                Some(row) => {
+            match named_passage(&obligation, "deadline_from", segments, namings) {
+                Named::Row(row) => {
                     if let Some(date) = first_full_date(&row.text) {
                         obligation.due = Some(Resolved {
                             date,
@@ -790,12 +842,16 @@ pub fn sort_timeline(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<
                         obligation.dated_by = Some(row);
                     }
                 }
-                None => {
+                Named::Nothing => {
                     if let Some((resolved, row)) = pointed_at(&obligation, segments) {
                         obligation.due = Some(resolved);
                         obligation.dated_by = Some(row);
                     }
                 }
+                // Outcome 1 (`app/METHOD.md` §0): the page cannot vouch
+                // for a passage the model never saw. The reading is
+                // refused; the ask keeps its phrase and shows undated.
+                Named::Refused => {}
             }
         }
         // The same shape for the sum (#612): the model names the
@@ -804,58 +860,58 @@ pub fn sort_timeline(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<
         // passage that does not contain it is a wrong claim, refused;
         // the staged finder runs only where nothing was named.
         if obligation.kind == "payment" {
+            let named = named_passage(&obligation, "amount_from", segments, namings);
             if obligation.amount != crate::run::NO_AMOUNT {
-                if let Some(row) = named_passage(&obligation, obligation.amount_from, segments) {
-                    if contains_ignoring_whitespace(&row.text, &obligation.amount) {
-                        obligation.priced_by = Some(row);
-                    } else {
-                        obligation.amount = crate::run::NO_AMOUNT.to_owned();
+                match &named {
+                    Named::Row(row) => {
+                        if contains_ignoring_whitespace(&row.text, &obligation.amount) {
+                            obligation.priced_by = Some(row.clone());
+                        } else {
+                            obligation.amount = crate::run::NO_AMOUNT.to_owned();
+                        }
                     }
+                    // Outcome 1: a sum read off a passage the model
+                    // never saw is refused with its naming. Never the
+                    // obligation, which stands with `no amount`.
+                    Named::Refused => obligation.amount = crate::run::NO_AMOUNT.to_owned(),
+                    Named::Nothing => {}
                 }
             }
             // "Named nothing" includes naming its own passage with no
             // sum: the model has not pointed anywhere else, and the
             // staged finder is the fallback until naming is reliable.
+            // A *refused* naming is not "named nothing": the model
+            // pointed, the page could not vouch for it, and Rust does
+            // not then go looking (#624).
             // The first scratch loop (4 September) found the 4B names
             // the due-date row 27 times in 36 and the total row 4 in
             // 24, so the date finder is nearly retired and the amount
             // finder is not.
-            if obligation.amount == crate::run::NO_AMOUNT
-                && named_passage(&obligation, obligation.amount_from, segments).is_none()
-            {
+            if obligation.amount == crate::run::NO_AMOUNT && named == Named::Nothing {
                 if let Some((figure, row)) = priced_at(&obligation, segments) {
                     obligation.amount = figure;
                     obligation.priced_by = Some(row);
                 }
             }
         }
-        match merged
-            .iter_mut()
-            .find(|kept| same_obligation(kept, &obligation))
-        {
-            Some(kept) => {
-                kept.evidence.extend(obligation.evidence);
-                if obligation.confidence == crate::run::LOW_CONFIDENCE {
-                    kept.confidence = obligation.confidence;
-                }
-            }
-            None => merged.push(obligation),
+        if merged.iter().any(|kept| same_candidate(kept, &obligation)) {
+            continue;
         }
-    }
-    for obligation in &mut merged {
-        // Document before ordinal: an ordinal is document-local, so
-        // sorting on it alone interleaves two documents' evidence as
-        // though the second continued the first (#330).
-        obligation
-            .evidence
-            .sort_by_key(|segment| (segment.document, segment.ordinal));
-        obligation.evidence.dedup();
+        merged.push(obligation);
     }
     merged.sort_by(|a, b| {
         // `None` sorts after every date: undated last, never dropped.
+        // Then the page: two readings of one ask by one date tie on
+        // everything else, and the letter's own order is the honest
+        // tiebreak (document before ordinal — an ordinal is
+        // document-local, #330).
         let key = |o: &Obligation| {
             let due = o.due.map(|resolved| resolved.date);
-            (due.is_none(), due, o.kind.clone(), o.party.clone())
+            let at = o
+                .evidence
+                .first()
+                .map(|segment| (segment.document, segment.ordinal));
+            (due.is_none(), due, o.kind.clone(), o.party.clone(), at)
         };
         key(a).cmp(&key(b))
     });
@@ -927,22 +983,61 @@ fn pointed_at(obligation: &Obligation, segments: &[Segment]) -> Option<(Resolved
         })
 }
 
+/// What a claim's naming of a passage came to.
+#[derive(Debug, Clone, PartialEq)]
+enum Named {
+    /// A passage of the claim's own document, inside the batch the
+    /// model answered, and not the claim's own: something to verify.
+    Row(Segment),
+    /// The claim named nothing, or named its own passage, or named an
+    /// id that indexes no segment or another document: nothing to
+    /// verify, and the staged finders may still run.
+    Nothing,
+    /// The claim named an id outside the batch the model answered
+    /// (#624). Outcome 1 of `app/METHOD.md` §0: the page cannot vouch
+    /// for a passage the model never saw, so the reading is refused
+    /// and nothing goes looking for it either.
+    Refused,
+}
+
 /// The passage a claim says its value lives in, when that is not the
 /// passage the claim was read from (CLAUDE.md, *Rust verifies; it never
-/// discovers*). A batch id indexes the run's segments; an id off the
-/// page, in another document, or naming the claim's own passage is
-/// `None`, and the caller then has nothing to verify.
+/// discovers*). A batch id indexes the run's segments. The id must be
+/// one the model was shown in the request it answered from —
+/// `exec::rejoin` holds the same set as `known` for result ids, and
+/// this is the check for named ones — and every naming checked is
+/// reported for the claim trace.
 fn named_passage(
     obligation: &Obligation,
-    id: Option<usize>,
+    field: &'static str,
     segments: &[Segment],
-) -> Option<Segment> {
-    let own = obligation.evidence.first()?;
-    let row = segments.get(id?)?;
-    if row.document != own.document || row.ordinal == own.ordinal {
-        return None;
+    namings: &mut Vec<Naming>,
+) -> Named {
+    let id = match field {
+        "amount_from" => obligation.amount_from,
+        "deadline_from" => obligation.deadline_from,
+        _ => unreachable!("a naming field is one of the two"),
+    };
+    let (Some(id), Some(own)) = (id, obligation.evidence.first()) else {
+        return Named::Nothing;
+    };
+    let shown = obligation.shown.contains(&id);
+    namings.push(Naming {
+        passage: own.clone(),
+        field,
+        named: id,
+        window: obligation.shown.clone(),
+        shown,
+    });
+    if !shown {
+        return Named::Refused;
     }
-    Some(row.clone())
+    match segments.get(id) {
+        Some(row) if row.document == own.document && row.ordinal != own.ordinal => {
+            Named::Row(row.clone())
+        }
+        _ => Named::Nothing,
+    }
 }
 
 /// #460 rule one, whitespace-insensitive: a line break is an artefact
@@ -1075,11 +1170,29 @@ fn money_figure(text: &str) -> Option<String> {
     Some(text[..end].to_owned())
 }
 
-/// One ask, however many segments said it: identity is what is being
-/// asked and by when, case-insensitive, never the evidence text.
-fn same_obligation(a: &Obligation, b: &Obligation) -> bool {
-    a.kind == b.kind
-        && a.party.eq_ignore_ascii_case(&b.party)
-        && a.deadline.eq_ignore_ascii_case(&b.deadline)
-        && a.anchor.eq_ignore_ascii_case(&b.anchor)
+/// The one duplicate Rust may fold: the same candidate, field for
+/// field, read out of the same passage of the same document — an
+/// execution artefact (the model listing one ask twice in one answer),
+/// not a second ask on the page.
+///
+/// Until the review of #626 (Task 2) this was `same_obligation`: kind,
+/// party, deadline and anchor, across passages and across documents,
+/// comparing neither the ask nor the sum. Two invoices to one payee by
+/// one date became one obligation keeping the first sum, and nobody
+/// was told. Whether two passages make *one* ask is a judgement about
+/// meaning with no page to check it against (`app/METHOD.md` §1.4),
+/// so Rust no longer makes it: every passage's reading is shown, and a
+/// duplicate costs a person a glance where a merge cost them a sum.
+fn same_candidate(a: &Obligation, b: &Obligation) -> bool {
+    let same_passage = match (a.evidence.first(), b.evidence.first()) {
+        (Some(x), Some(y)) => x.document == y.document && x.ordinal == y.ordinal,
+        _ => false,
+    };
+    same_passage
+        && a.kind == b.kind
+        && a.party == b.party
+        && a.ask == b.ask
+        && a.deadline == b.deadline
+        && a.anchor == b.anchor
+        && a.amount == b.amount
 }

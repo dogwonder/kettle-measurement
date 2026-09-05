@@ -1,0 +1,83 @@
+{
+  "schema": "kettle/comparison-report@0",
+  "run": {
+    "id": "run-01",
+    "pack": "app.kttl.renewal-diff",
+    "pack_version": "0.1.0",
+    "documents": [
+      {
+        "role": "previous",
+        "label": "Last year's policy",
+        "file": "generated-development-excess_rose-amber-01-previous.txt"
+      },
+      {
+        "role": "renewal",
+        "label": "This year's renewal",
+        "file": "generated-development-excess_rose-amber-01-renewal.txt"
+      }
+    ],
+    "passages": 12,
+    "started": "2026-09-05T10:50:52Z",
+    "finished": "2026-09-05T10:50:52Z"
+  },
+  "summary": {
+    "terms_count": 2,
+    "changed_count": 1,
+    "unchanged_count": 1,
+    "added_count": 0,
+    "removed_count": 0,
+    "needs_review_count": 0,
+    "note": "1 value changed."
+  },
+  "changes": [
+    {
+      "term": "compulsory_excess",
+      "label": "Compulsory excess",
+      "basis": "per_claim",
+      "basis_label": "per claim",
+      "state": "changed",
+      "from": "£240.00",
+      "to": "£482.50",
+      "delta": "£242.50",
+      "direction": "up",
+      "kind": "worked_out",
+      "sides": [
+        {
+          "label": "Last year's policy",
+          "value": "£240.00",
+          "quote": "Compulsory excess: £240.00 per claim."
+        },
+        {
+          "label": "This year's renewal",
+          "value": "£482.50",
+          "quote": "Compulsory excess: £482.50 per claim."
+        }
+      ]
+    },
+    {
+      "term": "premium",
+      "label": "Premium",
+      "basis": "annual",
+      "basis_label": "a year",
+      "state": "unchanged",
+      "from": "£536.00",
+      "to": "£536.00",
+      "delta": null,
+      "direction": null,
+      "kind": "read_and_verified",
+      "sides": [
+        {
+          "label": "Last year's policy",
+          "value": "£536.00",
+          "quote": "Total annual premium: £536.00."
+        },
+        {
+          "label": "This year's renewal",
+          "value": "£536.00",
+          "quote": "Total annual premium: £536.00."
+        }
+      ]
+    }
+  ],
+  "needs_review": []
+}

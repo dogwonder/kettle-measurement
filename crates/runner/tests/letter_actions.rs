@@ -57,6 +57,7 @@ fn outcome() -> ExtractionOutcome {
                 priced_by: None,
                 amount_from: None,
                 deadline_from: None,
+                shown: Default::default(),
                 disputed: vec![],
             },
             Obligation {
@@ -76,6 +77,7 @@ fn outcome() -> ExtractionOutcome {
                 priced_by: None,
                 amount_from: None,
                 deadline_from: None,
+                shown: Default::default(),
                 disputed: vec![],
             },
         ],
@@ -513,4 +515,65 @@ fn a_sum_read_off_a_row_is_reported_with_the_row() {
             .map(|p| p.text.as_str()),
         Some("Amount Due 41.21 GBP 009422")
     );
+}
+
+/// Two invoices to one payee by one date reach the report as two rows
+/// and the diary as two reminders, each with its own sum (review of
+/// #626, Task 2). The old four-string merge folded them into one and
+/// kept the first sum.
+#[test]
+fn two_invoices_by_one_date_are_two_rows_and_two_reminders() {
+    let invoice = |ordinal: usize, ask: &str, amount: &str| Obligation {
+        kind: "payment".to_owned(),
+        party: "Harborne Parking Services".to_owned(),
+        ask: ask.to_owned(),
+        deadline: "by 30 April 2026".to_owned(),
+        anchor: "30 April 2026".to_owned(),
+        amount: amount.to_owned(),
+        confidence: "high".to_owned(),
+        due: None,
+        evidence: vec![segment(
+            ordinal,
+            &format!("{ask}: {amount} by 30 April 2026."),
+        )],
+        dated_by: None,
+        priced_by: None,
+        amount_from: None,
+        deadline_from: None,
+        shown: Default::default(),
+        disputed: vec![],
+    };
+    let segments: Vec<Segment> = vec![
+        segment(0, "3 March 2026"),
+        segment(1, "Pay invoice A: £80.00 by 30 April 2026."),
+        segment(2, "Pay invoice B: £120.00 by 30 April 2026."),
+    ];
+    let obligations = runner::timeline::sort_timeline(
+        vec![
+            invoice(1, "Pay invoice A", "£80.00"),
+            invoice(2, "Pay invoice B", "£120.00"),
+        ],
+        &segments,
+    );
+    let outcome = ExtractionOutcome {
+        date_disputes: vec![],
+        obligations,
+    };
+
+    let report = build_letter_report(&outcome, run_info());
+    let amounts: Vec<&str> = report
+        .obligations
+        .iter()
+        .map(|row| row.amount.as_str())
+        .collect();
+    assert_eq!(amounts, vec!["£80.00", "£120.00"], "{report:#?}");
+
+    let actions = propose_letter_actions(&outcome, "run-01");
+    assert_eq!(actions.actions.len(), 2, "{actions:#?}");
+    let titles: Vec<&str> = actions
+        .actions
+        .iter()
+        .map(|action| action.title.as_str())
+        .collect();
+    assert_eq!(titles, vec!["Pay invoice A", "Pay invoice B"]);
 }

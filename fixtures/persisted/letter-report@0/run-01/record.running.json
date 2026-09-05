@@ -1,0 +1,13 @@
+{
+  "schema": "kettle/run-record@0",
+  "id": "run-01",
+  "pack_id": "app.kttl.letter-to-actions",
+  "pack_version": "0.3.0",
+  "status": "running",
+  "input_files": [
+    "generated-development-appointment_absolute-amber-01.txt"
+  ],
+  "started": "2026-09-05T10:50:52.074837+00:00",
+  "finished": null,
+  "error": null
+}

@@ -20,6 +20,23 @@
       ]
     },
     {
+      "expect": {
+        "amount": "£54.00",
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-10-04",
+        "kind": "payment",
+        "party": "Denholm Veterinary Group"
+      },
+      "id": "repeated_ask-winter-bay-04-payment-02",
+      "segment": "As a reminder, the sum of £54.00 must reach us within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
       "expect": null,
       "id": "repeated_ask-winter-bay-04-no-ask-03",
       "segment": "Once the account is clear we will write to confirm it.",

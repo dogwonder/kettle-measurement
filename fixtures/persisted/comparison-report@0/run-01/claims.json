@@ -1,0 +1,701 @@
+{
+  "schema": "kettle/claim-traces@0",
+  "claims": [
+    {
+      "id": "claim-000001",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 0,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Kestrel Assurance car insurance — policy schedule AMBER-ER-400 for the year to 31 August 2026.",
+      "candidate": {
+        "confidence": "high",
+        "id": 0,
+        "segment": "Kestrel Assurance car insurance — policy schedule AMBER-ER-400 for the year to 31 August 2026.",
+        "terms": []
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 0,
+            "segment": "Kestrel Assurance car insurance — policy schedule AMBER-ER-400 for the year to 31 August 2026.",
+            "terms": []
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000002",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 1,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Compulsory excess: £240.00 per claim.",
+      "candidate": {
+        "confidence": "high",
+        "id": 1,
+        "segment": "Compulsory excess: £240.00 per claim.",
+        "terms": [
+          {
+            "basis": "per_claim",
+            "quote": "Compulsory excess: £240.00 per claim.",
+            "term": "compulsory_excess",
+            "value": "£240.00"
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 1,
+            "segment": "Compulsory excess: £240.00 per claim.",
+            "terms": [
+              {
+                "basis": "per_claim",
+                "quote": "Compulsory excess: £240.00 per claim.",
+                "term": "compulsory_excess",
+                "value": "£240.00"
+              }
+            ]
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000003",
+      "parent_id": "claim-000002",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 1,
+      "candidate_index": 1,
+      "kind": "policy_term",
+      "source": "Compulsory excess: £240.00 per claim.",
+      "candidate": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £240.00 per claim.",
+        "term": "compulsory_excess",
+        "value": "£240.00"
+      },
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "quote",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "quote_identifies_passage",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "value_shape",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000004",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 2,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Total annual premium: £536.00.",
+      "candidate": {
+        "confidence": "high",
+        "id": 2,
+        "segment": "Total annual premium: £536.00.",
+        "terms": [
+          {
+            "basis": "annual",
+            "quote": "Total annual premium: £536.00.",
+            "term": "premium",
+            "value": "£536.00"
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 2,
+            "segment": "Total annual premium: £536.00.",
+            "terms": [
+              {
+                "basis": "annual",
+                "quote": "Total annual premium: £536.00.",
+                "term": "premium",
+                "value": "£536.00"
+              }
+            ]
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000005",
+      "parent_id": "claim-000004",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 2,
+      "candidate_index": 1,
+      "kind": "policy_term",
+      "source": "Total annual premium: £536.00.",
+      "candidate": {
+        "basis": "annual",
+        "quote": "Total annual premium: £536.00.",
+        "term": "premium",
+        "value": "£536.00"
+      },
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "quote",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "quote_identifies_passage",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "value_shape",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000006",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 3,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Cover limit: £2,580.00 per policy.",
+      "candidate": {
+        "confidence": "high",
+        "id": 3,
+        "segment": "Cover limit: £2,580.00 per policy.",
+        "terms": []
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 3,
+            "segment": "Cover limit: £2,580.00 per policy.",
+            "terms": []
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000007",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 4,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Your reference is AMBER-ER-400. Quote it whenever you write to us about this policy.",
+      "candidate": {
+        "confidence": "high",
+        "id": 4,
+        "segment": "Your reference is AMBER-ER-400. Quote it whenever you write to us about this policy.",
+        "terms": []
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 4,
+            "segment": "Your reference is AMBER-ER-400. Quote it whenever you write to us about this policy.",
+            "terms": []
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000008",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 5,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Kestrel Assurance arranges car insurance cover under AMBER-ER-400 and is regulated in the United Kingdom.",
+      "candidate": {
+        "confidence": "high",
+        "id": 5,
+        "segment": "Kestrel Assurance arranges car insurance cover under AMBER-ER-400 and is regulated in the United Kingdom.",
+        "terms": []
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 5,
+            "segment": "Kestrel Assurance arranges car insurance cover under AMBER-ER-400 and is regulated in the United Kingdom.",
+            "terms": []
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000009",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 6,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Kestrel Assurance car insurance — renewal schedule AMBER-ER-400 for the year to 31 August 2027.",
+      "candidate": {
+        "confidence": "high",
+        "id": 6,
+        "segment": "Kestrel Assurance car insurance — renewal schedule AMBER-ER-400 for the year to 31 August 2027.",
+        "terms": []
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 6,
+            "segment": "Kestrel Assurance car insurance — renewal schedule AMBER-ER-400 for the year to 31 August 2027.",
+            "terms": []
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000010",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 7,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Compulsory excess: £482.50 per claim.",
+      "candidate": {
+        "confidence": "high",
+        "id": 7,
+        "segment": "Compulsory excess: £482.50 per claim.",
+        "terms": [
+          {
+            "basis": "per_claim",
+            "quote": "Compulsory excess: £482.50 per claim.",
+            "term": "compulsory_excess",
+            "value": "£482.50"
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 7,
+            "segment": "Compulsory excess: £482.50 per claim.",
+            "terms": [
+              {
+                "basis": "per_claim",
+                "quote": "Compulsory excess: £482.50 per claim.",
+                "term": "compulsory_excess",
+                "value": "£482.50"
+              }
+            ]
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000011",
+      "parent_id": "claim-000010",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 7,
+      "candidate_index": 1,
+      "kind": "policy_term",
+      "source": "Compulsory excess: £482.50 per claim.",
+      "candidate": {
+        "basis": "per_claim",
+        "quote": "Compulsory excess: £482.50 per claim.",
+        "term": "compulsory_excess",
+        "value": "£482.50"
+      },
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "quote",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "quote_identifies_passage",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "value_shape",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000012",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 8,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Total annual premium: £536.00.",
+      "candidate": {
+        "confidence": "high",
+        "id": 8,
+        "segment": "Total annual premium: £536.00.",
+        "terms": [
+          {
+            "basis": "annual",
+            "quote": "Total annual premium: £536.00.",
+            "term": "premium",
+            "value": "£536.00"
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 8,
+            "segment": "Total annual premium: £536.00.",
+            "terms": [
+              {
+                "basis": "annual",
+                "quote": "Total annual premium: £536.00.",
+                "term": "premium",
+                "value": "£536.00"
+              }
+            ]
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000013",
+      "parent_id": "claim-000012",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 8,
+      "candidate_index": 1,
+      "kind": "policy_term",
+      "source": "Total annual premium: £536.00.",
+      "candidate": {
+        "basis": "annual",
+        "quote": "Total annual premium: £536.00.",
+        "term": "premium",
+        "value": "£536.00"
+      },
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "quote",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "quote_identifies_passage",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "value_shape",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000014",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 9,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Cover limit: £2,580.00 per policy.",
+      "candidate": {
+        "confidence": "high",
+        "id": 9,
+        "segment": "Cover limit: £2,580.00 per policy.",
+        "terms": []
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 9,
+            "segment": "Cover limit: £2,580.00 per policy.",
+            "terms": []
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000015",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 10,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Kestrel Assurance arranges car insurance cover under AMBER-ER-400 and is regulated in the United Kingdom.",
+      "candidate": {
+        "confidence": "high",
+        "id": 10,
+        "segment": "Kestrel Assurance arranges car insurance cover under AMBER-ER-400 and is regulated in the United Kingdom.",
+        "terms": []
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 10,
+            "segment": "Kestrel Assurance arranges car insurance cover under AMBER-ER-400 and is regulated in the United Kingdom.",
+            "terms": []
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    },
+    {
+      "id": "claim-000016",
+      "pack": "app.kttl.renewal-diff",
+      "step": "Reading what each document says",
+      "batch": 1,
+      "item": 11,
+      "candidate_index": 0,
+      "kind": "decision",
+      "source": "Your reference is AMBER-ER-400. Quote it whenever you write to us about this policy.",
+      "candidate": {
+        "confidence": "high",
+        "id": 11,
+        "segment": "Your reference is AMBER-ER-400. Quote it whenever you write to us about this policy.",
+        "terms": []
+      },
+      "attempts": [
+        {
+          "ordinal": 1,
+          "candidate": {
+            "confidence": "high",
+            "id": 11,
+            "segment": "Your reference is AMBER-ER-400. Quote it whenever you write to us about this policy.",
+            "terms": []
+          },
+          "schema": "passed",
+          "pairing": "passed"
+        }
+      ],
+      "checks": [
+        {
+          "guardrail": "schema",
+          "outcome": "passed"
+        },
+        {
+          "guardrail": "pairing",
+          "outcome": "passed"
+        }
+      ],
+      "terminal": "accepted"
+    }
+  ]
+}

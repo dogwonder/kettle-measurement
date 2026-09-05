@@ -1,0 +1,51 @@
+{
+  "schema": "kettle/pending-letter@0",
+  "outcome": {
+    "obligations": [
+      {
+        "kind": "payment",
+        "party": "Anytown Housing",
+        "ask": "Pay £120.00",
+        "deadline": "within 14 days",
+        "anchor": "the date of this letter",
+        "amount": "no amount",
+        "amount_from": null,
+        "deadline_from": null,
+        "shown": [],
+        "confidence": "high",
+        "due": null,
+        "evidence": [
+          {
+            "document": 0,
+            "page": 1,
+            "ordinal": 0,
+            "text": "Please pay £120.00 within 14 days of the date of this letter."
+          }
+        ],
+        "dated_by": null,
+        "priced_by": null,
+        "disputed": []
+      }
+    ],
+    "date_disputes": [
+      [
+        0,
+        {
+          "read": "2026-03-03",
+          "also_read": "2026-03-08"
+        }
+      ]
+    ]
+  },
+  "review": [],
+  "question": {
+    "document": 0,
+    "file": "letter.jpeg",
+    "read": "2026-03-03",
+    "also_read": "2026-03-08",
+    "passage": "Please pay £120.00 within 14 days of the date of this letter."
+  },
+  "file": "letter.jpeg",
+  "passages": 12,
+  "started": "2026-09-05T10:50:52Z"
+}

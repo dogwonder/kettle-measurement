@@ -20,6 +20,23 @@
       ]
     },
     {
+      "expect": {
+        "amount": "£480.00",
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-05-08",
+        "kind": "payment",
+        "party": "Trentham & Yale Solicitors"
+      },
+      "id": "repeated_ask-valley-28-payment-02",
+      "segment": "We remind you that payment of £480.00 is due within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
       "expect": null,
       "id": "repeated_ask-valley-28-no-ask-03",
       "segment": "No further action is needed once you have paid.",

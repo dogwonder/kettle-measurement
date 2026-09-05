@@ -54,6 +54,45 @@ pub fn batch_items(items: &[String], size: usize) -> Vec<Vec<BatchItem>> {
         .collect()
 }
 
+/// Batch pooled segments so that a boundary between two *units* always
+/// starts a batch (#624; `app/METHOD.md` §1.4 item 4). The batch is
+/// the window the model can name passages in, and a letter that began
+/// at id 8 of somebody else's window was a letter whose totals row
+/// could fall in the next one. A unit that fits in `size` is exactly
+/// one batch.
+///
+/// `units[i]` is the unit `items[i]` belongs to; `run::batch_units`
+/// says what a unit is — a document pooled under one role with others,
+/// or the whole of a role-bound set. Ids still number across the
+/// whole step, so an id indexes the pooled segments whichever batch
+/// produced it.
+///
+/// A unit of more than `size` passages is chunked at `size` as before
+/// and is out of scope here by design (`app/METHOD.md` §1.4 item 4):
+/// it needs an overlap, a second pass or an index passage, and that is
+/// a build with a measurement.
+pub fn batch_items_by_unit(items: &[String], units: &[usize], size: usize) -> Vec<Vec<BatchItem>> {
+    debug_assert_eq!(items.len(), units.len());
+    let size = size.max(1);
+    let mut batches: Vec<Vec<BatchItem>> = Vec::new();
+    let mut start = 0;
+    while start < items.len() {
+        let end = (start..items.len())
+            .find(|&i| units[i] != units[start])
+            .unwrap_or(items.len());
+        for chunk in (start..end).collect::<Vec<_>>().chunks(size) {
+            batches.push(
+                chunk
+                    .iter()
+                    .map(|&id| BatchItem::new(id, items[id].as_str()))
+                    .collect(),
+            );
+        }
+        start = end;
+    }
+    batches
+}
+
 /// Prompt rendering failures. A pack whose template doesn't parse is
 /// caught at load time (`check_prompt_syntax`, via the pack loader);
 /// render-time failures here mean a step's context didn't satisfy the
@@ -635,6 +674,30 @@ pub struct StepOutcome {
     /// batch. They must not silently disappear merely because they
     /// cannot affect the product output.
     pub rejected: Vec<RejectedCandidate>,
+    /// Per item, the ids in the *request* that produced its retained
+    /// answer or review entry (#624): what the model was shown when it
+    /// answered. The batch an item was first asked in is not that
+    /// window once a pairing retry or a truncation split has re-asked
+    /// it — a retry shows only the items that failed, and can carry a
+    /// gap (ids 0 and 2), so this is a set and never a range. Every
+    /// item in `answers` and `needs_review` has an entry.
+    pub shown: std::collections::BTreeMap<usize, std::collections::BTreeSet<usize>>,
+}
+
+impl StepOutcome {
+    /// The ids in the request that produced this item's answer.
+    /// Panics on an item this outcome did not produce: an answer with
+    /// no provenance is a bug, not a window of nothing.
+    pub fn shown(&self, item: usize) -> &std::collections::BTreeSet<usize> {
+        self.shown
+            .get(&item)
+            .unwrap_or_else(|| panic!("item {item} has an answer and no request it came from"))
+    }
+}
+
+/// The ids a request put in front of the model.
+fn ids_of(batch: &[BatchItem]) -> std::collections::BTreeSet<usize> {
+    batch.iter().map(|item| item.id).collect()
 }
 
 #[derive(Debug)]
@@ -810,6 +873,7 @@ pub fn run_batch(
         .filter(|review| matches!(review.reason, ReviewReason::LowConfidence))
         .map(|review| (review.item.id, review))
         .collect();
+    let mut reasked_shown = reasked.shown;
     outcome.needs_review = outcome
         .needs_review
         .into_iter()
@@ -820,9 +884,26 @@ pub fn run_batch(
             if reasked.answers.contains_key(&review.item.id) {
                 return None;
             }
-            Some(low_confidence.remove(&review.item.id).unwrap_or(review))
+            match low_confidence.remove(&review.item.id) {
+                // The re-ask's answer replaces the original entry, and
+                // its provenance with it. An item the re-ask still
+                // could not pair keeps its original entry, so its
+                // provenance stays the original request's too.
+                Some(replacement) => {
+                    if let Some(shown) = reasked_shown.remove(&review.item.id) {
+                        outcome.shown.insert(review.item.id, shown);
+                    }
+                    Some(replacement)
+                }
+                None => Some(review),
+            }
         })
         .collect();
+    for id in reasked.answers.keys() {
+        if let Some(shown) = reasked_shown.remove(id) {
+            outcome.shown.insert(*id, shown);
+        }
+    }
     outcome.answers.extend(reasked.answers);
     for (id, attempts) in reasked.attempts {
         outcome.attempts.entry(id).or_default().extend(attempts);
@@ -916,6 +997,7 @@ fn ask_batch(
                             })
                             .collect(),
                         rejected: Vec::new(),
+                        shown: batch.iter().map(|item| (item.id, ids_of(batch))).collect(),
                     });
                 }
                 Err(other) => return Err(StepError::Call(other)),
@@ -980,6 +1062,7 @@ fn split_truncated(
             needs_review: Vec::new(),
             attempts: Default::default(),
             rejected: Vec::new(),
+            shown: Default::default(),
         }),
         [item] => Ok(StepOutcome {
             answers: Default::default(),
@@ -990,6 +1073,7 @@ fn split_truncated(
             }],
             attempts: Default::default(),
             rejected: Vec::new(),
+            shown: std::iter::once((item.id, ids_of(batch))).collect(),
         }),
         _ => {
             endpoint.record_retry(RetryReason::Truncation);
@@ -1006,6 +1090,9 @@ fn split_truncated(
                 outcome.attempts.entry(id).or_default().extend(attempts);
             }
             outcome.rejected.extend(rest.rejected);
+            // Each half was its own request: an answer from the left
+            // was shown the left's ids only, never the union.
+            outcome.shown.extend(rest.shown);
             Ok(outcome)
         }
     }
@@ -1108,6 +1195,9 @@ fn rejoin(batch: &[BatchItem], answer: &serde_json::Value, echo_field: &str) -> 
         needs_review: Vec::new(),
         attempts: Default::default(),
         rejected,
+        // One request, one window: every item in it was shown every
+        // id in it, whatever the model then said about each.
+        shown: batch.iter().map(|item| (item.id, known.clone())).collect(),
     };
     for item in batch {
         let mut review = |reason, answer| {

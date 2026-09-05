@@ -1,0 +1,26 @@
+{
+  "schema": "kettle/proposed-actions@0",
+  "run_id": "run-01",
+  "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+  "actions": [
+    {
+      "id": "act-01",
+      "kind": "calendar_reminder",
+      "title": "Attend your appointment about the parking charge",
+      "detail": "Harborne Parking Services asked for this by 2 January 2026. The letter says \"2 January 2026\".",
+      "evidence": {
+        "asked_by": "Harborne Parking Services",
+        "in_the_letter": "2 January 2026",
+        "passage_1": "You have an appointment about your parking charge at Harborne Parking Services on 2 January 2026. Please arrive ten minutes early and bring this letter with you."
+      },
+      "export": {
+        "ics": {
+          "summary": "Attend your appointment about the parking charge — Harborne Parking Services",
+          "date": "2026-01-02"
+        },
+        "text": "Attend your appointment about the parking charge (Harborne Parking Services) — 2 January 2026"
+      },
+      "status": "proposed"
+    }
+  ]
+}

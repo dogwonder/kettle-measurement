@@ -233,6 +233,7 @@ fn guardrail_name(guardrail: runner::claim_trace::Guardrail) -> &'static str {
         Guardrail::Pairing => "pairing",
         Guardrail::Quote => "quote",
         Guardrail::QuoteIdentifiesPassage => "quote_identifies_passage",
+        Guardrail::PassageShown => "passage_shown",
         Guardrail::ValueShape => "value_shape",
         Guardrail::PackCoverage => "pack_coverage",
         Guardrail::DeterministicDerivation => "deterministic_derivation",

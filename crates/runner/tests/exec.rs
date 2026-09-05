@@ -1107,3 +1107,182 @@ fn an_exact_echo_pairs_even_when_another_item_extends_it() {
     assert_eq!(outcome.answers.len(), 2, "{:?}", outcome.needs_review);
     assert!(outcome.needs_review.is_empty());
 }
+
+/// Every retained answer says which ids were in the request that
+/// produced it (review of #626): the batch it was first asked in is
+/// not the window once a retry or a split has re-asked it.
+#[test]
+fn a_reasked_answer_is_shown_the_reask_and_not_the_original_batch() {
+    let partial = r#"{"results": [
+        {"id": 0, "raw": "SQ *KAFFA COFFEE", "name": "Kaffa Coffee"},
+        {"id": 1, "raw": "NETFLIX.COM", "name": "Netflix"}
+    ]}"#;
+    let mock = MockModel::respond_sequence(vec![
+        ("200 OK", completion_envelope(partial)),
+        (
+            "200 OK",
+            half_answer(&[
+                (2, "BRITISH GAS", "British Gas"),
+                (3, "THAMES WATER", "Thames Water"),
+            ]),
+        ),
+    ]);
+    let outcome = run_batch(
+        &mock.endpoint(),
+        "Sort these:\n{{ batch_json }}",
+        None,
+        &results_schema(),
+        &four_merchants(),
+        "raw",
+        &BatchContext::none(),
+    )
+    .expect("re-asked batch rejoins");
+
+    let set = |ids: &[usize]| {
+        ids.iter()
+            .copied()
+            .collect::<std::collections::BTreeSet<_>>()
+    };
+    assert_eq!(
+        outcome.shown[&0],
+        set(&[0, 1, 2, 3]),
+        "answered in the original batch"
+    );
+    assert_eq!(outcome.shown[&2], set(&[2, 3]), "answered in the re-ask");
+    assert_eq!(outcome.shown[&3], set(&[2, 3]));
+}
+
+#[test]
+fn a_noncontiguous_reask_is_shown_exactly_its_ids() {
+    let partial = r#"{"results": [
+        {"id": 1, "raw": "NETFLIX.COM", "name": "Netflix"},
+        {"id": 3, "raw": "THAMES WATER", "name": "Thames Water"}
+    ]}"#;
+    let mock = MockModel::respond_sequence(vec![
+        ("200 OK", completion_envelope(partial)),
+        (
+            "200 OK",
+            half_answer(&[
+                (0, "SQ *KAFFA COFFEE", "Kaffa Coffee"),
+                (2, "BRITISH GAS", "British Gas"),
+            ]),
+        ),
+    ]);
+    let outcome = run_batch(
+        &mock.endpoint(),
+        "Sort these:\n{{ batch_json }}",
+        None,
+        &results_schema(),
+        &four_merchants(),
+        "raw",
+        &BatchContext::none(),
+    )
+    .expect("re-asked batch rejoins");
+
+    let set = |ids: &[usize]| {
+        ids.iter()
+            .copied()
+            .collect::<std::collections::BTreeSet<_>>()
+    };
+    assert_eq!(
+        outcome.shown[&0],
+        set(&[0, 2]),
+        "a range 0..3 would vouch for id 1"
+    );
+    assert_eq!(outcome.shown[&2], set(&[0, 2]));
+    assert_eq!(outcome.shown[&1], set(&[0, 1, 2, 3]));
+}
+
+#[test]
+fn a_split_answer_is_shown_its_own_half() {
+    let mock = MockModel::respond_sequence(vec![
+        (
+            "200 OK",
+            truncated_envelope(r#"{"results": [{"id": 0, "raw": "SQ *KAF"#),
+        ),
+        (
+            "200 OK",
+            half_answer(&[
+                (0, "SQ *KAFFA COFFEE", "Kaffa Coffee"),
+                (1, "NETFLIX.COM", "Netflix"),
+            ]),
+        ),
+        (
+            "200 OK",
+            half_answer(&[
+                (2, "BRITISH GAS", "British Gas"),
+                (3, "THAMES WATER", "Thames Water"),
+            ]),
+        ),
+    ]);
+    let outcome = run_batch(
+        &mock.endpoint(),
+        "Sort these:\n{{ batch_json }}",
+        None,
+        &results_schema(),
+        &four_merchants(),
+        "raw",
+        &BatchContext::none(),
+    )
+    .expect("split batch rejoins");
+
+    let set = |ids: &[usize]| {
+        ids.iter()
+            .copied()
+            .collect::<std::collections::BTreeSet<_>>()
+    };
+    assert_eq!(outcome.shown[&0], set(&[0, 1]));
+    assert_eq!(outcome.shown[&1], set(&[0, 1]));
+    assert_eq!(outcome.shown[&2], set(&[2, 3]));
+    assert_eq!(outcome.shown[&3], set(&[2, 3]));
+}
+
+/// A low-confidence answer is retained for review, so it carries
+/// provenance too; a pairing failure the re-ask did not resolve keeps
+/// the original entry and the original request's ids with it.
+#[test]
+fn review_entries_carry_the_request_that_produced_them() {
+    let partial = r#"{"results": [
+        {"id": 0, "raw": "SQ *KAFFA COFFEE", "name": "Kaffa Coffee"},
+        {"id": 1, "raw": "NETFLIX.COM", "name": "Netflix", "confidence": "low"},
+        {"id": 2, "raw": "SOMEONE ELSE", "name": "Wrong Pairing"}
+    ]}"#;
+    let reask = r#"{"results": [
+        {"id": 2, "raw": "SOMEONE ELSE AGAIN", "name": "Still Wrong"}
+    ]}"#;
+    let mock = MockModel::respond_sequence(vec![
+        ("200 OK", completion_envelope(partial)),
+        ("200 OK", completion_envelope(reask)),
+    ]);
+    let outcome = run_batch(
+        &mock.endpoint(),
+        "Sort these:\n{{ batch_json }}",
+        None,
+        &results_schema(),
+        &four_merchants(),
+        "raw",
+        &BatchContext::none(),
+    )
+    .expect("batch rejoins");
+
+    let set = |ids: &[usize]| {
+        ids.iter()
+            .copied()
+            .collect::<std::collections::BTreeSet<_>>()
+    };
+    assert_eq!(
+        outcome.shown[&1],
+        set(&[0, 1, 2, 3]),
+        "low confidence, from the original"
+    );
+    // Ids 2 and 3 failed pairing twice; their review entries are the
+    // originals, and so is their provenance.
+    assert_eq!(outcome.shown[&2], set(&[0, 1, 2, 3]));
+    assert_eq!(outcome.shown[&3], set(&[0, 1, 2, 3]));
+    for review in &outcome.needs_review {
+        assert!(
+            outcome.shown.contains_key(&review.item.id),
+            "every review entry has provenance"
+        );
+    }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "kettle/run-record@0",
+  "id": "run-01",
+  "pack_id": "app.kttl.subscription-audit",
+  "pack_version": "1.5.0",
+  "status": "running",
+  "input_files": [
+    "statement-02-messy.csv"
+  ],
+  "started": "2026-09-05T10:50:52.159996+00:00",
+  "finished": null,
+  "error": null
+}

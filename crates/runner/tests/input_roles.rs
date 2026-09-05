@@ -12,7 +12,7 @@ use runner::run::{run_pack, run_pack_bound, Answers, InputBindingError, RunError
 use runner::run_dir::NoLog;
 use std::path::PathBuf;
 use std::sync::atomic::AtomicBool;
-use support::{completion_envelope, MockModel};
+use support::{completion_envelope, per_batch, MockModel};
 
 const LAST_YEAR: &str = "1 August 2025\n\nAnnual premium £412.00.";
 const THIS_YEAR: &str = "1 August 2026\n\nAnnual premium £459.00.";
@@ -276,7 +276,12 @@ fn a_single_role_pack_still_takes_a_flat_list() {
     std::fs::write(dir.join("pack.json"), single).expect("write manifest");
 
     let pack = load_pack(&dir).expect("a one-role pack loads");
-    let mock = MockModel::respond_sequence(vec![("200 OK", answer_for([LAST_YEAR, THIS_YEAR]))]);
+    // Two documents under one role are two batches (#624), unlike the
+    // role-bound pair every other test here runs.
+    let mock = MockModel::respond_sequence(per_batch(
+        &answer_for([LAST_YEAR, THIS_YEAR]),
+        &[LAST_YEAR.split("\n\n").count()],
+    ));
 
     let outcome = run_pack(
         &pack,

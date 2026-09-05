@@ -114,6 +114,7 @@ fn letter_html(template: &str, kind: Kind) -> String {
             priced_by: None,
             amount_from: None,
             deadline_from: None,
+            shown: Default::default(),
             disputed: vec![],
         }],
     };

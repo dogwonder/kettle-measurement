@@ -926,6 +926,7 @@ struct Passage {
     strata: Vec<&'static str>,
 }
 
+#[derive(Clone)]
 struct Obligation {
     kind: &'static str,
     party: String,
@@ -2763,6 +2764,14 @@ fn passages(
         }
         Shape::RepeatedAsk => {
             let days = if exam { 21 } else { 14 };
+            let repeated = Obligation {
+                kind: "payment",
+                party: sender.name.clone(),
+                deadline: format!("within {days} days"),
+                anchor: from_letter.clone(),
+                amount: sender.amount.clone(),
+                due: Some(after(letter_on, days)),
+            };
             out.push(Passage {
                 text: if exam {
                     format!(
@@ -2778,18 +2787,16 @@ fn passages(
                     )
                 },
                 reads_as: None,
-                expect: Some(Obligation {
-                    kind: "payment",
-                    party: sender.name.clone(),
-                    deadline: format!("within {days} days"),
-                    anchor: from_letter.clone(),
-                    amount: sender.amount.clone(),
-                    due: Some(after(letter_on, days)),
-                }),
+                expect: Some(repeated.clone()),
                 strata: vec!["repeated-obligation"],
             });
-            // Said again, differently. One obligation, two passages —
-            // the merge #241 does, measured end to end.
+            // Said again, differently, and scored again: each passage
+            // that makes the ask is a reading the run shows (review of
+            // #626, Task 2). Until then this passage carried no
+            // expectation because the runtime merged the two readings
+            // into one obligation citing both — the bed encoded the
+            // merge — and a run that shows the second saying would
+            // have scored it as an unauthored invention.
             out.push(Passage {
                 text: if exam {
                     format!(
@@ -2805,8 +2812,8 @@ fn passages(
                     )
                 },
                 reads_as: None,
-                expect: None,
-                strata: vec![],
+                expect: Some(repeated),
+                strata: vec!["repeated-obligation"],
             });
             out.push(closing(if exam {
                 "Once the account is clear we will write to confirm it."

@@ -141,3 +141,38 @@ pub fn truncated_envelope(content: &str) -> String {
     })
     .to_string()
 }
+
+/// Documents pooled under one role are read one per batch (#624), so a
+/// run over several letters makes one model call per letter. Tests
+/// still write one `results` array numbered across the step, as the
+/// model sees the ids; this deals one pooled envelope into an envelope
+/// per batch, splitting before each id in `starts`.
+#[allow(dead_code)]
+pub fn per_batch(answer: &str, starts: &[usize]) -> Vec<(&'static str, String)> {
+    let envelope: serde_json::Value = serde_json::from_str(answer).expect("envelope");
+    let content = envelope["choices"][0]["message"]["content"]
+        .as_str()
+        .expect("content");
+    let results: serde_json::Value = serde_json::from_str(content).expect("results");
+    let results = results["results"].as_array().expect("array");
+    let mut bounds = vec![0usize];
+    bounds.extend_from_slice(starts);
+    bounds.push(usize::MAX);
+    bounds
+        .windows(2)
+        .map(|window| {
+            let batch: Vec<serde_json::Value> = results
+                .iter()
+                .filter(|result| {
+                    let id = result["id"].as_u64().expect("id") as usize;
+                    id >= window[0] && id < window[1]
+                })
+                .cloned()
+                .collect();
+            (
+                "200 OK",
+                completion_envelope(&serde_json::json!({ "results": batch }).to_string()),
+            )
+        })
+        .collect()
+}

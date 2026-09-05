@@ -1521,6 +1521,7 @@ fn an_obligation_with_a_different_sum_is_a_different_assertion() {
         priced_by: None,
         amount_from: None,
         deadline_from: None,
+        shown: Default::default(),
         disputed: Vec::new(),
     };
     assert_eq!(expected("£84.00").identity(), found("£84.00").identity());

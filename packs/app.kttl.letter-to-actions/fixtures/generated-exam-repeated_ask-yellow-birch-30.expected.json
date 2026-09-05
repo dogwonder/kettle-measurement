@@ -20,6 +20,23 @@
       ]
     },
     {
+      "expect": {
+        "amount": "£68.50",
+        "anchor": "the date of this letter",
+        "deadline": "within 21 days",
+        "due": "2026-11-24",
+        "kind": "payment",
+        "party": "Fenwick Dental Practice"
+      },
+      "id": "repeated_ask-yellow-birch-30-payment-02",
+      "segment": "As a reminder, the sum of £68.50 must reach us within 21 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
       "expect": null,
       "id": "repeated_ask-yellow-birch-30-no-ask-03",
       "segment": "Once the account is clear we will write to confirm it.",

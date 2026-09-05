@@ -1,0 +1,14 @@
+{
+  "schema": "kettle/run-record@0",
+  "id": "run-01",
+  "pack_id": "app.kttl.renewal-diff",
+  "pack_version": "0.1.0",
+  "status": "running",
+  "input_files": [
+    "generated-development-excess_rose-amber-01-previous.txt",
+    "generated-development-excess_rose-amber-01-renewal.txt"
+  ],
+  "started": "2026-09-05T10:50:52.122358+00:00",
+  "finished": null,
+  "error": null
+}

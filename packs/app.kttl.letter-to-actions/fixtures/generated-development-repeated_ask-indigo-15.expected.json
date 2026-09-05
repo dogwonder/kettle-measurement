@@ -20,6 +20,23 @@
       ]
     },
     {
+      "expect": {
+        "amount": "£0.00",
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-03-29",
+        "kind": "payment",
+        "party": "Marlow Ridge Surgery"
+      },
+      "id": "repeated_ask-indigo-15-payment-02",
+      "segment": "We remind you that payment of £0.00 is due within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
       "expect": null,
       "id": "repeated_ask-indigo-15-no-ask-03",
       "segment": "No further action is needed once you have paid.",

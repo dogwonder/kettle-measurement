@@ -1,0 +1,43 @@
+{
+  "schema": "kettle/letter-report@0",
+  "run": {
+    "id": "run-01",
+    "pack": "app.kttl.letter-to-actions",
+    "pack_version": "0.3.0",
+    "file": "generated-development-appointment_absolute-amber-01.txt",
+    "passages": 8,
+    "started": "2026-09-05T10:50:52Z",
+    "finished": "2026-09-05T10:50:52Z"
+  },
+  "summary": {
+    "obligations_count": 1,
+    "dated_count": 1,
+    "undated_count": 0,
+    "needs_review_count": 0,
+    "note": "This letter asks you to do 1 thing."
+  },
+  "obligations": [
+    {
+      "kind": "attendance",
+      "party": "Harborne Parking Services",
+      "ask": "Attend your appointment about the parking charge",
+      "amount": "",
+      "deadline": "2 January 2026",
+      "due": {
+        "date": "2 January 2026",
+        "kind": "read_and_verified"
+      },
+      "confidence": "high",
+      "evidence": [
+        {
+          "page": 1,
+          "text": "You have an appointment about your parking charge at Harborne Parking Services on 2 January 2026. Please arrive ten minutes early and bring this letter with you."
+        }
+      ],
+      "dated_by": null,
+      "priced_by": null,
+      "disputed": []
+    }
+  ],
+  "needs_review": []
+}

@@ -1,0 +1,9 @@
+{
+  "inputs": [
+    {
+      "file": "statement-02-messy.csv",
+      "size": 1914,
+      "hash": "blake3:48987bca36d9cef64ba0d4e7fbfd4d83c119948a03b7a0c0a637a52c47012c5b"
+    }
+  ]
+}

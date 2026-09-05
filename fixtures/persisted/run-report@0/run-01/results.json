@@ -1,0 +1,274 @@
+{
+  "schema": "kettle/run-report@0",
+  "run": {
+    "id": "run-01",
+    "pack": {
+      "id": "app.kttl.subscription-audit",
+      "version": "1.5.0",
+      "title": "Audit a bank statement"
+    },
+    "input": {
+      "file": "statement-02-messy.csv",
+      "rows": 53,
+      "period": {
+        "from": "2023-03-08",
+        "to": "2025-12-08"
+      },
+      "hash": "blake3:48987bca36d9cef64ba0d4e7fbfd4d83c119948a03b7a0c0a637a52c47012c5b"
+    },
+    "model": {
+      "tier": "No model",
+      "id": "none"
+    },
+    "started": "2026-09-05T10:50:52Z",
+    "finished": "2026-09-05T10:50:52Z",
+    "currency": "GBP"
+  },
+  "summary": {
+    "recurring_count": 2,
+    "annualised_total": "226.88",
+    "monthly_equivalent": "18.91",
+    "price_rises": 1,
+    "needs_review_count": 0,
+    "note": "Everything Kettle found is counted in these totals."
+  },
+  "recurring": [
+    {
+      "merchant": "DISNEYPLUS",
+      "raw_merchant": "PAYPAL *DISNEYPLUS",
+      "kind": "subscription",
+      "category": "unknown",
+      "period": "monthly",
+      "amount_current": "10.99",
+      "annualised": "131.88",
+      "confidence": "low",
+      "price_rise": {
+        "from": "7.99",
+        "to": "10.99",
+        "month": "2024-11",
+        "extra_per_year": "36.00"
+      },
+      "evidence": {
+        "reason": "34 payments, one every month on or near the 8th",
+        "interval_days": {
+          "median": 31,
+          "spread": 3
+        },
+        "transactions": [
+          {
+            "date": "2023-03-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2023-04-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2023-05-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2023-06-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2023-07-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2023-08-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2023-09-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2023-10-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2023-11-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2023-12-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-01-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-02-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-03-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-04-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-05-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-06-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-07-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-08-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-09-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-10-08",
+            "amount": "7.99"
+          },
+          {
+            "date": "2024-11-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2024-12-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-01-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-02-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-03-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-04-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-05-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-06-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-07-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-08-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-09-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-10-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-11-08",
+            "amount": "10.99"
+          },
+          {
+            "date": "2025-12-08",
+            "amount": "10.99"
+          }
+        ]
+      }
+    },
+    {
+      "merchant": "AMAZON PRIME",
+      "raw_merchant": "AMAZON PRIME",
+      "kind": "subscription",
+      "category": "unknown",
+      "period": "yearly",
+      "amount_current": "95.00",
+      "annualised": "95.00",
+      "confidence": "low",
+      "price_rise": null,
+      "evidence": {
+        "reason": "3 payments, roughly a year apart",
+        "interval_days": {
+          "median": 365,
+          "spread": 1
+        },
+        "transactions": [
+          {
+            "date": "2023-03-14",
+            "amount": "95.00"
+          },
+          {
+            "date": "2024-03-14",
+            "amount": "95.00"
+          },
+          {
+            "date": "2025-03-14",
+            "amount": "95.00"
+          }
+        ]
+      }
+    }
+  ],
+  "regular_spend": [
+    {
+      "merchant": "KAFFA COFFEE",
+      "raw_merchant": "SQ *KAFFA COFFEE",
+      "kind": "regular_spend",
+      "category": "unknown",
+      "visits": 8,
+      "total": "30.50",
+      "typical_visit": "3.75",
+      "confidence": "low"
+    },
+    {
+      "merchant": "Amazon Marketplace",
+      "raw_merchant": "AMZNMktplace*2K4J",
+      "kind": "regular_spend",
+      "category": "unknown",
+      "visits": 3,
+      "total": "93.63",
+      "typical_visit": "23.94",
+      "confidence": "low"
+    },
+    {
+      "merchant": "COFFEECART",
+      "raw_merchant": "ZETTLE_*COFFEECART",
+      "kind": "regular_spend",
+      "category": "unknown",
+      "visits": 5,
+      "total": "15.80",
+      "typical_visit": "3.20",
+      "confidence": "low"
+    }
+  ],
+  "income": [],
+  "needs_review": [],
+  "check_yourself": [
+    {
+      "about": "AMAZON PRIME",
+      "why": "Yearly costs only appear once in a 12-month statement, so there's less evidence to go on. Check the renewal date — the next charge would land around 14 March 2026."
+    },
+    {
+      "about": "DISNEYPLUS",
+      "why": "Kettle wasn't certain what this one is, so it's counted with less confidence than the rest. Worth a look at your statement."
+    }
+  ]
+}

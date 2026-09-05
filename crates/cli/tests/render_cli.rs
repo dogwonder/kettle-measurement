@@ -112,3 +112,27 @@ fn an_invalid_results_file_names_the_file_that_needs_attention() {
     assert!(error.contains(&results.display().to_string()), "{error}");
     assert!(!output.exists(), "a failed render must not leave an output");
 }
+
+/// #419: a results file another version of Kettle wrote is named as
+/// such, not as a broken file — and a tag Kettle never wrote is.
+#[test]
+fn another_kettles_results_are_named_not_called_broken() {
+    let dir = scratch("other-version");
+    let template = repo("packs/app.kttl.letter-to-actions/report.html.tera");
+
+    let other = dir.join("results.json");
+    std::fs::write(&other, r#"{"schema": "kettle/letter-report@999"}"#).unwrap();
+    let error = cli::render::report_from_files(&other, &template).expect_err("refused");
+    assert!(
+        error.contains("another version of Kettle") && error.contains("kettle/letter-report@999"),
+        "{error}"
+    );
+
+    let unknown = dir.join("unknown.json");
+    std::fs::write(&unknown, r#"{"schema": "kettle/mystery@0"}"#).unwrap();
+    let error = cli::render::report_from_files(&unknown, &template).expect_err("refused");
+    assert!(
+        error.contains("not a Kettle results file") && !error.contains("another version"),
+        "{error}"
+    );
+}

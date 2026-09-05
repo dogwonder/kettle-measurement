@@ -62,6 +62,74 @@ impl<'de> Deserialize<'de> for Period {
 
 pub const RUN_REPORT_SCHEMA: &str = "kettle/run-report@0";
 
+/// The persisted-schema policy (#419; review of #626, Task 3).
+///
+/// Every document Kettle writes to a run directory carries a `schema`
+/// tag of the form `kettle/<family>@<version>`. The policy has three
+/// rules, and each has a mechanism rather than a convention:
+///
+/// 1. **A breaking change to a persisted shape bumps the version.**
+///    `TermChangeOut.quotes` changed shape twice under `@0`, and both
+///    times every saved comparison vanished from the app on the next
+///    launch — a document Kettle wrote yesterday deserialised as
+///    damage. A new incompatible shape never goes behind the old tag.
+/// 2. **Every supported version has a committed fixture that hydration
+///    reads** (`fixtures/persisted/`). A reader nothing exercises is a
+///    reader that will silently stop reading.
+/// 3. **An unsupported version is not damage.** A tag whose family
+///    Kettle knows and whose version it does not read is a document
+///    written by another Kettle; its already-written report stays
+///    reachable, inert, and the app says an earlier version made it.
+///    Damage is a supported tag that does not parse, or a tag Kettle
+///    has never heard of, and damage is never a report.
+///
+/// [`schema_version`] is the one parser of the tag; the app's
+/// hydration and the CLI's renderer both read it.
+pub fn schema_version(tag: &str) -> Option<(&str, u32)> {
+    let rest = tag.strip_prefix("kettle/")?;
+    let (family, version) = rest.split_once('@')?;
+    if family.is_empty()
+        || !family
+            .bytes()
+            .all(|byte| byte.is_ascii_lowercase() || byte == b'-')
+    {
+        return None;
+    }
+    let version = version.parse().ok()?;
+    Some((family, version))
+}
+
+#[cfg(test)]
+mod schema_tag_tests {
+    use super::schema_version;
+
+    #[test]
+    fn a_tag_is_a_family_and_a_version() {
+        assert_eq!(
+            schema_version("kettle/letter-report@0"),
+            Some(("letter-report", 0))
+        );
+        assert_eq!(
+            schema_version("kettle/comparison-report@12"),
+            Some(("comparison-report", 12))
+        );
+    }
+
+    #[test]
+    fn anything_else_is_no_tag_at_all() {
+        for tag in [
+            "",
+            "letter-report@0",
+            "kettle/letter-report",
+            "kettle/@0",
+            "kettle/letter-report@x",
+            "kettle/Letter Report@0",
+        ] {
+            assert_eq!(schema_version(tag), None, "{tag:?}");
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RunReport {
     /// Always `RUN_REPORT_SCHEMA`.

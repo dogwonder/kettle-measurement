@@ -20,6 +20,23 @@
       ]
     },
     {
+      "expect": {
+        "amount": "£142.75",
+        "anchor": "the date of this letter",
+        "deadline": "within 14 days",
+        "due": "2026-08-22",
+        "kind": "payment",
+        "party": "Cranleigh Energy"
+      },
+      "id": "repeated_ask-birch-08-payment-02",
+      "segment": "We remind you that payment of £142.75 is due within 14 days of the date of this letter.",
+      "strata": [
+        "any-letter",
+        "repeated-ask",
+        "repeated-obligation"
+      ]
+    },
+    {
       "expect": null,
       "id": "repeated_ask-birch-08-no-ask-03",
       "segment": "No further action is needed once you have paid.",

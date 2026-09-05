@@ -201,12 +201,20 @@ fn obligation(deadline: &str, anchor: &str, evidence: Segment) -> Obligation {
         priced_by: None,
         amount_from: None,
         deadline_from: None,
+        shown: Default::default(),
         disputed: vec![],
     }
 }
 
+/// Two passages that say one ask are two readings, and both are shown
+/// (review of #626, Task 2; `app/METHOD.md` §1.4). Until now four
+/// strings — kind, party, deadline, anchor — merged them into one,
+/// which is a judgement about meaning that no page can verify: it
+/// compared neither the ask nor the sum, so two invoices to one payee
+/// by one date became one obligation keeping the first sum. A
+/// duplicate is a glance; a merge is a loss.
 #[test]
-fn duplicates_from_overlapping_segments_merge_keeping_every_piece_of_evidence() {
+fn a_repeated_ask_is_shown_from_each_passage_that_made_it() {
     let first = obligation(
         "within 14 days",
         "the date of this letter",
@@ -226,23 +234,103 @@ fn duplicates_from_overlapping_segments_merge_keeping_every_piece_of_evidence() 
 
     let sorted = sort_timeline(vec![first, second], &letter_dated("3 March 2026"));
 
-    assert_eq!(sorted.len(), 1, "one obligation, said twice: {sorted:?}");
-    assert_eq!(sorted[0].due.map(|d| d.date), Some(date("2026-03-17")));
-    let ordinals: Vec<usize> = sorted[0].evidence.iter().map(|s| s.ordinal).collect();
-    assert_eq!(ordinals, vec![1, 3], "both passages kept as evidence");
+    assert_eq!(
+        sorted.len(),
+        2,
+        "one ask, said twice, shown twice: {sorted:?}"
+    );
+    for obligation in &sorted {
+        assert_eq!(obligation.due.map(|d| d.date), Some(date("2026-03-17")));
+        assert_eq!(obligation.evidence.len(), 1, "each keeps its own passage");
+    }
+    let ordinals: Vec<usize> = sorted.iter().map(|o| o.evidence[0].ordinal).collect();
+    assert_eq!(ordinals, vec![1, 3], "page order breaks the tie");
 }
 
+/// The same organisation, the same day, two invoices: two sums, two
+/// obligations, and neither sum is lost.
 #[test]
-fn a_less_confident_duplicate_makes_the_merged_obligation_less_confident() {
-    // Two readings of one obligation, one of them unsure: the person
-    // should be shown it for checking, so the doubt wins the merge.
+fn two_invoices_to_one_payee_by_one_date_stay_two_obligations() {
+    let mut a = obligation("by 30 April 2026", "30 April 2026", segment(2, "Invoice A"));
+    a.ask = "Pay invoice A".to_owned();
+    a.amount = "£80.00".to_owned();
+    let mut b = obligation("by 30 April 2026", "30 April 2026", segment(4, "Invoice B"));
+    b.ask = "Pay invoice B".to_owned();
+    b.amount = "£120.00".to_owned();
+
+    let sorted = sort_timeline(vec![a, b], &letter_dated("3 March 2026"));
+
+    let amounts: Vec<&str> = sorted.iter().map(|o| o.amount.as_str()).collect();
+    assert_eq!(amounts, vec!["£80.00", "£120.00"], "{sorted:#?}");
+}
+
+/// Equal sums are not one invoice either.
+#[test]
+fn two_invoices_for_the_same_sum_stay_two_obligations() {
+    let mut a = obligation("by 30 April 2026", "30 April 2026", segment(2, "Invoice A"));
+    a.amount = "£80.00".to_owned();
+    let mut b = obligation("by 30 April 2026", "30 April 2026", segment(4, "Invoice B"));
+    b.amount = "£80.00".to_owned();
+
+    let sorted = sort_timeline(vec![a, b], &letter_dated("3 March 2026"));
+    assert_eq!(sorted.len(), 2, "{sorted:#?}");
+}
+
+/// Two things to send back by one date are two responses.
+#[test]
+fn two_responses_to_one_party_by_one_date_stay_two_obligations() {
+    let mut form = obligation(
+        "within 14 days",
+        "the date of this letter",
+        segment(2, "form"),
+    );
+    form.kind = "response".to_owned();
+    form.ask = "Return the signed form".to_owned();
+    let mut id = obligation(
+        "within 14 days",
+        "the date of this letter",
+        segment(3, "id"),
+    );
+    id.kind = "response".to_owned();
+    id.ask = "Send photo ID".to_owned();
+
+    let sorted = sort_timeline(vec![form, id], &letter_dated("3 March 2026"));
+    let asks: Vec<&str> = sorted.iter().map(|o| o.ask.as_str()).collect();
+    assert_eq!(asks, vec!["Return the signed form", "Send photo ID"]);
+}
+
+/// The one duplicate Rust may still fold: the same candidate, word for
+/// word, read twice out of the same passage — an execution artefact,
+/// not a second ask on the page.
+#[test]
+fn the_same_candidate_from_the_same_passage_is_one() {
+    let passage = segment(
+        1,
+        "Please pay £120.00 within 14 days of the date of this letter.",
+    );
+    let once = obligation("within 14 days", "the date of this letter", passage.clone());
+    let twice = obligation("within 14 days", "the date of this letter", passage);
+
+    let sorted = sort_timeline(vec![once, twice], &letter_dated("3 March 2026"));
+    assert_eq!(sorted.len(), 1, "{sorted:#?}");
+    assert_eq!(sorted[0].evidence.len(), 1);
+}
+
+/// A low-confidence reading keeps its own confidence and its own
+/// passage: it is routed for checking on its own, not folded into a
+/// confident twin.
+#[test]
+fn a_less_confident_repeat_is_shown_at_its_own_confidence() {
     let confident = obligation("within 14 days", "the date of this letter", segment(1, "a"));
     let mut unsure = obligation("within 14 days", "the date of this letter", segment(2, "b"));
     unsure.confidence = "low".to_owned();
 
     let sorted = sort_timeline(vec![confident, unsure], &letter_dated("3 March 2026"));
-    assert_eq!(sorted.len(), 1);
-    assert_eq!(sorted[0].confidence, "low");
+    assert_eq!(sorted.len(), 2);
+    assert_eq!(sorted[0].confidence, "high");
+    assert_eq!(sorted[0].evidence[0].ordinal, 1);
+    assert_eq!(sorted[1].confidence, "low");
+    assert_eq!(sorted[1].evidence[0].ordinal, 2);
 }
 
 #[test]
@@ -1047,8 +1135,18 @@ fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
         })
         .collect();
 
+    // The whole page was one batch: every id below is one the model
+    // was shown (#624).
+    let shown = |mut obligation: Obligation| {
+        obligation.shown = (0..20).collect();
+        obligation
+    };
     // Named and verified: the figure is in the named passage.
-    let mut named = obligation("within 7 calendar days", "no particular date", ask.clone());
+    let mut named = shown(obligation(
+        "within 7 calendar days",
+        "no particular date",
+        ask.clone(),
+    ));
     named.amount = "41.21 GBP".to_owned();
     named.amount_from = Some(9);
     let named = sort_timeline(vec![named], &segments)[0].clone();
@@ -1057,7 +1155,11 @@ fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
 
     // Named and wrong: the figure is not in the named passage, so the
     // claim is refused rather than hunted for elsewhere.
-    let mut wrong = obligation("within 7 calendar days", "no particular date", ask.clone());
+    let mut wrong = shown(obligation(
+        "within 7 calendar days",
+        "no particular date",
+        ask.clone(),
+    ));
     wrong.amount = "41.21 GBP".to_owned();
     wrong.amount_from = Some(11);
     let wrong = sort_timeline(vec![wrong], &segments)[0].clone();
@@ -1066,7 +1168,11 @@ fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
 
     // A deadline whose date is printed elsewhere: the model names the
     // passage, Rust reads one full date from it, read-and-verified.
-    let mut pointed = obligation("by the date below", "no particular date", ask.clone());
+    let mut pointed = shown(obligation(
+        "by the date below",
+        "no particular date",
+        ask.clone(),
+    ));
     pointed.amount = "no amount".to_owned();
     pointed.deadline_from = Some(11);
     let pointed = sort_timeline(vec![pointed], &segments)[0].clone();
@@ -1078,7 +1184,11 @@ fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
     assert_eq!(pointed.evidence.len(), 1);
 
     // Naming its own passage is not naming another: nothing to carry.
-    let mut own = obligation("within 7 calendar days", "no particular date", ask.clone());
+    let mut own = shown(obligation(
+        "within 7 calendar days",
+        "no particular date",
+        ask.clone(),
+    ));
     own.amount = "no amount".to_owned();
     own.amount_from = Some(14);
     let own = sort_timeline(vec![own], &segments)[0].clone();

@@ -262,6 +262,11 @@ export interface RunRecord {
   report_path?: string;
   /** Present once status is "error"; plain language. */
   error?: string;
+  /**
+   * Plain language, about the record rather than the run: an earlier
+   * version of Kettle made this report, so it opens but is inert (#419).
+   */
+  notice?: string;
 }
 
 /** run://progress — the only thing that drives the step list. */

@@ -1,0 +1,67 @@
+{
+  "schema": "kettle/proposed-actions@0",
+  "run_id": "run-01",
+  "note": "Nothing happens automatically. Approving an action only prepares it for you — as a calendar file (.ics) you add yourself, or text you can copy.",
+  "actions": [
+    {
+      "id": "act-01",
+      "kind": "review_price_rise",
+      "title": "DISNEYPLUS rose £7.99 → £10.99 in November 2024",
+      "detail": "That's an extra £36.00 a year. If you'd rather not pay it, a cheaper plan or a pause might suit — worth a look.",
+      "evidence": {
+        "after": "10.99",
+        "before": "7.99",
+        "merchant": "DISNEYPLUS",
+        "month": "2024-11"
+      },
+      "export": {
+        "ics": {
+          "summary": "Review DISNEYPLUS subscription (rose to £10.99)",
+          "date": "2026-10-01"
+        },
+        "text": "Review DISNEYPLUS: price rose from £7.99 to £10.99 in November 2024 (+£36.00/year)."
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "act-02",
+      "kind": "review_subscription",
+      "title": "DISNEYPLUS costs £131.88 a year — still using it?",
+      "detail": "£10.99 every month since at least March 2023. If you're using it, ignore this. If not, it's one of the easier savings in this statement.",
+      "evidence": {
+        "amount": "10.99",
+        "annualised": "131.88",
+        "merchant": "DISNEYPLUS",
+        "period": "monthly"
+      },
+      "export": {
+        "ics": {
+          "summary": "Decide: keep or cancel DISNEYPLUS (£10.99/month)",
+          "date": "2026-09-12"
+        },
+        "text": "DISNEYPLUS: £10.99/month, £131.88/year. Decide whether to keep it."
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "act-03",
+      "kind": "check_renewal",
+      "title": "AMAZON PRIME renews around 14 March 2027 (£95.00)",
+      "detail": "Yearly plans are easy to forget. A reminder a week before gives you time to decide.",
+      "evidence": {
+        "amount": "95.00",
+        "last_charged": "2025-03-14",
+        "merchant": "AMAZON PRIME",
+        "period": "yearly"
+      },
+      "export": {
+        "ics": {
+          "summary": "AMAZON PRIME renews soon — £95.00. Keep it?",
+          "date": "2027-03-07"
+        },
+        "text": "AMAZON PRIME renews around 14 March 2027 (£95.00/year). Decide the week before."
+      },
+      "status": "proposed"
+    }
+  ]
+}

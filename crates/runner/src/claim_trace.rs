@@ -52,6 +52,13 @@ pub enum Guardrail {
     /// its document? A property of the document rather than of the
     /// claim, so it warns and never refuses.
     QuoteIdentifiesPassage,
+    /// The passage a claim names (`amount_from`, `deadline_from`) was
+    /// one the model was shown in the request it answered (#624;
+    /// `app/METHOD.md` §1.4 item 4) — the retry or split that produced
+    /// the answer, not the batch it began in. Fails when the id is not
+    /// in that set: the page cannot vouch for a passage the model never
+    /// saw, so the reading is refused and the obligation stands.
+    PassageShown,
     ValueShape,
     PackCoverage,
     DeterministicDerivation,
@@ -304,6 +311,29 @@ impl ClaimLedger {
         }
         if let Some(trace) = self.traces.iter_mut().find(|trace| trace.id == id) {
             trace.attempts = attempts;
+        }
+    }
+
+    /// Record on the obligation claim that named a passage whether
+    /// the id lay inside the batch the model answered (#624). The claim
+    /// is found by the item it was read from and the id it named: the
+    /// candidate is the model's answer verbatim, so the field is there.
+    pub(crate) fn record_passage_shown(&mut self, item: usize, naming: &crate::timeline::Naming) {
+        let check = ClaimCheck {
+            guardrail: Guardrail::PassageShown,
+            outcome: if naming.shown {
+                CheckOutcome::Passed
+            } else {
+                CheckOutcome::Failed
+            },
+            detail: Some(naming.detail()),
+        };
+        for trace in self.traces.iter_mut().filter(|trace| {
+            trace.kind == ClaimKind::Obligation
+                && trace.item == item
+                && trace.candidate[naming.field].as_u64() == Some(naming.named as u64)
+        }) {
+            trace.checks.push(check.clone());
         }
     }
 

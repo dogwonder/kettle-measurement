@@ -231,7 +231,7 @@ const STAGED_VOICE_DIVERGENCES: [(&str, &str); 7] = [
     ),
     (
         "repeated_ask",
-        "development \"Please pay…\", exam \"Payment of £X towards … is required…\" (2026-08-21)",
+        "development \"Please pay…\", exam \"Payment of £X towards … is required…\" (2026-08-21); the second saying is actorless in both voices (2026-09-05)",
     ),
     (
         "three_asks",
@@ -265,8 +265,15 @@ enum Actor {
 /// the test rather than defaulting, because defaulting is how a new
 /// exam sentence would enter the bed unclassified and unnoticed —
 /// which is the defect this test exists to catch.
-const CONSTRUCTIONS: [(&str, Actor); 22] = [
+const CONSTRUCTIONS: [(&str, Actor); 24] = [
     ("Please ", Actor::ReaderNamed),
+    // Review of #626, Task 2: `repeated_ask`'s second saying is scored
+    // now that the runtime shows it rather than merging it away. The
+    // reader is addressed in the development voice ("we remind you")
+    // but the ask clause names nobody — "payment … is due", "the sum
+    // … must reach us" — so both voices plant the ask actorless.
+    ("We remind you that ", Actor::ReaderUnnamed),
+    ("As a reminder, the sum of ", Actor::ReaderUnnamed),
     ("You have ", Actor::ReaderNamed),
     ("You must ", Actor::ReaderNamed),
     ("You are ", Actor::ReaderNamed),
@@ -1192,6 +1199,7 @@ fn every_committed_invoice_resolves_its_pointer() {
                 priced_by: None,
                 amount_from: None,
                 deadline_from: None,
+                shown: Default::default(),
                 disputed: vec![],
             };
 

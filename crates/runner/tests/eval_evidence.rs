@@ -110,9 +110,9 @@ fn letter_pack_with(name: &str, letter: &str, expected: &str) -> PathBuf {
                 "confidence": { "enum": ["high", "medium", "low"] },
                 "obligations": { "type": "array", "items": { "type": "object", "properties": {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
-                    "party": { "type": "string" },
+                    "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "string" },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "anchor": { "type": "string" }
                 }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
@@ -166,9 +166,9 @@ fn answer_naming_the_anchor_by_the_deadline() -> String {
                     "confidence": "high",
                     "obligations": [{
                         "kind": "payment",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Pay the balance of £40.00",
-                        "deadline": "within 28 days",
+                        "deadline": { "at": 1, "value": "within 28 days" },
                         "anchor": "within 28 days"
                     }]
                 },
@@ -296,9 +296,9 @@ fn answer_asserting_payment_from_the_negation() -> String {
                     "confidence": "high",
                     "obligations": [{
                         "kind": "payment",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Pay your account",
-                        "deadline": "at this time",
+                        "deadline": { "at": 1, "value": "at this time" },
                         "anchor": "the date of this letter"
                     }]
                 },
@@ -758,9 +758,9 @@ fn derivation_pack(name: &str, days: u32) -> PathBuf {
                 "confidence": { "enum": ["high", "medium", "low"] },
                 "obligations": { "type": "array", "items": { "type": "object", "properties": {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
-                    "party": { "type": "string" },
+                    "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "string" },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "anchor": { "type": "string" }
                 }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
@@ -804,9 +804,9 @@ fn answer_reading_the_payment() -> String {
                 { "id": 0, "segment": segments[0], "confidence": "high", "obligations": [] },
                 { "id": 1, "segment": segments[1], "confidence": "high", "obligations": [{
                     "kind": "payment",
-                    "party": "Harborne Parking Services",
+                    "party": { "at": 1, "value": "Harborne Parking Services" },
                     "ask": "Pay £120.00",
-                    "deadline": "within 14 days",
+                    "deadline": { "at": 1, "value": "within 14 days" },
                     "anchor": "the date of this letter"
                 }] },
                 { "id": 2, "segment": segments[2], "confidence": "high", "obligations": [] }

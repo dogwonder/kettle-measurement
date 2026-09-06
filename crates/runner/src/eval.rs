@@ -1347,9 +1347,15 @@ impl From<&crate::run::Obligation> for ExpectedObligation {
     fn from(found: &crate::run::Obligation) -> Self {
         Self {
             kind: found.kind.clone(),
-            party: found.party.clone(),
-            amount: found.amount.clone(),
-            deadline: found.deadline.clone(),
+            // As a person is shown them: a refused party is "the
+            // sender", an absent sum the bed's sentinel.
+            party: found.party_shown().to_owned(),
+            amount: if found.amount.is_absent() {
+                crate::run::no_amount_string()
+            } else {
+                found.amount.value.clone()
+            },
+            deadline: found.deadline.value.clone(),
             anchor: found.anchor.clone(),
             due: found.due.map(|d| d.date),
         }

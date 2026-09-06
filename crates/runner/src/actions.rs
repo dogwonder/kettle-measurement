@@ -527,8 +527,11 @@ pub fn propose_letter_actions(
         .enumerate()
         .map(|(index, obligation)| {
             let mut evidence = std::collections::BTreeMap::new();
-            evidence.insert("asked_by".to_owned(), obligation.party.clone());
-            evidence.insert("in_the_letter".to_owned(), obligation.deadline.clone());
+            evidence.insert("asked_by".to_owned(), obligation.party_shown().to_owned());
+            evidence.insert(
+                "in_the_letter".to_owned(),
+                obligation.deadline.value.clone(),
+            );
             for (n, passage) in obligation.evidence.iter().enumerate() {
                 evidence.insert(format!("passage_{}", n + 1), passage.text.clone());
             }
@@ -541,14 +544,15 @@ pub fn propose_letter_actions(
             let detail = match obligation.due {
                 Some(due) => format!(
                     "{} asked for this by {}. The letter says \"{}\".",
-                    obligation.party,
+                    obligation.party_shown(),
                     crate::fmt::date(due.date),
-                    obligation.deadline
+                    obligation.deadline.value
                 ),
                 None => format!(
                     "{} asked for this, but the letter does not give a date Kettle \
                      could work out — it says \"{}\". Choose a date that suits you.",
-                    obligation.party, obligation.deadline
+                    obligation.party_shown(),
+                    obligation.deadline.value
                 ),
             };
 
@@ -563,12 +567,14 @@ pub fn propose_letter_actions(
                     // No due date, no event: a calendar entry dated today
                     // would be a deadline the letter never set.
                     ics: obligation.due.map(|due| IcsExport {
-                        summary: format!("{} — {}", obligation.ask, obligation.party),
+                        summary: format!("{} — {}", obligation.ask, obligation.party_shown()),
                         date: due.date,
                     }),
                     text: format!(
                         "{} ({}) — {}",
-                        obligation.ask, obligation.party, obligation.deadline
+                        obligation.ask,
+                        obligation.party_shown(),
+                        obligation.deadline.value
                     ),
                 },
                 status: STATUS_PROPOSED.to_owned(),

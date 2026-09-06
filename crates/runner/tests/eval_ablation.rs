@@ -29,16 +29,19 @@ fn wrong_claim_stopped_by_quote() -> ClaimTrace {
         attempts: Vec::new(),
         checks: vec![
             ClaimCheck {
+                field: None,
                 guardrail: Guardrail::Schema,
                 outcome: CheckOutcome::Passed,
                 detail: None,
             },
             ClaimCheck {
+                field: None,
                 guardrail: Guardrail::Pairing,
                 outcome: CheckOutcome::Passed,
                 detail: None,
             },
             ClaimCheck {
+                field: None,
                 guardrail: Guardrail::Quote,
                 outcome: CheckOutcome::Failed,
                 detail: Some("£99.00 is not in the source".to_owned()),
@@ -345,6 +348,7 @@ fn verdicts_cover_the_asserted_half_and_the_stopped_half_of_one_recording() {
     let mut asserted = wrong_claim_stopped_by_quote();
     asserted.id = "claim-asserted".to_owned();
     asserted.checks = vec![ClaimCheck {
+        field: None,
         guardrail: Guardrail::Quote,
         outcome: CheckOutcome::Passed,
         detail: None,
@@ -638,6 +642,7 @@ fn an_extraction_item_judges_the_obligation_nested_in_its_decision() {
     decision.id = "claim-000003".to_owned();
     decision.kind = ClaimKind::Decision;
     decision.checks = vec![ClaimCheck {
+        field: None,
         guardrail: Guardrail::Schema,
         outcome: CheckOutcome::Passed,
         detail: None,
@@ -907,6 +912,7 @@ fn a_claim_routed_to_review_is_contained_even_with_no_failed_check() {
     let mut low_confidence = wrong_claim_stopped_by_quote();
     low_confidence.id = "claim-000070".to_owned();
     low_confidence.checks = vec![ClaimCheck {
+        field: None,
         guardrail: Guardrail::ReviewRouting,
         outcome: CheckOutcome::Passed,
         detail: None,
@@ -958,6 +964,7 @@ fn a_policy_row_counts_only_the_claims_the_recording_can_judge() {
     unjudged.id = "claim-000100".to_owned();
     unjudged.kind = ClaimKind::Decision;
     unjudged.checks = vec![ClaimCheck {
+        field: None,
         guardrail: Guardrail::Schema,
         outcome: CheckOutcome::Passed,
         detail: None,
@@ -1001,6 +1008,7 @@ fn a_row_counts_what_the_policy_got_right_as_well_as_what_it_got_wrong() {
     let mut right = wrong_claim_stopped_by_quote();
     right.id = "claim-right".to_owned();
     right.checks = vec![ClaimCheck {
+        field: None,
         guardrail: Guardrail::Quote,
         outcome: CheckOutcome::Passed,
         detail: None,
@@ -1150,5 +1158,54 @@ fn an_item_linking_two_identical_candidates_settles_both() {
         verdicts.get("claim-b"),
         Some(&CandidateVerdict::Wrong),
         "and the same is true of the other: {verdicts:?}"
+    );
+}
+
+/// A field-level check refuses one reading and leaves the obligation
+/// standing (review of #626, Task 4): the amount is dropped, the ask
+/// is still asserted. Crediting that as the guard *containing* the
+/// claim would count an obligation that still reached the report as
+/// prevented harm. The claim is asserted, and judged as asserted.
+#[test]
+fn a_refused_reading_leaves_the_claim_asserted_and_is_no_prevented_error() {
+    let mut standing = wrong_claim_stopped_by_quote();
+    standing.id = "claim-000045".to_owned();
+    standing.terminal = TerminalDisposition::Accepted;
+    standing.checks = vec![
+        ClaimCheck {
+            field: None,
+            guardrail: Guardrail::Schema,
+            outcome: CheckOutcome::Passed,
+            detail: None,
+        },
+        ClaimCheck {
+            field: None,
+            guardrail: Guardrail::Pairing,
+            outcome: CheckOutcome::Passed,
+            detail: None,
+        },
+        ClaimCheck {
+            field: Some("amount".to_owned()),
+            guardrail: Guardrail::Quote,
+            outcome: CheckOutcome::Failed,
+            detail: Some("amount's value is not in passage 3: refused".to_owned()),
+        },
+    ];
+    let verdicts = BTreeMap::from([("claim-000045".to_owned(), CandidateVerdict::Wrong)]);
+    let full = Policy::named("full-pipeline")
+        .with(Guardrail::Schema)
+        .with(Guardrail::Pairing)
+        .with(Guardrail::Quote);
+
+    let rows = scorecard(&[standing], &verdicts, &[full]);
+    let row = &rows[0];
+    assert!(
+        row.prevented.is_empty(),
+        "removing an amount does not contain an obligation that still appears: {row:?}"
+    );
+    assert_eq!(
+        row.escaped,
+        vec!["claim-000045".to_owned()],
+        "the claim was asserted, and a wrong assertion escaped: {row:?}"
     );
 }

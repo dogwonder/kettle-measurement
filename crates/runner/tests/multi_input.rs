@@ -74,12 +74,11 @@ fn letter_pack(name: &str) -> PathBuf {
                 "confidence": { "enum": ["high", "medium", "low"] },
                 "obligations": { "type": "array", "items": { "type": "object", "properties": {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
-                    "party": { "type": "string" },
+                    "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "string" },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "anchor": { "type": "string" },
-                    "amount": { "type": "string" },
-                    "amount_from": { "type": "integer" }
+                    "amount": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] }
                 }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
             "required": ["results"] }"#,
@@ -109,9 +108,9 @@ fn obligations_answers() -> Vec<(&'static str, String)> {
                         "confidence": "high",
                         "obligations": [{
                             "kind": "payment",
-                            "party": party,
+                            "party": { "at": first + 1, "value": party },
                             "ask": ask,
-                            "deadline": "within 14 days",
+                            "deadline": { "at": first + 1, "value": "within 14 days" },
                             "anchor": "the date of this letter"
                         }]
                     }
@@ -167,7 +166,7 @@ fn a_relative_deadline_resolves_against_its_own_document_date() {
         extraction
             .obligations
             .iter()
-            .find(|obligation| obligation.party == party)
+            .find(|obligation| obligation.party.value == party)
             .unwrap_or_else(|| panic!("no obligation for {party}: {:#?}", extraction.obligations))
             .due
     };
@@ -215,9 +214,9 @@ fn ordered_files_are_one_letter_and_keep_their_page_numbers() {
                     { "id": 0, "segment": "12 March 2026", "confidence": "high", "obligations": [] },
                     { "id": 1, "segment": ask, "confidence": "high", "obligations": [{
                         "kind": "payment",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Pay £120.00",
-                        "deadline": "within 14 days",
+                        "deadline": { "at": 1, "value": "within 14 days" },
                         "anchor": "the date of this letter"
                     }] }
                 ]
@@ -269,18 +268,17 @@ fn identical_asks_in_two_documents_are_both_shown_in_document_order() {
     };
     let ask = |evidence: Vec<Segment>| Obligation {
         kind: "payment".to_owned(),
-        party: "Harborne Parking Services".to_owned(),
+        party: runner::reading::Reading::new(0, "Harborne Parking Services".to_owned()),
         ask: "Pay £120.00".to_owned(),
-        deadline: "by 12 August 2026".to_owned(),
+        deadline: runner::reading::Reading::new(0, "by 12 August 2026".to_owned()),
         anchor: "12 August 2026".to_owned(),
-        amount: "no amount".to_owned(),
+        amount: runner::reading::Reading::absent(0),
+        refused: Vec::new(),
         confidence: "high".to_owned(),
         due: None,
         evidence,
         dated_by: None,
         priced_by: None,
-        amount_from: None,
-        deadline_from: None,
         shown: Default::default(),
         disputed: vec![],
     };
@@ -437,8 +435,8 @@ fn a_named_passage_outside_the_batch_answered_is_refused() {
 
     let ask = |id: usize, segment: &str, party: &str, amount: serde_json::Value| {
         let mut obligation = serde_json::json!({
-            "kind": "payment", "party": party, "ask": "Pay what is owed",
-            "deadline": "within 14 days", "anchor": "the date of this letter",
+            "kind": "payment", "party": { "at": id, "value": party }, "ask": "Pay what is owed",
+            "deadline": { "at": id, "value": "within 14 days" }, "anchor": "the date of this letter",
         });
         for (field, value) in amount.as_object().expect("amount fields") {
             obligation[field] = value.clone();
@@ -464,7 +462,7 @@ fn a_named_passage_outside_the_batch_answered_is_refused() {
                 1,
                 march[1],
                 "Harborne Parking Services",
-                serde_json::json!({ "amount": "£120.00" }),
+                serde_json::json!({ "amount": { "at": 1, "value": "£120.00" } }),
             ),
         ]),
         envelope(vec![
@@ -473,7 +471,7 @@ fn a_named_passage_outside_the_batch_answered_is_refused() {
                 3,
                 june[1],
                 "Selly Oak Water",
-                serde_json::json!({ "amount": "£80.00", "amount_from": 6 }),
+                serde_json::json!({ "amount": { "at": 6, "value": "£80.00" } }),
             ),
             quiet(4, june[2]),
             quiet(5, june[3]),
@@ -499,12 +497,12 @@ fn a_named_passage_outside_the_batch_answered_is_refused() {
     let water = extraction
         .obligations
         .iter()
-        .find(|obligation| obligation.party == "Selly Oak Water")
+        .find(|obligation| obligation.party.value == "Selly Oak Water")
         .unwrap_or_else(|| panic!("the obligation stands: {:#?}", extraction.obligations));
 
     // The reading is refused, never the obligation.
     assert_eq!(
-        water.amount, "no amount",
+        water.amount.value, "",
         "a sum read off a passage the model never saw"
     );
     assert!(
@@ -521,9 +519,9 @@ fn a_named_passage_outside_the_batch_answered_is_refused() {
     let parking = extraction
         .obligations
         .iter()
-        .find(|obligation| obligation.party == "Harborne Parking Services")
+        .find(|obligation| obligation.party.value == "Harborne Parking Services")
         .expect("the first letter's obligation");
-    assert_eq!(parking.amount, "£120.00");
+    assert_eq!(parking.amount.value, "£120.00");
 
     // The trace records the check on the claim that named the passage.
     let trace = outcome
@@ -532,7 +530,7 @@ fn a_named_passage_outside_the_batch_answered_is_refused() {
         .find(|trace| trace.kind == ClaimKind::Obligation && trace.item == 3)
         .expect("the June ask has a trace");
     assert_eq!(
-        trace.check(Guardrail::PassageShown),
+        trace.check_for("amount", Guardrail::PassageShown),
         Some(CheckOutcome::Failed),
         "the trace says the named passage was outside the batch answered: {trace:#?}"
     );
@@ -542,7 +540,11 @@ fn a_named_passage_outside_the_batch_answered_is_refused() {
         .iter()
         .find(|trace| trace.kind == ClaimKind::Obligation && trace.item == 1)
         .expect("the March ask has a trace");
-    assert_eq!(march_trace.check(Guardrail::PassageShown), None);
+    assert_eq!(
+        march_trace.check_for("amount", Guardrail::PassageShown),
+        Some(CheckOutcome::Passed),
+        "its own passage, shown"
+    );
 }
 
 fn pack_at(dir: &std::path::Path) -> runner::packs::Pack {
@@ -583,11 +585,14 @@ fn ask_result(
     })
 }
 
-fn payment(party: &str, amount_from: usize) -> serde_json::Value {
+/// An ask read from passage 1 — the one that names the payee — with
+/// the sum named at `amount_from`. `ask` tells two asks apart, since
+/// the verified party is the same words on the same page for both.
+fn payment(ask: &str, amount_from: usize) -> serde_json::Value {
     serde_json::json!({
-        "kind": "payment", "party": party, "ask": "Pay what is owed",
-        "deadline": "within 14 days", "anchor": "the date of this letter",
-        "amount": "£80.00", "amount_from": amount_from,
+        "kind": "payment", "party": { "at": 1, "value": "Selly Oak Water" }, "ask": ask,
+        "deadline": { "at": 1, "value": "within 14 days" }, "anchor": "the date of this letter",
+        "amount": { "at": amount_from, "value": "£80.00" },
     })
 }
 
@@ -610,14 +615,14 @@ fn run_named_letter(dir: &std::path::Path, mock: &MockModel) -> runner::run::Run
     .expect("the run completes")
 }
 
-fn obligation_of<'a>(outcome: &'a runner::run::RunOutcome, party: &str) -> &'a Obligation {
+fn obligation_of<'a>(outcome: &'a runner::run::RunOutcome, ask: &str) -> &'a Obligation {
     let Payload::Extraction(extraction) = &outcome.payload else {
         panic!("an obligations pack produces the Extraction payload");
     };
     extraction
         .obligations
         .iter()
-        .find(|obligation| obligation.party == party)
+        .find(|obligation| obligation.ask == ask)
         .unwrap_or_else(|| panic!("the obligation stands: {:#?}", extraction.obligations))
 }
 
@@ -632,7 +637,7 @@ fn passage_shown(
         .find(|trace| {
             trace.kind == ClaimKind::Obligation
                 && trace.item == item
-                && trace.candidate["amount_from"].as_u64() == Some(named as u64)
+                && trace.candidate["amount"]["at"].as_u64() == Some(named as u64)
         })
         .unwrap_or_else(|| {
             panic!(
@@ -640,7 +645,7 @@ fn passage_shown(
                 outcome.claim_traces
             )
         })
-        .check(Guardrail::PassageShown)
+        .check_for("amount", Guardrail::PassageShown)
 }
 
 /// The window is the request the answer came from, not the batch it
@@ -657,7 +662,7 @@ fn a_pairing_retry_answer_is_checked_against_the_retry_request() {
         results_envelope(vec![ask_result(
             1,
             "high",
-            vec![payment("Selly Oak Water", 3)],
+            vec![payment("Pay what is owed", 3)],
         )]),
     ]);
     let outcome = run_named_letter(&dir, &mock);
@@ -673,9 +678,9 @@ fn a_pairing_retry_answer_is_checked_against_the_retry_request() {
         "the retry showed passage 1 alone: {retry}"
     );
 
-    let water = obligation_of(&outcome, "Selly Oak Water");
+    let water = obligation_of(&outcome, "Pay what is owed");
     assert_eq!(
-        water.amount, "no amount",
+        water.amount.value, "",
         "a sum read off a row the retry never showed"
     );
     assert!(water.priced_by.is_none());
@@ -700,7 +705,7 @@ fn a_split_answer_is_checked_against_its_own_half() {
         // Left half: ids 0–1. The ask names the row in the right half.
         results_envelope(vec![
             quiet_result(0),
-            ask_result(1, "high", vec![payment("Selly Oak Water", 3)]),
+            ask_result(1, "high", vec![payment("Pay what is owed", 3)]),
         ]),
         // Right half: ids 2–3.
         results_envelope(vec![quiet_result(2), quiet_result(3)]),
@@ -714,9 +719,9 @@ fn a_split_answer_is_checked_against_its_own_half() {
         "the left half showed ids 0–1: {left}"
     );
 
-    let water = obligation_of(&outcome, "Selly Oak Water");
+    let water = obligation_of(&outcome, "Pay what is owed");
     assert_eq!(
-        water.amount, "no amount",
+        water.amount.value, "",
         "the abandoned first request does not count"
     );
     assert!(water.priced_by.is_none());
@@ -736,10 +741,7 @@ fn a_noncontiguous_retry_is_exactly_its_ids() {
             ask_result(
                 1,
                 "high",
-                vec![
-                    payment("Selly Oak Water", 2),
-                    payment("Selly Oak Council", 3),
-                ],
+                vec![payment("Pay the balance", 2), payment("Pay the total", 3)],
             ),
             quiet_result(3),
         ]),
@@ -755,17 +757,17 @@ fn a_noncontiguous_retry_is_exactly_its_ids() {
         "the retry showed ids 1 and 3 and not 2: {retry}"
     );
 
-    let gap = obligation_of(&outcome, "Selly Oak Water");
+    let gap = obligation_of(&outcome, "Pay the balance");
     assert_eq!(
-        gap.amount, "no amount",
+        gap.amount.value, "",
         "passage 2 sits inside the range and outside the set"
     );
     assert!(gap.priced_by.is_none());
     assert_eq!(passage_shown(&outcome, 1, 2), Some(CheckOutcome::Failed));
 
-    let shown = obligation_of(&outcome, "Selly Oak Council");
+    let shown = obligation_of(&outcome, "Pay the total");
     assert_eq!(
-        shown.amount, "£80.00",
+        shown.amount.value, "£80.00",
         "passage 3 was in the retry, and prints the sum"
     );
     assert_eq!(
@@ -786,14 +788,14 @@ fn a_low_confidence_retry_keeps_its_review_status_and_is_checked() {
         results_envelope(vec![ask_result(
             1,
             "low",
-            vec![payment("Selly Oak Water", 3)],
+            vec![payment("Pay what is owed", 3)],
         )]),
     ]);
     let outcome = run_named_letter(&dir, &mock);
 
-    let water = obligation_of(&outcome, "Selly Oak Water");
+    let water = obligation_of(&outcome, "Pay what is owed");
     assert_eq!(water.confidence, "low");
-    assert_eq!(water.amount, "no amount");
+    assert_eq!(water.amount.value, "");
     assert!(water.priced_by.is_none());
     assert_eq!(passage_shown(&outcome, 1, 3), Some(CheckOutcome::Failed));
     // The passage's own reading is routed for review, as any

@@ -68,9 +68,9 @@ fn letter_pack(name: &str, with_gate: bool) -> PathBuf {
                 "confidence": { "enum": ["high", "medium", "low"] },
                 "obligations": { "type": "array", "items": { "type": "object", "properties": {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
-                    "party": { "type": "string" },
+                    "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "string" },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "anchor": { "type": "string" }
                 }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },

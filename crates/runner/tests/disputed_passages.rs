@@ -30,18 +30,20 @@ fn segment(ordinal: usize, text: &str) -> Segment {
 fn obligation(ask: &str, deadline: &str, evidence: Segment) -> Obligation {
     Obligation {
         kind: "payment".to_owned(),
-        party: "Anytown Housing Association".to_owned(),
+        party: runner::reading::Reading::new(
+            evidence.ordinal,
+            "Anytown Housing Association".to_owned(),
+        ),
         ask: ask.to_owned(),
-        deadline: deadline.to_owned(),
+        deadline: runner::reading::Reading::new(evidence.ordinal, deadline.to_owned()),
         anchor: "28 April 2026".to_owned(),
-        amount: "no amount".to_owned(),
+        amount: runner::reading::Reading::absent(evidence.ordinal),
+        refused: Vec::new(),
         confidence: "high".to_owned(),
         due: None,
         evidence: vec![evidence],
         dated_by: None,
         priced_by: None,
-        amount_from: None,
-        deadline_from: None,
         shown: Default::default(),
         disputed: vec![],
     }

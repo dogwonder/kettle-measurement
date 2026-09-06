@@ -21,6 +21,7 @@ pub mod ocr;
 pub mod packs;
 pub mod parse;
 pub mod pdf;
+pub mod reading;
 pub mod recurrence;
 pub mod render;
 pub mod results;

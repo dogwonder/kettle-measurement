@@ -415,6 +415,7 @@ fn obligation_trace_with_every_guardrail_passed() -> ClaimTrace {
         ]
         .into_iter()
         .map(|guardrail| ClaimCheck {
+            field: None,
             guardrail,
             outcome: CheckOutcome::Passed,
             detail: None,

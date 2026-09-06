@@ -14,8 +14,11 @@ which is how saved comparisons vanished twice under `@0`.
 | `run-report@0` | subscription audit, `results.json` + `actions.json` + `report.html` | the no-model floor over the pack's own synthetic statement |
 | `comparison-report@0` | renewal comparison | the canned renewal answer the app tests use |
 | `letter-report@0` | letter | the canned letter answer over a committed bed fixture |
-| `pending-letter@0` | a letter parked on its date (`pending.json`, no results) | the app tests' parked outcome |
-| `pending-letter-untagged` | the same, as written before the tag existed: no `schema`, no `Obligation.shown` | derived from the row above by deleting those keys |
+| `pending-letter@1` | a letter parked on its date (`pending.json`, no results), obligations in the reading shape (review of #626, Task 4) | the app tests' parked outcome |
+
+Withdrawn: `pending-letter@0` and the untagged file that preceded it
+carried the obligation shape before the readings. Both now reopen as
+another Kettle's document — listed with a notice, never resumed.
 
 Wholly synthetic (CLAUDE.md, data rules): invented merchants, a bed
 letter, an invented parked ask. Nothing here came from a real document.

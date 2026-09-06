@@ -1187,18 +1187,23 @@ fn every_committed_invoice_resolves_its_pointer() {
 
             let obligation = runner::run::Obligation {
                 kind: want["kind"].as_str().expect("a kind").to_owned(),
-                party: want["party"].as_str().expect("a party").to_owned(),
+                party: runner::reading::Reading::new(
+                    evidence.ordinal,
+                    want["party"].as_str().expect("a party").to_owned(),
+                ),
                 ask: "Pay the total".to_owned(),
-                deadline: want["deadline"].as_str().expect("a deadline").to_owned(),
+                deadline: runner::reading::Reading::new(
+                    evidence.ordinal,
+                    want["deadline"].as_str().expect("a deadline").to_owned(),
+                ),
                 anchor: want["anchor"].as_str().expect("an anchor").to_owned(),
-                amount: "no amount".to_owned(),
+                amount: runner::reading::Reading::absent(evidence.ordinal),
+                refused: Vec::new(),
                 confidence: "high".to_owned(),
                 due: None,
                 evidence: vec![evidence],
                 dated_by: None,
                 priced_by: None,
-                amount_from: None,
-                deadline_from: None,
                 shown: Default::default(),
                 disputed: vec![],
             };

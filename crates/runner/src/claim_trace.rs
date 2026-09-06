@@ -94,6 +94,13 @@ pub struct ClaimCheck {
     pub outcome: CheckOutcome,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub detail: Option<String>,
+    /// The reading this check is about — `party`, `amount`,
+    /// `deadline` — when it is about one field and not the claim
+    /// (review of #626, Task 4). A failed field-level check refuses
+    /// that reading and leaves the obligation standing, so a reader
+    /// counting what stopped a claim must not count it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub field: Option<String>,
 }
 
 /// The one fate of a candidate. Later output links do not change it: an
@@ -163,10 +170,21 @@ pub struct ClaimTrace {
 }
 
 impl ClaimTrace {
+    /// The first check of this guardrail on the claim itself — never a
+    /// field-level check, which is about one reading and not the claim.
     pub fn check(&self, guardrail: Guardrail) -> Option<CheckOutcome> {
         self.checks
             .iter()
-            .find(|check| check.guardrail == guardrail)
+            .find(|check| check.guardrail == guardrail && check.field.is_none())
+            .map(|check| check.outcome)
+    }
+
+    /// The first check of this guardrail on one reading of the claim
+    /// (`party`, `amount`, `deadline`; review of #626, Task 4).
+    pub fn check_for(&self, field: &str, guardrail: Guardrail) -> Option<CheckOutcome> {
+        self.checks
+            .iter()
+            .find(|check| check.guardrail == guardrail && check.field.as_deref() == Some(field))
             .map(|check| check.outcome)
     }
 
@@ -193,6 +211,7 @@ impl ClaimTrace {
                 guardrail: Guardrail::DeterministicDerivation,
                 outcome: CheckOutcome::Passed,
                 detail: Some(stage.to_owned()),
+                field: None,
             });
             return;
         }
@@ -202,6 +221,7 @@ impl ClaimTrace {
             detail: Some(format!(
                 "{stage}: a faithful derivation yields {faithful}, the stage derived {derived}"
             )),
+            field: None,
         });
         if self.terminal == TerminalDisposition::Accepted {
             self.terminal = TerminalDisposition::PipelineIntroducedError;
@@ -314,26 +334,11 @@ impl ClaimLedger {
         }
     }
 
-    /// Record on the obligation claim that named a passage whether
-    /// the id lay inside the batch the model answered (#624). The claim
-    /// is found by the item it was read from and the id it named: the
-    /// candidate is the model's answer verbatim, so the field is there.
-    pub(crate) fn record_passage_shown(&mut self, item: usize, naming: &crate::timeline::Naming) {
-        let check = ClaimCheck {
-            guardrail: Guardrail::PassageShown,
-            outcome: if naming.shown {
-                CheckOutcome::Passed
-            } else {
-                CheckOutcome::Failed
-            },
-            detail: Some(naming.detail()),
-        };
-        for trace in self.traces.iter_mut().filter(|trace| {
-            trace.kind == ClaimKind::Obligation
-                && trace.item == item
-                && trace.candidate[naming.field].as_u64() == Some(naming.named as u64)
-        }) {
-            trace.checks.push(check.clone());
+    /// Add a check to one claim after it was pushed — the reading
+    /// checks, which run once the claim exists (review of #626, Task 4).
+    pub(crate) fn add_check(&mut self, id: &str, check: ClaimCheck) {
+        if let Some(trace) = self.traces.iter_mut().find(|trace| trace.id == id) {
+            trace.checks.push(check);
         }
     }
 
@@ -347,5 +352,6 @@ pub(crate) fn check(guardrail: Guardrail, outcome: CheckOutcome) -> ClaimCheck {
         guardrail,
         outcome,
         detail: None,
+        field: None,
     }
 }

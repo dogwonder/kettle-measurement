@@ -38,11 +38,12 @@ fn outcome() -> ExtractionOutcome {
         obligations: vec![
             Obligation {
                 kind: "payment".to_owned(),
-                party: "Harborne Parking Services".to_owned(),
+                party: runner::reading::Reading::new(1, "Harborne Parking Services".to_owned()),
                 ask: "Pay £120.00".to_owned(),
-                deadline: "within 14 days".to_owned(),
+                deadline: runner::reading::Reading::new(1, "within 14 days".to_owned()),
                 anchor: "the date of this letter".to_owned(),
-                amount: "no amount".to_owned(),
+                amount: runner::reading::Reading::absent(1),
+                refused: Vec::new(),
                 confidence: "high".to_owned(),
                 // Counted from the letter's date, not written on it.
                 due: Some(Resolved {
@@ -55,18 +56,20 @@ fn outcome() -> ExtractionOutcome {
                 )],
                 dated_by: None,
                 priced_by: None,
-                amount_from: None,
-                deadline_from: None,
                 shown: Default::default(),
                 disputed: vec![],
             },
             Obligation {
                 kind: "response".to_owned(),
-                party: "Harborne Parking Services".to_owned(),
+                party: runner::reading::Reading::new(3, "Harborne Parking Services".to_owned()),
                 ask: "Send a meter reading".to_owned(),
-                deadline: "at your earliest convenience".to_owned(),
+                deadline: runner::reading::Reading::new(
+                    3,
+                    "at your earliest convenience".to_owned(),
+                ),
                 anchor: "no particular date".to_owned(),
-                amount: "no amount".to_owned(),
+                amount: runner::reading::Reading::absent(3),
+                refused: Vec::new(),
                 confidence: "high".to_owned(),
                 due: None,
                 evidence: vec![segment(
@@ -75,8 +78,6 @@ fn outcome() -> ExtractionOutcome {
                 )],
                 dated_by: None,
                 priced_by: None,
-                amount_from: None,
-                deadline_from: None,
                 shown: Default::default(),
                 disputed: vec![],
             },
@@ -272,7 +273,7 @@ fn the_letter_report_says_what_needs_doing_and_never_mentions_subscriptions() {
 #[test]
 fn a_rendered_date_says_whether_it_was_read_or_worked_out() {
     let mut outcome = outcome();
-    outcome.obligations[1].deadline = "by 12 August 2026".to_owned();
+    outcome.obligations[1].deadline.value = "by 12 August 2026".to_owned();
     outcome.obligations[1].due = Some(Resolved {
         date: date("2026-08-12"),
         kind: Kind::ReadAndVerified,
@@ -431,7 +432,7 @@ fn a_deadline_the_letter_never_wrote_is_not_shown_as_its_words() {
     let ask = &mut outcome.obligations[1];
     // Exactly what the real letter produced: the anchor's sentinel in
     // the deadline field, on a passage that contains neither.
-    ask.deadline = "no particular date".to_owned();
+    ask.deadline.value = "no particular date".to_owned();
     ask.evidence = vec![segment(
         1,
         "If you have recently paid, please complete our form.",
@@ -481,7 +482,7 @@ fn the_sum_is_reported_only_in_the_letters_own_words() {
     let with = |amount: &str| {
         let mut outcome = outcome();
         outcome.obligations.truncate(1);
-        outcome.obligations[0].amount = amount.to_owned();
+        outcome.obligations[0].amount.value = amount.to_owned();
         build_letter_report(&outcome, run_info()).obligations[0]
             .amount
             .clone()
@@ -504,7 +505,7 @@ fn a_sum_read_off_a_row_is_reported_with_the_row() {
     let mut outcome = outcome();
     outcome.obligations.truncate(1);
     let row = segment(9, "Amount Due 41.21 GBP 009422");
-    outcome.obligations[0].amount = "41.21 GBP".to_owned();
+    outcome.obligations[0].amount.value = "41.21 GBP".to_owned();
     outcome.obligations[0].priced_by = Some(row);
     let report = build_letter_report(&outcome, run_info());
     assert_eq!(report.obligations[0].amount, "41.21 GBP");
@@ -525,11 +526,12 @@ fn a_sum_read_off_a_row_is_reported_with_the_row() {
 fn two_invoices_by_one_date_are_two_rows_and_two_reminders() {
     let invoice = |ordinal: usize, ask: &str, amount: &str| Obligation {
         kind: "payment".to_owned(),
-        party: "Harborne Parking Services".to_owned(),
+        party: runner::reading::Reading::new(ordinal, "Harborne Parking Services".to_owned()),
         ask: ask.to_owned(),
-        deadline: "by 30 April 2026".to_owned(),
+        deadline: runner::reading::Reading::new(ordinal, "by 30 April 2026".to_owned()),
         anchor: "30 April 2026".to_owned(),
-        amount: amount.to_owned(),
+        amount: runner::reading::Reading::new(ordinal, amount.to_owned()),
+        refused: Vec::new(),
         confidence: "high".to_owned(),
         due: None,
         evidence: vec![segment(
@@ -538,8 +540,6 @@ fn two_invoices_by_one_date_are_two_rows_and_two_reminders() {
         )],
         dated_by: None,
         priced_by: None,
-        amount_from: None,
-        deadline_from: None,
         shown: Default::default(),
         disputed: vec![],
     };

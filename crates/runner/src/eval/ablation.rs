@@ -278,8 +278,13 @@ pub fn scorecard(
 /// failed checks alone, the letter run would credit routing with
 /// stopping one claim when it stopped sixty-nine.
 fn stopped_by(trace: &ClaimTrace, policy: &Policy) -> bool {
+    // A field-level check refuses one reading and leaves the claim
+    // standing (review of #626, Task 4): removing an amount does not
+    // contain an obligation that still appears, so it is not counted.
     let failed = trace.checks.iter().any(|check| {
-        policy.active.contains(&check.guardrail) && check.outcome == CheckOutcome::Failed
+        check.field.is_none()
+            && policy.active.contains(&check.guardrail)
+            && check.outcome == CheckOutcome::Failed
     });
     let routed = policy.active.contains(&Guardrail::ReviewRouting)
         && trace.terminal == TerminalDisposition::NeedsReview;
@@ -368,13 +373,48 @@ fn disagrees_only_in_derived_fields(expected: &Extracted, proposed: &Extracted) 
 #[derive(serde::Deserialize)]
 struct ProposedObligation {
     kind: String,
-    party: String,
-    deadline: String,
+    party: Wire,
+    deadline: Wire,
     anchor: String,
     /// Absent in recordings made before #612; the sentinel then, so an
     /// old trace still compares.
-    #[serde(default = "crate::run::no_amount_string")]
-    amount: String,
+    #[serde(default)]
+    amount: Wire,
+}
+
+/// A field as the wire has carried it: a bare string before the
+/// reading shape (review of #626, Task 4), `{at, value}` since. The
+/// comparison reads the words either way; where they came from is not
+/// what an expectation asserts.
+#[derive(serde::Deserialize)]
+#[serde(untagged)]
+enum Wire {
+    Text(String),
+    Reading { value: String },
+}
+
+impl Default for Wire {
+    fn default() -> Self {
+        Wire::Text(crate::run::no_amount_string())
+    }
+}
+
+impl Wire {
+    fn into_text(self) -> String {
+        match self {
+            Wire::Text(text) => text,
+            Wire::Reading { value } => value,
+        }
+    }
+    /// An absent sum on the wire is the bed's sentinel.
+    fn into_amount(self) -> String {
+        let text = self.into_text();
+        if text.trim().is_empty() {
+            crate::run::no_amount_string()
+        } else {
+            text
+        }
+    }
 }
 
 /// The candidate as the shape an expectation is compared against.
@@ -395,10 +435,10 @@ fn proposed_assertion(trace: &ClaimTrace) -> Option<Extracted> {
                 .map(|proposed| {
                     Extracted::Obligation(ExpectedObligation {
                         kind: proposed.kind,
-                        party: proposed.party,
-                        deadline: proposed.deadline,
+                        party: proposed.party.into_text(),
+                        deadline: proposed.deadline.into_text(),
                         anchor: proposed.anchor,
-                        amount: proposed.amount,
+                        amount: proposed.amount.into_amount(),
                         due: None,
                     })
                 })

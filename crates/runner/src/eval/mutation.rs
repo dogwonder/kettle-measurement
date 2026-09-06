@@ -659,10 +659,10 @@ fn sites(operator: MutationOperator, content: &serde_json::Value) -> Vec<String>
             for (result_index, result) in results_of(content).iter().enumerate() {
                 if let Some(obligations) = result["obligations"].as_array() {
                     for (obligation_index, obligation) in obligations.iter().enumerate() {
-                        let deadline = obligation["deadline"].as_str().unwrap_or_default();
+                        let deadline = deadline_words(obligation);
                         if deadline.chars().any(|c| c.is_ascii_digit()) {
                             found.push(format!(
-                                "results[{result_index}].obligations[{obligation_index}].deadline"
+                                "results[{result_index}].obligations[{obligation_index}].deadline.value"
                             ));
                         }
                     }
@@ -733,10 +733,10 @@ fn sites(operator: MutationOperator, content: &serde_json::Value) -> Vec<String>
             for (result_index, result) in results_of(content).iter().enumerate() {
                 if let Some(obligations) = result["obligations"].as_array() {
                     for (obligation_index, obligation) in obligations.iter().enumerate() {
-                        let deadline = obligation["deadline"].as_str().unwrap_or_default();
+                        let deadline = deadline_words(obligation);
                         if !deadline.chars().any(|c| c.is_ascii_digit()) {
                             found.push(format!(
-                                "results[{result_index}].obligations[{obligation_index}].deadline"
+                                "results[{result_index}].obligations[{obligation_index}].deadline.value"
                             ));
                         }
                     }
@@ -880,15 +880,14 @@ fn apply(
         }
         MutationOperator::InventObligation => {
             let (result_index, _) = parse_site(site);
+            let own = content["results"][result_index]["id"].clone();
             let invented = serde_json::json!({
                 "kind": "payment",
-                "party": "An unnamed party",
+                "party": { "at": own, "value": "An unnamed party" },
                 "ask": "Pay an amount this passage never asked for",
-                "deadline": "within 7 days",
+                "deadline": { "at": own, "value": "within 7 days" },
                 "anchor": "the date of this letter",
-                "amount": "no amount",
-                "amount_from": content["results"][result_index]["id"].clone(),
-                "deadline_from": content["results"][result_index]["id"].clone()
+                "amount": { "at": own, "value": "" }
             });
             if let Some(obligations) =
                 mutated["results"][result_index]["obligations"].as_array_mut()
@@ -899,13 +898,14 @@ fn apply(
         }
         MutationOperator::DeadlineDigit => {
             let (result_index, obligation_index) = parse_site(site);
-            let before = content["results"][result_index]["obligations"][obligation_index]
-                ["deadline"]
-                .clone();
+            let before =
+                deadline_value(&content["results"][result_index]["obligations"][obligation_index]);
             let moved = move_one_digit(before.as_str().unwrap_or_default());
             let after = serde_json::Value::String(moved);
-            mutated["results"][result_index]["obligations"][obligation_index]["deadline"] =
-                after.clone();
+            set_deadline_value(
+                &mut mutated["results"][result_index]["obligations"][obligation_index],
+                after.clone(),
+            );
             (mutated, before, after)
         }
         MutationOperator::BatchOmit => {
@@ -992,12 +992,13 @@ fn apply(
         }
         MutationOperator::InventDate => {
             let (result_index, obligation_index) = parse_site(site);
-            let before = content["results"][result_index]["obligations"][obligation_index]
-                ["deadline"]
-                .clone();
+            let before =
+                deadline_value(&content["results"][result_index]["obligations"][obligation_index]);
             let after = serde_json::Value::String("by 15 June 2026".to_owned());
-            mutated["results"][result_index]["obligations"][obligation_index]["deadline"] =
-                after.clone();
+            set_deadline_value(
+                &mut mutated["results"][result_index]["obligations"][obligation_index],
+                after.clone(),
+            );
             (mutated, before, after)
         }
         MutationOperator::SchemaBreak => {
@@ -1076,4 +1077,26 @@ fn parse_site(site: &str) -> (usize, usize) {
         numbers.next().unwrap_or_default(),
         numbers.next().unwrap_or_default(),
     )
+}
+
+/// The deadline's words as the wire carries them: `{at, value}` since
+/// the reading shape (review of #626, Task 4), a bare string before.
+fn deadline_words(obligation: &serde_json::Value) -> &str {
+    obligation["deadline"]["value"]
+        .as_str()
+        .or_else(|| obligation["deadline"].as_str())
+        .unwrap_or_default()
+}
+
+fn deadline_value(obligation: &serde_json::Value) -> serde_json::Value {
+    serde_json::Value::String(deadline_words(obligation).to_owned())
+}
+
+/// Write the deadline's words back in whichever shape the answer uses.
+fn set_deadline_value(obligation: &mut serde_json::Value, after: serde_json::Value) {
+    if obligation["deadline"].is_object() {
+        obligation["deadline"]["value"] = after;
+    } else {
+        obligation["deadline"] = after;
+    }
 }

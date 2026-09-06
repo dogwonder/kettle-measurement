@@ -61,9 +61,9 @@ fn letter_pack(name: &str) -> PathBuf {
                 "confidence": { "enum": ["high", "medium", "low"] },
                 "obligations": { "type": "array", "items": { "type": "object", "properties": {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
-                    "party": { "type": "string" },
+                    "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "string" },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "anchor": { "type": "string" }
                 }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
@@ -88,9 +88,9 @@ fn obligations_answer() -> String {
                     "confidence": "high",
                     "obligations": [{
                         "kind": "payment",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 0, "value": "Harborne Parking Services" },
                         "ask": "Pay £120.00",
-                        "deadline": "within 14 days",
+                        "deadline": { "at": 0, "value": "within 14 days" },
                         "anchor": "the date of this letter"
                     }]
                 },
@@ -100,9 +100,9 @@ fn obligations_answer() -> String {
                     "confidence": "high",
                     "obligations": [{
                         "kind": "response",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Confirm your payment in writing",
-                        "deadline": "by 12 August 2026",
+                        "deadline": { "at": 1, "value": "by 12 August 2026" },
                         "anchor": "12 August 2026"
                     }]
                 }
@@ -142,9 +142,12 @@ fn an_obligations_step_fills_the_extraction_payload() {
 
     let pay = &extraction.obligations[0];
     assert_eq!(pay.kind, "payment");
-    assert_eq!(pay.party, "Harborne Parking Services");
+    assert_eq!(pay.party.value, "Harborne Parking Services");
     assert_eq!(pay.ask, "Pay £120.00");
-    assert_eq!(pay.deadline, "within 14 days", "the phrase, never a date");
+    assert_eq!(
+        pay.deadline.value, "within 14 days",
+        "the phrase, never a date"
+    );
     assert_eq!(pay.anchor, "the date of this letter");
     assert_eq!(pay.confidence, "high");
     // Evidence is the passage itself, cited as a person would find it.
@@ -159,7 +162,7 @@ fn an_obligations_step_fills_the_extraction_payload() {
 
     let confirm = &extraction.obligations[1];
     assert_eq!(confirm.kind, "response");
-    assert_eq!(confirm.deadline, "by 12 August 2026");
+    assert_eq!(confirm.deadline.value, "by 12 August 2026");
     assert_eq!(confirm.evidence[0].ordinal, 1);
     assert_eq!(
         confirm.due, None,
@@ -228,9 +231,9 @@ fn dated_letter_answer() -> String {
                     "confidence": "high",
                     "obligations": [{
                         "kind": "response",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Confirm your payment in writing",
-                        "deadline": "by 12 August 2026",
+                        "deadline": { "at": 1, "value": "by 12 August 2026" },
                         "anchor": "12 August 2026"
                     }]
                 },
@@ -240,9 +243,9 @@ fn dated_letter_answer() -> String {
                     "confidence": "high",
                     "obligations": [{
                         "kind": "payment",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 2, "value": "Harborne Parking Services" },
                         "ask": "Pay £120.00",
-                        "deadline": "within 14 days",
+                        "deadline": { "at": 2, "value": "within 14 days" },
                         "anchor": "the date of this letter"
                     }]
                 },
@@ -252,9 +255,9 @@ fn dated_letter_answer() -> String {
                     "confidence": "high",
                     "obligations": [{
                         "kind": "payment",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 2, "value": "Harborne Parking Services" },
                         "ask": "Pay £120.00",
-                        "deadline": "within 14 days",
+                        "deadline": { "at": 3, "value": "within 14 days" },
                         "anchor": "the date of this letter"
                     }]
                 }
@@ -313,7 +316,7 @@ fn the_timeline_step_dates_merges_and_orders_the_obligations() {
             "within 14 days of 3 March is 17 March — Rust's arithmetic, not the model's"
         );
         assert_eq!(
-            pay.deadline, "within 14 days",
+            pay.deadline.value, "within 14 days",
             "the phrase survives beside the date"
         );
         let ordinals: Vec<usize> = pay.evidence.iter().map(|s| s.ordinal).collect();

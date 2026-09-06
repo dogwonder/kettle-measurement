@@ -670,7 +670,7 @@ pub fn confirm_letter_date(
                 .is_some_and(|passage| passage.document == document);
             if theirs {
                 obligation.due =
-                    confirmed_deadline(&obligation.deadline, &obligation.anchor, given);
+                    confirmed_deadline(&obligation.deadline.value, &obligation.anchor, given);
             }
             obligation
         })
@@ -755,57 +755,13 @@ pub fn document_dates(segments: &[Segment]) -> Vec<Option<NaiveDate>> {
 /// the ones a person can still act on, and an undated one must survive
 /// to where they will see it.
 pub fn sort_timeline(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<Obligation> {
-    sort_timeline_noting(obligations, segments, &mut Vec::new())
+    sort_timeline_verified(obligations, segments)
 }
 
-/// One naming a claim made — `amount_from` or `deadline_from` — and
-/// whether the named id lay inside the batch the model answered (#624).
-/// Reported so the claim trace can carry the check; the sort itself has
-/// no ledger.
-#[derive(Debug, Clone, PartialEq)]
-pub struct Naming {
-    /// The passage the claim was read from.
-    pub passage: Segment,
-    /// Which field named it.
-    pub field: &'static str,
-    /// The id named.
-    pub named: usize,
-    /// The ids the model was shown in the request it answered from.
-    pub window: std::collections::BTreeSet<usize>,
-    /// Whether the id lay inside it.
-    pub shown: bool,
-}
-
-impl Naming {
-    /// The check's detail, for the trace.
-    pub fn detail(&self) -> String {
-        let window = self
-            .window
-            .iter()
-            .map(usize::to_string)
-            .collect::<Vec<_>>()
-            .join(", ");
-        if self.shown {
-            format!(
-                "{} names passage {}, one of those shown in the request answered ({window})",
-                self.field, self.named
-            )
-        } else {
-            format!(
-                "{} names passage {}, not one shown in the request answered ({window}): the \
-                 model never saw it, so the reading is refused",
-                self.field, self.named
-            )
-        }
-    }
-}
-
-/// [`sort_timeline`], reporting every naming it checked.
-pub fn sort_timeline_noting(
-    obligations: Vec<Obligation>,
-    segments: &[Segment],
-    namings: &mut Vec<Naming>,
-) -> Vec<Obligation> {
+/// The sort itself: every reading arrived verified (`reading::check`,
+/// at read time), so what is left here is to resolve, to read the row
+/// a verified `at` points to, and to order.
+fn sort_timeline_verified(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<Obligation> {
     let document_dates = document_dates(segments);
     let mut merged: Vec<Obligation> = Vec::new();
     for mut obligation in obligations {
@@ -818,7 +774,7 @@ pub fn sort_timeline_noting(
             .first()
             .and_then(|segment| document_dates.get(segment.document).copied())
             .flatten();
-        obligation.due = resolve(&obligation.deadline, &obligation.anchor, letter_date);
+        obligation.due = resolve(&obligation.deadline.value, &obligation.anchor, letter_date);
         if obligation.due.is_none() {
             // The row travels with the claim (#460 rule one): the
             // pointing passage contains no date, so a date asserted
@@ -828,12 +784,14 @@ pub fn sort_timeline_noting(
             // answered, and a row added there reads downstream as an
             // obligation asserted on a due-date row, which is what the
             // bed measures as an invention.
-            // The model names where the date is printed; Rust reads
-            // one full date off that passage and nothing else. The
-            // staged finder behind it is the fallback only while the
-            // weekly run has not yet shown the naming is reliable.
-            match named_passage(&obligation, "deadline_from", segments, namings) {
-                Named::Row(row) => {
+            // The model named where the date is printed (`deadline.at`,
+            // verified at read time); Rust reads one full date off that
+            // passage and nothing else. The staged finder behind it is
+            // the fallback only where nothing was named, never where a
+            // naming was refused (#624): the model pointed, the page
+            // could not vouch for it, and Rust does not then go looking.
+            match named_row(&obligation, obligation.deadline.at, segments) {
+                Some(row) => {
                     if let Some(date) = first_full_date(&row.text) {
                         obligation.due = Some(Resolved {
                             date,
@@ -842,54 +800,34 @@ pub fn sort_timeline_noting(
                         obligation.dated_by = Some(row);
                     }
                 }
-                Named::Nothing => {
+                None if !refused(&obligation, "deadline") => {
                     if let Some((resolved, row)) = pointed_at(&obligation, segments) {
                         obligation.due = Some(resolved);
                         obligation.dated_by = Some(row);
                     }
                 }
-                // Outcome 1 (`app/METHOD.md` §0): the page cannot vouch
-                // for a passage the model never saw. The reading is
-                // refused; the ask keeps its phrase and shows undated.
-                Named::Refused => {}
+                None => {}
             }
         }
-        // The same shape for the sum (#612): the model names the
-        // passage the figure is printed in, and Rust checks the figure
-        // is there — #460 rule one against the named passage. A named
-        // passage that does not contain it is a wrong claim, refused;
-        // the staged finder runs only where nothing was named.
+        // The same shape for the sum (#612): the figure was verified
+        // against the passage `amount.at` at read time (#460 rule one,
+        // as a whole money token). Where that passage is not the ask's
+        // own, it travels as `priced_by`. The staged finder runs only
+        // where nothing was read and nothing was refused.
+        // The first scratch loop (4 September) found the 4B names
+        // the due-date row 27 times in 36 and the total row 4 in
+        // 24, so the date finder is nearly retired and the amount
+        // finder is not.
         if obligation.kind == "payment" {
-            let named = named_passage(&obligation, "amount_from", segments, namings);
-            if obligation.amount != crate::run::NO_AMOUNT {
-                match &named {
-                    Named::Row(row) => {
-                        if contains_ignoring_whitespace(&row.text, &obligation.amount) {
-                            obligation.priced_by = Some(row.clone());
-                        } else {
-                            obligation.amount = crate::run::NO_AMOUNT.to_owned();
-                        }
-                    }
-                    // Outcome 1: a sum read off a passage the model
-                    // never saw is refused with its naming. Never the
-                    // obligation, which stands with `no amount`.
-                    Named::Refused => obligation.amount = crate::run::NO_AMOUNT.to_owned(),
-                    Named::Nothing => {}
-                }
-            }
-            // "Named nothing" includes naming its own passage with no
-            // sum: the model has not pointed anywhere else, and the
-            // staged finder is the fallback until naming is reliable.
-            // A *refused* naming is not "named nothing": the model
-            // pointed, the page could not vouch for it, and Rust does
-            // not then go looking (#624).
-            // The first scratch loop (4 September) found the 4B names
-            // the due-date row 27 times in 36 and the total row 4 in
-            // 24, so the date finder is nearly retired and the amount
-            // finder is not.
-            if obligation.amount == crate::run::NO_AMOUNT && named == Named::Nothing {
+            if !obligation.amount.is_absent() {
+                obligation.priced_by = named_row(&obligation, obligation.amount.at, segments);
+            } else if !refused(&obligation, "amount") {
                 if let Some((figure, row)) = priced_at(&obligation, segments) {
-                    obligation.amount = figure;
+                    let at = segments
+                        .iter()
+                        .position(|s| *s == row)
+                        .unwrap_or(obligation.amount.at);
+                    obligation.amount = crate::reading::Reading::new(at, figure);
                     obligation.priced_by = Some(row);
                 }
             }
@@ -911,7 +849,13 @@ pub fn sort_timeline_noting(
                 .evidence
                 .first()
                 .map(|segment| (segment.document, segment.ordinal));
-            (due.is_none(), due, o.kind.clone(), o.party.clone(), at)
+            (
+                due.is_none(),
+                due,
+                o.kind.clone(),
+                o.party.value.clone(),
+                at,
+            )
         };
         key(a).cmp(&key(b))
     });
@@ -962,7 +906,7 @@ fn points_at_a_date(deadline: &str) -> bool {
 /// [`Kind::WorkedOut`].
 fn pointed_at(obligation: &Obligation, segments: &[Segment]) -> Option<(Resolved, Segment)> {
     const LABELS: [&str; 3] = ["due date", "date due", "payment due"];
-    if !points_at_a_date(&obligation.deadline) {
+    if !points_at_a_date(&obligation.deadline.value) {
         return None;
     }
     let document = obligation.evidence.first()?.document;
@@ -983,68 +927,23 @@ fn pointed_at(obligation: &Obligation, segments: &[Segment]) -> Option<(Resolved
         })
 }
 
-/// What a claim's naming of a passage came to.
-#[derive(Debug, Clone, PartialEq)]
-enum Named {
-    /// A passage of the claim's own document, inside the batch the
-    /// model answered, and not the claim's own: something to verify.
-    Row(Segment),
-    /// The claim named nothing, or named its own passage, or named an
-    /// id that indexes no segment or another document: nothing to
-    /// verify, and the staged finders may still run.
-    Nothing,
-    /// The claim named an id outside the batch the model answered
-    /// (#624). Outcome 1 of `app/METHOD.md` §0: the page cannot vouch
-    /// for a passage the model never saw, so the reading is refused
-    /// and nothing goes looking for it either.
-    Refused,
+/// The passage a verified reading's `at` points to, when it is not
+/// the passage the claim was read from. `at` was checked at read time
+/// (`reading::check`: shown in the request answered, and a passage of
+/// this document), so this only asks whether it is another passage.
+fn named_row(obligation: &Obligation, at: usize, segments: &[Segment]) -> Option<Segment> {
+    let own = obligation.evidence.first()?;
+    segments
+        .get(at)
+        .filter(|row| row.document == own.document && row.ordinal != own.ordinal)
+        .cloned()
 }
 
-/// The passage a claim says its value lives in, when that is not the
-/// passage the claim was read from (CLAUDE.md, *Rust verifies; it never
-/// discovers*). A batch id indexes the run's segments. The id must be
-/// one the model was shown in the request it answered from —
-/// `exec::rejoin` holds the same set as `known` for result ids, and
-/// this is the check for named ones — and every naming checked is
-/// reported for the claim trace.
-fn named_passage(
-    obligation: &Obligation,
-    field: &'static str,
-    segments: &[Segment],
-    namings: &mut Vec<Naming>,
-) -> Named {
-    let id = match field {
-        "amount_from" => obligation.amount_from,
-        "deadline_from" => obligation.deadline_from,
-        _ => unreachable!("a naming field is one of the two"),
-    };
-    let (Some(id), Some(own)) = (id, obligation.evidence.first()) else {
-        return Named::Nothing;
-    };
-    let shown = obligation.shown.contains(&id);
-    namings.push(Naming {
-        passage: own.clone(),
-        field,
-        named: id,
-        window: obligation.shown.clone(),
-        shown,
-    });
-    if !shown {
-        return Named::Refused;
-    }
-    match segments.get(id) {
-        Some(row) if row.document == own.document && row.ordinal != own.ordinal => {
-            Named::Row(row.clone())
-        }
-        _ => Named::Nothing,
-    }
-}
-
-/// #460 rule one, whitespace-insensitive: a line break is an artefact
-/// of the page, not of the figure.
-fn contains_ignoring_whitespace(text: &str, wanted: &str) -> bool {
-    let squash = |s: &str| s.split_whitespace().collect::<Vec<_>>().join(" ");
-    squash(text).contains(&squash(wanted))
+/// Whether the page refused this field's reading (review of #626,
+/// Task 4): the model pointed, the page could not vouch for it, and
+/// the staged finders do not then go looking.
+fn refused(obligation: &Obligation, field: &str) -> bool {
+    obligation.refused.iter().any(|r| r.field == field)
 }
 
 /// The sum a payment ask is for, read off the same document's own

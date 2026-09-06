@@ -332,35 +332,39 @@ pub struct ComparisonOutcome {
 pub struct Obligation {
     /// What sort of ask this is — enum-constrained in the pack's schema.
     pub kind: String,
-    /// Who is asking, as the document names them.
-    pub party: String,
-    /// What is being asked, for a person to read.
+    /// Who is asking, as the document names them: a reading, `at` the
+    /// passage that prints the name (usually the letterhead or the
+    /// sign-off), verified by `reading::check`. Absent when refused or
+    /// never read; shown as "the sender" then, and the ask stands.
+    pub party: crate::reading::Reading,
+    /// What is being asked, for a person to read. Prose: a paraphrase
+    /// for a person, marked as Kettle's words, never verified.
     pub ask: String,
-    /// The deadline as written — a phrase, never a computed date.
-    pub deadline: String,
+    /// The letter's words for when — a phrase, never a computed date —
+    /// with `at` the passage the date is printed in: the ask's own
+    /// passage, or the due-date row a pointing phrase names. The
+    /// phrase is verified against the ask's own passage and `at` for
+    /// itself (`reading::Site::Own`, the interim shape until Task 5).
+    pub deadline: crate::reading::Reading,
     /// What the deadline counts from, as written ("the date of this
-    /// letter", "12 August 2026").
+    /// letter", "12 August 2026"). Becomes a reading (`from`) with the
+    /// deadline's structure in Task 5.
     pub anchor: String,
-    /// The sum this ask is for, copied from the passage as written
-    /// ("£84.00"), or the sentinel `no amount` (#612). Never parsed and
-    /// never operated on here: reading a figure off the page is the
-    /// same act as reading a deadline phrase, and anything done with it
-    /// afterwards is Rust's. Defaults on deserialisation so recordings
-    /// and results written before the field existed still load.
-    #[serde(default = "no_amount")]
-    pub amount: String,
-    /// The passage the model says the sum is printed in, as a batch id
-    /// (an index into the run's segments), when it is not this one.
-    /// Rust verifies the figure is there and carries the passage as
-    /// `priced_by`; it never searches for one itself (CLAUDE.md, *Rust
-    /// verifies; it never discovers*).
+    /// The sum this ask is for, copied verbatim from the passage `at`
+    /// ("£84.00" — a whole money token there, #460 rule one), verified
+    /// by `reading::check`. Absent (`value: ""`) when the letter prints
+    /// none, the model read none, or the reading was refused. Never
+    /// parsed into a number here and never operated on: reading a
+    /// figure off the page is the same act as reading a phrase. When
+    /// `at` is not the ask's own passage, that passage is `priced_by`.
+    pub amount: crate::reading::Reading,
+    /// Readings the page contradicted, with why (review of #626,
+    /// Task 4): the raw value the model gave, kept as diagnostic
+    /// evidence and never as a reported value. A refused field is
+    /// absent above, and the staged finders do not go looking for what
+    /// the model pointed at and the page refused.
     #[serde(default)]
-    pub amount_from: Option<usize>,
-    /// The passage the model says the deadline's date is printed in,
-    /// when the deadline points elsewhere on the page. Rust reads one
-    /// full date from it and carries the passage as `dated_by`.
-    #[serde(default)]
-    pub deadline_from: Option<usize>,
+    pub refused: Vec<RefusedReading>,
     /// The ids the model was shown in the request it answered this
     /// passage in (#624; `app/METHOD.md` §1.4 item 4) — the set a named
     /// passage must fall inside, because the page cannot vouch for a
@@ -439,27 +443,44 @@ pub struct Obligation {
 /// The sentinel an obligation carries where its passage names no sum.
 pub const NO_AMOUNT: &str = "no amount";
 
-fn no_amount() -> String {
-    NO_AMOUNT.to_owned()
+/// What a person is shown for a party the page could not vouch for.
+pub const THE_SENDER: &str = "the sender";
+
+/// A reading the page contradicted, kept beside the obligation as
+/// diagnostic evidence (review of #626, Task 4).
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub struct RefusedReading {
+    /// `party`, `amount` or `deadline`.
+    pub field: String,
+    /// What the model read, verbatim.
+    pub at: usize,
+    pub value: String,
+    /// Why the page refused it, in the trace's words.
+    pub why: String,
+}
+
+impl Obligation {
+    /// The party as a person is shown it: the verified name, or "the
+    /// sender" when none stood.
+    pub fn party_shown(&self) -> &str {
+        if self.party.is_absent() {
+            THE_SENDER
+        } else {
+            &self.party.value
+        }
+    }
 }
 
 /// The same default, reachable from the eval's expectation type.
 pub fn no_amount_string() -> String {
-    no_amount()
+    NO_AMOUNT.to_owned()
 }
 
 impl Obligation {
     /// What this obligation *is*, for every comparison the eval harness
     /// makes (#554) — the same identity a bed's expectation carries.
     pub fn identity(&self) -> crate::eval::ObligationIdentity {
-        crate::eval::ObligationIdentity::of(
-            &self.kind,
-            &self.party,
-            &self.deadline,
-            &self.anchor,
-            &self.amount,
-            self.due.map(|d| d.date),
-        )
+        crate::eval::ExpectedObligation::from(self).identity()
     }
 }
 
@@ -1325,20 +1346,8 @@ fn run_bound(
                     current: 1,
                     total: 1,
                 });
-                let mut namings = Vec::new();
-                obligations = crate::timeline::sort_timeline_noting(
-                    std::mem::take(&mut obligations),
-                    &segments,
-                    &mut namings,
-                );
-                // A naming is checked against the ids the model was
-                // shown in the request it answered from (#624); the
-                // obligation's own trace says so.
-                for naming in namings {
-                    if let Some(item) = segments.iter().position(|s| *s == naming.passage) {
-                        claim_ledger.record_passage_shown(item, &naming);
-                    }
-                }
+                obligations =
+                    crate::timeline::sort_timeline(std::mem::take(&mut obligations), &segments);
                 // After the sort, not before: the sort folds a
                 // candidate read twice out of one passage, and marking
                 // last asks each document about the evidence that
@@ -1694,6 +1703,7 @@ fn trace_rejected_candidates(
                     guardrail: crate::claim_trace::Guardrail::Pairing,
                     outcome: crate::claim_trace::CheckOutcome::Failed,
                     detail: Some(rejected.reason),
+                    field: None,
                 },
             ],
             crate::claim_trace::TerminalDisposition::Rejected,
@@ -1744,7 +1754,7 @@ fn run_obligations_step(
         },
         needs_review,
         &mut |segment, answer, review, ledger, trace| {
-            let (read, routed) = segment_obligations(segment, answer, ledger, trace);
+            let (read, routed) = segment_obligations(segment, segments, answer, ledger, trace);
             obligations.extend(read);
             review.extend(routed);
         },
@@ -2126,6 +2136,7 @@ fn run_segment_step(
 ///   with no headroom.
 fn segment_obligations(
     segment: &crate::document::Segment,
+    segments: &[crate::document::Segment],
     answer: &serde_json::Value,
     claim_ledger: &mut crate::claim_trace::ClaimLedger,
     trace: &SegmentTrace,
@@ -2182,7 +2193,7 @@ fn segment_obligations(
             }
             continue;
         }
-        claim_ledger.push(
+        let claim_id = claim_ledger.push(
             Some(trace.parent_id.clone()),
             &trace.step,
             trace.batch,
@@ -2207,32 +2218,157 @@ fn segment_obligations(
             ],
             crate::claim_trace::TerminalDisposition::Accepted,
         );
-        read.push({
-            Obligation {
-                kind: text(obligation, "kind"),
-                party: text(obligation, "party"),
-                ask: text(obligation, "ask"),
-                deadline: text(obligation, "deadline"),
-                anchor: text(obligation, "anchor"),
-                amount: obligation["amount"]
-                    .as_str()
-                    .map_or_else(no_amount, str::to_owned),
-                amount_from: obligation["amount_from"].as_u64().map(|id| id as usize),
-                deadline_from: obligation["deadline_from"].as_u64().map(|id| id as usize),
-                shown: trace.shown.clone(),
-                confidence: confidence.clone(),
-                due: None,
-                evidence: vec![segment.clone()],
-                // Filled by `mark_disputed` once the page's two readings
-                // have been compared — the model's answer knows nothing
-                // about how the page was read.
-                dated_by: None,
-                priced_by: None,
-                disputed: Vec::new(),
+        // Every value read off the page goes through the one verifier
+        // (`reading::check`; `app/METHOD.md` §3). A refused reading is
+        // refused as a reading, never as an obligation: the field is
+        // absent, the raw value is kept beside it as evidence, and the
+        // check lands on the claim's trace naming the field.
+        let mut refused = Vec::new();
+        let mut checked_reading = |field: &str,
+                                   kind: crate::reading::Kind,
+                                   site: crate::reading::Site,
+                                   refused: &mut Vec<RefusedReading>|
+         -> crate::reading::Reading {
+            let raw = reading_of(obligation, field, trace.item);
+            let checked =
+                crate::reading::check_at(&raw, kind, site, segment, &trace.shown, segments);
+            for check in reading_checks(field, &raw, &checked) {
+                claim_ledger.add_check(&claim_id, check);
             }
+            match checked {
+                crate::reading::Checked::Absent => crate::reading::Reading::absent(trace.item),
+                crate::reading::Checked::Supported { .. } => raw,
+                crate::reading::Checked::Refused(why) => {
+                    refused.push(RefusedReading {
+                        field: field.to_owned(),
+                        at: raw.at,
+                        value: raw.value,
+                        why: why.detail(field),
+                    });
+                    crate::reading::Reading::absent(trace.item)
+                }
+            }
+        };
+        let party = checked_reading(
+            "party",
+            crate::reading::Kind::Name,
+            crate::reading::Site::Named,
+            &mut refused,
+        );
+        let amount = checked_reading(
+            "amount",
+            crate::reading::Kind::Money,
+            crate::reading::Site::Named,
+            &mut refused,
+        );
+        let deadline = checked_reading(
+            "deadline",
+            crate::reading::Kind::Phrase,
+            crate::reading::Site::Own,
+            &mut refused,
+        );
+        read.push(Obligation {
+            kind: text(obligation, "kind"),
+            party,
+            ask: text(obligation, "ask"),
+            deadline,
+            anchor: text(obligation, "anchor"),
+            amount,
+            refused,
+            shown: trace.shown.clone(),
+            confidence: confidence.clone(),
+            due: None,
+            evidence: vec![segment.clone()],
+            // Filled by `mark_disputed` once the page's two readings
+            // have been compared — the model's answer knows nothing
+            // about how the page was read.
+            dated_by: None,
+            priced_by: None,
+            disputed: Vec::new(),
         });
     }
     (read, review)
+}
+
+/// One `{at, value}` reading off the model's answer. Anything that is
+/// not that shape reads as absent at the obligation's own passage — the
+/// defined convention, checked against nothing.
+fn reading_of(obligation: &serde_json::Value, field: &str, own: usize) -> crate::reading::Reading {
+    let value = &obligation[field];
+    match (value["at"].as_u64(), value["value"].as_str()) {
+        (Some(at), Some(text)) => crate::reading::Reading::new(at as usize, text),
+        _ => crate::reading::Reading::absent(own),
+    }
+}
+
+/// The verifier's answer for one field, as checks on the claim's trace.
+fn reading_checks(
+    field: &str,
+    raw: &crate::reading::Reading,
+    checked: &crate::reading::Checked,
+) -> Vec<crate::claim_trace::ClaimCheck> {
+    use crate::claim_trace::{CheckOutcome, ClaimCheck, Guardrail};
+    use crate::reading::{Checked, Refusal};
+    let on = |guardrail, outcome, detail: Option<String>| ClaimCheck {
+        guardrail,
+        outcome,
+        detail,
+        field: Some(field.to_owned()),
+    };
+    match checked {
+        Checked::Absent => Vec::new(),
+        Checked::Refused(why) => match why {
+            Refusal::NotShown { .. } => vec![on(
+                Guardrail::PassageShown,
+                CheckOutcome::Failed,
+                Some(why.detail(field)),
+            )],
+            Refusal::NotThisDocument { .. } | Refusal::NotInPassage { .. } => vec![
+                on(Guardrail::PassageShown, CheckOutcome::Passed, None),
+                on(
+                    Guardrail::Quote,
+                    CheckOutcome::Failed,
+                    Some(why.detail(field)),
+                ),
+            ],
+        },
+        Checked::Supported {
+            parses, warnings, ..
+        } => {
+            let mut checks = vec![
+                on(
+                    Guardrail::PassageShown,
+                    CheckOutcome::Passed,
+                    Some(format!(
+                        "{field} names passage {}, shown in the request answered",
+                        raw.at
+                    )),
+                ),
+                on(Guardrail::Quote, CheckOutcome::Passed, None),
+                on(
+                    Guardrail::ValueShape,
+                    if *parses {
+                        CheckOutcome::Passed
+                    } else {
+                        CheckOutcome::Failed
+                    },
+                    (!parses).then(|| {
+                        format!(
+                            "{field} is on the page but Kettle cannot work it out: kept as words"
+                        )
+                    }),
+                ),
+            ];
+            for warning in warnings {
+                checks.push(on(
+                    Guardrail::QuoteIdentifiesPassage,
+                    CheckOutcome::Failed,
+                    Some(warning.detail(field)),
+                ));
+            }
+            checks
+        }
+    }
 }
 
 /// One segment's validated answer, read into named terms (#350).

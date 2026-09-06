@@ -33,25 +33,55 @@
                   ]
                 },
                 "party": {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "at": {
+                      "type": "integer"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "at",
+                    "value"
+                  ]
                 },
                 "ask": {
                   "type": "string"
                 },
                 "deadline": {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "at": {
+                      "type": "integer"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "at",
+                    "value"
+                  ]
                 },
                 "anchor": {
                   "type": "string"
                 },
                 "amount": {
-                  "type": "string"
-                },
-                "amount_from": {
-                  "type": "integer"
-                },
-                "deadline_from": {
-                  "type": "integer"
+                  "type": "object",
+                  "properties": {
+                    "at": {
+                      "type": "integer"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "at",
+                    "value"
+                  ]
                 }
               },
               "required": [
@@ -60,9 +90,7 @@
                 "ask",
                 "deadline",
                 "anchor",
-                "amount",
-                "amount_from",
-                "deadline_from"
+                "amount"
               ]
             }
           }

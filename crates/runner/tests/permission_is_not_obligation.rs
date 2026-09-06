@@ -104,9 +104,9 @@ fn letter_pack(name: &str) -> PathBuf {
                 "confidence": { "enum": ["high", "medium", "low"] },
                 "obligations": { "type": "array", "items": { "type": "object", "properties": {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
-                    "party": { "type": "string" },
+                    "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "string" },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "anchor": { "type": "string" }
                 }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
@@ -159,9 +159,9 @@ fn answer_reading_the_permission_as_an_obligation() -> String {
                     "confidence": "high",
                     "obligations": [{
                         "kind": "payment",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Pay £120.00",
-                        "deadline": "within 14 days",
+                        "deadline": { "at": 1, "value": "within 14 days" },
                         "anchor": "the date of this letter"
                     }]
                 },
@@ -171,9 +171,9 @@ fn answer_reading_the_permission_as_an_obligation() -> String {
                     "confidence": "high",
                     "obligations": [{
                         "kind": "response",
-                        "party": "Harborne Parking Services",
+                        "party": { "at": 2, "value": "Harborne Parking Services" },
                         "ask": "Confirm in writing",
-                        "deadline": "within 28 days",
+                        "deadline": { "at": 2, "value": "within 28 days" },
                         "anchor": "the date of this letter"
                     }]
                 }

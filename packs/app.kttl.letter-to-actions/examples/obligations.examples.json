@@ -7,13 +7,20 @@
       "obligations": [
         {
           "kind": "payment",
-          "party": "Redhill District Council",
+          "party": {
+            "at": 900,
+            "value": "Redhill District Council"
+          },
           "ask": "Pay £84.00 for the garden waste licence",
-          "deadline": "within 14 days",
+          "deadline": {
+            "at": 900,
+            "value": "within 14 days"
+          },
           "anchor": "the date of this letter",
-          "amount": "£84.00",
-          "amount_from": 900,
-          "deadline_from": 900
+          "amount": {
+            "at": 900,
+            "value": "£84.00"
+          }
         }
       ]
     },
@@ -30,13 +37,20 @@
       "obligations": [
         {
           "kind": "attendance",
-          "party": "Redhill District Council",
+          "party": {
+            "at": 902,
+            "value": "Redhill District Council"
+          },
           "ask": "Attend the tribunal hearing",
-          "deadline": "on 14 September 2026",
+          "deadline": {
+            "at": 902,
+            "value": "on 14 September 2026"
+          },
           "anchor": "14 September 2026",
-          "amount": "no amount",
-          "amount_from": 902,
-          "deadline_from": 902
+          "amount": {
+            "at": 902,
+            "value": ""
+          }
         }
       ]
     },
@@ -47,13 +61,20 @@
       "obligations": [
         {
           "kind": "response",
-          "party": "Redhill District Council",
+          "party": {
+            "at": 903,
+            "value": "Redhill District Council"
+          },
           "ask": "Send a meter reading",
-          "deadline": "at your earliest convenience",
+          "deadline": {
+            "at": 903,
+            "value": "at your earliest convenience"
+          },
           "anchor": "no particular date",
-          "amount": "no amount",
-          "amount_from": 903,
-          "deadline_from": 903
+          "amount": {
+            "at": 903,
+            "value": ""
+          }
         }
       ]
     },
@@ -76,13 +97,20 @@
       "obligations": [
         {
           "kind": "attendance",
-          "party": "Redhill District Council",
+          "party": {
+            "at": 906,
+            "value": "Redhill District Council"
+          },
           "ask": "Attend the appointment with the housing officer",
-          "deadline": "on 3 June 2026 at 10.30am",
+          "deadline": {
+            "at": 906,
+            "value": "on 3 June 2026 at 10.30am"
+          },
           "anchor": "3 June 2026",
-          "amount": "no amount",
-          "amount_from": 906,
-          "deadline_from": 906
+          "amount": {
+            "at": 906,
+            "value": ""
+          }
         }
       ]
     },

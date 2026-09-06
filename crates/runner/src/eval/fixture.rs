@@ -2920,11 +2920,12 @@ mod tests {
         let found =
             |party: &str, deadline: &str, anchor: &str, due: Option<&str>| crate::run::Obligation {
                 kind: "payment".to_owned(),
-                party: party.to_owned(),
+                party: crate::reading::Reading::new(0, party.to_owned()),
                 ask: "Pay the arrears".to_owned(),
-                deadline: deadline.to_owned(),
+                deadline: crate::reading::Reading::new(0, deadline.to_owned()),
                 anchor: anchor.to_owned(),
-                amount: "no amount".to_owned(),
+                amount: crate::reading::Reading::absent(0),
+                refused: Vec::new(),
                 confidence: "high".to_owned(),
                 due: due.map(|d| Resolved {
                     date: date(d),
@@ -2933,8 +2934,6 @@ mod tests {
                 evidence: Vec::new(),
                 dated_by: None,
                 priced_by: None,
-                amount_from: None,
-                deadline_from: None,
                 shown: Default::default(),
                 disputed: Vec::new(),
             };
@@ -3111,6 +3110,7 @@ mod tests {
                 guardrail: Guardrail::Schema,
                 outcome: CheckOutcome::Passed,
                 detail: None,
+                field: None,
             }],
             terminal: TerminalDisposition::Accepted,
             outputs: Vec::new(),

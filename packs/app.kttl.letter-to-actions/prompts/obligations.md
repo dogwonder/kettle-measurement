@@ -67,43 +67,52 @@ For each passage, decide:
 
 For each obligation give:
 - kind: "payment" | "response" | "attendance" | "other"
+Three of the fields are readings: a value copied from the letter and
+the id of the passage it is printed in, written as {"at": id, "value":
+"..."}. The value is checked against that passage word for word, so
+copy it exactly as printed and name the passage it is printed in —
+never a passage you were not shown, and never a passage of a different
+letter. Where the letter does not give a value, write "" for the value
+and this passage's own id for "at".
+
 - party: the organisation doing the asking, exactly as the letter names
   them — never the person receiving it. Some passages name them and
   some do not; the letter as a whole always does, in a heading or a
-  sign-off. Use that name for every obligation in the letter.
+  sign-off. "at" is the id of the passage that prints the name — this
+  one if it does, otherwise the heading or sign-off — and "value" is
+  the name as that passage prints it. Use the same name for every
+  obligation in the letter.
 - ask: what the person must do, in a short phrase they can read
-- deadline: the words the letter uses for when the thing must be done,
-  copied exactly — "within 14 days", "by the end of the month", "on 3
-  March 2026". Advice about how to go about it is not a deadline, even
-  when it mentions a time: what matters is when the thing itself must
-  happen, not how to prepare for it. Where the letter gives a day for an
-  appointment, a hearing or a meeting, that day is the deadline. Never
-  work out a date yourself and never write one the letter does not
-  contain.
+- deadline: "value" is the words the letter uses for when the thing
+  must be done, copied exactly from this passage — "within 14 days",
+  "by the end of the month", "on 3 March 2026". Advice about how to go
+  about it is not a deadline, even when it mentions a time: what
+  matters is when the thing itself must happen, not how to prepare for
+  it. Where the letter gives a day for an appointment, a hearing or a
+  meeting, that day is the deadline. Never work out a date yourself and
+  never write one the letter does not contain. "at" is the id of the
+  passage the date is printed in: this passage's own id when the
+  deadline is written here, whether as a day or as a period. When the
+  words point elsewhere — "by the date shown beside it", "the date
+  given below" — "at" is the id of the passage that prints that date,
+  usually a due-date row. You are naming where the date is, not reading
+  it: "value" stays the words this passage uses.
 - anchor: what the deadline counts from, in the letter's own words —
   "the date of this letter", or a date the letter states. If nothing is
   given, write "no particular date".
-- amount: the sum this ask is for, copied exactly as this passage
-  writes it — "£84.00", "£1,250.00", "41.21 GBP". Only a sum this
-  page prints, and only the sum being asked for: not a previous
-  balance, not a reduced rate. If no passage names the sum, write "no
-  amount". Never add up, convert or round: a figure you work out is a
-  figure somebody pays wrongly.
-- amount_from: the id of the passage the amount is printed in. Usually
-  this passage's own id. A letter often states the ask in one sentence
-  and prints the sum in a row elsewhere — "Amount due £41.21", a totals
-  table — and then the id is that row's, and amount is the figure that
-  row prints. An ask for "the total", "the amount shown", "the balance"
-  or "the sum below" is this case: find the row that prints it, give
-  its id, and copy its figure into amount. With "no amount", give this
-  passage's own id.
-- deadline_from: the id of the passage the date is printed in. This
-  passage's own id when the deadline is written here, whether as a day
-  or as a period. When the words point elsewhere — "by the date shown
-  beside it", "the date given below" — the id of the passage that
-  prints that date, usually a due-date row. You are naming where the
-  date is, not reading it: copy nothing from that passage into
-  deadline.
+- amount: "value" is the sum this ask is for, copied exactly as the
+  page writes it — "£84.00", "£1,250.00", "41.21 GBP" — and "at" is
+  the id of the passage it is printed in. Usually this passage's own
+  id. A letter often states the ask in one sentence and prints the sum
+  in a row elsewhere — "Amount due £41.21", a totals table — and then
+  "at" is that row's id and "value" is the figure that row prints. An
+  ask for "the total", "the amount shown", "the balance" or "the sum
+  below" is this case: find the row that prints it, give its id, and
+  copy its figure. Only a sum the page prints, and only the sum being
+  asked for: not a previous balance, not a reduced rate. If no passage
+  prints the sum, write "" with this passage's own id. Never add up,
+  convert or round: a figure you work out is a figure somebody pays
+  wrongly.
 
 You are not asked to work out when anything actually falls due. That is
 done separately, from the words you copy. Copying the deadline exactly

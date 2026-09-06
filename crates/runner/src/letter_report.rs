@@ -80,10 +80,10 @@ pub fn build_letter_report_with_review(
         .iter()
         .map(|obligation| ObligationOut {
             kind: obligation.kind.clone(),
-            party: obligation.party.clone(),
+            party: obligation.party_shown().to_owned(),
             ask: obligation.ask.clone(),
             amount: letters_own_words(
-                &obligation.amount,
+                &obligation.amount.value,
                 obligation
                     .evidence
                     .iter()
@@ -92,7 +92,7 @@ pub fn build_letter_report_with_review(
                     .collect::<Vec<_>>()
                     .as_slice(),
             ),
-            deadline: letters_own_words(&obligation.deadline, &obligation.evidence),
+            deadline: letters_own_words(&obligation.deadline.value, &obligation.evidence),
             due: obligation.due.map(Into::into),
             confidence: Confidence::parse(&obligation.confidence),
             evidence: obligation

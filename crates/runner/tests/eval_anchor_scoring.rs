@@ -49,11 +49,12 @@ fn found(anchor: &str, due: Option<NaiveDate>) -> RunOutcome {
             date_disputes: vec![],
             obligations: vec![Obligation {
                 kind: "payment".to_owned(),
-                party: "Denholm Veterinary Group".to_owned(),
+                party: runner::reading::Reading::new(0, "Denholm Veterinary Group".to_owned()),
                 ask: "Settle the balance".to_owned(),
-                deadline: "by the end of the month".to_owned(),
+                deadline: runner::reading::Reading::new(0, "by the end of the month".to_owned()),
                 anchor: anchor.to_owned(),
-                amount: "no amount".to_owned(),
+                amount: runner::reading::Reading::absent(0),
+                refused: Vec::new(),
                 confidence: "high".to_owned(),
                 // A month-end deadline is always Rust's arithmetic;
                 // scoring joins on the date, never on the kind.
@@ -64,8 +65,6 @@ fn found(anchor: &str, due: Option<NaiveDate>) -> RunOutcome {
                 evidence: Vec::new(),
                 dated_by: None,
                 priced_by: None,
-                amount_from: None,
-                deadline_from: None,
                 shown: Default::default(),
                 disputed: vec![],
             }],

@@ -236,12 +236,33 @@ fn answer(prompt: &str, fixtures: &[Vec<(String, Truth)>]) -> String {
                     "obligations": expected
                         .iter()
                         .map(|expect| {
+                            // Readings name the passage that prints the
+                            // value (review of #626, Task 4): the ask's
+                            // own passage where it does, else the first
+                            // in this batch that does — the letterhead
+                            // for a party, a totals row for a sum. The
+                            // oracle may look; the runtime only checks.
+                            let printed_at = |value: &str| -> u64 {
+                                if crate::reading::contains_squashed(segment, value) {
+                                    return *id;
+                                }
+                                items
+                                    .iter()
+                                    .find(|(_, other)| crate::reading::contains_squashed(other, value))
+                                    .map_or(*id, |(other_id, _)| *other_id)
+                            };
+                            let amount = if expect.amount == crate::run::NO_AMOUNT {
+                                String::new()
+                            } else {
+                                expect.amount.clone()
+                            };
                             serde_json::json!({
                                 "kind": expect.kind,
-                                "party": expect.party,
+                                "party": { "at": printed_at(&expect.party), "value": expect.party },
                                 "ask": "As the letter asks",
-                                "deadline": expect.deadline,
-                                "anchor": expect.anchor
+                                "deadline": { "at": id, "value": expect.deadline },
+                                "anchor": expect.anchor,
+                                "amount": { "at": printed_at(&amount), "value": amount }
                             })
                         })
                         .collect::<Vec<_>>()

@@ -189,18 +189,20 @@ fn letter_dated(written: &str) -> Vec<Segment> {
 fn obligation(deadline: &str, anchor: &str, evidence: Segment) -> Obligation {
     Obligation {
         kind: "payment".to_owned(),
-        party: "Harborne Parking Services".to_owned(),
+        party: runner::reading::Reading::new(
+            evidence.ordinal,
+            "Harborne Parking Services".to_owned(),
+        ),
         ask: "Pay £120.00".to_owned(),
-        deadline: deadline.to_owned(),
+        deadline: runner::reading::Reading::new(evidence.ordinal, deadline.to_owned()),
         anchor: anchor.to_owned(),
-        amount: "no amount".to_owned(),
+        amount: runner::reading::Reading::absent(evidence.ordinal),
+        refused: Vec::new(),
         confidence: "high".to_owned(),
         due: None,
         evidence: vec![evidence],
         dated_by: None,
         priced_by: None,
-        amount_from: None,
-        deadline_from: None,
         shown: Default::default(),
         disputed: vec![],
     }
@@ -253,14 +255,14 @@ fn a_repeated_ask_is_shown_from_each_passage_that_made_it() {
 fn two_invoices_to_one_payee_by_one_date_stay_two_obligations() {
     let mut a = obligation("by 30 April 2026", "30 April 2026", segment(2, "Invoice A"));
     a.ask = "Pay invoice A".to_owned();
-    a.amount = "£80.00".to_owned();
+    a.amount.value = "£80.00".to_owned();
     let mut b = obligation("by 30 April 2026", "30 April 2026", segment(4, "Invoice B"));
     b.ask = "Pay invoice B".to_owned();
-    b.amount = "£120.00".to_owned();
+    b.amount.value = "£120.00".to_owned();
 
     let sorted = sort_timeline(vec![a, b], &letter_dated("3 March 2026"));
 
-    let amounts: Vec<&str> = sorted.iter().map(|o| o.amount.as_str()).collect();
+    let amounts: Vec<&str> = sorted.iter().map(|o| o.amount.value.as_str()).collect();
     assert_eq!(amounts, vec!["£80.00", "£120.00"], "{sorted:#?}");
 }
 
@@ -268,9 +270,9 @@ fn two_invoices_to_one_payee_by_one_date_stay_two_obligations() {
 #[test]
 fn two_invoices_for_the_same_sum_stay_two_obligations() {
     let mut a = obligation("by 30 April 2026", "30 April 2026", segment(2, "Invoice A"));
-    a.amount = "£80.00".to_owned();
+    a.amount.value = "£80.00".to_owned();
     let mut b = obligation("by 30 April 2026", "30 April 2026", segment(4, "Invoice B"));
-    b.amount = "£80.00".to_owned();
+    b.amount.value = "£80.00".to_owned();
 
     let sorted = sort_timeline(vec![a, b], &letter_dated("3 March 2026"));
     assert_eq!(sorted.len(), 2, "{sorted:#?}");
@@ -368,7 +370,7 @@ fn the_timeline_is_date_ordered_with_undated_obligations_surviving_last() {
         sorted[2].due, None,
         "an unresolvable deadline keeps its phrase and stays visible"
     );
-    assert_eq!(sorted[2].deadline, "when convenient");
+    assert_eq!(sorted[2].deadline.value, "when convenient");
 }
 
 /// The kind survives the sort (#366, #367).
@@ -899,7 +901,7 @@ fn a_pointing_deadline_with_no_row_to_point_at_stays_undated() {
         "no due-date row, so no date: {sorted:#?}"
     );
     assert_eq!(
-        sorted[0].deadline, "by the date shown beside it",
+        sorted[0].deadline.value, "by the date shown beside it",
         "the letter's own words survive to where a person will read them"
     );
 }
@@ -1041,10 +1043,10 @@ fn the_row_a_payment_asks_sum_was_read_from_travels_with_the_claim() {
         segment(19, "EXPD 30/06/2026 51 41.21 41.21 396636183"),
     ];
     let mut asked = obligation("within 7 calendar days", "no particular date", ask);
-    asked.amount = "no amount".to_owned();
+    asked.amount = runner::reading::Reading::absent(asked.amount.at);
     let sorted = sort_timeline(vec![asked], &segments);
 
-    assert_eq!(sorted[0].amount, "41.21 GBP");
+    assert_eq!(sorted[0].amount.value, "41.21 GBP");
     let priced_by = sorted[0]
         .priced_by
         .as_ref()
@@ -1074,21 +1076,21 @@ fn a_sum_is_read_off_a_row_only_where_the_page_labels_exactly_one() {
 
     // Printed in the passage: untouched.
     let mut own = obligation("within 14 days", "the date of this letter", ask());
-    own.amount = "£120.00".to_owned();
+    own.amount.value = "£120.00".to_owned();
     let own = sort_timeline(vec![own], &[ask(), total_row("Total £360.00")]);
-    assert_eq!(own[0].amount, "£120.00");
+    assert_eq!(own[0].amount.value, "£120.00");
     assert!(own[0].priced_by.is_none());
 
     // Not a payment: no sum is looked for.
     let mut reply = obligation("within 14 days", "the date of this letter", ask());
     reply.kind = "response".to_owned();
-    reply.amount = "no amount".to_owned();
+    reply.amount = runner::reading::Reading::absent(reply.amount.at);
     let reply = sort_timeline(vec![reply], &[ask(), total_row("Total £360.00")]);
-    assert_eq!(reply[0].amount, "no amount");
+    assert!(reply[0].amount.is_absent());
 
     // Two totals: ambiguous, so blank.
     let mut two = obligation("within 14 days", "the date of this letter", ask());
-    two.amount = "no amount".to_owned();
+    two.amount = runner::reading::Reading::absent(two.amount.at);
     let two = sort_timeline(
         vec![two],
         &[
@@ -1097,12 +1099,12 @@ fn a_sum_is_read_off_a_row_only_where_the_page_labels_exactly_one() {
             segment(4, "Total £400.00"),
         ],
     );
-    assert_eq!(two[0].amount, "no amount");
+    assert!(two[0].amount.is_absent());
     assert!(two[0].priced_by.is_none());
 
     // The bed's invoice table, read column by column.
     let mut invoice = obligation("within 14 days", "the date of this letter", ask());
-    invoice.amount = "no amount".to_owned();
+    invoice.amount = runner::reading::Reading::absent(invoice.amount.at);
     let invoice = sort_timeline(
         vec![invoice],
         &[
@@ -1110,7 +1112,7 @@ fn a_sum_is_read_off_a_row_only_where_the_page_labels_exactly_one() {
             total_row("Due date 6 March 2026 Sub total £300.00 VAT £60.00 Total £360.00"),
         ],
     );
-    assert_eq!(invoice[0].amount, "£360.00");
+    assert_eq!(invoice[0].amount.value, "£360.00");
     assert_eq!(invoice[0].priced_by.as_ref().map(|s| s.ordinal), Some(3));
 }
 
@@ -1147,23 +1149,28 @@ fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
         "no particular date",
         ask.clone(),
     ));
-    named.amount = "41.21 GBP".to_owned();
-    named.amount_from = Some(9);
+    named.amount = runner::reading::Reading::new(9, "41.21 GBP");
     let named = sort_timeline(vec![named], &segments)[0].clone();
-    assert_eq!(named.amount, "41.21 GBP");
+    assert_eq!(named.amount.value, "41.21 GBP");
     assert_eq!(named.priced_by.as_ref().map(|s| s.ordinal), Some(9));
 
-    // Named and wrong: the figure is not in the named passage, so the
-    // claim is refused rather than hunted for elsewhere.
+    // Named and wrong: the page refused the reading at read time
+    // (`reading::check`, tests/readings.rs), so the sort sees an absent
+    // sum with the refusal beside it — and does not go hunting for one.
     let mut wrong = shown(obligation(
         "within 7 calendar days",
         "no particular date",
         ask.clone(),
     ));
-    wrong.amount = "41.21 GBP".to_owned();
-    wrong.amount_from = Some(11);
+    wrong.amount = runner::reading::Reading::absent(14);
+    wrong.refused = vec![runner::run::RefusedReading {
+        field: "amount".to_owned(),
+        at: 11,
+        value: "41.21 GBP".to_owned(),
+        why: "amount's value is not in passage 11: refused".to_owned(),
+    }];
     let wrong = sort_timeline(vec![wrong], &segments)[0].clone();
-    assert_eq!(wrong.amount, "no amount");
+    assert!(wrong.amount.is_absent(), "{:?}", wrong.amount);
     assert!(wrong.priced_by.is_none());
 
     // A deadline whose date is printed elsewhere: the model names the
@@ -1173,8 +1180,8 @@ fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
         "no particular date",
         ask.clone(),
     ));
-    pointed.amount = "no amount".to_owned();
-    pointed.deadline_from = Some(11);
+    pointed.amount = runner::reading::Reading::absent(14);
+    pointed.deadline = runner::reading::Reading::new(11, "by the date below");
     let pointed = sort_timeline(vec![pointed], &segments)[0].clone();
     assert_eq!(
         pointed.due.as_ref().map(|r| (r.date, r.kind)),
@@ -1189,8 +1196,7 @@ fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
         "no particular date",
         ask.clone(),
     ));
-    own.amount = "no amount".to_owned();
-    own.amount_from = Some(14);
+    own.amount = runner::reading::Reading::absent(14);
     let own = sort_timeline(vec![own], &segments)[0].clone();
     assert!(own.priced_by.is_none());
 }

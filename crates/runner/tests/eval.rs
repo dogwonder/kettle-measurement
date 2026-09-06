@@ -1509,18 +1509,17 @@ fn an_obligation_with_a_different_sum_is_a_different_assertion() {
     };
     let found = |amount: &str| runner::run::Obligation {
         kind: "payment".to_owned(),
-        party: "Elmswood Lettings".to_owned(),
+        party: runner::reading::Reading::new(0, "Elmswood Lettings".to_owned()),
         ask: "Pay the arrears".to_owned(),
-        deadline: "within 14 days".to_owned(),
+        deadline: runner::reading::Reading::new(0, "within 14 days".to_owned()),
         anchor: "the date of this letter".to_owned(),
-        amount: amount.to_owned(),
+        amount: runner::reading::Reading::new(0, amount.to_owned()),
+        refused: Vec::new(),
         confidence: "high".to_owned(),
         due: None,
         evidence: Vec::new(),
         dated_by: None,
         priced_by: None,
-        amount_from: None,
-        deadline_from: None,
         shown: Default::default(),
         disputed: Vec::new(),
     };

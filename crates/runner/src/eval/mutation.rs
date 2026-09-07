@@ -428,7 +428,15 @@ impl MutationHarness {
             for item in &fixture.items {
                 for exchange in &item.exchanges {
                     owner
-                        .entry(super::replay::digest_prompt_only(&exchange.request))
+                        .entry(
+                            exchange
+                                .generation
+                                .as_ref()
+                                .map(|g| g.digest())
+                                .unwrap_or_else(|| {
+                                    super::replay::digest_prompt_only(&exchange.request)
+                                }),
+                        )
                         .or_insert_with(|| fixture.fixture.clone());
                 }
             }

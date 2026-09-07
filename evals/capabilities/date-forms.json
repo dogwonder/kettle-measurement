@@ -1,0 +1,1229 @@
+{
+  "schema_version": 1,
+  "capability": "dates-and-periods",
+  "letter_date": "2026-03-10",
+  "legacy_anchor": "the date of this letter",
+  "cases": [
+    {
+      "id": "date-form-001",
+      "capability": "dates-and-periods",
+      "form": "day-first, month in words",
+      "phrase": "on 6 March 2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-06"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-001-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 6 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-002",
+      "capability": "dates-and-periods",
+      "form": "day-first with an ordinal",
+      "phrase": "on 6th March 2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-06"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-002-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 6th March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-003",
+      "capability": "dates-and-periods",
+      "form": "weekday before the date",
+      "phrase": "on Friday 6 March 2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-06"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-003-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on Friday 6 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-004",
+      "capability": "dates-and-periods",
+      "form": "month abbreviated",
+      "phrase": "on 6 Mar 2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-06"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-004-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 6 Mar 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-005",
+      "capability": "dates-and-periods",
+      "form": "month abbreviated with a stop",
+      "phrase": "on 6 Sept. 2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-09-06"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-005-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 6 Sept. 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-006",
+      "capability": "dates-and-periods",
+      "form": "month-first, month in words",
+      "phrase": "on March 6, 2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-06"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-006-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on March 6, 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-007",
+      "capability": "dates-and-periods",
+      "form": "ISO 8601",
+      "phrase": "on 2026-03-06",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-06"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-007-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 2026-03-06.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-008",
+      "capability": "dates-and-periods",
+      "form": "a time before the day",
+      "phrase": "before 5pm on 6 March 2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-06"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-008-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond before 5pm on 6 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-009",
+      "capability": "dates-and-periods",
+      "form": "on or before",
+      "phrase": "on or before 6 March 2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-06"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-009-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on or before 6 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-010",
+      "capability": "dates-and-periods",
+      "form": "all-numeric, day over twelve",
+      "phrase": "on 20/08/2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-08-20"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-010-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 20/08/2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-011",
+      "capability": "dates-and-periods",
+      "form": "all-numeric, month-first, day over twelve",
+      "phrase": "on 08/20/2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-08-20"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-011-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 08/20/2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-012",
+      "capability": "dates-and-periods",
+      "form": "all-numeric, stops, day over twelve",
+      "phrase": "on 20.8.2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-08-20"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-012-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 20.8.2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-013",
+      "capability": "dates-and-periods",
+      "form": "all-numeric, hyphens, day over twelve",
+      "phrase": "on 20-08-2026",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-08-20"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-013-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 20-08-2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-014",
+      "capability": "dates-and-periods",
+      "form": "all-numeric, both fields twelve or under",
+      "phrase": "on 06/03/2026",
+      "source_truth": {
+        "status": "refused",
+        "reason": "day-first and month-first cannot be told apart, and guessing wrong moves a deadline by up to eleven months"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-014-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 06/03/2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-015",
+      "capability": "dates-and-periods",
+      "form": "all-numeric, stops, both fields twelve or under",
+      "phrase": "on 6.3.2026",
+      "source_truth": {
+        "status": "refused",
+        "reason": "ambiguous for the same reason as slashes"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-015-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 6.3.2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-016",
+      "capability": "dates-and-periods",
+      "form": "all-numeric, two-digit year",
+      "phrase": "on 20/08/26",
+      "source_truth": {
+        "status": "refused",
+        "reason": "a two-digit year names no century, and the day-over-twelve rule cannot settle which field is the year"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-016-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond on 20/08/26.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-017",
+      "capability": "dates-and-periods",
+      "form": "plain days",
+      "phrase": "within 14 days",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-24"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 14,
+          "unit": "days",
+          "qualifier": "none",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-017-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within 14 days. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-018",
+      "capability": "dates-and-periods",
+      "form": "days spelled out",
+      "phrase": "within fourteen days",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-24"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 14,
+          "unit": "days",
+          "qualifier": "none",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-018-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within fourteen days. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-019",
+      "capability": "dates-and-periods",
+      "form": "calendar days",
+      "phrase": "within 14 calendar days",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-24"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 14,
+          "unit": "days",
+          "qualifier": "calendar",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-019-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within 14 calendar days. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-020",
+      "capability": "dates-and-periods",
+      "form": "clear days",
+      "phrase": "within 14 clear days",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-24"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 14,
+          "unit": "days",
+          "qualifier": "clear",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-020-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within 14 clear days. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-021",
+      "capability": "dates-and-periods",
+      "form": "no later than",
+      "phrase": "no later than 14 days",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-24"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 14,
+          "unit": "days",
+          "qualifier": "none",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-021-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond no later than 14 days. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-022",
+      "capability": "dates-and-periods",
+      "form": "in the next",
+      "phrase": "in the next 14 days",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-24"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 14,
+          "unit": "days",
+          "qualifier": "none",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-022-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond in the next 14 days. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-023",
+      "capability": "dates-and-periods",
+      "form": "from, not within",
+      "phrase": "14 days from the date of this letter",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-24"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 14,
+          "unit": "days",
+          "qualifier": "none",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-023-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond 14 days from the date of this letter. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-024",
+      "capability": "dates-and-periods",
+      "form": "weeks",
+      "phrase": "within 2 weeks",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-24"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 2,
+          "unit": "weeks",
+          "qualifier": "none",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-024-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within 2 weeks. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-025",
+      "capability": "dates-and-periods",
+      "form": "a fortnight",
+      "phrase": "within a fortnight",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-24"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 14,
+          "unit": "days",
+          "qualifier": "none",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-025-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within a fortnight. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-026",
+      "capability": "dates-and-periods",
+      "form": "one month",
+      "phrase": "within one month",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-04-10"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 1,
+          "unit": "months",
+          "qualifier": "none",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-026-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within one month. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-027",
+      "capability": "dates-and-periods",
+      "form": "several months",
+      "phrase": "within 3 months",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-06-10"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 3,
+          "unit": "months",
+          "qualifier": "none",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-027-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within 3 months. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-028",
+      "capability": "dates-and-periods",
+      "form": "working days",
+      "phrase": "within 14 working days",
+      "source_truth": {
+        "status": "refused",
+        "reason": "working days need a bank-holiday calendar Kettle does not have, and counting them as calendar days would be wrong by up to a week"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 14,
+          "unit": "days",
+          "qualifier": "working",
+          "counts_from": "letter_date"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-028-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within 14 working days. The period runs from the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-029",
+      "capability": "dates-and-periods",
+      "form": "counted from receipt",
+      "phrase": "within 28 days of receipt",
+      "source_truth": {
+        "status": "refused",
+        "reason": "receipt is a day the letter does not state; counting from the letter's own date answers a question the page did not ask"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 28,
+          "unit": "days",
+          "qualifier": "none",
+          "counts_from": "receipt"
+        },
+        "base_date": null,
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-029-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond within 28 days of receipt.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-030",
+      "capability": "dates-and-periods",
+      "form": "end of the month",
+      "phrase": "by the end of the month",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-31"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "month_end"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-030-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond by the end of the month.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-031",
+      "capability": "dates-and-periods",
+      "form": "end of this month",
+      "phrase": "by the end of this month",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-31"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "month_end"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-031-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond by the end of this month.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-032",
+      "capability": "dates-and-periods",
+      "form": "the last day",
+      "phrase": "by the last day of the month",
+      "source_truth": {
+        "status": "day",
+        "date": "2026-03-31"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "month_end"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": "last-day wording does not meet the current month-end check"
+      },
+      "model_reading": {
+        "case_id": "date-form-032-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond by the last day of the month.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "date-form-033",
+      "capability": "dates-and-periods",
+      "form": "by return",
+      "phrase": "by return of post",
+      "source_truth": {
+        "status": "refused",
+        "reason": "names no day, and the post is not a date"
+      },
+      "provenance": {
+        "kind": "inherited-internal-inventory",
+        "revision": "0b7127cc",
+        "path": "crates/runner/tests/reading_vocabulary.rs",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::resolve_structured after reading::check",
+        "proposal": {
+          "count": 0,
+          "unit": "none",
+          "qualifier": "none",
+          "counts_from": "none"
+        },
+        "base_date": "2026-03-10",
+        "pointed": false,
+        "coverage": "pending-v19-test",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "date-form-033-letter",
+        "document": "10 March 2026\nExample Services\nPlease respond by return of post.",
+        "coverage": "not-measured"
+      }
+    }
+  ]
+}

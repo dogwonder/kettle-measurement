@@ -173,15 +173,43 @@ pub fn render_prompt(
 /// happened.
 pub const MAX_ANSWER_TOKENS: u32 = 4096;
 
+/// The complete generation request, in a versioned, durable envelope.
+/// The payload is the same JSON sent over HTTP, including schema and policy.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct GenerationRequest {
+    pub version: u32,
+    pub payload: serde_json::Value,
+}
+
+impl GenerationRequest {
+    pub const VERSION: u32 = 1;
+
+    pub fn current(prompt: &str, schema: &serde_json::Value) -> Self {
+        Self {
+            version: Self::VERSION,
+            payload: RequestPolicy::current().request(prompt, schema),
+        }
+    }
+
+    pub fn digest(&self) -> String {
+        let bytes = serde_json::to_vec(self).expect("generation request serialises");
+        format!("blake3:generation-v1:{}", blake3::hash(&bytes).to_hex())
+    }
+
+    pub fn prompt(&self) -> Option<&str> {
+        self.payload["messages"][0]["content"].as_str()
+    }
+}
+
 /// The stable part of the chat-completions request Kettle sends.
 ///
 /// A rendered prompt is only one field inside this contract. The same
 /// bytes in a system turn and a user turn are different questions to a
 /// chat template (#328), just as a different output bound or response
 /// format is a different measurement. Run directories record this
-/// policy once beside the model; replay combines it with each recorded
-/// prompt, so a future request-shape change refuses old answers rather
-/// than silently treating them as evidence.
+/// policy once beside the model. New exchanges also retain the complete
+/// payload, including the schema; legacy replay has only policy and prompt.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub(crate) struct RequestPolicy {
     pub(crate) model: String,
@@ -201,6 +229,17 @@ impl RequestPolicy {
             temperature: 0,
             message_role: "user".to_owned(),
             max_tokens: MAX_ANSWER_TOKENS,
+            response_format: "json_schema".to_owned(),
+        }
+    }
+
+    // Frozen pre-identity archive policy, never today's evolving defaults.
+    pub(crate) fn legacy() -> Self {
+        RequestPolicy {
+            model: "local".to_owned(),
+            temperature: 0,
+            message_role: "user".to_owned(),
+            max_tokens: 4096,
             response_format: "json_schema".to_owned(),
         }
     }
@@ -280,6 +319,7 @@ pub struct ModelMetrics {
 
 #[derive(Debug, Clone)]
 pub struct Endpoint {
+    runtime_identity: Option<crate::eval::resume::RuntimeIdentity>,
     base_url: String,
     metrics: Arc<Mutex<ModelTotals>>,
     /// Answers recorded by an earlier run (#288). When present no HTTP
@@ -292,23 +332,23 @@ pub struct Endpoint {
 impl Endpoint {
     pub fn local(port: u16) -> Self {
         Endpoint {
+            runtime_identity: None,
             base_url: format!("http://127.0.0.1:{port}"),
             metrics: Arc::new(Mutex::new(ModelTotals::default())),
             recording: None,
         }
     }
 
-    /// An endpoint that answers only from what an earlier run recorded.
-    ///
-    /// At temperature 0, with a fixed prompt, schema and model, the
-    /// answer is deterministic — the property the whole eval discipline
-    /// already rests on — so replaying it is sound. What makes it
-    /// *safe* is that the lookup is keyed on the request itself: a
-    /// changed prompt or schema produces a different request, finds no
-    /// recorded answer, and fails loudly rather than scoring the new
-    /// prompt against the old prompt's answers.
+    /// Whether this endpoint includes legacy requests without a schema identity.
+    pub fn replay_compatibility(&self) -> Option<crate::eval::replay::ReplayCompatibility> {
+        self.recording.as_ref().map(|r| r.compatibility())
+    }
+
+    /// Answer only from the recording. New recordings require complete request
+    /// identity; legacy archives expose their weaker matching in the report.
     pub fn replaying(recording: crate::eval::replay::Recording) -> Self {
         Endpoint {
+            runtime_identity: None,
             base_url: String::new(),
             metrics: Arc::new(Mutex::new(ModelTotals::default())),
             recording: Some(Arc::new(recording)),
@@ -319,6 +359,23 @@ impl Endpoint {
         self.metrics
             .lock()
             .unwrap_or_else(|poisoned| poisoned.into_inner())
+    }
+
+    /// The caller supplies the identity of the runtime it actually started.
+    pub fn with_runtime_identity(mut self, identity: crate::eval::resume::RuntimeIdentity) -> Self {
+        self.runtime_identity = Some(identity);
+        self
+    }
+
+    pub(crate) fn resume_identity(&self) -> Option<serde_json::Value> {
+        if let Some(recording) = &self.recording {
+            let answers: Vec<_> = recording.entries().collect();
+            return Some(serde_json::json!({"mode":"replay", "answers_digest":
+                blake3::hash(&serde_json::to_vec(&answers).expect("recording serialises")).to_hex().to_string()}));
+        }
+        self.runtime_identity
+            .as_ref()
+            .map(|identity| serde_json::json!({"mode":"live", "runtime":identity}))
     }
 
     fn record_completion(&self, envelope: &serde_json::Value) {
@@ -473,9 +530,30 @@ pub fn call_constrained(
     // `finish_reason: "length"` and the truncation path below. Both
     // choices come from the recorded policy, so executed and replayed
     // request identity cannot drift.
-    let request = RequestPolicy::current().request(prompt, schema);
+    let request = GenerationRequest::current(prompt, schema).payload;
 
     let transport = |e: &dyn std::fmt::Display| ModelCallError::Transport(e.to_string());
+
+    // A replay never reaches the network. The request is the key, so
+    // this both serves the recorded answer and refuses a prompt the
+    // recording knows nothing about. Everything below — the truncation
+    // check, the schema re-validation — runs on a replayed answer
+    // exactly as on a live one: a replay must be scored by the same
+    // rules or it is not the same measurement.
+    if let Some(recording) = &endpoint.recording {
+        let body = recording.answer_for(prompt, schema).ok_or_else(|| {
+            ModelCallError::Transport(
+                "this replay has no recorded answer for one of the questions asked. \
+                 The prompt, schema or examples have changed since the recording, so \
+                 those answers are not evidence about these questions — record again."
+                    .to_owned(),
+            )
+        })?;
+        // A run directory records the model's parsed answer, not the
+        // server's envelope, so it is validated directly — by the same
+        // schema rules a live answer meets.
+        return validate_answer(schema, &body, &transport);
+    }
 
     let url = format!("{}/v1/chat/completions", endpoint.base_url);
     let payload = request.to_string();
@@ -500,27 +578,6 @@ pub fn call_constrained(
         // Nobody listening means the call was cancelled meanwhile.
         send_exchange.send(result).ok();
     });
-
-    // A replay never reaches the network. The request is the key, so
-    // this both serves the recorded answer and refuses a prompt the
-    // recording knows nothing about. Everything below — the truncation
-    // check, the schema re-validation — runs on a replayed answer
-    // exactly as on a live one: a replay must be scored by the same
-    // rules or it is not the same measurement.
-    if let Some(recording) = &endpoint.recording {
-        let body = recording.answer_for(prompt, schema).ok_or_else(|| {
-            ModelCallError::Transport(
-                "this replay has no recorded answer for one of the questions asked. \
-                 The prompt, schema or examples have changed since the recording, so \
-                 those answers are not evidence about these questions — record again."
-                    .to_owned(),
-            )
-        })?;
-        // A run directory records the model's parsed answer, not the
-        // server's envelope, so it is validated directly — by the same
-        // schema rules a live answer meets.
-        return validate_answer(schema, &body, &transport);
-    }
 
     let (status, body) = loop {
         if cancel.load(Ordering::Relaxed) {
@@ -792,14 +849,31 @@ impl BatchContext<'_> {
         &self,
         items: &[BatchItem],
         prompt: &str,
+        schema: &serde_json::Value,
+        endpoint: &Endpoint,
         result: Result<serde_json::Value, E>,
     ) -> Result<serde_json::Value, E> {
         let response = match &result {
             Ok(answer) => answer.to_string(),
             Err(e) => e.to_string(),
         };
-        self.log
-            .exchange(self.step, self.batch, items, prompt, &response);
+        // Replaying a legacy answer cannot upgrade its missing request identity.
+        if endpoint
+            .recording
+            .as_ref()
+            .is_some_and(|r| !r.has_exact(prompt, schema))
+        {
+            self.log
+                .exchange(self.step, self.batch, items, prompt, &response);
+        } else {
+            self.log.generation(
+                self.step,
+                self.batch,
+                items,
+                &GenerationRequest::current(prompt, schema),
+                &response,
+            );
+        }
         result
     }
 }
@@ -935,6 +1009,8 @@ fn ask_batch(
     let answer = match context.record(
         batch,
         &prompt,
+        schema,
+        endpoint,
         call_constrained(endpoint, &prompt, schema, context.cancel),
     ) {
         Ok(answer) => answer,
@@ -954,6 +1030,8 @@ fn ask_batch(
             match context.record(
                 batch,
                 &retry_prompt,
+                schema,
+                endpoint,
                 call_constrained(endpoint, &retry_prompt, schema, context.cancel),
             ) {
                 Ok(answer) => answer,

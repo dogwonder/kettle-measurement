@@ -23,6 +23,156 @@ use super::{EvalSet, FixtureResult};
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
+/// Inputs of a live endpoint that ModelInfo alone cannot describe. A caller
+/// without this identity can still evaluate, but cannot reuse cached results.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct RuntimeIdentity {
+    pub sidecar_digest: String,
+    pub policy: super::RuntimePolicy,
+    pub threads: usize,
+    /// Only a digest is kept: inherited environment values may be private.
+    pub environment_digest: String,
+}
+
+impl RuntimeIdentity {
+    pub fn for_sidecar(
+        binary: &Path,
+        runtime: &crate::sidecar::SidecarRuntime,
+    ) -> Result<Self, String> {
+        let mut environment: Vec<_> = std::env::vars_os().collect();
+        environment.sort();
+        let mut hasher = blake3::Hasher::new();
+        for (key, value) in environment {
+            hash_part(&mut hasher, key.as_encoded_bytes());
+            hash_part(&mut hasher, value.as_encoded_bytes());
+        }
+        Ok(Self {
+            sidecar_digest: bundle_identity(binary)?,
+            policy: super::RuntimePolicy::effective(runtime),
+            threads: crate::sidecar::quiet_threads(num_cpus::get_physical()),
+            environment_digest: format!("blake3:{}", hasher.finalize().to_hex()),
+        })
+    }
+}
+
+fn hash_part(hasher: &mut blake3::Hasher, bytes: &[u8]) {
+    hasher.update(&(bytes.len() as u64).to_le_bytes());
+    hasher.update(bytes);
+}
+
+/// Stream the actual file once per evaluation, without loading weights.
+pub fn file_identity(path: &Path) -> Result<String, String> {
+    let file = std::fs::File::open(path)
+        .map_err(|e| format!("cannot identify {}: {e}", path.display()))?;
+    let mut hasher = blake3::Hasher::new();
+    hasher
+        .update_reader(file)
+        .map_err(|e| format!("cannot identify {}: {e}", path.display()))?;
+    Ok(format!("blake3:{}", hasher.finalize().to_hex()))
+}
+
+/// Vendored executables may be launchers: include their bundled shared libraries.
+pub fn bundle_identity(binary: &Path) -> Result<String, String> {
+    let mut parts = vec![("executable".to_owned(), file_identity(binary)?)];
+    let parent = binary.parent().ok_or("runtime binary has no directory")?;
+    for entry in std::fs::read_dir(parent).map_err(|e| e.to_string())? {
+        let entry = entry.map_err(|e| e.to_string())?;
+        let name = entry.file_name().to_string_lossy().into_owned();
+        if entry.path() != binary
+            && (name.ends_with(".dylib") || name.ends_with(".dll") || name.contains(".so"))
+        {
+            parts.push((name, file_identity(&entry.path())?));
+        }
+    }
+    parts.sort();
+    let bytes = serde_json::to_vec(&parts).expect("file identities serialise");
+    Ok(format!("blake3:{}", blake3::hash(&bytes).to_hex()))
+}
+
+/// The manifest in memory governs execution; hashing only pack.json could miss
+/// a caller's effective overrides. Debug is deterministic for these data-only,
+/// ordered types, and the executable digest versions its representation too.
+fn pipeline_identity(pack: &crate::packs::Pack) -> Result<String, String> {
+    let mut hasher = blake3::Hasher::new();
+    hash_part(&mut hasher, b"kettle-effective-pipeline-v1");
+    hash_part(&mut hasher, format!("{:?}", pack.manifest).as_bytes());
+    for step in &pack.manifest.pipeline {
+        for path in crate::packs::referenced_files(step) {
+            hash_part(&mut hasher, path.as_bytes());
+            let bytes = std::fs::read(pack.dir.join(path))
+                .map_err(|e| format!("cannot identify pipeline input {path}: {e}"))?;
+            hash_part(&mut hasher, &bytes);
+        }
+    }
+    Ok(format!("blake3:{}", hasher.finalize().to_hex()))
+}
+
+pub(crate) fn effective_identity(
+    evaluator: &super::fixture::FixtureEvaluator,
+    pack: &crate::packs::Pack,
+) -> Result<Option<(String, String)>, String> {
+    let asking = match &evaluator.answers {
+        crate::run::Answers::WithoutModel => serde_json::json!({"mode":"without-model"}),
+        crate::run::Answers::FromModel(endpoint) => {
+            let Some(identity) = endpoint.resume_identity() else {
+                return Ok(None);
+            };
+            if endpoint.replay_compatibility().is_none()
+                && evaluator
+                    .model
+                    .as_ref()
+                    .and_then(|m| m.weights_digest.as_ref())
+                    .is_none()
+            {
+                return Ok(None);
+            }
+            identity
+        }
+    };
+    // Once per process, not once per fixture. Any compiled pipeline, verifier,
+    // feature or scoring implementation change invalidates cached whole results.
+    static EXECUTABLE: std::sync::OnceLock<Result<String, String>> = std::sync::OnceLock::new();
+    let executable = EXECUTABLE
+        .get_or_init(|| {
+            let path = std::env::current_exe().map_err(|e| e.to_string())?;
+            file_identity(&path)
+        })
+        .as_ref()
+        .map_err(Clone::clone)?;
+    let pdfium = evaluator
+        .pdfium_dir
+        .as_ref()
+        .map(|dir| {
+            let name = if cfg!(target_os = "windows") {
+                "pdfium.dll"
+            } else if cfg!(target_os = "macos") {
+                "libpdfium.dylib"
+            } else {
+                "libpdfium.so"
+            };
+            let path = dir.join(name);
+            if path.exists() {
+                file_identity(&path).map(Some)
+            } else {
+                Ok(None)
+            }
+        })
+        .transpose()?;
+    let identity = serde_json::json!({
+        "version": 2, "asking": asking, "model": evaluator.model,
+        "sidecar": evaluator.sidecar, "machine": evaluator.machine,
+        "request_policy": crate::exec::RequestPolicy::current(),
+        "executable": executable, "pdfium": pdfium,
+    });
+    Ok(Some((
+        pipeline_identity(pack)?,
+        format!(
+            "blake3:{}",
+            blake3::hash(identity.to_string().as_bytes()).to_hex()
+        ),
+    )))
+}
+
 /// Everything that must be identical before one fixture's score may be
 /// reused. Each field prevents a specific wrong answer; the tests name
 /// them one by one.
@@ -31,10 +181,11 @@ pub struct ResumeKey {
     pub pack: String,
     /// A 1.2.0 fixture must not be scored into a 1.3.0 run.
     pub pack_version: String,
-    /// blake3 of the prompt, its examples and its schema. An
-    /// unmeasured prompt edit is the one change this project cannot
-    /// review (CLAUDE.md), and half-measuring one is worse.
+    /// Digest of the effective manifest and every referenced pipeline file.
+    /// The field name is retained for serialisation compatibility.
     pub prompt_version: String,
+    /// Digest of the complete execution identity, including weight bytes,
+    /// runtime and compiled evaluator. The field name predates this scope.
     pub model: String,
     /// The weights are pinned; the sidecar is not, and a version bump
     /// can change grammar-constrained sampling on its own (#74).
@@ -44,8 +195,7 @@ pub struct ResumeKey {
     /// on CUDA — 53 of 852 passages on 1 September 2026 — and a run
     /// interrupted on one runtime and resumed on another would present
     /// both sets of answers as one recording (#596). The whole device
-    /// string, not only the backend: resume is a promise of
-    /// byte-identity, and only the same runtime keeps it.
+    /// string, not only the backend: reuse requires the same execution inputs.
     pub device: String,
     pub scoring_version: u32,
     /// The sealed exam selection must never be spent by accident.
@@ -62,6 +212,7 @@ impl ResumeKey {
     /// collisions waiting in it.
     fn file_name(&self) -> String {
         let mut hasher = blake3::Hasher::new();
+        hasher.update(b"kettle-resume-v2\0");
         // Length-prefixed, so two different keys cannot concatenate
         // into the same bytes — the same reasoning as the prompt
         // digest's.

@@ -1,0 +1,698 @@
+{
+  "schema_version": 1,
+  "capability": "money-and-quantities",
+  "letter_date": "2026-03-10",
+  "cases": [
+    {
+      "id": "money-form-001",
+      "capability": "money-and-quantities",
+      "form": "pounds, pence",
+      "phrase": "£75.50",
+      "source_truth": {
+        "status": "sum",
+        "amount": "75.50",
+        "currency": "GBP"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "Do not use decimals unless pence are included: £75.50"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money — whole money token, £/€/$ sign or trailing GBP/EUR/USD, thousands commas, optional two-digit pence",
+        "coverage": "main-check",
+        "known_gap": null,
+        "check": {
+          "kind": "Money",
+          "value": "£75.50",
+          "expected": "supported"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-001-letter",
+        "document": "10 March 2026\nExample Services\nThe total due is £75.50.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-002",
+      "capability": "money-and-quantities",
+      "form": "pounds, no pence",
+      "phrase": "£75",
+      "source_truth": {
+        "status": "sum",
+        "amount": "75",
+        "currency": "GBP"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "Use the £ symbol: £75"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money — whole money token, £/€/$ sign or trailing GBP/EUR/USD, thousands commas, optional two-digit pence",
+        "coverage": "main-check",
+        "known_gap": null,
+        "check": {
+          "kind": "Money",
+          "value": "£75",
+          "expected": "supported"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-002-letter",
+        "document": "10 March 2026\nExample Services\nA late fee of £75 applies.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-003",
+      "capability": "money-and-quantities",
+      "form": "thousands comma",
+      "phrase": "£1,250.00",
+      "source_truth": {
+        "status": "sum",
+        "amount": "1250.00",
+        "currency": "GBP"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "Insert a comma for clarity: 9,000"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money — whole money token, £/€/$ sign or trailing GBP/EUR/USD, thousands commas, optional two-digit pence",
+        "coverage": "main-check",
+        "known_gap": null,
+        "check": {
+          "kind": "Money",
+          "value": "£1,250.00",
+          "expected": "supported"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-003-letter",
+        "document": "10 March 2026\nExample Services\nThe balance of £1,250.00 is now overdue.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-004",
+      "capability": "money-and-quantities",
+      "form": "trailing currency code",
+      "phrase": "41.21 GBP",
+      "source_truth": {
+        "status": "sum",
+        "amount": "41.21",
+        "currency": "GBP"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money — whole money token, £/€/$ sign or trailing GBP/EUR/USD, thousands commas, optional two-digit pence",
+        "coverage": "main-check",
+        "known_gap": null,
+        "check": {
+          "kind": "Money",
+          "value": "41.21 GBP",
+          "expected": "supported"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-004-letter",
+        "document": "10 March 2026\nExample Services\nAmount Due 41.21 GBP 009422",
+        "coverage": "not-measured"
+      },
+      "notes": "the form the first real letter printed (#612)"
+    },
+    {
+      "id": "money-form-005",
+      "capability": "money-and-quantities",
+      "form": "leading currency code",
+      "phrase": "GBP 41.21",
+      "source_truth": {
+        "status": "sum",
+        "amount": "41.21",
+        "currency": "GBP"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "a leading code is not read; only a trailing GBP/EUR/USD is",
+        "check": {
+          "kind": "Money",
+          "value": "GBP 41.21",
+          "expected": "not-a-sum"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-005-letter",
+        "document": "10 March 2026\nExample Services\nAmount Due GBP 41.21",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-006",
+      "capability": "money-and-quantities",
+      "form": "bare figure with pence",
+      "phrase": "1,250.00",
+      "source_truth": {
+        "status": "sum",
+        "amount": "1250.00",
+        "currency": "absent",
+        "note": "currency is not stated; the column header would say"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money — whole money token, £/€/$ sign or trailing GBP/EUR/USD, thousands commas, optional two-digit pence",
+        "coverage": "main-check",
+        "known_gap": null,
+        "check": {
+          "kind": "Money",
+          "value": "1,250.00",
+          "expected": "supported"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-006-letter",
+        "document": "10 March 2026\nExample Services\nTotal 1,250.00",
+        "coverage": "not-measured"
+      },
+      "notes": "accepted as a sum because pence are present; the currency is the reader's inference and the truth says so"
+    },
+    {
+      "id": "money-form-007",
+      "capability": "money-and-quantities",
+      "form": "bare figure, no pence",
+      "phrase": "1,250",
+      "source_truth": {
+        "status": "ambiguous",
+        "reason": "a count or a sum; nothing in the token says which"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "refused by design: a figure with neither sign, code nor pence is a count",
+        "check": {
+          "kind": "Money",
+          "value": "1,250",
+          "expected": "not-a-sum"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-007-letter",
+        "document": "10 March 2026\nExample Services\nUnits 1,250",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-008",
+      "capability": "money-and-quantities",
+      "form": "millions in words",
+      "phrase": "£1.5 million",
+      "source_truth": {
+        "status": "sum",
+        "amount": "1500000",
+        "currency": "GBP"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "£1.5 million"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "'million' is not read; the token ends at £1.5, which has one decimal and is refused",
+        "check": {
+          "kind": "Money",
+          "value": "£1.5 million",
+          "expected": "not-a-sum"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-008-letter",
+        "document": "10 March 2026\nExample Services\nThe fund holds £1.5 million.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-009",
+      "capability": "money-and-quantities",
+      "form": "pence in words",
+      "phrase": "4 pence per minute",
+      "source_truth": {
+        "status": "rate",
+        "amount": "0.04",
+        "currency": "GBP",
+        "per": "minute"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "4 pence per minute"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "pence in words are not a money token",
+        "check": {
+          "kind": "Money",
+          "value": "4 pence per minute",
+          "expected": "not-a-sum"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-009-letter",
+        "document": "10 March 2026\nExample Services\nCalls cost 4 pence per minute.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-010",
+      "capability": "money-and-quantities",
+      "form": "negative in parentheses",
+      "phrase": "(£12.00)",
+      "source_truth": {
+        "status": "sum",
+        "amount": "-12.00",
+        "currency": "GBP",
+        "note": "a credit or refund"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "the sign convention is not read; £12.00 inside the brackets is accepted as a positive sum (#595 money qualifiers)",
+        "check": {
+          "kind": "Money",
+          "value": "£12.00",
+          "expected": "accepted-misread"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-010-letter",
+        "document": "10 March 2026\nExample Services\nAdjustment (£12.00)",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-011",
+      "capability": "money-and-quantities",
+      "form": "credit marked CR",
+      "phrase": "£12.00 CR",
+      "source_truth": {
+        "status": "sum",
+        "amount": "-12.00",
+        "currency": "GBP"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "CR is not read; the sum reads positive",
+        "check": {
+          "kind": "Money",
+          "value": "£12.00",
+          "expected": "accepted-misread"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-011-letter",
+        "document": "10 March 2026\nExample Services\nBalance £12.00 CR",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-012",
+      "capability": "money-and-quantities",
+      "form": "VAT-exclusive total",
+      "phrase": "£300.00 excluding VAT",
+      "source_truth": {
+        "status": "sum",
+        "amount": "300.00",
+        "currency": "GBP",
+        "basis": "excluding VAT",
+        "note": "the total payable is £360.00 at 20%"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK: invoices — what they must include",
+          "locator": "GOV.UK, Invoicing and taking payment from customers, section: Invoices — what they must include",
+          "quoted_rule": "an invoice must include the amount(s) being charged, VAT amount if applicable, and the total amount owed"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "the qualifier is not read: £300.00 verifies as a sum, and nothing says it is not the total (#595)",
+        "check": {
+          "kind": "Money",
+          "value": "£300.00",
+          "expected": "accepted-misread"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-012-letter",
+        "document": "10 March 2026\nExample Services\nSub total £300.00 excluding VAT\nVAT £60.00\nTotal £360.00",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-013",
+      "capability": "money-and-quantities",
+      "form": "instalment beside annual total",
+      "phrase": "first instalment of £305.29",
+      "source_truth": {
+        "status": "sum",
+        "amount": "305.29",
+        "currency": "GBP",
+        "selected": "instalment",
+        "also": {
+          "annual_total": "3052.90"
+        }
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money verifies whichever figure the model names; which figure the ask is for is the model's choice",
+        "coverage": "model-judgement",
+        "known_gap": "choosing the instalment over the total is not verified; the kettle-examples truth authors it (first batch)"
+      },
+      "model_reading": {
+        "case_id": "money-form-013-letter",
+        "document": "10 March 2026\nExample Services\nYour council tax for the year is £3,052.90. Your first instalment of £305.29 is due by 3 April 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-014",
+      "capability": "money-and-quantities",
+      "form": "monthly versus annual",
+      "phrase": "£24.99 a month",
+      "source_truth": {
+        "status": "rate",
+        "amount": "24.99",
+        "currency": "GBP",
+        "per": "month",
+        "note": "£299.88 a year is a derived figure the letter does not print"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "the period is not read; the renewal pack's basis enum carries it for policy terms, the letter pack has no field (#595)",
+        "check": {
+          "kind": "Money",
+          "value": "£24.99",
+          "expected": "accepted-misread"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-014-letter",
+        "document": "10 March 2026\nExample Services\nYour premium is £24.99 a month.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-015",
+      "capability": "money-and-quantities",
+      "form": "range",
+      "phrase": "between £40 and £60",
+      "source_truth": {
+        "status": "range",
+        "low": "40",
+        "high": "60",
+        "currency": "GBP"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "a range is two tokens; one reading carries one",
+        "check": {
+          "kind": "Money",
+          "value": "between £40 and £60",
+          "expected": "not-a-sum"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-015-letter",
+        "document": "10 March 2026\nExample Services\nThe call-out charge is between £40 and £60.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-016",
+      "capability": "money-and-quantities",
+      "form": "percentage, not money",
+      "phrase": "20%",
+      "source_truth": {
+        "status": "percentage",
+        "value": "20"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "Always use % with a number: 50%"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.renewal-diff",
+        "idea:freelance-invoice-audit",
+        "idea:receipt-batch",
+        "idea:energy-tariff-audit"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "a percentage is not a money token and is refused; nothing else reads it",
+        "check": {
+          "kind": "Money",
+          "value": "20%",
+          "expected": "not-a-sum"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-016-letter",
+        "document": "10 March 2026\nExample Services\nVAT is charged at 20%.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "money-form-017",
+      "capability": "money-and-quantities",
+      "form": "amount absent",
+      "phrase": "no sum is printed",
+      "source_truth": {
+        "status": "absent"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money — whole money token, £/€/$ sign or trailing GBP/EUR/USD, thousands commas, optional two-digit pence",
+        "coverage": "main-check",
+        "known_gap": null,
+        "check": {
+          "kind": "Money",
+          "value": "",
+          "expected": "absent"
+        }
+      },
+      "model_reading": {
+        "case_id": "money-form-017-letter",
+        "document": "10 March 2026\nExample Services\nPlease pay the outstanding balance. There is no sum is printed here; see your statement.",
+        "coverage": "not-measured"
+      },
+      "notes": "an empty reading is the defined absence; the finder that used to search for a labelled row is retired in #628"
+    }
+  ]
+}

@@ -827,6 +827,7 @@ dependencies = [
  "blake3",
  "chrono",
  "clap",
+ "jsonschema",
  "runner",
  "rust_decimal",
  "serde",

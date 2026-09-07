@@ -1309,12 +1309,14 @@ fn the_pooled_gate_is_read_by_its_wilson_lower_bound_not_its_point_estimate() {
 
 fn report_of(fixtures: Vec<FixtureResult>) -> EvalReport {
     EvalReport {
+        replay_compatibility: None,
         unrunnable: Vec::new(),
         reused_fixtures: 0,
         pack: "app.kttl.subscription-audit".to_string(),
         pack_version: "1.0.0".to_string(),
         eval_set: runner::eval::fixture::EvalSelection::Development,
         model: Some(ModelInfo {
+            weights_digest: None,
             file: "qwen2.5-3b-instruct-q4_k_m.gguf".to_string(),
             params: "3B".to_string(),
             quant: "Q4_K_M".to_string(),

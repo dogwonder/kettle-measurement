@@ -234,9 +234,14 @@ pub fn resolve_structured(
     }
 
     // The end of a month names no count and no unit: a base and an
-    // operation, verified as *end* and *month* both present.
+    // operation, verified as *end* and *month* both present — or the
+    // month's *last day*, which is the same day said the other way
+    // (`date-forms.json` row 032, the one form the words give without
+    // the word *end*). A check of what the reading claims against the
+    // words, not a search for the phrase.
     if read.counts_from == "month_end" {
-        if !(has("end") && (has("month") || has("months"))) {
+        let says_end = has("end") || (has("last") && has("day"));
+        if !(says_end && (has("month") || has("months"))) {
             return Err(contradicted("month end the words never gave"));
         }
         // A count is a period the words never gave; a unit of months

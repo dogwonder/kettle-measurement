@@ -47,12 +47,14 @@ fn packs_dir(dir: &Path, packs: &[&str]) -> PathBuf {
 /// A report every fixture of which passes cleanly.
 fn report(pack: &str, model: &str) -> EvalReport {
     EvalReport {
+        replay_compatibility: None,
         unrunnable: Vec::new(),
         reused_fixtures: 0,
         pack: pack.to_owned(),
         pack_version: "1.0.0".to_owned(),
         eval_set: runner::eval::fixture::EvalSelection::Development,
         model: Some(ModelInfo {
+            weights_digest: None,
             file: model.to_owned(),
             params: "3B".to_owned(),
             quant: "Q4_K_M".to_owned(),
@@ -266,6 +268,7 @@ fn classification_item(actual_kind: &str, response: &str) -> ScoredItem {
         trace_ids: Vec::new(),
         confidence: None,
         exchanges: vec![ModelExchange {
+            generation: None,
             step: "classify".to_owned(),
             batch: 1,
             request: format!("classify PureGym for {response}"),
@@ -319,6 +322,7 @@ fn extraction_item(
         trace_ids: Vec::new(),
         confidence: None,
         exchanges: vec![ModelExchange {
+            generation: None,
             step: "obligations".to_owned(),
             batch: 1,
             request: "what does this passage oblige?".to_owned(),

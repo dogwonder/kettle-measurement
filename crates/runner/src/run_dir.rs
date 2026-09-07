@@ -11,6 +11,7 @@
 //! <root>/<run-id>/
 //!   run.json          input names, sizes and hashes, and the model
 //!   raw/0001-grouping-payments-by-merchant.request.txt   (the prompt)
+//!   raw/0001-grouping-payments-by-merchant.generation.json (versioned payload)
 //!   raw/0001-grouping-payments-by-merchant.response.json (the answer)
 //!   claims.json       kettle/claim-traces@0 diagnostic lifecycle
 //!   results.json      kettle/run-report@0
@@ -33,6 +34,25 @@ use std::path::{Component, Path, PathBuf};
 /// stop logging, not a reason to lose the answers. Errors are swallowed
 /// deliberately, which is why nothing here returns `Result`.
 pub trait RunLog {
+    /// A request whose complete generation identity is known. Older custom
+    /// loggers may still consume just the diagnostic prompt/answer pair.
+    fn generation(
+        &self,
+        step: &str,
+        batch: usize,
+        items: &[crate::exec::BatchItem],
+        request: &crate::exec::GenerationRequest,
+        response: &str,
+    ) {
+        self.exchange(
+            step,
+            batch,
+            items,
+            request.prompt().expect("generated prompt"),
+            response,
+        );
+    }
+
     /// One model exchange, exactly as it went over the wire.
     fn exchange(
         &self,
@@ -153,6 +173,10 @@ struct RecordedInput {
 
 #[derive(serde::Serialize, serde::Deserialize, Default)]
 struct RunManifest {
+    /// Missing on legacy prompt-only recordings. New recordings cannot fall
+    /// back to legacy matching if an identity file is missing or damaged.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    generation_request_version: Option<u32>,
     #[serde(default)]
     inputs: Vec<RecordedInput>,
     /// Which model answered, when one did (#303).
@@ -326,6 +350,37 @@ impl RunDir {
 }
 
 impl RunLog for RunDir {
+    fn generation(
+        &self,
+        step: &str,
+        batch: usize,
+        items: &[crate::exec::BatchItem],
+        request: &crate::exec::GenerationRequest,
+        response: &str,
+    ) {
+        let mut manifest = self.manifest();
+        manifest.generation_request_version = Some(crate::exec::GenerationRequest::VERSION);
+        if self.write_manifest(&manifest).is_err() {
+            return;
+        }
+        let path = self.path.join("raw").join(format!(
+            "{:04}-{}.generation.json",
+            self.next.get(),
+            slug(step)
+        ));
+        let contents = serde_json::to_vec_pretty(request).expect("generation request serialises");
+        if std::fs::write(path, contents).is_err() {
+            return;
+        }
+        self.exchange(
+            step,
+            batch,
+            items,
+            request.prompt().expect("generated prompt"),
+            response,
+        );
+    }
+
     /// `raw/0001-<slug of step>.request.txt` and `.response.json`.
     ///
     /// The request is the *rendered prompt*, not the HTTP payload, so it

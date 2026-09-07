@@ -22,6 +22,60 @@ fn schema() -> serde_json::Value {
 }
 
 #[test]
+fn disk_replay_refuses_an_expanded_enum_even_when_the_old_answer_is_valid() {
+    use runner::exec::{render_prompt, run_batch, BatchContext, BatchItem};
+    use runner::run_dir::RunDir;
+    let dir = std::env::temp_dir().join(format!("kettle-disk-schema-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&dir);
+    let log = RunDir::create(&dir, "recording").unwrap();
+    let schema = serde_json::json!({
+        "type": "object", "required": ["results"],
+        "properties": {"results": {"type": "array", "items": {
+            "type": "object", "properties": {"choice": {"enum": ["yes"]}}
+        }}}
+    });
+    let body = r#"{"results":[{"id":0,"raw":"one","choice":"yes"}]}"#;
+    let model = MockModel::respond_once("200 OK", completion_envelope(body));
+    let batch = [BatchItem::new(0, "one")];
+    let template = "Read {{ batch_json }}";
+    let context = BatchContext {
+        log: &log,
+        step: "Read",
+        batch: 1,
+        cancel: &AtomicBool::new(false),
+    };
+    run_batch(
+        &model.endpoint(),
+        template,
+        None,
+        &schema,
+        &batch,
+        "raw",
+        &context,
+    )
+    .unwrap();
+    let recording = Recording::from_run_dirs(&dir).unwrap();
+    let endpoint = Endpoint::replaying(recording);
+    let prompt = render_prompt(template, &batch, None).unwrap();
+    assert_eq!(
+        call_constrained(&endpoint, &prompt, &schema, context.cancel).unwrap()["results"][0]
+            ["choice"],
+        "yes"
+    );
+    let mut widened = schema.clone();
+    widened["properties"]["results"]["items"]["properties"]["choice"]["enum"] =
+        serde_json::json!(["yes", "no"]);
+    assert!(jsonschema::is_valid(
+        &widened,
+        &serde_json::from_str::<serde_json::Value>(body).unwrap()
+    ));
+    let error = call_constrained(&endpoint, &prompt, &widened, context.cancel)
+        .expect_err("different generation request");
+    assert!(error.to_string().contains("no recorded answer"));
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
 fn a_replayed_answer_is_served_without_asking_any_model() {
     // No endpoint, no port, no server — if this reaches the network it
     // fails, which is the assertion.
@@ -447,6 +501,8 @@ fn a_recording_replays_whether_its_request_was_named_txt_or_json() {
 
     let recording = Recording::from_run_dirs(&dir).expect("the recording loads");
     assert_eq!(recording.len(), 2, "both namings are answers");
+    assert_eq!(recording.compatibility().legacy_prompt_only_requests, 2);
+    assert_eq!(recording.compatibility().exact_requests, 0);
 
     let endpoint = Endpoint::replaying(recording);
     let fresh_answer = call_constrained(
@@ -467,4 +523,99 @@ fn a_recording_replays_whether_its_request_was_named_txt_or_json() {
     )
     .expect("the archived .json recording still serves");
     assert_eq!(archived_answer["results"][0]["name"], "Bandcamp");
+}
+
+#[test]
+fn new_recordings_refuse_missing_corrupt_or_unknown_generation_identity() {
+    use runner::exec::GenerationRequest;
+    use runner::run_dir::{RunDir, RunLog};
+    let root =
+        std::env::temp_dir().join(format!("kettle-recording-identity-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&root);
+    let dir = RunDir::create(&root, "new").unwrap();
+    let request = GenerationRequest::current("Read", &schema());
+    dir.generation("Read", 1, &[], &request, r#"{"results":[]}"#);
+    let identity = dir.path.join("raw/0001-read.generation.json");
+    let original = std::fs::read(&identity).unwrap();
+    assert_eq!(
+        Recording::from_run_dirs(&root)
+            .unwrap()
+            .compatibility()
+            .exact_requests,
+        1
+    );
+    for invalid in [
+        "{".to_owned(),
+        serde_json::json!({"version":99,"payload":request.payload}).to_string(),
+    ] {
+        std::fs::write(&identity, invalid).unwrap();
+        assert!(Recording::from_run_dirs(&root).is_err());
+    }
+    std::fs::remove_file(&identity).unwrap();
+    assert!(Recording::from_run_dirs(&root)
+        .unwrap_err()
+        .contains("cannot use prompt-only"));
+    std::fs::write(&identity, original).unwrap();
+    std::fs::write(dir.path.join("raw/0001-read.request.txt"), "Changed").unwrap();
+    assert!(Recording::from_run_dirs(&root)
+        .unwrap_err()
+        .contains("inconsistent"));
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn an_exact_recording_cannot_fall_back_to_a_legacy_answer_for_a_changed_schema() {
+    use runner::exec::GenerationRequest;
+    use runner::run_dir::{RunDir, RunLog};
+    let root = std::env::temp_dir().join(format!("kettle-recording-mixed-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&root);
+    let exact = RunDir::create(&root, "exact").unwrap();
+    exact.generation(
+        "Read",
+        1,
+        &[],
+        &GenerationRequest::current("Read", &schema()),
+        r#"{"results":[]}"#,
+    );
+    let legacy = RunDir::create(&root, "legacy").unwrap();
+    legacy.exchange("Read", 1, &[], "Read", r#"{"results":[]}"#);
+    let recording = Recording::from_run_dirs(&root).unwrap();
+    assert!(recording.answer_for("Read", &schema()).is_some());
+    assert_eq!(recording.compatibility().legacy_prompt_only_requests, 1);
+    let mut changed = schema();
+    changed["description"] = serde_json::json!("A changed generation schema");
+    assert!(recording.answer_for("Read", &changed).is_none());
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn disk_identity_covers_every_generation_policy_field() {
+    use runner::exec::GenerationRequest;
+    use runner::run_dir::{RunDir, RunLog};
+    let root = std::env::temp_dir().join(format!("kettle-recording-policy-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&root);
+    let base = GenerationRequest::current("Read", &schema());
+    for (index, (pointer, value)) in [
+        ("/model", serde_json::json!("different")),
+        ("/temperature", serde_json::json!(1)),
+        ("/max_tokens", serde_json::json!(2048)),
+        ("/messages/0/role", serde_json::json!("system")),
+        ("/response_format/type", serde_json::json!("json_object")),
+    ]
+    .into_iter()
+    .enumerate()
+    {
+        let mut request = base.clone();
+        *request.payload.pointer_mut(pointer).unwrap() = value;
+        let dir = RunDir::create(&root, &format!("case-{index}")).unwrap();
+        dir.generation("Read", 1, &[], &request, r#"{"results":[]}"#);
+        assert!(
+            Recording::from_run_dirs(&dir.path)
+                .unwrap()
+                .answer_for("Read", &schema())
+                .is_none(),
+            "{pointer}"
+        );
+    }
+    std::fs::remove_dir_all(root).unwrap();
 }

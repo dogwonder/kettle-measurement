@@ -38,6 +38,10 @@ use crate::run::LOW_CONFIDENCE;
 /// One fixture's `expected.json`: the answers a good run produces.
 #[derive(Debug, Clone, Deserialize)]
 pub struct Expected {
+    /// New external generators name the scorer their truth targets. Legacy
+    /// beds omit this and retain their existing validation rules.
+    #[serde(default)]
+    pub scoring_version: Option<u32>,
     /// Authored identity for this fixture, independent of its file name.
     /// Required whenever the fixture contains classification items.
     #[serde(default)]
@@ -139,6 +143,15 @@ impl Expected {
     /// failure. That is the harness lying about the one thing it exists
     /// to measure.
     pub fn validate(&self) -> Result<(), String> {
+        if let Some(version) = self.scoring_version {
+            if version != super::SCORING_VERSION {
+                return Err(format!(
+                    "truth targets scoring version {version}, but this runner uses {}; \
+                     regenerate expectations for the intended runner",
+                    super::SCORING_VERSION
+                ));
+            }
+        }
         if !self.classify.is_empty() {
             validate_authored_id(&self.fixture_id, "fixture id")?;
         }
@@ -378,6 +391,27 @@ impl<'a> EvalRunLog<'a> {
 }
 
 impl RunLog for EvalRunLog<'_> {
+    fn generation(
+        &self,
+        step: &str,
+        batch: usize,
+        items: &[BatchItem],
+        request: &crate::exec::GenerationRequest,
+        response: &str,
+    ) {
+        if let Some(disk) = self.disk {
+            disk.generation(step, batch, items, request, response);
+        }
+        self.capture(
+            step,
+            batch,
+            items,
+            request.prompt().expect("generated prompt"),
+            response,
+            Some(request.clone()),
+        );
+    }
+
     fn exchange(
         &self,
         step: &str,
@@ -389,8 +423,23 @@ impl RunLog for EvalRunLog<'_> {
         if let Some(disk) = self.disk {
             disk.exchange(step, batch, items, request, response);
         }
+        self.capture(step, batch, items, request, response, None);
+    }
+}
+
+impl EvalRunLog<'_> {
+    fn capture(
+        &self,
+        step: &str,
+        batch: usize,
+        items: &[BatchItem],
+        request: &str,
+        response: &str,
+        generation: Option<crate::exec::GenerationRequest>,
+    ) {
         self.exchanges.borrow_mut().push(CapturedExchange {
             exchange: ModelExchange {
+                generation,
                 step: step.to_owned(),
                 batch,
                 request: request.to_owned(),
@@ -587,6 +636,11 @@ impl FixtureEvaluator {
             .resume_dir
             .as_ref()
             .map(|dir| super::resume::ResumeCache::at(dir));
+        let cache_identity = if cache.is_some() {
+            super::resume::effective_identity(self, pack)?
+        } else {
+            None
+        };
         let mut reused = 0usize;
         let mut unrunnable: Vec<String> = Vec::new();
         let mut results = Vec::new();
@@ -603,30 +657,29 @@ impl FixtureEvaluator {
             // A fixture already scored under an identical key is not
             // measured again (#282). The key is computed even on a
             // miss, so this run's result can be kept for the next one.
-            let resume_key = cache.as_ref().map(|_| super::resume::ResumeKey {
-                pack: pack.manifest.id.clone(),
-                pack_version: pack.manifest.version.clone(),
-                prompt_version: prompt_version.clone(),
-                model: self
-                    .model
+            let resume_key =
+                cache_identity
                     .as_ref()
-                    .map(|model| model.file.clone())
-                    .unwrap_or_else(|| "no-model".to_owned()),
-                sidecar: self
-                    .sidecar
-                    .as_ref()
-                    .map(|sidecar| sidecar.version.clone())
-                    .unwrap_or_else(|| "none".to_owned()),
-                device: self
-                    .sidecar
-                    .as_ref()
-                    .and_then(|sidecar| sidecar.device.clone())
-                    .unwrap_or_else(|| "unrecorded".to_owned()),
-                scoring_version: super::SCORING_VERSION,
-                eval_set: fixture.expected.eval_set,
-                fixture: fixture.name.clone(),
-                fixture_digest: digest.clone(),
-            });
+                    .map(|(pipeline, execution)| super::resume::ResumeKey {
+                        pack: pack.manifest.id.clone(),
+                        pack_version: pack.manifest.version.clone(),
+                        prompt_version: pipeline.clone(),
+                        model: execution.clone(),
+                        sidecar: self
+                            .sidecar
+                            .as_ref()
+                            .map(|sidecar| sidecar.version.clone())
+                            .unwrap_or_else(|| "none".to_owned()),
+                        device: self
+                            .sidecar
+                            .as_ref()
+                            .and_then(|sidecar| sidecar.device.clone())
+                            .unwrap_or_else(|| "unrecorded".to_owned()),
+                        scoring_version: super::SCORING_VERSION,
+                        eval_set: fixture.expected.eval_set,
+                        fixture: fixture.name.clone(),
+                        fixture_digest: digest.clone(),
+                    });
             if let (Some(cache), Some(key)) = (cache.as_ref(), resume_key.as_ref()) {
                 if let Some(kept) = cache.get(key) {
                     reused += 1;
@@ -841,6 +894,10 @@ impl FixtureEvaluator {
         }
         let thresholds = pack.thresholds();
         let mut report = EvalReport {
+            replay_compatibility: match &self.answers {
+                Answers::FromModel(endpoint) => endpoint.replay_compatibility(),
+                Answers::WithoutModel => None,
+            },
             reused_fixtures: reused,
             unrunnable,
             pack: pack.manifest.id.clone(),
@@ -1450,6 +1507,7 @@ pub fn model_info(file: &str, context: u32) -> ModelInfo {
     let parts: Vec<&str> = stem.split(['-', '.', '_']).collect();
 
     ModelInfo {
+        weights_digest: None,
         file: file.to_owned(),
         params: parameter_count(&parts).unwrap_or_else(|| UNKNOWN.to_owned()),
         quant: quantisation(&stem).unwrap_or_else(|| UNKNOWN.to_owned()),

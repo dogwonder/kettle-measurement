@@ -102,8 +102,8 @@ fn contains_raw_io_after_step() {
 
     assert_eq!(
         files.len(),
-        4,
-        "two model steps, a request and a response each: {files:?}"
+        6,
+        "two model steps, a generation identity, prompt and response each: {files:?}"
     );
     assert!(
         files[0].starts_with("0001-grouping-payments-by-merchant"),
@@ -111,10 +111,22 @@ fn contains_raw_io_after_step() {
          what a person saw: {files:?}"
     );
 
-    let request = std::fs::read_to_string(raw.join(&files[0])).expect("the request was written");
+    let prompt_path = files
+        .iter()
+        .find(|name| name.ends_with(".request.txt"))
+        .unwrap();
+    let request = std::fs::read_to_string(raw.join(prompt_path)).expect("the request was written");
     assert!(
         request.contains("DISNEYPLUS"),
         "the request holds exactly what was asked"
+    );
+    let identity: runner::exec::GenerationRequest =
+        serde_json::from_str(&std::fs::read_to_string(raw.join(&files[0])).unwrap()).unwrap();
+    assert_eq!(identity.prompt(), Some(request.as_str()));
+    assert_eq!(
+        identity.payload,
+        serde_json::from_str::<serde_json::Value>(&mock.request_body()).unwrap(),
+        "the archived identity is the actual HTTP request, including its schema"
     );
 
     let response: String = files

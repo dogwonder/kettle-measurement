@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "capability": "relationships",
+  "letter_date": "2026-03-10",
+  "cases": [
+    {
+      "id": "relation-form-001",
+      "capability": "relationships",
+      "form": "right value, wrong row",
+      "phrase": "Total £360.00",
+      "source_truth": {
+        "status": "relation",
+        "selected": "Total £360.00",
+        "distractors": [
+          "Sub total £300.00",
+          "VAT £60.00"
+        ]
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK Design System: table",
+          "locator": "GOV.UK Design System, Components, Table",
+          "quoted_rule": "row headers with scope=\"row\" and column headers with scope=\"col\" tell a reader which cell belongs to which"
+        }
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "reading::check verifies the named figure is on the named row; choosing the row is the model's (Task 4: a row of three sums warns)",
+        "coverage": "model-judgement",
+        "known_gap": "Rust cannot know which row an ask means"
+      },
+      "model_reading": {
+        "case_id": "relation-form-001-letter",
+        "document": "10 March 2026\nExample Services\nSub total £300.00\nVAT £60.00\nTotal £360.00\nPayment of the total is due within 14 days.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "relation-form-002",
+      "capability": "relationships",
+      "form": "right date, wrong event",
+      "phrase": "hearing on 1 June 2026",
+      "source_truth": {
+        "status": "relation",
+        "selected": "within 14 days of the hearing on 1 June 2026",
+        "distractor": "our letter of 3 March 2026",
+        "note": "the period counts from the hearing, not the earlier letter"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "#628: the base is a reading the model names; a base that is not the day the words themselves name is refused",
+        "coverage": "pending-v19-test",
+        "known_gap": "on main the base comes from a phrase parser"
+      },
+      "model_reading": {
+        "case_id": "relation-form-002-letter",
+        "document": "10 March 2026\nExample Services\nFurther to our letter of 3 March 2026: you must reply within 14 days of the hearing on 1 June 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "relation-form-003",
+      "capability": "relationships",
+      "form": "right value, wrong document",
+      "phrase": "Total £360.00",
+      "source_truth": {
+        "status": "relation",
+        "selected": "document 0: Total £360.00",
+        "distractor": "document 1: Total £480.00"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "reading::check refuses an id in another document (NotThisDocument)",
+        "coverage": "main-check",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "relation-form-003-letter",
+        "document": "Document 0\n10 March 2026\nExample Services\nPayment of the total below is due within 14 days.\nTotal £360.00\n---\nDocument 1\n12 March 2026\nOther Services\nTotal £480.00",
+        "coverage": "not-measured"
+      },
+      "notes": "the model-reading example is two documents; the document boundary is what the harness supplies, not text"
+    },
+    {
+      "id": "relation-form-004",
+      "capability": "relationships",
+      "form": "repeated ask, one obligation said twice",
+      "phrase": "We remind you that payment of £120.00 is due within 14 days",
+      "source_truth": {
+        "status": "relation",
+        "kind": "repeated",
+        "obligations_shown": 2,
+        "note": "two readings of one ask; both shown, never merged (Task 2)"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::same_candidate folds only the same candidate from the same passage",
+        "coverage": "main-check",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "relation-form-004-letter",
+        "document": "10 March 2026\nExample Services\nPlease pay £120.00 within 14 days of the date of this letter.\nWe remind you that payment of £120.00 is due within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "relation-form-005",
+      "capability": "relationships",
+      "form": "two distinct asks that look alike",
+      "phrase": "Pay invoice A, £80.00",
+      "source_truth": {
+        "status": "relation",
+        "kind": "distinct",
+        "obligations_shown": 2
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "timeline::same_candidate keeps both (Task 2)",
+        "coverage": "main-check",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "relation-form-005-letter",
+        "document": "10 March 2026\nExample Services\nPay invoice A, £80.00, by 30 April 2026.\nPay invoice B, £120.00, by 30 April 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "relation-form-006",
+      "capability": "relationships",
+      "form": "replacement within one letter",
+      "phrase": "The amount of £95.00 replaces the £120.00 previously requested",
+      "source_truth": {
+        "status": "relation",
+        "kind": "replaces",
+        "selected": "£95.00",
+        "superseded": "£120.00"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "a replacement is not represented; both sums verify if named"
+      },
+      "model_reading": {
+        "case_id": "relation-form-006-letter",
+        "document": "10 March 2026\nExample Services\nThe amount of £95.00 replaces the £120.00 previously requested. Please pay £95.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "relation-form-007",
+      "capability": "relationships",
+      "form": "conflict between two documents",
+      "phrase": "Total £380.00",
+      "source_truth": {
+        "status": "conflict",
+        "values": [
+          "360.00",
+          "380.00"
+        ],
+        "note": "the letter and its statement disagree; neither is verified over the other"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "a conflict across documents is not detected; each document's reading stands alone"
+      },
+      "model_reading": {
+        "case_id": "relation-form-007-letter",
+        "document": "Document 0\n10 March 2026\nExample Services\nTotal £360.00\n---\nDocument 1\nStatement\nTotal £380.00",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "relation-form-008",
+      "capability": "relationships",
+      "form": "date belongs to a past event",
+      "phrase": "received on 3 March 2026",
+      "source_truth": {
+        "status": "relation",
+        "kind": "not-a-deadline",
+        "note": "a past receipt date, not when anything is due"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "relation-form-008-letter",
+        "document": "10 March 2026\nExample Services\nThank you for your form, received on 3 March 2026. Please pay £120.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "relation-form-009",
+      "capability": "relationships",
+      "form": "appointment pair: date in one passage, time in another",
+      "phrase": "Date: 12 March 2026\nTime: 2:30pm",
+      "source_truth": {
+        "status": "relation",
+        "kind": "assembled",
+        "date": "2026-03-12",
+        "time": "14:30"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK Design System: table",
+          "locator": "GOV.UK Design System, Components, Table",
+          "quoted_rule": "a cell is read against its row and column header"
+        }
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "relation-form-009-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment details:\nDate: 12 March 2026\nTime: 2:30pm\nPlace: Clinic 4",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "relation-form-010",
+      "capability": "relationships",
+      "form": "pointing phrase and the row it points at",
+      "phrase": "by the date shown beside it",
+      "source_truth": {
+        "status": "relation",
+        "kind": "pointed",
+        "selected": "Due date 6 April 2026"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "main: deadline_from names the row and Rust reads one full date from it (#544); #628: the deadline is the date the row prints, read at the row",
+        "coverage": "main-check",
+        "known_gap": "the two builds expect different words for the same fact; the bed moved with #628"
+      },
+      "model_reading": {
+        "case_id": "relation-form-010-letter",
+        "document": "10 March 2026\nExample Services\nPayment of the total is due by the date shown beside it.\nDue date 6 April 2026\nTotal £360.00",
+        "coverage": "not-measured"
+      }
+    }
+  ]
+}

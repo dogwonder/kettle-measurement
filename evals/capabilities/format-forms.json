@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "capability": "formats",
+  "letter_date": "2026-03-10",
+  "cases": [
+    {
+      "id": "format-form-001",
+      "capability": "formats",
+      "form": "prose paragraph",
+      "phrase": "Please pay £120.00 within 14 days of the date of this letter.",
+      "source_truth": {
+        "status": "obligation",
+        "kind": "payment"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:explain-this-document"
+      ],
+      "verifier": {
+        "boundary": "one passage, one closed answer",
+        "coverage": "main-check",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "format-form-001-letter",
+        "document": "10 March 2026\nExample Services\nPlease pay £120.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "format-form-002",
+      "capability": "formats",
+      "form": "bulleted list of asks",
+      "phrase": "- return the signed form\n- send a copy of your photo ID",
+      "source_truth": {
+        "status": "obligations",
+        "count": 2
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:explain-this-document"
+      ],
+      "verifier": {
+        "boundary": "segmentation decides whether the list is one passage or three; the deadline sits in the lead line",
+        "coverage": "unsupported",
+        "known_gap": "a list item read alone has no deadline; the relationship to its lead line is not represented"
+      },
+      "model_reading": {
+        "case_id": "format-form-002-letter",
+        "document": "10 March 2026\nExample Services\nBy 24 March 2026 please:\n- return the signed form\n- send a copy of your photo ID",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "format-form-003",
+      "capability": "formats",
+      "form": "row-wise table flattened by OCR",
+      "phrase": "Due date Sub total £300.00 6 April 2026 VAT £60.00 Total £360.00",
+      "source_truth": {
+        "status": "relation",
+        "selected_total": "360.00",
+        "selected_due": "2026-04-06"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK Design System: table",
+          "locator": "GOV.UK Design System, Components, Table",
+          "quoted_rule": "numeric cells are right-aligned under a column header"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:explain-this-document"
+      ],
+      "verifier": {
+        "boundary": "reading::check on the row: a whole money token among three warns; the date is the first full date on the row",
+        "coverage": "main-check",
+        "known_gap": "column membership is lost in the flattening (#544)"
+      },
+      "model_reading": {
+        "case_id": "format-form-003-letter",
+        "document": "10 March 2026\nExample Services\nDue date Sub total £300.00 6 April 2026 VAT £60.00 Total £360.00",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "format-form-004",
+      "capability": "formats",
+      "form": "column-wise table kept as rows",
+      "phrase": "Due date\t6 April 2026\nTotal\t£360.00",
+      "source_truth": {
+        "status": "relation",
+        "selected_total": "360.00",
+        "selected_due": "2026-04-06"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK Design System: table",
+          "locator": "GOV.UK Design System, Components, Table",
+          "quoted_rule": "row headers with scope=\"row\""
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:explain-this-document"
+      ],
+      "verifier": {
+        "boundary": "each row is a passage the model can name",
+        "coverage": "main-check",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "format-form-004-letter",
+        "document": "10 March 2026\nExample Services\nDue date\t6 April 2026\nTotal\t£360.00",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "format-form-005",
+      "capability": "formats",
+      "form": "ask in the footer",
+      "phrase": "Quote your account number on all correspondence and pay by the date above.",
+      "source_truth": {
+        "status": "obligation",
+        "kind": "payment",
+        "note": "an ask the body does not make"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:explain-this-document"
+      ],
+      "verifier": {
+        "boundary": "a footer is a passage like any other once segmented",
+        "coverage": "model-judgement",
+        "known_gap": "#610 found a rendered footer whose ask was absent from the oracle; the truth here authors it"
+      },
+      "model_reading": {
+        "case_id": "format-form-005-letter",
+        "document": "10 March 2026\nExample Services\nYour statement is enclosed.\n— Example Services, PO Box 12. Quote your account number on all correspondence and pay by the date above.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "format-form-006",
+      "capability": "formats",
+      "form": "payment slip at the foot",
+      "phrase": "Payment slip: Amount £120.00 Due 24 March 2026",
+      "source_truth": {
+        "status": "relation",
+        "kind": "restates",
+        "note": "the slip restates the body's ask; not a second obligation"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:explain-this-document"
+      ],
+      "verifier": {
+        "boundary": "Task 2 shows both readings; nothing marks the slip as a restatement",
+        "coverage": "unsupported",
+        "known_gap": "slip versus body is not distinguished"
+      },
+      "model_reading": {
+        "case_id": "format-form-006-letter",
+        "document": "10 March 2026\nExample Services\nPlease pay £120.00 by 24 March 2026.\nPayment slip: Amount £120.00 Due 24 March 2026 Ref 0044",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "format-form-007",
+      "capability": "formats",
+      "form": "late-page ask beyond one batch",
+      "phrase": "Please pay £120.00 within 14 days",
+      "source_truth": {
+        "status": "obligation",
+        "kind": "payment",
+        "passage_index": 24
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:explain-this-document"
+      ],
+      "verifier": {
+        "boundary": "a document over the batch size is chunked; a passage named across the boundary is refused (#624)",
+        "coverage": "unsupported",
+        "known_gap": "the party (letterhead) and the base (dateline) sit in the first batch, so a late ask is shown as 'the sender', undated (METHOD §3.2)"
+      },
+      "model_reading": {
+        "case_id": "format-form-007-letter",
+        "document": "10 March 2026\nExample Services\nParagraph 1.\nParagraph 2.\nParagraph 3.\nParagraph 4.\nParagraph 5.\nParagraph 6.\nParagraph 7.\nParagraph 8.\nParagraph 9.\nParagraph 10.\nParagraph 11.\nParagraph 12.\nParagraph 13.\nParagraph 14.\nParagraph 15.\nParagraph 16.\nParagraph 17.\nParagraph 18.\nParagraph 19.\nParagraph 20.\nParagraph 21.\nParagraph 22.\nParagraph 23.\nPlease pay £120.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "format-form-008",
+      "capability": "formats",
+      "form": "two documents pooled under one role",
+      "phrase": "Document 1",
+      "source_truth": {
+        "status": "relation",
+        "kind": "separate",
+        "documents": 2
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints"
+      ],
+      "verifier": {
+        "boundary": "documents pooled under one role start their own batch; each counts from its own date (#330, #624)",
+        "coverage": "main-check",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "format-form-008-letter",
+        "document": "Document 0\n10 March 2026\nExample Services\nPlease pay £120.00 within 14 days of the date of this letter.\n---\nDocument 1\n20 June 2026\nOther Services\nPlease pay £80.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "format-form-009",
+      "capability": "formats",
+      "form": "photograph: OCR passes disagree on the date",
+      "phrase": "10 March 2026",
+      "source_truth": {
+        "status": "ambiguous",
+        "reason": "two readings of the dateline disagree; a person settles it (#412)"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:explain-this-document"
+      ],
+      "verifier": {
+        "boundary": "document.rs date_dispute compares the dateline of two OCR passes and parks the run for a person",
+        "coverage": "main-check",
+        "known_gap": "only the dateline is disputed; a disagreement on an amount or a deadline is not detected"
+      },
+      "model_reading": {
+        "case_id": "format-form-009-letter",
+        "document": "10 March 2026\nExample Services\nPlease pay £120.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      },
+      "notes": "the second pass's text is not shown here; the dispute is a property of acquisition, not of the words"
+    },
+    {
+      "id": "format-form-010",
+      "capability": "formats",
+      "form": "missing page in a paired set",
+      "phrase": "Page 3 of 3",
+      "source_truth": {
+        "status": "unsupported",
+        "reason": "a missing page cannot be read; the harness must report acquisition failure separately from reading failure"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "app.kttl.renewal-diff",
+        "idea:explain-this-document"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "page completeness is not checked; ordered pages are pooled as one document"
+      },
+      "model_reading": {
+        "case_id": "format-form-010-letter",
+        "document": "Page 1 of 3\n10 March 2026\nExample Services\nSee overleaf for the amount due.\nPage 3 of 3\nYours sincerely, Example Services",
+        "coverage": "not-measured"
+      },
+      "notes": "plan work package 5"
+    }
+  ]
+}

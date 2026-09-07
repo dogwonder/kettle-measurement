@@ -100,6 +100,10 @@ impl Evaluator for SidecarEvaluator {
             // joins on the model, so such a report could never be
             // compared against a live one, which defeated the case
             // replay was built for.
+            let compatibility = recording.compatibility();
+            if compatibility.legacy_prompt_only_requests > 0 {
+                eprintln!("Replay compatibility: {} legacy prompt-only requests; their generation schemas were not recorded and cannot be checked.", compatibility.legacy_prompt_only_requests);
+            }
             let model = recording.model().cloned();
             let evaluator = FixtureEvaluator {
                 answers: Answers::FromModel(runner::exec::Endpoint::replaying(recording)),
@@ -157,6 +161,9 @@ impl Evaluator for SidecarEvaluator {
             ..SidecarRuntime::default()
         };
         let policy = runner::eval::RuntimePolicy::effective(&runtime);
+        let runtime_identity =
+            runner::eval::resume::RuntimeIdentity::for_sidecar(&self.sidecar_binary, &runtime)?;
+        let weights_digest = runner::eval::resume::file_identity(&spec.path)?;
         let mut sidecar = Sidecar::spawn(&self.sidecar_binary, &spec.path, &log, runtime)
             .map_err(|e| format!("couldn't start {}: {e}", self.sidecar_binary.display()))?;
         sidecar.wait_until_ready(MODEL_LOAD_TIMEOUT).map_err(|e| {
@@ -171,8 +178,11 @@ impl Evaluator for SidecarEvaluator {
         // the file name: a models.toml may have pinned them precisely
         // because the name doesn't say.
         let evaluator = FixtureEvaluator {
-            answers: Answers::FromModel(Endpoint::local(sidecar.port())),
+            answers: Answers::FromModel(
+                Endpoint::local(sidecar.port()).with_runtime_identity(runtime_identity),
+            ),
             model: Some(ModelInfo {
+                weights_digest: Some(weights_digest),
                 file: spec.file.clone(),
                 params: spec.params.clone(),
                 quant: spec.quant.clone(),

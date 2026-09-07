@@ -1122,6 +1122,46 @@ Four things to get right:
 `--replay` is not a shortcut here: it refuses a prompt change by design,
 because the request is the cache key.
 
+## Replay compatibility and resume inputs
+
+New recordings keep `raw/NNNN-step.generation.json` beside the readable
+`.request.txt` and `.response.json`. It contains `{ "version": 1, "payload": … }`,
+where the payload is the complete chat-completions request, including the
+rendered prompt, response schema, model label, role, temperature and token bound.
+Disk and in-memory replay match the same digest. Even widening a schema enum
+requires a new answer: an old answer remaining valid does not make it an answer
+to the changed request. Replay uses no endpoint or weights.
+
+Legacy archives keep their existing prompt-and-policy matching. They cannot
+establish schema compatibility. The CLI prints that limitation, and the report's
+`replay_compatibility` counts distinct exact and legacy requests in the loaded
+recording. Per-item exchanges carry `generation` only when the original complete
+request is known. These counts describe the recording, not model calls made by
+the replay. A new run's `generation_request_version` marker prevents a missing,
+damaged or unsupported identity file from silently becoming a legacy request.
+An exact recording also prevents legacy fallback for that same prompt.
+
+Resume caches whole fixture results. Its v2 key includes the effective manifest
+and every pipeline prompt, example, schema and render template; fixture and truth
+bytes; scoring version and selection; actual model weight bytes; effective
+context, reasoning, parallelism, output bound and thread count; the sidecar and
+adjacent bundled libraries; device and machine metadata; inherited environment
+digest; the evaluator executable; and the configured PDFium binary when present.
+In-memory manifest overrides count too. Replay cache identity includes the
+recorded requests and answers. The live CLI streams weight bytes once before
+starting the sidecar and records `model.weights_digest` with the measurement.
+
+Old cache keys miss automatically. A live library caller without weight and
+runtime identity can still evaluate, but cannot reuse or populate the cache.
+Full environment and executable digests are deliberately conservative: rebuilding
+the evaluator or changing an unrelated environment value can cause a miss.
+Environment values themselves are never stored. Freeze files and runtime inputs
+for the duration of an evaluation, as for any scheduled measurement.
+
+See [the second implementation batch](capabilities/second-batch.md) for the
+mock-based acceptance checks. These changes do not establish new model scores
+or refresh a baseline.
+
 ## When a score is bad, read the answers
 
 Every eval writes each fixture's model exchanges to

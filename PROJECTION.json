@@ -1,5 +1,5 @@
 {
-  "files": 3185,
+  "files": 3209,
   "generated": "2026-09-07",
   "published": [
     "crates/",
@@ -22,7 +22,7 @@
     "app/src-tauri/models.json",
     "app/src-tauri/tauri.conf.json"
   ],
-  "revision": "cfc0ba61",
+  "revision": "d2cf86c0",
   "schema": "kettle/projection@0",
   "source": "dogwonder/kettle"
 }

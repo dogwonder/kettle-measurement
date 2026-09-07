@@ -1,0 +1,470 @@
+{
+  "schema_version": 1,
+  "capability": "obligations",
+  "letter_date": "2026-03-10",
+  "cases": [
+    {
+      "id": "obligation-form-001",
+      "capability": "obligations",
+      "form": "required, imperative",
+      "phrase": "Please pay £120.00 within 14 days",
+      "source_truth": {
+        "status": "obligation",
+        "kind": "payment",
+        "actor": "reader"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-001-letter",
+        "document": "10 March 2026\nExample Services\nPlease pay £120.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-002",
+      "capability": "obligations",
+      "form": "required, deontic must",
+      "phrase": "You must return the form",
+      "source_truth": {
+        "status": "obligation",
+        "kind": "response",
+        "actor": "reader"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-002-letter",
+        "document": "10 March 2026\nExample Services\nYou must return the form by 24 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-003",
+      "capability": "obligations",
+      "form": "required, stated as an outcome",
+      "phrase": "Payment must reach us",
+      "source_truth": {
+        "status": "obligation",
+        "kind": "payment",
+        "actor": "reader",
+        "note": "nobody is named; money does not move itself"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-003-letter",
+        "document": "10 March 2026\nExample Services\nPayment must reach us within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      },
+      "notes": "the exam voice's construction (#552)"
+    },
+    {
+      "id": "obligation-form-004",
+      "capability": "obligations",
+      "form": "permitted, not required",
+      "phrase": "You may also confirm in writing",
+      "source_truth": {
+        "status": "no-obligation",
+        "reason": "an offer, not an ask"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-004-letter",
+        "document": "10 March 2026\nExample Services\nYou may also confirm in writing that you have paid.",
+        "coverage": "not-measured"
+      },
+      "notes": "the #406 case; the modality vocabulary that routed it is retired in #628 and the judgement is the model's, measured by courtesy-only"
+    },
+    {
+      "id": "obligation-form-005",
+      "capability": "obligations",
+      "form": "advised, general",
+      "phrase": "Never give your bank details to anyone who telephones",
+      "source_truth": {
+        "status": "no-obligation",
+        "reason": "general advice arising from no particular letter"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-005-letter",
+        "document": "10 March 2026\nExample Services\nNever give your bank details to anyone who telephones you claiming to be from this office.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-006",
+      "capability": "obligations",
+      "form": "conditional on a fact the letter cannot settle",
+      "phrase": "If you rent this property out, you must tell your tenants",
+      "source_truth": {
+        "status": "no-obligation",
+        "reason": "the condition is unsettled; nothing is asked of this reader now"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-006-letter",
+        "document": "10 March 2026\nExample Services\nIf you rent this property out, you must tell your tenants that the works are taking place.",
+        "coverage": "not-measured"
+      },
+      "notes": "the pack's rule (#399, #614); an independent adjudication may differ and the inventory records the pack's, not a universal one"
+    },
+    {
+      "id": "obligation-form-007",
+      "capability": "obligations",
+      "form": "conditional already discharged",
+      "phrase": "If you have already paid, please disregard this letter",
+      "source_truth": {
+        "status": "no-obligation",
+        "reason": "whether they have paid is exactly what the letter cannot settle"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-007-letter",
+        "document": "10 March 2026\nExample Services\nIf you have already paid, please disregard this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-008",
+      "capability": "obligations",
+      "form": "courtesy softening is not a condition",
+      "phrase": "We would be grateful if you could send a reading",
+      "source_truth": {
+        "status": "obligation",
+        "kind": "response",
+        "actor": "reader"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-008-letter",
+        "document": "10 March 2026\nExample Services\nWe would be grateful if you could send a reading of your meter by 24 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-009",
+      "capability": "obligations",
+      "form": "completed, nothing to do",
+      "phrase": "Thank you for your payment of £120.00, received on 3 March 2026",
+      "source_truth": {
+        "status": "no-obligation",
+        "reason": "the ask has been met; the date is a past event"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-009-letter",
+        "document": "10 March 2026\nExample Services\nThank you for your payment of £120.00, received on 3 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-010",
+      "capability": "obligations",
+      "form": "cancelled appointment",
+      "phrase": "Your appointment on 12 May 2026 has been cancelled",
+      "source_truth": {
+        "status": "no-obligation",
+        "reason": "a cancelled event is not an ask; recording it would put a person at a clinic on the wrong day"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "no field says cancelled; a model that reads attendance here is verified only for the date being on the page",
+        "coverage": "none",
+        "known_gap": "cancellation is not represented (#595 supersession)"
+      },
+      "model_reading": {
+        "case_id": "obligation-form-010-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment on 12 May 2026 has been cancelled. We will write again with a new date.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-011",
+      "capability": "obligations",
+      "form": "superseding letter",
+      "phrase": "This letter replaces our letter of 3 March 2026",
+      "source_truth": {
+        "status": "obligation",
+        "kind": "payment",
+        "actor": "reader",
+        "supersedes": "the letter of 3 March 2026",
+        "note": "the earlier letter's ask is void"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "idea:deadlines-across-documents",
+        "app.kttl.renewal-diff",
+        "idea:housing-complaints",
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "the new ask verifies; nothing records what it replaces",
+        "coverage": "none",
+        "known_gap": "supersession is not represented; across two documents the old ask would also be shown (#595)"
+      },
+      "model_reading": {
+        "case_id": "obligation-form-011-letter",
+        "document": "10 March 2026\nExample Services\nThis letter replaces our letter of 3 March 2026. Please pay £95.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-012",
+      "capability": "obligations",
+      "form": "someone else must act",
+      "phrase": "Our finance team will refund the difference within 10 working days",
+      "source_truth": {
+        "status": "no-obligation",
+        "reason": "the actor is the sender"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-012-letter",
+        "document": "10 March 2026\nExample Services\nOur finance team will refund the difference within 10 working days.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-013",
+      "capability": "obligations",
+      "form": "two asks in one sentence",
+      "phrase": "Please return the signed form and send a copy of your photo ID",
+      "source_truth": {
+        "status": "obligations",
+        "count": 2,
+        "kinds": [
+          "response",
+          "response"
+        ]
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the answer is a list per passage; two entries verify separately and are shown separately (Task 2)",
+        "coverage": "main-check",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-013-letter",
+        "document": "10 March 2026\nExample Services\nPlease return the signed form and send a copy of your photo ID by 24 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "obligation-form-014",
+      "capability": "obligations",
+      "form": "instruction addressed to staff",
+      "phrase": "Staff: file this letter under the account number",
+      "source_truth": {
+        "status": "no-obligation",
+        "reason": "addressed to the sender's own staff"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:tenancy-obligations",
+        "idea:contract-obligations",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "obligation-form-014-letter",
+        "document": "10 March 2026\nExample Services\nStaff: file this letter under the account number before 5pm.",
+        "coverage": "not-measured"
+      }
+    }
+  ]
+}

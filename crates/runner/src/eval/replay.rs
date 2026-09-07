@@ -1,11 +1,8 @@
 //! Answers an earlier run recorded, replayed (#288).
 //!
-//! At temperature 0, with a fixed prompt, schema and model, an answer
-//! is deterministic — the property the whole eval discipline already
-//! rests on, and the one prompt caching exploits a level further down.
-//! So a *scorer* change never needs the model: it needs the answers,
-//! and Kettle already writes every exchange to a run directory (brief
-//! §11), today only as a diagnostic record.
+//! A scorer change can be checked against the answers already recorded,
+//! without asking a model again. Replay preserves those observations;
+//! it does not assume that a new live run would produce identical bytes.
 //!
 //! That turns verifying a scoring change from a 115-minute measurement
 //! (#242) into seconds, which is what makes "read the answers before
@@ -20,11 +17,12 @@
 //! and the run stops with a sentence saying so. The safety property is
 //! structural rather than remembered.
 //!
-//! A prompt or request-policy change invalidates a recording. A scorer
-//! change does not, because it cannot alter what the model would have
-//! said — which is precisely the case this exists to serve.
+//! New recordings retain the complete generation payload. Legacy archives
+//! retain only prompt and policy: their schema compatibility is unknown,
+//! and the report explicitly identifies that limitation.
 
-use std::collections::BTreeMap;
+use crate::exec::GenerationRequest;
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 
 /// The completion bodies an earlier run received, by request.
@@ -36,20 +34,22 @@ pub struct Recording {
     /// deterministic floor, or of a run written before run directories
     /// carried the model.
     model: Option<crate::eval::ModelInfo>,
+    exact_prompts: BTreeSet<String>,
 }
 
 impl Recording {
     /// Every exchange under a run-directory root, however deep.
     ///
-    /// `evals/runs/run1/<pack>-<model>-<fixture>/raw/NNNN-<step>.request.json`
-    /// and its `.response.json` sibling. A request without a response
+    /// `evals/runs/run1/<pack>-<model>-<fixture>/raw/NNNN-<step>.request.txt`,
+    /// `.generation.json` and `.response.json`. Older `.request.json`
+    /// prompts remain readable. A request without a response
     /// (the interruption that stopped the run mid-write) is skipped
     /// rather than half-loaded.
     pub fn from_run_dirs(root: &Path) -> Result<Self, String> {
-        let mut answers = BTreeMap::new();
+        let mut recording = Self::default();
         let mut models: BTreeMap<String, crate::eval::ModelInfo> = BTreeMap::new();
-        collect(root, &mut answers, &mut models, None)?;
-        if answers.is_empty() {
+        collect(root, &mut recording, &mut models, None, None)?;
+        if recording.is_empty() {
             return Err(format!(
                 "no recorded answers under {} — a replay needs a run that kept its \
                  exchanges, which every eval writes to evals/runs/run<N>/.",
@@ -62,7 +62,7 @@ impl Recording {
         // down. Refused rather than resolved: only the person who made
         // these directories knows which one they meant.
         if models.len() > 1 {
-            let named: Vec<&str> = models.keys().map(String::as_str).collect();
+            let named: Vec<&str> = models.values().map(|model| model.file.as_str()).collect();
             return Err(format!(
                 "the recording under {} holds answers from more than one model ({}) — a \
                  replay serves them all and could only label the report with one. Point \
@@ -71,10 +71,24 @@ impl Recording {
                 named.join(", "),
             ));
         }
-        Ok(Recording {
-            answers,
-            model: models.into_values().next(),
-        })
+        recording.model = models.into_values().next();
+        Ok(recording)
+    }
+
+    pub fn has_exact(&self, prompt: &str, schema: &serde_json::Value) -> bool {
+        self.answers.contains_key(&digest(prompt, schema))
+    }
+
+    pub fn compatibility(&self) -> ReplayCompatibility {
+        let legacy_prompt_only_requests = self
+            .answers
+            .keys()
+            .filter(|key| key.starts_with("blake3:request-prompt:"))
+            .count();
+        ReplayCompatibility {
+            exact_requests: self.len() - legacy_prompt_only_requests,
+            legacy_prompt_only_requests,
+        }
     }
 
     /// Whose answers this recording serves, if the runs recorded it.
@@ -98,18 +112,23 @@ impl Recording {
         self.answers.is_empty()
     }
 
-    /// The recorded completion body for this exact request, if there is
-    /// one. `None` is the honest answer for a question the recording
-    /// never heard, and the caller must refuse rather than improvise.
+    /// Match complete identity first, then legacy prompt/policy only when
+    /// no exact recording owns this prompt. The legacy path cannot establish
+    /// schema compatibility; callers expose that via `compatibility()`.
     pub fn answer_for(&self, prompt: &str, schema: &serde_json::Value) -> Option<String> {
         self.answers
             .get(&digest(prompt, schema))
-            .or_else(|| self.answers.get(&digest_prompt_only(prompt)))
+            .or_else(|| {
+                (!self.exact_prompts.contains(&digest_prompt_only(prompt)))
+                    .then(|| self.answers.get(&digest_prompt_only(prompt)))
+                    .flatten()
+            })
             .cloned()
     }
 
     /// Add one exchange. Used by the loader and by tests.
     pub fn insert(&mut self, prompt: &str, schema: &serde_json::Value, body: impl Into<String>) {
+        self.exact_prompts.insert(digest_prompt_only(prompt));
         self.answers.insert(digest(prompt, schema), body.into());
     }
 
@@ -127,25 +146,13 @@ impl Recording {
     }
 }
 
-/// A question's exact in-memory identity: the chat-completions request
-/// Kettle sends, including the rendered prompt and schema.
-///
-/// Length-prefixed so a prompt ending where a schema begins cannot
-/// collide with a different split of the same bytes.
+/// Disk and in-memory recordings use exactly the same generation identity.
 fn digest(prompt: &str, schema: &serde_json::Value) -> String {
-    let request = crate::exec::RequestPolicy::current().request(prompt, schema);
-    let request = serde_json::to_vec(&request).unwrap_or_default();
-    let mut hasher = blake3::Hasher::new();
-    hasher.update(&(request.len() as u64).to_le_bytes());
-    hasher.update(&request);
-    format!("blake3:{}", hasher.finalize().to_hex())
+    GenerationRequest::current(prompt, schema).digest()
 }
 
-/// The key for an entry loaded from a run directory, where the prompt
-/// is recorded per exchange and the stable request policy is recorded
-/// once in `run.json`. The schema remains unavailable on legacy and
-/// current run directories; in-memory recordings use [`digest`] and
-/// keep its exact identity.
+/// Legacy archives have only prompt and request policy. This key cannot
+/// establish schema compatibility; new recordings always use full identity.
 pub(crate) fn digest_prompt_only(prompt: &str) -> String {
     digest_policy_prompt(&crate::exec::RequestPolicy::current(), prompt)
 }
@@ -162,9 +169,10 @@ fn digest_policy_prompt(policy: &crate::exec::RequestPolicy, prompt: &str) -> St
 
 fn collect(
     dir: &Path,
-    answers: &mut BTreeMap<String, String>,
+    recording: &mut Recording,
     models: &mut BTreeMap<String, crate::eval::ModelInfo>,
     inherited_policy: Option<&crate::exec::RequestPolicy>,
+    inherited_version: Option<u32>,
 ) -> Result<(), String> {
     let entries = match std::fs::read_dir(dir) {
         Ok(entries) => entries,
@@ -175,31 +183,60 @@ fn collect(
     // Read the run-level request identity before its raw exchanges.
     // Directory iteration order is unspecified, so learning this while
     // walking the entries could key an exchange before its manifest.
-    let manifest = std::fs::read_to_string(dir.join("run.json"))
-        .ok()
-        .and_then(|text| serde_json::from_str::<serde_json::Value>(&text).ok());
-    let request_policy = manifest
+    let manifest_path = dir.join("run.json");
+    let manifest: Option<serde_json::Value> = match std::fs::read_to_string(&manifest_path) {
+        Ok(text) => Some(serde_json::from_str(&text).map_err(|e| {
+            format!(
+                "{}: invalid recording manifest: {e}",
+                manifest_path.display()
+            )
+        })?),
+        Err(e) if e.kind() == std::io::ErrorKind::NotFound => None,
+        Err(e) => return Err(format!("{}: {e}", manifest_path.display())),
+    };
+    let version = match manifest
         .as_ref()
-        .and_then(|manifest| manifest.get("request"))
-        .and_then(|request| {
-            serde_json::from_value::<crate::exec::RequestPolicy>(request.clone()).ok()
-        })
-        .or_else(|| inherited_policy.cloned())
-        // Archived recordings predate #328. Treat them as the request
-        // shape current when the compatibility rule landed: this keeps
-        // the archive usable, while any future role/bound/format change
-        // gets a different key and refuses them.
-        .unwrap_or_else(crate::exec::RequestPolicy::current);
-    if let Some(model) = manifest.as_ref().and_then(|manifest| {
-        serde_json::from_value::<crate::eval::ModelInfo>(manifest.get("model")?.clone()).ok()
-    }) {
-        models.insert(model.file.clone(), model);
+        .and_then(|m| m.get("generation_request_version"))
+    {
+        Some(value) => Some(
+            value
+                .as_u64()
+                .and_then(|n| u32::try_from(n).ok())
+                .ok_or_else(|| "invalid generation request version".to_owned())?,
+        ),
+        None => inherited_version,
+    };
+    if version.is_some_and(|v| v != GenerationRequest::VERSION) {
+        return Err(format!(
+            "unsupported generation request version {version:?}"
+        ));
+    }
+    let request_policy = match manifest.as_ref().and_then(|m| m.get("request")) {
+        Some(value) if !value.is_null() => {
+            serde_json::from_value::<crate::exec::RequestPolicy>(value.clone())
+                .map_err(|e| format!("invalid recorded request policy: {e}"))?
+        }
+        _ => inherited_policy
+            .cloned()
+            .unwrap_or_else(crate::exec::RequestPolicy::legacy),
+    };
+    if let Some(value) = manifest
+        .as_ref()
+        .and_then(|m| m.get("model"))
+        .filter(|v| !v.is_null())
+    {
+        let model: crate::eval::ModelInfo = serde_json::from_value(value.clone())
+            .map_err(|e| format!("invalid recorded model identity: {e}"))?;
+        models.insert(
+            serde_json::to_string(&model).expect("model serialises"),
+            model,
+        );
     }
 
     for entry in entries.flatten() {
         let path = entry.path();
         if path.is_dir() {
-            collect(&path, answers, models, Some(&request_policy))?;
+            collect(&path, recording, models, Some(&request_policy), version)?;
             continue;
         }
         if path.file_name().is_some_and(|name| name == "run.json") {
@@ -228,15 +265,24 @@ fn collect(
         ) else {
             continue; // a request whose answer never landed
         };
-        // A run directory records the rendered prompt, not the HTTP
-        // payload, so the prompt is the key. The schema is not on
-        // disk: `schema_free` entries match whatever schema the
-        // replaying run supplies, which is sound because a schema
-        // change without a prompt change is not a thing any pack has
-        // done — but it is a gap, and it is written down rather than
-        // hidden.
-        let key = digest_policy_prompt(&request_policy, &request_text);
-        if let Some(previous) = answers.get(&key) {
+        let identity_path = path.with_file_name(format!("{stem}.generation.json"));
+        let key = match std::fs::read_to_string(&identity_path) {
+            Ok(text) => {
+                let generation: GenerationRequest = serde_json::from_str(&text)
+                    .map_err(|e| format!("{}: invalid generation identity: {e}", identity_path.display()))?;
+                if generation.version != GenerationRequest::VERSION || generation.prompt() != Some(request_text.as_str())
+                    || generation.payload.pointer("/response_format/json_schema/schema").is_none() {
+                    return Err(format!("{}: incompatible or inconsistent generation identity", identity_path.display()));
+                }
+                recording.exact_prompts.insert(digest_prompt_only(&request_text));
+                generation.digest()
+            }
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound && version.is_none() => {
+                digest_policy_prompt(&request_policy, &request_text)
+            }
+            Err(e) => return Err(format!("{}: missing or unreadable generation identity: {e}; cannot use prompt-only matching", identity_path.display())),
+        };
+        if let Some(previous) = recording.answers.get(&key) {
             if previous != &body {
                 return Err(format!(
                     "the recording under {} holds different answers for the same request — \
@@ -246,8 +292,16 @@ fn collect(
                 ));
             }
         } else {
-            answers.insert(key, body);
+            recording.answers.insert(key, body);
         }
     }
     Ok(())
+}
+
+/// A legacy match cannot establish schema compatibility, even if its answer
+/// validates today. Kept with replay results rather than called exact.
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub struct ReplayCompatibility {
+    pub exact_requests: usize,
+    pub legacy_prompt_only_requests: usize,
 }

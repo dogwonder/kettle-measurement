@@ -1,0 +1,448 @@
+{
+  "schema_version": 1,
+  "slice": "slice-01",
+  "description": "one set of facts — a dated letter's base, a 14-day payment with an instalment beside an annual total, an appointment with a time and a place, a reference to quote, and a conditional the document cannot settle — rendered as a letter and as a statement",
+  "facts": [
+    {
+      "id": "fact-org",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Redhill District Council"
+      }
+    },
+    {
+      "id": "fact-letter-date",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      },
+      "role": "the base a relative period counts from"
+    },
+    {
+      "id": "fact-earlier-letter-date",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-03"
+      },
+      "role": "a date belonging to another event; never a base or a deadline"
+    },
+    {
+      "id": "fact-instalment",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "305.29",
+        "currency": "GBP"
+      },
+      "role": "the sum the payment ask is for"
+    },
+    {
+      "id": "fact-annual-total",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "3052.90",
+        "currency": "GBP"
+      },
+      "role": "printed beside the instalment; not the sum asked for"
+    },
+    {
+      "id": "fact-due",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-24"
+      },
+      "role": "the day the payment falls due: 14 days from the letter's date"
+    },
+    {
+      "id": "fact-appointment-date",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-04-02"
+      }
+    },
+    {
+      "id": "fact-appointment-time",
+      "field": "time",
+      "status": "stated",
+      "value": {
+        "kind": "time",
+        "hhmm": "14:30"
+      }
+    },
+    {
+      "id": "fact-appointment-place",
+      "field": "place",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Room 4, Civic Centre"
+      }
+    },
+    {
+      "id": "fact-reference",
+      "field": "reference",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "CT-4471"
+      },
+      "role": "to quote when calling; looks like nothing else on the page"
+    },
+    {
+      "id": "fact-tenants-condition",
+      "field": "condition",
+      "status": "ambiguous",
+      "value": {
+        "kind": "text",
+        "text": "whether the reader rents the property out"
+      },
+      "role": "a condition the document cannot settle"
+    },
+    {
+      "id": "fact-payment-time",
+      "field": "time",
+      "status": "absent",
+      "value": null,
+      "role": "no time of day is given for the payment"
+    }
+  ],
+  "relations": [
+    {
+      "id": "rel-instalment-not-total",
+      "kind": "selected-over-distractor",
+      "ask": "ask-pay",
+      "field": "amount",
+      "selected": "fact-instalment",
+      "distractor": "fact-annual-total"
+    },
+    {
+      "id": "rel-base-not-earlier-letter",
+      "kind": "selected-over-distractor",
+      "ask": "ask-pay",
+      "field": "base",
+      "selected": "fact-letter-date",
+      "distractor": "fact-earlier-letter-date"
+    },
+    {
+      "id": "rel-appointment-not-payment-date",
+      "kind": "selected-over-distractor",
+      "ask": "ask-attend",
+      "field": "deadline",
+      "selected": "fact-appointment-date",
+      "distractor": "fact-due"
+    }
+  ],
+  "cases": [
+    {
+      "id": "slice01-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Redhill District Council",
+        "Further to our letter of 3 March 2026, your council tax for the year is £3,052.90.",
+        "Please pay your first instalment of £305.29 within 14 days of the date of this letter.",
+        "If you rent this property out, you must tell your tenants that the charge applies.",
+        "An appointment has been booked for you with the recovery officer on 2 April 2026 at 2:30pm at Room 4, Civic Centre.",
+        "Quote reference CT-4471 when you call.",
+        "Yours sincerely,\nRedhill District Council"
+      ],
+      "spans": [
+        {
+          "fact": "fact-letter-date",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "fact-org",
+          "passage": 1,
+          "text": "Redhill District Council"
+        },
+        {
+          "fact": "fact-earlier-letter-date",
+          "passage": 2,
+          "text": "3 March 2026"
+        },
+        {
+          "fact": "fact-annual-total",
+          "passage": 2,
+          "text": "£3,052.90"
+        },
+        {
+          "fact": "fact-instalment",
+          "passage": 3,
+          "text": "£305.29"
+        },
+        {
+          "fact": "fact-due",
+          "passage": 3,
+          "text": "within 14 days of the date of this letter"
+        },
+        {
+          "fact": "fact-tenants-condition",
+          "passage": 4,
+          "text": "If you rent this property out"
+        },
+        {
+          "fact": "fact-appointment-date",
+          "passage": 5,
+          "text": "2 April 2026"
+        },
+        {
+          "fact": "fact-appointment-time",
+          "passage": 5,
+          "text": "2:30pm"
+        },
+        {
+          "fact": "fact-appointment-place",
+          "passage": 5,
+          "text": "Room 4, Civic Centre"
+        },
+        {
+          "fact": "fact-reference",
+          "passage": 6,
+          "text": "CT-4471"
+        }
+      ],
+      "asks": [
+        {
+          "id": "ask-pay",
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "fact-org",
+            "deadline": "fact-due",
+            "base": "fact-letter-date",
+            "amount": "fact-instalment",
+            "time": "fact-payment-time",
+            "place": null,
+            "reference": "fact-reference"
+          },
+          "passage": 3,
+          "deadline_words": "within 14 days of the date of this letter",
+          "read": {
+            "count": 14,
+            "unit": "days",
+            "qualifier": "none",
+            "counts_from": "letter_date"
+          },
+          "deadline_read": {
+            "count": 14,
+            "unit": "days",
+            "qualifier": "none",
+            "counts_from": "letter_date"
+          }
+        },
+        {
+          "id": "ask-attend",
+          "kind": "attendance",
+          "status": "obligation",
+          "fields": {
+            "party": "fact-org",
+            "deadline": "fact-appointment-date",
+            "base": null,
+            "amount": null,
+            "time": "fact-appointment-time",
+            "place": "fact-appointment-place",
+            "reference": null
+          },
+          "passage": 5,
+          "deadline_words": "2 April 2026",
+          "read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          },
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "ask-tenants",
+          "kind": "response",
+          "status": "no-obligation",
+          "reason": "conditional on a fact the document cannot settle",
+          "fields": {
+            "party": "fact-org",
+            "deadline": null,
+            "base": null,
+            "amount": null,
+            "time": null,
+            "place": null,
+            "reference": null
+          },
+          "condition": "fact-tenants-condition",
+          "passage": 4
+        }
+      ]
+    },
+    {
+      "id": "slice01-statement",
+      "document_kind": "statement",
+      "passages": [
+        "Statement of account",
+        "Redhill District Council\tReference CT-4471",
+        "Statement date\t10/03/2026",
+        "Previous notice\t03/03/2026",
+        "Annual charge\t£3,052.90",
+        "Instalment 1\t£305.29\tdue 24/03/2026",
+        "Recovery appointment\t02/04/2026\t14:30\tRoom 4, Civic Centre",
+        "Note: landlords must tell their tenants that the charge applies."
+      ],
+      "spans": [
+        {
+          "fact": "fact-org",
+          "passage": 1,
+          "text": "Redhill District Council"
+        },
+        {
+          "fact": "fact-reference",
+          "passage": 1,
+          "text": "CT-4471"
+        },
+        {
+          "fact": "fact-letter-date",
+          "passage": 2,
+          "text": "10/03/2026"
+        },
+        {
+          "fact": "fact-earlier-letter-date",
+          "passage": 3,
+          "text": "03/03/2026"
+        },
+        {
+          "fact": "fact-annual-total",
+          "passage": 4,
+          "text": "£3,052.90"
+        },
+        {
+          "fact": "fact-instalment",
+          "passage": 5,
+          "text": "£305.29"
+        },
+        {
+          "fact": "fact-due",
+          "passage": 5,
+          "text": "due 24/03/2026"
+        },
+        {
+          "fact": "fact-appointment-date",
+          "passage": 6,
+          "text": "02/04/2026"
+        },
+        {
+          "fact": "fact-appointment-time",
+          "passage": 6,
+          "text": "14:30"
+        },
+        {
+          "fact": "fact-appointment-place",
+          "passage": 6,
+          "text": "Room 4, Civic Centre"
+        },
+        {
+          "fact": "fact-tenants-condition",
+          "passage": 7,
+          "text": "landlords must tell their tenants"
+        }
+      ],
+      "asks": [
+        {
+          "id": "ask-pay",
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "fact-org",
+            "deadline": "fact-due",
+            "base": "fact-letter-date",
+            "amount": "fact-instalment",
+            "time": "fact-payment-time",
+            "place": null,
+            "reference": "fact-reference"
+          },
+          "passage": 5,
+          "deadline_words": "due 24/03/2026",
+          "read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          },
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "ask-attend",
+          "kind": "attendance",
+          "status": "obligation",
+          "fields": {
+            "party": "fact-org",
+            "deadline": "fact-appointment-date",
+            "base": null,
+            "amount": null,
+            "time": "fact-appointment-time",
+            "place": "fact-appointment-place",
+            "reference": null
+          },
+          "passage": 6,
+          "deadline_words": "02/04/2026",
+          "read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          },
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "ask-tenants",
+          "kind": "response",
+          "status": "no-obligation",
+          "reason": "conditional on a fact the document cannot settle",
+          "fields": {
+            "party": "fact-org",
+            "deadline": null,
+            "base": null,
+            "amount": null,
+            "time": null,
+            "place": null,
+            "reference": null
+          },
+          "condition": "fact-tenants-condition",
+          "passage": 7
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "generator": "kettle-examples synth_letters.corpus",
+    "generator_revision": "52a843c333b32cfd3521afd97005645dae8441a3",
+    "digest": "sha256:19e5043188f35521c9683554b1bfb64b1359ef363835758865a171df5570b838",
+    "synthetic": true
+  }
+}

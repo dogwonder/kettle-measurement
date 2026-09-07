@@ -578,12 +578,14 @@ mod tests {
 
     fn report(relations: Vec<RelationResult>) -> EvalReport {
         EvalReport {
+            replay_compatibility: None,
             unrunnable: Vec::new(),
             reused_fixtures: 0,
             pack: "app.kttl.letter-to-actions".to_owned(),
             pack_version: "0.2.0".to_owned(),
             eval_set: EvalSelection::Development,
             model: Some(ModelInfo {
+                weights_digest: None,
                 file: "qwen3.5-4b-q4_k_m.gguf".to_owned(),
                 params: "4B".to_owned(),
                 quant: "Q4_K_M".to_owned(),

@@ -890,7 +890,7 @@ fn validate_wasm_steps(steps: &[WasmStep]) -> Result<(), PackError> {
 }
 
 /// Every file path a step references, relative to the pack directory.
-fn referenced_files(step: &PipelineStep) -> Vec<&str> {
+pub(crate) fn referenced_files(step: &PipelineStep) -> Vec<&str> {
     match step {
         PipelineStep::Preprocess { .. } | PipelineStep::Aggregate { .. } => Vec::new(),
         PipelineStep::Model {

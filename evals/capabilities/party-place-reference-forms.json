@@ -1,0 +1,434 @@
+{
+  "schema_version": 1,
+  "capability": "parties-places-and-references",
+  "letter_date": "2026-03-10",
+  "cases": [
+    {
+      "id": "party-form-001",
+      "capability": "parties-places-and-references",
+      "form": "organisation in the letterhead",
+      "phrase": "Example Services",
+      "source_truth": {
+        "status": "party",
+        "name": "Example Services",
+        "type": "organisation"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Name — verbatim containment, never case-folded",
+        "coverage": "main-check",
+        "known_gap": null,
+        "check": {
+          "kind": "Name",
+          "value": "Example Services",
+          "expected": "supported"
+        }
+      },
+      "model_reading": {
+        "case_id": "party-form-001-letter",
+        "document": "10 March 2026\nExample Services\nPlease pay £120.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "party-form-002",
+      "capability": "parties-places-and-references",
+      "form": "organisation with a legal suffix",
+      "phrase": "Pelham Parking Enforcement Ltd",
+      "source_truth": {
+        "status": "party",
+        "name": "Pelham Parking Enforcement Ltd",
+        "type": "organisation",
+        "note": "'Ltd' is part of the name as printed"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Name — verbatim containment, never case-folded",
+        "coverage": "main-check",
+        "known_gap": null,
+        "check": {
+          "kind": "Name",
+          "value": "Pelham Parking Enforcement Ltd",
+          "expected": "supported"
+        }
+      },
+      "model_reading": {
+        "case_id": "party-form-002-letter",
+        "document": "10 March 2026\nPelham Parking Enforcement Ltd\nPlease pay the charge within 28 days.",
+        "coverage": "not-measured"
+      },
+      "notes": "the 6 September full run scored 'Pelham Parking Enforcement Ltd' against a bed expecting the name without the suffix: a bed-authoring question, not a reading error"
+    },
+    {
+      "id": "party-form-003",
+      "capability": "parties-places-and-references",
+      "form": "named person with title",
+      "phrase": "Dr A. Patel",
+      "source_truth": {
+        "status": "party",
+        "name": "Dr A. Patel",
+        "type": "person",
+        "on_behalf_of": "Example Services"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "the party is one string; person versus organisation is not distinguished (#595)"
+      },
+      "model_reading": {
+        "case_id": "party-form-003-letter",
+        "document": "10 March 2026\nExample Services\nDr A. Patel would like to see you on 12 March 2026 at 2:30pm.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "party-form-004",
+      "capability": "parties-places-and-references",
+      "form": "role, not a name",
+      "phrase": "The Practice Manager",
+      "source_truth": {
+        "status": "party",
+        "name": "The Practice Manager",
+        "type": "role",
+        "on_behalf_of": "Example Services"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "a role is read as the name; nothing says it is a role"
+      },
+      "model_reading": {
+        "case_id": "party-form-004-letter",
+        "document": "10 March 2026\nExample Services\nThe Practice Manager asks that you confirm your attendance by 5 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "party-form-005",
+      "capability": "parties-places-and-references",
+      "form": "department of the sender",
+      "phrase": "Council Tax Recovery Team",
+      "source_truth": {
+        "status": "party",
+        "name": "Council Tax Recovery Team",
+        "type": "department",
+        "on_behalf_of": "Example Services"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "department versus organisation is not distinguished"
+      },
+      "model_reading": {
+        "case_id": "party-form-005-letter",
+        "document": "10 March 2026\nExample Services\nCouncil Tax Recovery Team\nPlease pay the instalment of £305.29 by 3 April 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "party-form-006",
+      "capability": "parties-places-and-references",
+      "form": "sender named only in the sign-off",
+      "phrase": "Example Services",
+      "source_truth": {
+        "status": "party",
+        "name": "Example Services",
+        "type": "organisation",
+        "printed_at": "sign-off"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Name — verbatim containment, never case-folded",
+        "coverage": "main-check",
+        "known_gap": null,
+        "check": {
+          "kind": "Name",
+          "value": "Example Services",
+          "expected": "supported"
+        }
+      },
+      "model_reading": {
+        "case_id": "party-form-006-letter",
+        "document": "10 March 2026\nPlease pay £120.00 within 14 days of the date of this letter.\nYours sincerely,\nExample Services",
+        "coverage": "not-measured"
+      },
+      "notes": "the reading names the sign-off passage; on a letter over one batch the sign-off can be outside the window (METHOD §3.2)"
+    },
+    {
+      "id": "party-form-007",
+      "capability": "parties-places-and-references",
+      "form": "recipient is not the party",
+      "phrase": "Dear Ms Okafor",
+      "source_truth": {
+        "status": "not-the-party",
+        "name": "Ms Okafor",
+        "role": "recipient"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "the model's closed answer (kind enum / empty obligations); Rust verifies nothing semantic here",
+        "coverage": "model-judgement",
+        "known_gap": null
+      },
+      "model_reading": {
+        "case_id": "party-form-007-letter",
+        "document": "10 March 2026\nExample Services\nDear Ms Okafor,\nPlease pay £120.00 within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      },
+      "notes": "the prompt says never the person receiving it; Rust verifies only that whatever name is given is on the page"
+    },
+    {
+      "id": "party-form-008",
+      "capability": "parties-places-and-references",
+      "form": "third party the reader must deal with",
+      "phrase": "pay the bailiff, Marston Recovery",
+      "source_truth": {
+        "status": "party",
+        "name": "Marston Recovery",
+        "type": "organisation",
+        "role": "payee",
+        "note": "the sender is Example Services; the payee is a third party"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "payee versus sender is not distinguished; 'party' means the organisation doing the asking"
+      },
+      "model_reading": {
+        "case_id": "party-form-008-letter",
+        "document": "10 March 2026\nExample Services\nYou must now pay the bailiff, Marston Recovery, within 7 days.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "party-form-009",
+      "capability": "parties-places-and-references",
+      "form": "venue",
+      "phrase": "Clinic 4, Level 2, Queen Elizabeth Hospital",
+      "source_truth": {
+        "status": "place",
+        "name": "Clinic 4, Level 2, Queen Elizabeth Hospital"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "no place field (#595 'Where')"
+      },
+      "model_reading": {
+        "case_id": "party-form-009-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment is on 12 March 2026 at 2:30pm at Clinic 4, Level 2, Queen Elizabeth Hospital.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "party-form-010",
+      "capability": "parties-places-and-references",
+      "form": "postal address, not a venue",
+      "phrase": "return the form to PO Box 12, Redhill RH1 1AA",
+      "source_truth": {
+        "status": "place",
+        "name": "PO Box 12, Redhill RH1 1AA",
+        "type": "postal-address"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "no place field; a postal address and a venue are not distinguished"
+      },
+      "model_reading": {
+        "case_id": "party-form-010-letter",
+        "document": "10 March 2026\nExample Services\nPlease return the form to PO Box 12, Redhill RH1 1AA by 24 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "party-form-011",
+      "capability": "parties-places-and-references",
+      "form": "reference to quote back",
+      "phrase": "Quote reference BI-66319 when you call",
+      "source_truth": {
+        "status": "reference",
+        "value": "BI-66319",
+        "purpose": "quote when calling"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:what-is-this-form-asking"
+      ],
+      "verifier": {
+        "boundary": "no field carries this",
+        "coverage": "none",
+        "known_gap": "no reference field (#595); the reference is dropped"
+      },
+      "model_reading": {
+        "case_id": "party-form-011-letter",
+        "document": "10 March 2026\nExample Services\nQuote reference BI-66319 when you call.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "party-form-012",
+      "capability": "parties-places-and-references",
+      "form": "reference that looks like a sum",
+      "phrase": "Account 41.21",
+      "source_truth": {
+        "status": "reference",
+        "value": "41.21",
+        "note": "an account number with a decimal point, not money"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "reading::check Kind::Money",
+        "coverage": "unsupported",
+        "known_gap": "41.21 has pence and verifies as a money token if named; only the model's choice of passage separates the two",
+        "check": {
+          "kind": "Money",
+          "value": "41.21",
+          "expected": "accepted-misread"
+        }
+      },
+      "model_reading": {
+        "case_id": "party-form-012-letter",
+        "document": "10 March 2026\nExample Services\nAccount 41.21\nAmount due £41.21",
+        "coverage": "not-measured"
+      },
+      "notes": "adjacent look-alikes; the truth says which is which"
+    },
+    {
+      "id": "party-form-013",
+      "capability": "parties-places-and-references",
+      "form": "reference that looks like a date",
+      "phrase": "Case 12/03/2026",
+      "source_truth": {
+        "status": "reference",
+        "value": "12/03/2026",
+        "note": "a case number in date form"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions"
+      ],
+      "verifier": {
+        "boundary": "first_full_date reads a numeric date wherever it is named",
+        "coverage": "unsupported",
+        "known_gap": "a numeric date inside a reference reads as a date if the model names that passage"
+      },
+      "model_reading": {
+        "case_id": "party-form-013-letter",
+        "document": "10 March 2026\nExample Services\nCase 12/03/2026\nPlease reply within 14 days of the date of this letter.",
+        "coverage": "not-measured"
+      }
+    }
+  ]
+}

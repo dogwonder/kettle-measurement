@@ -18,6 +18,7 @@
 
 pub mod ablation;
 pub mod bed;
+pub mod corpus;
 pub mod evidence;
 pub mod fixture;
 pub mod letters;
@@ -526,6 +527,9 @@ impl Thresholds {
 /// One model measured against one pack's fixtures.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct EvalReport {
+    /// Replay compatibility is evidence provenance, never a new measurement.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub replay_compatibility: Option<replay::ReplayCompatibility>,
     /// Pack id, e.g. "app.kttl.subscription-audit".
     pub pack: String,
     pub pack_version: String,
@@ -813,6 +817,9 @@ impl EvalReport {
 /// earns a tier its name, so it records the file itself.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ModelInfo {
+    /// Content identity, never filename identity. Absent on legacy measurements.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub weights_digest: Option<String>,
     /// File name only, e.g. "qwen2.5-3b-instruct-q4_k_m.gguf" — never a
     /// full path, for the same reason inputs aren't (paths leak a home
     /// directory into a document people share).
@@ -1186,6 +1193,9 @@ impl ClassificationOutcome {
 /// One raw prompt/answer pair that contributed to a scored item.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ModelExchange {
+    /// Complete request identity; absent on historical prompt-only records.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub generation: Option<crate::exec::GenerationRequest>,
     pub step: String,
     pub batch: usize,
     pub request: String,

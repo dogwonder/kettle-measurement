@@ -1,0 +1,529 @@
+{
+  "schema_version": 1,
+  "capability": "times",
+  "letter_date": "2026-03-10",
+  "cases": [
+    {
+      "id": "time-form-001",
+      "capability": "times",
+      "form": "12-hour, minutes, no space before pm",
+      "phrase": "at 5:30pm",
+      "source_truth": {
+        "status": "time",
+        "time": "17:30"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "Use the 12-hour clock: 5:30pm, not 1730hrs"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-001-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment is on 12 March 2026 at 5:30pm.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-002",
+      "capability": "times",
+      "form": "12-hour, dot separator, no space",
+      "phrase": "at 3.50pm",
+      "source_truth": {
+        "status": "time",
+        "time": "15:50"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-002-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment is on 12 March 2026 at 3.50pm.",
+        "coverage": "not-measured"
+      },
+      "notes": "the letter bed's only time form (#595); dot rather than colon is common in UK letters and not covered by the style guide"
+    },
+    {
+      "id": "time-form-003",
+      "capability": "times",
+      "form": "12-hour, space before pm",
+      "phrase": "at 3:50 pm",
+      "source_truth": {
+        "status": "time",
+        "time": "15:50"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-003-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment is on 12 March 2026 at 3:50 pm.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-004",
+      "capability": "times",
+      "form": "24-hour with colon",
+      "phrase": "at 15:50",
+      "source_truth": {
+        "status": "time",
+        "time": "15:50"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-004-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment is on 12 March 2026 at 15:50.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-005",
+      "capability": "times",
+      "form": "24-hour without separator",
+      "phrase": "at 1550",
+      "source_truth": {
+        "status": "ambiguous",
+        "reason": "a bare four-digit figure may be a time, a reference or a year; the letter must say"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-005-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment is on 12 March 2026 at 1550. Quote 1550 when you call.",
+        "coverage": "not-measured"
+      },
+      "notes": "the same digits appear as a reference in the next sentence"
+    },
+    {
+      "id": "time-form-006",
+      "capability": "times",
+      "form": "hour only, am",
+      "phrase": "at 9am",
+      "source_truth": {
+        "status": "time",
+        "time": "09:00"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "10am to 11am"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-006-letter",
+        "document": "10 March 2026\nExample Services\nPlease arrive at 9am on 12 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-007",
+      "capability": "times",
+      "form": "midday",
+      "phrase": "at midday",
+      "source_truth": {
+        "status": "time",
+        "time": "12:00"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "midday, not 12 noon"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-007-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment is on 12 March 2026 at midday.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-008",
+      "capability": "times",
+      "form": "midnight as a deadline",
+      "phrase": "by midnight on 12 March 2026",
+      "source_truth": {
+        "status": "time",
+        "time": "24:00",
+        "note": "midnight ends 12 March; a reading of 00:00 on 12 March is a day early"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "midnight, not 00:00"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-008-letter",
+        "document": "10 March 2026\nExample Services\nYour online application must be submitted by midnight on 12 March 2026.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-009",
+      "capability": "times",
+      "form": "window with 'to'",
+      "phrase": "between 10am to 11am",
+      "source_truth": {
+        "status": "window",
+        "start": "10:00",
+        "end": "11:00"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "GOV.UK style guide A to Z",
+          "locator": "GOV.UK publishing guidance, Writing to GOV.UK standards, A to Z style guide (entries: dates, times, money, numbers, percentages)",
+          "quoted_rule": "time ranges: 10am to 11am, using 'to' not hyphens"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-009-letter",
+        "document": "10 March 2026\nExample Services\nAn engineer will call on 12 March 2026 between 10am to 11am.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-010",
+      "capability": "times",
+      "form": "window with 'and'",
+      "phrase": "between 12pm and 5pm",
+      "source_truth": {
+        "status": "window",
+        "start": "12:00",
+        "end": "17:00"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-010-letter",
+        "document": "10 March 2026\nExample Services\nAn engineer will call on 12 March 2026 between 12pm and 5pm.",
+        "coverage": "not-measured"
+      },
+      "notes": "the kettle-examples appointment form"
+    },
+    {
+      "id": "time-form-011",
+      "capability": "times",
+      "form": "arrival time beside appointment time",
+      "phrase": "Please arrive by 2:15pm for your 2:30pm appointment",
+      "source_truth": {
+        "status": "time",
+        "time": "14:30",
+        "also": {
+          "arrival": "14:15"
+        },
+        "note": "the appointment is 2:30pm; arrival is advice about it, not a second ask"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": "pending"
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-011-letter",
+        "document": "10 March 2026\nExample Services\nPlease arrive by 2:15pm for your 2:30pm appointment on 12 March 2026.",
+        "coverage": "not-measured"
+      },
+      "notes": "the prompt already treats arrival advice as part of the appointment; the truth keeps both values so a reading that swaps them is visible"
+    },
+    {
+      "id": "time-form-012",
+      "capability": "times",
+      "form": "duration, not a time",
+      "phrase": "for about 45 minutes",
+      "source_truth": {
+        "status": "duration",
+        "minutes": 45
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "RFC 5545 (iCalendar)",
+          "locator": "IETF RFC 5545, Internet Calendaring and Scheduling Core Object Specification, section 3.3 (property value data types)",
+          "quoted_rule": "DURATION: dur-value = P… e.g. PT45M"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-012-letter",
+        "document": "10 March 2026\nExample Services\nYour appointment on 12 March 2026 at 2:30pm will last for about 45 minutes.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-013",
+      "capability": "times",
+      "form": "ISO date-time, floating",
+      "phrase": "2026-03-12T14:30",
+      "source_truth": {
+        "status": "time",
+        "time": "14:30",
+        "note": "floating local time, no zone"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "RFC 5545 (iCalendar)",
+          "locator": "IETF RFC 5545, Internet Calendaring and Scheduling Core Object Specification, section 3.3 (property value data types)",
+          "quoted_rule": "a DATE-TIME with no UTC designator and no TZID is floating: not bound to any time zone"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-013-letter",
+        "document": "10 March 2026\nExample Services\nBooking reference 7Q2: 2026-03-12T14:30, Clinic 4.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-014",
+      "capability": "times",
+      "form": "UTC-marked date-time on a UK letter",
+      "phrase": "2026-03-12T14:30Z",
+      "source_truth": {
+        "status": "ambiguous",
+        "reason": "Z is UTC; on 12 March UK clocks are GMT so the local time is the same, but on a summer date it would be an hour out — the reading must carry the zone"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "RFC 5545 (iCalendar)",
+          "locator": "IETF RFC 5545, Internet Calendaring and Scheduling Core Object Specification, section 3.3 (property value data types)",
+          "quoted_rule": "a DATE-TIME with Z is UTC"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-014-letter",
+        "document": "10 March 2026\nExample Services\nYour video consultation is at 2026-03-12T14:30Z.",
+        "coverage": "not-measured"
+      }
+    },
+    {
+      "id": "time-form-015",
+      "capability": "times",
+      "form": "all-day, no time",
+      "phrase": "on 12 March 2026",
+      "source_truth": {
+        "status": "absent",
+        "reason": "the day is given and no time; an all-day event, not midnight"
+      },
+      "provenance": {
+        "kind": "authored-this-batch",
+        "revision": "222d8313",
+        "path": "evals/capabilities/third-batch.md",
+        "independent_source": {
+          "kind": "public-style-or-standard",
+          "name": "RFC 5545 (iCalendar)",
+          "locator": "IETF RFC 5545, Internet Calendaring and Scheduling Core Object Specification, section 3.3 (property value data types)",
+          "quoted_rule": "an all-day event uses the DATE value type rather than DATE-TIME"
+        }
+      },
+      "consumer_packs": [
+        "app.kttl.letter-to-actions",
+        "idea:transcribe-a-recording",
+        "idea:household-knowledge"
+      ],
+      "verifier": {
+        "boundary": "no time is read: `first_full_date` keeps the day and drops the time; no report or scorer field carries one",
+        "coverage": "none",
+        "known_gap": "times are not extracted or scored by any pack (#595)"
+      },
+      "model_reading": {
+        "case_id": "time-form-015-letter",
+        "document": "10 March 2026\nExample Services\nYour bins will be collected on 12 March 2026.",
+        "coverage": "not-measured"
+      }
+    }
+  ]
+}

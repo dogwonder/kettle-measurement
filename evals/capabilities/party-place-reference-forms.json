@@ -30,6 +30,11 @@
           "kind": "Name",
           "value": "Example Services",
           "expected": "supported"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -66,6 +71,11 @@
           "kind": "Name",
           "value": "Pelham Parking Enforcement Ltd",
           "expected": "supported"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -200,6 +210,11 @@
           "kind": "Name",
           "value": "Example Services",
           "expected": "supported"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -391,6 +406,11 @@
           "kind": "Money",
           "value": "41.21",
           "expected": "accepted-misread"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {

@@ -48,6 +48,9 @@ pub enum ParseError {
     /// this build of Kettle, and the wording differs accordingly.
     Ocr(crate::ocr::OcrError),
     UnsupportedFileType(String),
+    TooManyPages {
+        max: usize,
+    },
     UnrecognisedColumns {
         headers: Vec<String>,
     },
@@ -56,6 +59,7 @@ pub enum ParseError {
 impl fmt::Display for ParseError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            ParseError::TooManyPages { max } => write!(f, "Choose a letter with up to {max} pages in total, including pages inside PDFs. Nothing was sent to the model."),
             ParseError::Io(e) => write!(f, "could not open the file: {e}"),
             ParseError::Csv(e) => write!(f, "could not read the file: {e}"),
             ParseError::Pdf(e) => write!(f, "{e}"),

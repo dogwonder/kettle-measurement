@@ -47,7 +47,7 @@ fn inventories() -> Vec<(String, serde_json::Value)> {
 /// `scripts/capability-coverage.py`, which reports on the same files.
 const VERIFIER_COVERAGE: [&str; 5] = [
     "main-check",
-    "pending-v19-test",
+    "not-exercised",
     "model-judgement",
     "unsupported",
     "none",
@@ -137,6 +137,60 @@ fn every_family_keeps_the_three_answers_apart() {
                 VERIFIER_COVERAGE.contains(&coverage),
                 "{id}: verifier coverage {coverage:?} is not in the vocabulary"
             );
+            let owner = if capability == "dates-and-periods" {
+                Some((
+                    "reading_vocabulary.rs",
+                    "every_surface_form_reads_as_the_table_says",
+                ))
+            } else if verifier["check"].is_object() {
+                Some((
+                    "inventory_verifier.rs",
+                    "every_checked_case_comes_out_as_the_inventory_says",
+                ))
+            } else {
+                None
+            };
+            if let Some((file, name)) = owner {
+                let test = &verifier["test"];
+                assert_eq!(test["file"], format!("crates/runner/tests/{file}"), "{id}");
+                assert_eq!(test["name"], name, "{id}");
+                assert!(
+                    !test["scope"].as_str().unwrap_or_default().is_empty(),
+                    "{id}: check scope"
+                );
+                assert!(
+                    matches!(coverage, "main-check" | "unsupported"),
+                    "{id}: stale check status"
+                );
+                let source = std::fs::read_to_string(
+                    Path::new(env!("CARGO_MANIFEST_DIR"))
+                        .join("tests")
+                        .join(file),
+                )
+                .unwrap();
+                assert!(
+                    source.contains(&format!("fn {name}(")),
+                    "{id}: owning test missing"
+                );
+            } else {
+                assert!(
+                    verifier["test"].is_null(),
+                    "{id}: no adapter executes this inventory case"
+                );
+                assert_ne!(
+                    coverage, "main-check",
+                    "{id}: no adapter executes this inventory case"
+                );
+            }
+            if matches!(
+                verifier["check"]["expected"].as_str(),
+                Some("accepted-misread" | "not-a-sum")
+            ) {
+                assert_eq!(
+                    coverage, "unsupported",
+                    "{id}: an executable limitation is not a supported capability"
+                );
+            }
             // A form the verifier cannot check must say why, so an
             // unsupported capability is never a silent pass.
             if matches!(coverage, "unsupported" | "none") {

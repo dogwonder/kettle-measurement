@@ -229,6 +229,10 @@ page images or parts of one logical document, declare
 numbering across the files in the order supplied; the app shows that
 order and lets the person correct it. Use this only with
 `builtin:document-text` — it is not a way to pool unrelated documents.
+Use a positive `max_pages` to bound the total physical pages in each
+logical document before any model call; `count` bounds files separately.
+For a three-page letter, declare `"count": {"min": 1, "max": 3}` and
+`"max_pages": 3`. A PDF with four pages is then refused even as one file.
 
 **How does a pack compare two documents?** Declare the two inputs in
 the order they are compared — the *earlier* document first — a

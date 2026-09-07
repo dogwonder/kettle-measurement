@@ -41,7 +41,10 @@ path, or on macOS a full-size JPEG/HEIC photograph) into ordered
 paragraph `Segment`s, each carrying its page and position as a person
 would cite it (#239, #240, #399). A role declaring
 `file_semantics: "pages"` joins several chosen files as ordered parts
-of one document. Segmentation is
+of one document. An optional positive `max_pages` limits physical pages
+across that group, including blank pages inside PDFs; `count` still
+limits files. The shipped letter pack accepts up to three files and
+three total pages. Segmentation is
 measured against the page's own line spacing, so letters and agreements
 set at different sizes both split at paragraphs. Contract tests:
 `crates/runner/tests/document.rs`.

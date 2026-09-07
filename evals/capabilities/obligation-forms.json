@@ -425,7 +425,7 @@
       ],
       "verifier": {
         "boundary": "the answer is a list per passage; two entries verify separately and are shown separately (Task 2)",
-        "coverage": "main-check",
+        "coverage": "not-exercised",
         "known_gap": null
       },
       "model_reading": {

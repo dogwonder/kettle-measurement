@@ -39,6 +39,11 @@
           "kind": "Money",
           "value": "£75.50",
           "expected": "supported"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -83,6 +88,11 @@
           "kind": "Money",
           "value": "£75",
           "expected": "supported"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -127,6 +137,11 @@
           "kind": "Money",
           "value": "£1,250.00",
           "expected": "supported"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -166,6 +181,11 @@
           "kind": "Money",
           "value": "41.21 GBP",
           "expected": "supported"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -206,6 +226,11 @@
           "kind": "Money",
           "value": "GBP 41.21",
           "expected": "not-a-sum"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -245,6 +270,11 @@
           "kind": "Money",
           "value": "1,250.00",
           "expected": "supported"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -283,6 +313,11 @@
           "kind": "Money",
           "value": "1,250",
           "expected": "not-a-sum"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -326,6 +361,11 @@
           "kind": "Money",
           "value": "£1.5 million",
           "expected": "not-a-sum"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -370,6 +410,11 @@
           "kind": "Money",
           "value": "4 pence per minute",
           "expected": "not-a-sum"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -409,6 +454,11 @@
           "kind": "Money",
           "value": "£12.00",
           "expected": "accepted-misread"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -447,6 +497,11 @@
           "kind": "Money",
           "value": "£12.00",
           "expected": "accepted-misread"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -493,6 +548,11 @@
           "kind": "Money",
           "value": "£300.00",
           "expected": "accepted-misread"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -571,6 +631,11 @@
           "kind": "Money",
           "value": "£24.99",
           "expected": "accepted-misread"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -610,6 +675,11 @@
           "kind": "Money",
           "value": "between £40 and £60",
           "expected": "not-a-sum"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -652,6 +722,11 @@
           "kind": "Money",
           "value": "20%",
           "expected": "not-a-sum"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {
@@ -685,6 +760,11 @@
           "kind": "Money",
           "value": "",
           "expected": "absent"
+        },
+        "test": {
+          "file": "crates/runner/tests/inventory_verifier.rs",
+          "name": "every_checked_case_comes_out_as_the_inventory_says",
+          "scope": "containment and parseability of the supplied reading; does not establish semantic selection or all typed source facts"
         }
       },
       "model_reading": {

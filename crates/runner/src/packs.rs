@@ -247,6 +247,8 @@ pub struct InputSpec {
     /// one logical document (#399), so a date on the first photograph
     /// can anchor an obligation on the second.
     pub file_semantics: FileSemantics,
+    /// Maximum physical pages in each logical document, including PDF pages.
+    pub max_pages: Option<usize>,
 }
 
 /// The relationship between several files supplied to one role.
@@ -387,9 +389,14 @@ impl<'de> Deserialize<'de> for InputSpec {
             count: Option<CountSpec>,
             #[serde(default)]
             file_semantics: FileSemantics,
+            #[serde(default)]
+            max_pages: Option<usize>,
         }
 
         let raw = Raw::deserialize(deserializer)?;
+        if raw.max_pages == Some(0) {
+            return Err(serde::de::Error::custom("max_pages must be positive"));
+        }
         let count = match (raw.multiple, raw.count) {
             (Some(_), Some(_)) => {
                 return Err(serde::de::Error::custom(format!(
@@ -412,6 +419,7 @@ impl<'de> Deserialize<'de> for InputSpec {
             accept: raw.accept,
             count,
             file_semantics: raw.file_semantics,
+            max_pages: raw.max_pages,
         })
     }
 }

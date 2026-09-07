@@ -1,8 +1,13 @@
 # scripts/
 
-Packaging, in the order it happens. Every one of these needs something
-gitignored or a real build, so none of them run in CI — the same
-position as the evals, and for the same reason.
+Packaging scripts, in the order they run. The packaging sequence needs
+gitignored assets or a real build and runs locally.
+
+`capability-coverage.py` reports the inventory's executable checks and
+their limits without running a model. Its claim checks run in CI:
+`python3 -m unittest discover -s scripts -p 'test_capability_coverage.py'`.
+See [the capability inventory](../evals/capabilities/README.md) for the
+owning Rust tests and the distinction between a check and a capability.
 
 ```
 vendor-sidecar.sh   →   sign-macos.sh   →   tauri build   →   smoke-install.sh

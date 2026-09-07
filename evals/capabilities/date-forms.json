@@ -23,7 +23,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -32,8 +32,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-001-letter",
@@ -60,7 +65,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -69,8 +74,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-002-letter",
@@ -97,7 +107,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -106,8 +116,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-003-letter",
@@ -134,7 +149,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -143,8 +158,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-004-letter",
@@ -171,7 +191,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -180,8 +200,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-005-letter",
@@ -208,7 +233,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -217,8 +242,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-006-letter",
@@ -245,7 +275,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -254,8 +284,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-007-letter",
@@ -282,7 +317,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -291,8 +326,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-008-letter",
@@ -319,7 +359,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -328,8 +368,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-009-letter",
@@ -356,7 +401,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -365,8 +410,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-010-letter",
@@ -393,7 +443,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -402,8 +452,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-011-letter",
@@ -430,7 +485,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -439,8 +494,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-012-letter",
@@ -467,7 +527,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -476,8 +536,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-013-letter",
@@ -504,7 +569,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -513,8 +578,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-014-letter",
@@ -541,7 +611,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -550,8 +620,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-015-letter",
@@ -578,7 +653,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -587,8 +662,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-016-letter",
@@ -615,7 +695,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 14,
           "unit": "days",
@@ -624,8 +704,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-017-letter",
@@ -652,7 +737,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 14,
           "unit": "days",
@@ -661,8 +746,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-018-letter",
@@ -689,7 +779,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 14,
           "unit": "days",
@@ -698,8 +788,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-019-letter",
@@ -726,7 +821,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 14,
           "unit": "days",
@@ -735,8 +830,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-020-letter",
@@ -763,7 +863,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 14,
           "unit": "days",
@@ -772,8 +872,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-021-letter",
@@ -800,7 +905,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 14,
           "unit": "days",
@@ -809,8 +914,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-022-letter",
@@ -837,7 +947,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 14,
           "unit": "days",
@@ -846,8 +956,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-023-letter",
@@ -874,7 +989,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 2,
           "unit": "weeks",
@@ -883,8 +998,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-024-letter",
@@ -911,7 +1031,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 14,
           "unit": "days",
@@ -920,8 +1040,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-025-letter",
@@ -948,7 +1073,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 1,
           "unit": "months",
@@ -957,8 +1082,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-026-letter",
@@ -985,7 +1115,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 3,
           "unit": "months",
@@ -994,8 +1124,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-027-letter",
@@ -1022,7 +1157,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 14,
           "unit": "days",
@@ -1031,8 +1166,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-028-letter",
@@ -1059,7 +1199,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 28,
           "unit": "days",
@@ -1068,8 +1208,13 @@
         },
         "base_date": null,
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-029-letter",
@@ -1096,7 +1241,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -1105,8 +1250,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-030-letter",
@@ -1133,7 +1283,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -1142,8 +1292,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-031-letter",
@@ -1170,7 +1325,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -1179,8 +1334,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": "last-day wording does not meet the current month-end check"
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-032-letter",
@@ -1207,7 +1367,7 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "timeline::resolve_structured after reading::check",
+        "boundary": "timeline::resolve_structured with an authored reading and base date",
         "proposal": {
           "count": 0,
           "unit": "none",
@@ -1216,8 +1376,13 @@
         },
         "base_date": "2026-03-10",
         "pointed": false,
-        "coverage": "pending-v19-test",
-        "known_gap": null
+        "coverage": "main-check",
+        "known_gap": null,
+        "test": {
+          "file": "crates/runner/tests/reading_vocabulary.rs",
+          "name": "every_surface_form_reads_as_the_table_says",
+          "scope": "derived date or no date from the authored structure; does not exercise reading::check or model discovery"
+        }
       },
       "model_reading": {
         "case_id": "date-form-033-letter",

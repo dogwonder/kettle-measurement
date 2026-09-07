@@ -244,6 +244,8 @@ export interface PackInput {
   multiple: boolean;
   /** Several chosen files are ordered pages of one document. */
   pages: boolean;
+  max_files?: number | null;
+  max_pages?: number | null;
 }
 
 export type RunStatus = "running" | "complete" | "error" | "cancelled";

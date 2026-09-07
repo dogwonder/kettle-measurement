@@ -815,3 +815,38 @@ fn a_low_confidence_retry_keeps_its_review_status_and_is_checked() {
         Some(CheckOutcome::Passed)
     );
 }
+
+#[test]
+fn a_letter_over_the_page_limit_is_refused_before_any_model_call() {
+    let dir = letter_pack("page-limit");
+    let manifest = std::fs::read_to_string(dir.join("pack.json")).unwrap();
+    std::fs::write(
+        dir.join("pack.json"),
+        manifest.replace(
+            r#""multiple": true"#,
+            r#""count": {"min": 1, "max": 3}, "file_semantics": "pages", "max_pages": 1"#,
+        ),
+    )
+    .unwrap();
+    let pack = load_pack(&dir).expect("a page limit is a supported declaration");
+    let result = run_pack(
+        &pack,
+        &[
+            dir.join("fixtures/march.txt"),
+            dir.join("fixtures/june.txt"),
+        ],
+        &Answers::FromModel(runner::exec::Endpoint::local(1)),
+        &AtomicBool::new(false),
+        &mut |_| {},
+        &NoLog,
+    );
+    let message = result
+        .err()
+        .expect("two pages exceed this pack's limit")
+        .to_string();
+    assert!(message.contains("page"), "{message}");
+    assert!(
+        !message.contains("connect"),
+        "refused before model use: {message}"
+    );
+}

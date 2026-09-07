@@ -1095,10 +1095,11 @@ fn run_bound(
                             total: inputs.len(),
                         });
                     }
-                    let read = crate::document::read_document_parts(
+                    let read = crate::document::read_document_parts_limited(
                         &group,
                         logical_document,
                         resources.pdfium_dir,
+                        declared.max_pages,
                     )
                     .map_err(RunError::Parse)?;
                     // Per document, because "the date of this letter" is

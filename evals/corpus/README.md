@@ -58,4 +58,7 @@ through the real `reading::check` and timeline. What it found is in
 Two cases and two obligations are a scorer, not a denominator. No
 model has read the slice; `model_reading` coverage for every form in
 the inventory is still `not-measured`. The verified column exercises
-the boundary on `main` (v18); #628's deadline structure is not here.
+the boundary on `main` (scoring 19), including #628's authored deadline
+structure and base reading. The corpus tests use controlled proposals;
+connecting actual model execution and recordings is the next implementation
+slice in `plan.md`.

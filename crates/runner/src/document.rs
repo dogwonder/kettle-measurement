@@ -107,10 +107,27 @@ pub fn read_document_parts(
     document: usize,
     pdfium_dir: Option<&Path>,
 ) -> Result<DocumentRead, ParseError> {
-    let parts = paths
-        .iter()
-        .map(|path| read_document(path, document, pdfium_dir))
-        .collect::<Result<Vec<_>, _>>()?;
+    read_document_parts_limited(paths, document, pdfium_dir, None)
+}
+
+/// Like `read_document_parts`, with a physical-page limit checked before
+/// returning any text to a model. PDF pages count even when blank.
+pub fn read_document_parts_limited(
+    paths: &[&Path],
+    document: usize,
+    pdfium_dir: Option<&Path>,
+    max_pages: Option<usize>,
+) -> Result<DocumentRead, ParseError> {
+    let mut parts = Vec::new();
+    let mut pages = 0;
+    for path in paths {
+        let part = read_document(path, document, pdfium_dir)?;
+        pages += part.pages;
+        if let Some(max) = max_pages.filter(|max| pages > *max) {
+            return Err(ParseError::TooManyPages { max });
+        }
+        parts.push(part);
+    }
     Ok(combine_parts(parts))
 }
 

@@ -68,9 +68,9 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "#628: the base is a reading the model names; a base that is not the day the words themselves name is refused",
-        "coverage": "pending-v19-test",
-        "known_gap": "on main the base comes from a phrase parser"
+        "boundary": "timeline::resolve_structured counts a named-date period from the day in its verified words; other bases use the supplied from reading",
+        "coverage": "not-exercised",
+        "known_gap": "this inventory case has no executable check of choosing the hearing date over the earlier letter date"
       },
       "model_reading": {
         "case_id": "relation-form-002-letter",
@@ -102,7 +102,7 @@
       ],
       "verifier": {
         "boundary": "reading::check refuses an id in another document (NotThisDocument)",
-        "coverage": "main-check",
+        "coverage": "not-exercised",
         "known_gap": null
       },
       "model_reading": {
@@ -137,7 +137,7 @@
       ],
       "verifier": {
         "boundary": "timeline::same_candidate folds only the same candidate from the same passage",
-        "coverage": "main-check",
+        "coverage": "not-exercised",
         "known_gap": null
       },
       "model_reading": {
@@ -170,7 +170,7 @@
       ],
       "verifier": {
         "boundary": "timeline::same_candidate keeps both (Task 2)",
-        "coverage": "main-check",
+        "coverage": "not-exercised",
         "known_gap": null
       },
       "model_reading": {
@@ -343,9 +343,9 @@
         "app.kttl.letter-to-actions"
       ],
       "verifier": {
-        "boundary": "main: deadline_from names the row and Rust reads one full date from it (#544); #628: the deadline is the date the row prints, read at the row",
-        "coverage": "main-check",
-        "known_gap": "the two builds expect different words for the same fact; the bed moved with #628"
+        "boundary": "the deadline is the date its row prints, read at the row; timeline checks the supplied reading (#628)",
+        "coverage": "not-exercised",
+        "known_gap": null
       },
       "model_reading": {
         "case_id": "relation-form-010-letter",

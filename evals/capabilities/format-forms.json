@@ -25,7 +25,7 @@
       ],
       "verifier": {
         "boundary": "one passage, one closed answer",
-        "coverage": "main-check",
+        "coverage": "not-exercised",
         "known_gap": null
       },
       "model_reading": {
@@ -92,8 +92,8 @@
         "idea:explain-this-document"
       ],
       "verifier": {
-        "boundary": "reading::check on the row: a whole money token among three warns; the date is the first full date on the row",
-        "coverage": "main-check",
+        "boundary": "reading::check validates the supplied money/date value at the named row; multiple sums warn, but correct column selection is not verified",
+        "coverage": "not-exercised",
         "known_gap": "column membership is lost in the flattening (#544)"
       },
       "model_reading": {
@@ -130,7 +130,7 @@
       ],
       "verifier": {
         "boundary": "each row is a passage the model can name",
-        "coverage": "main-check",
+        "coverage": "not-exercised",
         "known_gap": null
       },
       "model_reading": {
@@ -258,7 +258,7 @@
       ],
       "verifier": {
         "boundary": "documents pooled under one role start their own batch; each counts from its own date (#330, #624)",
-        "coverage": "main-check",
+        "coverage": "not-exercised",
         "known_gap": null
       },
       "model_reading": {
@@ -289,7 +289,7 @@
       ],
       "verifier": {
         "boundary": "document.rs date_dispute compares the dateline of two OCR passes and parks the run for a person",
-        "coverage": "main-check",
+        "coverage": "not-exercised",
         "known_gap": "only the dateline is disputed; a disagreement on an amount or a deadline is not detected"
       },
       "model_reading": {

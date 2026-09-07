@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-07-24",
         "kind": "payment",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-wheat-meadow-02-payment-01",
       "segment": "Please settle £188.20 for your policy renewal within 21 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "within 35 days",
         "due": "2026-08-07",
         "kind": "response",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-wheat-meadow-02-response-02",
       "segment": "You must also write to confirm that payment has been made, within 35 days of the date of this letter.",

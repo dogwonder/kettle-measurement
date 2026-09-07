@@ -3,8 +3,16 @@
 //!
 //! A letter says "within 14 days of the date of this letter", "by the
 //! end of the month", "on 3 March 2026". The model reads those phrases
-//! off the page (#240); every date below is arithmetic it never does
-//! (CLAUDE.md), because a date a model invented is a missed deadline.
+//! off the page (#240) and reads them into structure — a count, a
+//! unit, a qualifier, what they count from — and Rust checks every
+//! field against the words before it counts (`resolve_structured`;
+//! review of #626, Task 5). Every date below is arithmetic the model
+//! never does (CLAUDE.md), because a date a model invented is a missed
+//! deadline; and no line is searched for either (*Rust verifies; it
+//! never discovers*): the passage a period counts from is a reading
+//! the model names and Rust verifies, never a dateline Rust went and
+//! found. The one finder left, `dateline`, serves the OCR dispute
+//! (`date_dispute`) and is staged for retirement there.
 //!
 //! Unresolvable phrases are not guessed. An obligation whose date
 //! cannot be resolved keeps its phrase, stays undated and sorts last —
@@ -36,93 +44,6 @@ pub struct Resolved {
     pub kind: Kind,
 }
 
-/// The date phrases this resolver understands. Deliberately small and
-/// fully tested: a phrase outside the set resolves to nothing rather
-/// than to a guess, and growing the set is a code change with tests,
-/// never a loosening of what counts as understood.
-///
-/// - an absolute date written in the deadline itself ("by 12 August
-///   2026") — read, not computed. Only where the phrase asks for no
-///   arithmetic: a date inside a relative phrase is what the counting
-///   starts from, not the answer (#435);
-/// - "within N days", counted from the anchor when the anchor is a
-///   date — whether that anchor arrived in its own field or was left in
-///   the phrase — else from the letter's own date;
-/// - "the end of the month", of that same base date's month.
-pub fn resolve_deadline(deadline: &str, anchor: &str, letter_date: NaiveDate) -> Option<Resolved> {
-    resolve(deadline, anchor, Some(letter_date))
-}
-
-/// [`resolve_deadline`], for a document whose own date was never found.
-/// An absolute deadline still resolves — it needs no anchor — but a
-/// relative one has nothing to count from and honestly stays undated.
-fn resolve(deadline: &str, anchor: &str, letter_date: Option<NaiveDate>) -> Option<Resolved> {
-    resolve_kinded(deadline, anchor, letter_date, Kind::WorkedOut)
-}
-
-/// A deadline resolved against a date the *person* supplied, after two
-/// readings of a photographed letter disagreed about it (#412).
-///
-/// Only what actually depends on their answer becomes theirs. A date
-/// written on the page never depended on the letter's date and stays
-/// read; a deadline counted from a dated anchor counts from that
-/// anchor, not from their answer. Claiming either as theirs would
-/// quietly widen what their correction is taken to cover.
-pub fn confirmed_deadline(deadline: &str, anchor: &str, given: NaiveDate) -> Option<Resolved> {
-    resolve_kinded(deadline, anchor, Some(given), Kind::Yours)
-}
-
-/// `from_letter_date` is the kind to use when the answer was counted
-/// from the document's own date, which is the only branch a supplied
-/// date can reach.
-fn resolve_kinded(
-    deadline: &str,
-    anchor: &str,
-    letter_date: Option<NaiveDate>,
-    from_letter_date: Kind,
-) -> Option<Resolved> {
-    // Whether the phrase asks for arithmetic at all is the first
-    // question, because it decides how a date *inside* the phrase is
-    // read. Asked before anything else, and only once (#435).
-    let lowered = deadline.to_lowercase();
-    // A refused phrase is refused whatever else it carries. Without
-    // this the fall-through below reads "within 14 working days of 6
-    // March 2026" as *6 March* — the anchor returned as the answer,
-    // which is the confidently-wrong shape refusing exists to avoid.
-    if refuses(&lowered) {
-        return None;
-    }
-    let Some(counted) = counted_from(&lowered) else {
-        // Nothing to count, so a date written here is the answer and the
-        // page wrote it: nothing was computed.
-        return first_full_date(deadline).map(|date| Resolved {
-            date,
-            kind: Kind::ReadAndVerified,
-        });
-    };
-
-    // The base a relative phrase counts from: a dated anchor ("within
-    // 14 days of the hearing on 1 June 2026") beats the letter's date.
-    // Which of the two it was decides whose claim the answer is. The
-    // anchor may have been left in the phrase rather than split out
-    // ("within 30 days of 22 May 2026"), and a date there is the same
-    // anchor by another route — never the answer itself.
-    let (base, kind) = match first_full_date(anchor).or_else(|| first_full_date(deadline)) {
-        Some(dated_anchor) => (dated_anchor, Kind::WorkedOut),
-        None => (letter_date?, from_letter_date),
-    };
-
-    // Everything below this line is Rust's arithmetic over a date that
-    // was read. The page never wrote the answer, so the report must not
-    // present it in the same voice as one that did.
-    let date = match counted {
-        Counted::Days(days) => base.checked_add_days(Days::new(days))?,
-        Counted::Months(months) => base.checked_add_months(Months::new(months))?,
-        Counted::MonthEnd => end_of_month(base)?,
-    };
-    Some(Resolved { date, kind })
-}
-
 /// The arithmetic a deadline phrase asks for, if it asks for any.
 ///
 /// Naming it separates the two questions that used to be tangled: *is
@@ -137,88 +58,6 @@ pub(crate) enum Counted {
     /// `checked_add_months` clamps to the month's last day exactly as a
     /// person would.
     Months(u32),
-    MonthEnd,
-}
-
-fn counted_from(lowered: &str) -> Option<Counted> {
-    if refuses(lowered) {
-        return None;
-    }
-    interval(lowered).or_else(|| month_end_phrase(lowered).then_some(Counted::MonthEnd))
-}
-
-/// Phrases Kettle declines to count, and why.
-///
-/// A refusal is a design decision, not a gap: it displays the letter's
-/// own words with no date beside them, which is honest, where a guess
-/// would be a claim the page does not support. Both entries here are
-/// cases where the arithmetic is *available* and wrong.
-///
-/// Checked before any counting and before any date is looked for, so a
-/// phrase carrying both a refusal and a date — "within 14 working days
-/// of 6 March 2026" — cannot fall through and return the anchor as
-/// though it were the answer.
-fn refuses(lowered: &str) -> bool {
-    // Working days need a bank-holiday calendar Kettle does not have.
-    // Counting them as calendar days is wrong by up to a week, and
-    // wrong in the direction that makes a person late.
-    lowered.contains("working day")
-        || lowered.contains("business day")
-        // Receipt is a day the letter does not state. Counting from the
-        // letter's own date answers a question the page did not ask,
-        // and presents it as worked out.
-        || lowered.contains("of receipt")
-        || lowered.contains("from receipt")
-        || lowered.contains("receipt of")
-}
-
-/// Whether the phrase names the end of the month it counts in.
-fn month_end_phrase(lowered: &str) -> bool {
-    [
-        "end of the month",
-        "end of this month",
-        "month end",
-        "last day of the month",
-    ]
-    .iter()
-    .any(|form| lowered.contains(form))
-}
-
-/// The interval a phrase counts, in whatever unit it names.
-///
-/// Scans for a count followed by its unit rather than keying on
-/// "within", because a letter says the same thing many ways — "no later
-/// than 14 days", "in the next 14 days", "14 days from the date of this
-/// letter" — and the word before the number carries none of the
-/// meaning. The unit does.
-///
-/// Keeps scanning past a count whose next word is not a unit, so a
-/// phrase naming a day as well as an interval does not stop on the day.
-fn interval(lowered: &str) -> Option<Counted> {
-    let words: Vec<&str> = lowered.split_whitespace().collect();
-    for (at, word) in words.iter().enumerate() {
-        let Some(count) = count_word(word) else {
-            continue;
-        };
-        // "calendar" and "clear" qualify the unit without changing it:
-        // both mean every day, which is what Kettle counts anyway.
-        let mut unit = match words.get(at + 1) {
-            Some(&"calendar") | Some(&"clear") => words.get(at + 2),
-            other => other,
-        };
-        let unit = match unit.take() {
-            Some(word) => word.trim_matches(|c: char| !c.is_alphabetic()),
-            None => continue,
-        };
-        match unit {
-            "day" | "days" => return Some(Counted::Days(count)),
-            "week" | "weeks" => return Some(Counted::Days(count * 7)),
-            "fortnight" | "fortnights" => return Some(Counted::Days(count * 14)),
-            "month" | "months" => return Some(Counted::Months(count as u32)),
-            _ => continue,
-        }
-    }
-    None
 }
 
 /// A count written as digits or as a word.
@@ -273,69 +112,242 @@ pub enum DeadlineShape {
     Counted,
     /// Names its own day: "on 27 December 2026".
     Absolute,
-    /// Names no day and says where on the page one is (#544): "the
-    /// date shown beside it".
+    /// Names no day in the ask and says where on the page one is
+    /// (#544): the date the due-date row prints, read at that row.
     Pointed,
     /// None of the above: "as soon as you are able".
     Undated,
 }
 
-pub fn deadline_shape(deadline: &str) -> DeadlineShape {
-    let lowered = deadline.to_lowercase();
-    if counted_from(&lowered).is_some() {
+/// The route a deadline takes, read from its structure and not from
+/// its words (#554; review of #626, Task 5) — the same function on the
+/// run's side and the bed's, so the scorer's identity and the runtime
+/// agree by construction rather than by two parsers agreeing.
+///
+/// `pointed`: the words were read at a passage other than the ask's
+/// own — the due-date row. `dated`: they parse as one full date.
+pub fn deadline_route(read: &crate::run::When, pointed: bool, dated: bool) -> DeadlineShape {
+    if read.counts_from == "month_end" || read.unit != "none" {
         DeadlineShape::Counted
-    } else if first_full_date(deadline).is_some() {
-        DeadlineShape::Absolute
-    } else if points_at_a_date(deadline) {
+    } else if pointed && dated {
         DeadlineShape::Pointed
+    } else if dated {
+        DeadlineShape::Absolute
     } else {
         DeadlineShape::Undated
     }
 }
 
-/// Everything the model supplied about a deadline, before any
-/// resolution (#554): the comparison a candidate that never reached the
-/// resolver can be held to. Two signatures are equal exactly when the
-/// resolver, given one letter date, would produce one identity from
-/// them — so the ablation scorecard can say "these agree on everything
-/// the model said" without running the arithmetic itself.
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub(crate) enum DeadlineSignature {
-    Counted {
-        interval: Counted,
-        /// The base the count starts from, where the words name one —
-        /// in the anchor or left in the phrase, the same base by another
-        /// route.
-        base: Option<NaiveDate>,
-    },
-    Absolute(NaiveDate),
-    Pointed(String),
-    Undated {
-        words: String,
-        anchor_date: Option<NaiveDate>,
-    },
+/// Why a deadline stayed undated, in the vocabulary of the three
+/// outcomes (`app/METHOD.md` §0): the page contradicted the structure
+/// (refused), the words are on the page but ask for a computation
+/// Kettle does not make (unsupported), or nothing was read.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "outcome", rename_all = "snake_case")]
+pub enum Unresolved {
+    /// The structure the model read is not in the words it read it from.
+    Contradicted { why: String },
+    /// The words are the page's; the derivation is not one Kettle makes.
+    Unsupported { why: String },
+    /// A base the period counts from was not read.
+    NoBase { why: String },
 }
 
-pub(crate) fn deadline_signature(deadline: &str, anchor: &str) -> DeadlineSignature {
+/// Resolve a deadline from the fields the model read it into, after
+/// checking every field against the words it was read from — whether
+/// or not another field is `none` (review of #626, Task 5, closing
+/// the four gaps in #622's first cut).
+///
+/// The check is containment, the same rule as a quote (#460): the
+/// count must appear in the words as digits or as its word ("a
+/// fortnight" standing for fourteen days or two weeks, "a month" for
+/// one), the unit as its word, a qualifier as its word, "receipt" as
+/// the word, and the end of a month as *end* and *month* both present.
+/// Working days and receipt are unsupported computations, refused by
+/// their value and kept as words. A period counts only from a base
+/// the model read (`from`, verified as one full date at the passage
+/// it names): `counts_from: none` counts from nothing and never
+/// borrows the letter's date, and a `from` the page refused leaves the
+/// period undated. Nothing here parses prose to *find* anything; it
+/// asks whether what the model said is there, and then counts.
+///
+/// `from` is the base's date where one was read; `from_kind` is whose
+/// claim a date counted from it is — `WorkedOut` when the model read
+/// the base, `Yours` when a person confirmed it (#412).
+pub fn resolve_structured(
+    deadline: &str,
+    read: &crate::run::When,
+    pointed: bool,
+    from: Option<NaiveDate>,
+    from_kind: Kind,
+) -> Result<Resolved, Unresolved> {
     let lowered = deadline.to_lowercase();
-    if let Some(interval) = counted_from(&lowered) {
-        return DeadlineSignature::Counted {
-            interval,
-            base: first_full_date(anchor).or_else(|| first_full_date(deadline)),
+    let words: Vec<&str> = lowered
+        .split_whitespace()
+        .map(|w| w.trim_matches(|c: char| !c.is_alphanumeric()))
+        .collect();
+    let has = |w: &str| words.contains(&w);
+    let contradicted = |why: &str| Unresolved::Contradicted {
+        why: why.to_owned(),
+    };
+    let unsupported = |why: &str| Unresolved::Unsupported {
+        why: why.to_owned(),
+    };
+
+    // Every field against the words, before anything else. The
+    // qualifier and the receipt are checked both ways: a structure
+    // that leaves out a word the letter wrote is as wrong as one that
+    // adds a word it did not.
+    let says_working = has("working") || has("business");
+    match read.qualifier.as_str() {
+        "none" => {
+            if says_working {
+                return Err(contradicted(
+                    "the words say working days and the reading did not",
+                ));
+            }
+        }
+        "working" => {
+            if !says_working {
+                return Err(contradicted(
+                    "the reading says working days and the words do not",
+                ));
+            }
+        }
+        "calendar" | "clear" => {
+            if !has(&read.qualifier) {
+                return Err(contradicted("the reading's qualifier is not in the words"));
+            }
+        }
+        _ => return Err(contradicted("an unknown qualifier")),
+    }
+    let says_receipt = has("receipt");
+    if read.counts_from == "receipt" && !says_receipt {
+        return Err(contradicted(
+            "the reading counts from receipt and the words do not say so",
+        ));
+    }
+    if says_receipt && read.counts_from != "receipt" {
+        return Err(contradicted(
+            "the words count from receipt and the reading does not",
+        ));
+    }
+
+    // The end of a month names no count and no unit: a base and an
+    // operation, verified as *end* and *month* both present.
+    if read.counts_from == "month_end" {
+        if !(has("end") && (has("month") || has("months"))) {
+            return Err(contradicted("month end the words never gave"));
+        }
+        // A count is a period the words never gave; a unit of months
+        // with no count is the word *month* the words do give, and
+        // contradicts nothing.
+        if read.count != 0 || !matches!(read.unit.as_str(), "none" | "months") {
+            return Err(contradicted("a period alongside month end"));
+        }
+        let Some(base) = from else {
+            return Err(Unresolved::NoBase {
+                why: "the month is the letter's, and its date was not read".to_owned(),
+            });
+        };
+        return end_of_month(base)
+            .map(|date| Resolved {
+                date,
+                kind: from_kind,
+            })
+            .ok_or_else(|| unsupported("no such month"));
+    }
+
+    // No period: the day is named in the words or not at all.
+    if read.unit == "none" {
+        if read.count != 0 {
+            return Err(contradicted("a count with no unit"));
+        }
+        if matches!(read.counts_from.as_str(), "letter_date" | "receipt") {
+            return Err(contradicted("a base with no period to count"));
+        }
+        return match first_full_date(deadline) {
+            Some(date) => Ok(Resolved {
+                date,
+                kind: Kind::ReadAndVerified,
+            }),
+            None => Err(unsupported(if pointed {
+                "the row pointed at prints no full date"
+            } else {
+                "the words name no day Kettle can read"
+            })),
         };
     }
-    if let Some(date) = first_full_date(deadline) {
-        return DeadlineSignature::Absolute(date);
+
+    // A period: the count as digits or as its word, the unit as its word.
+    let counted = match read.unit.as_str() {
+        "days" => Counted::Days(read.count),
+        "weeks" => Counted::Days(read.count.saturating_mul(7)),
+        "months" => Counted::Months(u32::try_from(read.count).unwrap_or(u32::MAX)),
+        _ => return Err(contradicted("an unknown unit")),
+    };
+    if read.count == 0 {
+        return Err(contradicted("a period of nothing"));
     }
-    if points_at_a_date(deadline) {
-        return DeadlineSignature::Pointed(
-            lowered.split_whitespace().collect::<Vec<_>>().join(" "),
-        );
+    let count_present = words.iter().any(|w| count_word(w) == Some(read.count))
+        || (has("fortnight")
+            && (read.unit == "days" && read.count == 14
+                || read.unit == "weeks" && read.count == 2))
+        || (read.unit == "months" && read.count == 1 && (has("month") || has("months")));
+    if !count_present {
+        return Err(contradicted("a count the words do not contain"));
     }
-    DeadlineSignature::Undated {
-        words: lowered.split_whitespace().collect::<Vec<_>>().join(" "),
-        anchor_date: first_full_date(anchor),
+    let unit_present = match read.unit.as_str() {
+        "days" => has("day") || has("days") || has("fortnight"),
+        "weeks" => has("week") || has("weeks") || has("fortnight"),
+        _ => has("month") || has("months"),
+    };
+    if !unit_present {
+        return Err(contradicted("a unit the words do not contain"));
     }
+    if read.qualifier == "working" {
+        return Err(unsupported(
+            "working days need a bank-holiday calendar Kettle does not have",
+        ));
+    }
+    let (base, kind) = match read.counts_from.as_str() {
+        "receipt" => {
+            return Err(unsupported("receipt is a day the letter does not state"));
+        }
+        // Where the words themselves print the day they count from
+        // ("within 30 days of 20 March 2026"), that day is the base:
+        // the words are the model's own verified reading, and parsing
+        // a date out of them is step 4, not a search. A `from` naming
+        // a different day is the model handing the dateline over, and
+        // the words win.
+        "named_date" if first_full_date(deadline).is_some() => {
+            (first_full_date(deadline).expect("checked"), Kind::WorkedOut)
+        }
+        "named_date" | "letter_date" => match from {
+            Some(base) => (base, from_kind),
+            None => {
+                return Err(Unresolved::NoBase {
+                    why: if read.counts_from == "letter_date" {
+                        "the letter's date was not read".to_owned()
+                    } else {
+                        "the day it counts from was not read".to_owned()
+                    },
+                })
+            }
+        },
+        "none" => {
+            return Err(Unresolved::NoBase {
+                why: "the words say what to count and not what from".to_owned(),
+            });
+        }
+        _ => return Err(contradicted("an unknown base")),
+    };
+    let date = match counted {
+        Counted::Days(days) => base.checked_add_days(Days::new(days)),
+        Counted::Months(months) => base.checked_add_months(Months::new(months)),
+    };
+    date.map(|date| Resolved { date, kind })
+        .ok_or_else(|| unsupported("a date past the calendar"))
 }
 
 /// The last day of `date`'s month — a leap-year February included,
@@ -349,7 +361,7 @@ fn end_of_month(date: NaiveDate) -> Option<NaiveDate> {
 /// The first "3 March 2026"-shaped date in `text`. British letters
 /// write the day first and the month as a word; this reads exactly
 /// that, and nothing looser — "03/04/2026" is ambiguous on purpose.
-pub(crate) fn first_full_date(text: &str) -> Option<NaiveDate> {
+pub fn first_full_date(text: &str) -> Option<NaiveDate> {
     find_full_date(&date_words(text)).map(|(date, _, _)| date)
 }
 
@@ -668,9 +680,25 @@ pub fn confirm_letter_date(
                 .evidence
                 .first()
                 .is_some_and(|passage| passage.document == document);
-            if theirs {
-                obligation.due =
-                    confirmed_deadline(&obligation.deadline.value, &obligation.anchor, given);
+            // Only what depended on the letter's date becomes theirs
+            // (#412): a period counted from the letter's date, or its
+            // month end. A day written on the page, or a period counted
+            // from a named day, never depended on their answer.
+            if theirs
+                && matches!(
+                    obligation.read.counts_from.as_str(),
+                    "letter_date" | "month_end"
+                )
+            {
+                let pointed = obligation.dated_by.is_some();
+                obligation.due = resolve_structured(
+                    &obligation.deadline.value,
+                    &obligation.read,
+                    pointed,
+                    Some(given),
+                    Kind::Yours,
+                )
+                .ok();
             }
             obligation
         })
@@ -714,36 +742,6 @@ pub fn date_dispute(read: &[Segment], also_read: &[Segment]) -> Option<DateDispu
     })
 }
 
-/// Each input document's own date, indexed by [`Segment::document`].
-///
-/// A run may pool several documents (#330), and "the date of this
-/// letter" is a different date in each of them. Reading the first three
-/// segments of the *pooled* collection answers only for whichever
-/// document happened to be read first, and then silently applies that
-/// answer to every other document's relative deadlines — a due date
-/// months wrong, presented as resolved.
-///
-/// Each document's opening segments are searched on their own, so the
-/// early stop in [`letter_date`] means the same thing per document as
-/// it did when a run only ever had one.
-pub fn document_dates(segments: &[Segment]) -> Vec<Option<NaiveDate>> {
-    let count = segments
-        .iter()
-        .map(|segment| segment.document + 1)
-        .max()
-        .unwrap_or(0);
-    (0..count)
-        .map(|document| {
-            let own: Vec<Segment> = segments
-                .iter()
-                .filter(|segment| segment.document == document)
-                .cloned()
-                .collect();
-            letter_date(&own)
-        })
-        .collect()
-}
-
 /// Resolve, merge and order one document's obligations.
 ///
 /// Duplicates — the same ask, read from overlapping segments — merge
@@ -762,75 +760,55 @@ pub fn sort_timeline(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<
 /// at read time), so what is left here is to resolve, to read the row
 /// a verified `at` points to, and to order.
 fn sort_timeline_verified(obligations: Vec<Obligation>, segments: &[Segment]) -> Vec<Obligation> {
-    let document_dates = document_dates(segments);
     let mut merged: Vec<Obligation> = Vec::new();
     for mut obligation in obligations {
-        // Each obligation counts from the date of the document it was
-        // read out of (#330). An obligation with no evidence has no
-        // document to ask, and `None` there is honest: it displays as
-        // undated rather than as somebody else's date.
-        let letter_date = obligation
-            .evidence
-            .first()
-            .and_then(|segment| document_dates.get(segment.document).copied())
+        // Every reading arrived verified (`reading::check`, at read
+        // time): the words at the passage that prints them, the base
+        // at the passage that prints it. What is left is to check the
+        // structure against the words and count (`resolve_structured`),
+        // and to carry the passages `at` points to — in `dated_by` and
+        // never in `evidence`, because `evidence` is what the model was
+        // asked about and a row added there reads downstream as an
+        // obligation asserted on a due-date row (#544, #460 rule one).
+        let row = named_row(&obligation, obligation.deadline.at, segments);
+        let pointed = row.is_some();
+        let from = (!obligation.from.is_absent())
+            .then(|| first_full_date(&obligation.from.value))
             .flatten();
-        obligation.due = resolve(&obligation.deadline.value, &obligation.anchor, letter_date);
-        if obligation.due.is_none() {
-            // The row travels with the claim (#460 rule one): the
-            // pointing passage contains no date, so a date asserted
-            // without the row beside it is a claim whose own quote does
-            // not carry it. In `dated_by` and never in `evidence` —
-            // `evidence` is what the model was asked about and
-            // answered, and a row added there reads downstream as an
-            // obligation asserted on a due-date row, which is what the
-            // bed measures as an invention.
-            // The model named where the date is printed (`deadline.at`,
-            // verified at read time); Rust reads one full date off that
-            // passage and nothing else. The staged finder behind it is
-            // the fallback only where nothing was named, never where a
-            // naming was refused (#624): the model pointed, the page
-            // could not vouch for it, and Rust does not then go looking.
-            match named_row(&obligation, obligation.deadline.at, segments) {
-                Some(row) => {
-                    if let Some(date) = first_full_date(&row.text) {
-                        obligation.due = Some(Resolved {
-                            date,
-                            kind: Kind::ReadAndVerified,
-                        });
-                        obligation.dated_by = Some(row);
-                    }
-                }
-                None if !refused(&obligation, "deadline") => {
-                    if let Some((resolved, row)) = pointed_at(&obligation, segments) {
-                        obligation.due = Some(resolved);
-                        obligation.dated_by = Some(row);
-                    }
-                }
-                None => {}
+        match resolve_structured(
+            &obligation.deadline.value,
+            &obligation.read,
+            pointed,
+            from,
+            Kind::WorkedOut,
+        ) {
+            Ok(resolved) => {
+                obligation.due = Some(resolved);
+                obligation.dated_by = row;
+                obligation.unresolved = None;
+            }
+            Err(why) => {
+                obligation.due = None;
+                obligation.dated_by = row;
+                obligation.unresolved = Some(why);
             }
         }
-        // The same shape for the sum (#612): the figure was verified
-        // against the passage `amount.at` at read time (#460 rule one,
-        // as a whole money token). Where that passage is not the ask's
-        // own, it travels as `priced_by`. The staged finder runs only
-        // where nothing was read and nothing was refused.
-        // The first scratch loop (4 September) found the 4B names
-        // the due-date row 27 times in 36 and the total row 4 in
-        // 24, so the date finder is nearly retired and the amount
-        // finder is not.
+        // The sum was verified against the passage `amount.at` at read
+        // time (#460 rule one, as a whole money token). Where that
+        // passage is not the ask's own, it travels as `priced_by`.
+        // Nothing goes looking where the model read none. A sum is a
+        // payment's alone: the page vouches that a figure is printed,
+        // not that a reply slip is for money, and the 4B copies the
+        // letter's sum onto its response ask on 41 of 85 such letters
+        // (6 September 2026) — a pack policy, refused to derive, and
+        // the report already shows none there.
         if obligation.kind == "payment" {
             if !obligation.amount.is_absent() {
                 obligation.priced_by = named_row(&obligation, obligation.amount.at, segments);
-            } else if !refused(&obligation, "amount") {
-                if let Some((figure, row)) = priced_at(&obligation, segments) {
-                    let at = segments
-                        .iter()
-                        .position(|s| *s == row)
-                        .unwrap_or(obligation.amount.at);
-                    obligation.amount = crate::reading::Reading::new(at, figure);
-                    obligation.priced_by = Some(row);
-                }
             }
+        } else if !obligation.amount.is_absent() {
+            let own = obligation.evidence.first().map_or(0, |s| s.ordinal);
+            obligation.amount = crate::reading::Reading::absent(own);
         }
         if merged.iter().any(|kept| same_candidate(kept, &obligation)) {
             continue;
@@ -862,71 +840,6 @@ fn sort_timeline_verified(obligations: Vec<Obligation>, segments: &[Segment]) ->
     merged
 }
 
-/// Deadlines that name no date but say where one is printed (#544).
-///
-/// Two conditions, and the second is the one doing the work. Naming
-/// "the date" is common enough to mean little on its own; what makes a
-/// phrase a pointer is that it also names a **direction on the page**.
-/// "The date shown beside it" can only mean the layout. "The date shown
-/// on your last statement" names a source instead — another document
-/// this run may never have seen — and resolves to nothing, which is the
-/// honest answer.
-///
-/// Stated this way rather than as a phrasebook because the bed's two
-/// halves already word it differently ("shown beside it" against "given
-/// against it"), and a rule tuned to the set it was written against
-/// would leave the sealed set undated. Both lists are deliberately
-/// small; growing either is a code change with a test, exactly as
-/// [`counted_from`]'s set is.
-fn points_at_a_date(deadline: &str) -> bool {
-    const DIRECTIONS: [&str; 7] = [
-        "beside",
-        "against",
-        "opposite",
-        "alongside",
-        "below",
-        "above",
-        "next to",
-    ];
-    let lower = deadline.to_lowercase();
-    lower.contains("the date") && DIRECTIONS.iter().any(|where_| lower.contains(where_))
-}
-
-/// The date a pointing deadline points at, read off the same document.
-///
-/// The passage wanted is a due-date row and nothing else: a label the
-/// page uses for the date it wants payment by, and the date itself.
-/// That narrowness is the safety. A pointing phrase already had to be
-/// recognised before this is asked at all, so the only way to reach a
-/// wrong date is a letter that both defers to its layout and labels a
-/// second date as its due date.
-///
-/// Nothing here is arithmetic — the answer is the page's own date,
-/// which is why it comes back [`Kind::ReadAndVerified`] and not
-/// [`Kind::WorkedOut`].
-fn pointed_at(obligation: &Obligation, segments: &[Segment]) -> Option<(Resolved, Segment)> {
-    const LABELS: [&str; 3] = ["due date", "date due", "payment due"];
-    if !points_at_a_date(&obligation.deadline.value) {
-        return None;
-    }
-    let document = obligation.evidence.first()?.document;
-    segments
-        .iter()
-        .filter(|segment| segment.document == document)
-        .find_map(|segment| {
-            let lower = segment.text.to_lowercase();
-            let label = LABELS.iter().find(|label| lower.starts_with(**label))?;
-            let date = first_full_date(&segment.text[label.len()..])?;
-            Some((
-                Resolved {
-                    date,
-                    kind: Kind::ReadAndVerified,
-                },
-                segment.clone(),
-            ))
-        })
-}
-
 /// The passage a verified reading's `at` points to, when it is not
 /// the passage the claim was read from. `at` was checked at read time
 /// (`reading::check`: shown in the request answered, and a passage of
@@ -937,136 +850,6 @@ fn named_row(obligation: &Obligation, at: usize, segments: &[Segment]) -> Option
         .get(at)
         .filter(|row| row.document == own.document && row.ordinal != own.ordinal)
         .cloned()
-}
-
-/// Whether the page refused this field's reading (review of #626,
-/// Task 4): the model pointed, the page could not vouch for it, and
-/// the staged finders do not then go looking.
-fn refused(obligation: &Obligation, field: &str) -> bool {
-    obligation.refused.iter().any(|r| r.field == field)
-}
-
-/// The sum a payment ask is for, read off the same document's own
-/// labelled row when the ask's passage printed none (#612).
-///
-/// **Staged phrasebook** (tests/phrasebooks.rs): the fallback behind
-/// `amount_from`, to go when the weekly run shows the model names the
-/// row reliably.
-///
-/// Found on the first real letter after the field shipped: the ask
-/// sentence named no figure and the page printed *Amount Due 41.21
-/// GBP* two passages away. The passage wanted is a row that labels the
-/// sum the page wants paid and prints it — nothing else. Labels are
-/// tried in order of how specifically they name *what is owed*, and
-/// the first label the document uses decides; if that label appears
-/// with two different figures the page is ambiguous and nothing is
-/// read, because a wrong sum is worse than a blank one. The figure is
-/// copied exactly as printed — `£360.00`, `41.21 GBP` — and never
-/// parsed here, so it is read-and-verified, not worked out.
-fn priced_at(obligation: &Obligation, segments: &[Segment]) -> Option<(String, Segment)> {
-    const LABELS: [&str; 7] = [
-        "amount due",
-        "total due",
-        "balance due",
-        "amount payable",
-        "outstanding balance",
-        "total",
-        "balance",
-    ];
-    let document = obligation.evidence.first()?.document;
-    let on_page: Vec<&Segment> = segments
-        .iter()
-        .filter(|segment| segment.document == document)
-        .collect();
-    for label in LABELS {
-        let mut found: Option<(String, Segment)> = None;
-        for segment in &on_page {
-            let lower = segment.text.to_lowercase();
-            let mut from = 0;
-            while let Some(at) = lower[from..].find(label) {
-                let start = from + at + label.len();
-                from = start;
-                // A label inside a longer word ("subtotal") is not this
-                // label, and neither is "sub total": a sub total is
-                // what the page prints *before* the sum it wants.
-                let before = &lower[..from - label.len()];
-                let preceded_by_letter = before
-                    .chars()
-                    .next_back()
-                    .is_some_and(char::is_alphanumeric);
-                if preceded_by_letter || before.trim_end().ends_with("sub") {
-                    continue;
-                }
-                let Some(figure) = money_figure(&segment.text[start..]) else {
-                    continue;
-                };
-                match &found {
-                    Some((seen, _)) if seen != &figure => return None,
-                    Some(_) => {}
-                    None => found = Some((figure, (*segment).clone())),
-                }
-            }
-        }
-        if found.is_some() {
-            return found;
-        }
-    }
-    None
-}
-
-/// A printed sum at the start of `text`, after any label punctuation:
-/// `£360.00`, `£1,250`, `41.21 GBP`, `€12.00`. Returned verbatim.
-fn money_figure(text: &str) -> Option<String> {
-    let text = text.trim_start_matches(|c: char| c.is_whitespace() || c == ':' || c == '-');
-    let bytes = text.as_bytes();
-    let mut at = 0;
-    let mut sign = 0;
-    for symbol in ["£", "€", "$"] {
-        if text.starts_with(symbol) {
-            sign = symbol.len();
-        }
-    }
-    at += sign;
-    if sign > 0 {
-        at += text[at..].len() - text[at..].trim_start().len();
-    }
-    let digits_start = at;
-    while at < bytes.len() && (bytes[at].is_ascii_digit() || bytes[at] == b',') {
-        at += 1;
-    }
-    if at == digits_start || !bytes[digits_start].is_ascii_digit() {
-        return None;
-    }
-    if at + 2 < bytes.len() + 1
-        && bytes.get(at) == Some(&b'.')
-        && bytes.get(at + 1).is_some_and(u8::is_ascii_digit)
-        && bytes.get(at + 2).is_some_and(u8::is_ascii_digit)
-    {
-        at += 3;
-    }
-    // A figure with neither a currency sign nor pence is a count, not a
-    // sum — unless a currency code follows it.
-    let rest = &text[at..];
-    let code = ["GBP", "EUR", "USD"]
-        .iter()
-        .find(|code| rest.trim_start().starts_with(**code) && rest.starts_with(' '));
-    let end = match code {
-        Some(code) => at + (rest.len() - rest.trim_start().len()) + code.len(),
-        None => at,
-    };
-    let has_pence = text[digits_start..at].contains('.');
-    if sign == 0 && code.is_none() && !has_pence {
-        return None;
-    }
-    // Must end at a word boundary: "41.215" is not "41.21".
-    if text[end..]
-        .chars()
-        .next()
-        .is_some_and(char::is_alphanumeric)
-    {
-        return None;
-    }
-    Some(text[..end].to_owned())
 }
 
 /// The one duplicate Rust may fold: the same candidate, field for
@@ -1092,6 +875,7 @@ fn same_candidate(a: &Obligation, b: &Obligation) -> bool {
         && a.party == b.party
         && a.ask == b.ask
         && a.deadline == b.deadline
-        && a.anchor == b.anchor
+        && a.read == b.read
+        && a.from == b.from
         && a.amount == b.amount
 }

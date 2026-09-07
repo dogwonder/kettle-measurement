@@ -9,7 +9,14 @@
         "deadline": "for 16 July 2026 at 9.10am",
         "due": "2026-07-16",
         "kind": "attendance",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-ember-05-attendance-01",
       "segment": "Your appointment about your water account with Northgate Water is booked for 16 July 2026 at 9.10am.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-ember-05-other-03",
       "segment": "Please write out your address history and bring it with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-ember-05-other-05",
       "segment": "Please obtain a copy of the agreement from the other party before your appointment.",

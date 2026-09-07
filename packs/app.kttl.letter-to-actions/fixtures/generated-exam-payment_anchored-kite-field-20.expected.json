@@ -9,7 +9,14 @@
         "deadline": "within 45 days",
         "due": "2026-06-26",
         "kind": "payment",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 45,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-kite-field-20-payment-02",
       "segment": "The sum of £120.00 falls due within 45 days of 12 May 2026. Please quote HPS-4821 when you pay.",

@@ -9,7 +9,14 @@
         "deadline": "for 25 October 2026 at 2.15pm",
         "due": "2026-10-25",
         "kind": "attendance",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-ivy-09-attendance-01",
       "segment": "Your appointment about your pet health plan with Denholm Veterinary Group is booked for 25 October 2026 at 2.15pm.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-ivy-09-other-03",
       "segment": "Please bring a recent proof of your address with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-ivy-09-other-05",
       "segment": "Please order a replacement card before your appointment so that you have it with you.",

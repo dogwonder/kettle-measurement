@@ -9,7 +9,14 @@
         "deadline": "for 30 June 2026 at 2.15pm",
         "due": "2026-06-30",
         "kind": "attendance",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-yellowhorn-36-attendance-01",
       "segment": "An appointment concerning your water account has been arranged with Northgate Water for 30 June 2026 at 2.15pm.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-yellowhorn-36-other-03",
       "segment": "You must ring the bell if the desk is unattended, and take a meter reading before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-yellowhorn-36-other-05",
       "segment": "You must use the visitor bays rather than the staff bays and obtain a copy of the agreement from the other party in advance.",

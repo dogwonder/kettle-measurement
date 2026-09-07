@@ -9,7 +9,14 @@
         "deadline": "within 30 days",
         "due": "2026-07-13",
         "kind": "payment",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 30,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-juniper-20-payment-02",
       "segment": "Please pay £142.75 within 30 days of 13 June 2026, quoting reference CE-40027.",

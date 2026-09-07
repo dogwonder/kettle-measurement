@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": "2026-09-12",
         "kind": "response",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-cobble-lane-03-response-01",
       "segment": "A written response about the energy account is required within 35 days of the date of this letter.",

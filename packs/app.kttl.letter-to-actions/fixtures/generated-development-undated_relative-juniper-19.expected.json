@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": null,
         "kind": "response",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-juniper-19-response-00",
       "segment": "Please return the enclosed form about your policy renewal within 35 days.",

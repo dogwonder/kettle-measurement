@@ -664,3 +664,38 @@ Two smaller things worth keeping:
   refusal means editing the script to skip it is not available, by
   design. That is the right trade for provenance and the wrong one for
   iteration; a preflight is how you stop paying it.
+
+## What the fourth and fifth runs cost
+
+6 and 7 September 2026, the first v19 runs (#628), on a 3090 twice and
+then a 4090. The provisioning held; what it found was in the process
+around the run, not the box.
+
+- **`pod-eval.sh` stops at its `cargo test` gate after every scoring
+  bump.** `declared_tiers` wants a non-fail tier at the current version,
+  and a pod score never mints one, so on a fresh bump the gate is red by
+  construction — after the ten-minute CUDA build. The floor is now
+  staged with a date until the local row lands, so the gate is green
+  again; if it is ever red for that reason alone, run
+  `vendor-sidecar.sh` and then the eval command by hand with the
+  script's exact flags, and say so in the MANIFEST.
+- **The proxy SSH ignores a command.** `ssh <pod>@ssh.runpod.io` drops
+  into a shell whatever you pass; the exposed TCP port from
+  `runpodctl pod get <id>` (`.ssh.ip`, `.ssh.port`) takes commands and
+  `scp`, and was the route home for every tarball this week.
+- **Check which side of the mount is local before placing the build.**
+  The 6 September 3090 had a local NVMe data volume; the 7 September
+  boxes had a MooseFS `/workspace` at 700–900 MB/s and a 30 GB overlay
+  at 3.8 GB/s. Probe both with `dd` and put the clone, `target/` and
+  `TMPDIR` on the faster one; only the weights need the volume.
+- **A card that is not a 3090 or 5090 still needs `KETTLE_CUDA_ARCH`.**
+  The 4090 is `89`. Same backend, so `--baseline` notes the card and
+  does not refuse.
+- **Two eval chains at once look like one.** Killing an eval inside a
+  `for` loop lets the loop start the next bed, and a second launch then
+  shares `evals/runs/run1` with it. Kill the parent shell, then the
+  eval, then the sidecar, and confirm `pgrep` shows one of each before
+  relaunching. Local, but it cost twenty minutes twice.
+- **Two generated `kettle-examples` beds share fixture stems** across
+  deadline styles, so merging them into one `--fixture-dir` silently
+  overwrites half of one. Run them as two directories.

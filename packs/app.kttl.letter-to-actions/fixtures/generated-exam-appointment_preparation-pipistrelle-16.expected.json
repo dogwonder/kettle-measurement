@@ -9,7 +9,14 @@
         "deadline": "for 29 October 2026 at 9.10am",
         "due": "2026-10-29",
         "kind": "attendance",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-pipistrelle-16-attendance-01",
       "segment": "An appointment concerning your pet health plan has been arranged with Denholm Veterinary Group for 29 October 2026 at 9.10am.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-pipistrelle-16-other-03",
       "segment": "You must take a meter reading and note it down before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-pipistrelle-16-other-05",
       "segment": "You must obtain a copy of the agreement from the other party in advance.",

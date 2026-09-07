@@ -9,7 +9,14 @@
         "deadline": "within 28 days",
         "due": "2026-04-08",
         "kind": "response",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-cobble-03-response-01",
       "segment": "A written response about the annual review is required within 28 days of the date of this letter.",

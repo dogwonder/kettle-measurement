@@ -9,7 +9,14 @@
         "deadline": "on 5 June 2026 at 9.10am",
         "due": "2026-06-05",
         "kind": "attendance",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-blackcap-09-attendance-01",
       "segment": "This letter confirms your appointment about your pet health plan with Denholm Veterinary Group on 5 June 2026 at 9.10am.",

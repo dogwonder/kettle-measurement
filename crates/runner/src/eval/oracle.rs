@@ -256,12 +256,39 @@ fn answer(prompt: &str, fixtures: &[Vec<(String, Truth)>]) -> String {
                             } else {
                                 expect.amount.clone()
                             };
+                            // The deadline's structure is what the bed
+                            // authored; its base is read where the
+                            // letter prints it — the named day, or the
+                            // first passage that dates the letter.
+                            let read = expect.when.clone().unwrap_or_default();
+                            let from = match read.counts_from.as_str() {
+                                "named_date" => Some((printed_at(&expect.anchor), expect.anchor.clone())),
+                                "letter_date" | "month_end" => items
+                                    .iter()
+                                    .find(|(_, other)| {
+                                        crate::timeline::first_full_date(other).is_some()
+                                    })
+                                    .map(|(other_id, other)| (*other_id, other.clone())),
+                                _ => None,
+                            };
+                            let (from_at, from_value) = from.unwrap_or((*id, String::new()));
+                            // A pointing ask's deadline is the date its
+                            // row prints, at that row.
+                            let deadline_at = if expect.pointed {
+                                printed_at(&expect.deadline)
+                            } else {
+                                *id
+                            };
                             serde_json::json!({
                                 "kind": expect.kind,
                                 "party": { "at": printed_at(&expect.party), "value": expect.party },
                                 "ask": "As the letter asks",
-                                "deadline": { "at": id, "value": expect.deadline },
-                                "anchor": expect.anchor,
+                                "deadline": {
+                                    "at": deadline_at,
+                                    "value": expect.deadline,
+                                    "read": read,
+                                    "from": { "at": from_at, "value": from_value }
+                                },
                                 "amount": { "at": printed_at(&amount), "value": amount }
                             })
                         })

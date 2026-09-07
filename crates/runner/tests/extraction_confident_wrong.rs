@@ -13,6 +13,7 @@
 //! rewordings must not count, and a field that genuinely changes the
 //! answer must still count.
 
+mod support;
 use runner::eval::{
     extraction_metrics, ExpectedObligation, ExpectedTerm, Extracted, ExtractionOutcome, HarmClass,
     ScoredDecision, ScoredItem,
@@ -60,6 +61,8 @@ fn obligation(deadline: &str, anchor: &str, due: Option<&str>) -> Extracted {
         anchor: anchor.to_owned(),
         amount: "no amount".to_owned(),
         due: due.map(|d| d.parse().expect("an authored date")),
+        when: Some(support::authored_when(deadline, anchor).0),
+        pointed: support::authored_when(deadline, anchor).1,
     })
 }
 

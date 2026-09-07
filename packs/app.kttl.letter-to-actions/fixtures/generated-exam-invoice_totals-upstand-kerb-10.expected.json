@@ -5,11 +5,18 @@
     {
       "expect": {
         "amount": "£360.00",
-        "anchor": "the date given against it",
-        "deadline": "by the date given against it",
+        "anchor": "no particular date",
+        "deadline": "28 April 2026",
         "due": "2026-04-28",
         "kind": "payment",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": true,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "invoice_totals-upstand-kerb-10-payment-01",
       "segment": "Our invoice for the annual review is set out below. The amount shown as due should reach us by the date given against it.",

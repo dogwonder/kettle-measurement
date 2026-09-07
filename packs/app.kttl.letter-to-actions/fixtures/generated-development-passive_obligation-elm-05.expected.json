@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": "2026-07-02",
         "kind": "response",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-elm-05-response-01",
       "segment": "Confirmation that the water account details are correct must be returned within 42 days of the date of this letter.",

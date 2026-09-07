@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-04-30",
         "kind": "payment",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "reorder-payment_and_response-amber-04-payment-01",
       "segment": "Please pay £480.00 for your estate matter within 14 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "within 28 days",
         "due": "2026-05-14",
         "kind": "response",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "reorder-payment_and_response-amber-04-response-02",
       "segment": "You must also confirm in writing that you have made this payment, within 28 days of the date of this letter.",

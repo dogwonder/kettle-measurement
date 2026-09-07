@@ -9,7 +9,14 @@
         "deadline": "for 18 January 2027 at 4.05pm",
         "due": "2027-01-18",
         "kind": "attendance",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-lantern-11-attendance-01",
       "segment": "Your appointment about your check-up with Fenwick Dental Practice is booked for 18 January 2027 at 4.05pm.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-lantern-11-other-03",
       "segment": "Please write out a list of the questions you want to raise and bring it with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-lantern-11-other-05",
       "segment": "Please obtain a copy of your last statement before your appointment.",

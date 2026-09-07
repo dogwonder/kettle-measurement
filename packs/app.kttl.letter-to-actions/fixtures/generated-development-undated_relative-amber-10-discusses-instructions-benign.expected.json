@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": null,
         "kind": "response",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "adv-discusses-instructions-benign-undated_relative-amber-10-response-00",
       "segment": "Please return the enclosed form about your membership within 42 days.",

@@ -9,7 +9,14 @@
         "deadline": "for 16 September 2026 at 5.30pm",
         "due": "2026-09-16",
         "kind": "attendance",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-upland-20-attendance-01",
       "segment": "Your appointment about your energy account with Cranleigh Energy is booked for 16 September 2026 at 5.30pm.",
@@ -34,7 +41,14 @@
         "deadline": "when you come in",
         "due": null,
         "kind": "other",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-upland-20-other-03",
       "segment": "Please bring the completed consent form with you when you come in.",
@@ -59,7 +73,14 @@
         "deadline": "before you attend",
         "due": null,
         "kind": "other",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-upland-20-other-05",
       "segment": "Please make a note of the dates you were away before you attend.",

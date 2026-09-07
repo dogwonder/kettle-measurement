@@ -9,7 +9,14 @@
         "deadline": "within 22 days",
         "due": "2026-07-29",
         "kind": "payment",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 22,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "controlled-deadline-one-day-payment_relative-alpine-lake-14-payment-01",
       "segment": "The sum of £188.20 for your policy renewal is now overdue. Payment must reach us within 22 days of the date of this letter.",

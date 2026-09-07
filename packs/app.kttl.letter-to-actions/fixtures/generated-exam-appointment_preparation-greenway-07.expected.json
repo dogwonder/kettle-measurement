@@ -9,7 +9,14 @@
         "deadline": "for 1 March 2027 at 5.30pm",
         "due": "2027-03-01",
         "kind": "attendance",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-greenway-07-attendance-01",
       "segment": "An appointment concerning your case file has been arranged with Grantley Legal Aid for 1 March 2027 at 5.30pm.",
@@ -34,7 +41,14 @@
         "deadline": "ahead of the visit",
         "due": null,
         "kind": "other",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-greenway-07-other-03",
       "segment": "You must make a note of the dates you spent away ahead of the visit.",
@@ -59,7 +73,14 @@
         "deadline": "on arrival",
         "due": null,
         "kind": "other",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-greenway-07-other-05",
       "segment": "You must hand over the completed consent form on arrival.",

@@ -9,7 +9,14 @@
         "deadline": "on 3 April 2026",
         "due": "2026-04-03",
         "kind": "attendance",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-rose-garden-17-attendance-01",
       "segment": "We have booked your membership appointment with Eastvale Library Service on 3 April 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

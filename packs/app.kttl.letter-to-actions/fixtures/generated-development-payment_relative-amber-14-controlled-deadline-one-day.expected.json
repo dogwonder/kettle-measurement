@@ -9,7 +9,14 @@
         "deadline": "within 15 days",
         "due": "2026-02-25",
         "kind": "payment",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 15,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "controlled-deadline-one-day-payment_relative-amber-14-payment-01",
       "segment": "Our records show that council tax account of £214.60 remains outstanding. Please pay £214.60 within 15 days of the date of this letter.",

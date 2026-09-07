@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": null,
         "kind": "response",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-yellow-birch-09-response-00",
       "segment": "The enclosed form about your council tax account should be completed and returned within 42 days.",

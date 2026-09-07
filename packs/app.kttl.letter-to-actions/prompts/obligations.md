@@ -33,6 +33,9 @@ For each passage, decide:
   This is a question about who must act. It is not about whether the
   wording is forceful enough, and not about whether the reader is named
   at all.
+  Record a task when the letter requests or requires the reader to act.
+  Permission to take an optional step creates no task, even if it
+  includes a time limit. Polite wording can still make a request.
   Then ask whether this letter is asking it of them *now*. Two kinds of
   sentence read like asks and are not. A request made conditional on
   something the letter does not settle — on renting the property out,
@@ -69,7 +72,7 @@ For each obligation give:
 - kind: "payment" | "response" | "attendance" | "other"
 Three of the fields are readings: a value copied from the letter and
 the id of the passage it is printed in, written as {"at": id, "value":
-"..."}. The value is checked against that passage word for word, so
+"..."}; the deadline carries two more parts beside its value. The value is checked against that passage word for word, so
 copy it exactly as printed and name the passage it is printed in —
 never a passage you were not shown, and never a passage of a different
 letter. Where the letter does not give a value, write "" for the value
@@ -83,23 +86,48 @@ and this passage's own id for "at".
   the name as that passage prints it. Use the same name for every
   obligation in the letter.
 - ask: what the person must do, in a short phrase they can read
-- deadline: "value" is the words the letter uses for when the thing
-  must be done, copied exactly from this passage — "within 14 days",
-  "by the end of the month", "on 3 March 2026". Advice about how to go
-  about it is not a deadline, even when it mentions a time: what
-  matters is when the thing itself must happen, not how to prepare for
-  it. Where the letter gives a day for an appointment, a hearing or a
-  meeting, that day is the deadline. Never work out a date yourself and
-  never write one the letter does not contain. "at" is the id of the
-  passage the date is printed in: this passage's own id when the
-  deadline is written here, whether as a day or as a period. When the
-  words point elsewhere — "by the date shown beside it", "the date
-  given below" — "at" is the id of the passage that prints that date,
-  usually a due-date row. You are naming where the date is, not reading
-  it: "value" stays the words this passage uses.
-- anchor: what the deadline counts from, in the letter's own words —
-  "the date of this letter", or a date the letter states. If nothing is
-  given, write "no particular date".
+- deadline: a reading with two more parts. "value" is the words the
+  letter uses for when the thing must be done, copied exactly from this
+  passage — "within 14 days of the date of this letter", "by the end of
+  the month", "on 3 March 2026" — and "at" is this passage's own id.
+  Advice about how to go about it is not a deadline, even when it
+  mentions a time: what matters is when the thing itself must happen,
+  not how to prepare for it. Where the letter gives a day for an
+  appointment, a hearing or a meeting, that day is the deadline. When
+  the words only point at the page — "by the date shown beside it",
+  "the date given below" — the deadline is the date the row it points
+  at prints: "at" is that row's id and "value" is the date exactly as
+  the row prints it, "14 September 2026". Never work out a date
+  yourself and never write one the letter does not contain.
+  "read" is the words of "value" as fields, so the date can be counted
+  without anyone parsing prose. count: the number the words give —
+  "within 14 days" is 14, "within fourteen days" is 14, "within a
+  fortnight" is 14 days, "within one month" is 1 month; 0 when the
+  words name a day or no period. unit: "days", "weeks" or "months" for
+  a period, "none" for a named day or no period. qualifier: "calendar",
+  "clear" or "working" when the words say so, "none" otherwise.
+  counts_from: what the period counts from — "letter_date" for the
+  date of this letter, stated or not; "receipt" when the words say
+  from receipt; "named_date" when the words give a day to count from;
+  "month_end" for "by the end of the month"; "none" when there is no
+  period. Every field is read off the words in "value", never worked
+  out: a count the words do not contain is a date somebody misses.
+  "from" is a reading of the day the period counts from, copied from
+  where the letter prints it. For "letter_date" and "month_end" that is
+  the passage that dates the letter — usually the heading — and
+  "value" is the date exactly as that passage prints it, for example
+  {"at": 0, "value": "3 March 2026"}. For "named_date" it is the
+  passage that prints the day named, and "value" is that day. Whenever
+  counts_from is "letter_date", "month_end" or "named_date", "value"
+  must be the date: an empty "value" there is a deadline nobody can
+  count. Only for "none" and "receipt", and for a deadline that names
+  its own day, write "" with this passage's own id.
+  A letter that prints no date at all still states its period. Read
+  the period exactly as the words give it — the count, the unit, and
+  what it counts from — and write "" for the date, with this passage's
+  own id: the words are a fact about the letter, and a period nobody
+  can count from is still the period the letter set. Never turn a
+  stated period into no period because the date is missing.
 - amount: "value" is the sum this ask is for, copied exactly as the
   page writes it — "£84.00", "£1,250.00", "41.21 GBP" — and "at" is
   the id of the passage it is printed in. Usually this passage's own

@@ -9,7 +9,14 @@
         "deadline": "at your earliest convenience",
         "due": null,
         "kind": "response",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-linden-11-response-01",
       "segment": "Please send us a meter reading for your check-up at your earliest convenience.",

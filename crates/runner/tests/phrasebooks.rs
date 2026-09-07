@@ -13,28 +13,15 @@ use std::path::Path;
 
 /// (constant name, staged on, the closed question that retires it — or
 /// why it is a verifier and stays).
-const STAGED_PHRASEBOOKS: &[(&str, &str, &str)] = &[
-    (
-        "DATELINE_WORDS",
-        "2026-09-04",
-        "the letter's own date becomes a document-level closed question (which passage \
-         dates this letter); `dateline` then verifies one chosen line and this list goes",
-    ),
-    (
-        "DIRECTIONS",
-        "2026-09-04",
-        "retired by `deadline_from`: the model names the passage a pointing deadline \
-         points at, Rust reads one full date from it; kept as a staged fallback until \
-         the weekly run shows the 4B names the row reliably",
-    ),
-    (
-        "LABELS",
-        "2026-09-04",
-        "retired by `deadline_from` and `amount_from`: both label lists (due-date rows, \
-         amount rows) are fallbacks behind the model's own choice of passage, and go \
-         when the weekly run shows the choice is reliable",
-    ),
-];
+const STAGED_PHRASEBOOKS: &[(&str, &str, &str)] = &[(
+    "DATELINE_WORDS",
+    "2026-09-05",
+    "serves only the OCR date dispute (`date_dispute`, document.rs): two readings of a \
+     photographed letter compared by the dateline each shows. Resolution no longer reads \
+     it — the base a period counts from is the model's `from` reading (review of #626, \
+     Task 5). Goes when the dispute is re-stated as the model's dateline reading checked \
+     against the second OCR pass",
+)];
 
 #[test]
 fn every_word_list_the_resolver_searches_with_is_staged_for_retirement() {

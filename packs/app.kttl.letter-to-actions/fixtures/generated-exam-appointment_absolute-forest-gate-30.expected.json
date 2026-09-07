@@ -9,7 +9,14 @@
         "deadline": "on 16 November 2026",
         "due": "2026-11-16",
         "kind": "attendance",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-forest-gate-30-attendance-01",
       "segment": "We have booked your check-up appointment with Fenwick Dental Practice on 16 November 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

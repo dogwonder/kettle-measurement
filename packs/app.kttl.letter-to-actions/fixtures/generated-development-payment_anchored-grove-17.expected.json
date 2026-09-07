@@ -9,7 +9,14 @@
         "deadline": "within 30 days",
         "due": "2026-10-24",
         "kind": "payment",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 30,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-grove-17-payment-02",
       "segment": "Please pay £96.45 within 30 days of 24 September 2026, quoting reference NW-55210.",

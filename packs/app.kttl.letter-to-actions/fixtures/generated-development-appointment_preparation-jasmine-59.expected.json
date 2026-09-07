@@ -9,7 +9,14 @@
         "deadline": "for 6 January 2027 at 4.05pm",
         "due": "2027-01-06",
         "kind": "attendance",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-jasmine-59-attendance-01",
       "segment": "Your appointment about your check-up with Fenwick Dental Practice is booked for 6 January 2027 at 4.05pm.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-jasmine-59-other-03",
       "segment": "Please take a ticket from the machine as you come in, and bring a recent proof of your address with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-jasmine-59-other-05",
       "segment": "Please do not arrive more than half an hour early, and order a replacement card before your appointment.",

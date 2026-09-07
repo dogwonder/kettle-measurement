@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-06-30",
         "kind": "payment",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-elder-ridge-01-payment-01",
       "segment": "Your tenancy account stands at £310.00. We ask that this is cleared by the end of the month.",

@@ -9,7 +9,14 @@
         "deadline": "within 28 days",
         "due": "2026-09-05",
         "kind": "response",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-hawthorn-08-response-01",
       "segment": "A written response about the energy account is required within 28 days of the date of this letter.",

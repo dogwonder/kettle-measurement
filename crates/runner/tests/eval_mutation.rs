@@ -78,9 +78,9 @@ fn letter_pack(name: &str) -> PathBuf {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
                     "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" }, "read": { "type": "object", "properties": { "count": { "type": "integer" }, "unit": { "enum": ["days", "weeks", "months", "none"] }, "qualifier": { "enum": ["calendar", "clear", "working", "none"] }, "counts_from": { "enum": ["letter_date", "receipt", "named_date", "month_end", "none"] } }, "required": ["count", "unit", "qualifier", "counts_from"] }, "from": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] } }, "required": ["at", "value", "read", "from"] },
                     "anchor": { "type": "string" }
-                }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
+                }, "required": ["kind", "party", "ask", "deadline"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
             "required": ["results"] }"#,
     );
@@ -101,7 +101,9 @@ fn letter_pack(name: &str) -> PathBuf {
                 "party": "Harborne Parking Services",
                 "deadline": "within 14 days",
                 "anchor": "the date of this letter",
-                "due": "2026-03-17"
+                "due": "2026-03-17",
+                "when": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" },
+                "pointed": false
               }
             },
             {
@@ -113,7 +115,9 @@ fn letter_pack(name: &str) -> PathBuf {
                 "party": "Harborne Parking Services",
                 "deadline": "by 28 March 2026",
                 "anchor": "28 March 2026",
-                "due": "2026-03-28"
+                "due": "2026-03-28",
+                "when": { "count": 0, "unit": "none", "qualifier": "none", "counts_from": "none" },
+                "pointed": false
               }
             },
             {
@@ -900,19 +904,19 @@ fn pooled_letter_pack(name: &str) -> PathBuf {
             item("pooled-payment-01",
                  "Please pay £120.00 to Harborne Parking Services within 14 days of the date of this letter.",
                  serde_json::json!({ "kind": "payment", "party": "Harborne Parking Services",
-                     "deadline": "within 14 days", "anchor": "the date of this letter", "due": "2026-03-17" })),
+                     "deadline": "within 14 days", "anchor": "the date of this letter", "due": "2026-03-17", "when": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" } })),
             item("pooled-response-01",
                  "Please also return the enclosed reply slip to Harborne Parking Services by 28 March 2026.",
                  serde_json::json!({ "kind": "response", "party": "Harborne Parking Services",
-                     "deadline": "by 28 March 2026", "anchor": "28 March 2026", "due": "2026-03-28" })),
+                     "deadline": "by 28 March 2026", "anchor": "28 March 2026", "due": "2026-03-28", "when": { "count": 0, "unit": "none", "qualifier": "none", "counts_from": "none" } })),
             item("pooled-attendance-01",
                  "Please attend the hearing at Kelsford Borough Council on 2 May 2026.",
                  serde_json::json!({ "kind": "attendance", "party": "Kelsford Borough Council",
-                     "deadline": "on 2 May 2026", "anchor": "2 May 2026", "due": "2026-05-02" })),
+                     "deadline": "on 2 May 2026", "anchor": "2 May 2026", "due": "2026-05-02", "when": { "count": 0, "unit": "none", "qualifier": "none", "counts_from": "none" } })),
             item("pooled-payment-02",
                  "Please pay the outstanding balance of £45.50 to Kelsford Borough Council by 14 April 2026.",
                  serde_json::json!({ "kind": "payment", "party": "Kelsford Borough Council",
-                     "deadline": "by 14 April 2026", "anchor": "14 April 2026", "due": "2026-04-14" })),
+                     "deadline": "by 14 April 2026", "anchor": "14 April 2026", "due": "2026-04-14", "when": { "count": 0, "unit": "none", "qualifier": "none", "counts_from": "none" } })),
             item("pooled-no-ask-01", "Our offices are open Monday to Friday.", serde_json::Value::Null),
             item("pooled-no-ask-02", "This letter requires no response if you have already paid.", serde_json::Value::Null),
             item("pooled-no-ask-03", "We thank you for your co-operation.", serde_json::Value::Null)

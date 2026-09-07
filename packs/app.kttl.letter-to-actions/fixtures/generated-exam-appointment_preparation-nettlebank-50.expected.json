@@ -9,7 +9,14 @@
         "deadline": "for 16 August 2026 at 11.20am",
         "due": "2026-08-16",
         "kind": "attendance",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-nettlebank-50-attendance-01",
       "segment": "An appointment concerning your policy renewal has been arranged with Belwood Insurance for 16 August 2026 at 11.20am.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-nettlebank-50-other-03",
       "segment": "You must arrive on time and register for an online account before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-nettlebank-50-other-05",
       "segment": "You must allow additional time if you travel by public transport and order a replacement card in advance.",

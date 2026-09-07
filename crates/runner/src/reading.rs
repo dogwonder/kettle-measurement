@@ -66,6 +66,8 @@ pub enum Kind {
     Money,
     /// The letter's words for when; parsed elsewhere, if at all.
     Phrase,
+    /// One full date, as the page prints it.
+    Date,
 }
 
 /// Why a reading was refused: the page contradicted it.
@@ -201,7 +203,7 @@ pub fn check_at(
     };
     let contained = match kind {
         Kind::Money => contains_money_token(&passage.text, &reading.value),
-        Kind::Name | Kind::Phrase => contains_squashed(&passage.text, &reading.value),
+        Kind::Name | Kind::Phrase | Kind::Date => contains_squashed(&passage.text, &reading.value),
     };
     if !contained {
         return Checked::Refused(Refusal::NotInPassage { at });
@@ -212,6 +214,7 @@ pub fn check_at(
         }
         Kind::Name => !reading.value.trim().is_empty(),
         Kind::Phrase => true,
+        Kind::Date => crate::timeline::first_full_date(&reading.value).is_some(),
     };
     let mut warnings = Vec::new();
     if kind == Kind::Money {

@@ -1043,6 +1043,8 @@ fn scored_extraction(ordinal: usize, found: bool, strata: &[&str]) -> ScoredItem
         anchor: "the date of this letter".to_owned(),
         amount: "no amount".to_owned(),
         due: None,
+        when: None,
+        pointed: false,
     };
     ScoredItem {
         id: format!("app.kttl.test/letters-01/obligation-{ordinal:02}"),
@@ -1505,6 +1507,11 @@ fn an_obligation_with_a_different_sum_is_a_different_assertion() {
         deadline: "within 14 days".to_owned(),
         anchor: "the date of this letter".to_owned(),
         due: None,
+        // Authored beside the words, as every v19 expectation is: an
+        // undated period is compared by its structure, so an expectation
+        // with none would never meet the reading below (7 September 2026).
+        when: Some(runner::run::When::new(14, "days", "none", "letter_date")),
+        pointed: false,
         amount: amount.to_owned(),
     };
     let found = |amount: &str| runner::run::Obligation {
@@ -1512,7 +1519,9 @@ fn an_obligation_with_a_different_sum_is_a_different_assertion() {
         party: runner::reading::Reading::new(0, "Elmswood Lettings".to_owned()),
         ask: "Pay the arrears".to_owned(),
         deadline: runner::reading::Reading::new(0, "within 14 days".to_owned()),
-        anchor: "the date of this letter".to_owned(),
+        read: runner::run::When::new(14, "days", "none", "letter_date"),
+        from: runner::reading::Reading::absent(0),
+        unresolved: None,
         amount: runner::reading::Reading::new(0, amount.to_owned()),
         refused: Vec::new(),
         confidence: "high".to_owned(),

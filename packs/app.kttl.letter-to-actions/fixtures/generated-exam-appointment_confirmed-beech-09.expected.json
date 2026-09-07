@@ -9,7 +9,14 @@
         "deadline": "on 4 May 2026 at 3.50pm",
         "due": "2026-05-04",
         "kind": "attendance",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-beech-09-attendance-01",
       "segment": "We are writing to confirm your council tax account appointment with Kelsford Borough Council on 4 May 2026 at 3.50pm.",

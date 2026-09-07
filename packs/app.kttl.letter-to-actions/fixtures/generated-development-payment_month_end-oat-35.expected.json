@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-11-30",
         "kind": "payment",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-oat-35-payment-01",
       "segment": "The balance on your check-up is £68.50. Please settle it by the end of the month.",

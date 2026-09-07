@@ -1,15 +1,17 @@
-//! #241: deadlines resolved in Rust, duplicates merged. The model
-//! reads "within 14 days" off the page; every date below is arithmetic
-//! it never does (CLAUDE.md) — a date a model invented is a missed
-//! deadline.
+//! #241: deadlines resolved in Rust. The model reads "within 14 days"
+//! off the page and into structure; Rust checks the structure against
+//! the words and counts (review of #626, Task 5). Every date below is
+//! arithmetic the model never does (CLAUDE.md) — a date a model
+//! invented is a missed deadline — and no line is searched for.
 
 use chrono::NaiveDate;
 use runner::claim::Kind;
 use runner::document::{segments_from_text, Segment};
+use runner::reading::Reading;
 use runner::run::Obligation;
+use runner::run::When;
 use runner::timeline::{
-    confirm_letter_date, confirmed_deadline, date_dispute, letter_date, resolve_deadline,
-    sort_timeline,
+    confirm_letter_date, date_dispute, letter_date, resolve_structured, sort_timeline, Unresolved,
 };
 use std::str::FromStr;
 
@@ -17,154 +19,419 @@ fn date(iso: &str) -> NaiveDate {
     NaiveDate::from_str(iso).expect("test date")
 }
 
+/// The structured resolver, one case per row of the review's Task 5
+/// list. Every field is checked against the words whether or not
+/// another is `none`; a period counts only from a base the model read.
+fn when(count: u64, unit: &str, qualifier: &str, counts_from: &str) -> When {
+    When::new(count, unit, qualifier, counts_from)
+}
+
 #[test]
-fn a_relative_deadline_resolves_against_the_letter_date() {
-    // The issue's own three cases, anchored to 3 March 2026.
-    let letter = date("2026-03-03");
+fn a_correct_count_is_checked_against_its_words_and_then_counted() {
+    let letter = Some(date("2026-03-03"));
+    let worked = |iso: &str| {
+        Ok(runner::timeline::Resolved {
+            date: date(iso),
+            kind: Kind::WorkedOut,
+        })
+    };
     assert_eq!(
-        resolve_deadline("within 14 days", "the date of this letter", letter).map(|r| r.date),
-        Some(date("2026-03-17"))
+        resolve_structured(
+            "within 14 days",
+            &when(14, "days", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        ),
+        worked("2026-03-17")
     );
     assert_eq!(
-        resolve_deadline("by the end of the month", "the date of this letter", letter)
-            .map(|r| r.date),
-        Some(date("2026-03-31"))
+        resolve_structured(
+            "within fourteen days",
+            &when(14, "days", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        ),
+        worked("2026-03-17")
     );
     assert_eq!(
-        resolve_deadline("when convenient", "no particular date", letter),
+        resolve_structured(
+            "within a fortnight",
+            &when(14, "days", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        ),
+        worked("2026-03-17")
+    );
+    assert_eq!(
+        resolve_structured(
+            "within 2 weeks",
+            &when(2, "weeks", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        ),
+        worked("2026-03-17")
+    );
+    assert_eq!(
+        resolve_structured(
+            "within one month",
+            &when(1, "months", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        ),
+        worked("2026-04-03")
+    );
+    assert_eq!(
+        resolve_structured(
+            "within 14 calendar days",
+            &when(14, "days", "calendar", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        ),
+        worked("2026-03-17")
+    );
+    assert_eq!(
+        resolve_structured(
+            "by the end of the month",
+            &when(0, "none", "none", "month_end"),
+            false,
+            letter,
+            Kind::WorkedOut
+        ),
+        worked("2026-03-31")
+    );
+    // A leap February's end is arithmetic, not guesswork.
+    assert_eq!(
+        resolve_structured(
+            "by the end of the month",
+            &when(0, "none", "none", "month_end"),
+            false,
+            Some(date("2028-02-10")),
+            Kind::WorkedOut
+        )
+        .map(|r| r.date),
+        Ok(date("2028-02-29"))
+    );
+}
+
+#[test]
+fn a_contradictory_count_or_unit_is_refused_never_repaired() {
+    let letter = Some(date("2026-03-03"));
+    let contradicted = |r: Result<runner::timeline::Resolved, Unresolved>| {
+        matches!(r, Err(Unresolved::Contradicted { .. }))
+    };
+    assert!(
+        contradicted(resolve_structured(
+            "within 14 days",
+            &when(28, "days", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "28 against fourteen"
+    );
+    assert!(
+        contradicted(resolve_structured(
+            "within 14 days",
+            &when(14, "weeks", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "weeks against days"
+    );
+    assert!(
+        contradicted(resolve_structured(
+            "at your earliest convenience",
+            &when(14, "days", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "a period the words never gave"
+    );
+    assert!(
+        contradicted(resolve_structured(
+            "within 14 days",
+            &when(0, "none", "none", "month_end"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "month end the words never gave"
+    );
+    // `unit == none` does not skip the other fields.
+    assert!(
+        contradicted(resolve_structured(
+            "on 6 March 2026",
+            &when(14, "none", "none", "none"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "a count with no unit"
+    );
+    assert!(
+        contradicted(resolve_structured(
+            "on 6 March 2026",
+            &when(0, "none", "calendar", "none"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "a qualifier the words never gave"
+    );
+    assert!(
+        contradicted(resolve_structured(
+            "on 6 March 2026",
+            &when(0, "none", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "a base with nothing to count"
+    );
+    // The qualifier is checked as its word, both ways.
+    assert!(
+        contradicted(resolve_structured(
+            "within 14 working days",
+            &when(14, "days", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "working days the reading left out"
+    );
+    assert!(
+        contradicted(resolve_structured(
+            "within 14 days",
+            &when(14, "days", "working", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "working days the words never gave"
+    );
+    // And receipt.
+    assert!(
+        contradicted(resolve_structured(
+            "within 28 days of receipt",
+            &when(28, "days", "none", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "receipt the reading left out"
+    );
+}
+
+#[test]
+fn an_unsupported_computation_keeps_the_words_and_derives_nothing() {
+    let letter = Some(date("2026-03-03"));
+    let unsupported = |r: Result<runner::timeline::Resolved, Unresolved>| {
+        matches!(r, Err(Unresolved::Unsupported { .. }))
+    };
+    assert!(
+        unsupported(resolve_structured(
+            "within 14 working days",
+            &when(14, "days", "working", "letter_date"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "working days need a calendar Kettle does not have"
+    );
+    assert!(
+        unsupported(resolve_structured(
+            "within 28 days of receipt",
+            &when(28, "days", "none", "receipt"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "receipt is a day the letter does not state"
+    );
+    assert!(
+        unsupported(resolve_structured(
+            "as soon as possible",
+            &when(0, "none", "none", "none"),
+            false,
+            letter,
+            Kind::WorkedOut
+        )),
+        "no day Kettle can read"
+    );
+}
+
+#[test]
+fn a_period_counts_only_from_a_base_the_model_read() {
+    // An explicit named day: counted from it, worked out.
+    assert_eq!(
+        resolve_structured(
+            "within 30 days of 22 May 2026",
+            &when(30, "days", "none", "named_date"),
+            false,
+            Some(date("2026-05-22")),
+            Kind::WorkedOut
+        )
+        .map(|r| (r.date, r.kind)),
+        Ok((date("2026-06-21"), Kind::WorkedOut))
+    );
+    // The day the words themselves name is the base, whatever `from`
+    // says: the words are the verified reading, and the 4B hands the
+    // dateline over as `from` on every such letter.
+    assert_eq!(
+        resolve_structured(
+            "within 30 days of 22 May 2026",
+            &when(30, "days", "none", "named_date"),
+            false,
+            Some(date("2026-03-03")),
+            Kind::WorkedOut
+        )
+        .map(|r| r.date),
+        Ok(date("2026-06-21")),
+        "the dateline handed over as the named day is ignored for the day the words print"
+    );
+    // Month end read with a unit of months and no count is the word
+    // *month* the words give, not a period.
+    assert_eq!(
+        resolve_structured(
+            "by the end of the month",
+            &when(0, "months", "none", "month_end"),
+            false,
+            Some(date("2026-03-03")),
+            Kind::WorkedOut
+        )
+        .map(|r| r.date),
+        Ok(date("2026-03-31"))
+    );
+    // An absent base: undated, never borrowed from the letter.
+    let no_base = |r: Result<runner::timeline::Resolved, Unresolved>| {
+        matches!(r, Err(Unresolved::NoBase { .. }))
+    };
+    assert!(
+        no_base(resolve_structured(
+            "within 14 days",
+            &when(14, "days", "none", "letter_date"),
+            false,
+            None,
+            Kind::WorkedOut
+        )),
+        "the letter's date was not read"
+    );
+    assert!(
+        no_base(resolve_structured(
+            "within 14 days",
+            &when(14, "days", "none", "named_date"),
+            false,
+            None,
+            Kind::WorkedOut
+        )),
+        "the named day was not read"
+    );
+    assert!(
+        no_base(resolve_structured(
+            "within 14 days",
+            &when(14, "days", "none", "none"),
+            false,
+            Some(date("2026-03-03")),
+            Kind::WorkedOut
+        )),
+        "counts_from none counts from nothing, even with a letter date to hand"
+    );
+    assert!(no_base(resolve_structured(
+        "by the end of the month",
+        &when(0, "none", "none", "month_end"),
+        false,
         None,
-        "an unresolvable phrase is not guessed"
-    );
+        Kind::WorkedOut
+    )));
 }
 
 #[test]
-fn an_absolute_date_is_read_not_computed() {
-    let letter = date("2026-03-03");
+fn a_day_the_words_name_is_read_and_a_row_pointed_at_is_read_at_the_row() {
+    let read = |iso: &str| {
+        Ok(runner::timeline::Resolved {
+            date: date(iso),
+            kind: Kind::ReadAndVerified,
+        })
+    };
     assert_eq!(
-        resolve_deadline("by 12 August 2026", "12 August 2026", letter).map(|r| r.date),
-        Some(date("2026-08-12"))
-    );
-    // The deadline phrase alone carries the date; the anchor echoes it.
-    assert_eq!(
-        resolve_deadline("on 3 March 2026", "3 March 2026", letter).map(|r| r.date),
-        Some(date("2026-03-03"))
-    );
-}
-
-/// A resolved deadline says which kind of claim it is (#366, #367).
-///
-/// The test above is *named* "read not computed" and cannot assert it:
-/// both branches return a bare date, so "12 August 2026" quoted off the
-/// page and "within 14 days" counted from the letter arrive at the
-/// report identically. They are not the same claim — one is wrong only
-/// if the page was misread, the other only if this arithmetic is wrong,
-/// and a person chasing a missed deadline needs to know which they are
-/// looking at.
-#[test]
-fn a_resolved_deadline_states_whether_it_was_read_or_worked_out() {
-    let letter = date("2026-03-03");
-
-    let written = resolve_deadline("by 12 August 2026", "12 August 2026", letter)
-        .expect("an absolute deadline resolves");
-    assert_eq!(written.date, date("2026-08-12"));
-    assert_eq!(written.kind, Kind::ReadAndVerified);
-
-    let counted = resolve_deadline("within 14 days", "the date of this letter", letter)
-        .expect("a relative deadline resolves against the letter date");
-    assert_eq!(counted.date, date("2026-03-17"));
-    assert_eq!(counted.kind, Kind::WorkedOut);
-
-    // The month-end phrase is arithmetic too — the page never wrote
-    // "31 March", Rust worked out which day the month ends on.
-    let month_end = resolve_deadline("by the end of the month", "the date of this letter", letter)
-        .expect("a month-end deadline resolves");
-    assert_eq!(month_end.kind, Kind::WorkedOut);
-}
-
-/// A deadline phrase that quotes its own anchor is still counted from
-/// it (#435).
-///
-/// Found by measuring Qwen3.5-9B on the letter bed: it returns the whole
-/// phrase, anchor included — `"within 30 days of 22 May 2026"` — where
-/// the other models return the bare `"within 30 days"`. Both are
-/// defensible readings of the sentence, so the resolver has to survive
-/// either.
-///
-/// It did not. The written-date shortcut scans the *whole* phrase for a
-/// date, found the anchor sitting inside it and returned that: thirty
-/// days early, on 35 of 445 obligation decisions. The arithmetic below
-/// it never ran.
-///
-/// The kind is the half that matters more. Returning early claims the
-/// page wrote this date (#366), so a date Kettle should have worked out
-/// was both wrong and asserted in the strongest voice it has.
-#[test]
-fn a_deadline_that_quotes_its_anchor_is_still_counted_from_it() {
-    let letter = date("2026-03-03");
-
-    let counted = resolve_deadline("within 30 days of 22 May 2026", "22 May 2026", letter)
-        .expect("a relative deadline resolves against its dated anchor");
-    assert_eq!(
-        counted.date,
-        date("2026-06-21"),
-        "thirty days after the anchor, not the anchor itself"
+        resolve_structured(
+            "by 12 August 2026",
+            &when(0, "none", "none", "none"),
+            false,
+            None,
+            Kind::WorkedOut
+        ),
+        read("2026-08-12")
     );
     assert_eq!(
-        counted.kind,
-        Kind::WorkedOut,
-        "arithmetic over a date that was read is not itself read"
+        resolve_structured(
+            "on 3 March 2026",
+            &when(0, "none", "none", "none"),
+            false,
+            None,
+            Kind::WorkedOut
+        ),
+        read("2026-03-03")
     );
-
-    // The same phrase with no separate anchor field: the date the
-    // arithmetic counts from is inside the deadline and nowhere else,
-    // which is exactly the shape the model returned.
-    let inline = resolve_deadline("within 30 days of 22 May 2026", "", letter)
-        .expect("the anchor inside the phrase is still an anchor");
-    assert_eq!(inline.date, date("2026-06-21"));
-    assert_eq!(inline.kind, Kind::WorkedOut);
-}
-
-#[test]
-fn a_dated_anchor_beats_the_letter_date() {
-    // "within 14 days of the hearing on 1 June 2026" counts from the
-    // hearing, not from the letter.
-    let letter = date("2026-03-03");
+    // A pointing ask's deadline is the date its row prints, verified
+    // at the row and read from it.
     assert_eq!(
-        resolve_deadline("within 14 days", "1 June 2026", letter).map(|r| r.date),
-        Some(date("2026-06-15"))
+        resolve_structured(
+            "6 March 2026",
+            &when(0, "none", "none", "none"),
+            true,
+            None,
+            Kind::WorkedOut
+        ),
+        read("2026-03-06")
     );
-}
-
-#[test]
-fn month_ends_and_leap_years_are_arithmetic_not_guesswork() {
-    // Thirty days from 31 January 2024 crosses a 29-day February.
+    // A date inside a relative phrase is the base, never the answer.
     assert_eq!(
-        resolve_deadline(
-            "within 30 days",
-            "the date of this letter",
-            date("2024-01-31")
+        resolve_structured(
+            "within 30 days of 22 May 2026",
+            &when(30, "days", "none", "named_date"),
+            false,
+            Some(date("2026-05-22")),
+            Kind::WorkedOut
         )
         .map(|r| r.date),
-        Some(date("2024-03-01"))
+        Ok(date("2026-06-21"))
     );
-    // The end of February is the 29th in a leap year and the 28th not.
+}
+
+#[test]
+fn a_date_a_person_confirmed_is_theirs_and_only_where_it_counted() {
+    let given = date("2026-03-03");
     assert_eq!(
-        resolve_deadline(
-            "by the end of the month",
-            "the date of this letter",
-            date("2024-02-10")
+        resolve_structured(
+            "within 14 days",
+            &when(14, "days", "none", "letter_date"),
+            false,
+            Some(given),
+            Kind::Yours
         )
-        .map(|r| r.date),
-        Some(date("2024-02-29"))
+        .map(|r| (r.date, r.kind)),
+        Ok((date("2026-03-17"), Kind::Yours))
     );
+    // A day written on the page never depended on their answer.
     assert_eq!(
-        resolve_deadline(
-            "by the end of the month",
-            "the date of this letter",
-            date("2025-02-10")
+        resolve_structured(
+            "by 12 August 2026",
+            &when(0, "none", "none", "none"),
+            false,
+            Some(given),
+            Kind::Yours
         )
-        .map(|r| r.date),
-        Some(date("2025-02-28"))
+        .map(|r| r.kind),
+        Ok(Kind::ReadAndVerified)
     );
 }
 
@@ -186,6 +453,52 @@ fn letter_dated(written: &str) -> Vec<Segment> {
     vec![segment(0, written)]
 }
 
+/// What a bed author knows about the phrases these tests use — the
+/// structure the model would read, authored here rather than parsed.
+fn structure_of(deadline: &str, anchor: &str) -> When {
+    let named = runner::timeline::first_full_date(anchor).is_some();
+    if let Some(days) = deadline
+        .strip_prefix("within ")
+        .and_then(|rest| rest.split_whitespace().next())
+        .and_then(|n| n.parse::<u64>().ok())
+    {
+        return When::new(
+            days,
+            "days",
+            "none",
+            if named { "named_date" } else { "letter_date" },
+        );
+    }
+    if deadline.contains("end of the month") {
+        return When::new(0, "none", "none", "month_end");
+    }
+    When::default()
+}
+
+/// The base a period counts from, as the reading the model would give:
+/// the named day where the anchor is one, else the test letter's own
+/// dateline at passage 0 — `letter_dated` — which the tests that need
+/// it fill in with `dated`.
+fn base_of(anchor: &str, own: usize) -> Reading {
+    if runner::timeline::first_full_date(anchor).is_some() {
+        Reading::new(own, anchor)
+    } else {
+        Reading::absent(own)
+    }
+}
+
+/// Give an obligation counted from the letter's date the dateline
+/// reading `letter_dated` puts at passage 0.
+fn dated(mut obligation: Obligation, written: &str) -> Obligation {
+    if matches!(
+        obligation.read.counts_from.as_str(),
+        "letter_date" | "month_end"
+    ) {
+        obligation.from = Reading::new(0, written);
+    }
+    obligation
+}
+
 fn obligation(deadline: &str, anchor: &str, evidence: Segment) -> Obligation {
     Obligation {
         kind: "payment".to_owned(),
@@ -195,7 +508,9 @@ fn obligation(deadline: &str, anchor: &str, evidence: Segment) -> Obligation {
         ),
         ask: "Pay £120.00".to_owned(),
         deadline: runner::reading::Reading::new(evidence.ordinal, deadline.to_owned()),
-        anchor: anchor.to_owned(),
+        read: structure_of(deadline, anchor),
+        from: base_of(anchor, evidence.ordinal),
+        unresolved: None,
         amount: runner::reading::Reading::absent(evidence.ordinal),
         refused: Vec::new(),
         confidence: "high".to_owned(),
@@ -234,7 +549,10 @@ fn a_repeated_ask_is_shown_from_each_passage_that_made_it() {
         ),
     );
 
-    let sorted = sort_timeline(vec![first, second], &letter_dated("3 March 2026"));
+    let sorted = sort_timeline(
+        vec![dated(first, "3 March 2026"), dated(second, "3 March 2026")],
+        &letter_dated("3 March 2026"),
+    );
 
     assert_eq!(
         sorted.len(),
@@ -342,10 +660,13 @@ fn the_timeline_is_date_ordered_with_undated_obligations_surviving_last() {
         o.kind = "response".to_owned();
         o
     };
-    let march = obligation(
-        "within 14 days",
-        "the date of this letter",
-        segment(1, "pay"),
+    let march = dated(
+        obligation(
+            "within 14 days",
+            "the date of this letter",
+            segment(1, "pay"),
+        ),
+        "3 March 2026",
     );
     let vague = {
         let mut o = obligation(
@@ -383,10 +704,13 @@ fn the_timeline_is_date_ordered_with_undated_obligations_surviving_last() {
 /// date quoted off the page is the false assurance #367 exists to stop.
 #[test]
 fn a_sorted_obligation_still_says_how_its_date_was_arrived_at() {
-    let counted = obligation(
-        "within 14 days",
-        "the date of this letter",
-        segment(1, "pay"),
+    let counted = dated(
+        obligation(
+            "within 14 days",
+            "the date of this letter",
+            segment(1, "pay"),
+        ),
+        "3 March 2026",
     );
     let written = {
         let mut o = obligation("by 12 August 2026", "12 August 2026", segment(4, "confirm"));
@@ -567,14 +891,16 @@ fn a_letter_dating_itself_all_numerically_is_read_where_its_digits_settle_the_or
 
     // The point of reading it: the relative deadline now resolves.
     let letter = vec![segment(0, "20/08/2026")];
-    let resolved = sort_timeline(
-        vec![obligation(
-            "within 7 calendar days",
-            "no particular date",
-            letter[0].clone(),
-        )],
-        &letter,
+    // The model reads the dateline as the base and its structure as
+    // seven calendar days from it; Rust checks both and counts.
+    let mut ask = obligation(
+        "within 7 calendar days",
+        "no particular date",
+        letter[0].clone(),
     );
+    ask.read = When::new(7, "days", "calendar", "letter_date");
+    ask.from = Reading::new(0, "20/08/2026");
+    let resolved = sort_timeline(vec![ask], &letter);
     assert_eq!(
         resolved[0].due.as_ref().map(|r| r.date),
         Some(date("2026-08-27"))
@@ -636,52 +962,6 @@ fn two_undated_readings_are_not_a_dispute() {
     let literal = vec![segment(0, "Dear Ms Okafor")];
 
     assert_eq!(date_dispute(&applied, &literal), None);
-}
-
-#[test]
-fn a_deadline_counted_from_a_date_you_gave_is_yours() {
-    // #412 step 4, and the test `claim.rs` asked for before `Yours`
-    // could exist. When two readings disagreed about the letter's date
-    // and a person settled it, every deadline counted from that date
-    // depends on their answer — so if one is wrong, it is wrong because
-    // their date was, not because Rust's arithmetic or the reading was.
-    // A report that called it "worked out" would be claiming arithmetic
-    // over values read off the page, which is no longer true.
-    let yours = confirmed_deadline(
-        "within 14 days",
-        "the date of this letter",
-        date("2026-03-03"),
-    )
-    .expect("a relative deadline resolves against the date you gave");
-
-    assert_eq!(yours.date, date("2026-03-17"));
-    assert_eq!(yours.kind, Kind::Yours);
-}
-
-#[test]
-fn a_date_written_on_the_page_is_unaffected_by_your_correction() {
-    // "by 12 August 2026" never depended on the letter's date, so
-    // correcting the letter's date must not restate it as yours. It is
-    // still read off the page, and still wrong only if the page was
-    // misread.
-    let written = confirmed_deadline("by 12 August 2026", "12 August 2026", date("2026-03-03"))
-        .expect("an absolute deadline resolves");
-
-    assert_eq!(written.date, date("2026-08-12"));
-    assert_eq!(written.kind, Kind::ReadAndVerified);
-}
-
-#[test]
-fn a_deadline_counted_from_a_dated_anchor_is_still_worked_out() {
-    // "within 14 days of the hearing on 1 June 2026" counts from the
-    // hearing, which is on the page. The person's date is not in this
-    // answer at all, so claiming it is theirs would be false — and
-    // would quietly widen what their correction is taken to cover.
-    let counted = confirmed_deadline("within 14 days", "1 June 2026", date("2026-03-03"))
-        .expect("a dated anchor resolves");
-
-    assert_eq!(counted.date, date("2026-06-15"));
-    assert_eq!(counted.kind, Kind::WorkedOut);
 }
 
 #[test]
@@ -776,109 +1056,53 @@ fn pointing_passage(segments: &[Segment]) -> Segment {
         .clone()
 }
 
-/// #544: a deadline that points at a table resolves against the table.
-///
-/// The v14 letter run got this passage right and was scored wrong for
-/// it. Given `"Please find our invoice ... Payment of the total is due
-/// by the date shown beside it."`, the model recorded a payment
-/// obligation and copied the deadline exactly — which is what the
-/// prompt demands of it, since the sentence contains no date to read.
-/// The bed expected the obligation on the table row instead, and the
-/// row is `"Due date 6 March 2026"`: no ask, no party, nothing a
-/// closed question about that passage alone could turn into a payment.
-/// Asking the model for one is asking it to invent, which is the harm
-/// the pack's `no_obligation` ceiling exists to stop.
-///
-/// So the ask stays where it was made and the date stays where it was
-/// printed, and the resolver is what has to cross between them. The
-/// letter is read from the committed fixture rather than retyped: what
-/// is being tested is the passage a person's letter actually produces.
+/// The due-date row the pointing passage points at.
+fn due_date_row(segments: &[Segment]) -> Segment {
+    segments
+        .iter()
+        .find(|segment| segment.text.starts_with("Due date"))
+        .expect("the due-date row")
+        .clone()
+}
+
+/// #544 on the reading shape (review of #626, Task 5): an ask that
+/// points at the page — "Payment of the total is due by the date shown
+/// beside it" — has for its deadline the date the row prints, read at
+/// that row. The ask is still scored where it was made: `evidence` is
+/// the prose passage, the row travels as `dated_by`, and the date is
+/// read-and-verified because nothing was computed. No direction word
+/// list decides any of it; the model named the row and the page
+/// vouched for the date.
 #[test]
-fn a_pointing_deadline_resolves_against_the_table_it_points_at() {
+fn a_pointing_deadline_is_the_date_its_row_prints_read_at_the_row() {
     let segments = mortise_02();
     let prose = pointing_passage(&segments);
-
-    // The v14 run's own answer for that passage, copied from the
-    // archived response rather than written to suit the test.
-    let pointing = obligation(
-        "by the date shown beside it",
-        "the date shown beside it",
-        prose,
-    );
+    let row = due_date_row(&segments);
+    let mut pointing = obligation("6 March 2026", "no particular date", prose.clone());
+    pointing.deadline = Reading::new(row.ordinal, "6 March 2026");
 
     let sorted = sort_timeline(vec![pointing], &segments);
 
     assert_eq!(
-        sorted[0].due.map(|resolved| resolved.date),
-        Some(date("2026-03-06")),
-        "the date printed beside the ask is the date a person is given: {sorted:#?}"
+        sorted[0].due.map(|r| (r.date, r.kind)),
+        Some((date("2026-03-06"), Kind::ReadAndVerified)),
+        "{sorted:#?}"
     );
-}
-
-/// #460 rule one, applied to the date this resolution invents nothing
-/// to reach: the quote must contain the value it evidences.
-///
-/// The pointing passage says "by the date shown beside it" and that is
-/// the whole of what it says — a person reading the report sees 6 March
-/// 2026 asserted, and the words offered for it contain no date at all.
-/// The row the resolver read has to travel with the claim; otherwise
-/// the fix trades a missing date for an unbacked one, which is the
-/// worse of the two.
-///
-/// It travels in its own field, not in `evidence`, and that distinction
-/// was measured rather than reasoned. Written as an extra `evidence`
-/// entry it read, to everything downstream, as *the run asserted an
-/// obligation on this row* — and replaying the v14 letter run scored
-/// all twelve due-date rows as inventions on exactly that basis. The
-/// passages in `evidence` are the ones the model was asked about; this
-/// is one Rust went and read because the answer said where to look.
-#[test]
-fn the_row_a_pointing_deadline_was_read_from_travels_with_the_claim() {
-    let segments = mortise_02();
-    let prose = pointing_passage(&segments);
-    let sorted = sort_timeline(
-        vec![obligation(
-            "by the date shown beside it",
-            "the date shown beside it",
-            prose,
-        )],
-        &segments,
-    );
-
     let dated_by = sorted[0]
         .dated_by
         .as_ref()
-        .expect("the row the date was read out of");
-    assert!(
-        dated_by.text.contains("6 March 2026"),
-        "the date a person is shown is quoted from the page it was read off: {dated_by:#?}"
-    );
-
-    let quoted: Vec<&str> = sorted[0]
-        .evidence
-        .iter()
-        .map(|segment| segment.text.as_str())
-        .collect();
+        .expect("the row travels with the claim");
+    assert!(dated_by.text.contains("6 March 2026"), "{dated_by:#?}");
+    let quoted: Vec<&str> = sorted[0].evidence.iter().map(|s| s.text.as_str()).collect();
     assert_eq!(
         quoted,
-        vec![
-            "Please find our invoice for your council tax account below. \
-Payment of the total is due by the date shown beside it."
-        ],
+        vec![prose.text.as_str()],
         "the passage the model answered about is the only one it asserted on"
     );
 }
 
-/// The refusal half. A pointing phrase is only resolvable because the
-/// page prints the date somewhere; where it does not, the honest answer
-/// is the one this pack already gives for every other phrase it cannot
-/// resolve — keep the words, stay undated, sort last (#241).
-///
-/// Without this the new rule degrades into "a letter that mentions a
-/// date beside something gets that date", which is the guessing the
-/// resolver's small closed phrase set exists to prevent.
 #[test]
-fn a_pointing_deadline_with_no_row_to_point_at_stays_undated() {
+fn a_pointing_ask_with_no_row_to_point_at_keeps_its_words_and_stays_undated() {
     let segments = vec![
         segment(0, "6 February 2026"),
         segment(
@@ -887,61 +1111,27 @@ fn a_pointing_deadline_with_no_row_to_point_at_stays_undated() {
         ),
         segment(2, "We wrote to you about this on 3 January 2026."),
     ];
+    // Nothing to point at, so the model copies the words at the ask's
+    // own passage: a day Kettle cannot read, kept as words.
     let sorted = sort_timeline(
         vec![obligation(
             "by the date shown beside it",
-            "the date shown beside it",
+            "no particular date",
             segments[1].clone(),
         )],
         &segments,
     );
-
-    assert_eq!(
-        sorted[0].due, None,
-        "no due-date row, so no date: {sorted:#?}"
-    );
-    assert_eq!(
-        sorted[0].deadline.value, "by the date shown beside it",
-        "the letter's own words survive to where a person will read them"
+    assert_eq!(sorted[0].due, None, "{sorted:#?}");
+    assert_eq!(sorted[0].deadline.value, "by the date shown beside it");
+    assert!(
+        matches!(sorted[0].unresolved, Some(Unresolved::Unsupported { .. })),
+        "{:?}",
+        sorted[0].unresolved
     );
 }
 
-/// #330's rule, which this resolution has to inherit rather than
-/// rediscover: "beside it" is a place on *this* page. A run may pool a
-/// letter and its chaser, and the second document's due-date row is
-/// beside nothing in the first — a date months wrong, presented as read
-/// off the page, which is the strongest voice the report has.
 #[test]
-fn a_pointing_deadline_cannot_reach_another_documents_due_date() {
-    let mut invoice = segment(0, "Due date 6 March 2026");
-    invoice.document = 1;
-    let chaser = segment(
-        0,
-        "Payment of the total is due by the date shown beside it.",
-    );
-    let segments = vec![chaser.clone(), invoice];
-
-    let sorted = sort_timeline(
-        vec![obligation(
-            "by the date shown beside it",
-            "the date shown beside it",
-            chaser,
-        )],
-        &segments,
-    );
-
-    assert_eq!(
-        sorted[0].due, None,
-        "the other document's due date is beside nothing here: {sorted:#?}"
-    );
-}
-
-/// The commonest shape must be untouched. A deadline that states its
-/// own date resolves from the phrase, as it always has, and never
-/// consults a row — otherwise a letter carrying both would answer with
-/// whichever the code happened to try first.
-#[test]
-fn a_deadline_that_names_its_date_ignores_the_due_date_row() {
+fn a_deadline_that_names_its_date_is_read_at_its_own_passage() {
     let segments = vec![
         segment(0, "6 February 2026"),
         segment(1, "Please confirm in writing by 20 February 2026."),
@@ -955,171 +1145,54 @@ fn a_deadline_that_names_its_date_ignores_the_due_date_row() {
         )],
         &segments,
     );
-
     assert_eq!(
-        sorted[0].due.map(|resolved| resolved.date),
+        sorted[0].due.map(|r| r.date),
         Some(date("2026-02-20")),
-        "the phrase's own date is the answer: {sorted:#?}"
+        "{sorted:#?}"
     );
+    assert!(sorted[0].dated_by.is_none(), "its own passage, not a row");
 }
 
-/// A letter is free to word the pointer however it likes, and the two
-/// halves of this bed already do: development invoices say "by the date
-/// shown beside it" and exam invoices say "by the date given against
-/// it". A rule that recognised the first and not the second would
-/// resolve the set it was written against and leave the sealed set
-/// undated, which is a fix that measures itself.
-///
-/// So the rule is stated over what the phrase *does* — name the date
-/// and point somewhere on the page — rather than over either set's
-/// wording.
+/// The sum was verified at the passage `amount.at` at read time; the
+/// sort carries that passage as `priced_by` where it is not the ask's
+/// own. Nothing is searched for where none was read (the amount finder
+/// is gone; review of #626, Task 5).
 #[test]
-fn a_pointer_is_recognised_by_what_it_does_not_by_its_wording() {
-    let row = segment(2, "Due date 6 March 2026");
-    for words in [
-        "by the date shown beside it",
-        "by the date given against it",
-        "by the date shown opposite",
-        "by the date set out below",
-    ] {
-        let prose = segment(1, "Payment of the total is due.");
-        let segments = vec![segment(0, "6 February 2026"), prose.clone(), row.clone()];
-        let sorted = sort_timeline(vec![obligation(words, words, prose)], &segments);
-        assert_eq!(
-            sorted[0].due.map(|resolved| resolved.date),
-            Some(date("2026-03-06")),
-            "{words:?} points at the row: {sorted:#?}"
-        );
-    }
-
-    // And the counter-case, which is why this cannot simply be "any
-    // phrase naming a date": a date somewhere else is not a date on
-    // this page, and the row must not be read as though it were.
-    let prose = segment(
-        1,
-        "Payment is due by the date shown on your last statement.",
-    );
-    let segments = vec![segment(0, "6 February 2026"), prose.clone(), row];
-    let sorted = sort_timeline(
-        vec![obligation(
-            "by the date shown on your last statement",
-            "no particular date",
-            prose,
-        )],
-        &segments,
-    );
-    assert_eq!(
-        sorted[0].due, None,
-        "another document's date is not beside anything here: {sorted:#?}"
-    );
-}
-
-/// #612, second half — found on the same real letter the field was
-/// built for. The ask sentence, *"Unless payment of all overdue
-/// invoices is received within 7 calendar days…"*, prints no sum; the
-/// sum sits two passages away in the letter's own row, *Amount Due
-/// 41.21 GBP*. The model answered `no amount` for its passage, which
-/// was right, and the report showed nothing, which was not what the
-/// letter said.
-///
-/// #544's shape: where a payment ask's passage prints no sum and the
-/// document labels one — an amount-due, total or balance row — Rust
-/// reads that row and it travels with the claim in `priced_by`, never
-/// in `evidence`. Nothing is computed, so it is read-and-verified.
-#[test]
-fn the_row_a_payment_asks_sum_was_read_from_travels_with_the_claim() {
+fn a_sum_read_at_a_row_travels_with_the_claim_and_an_absent_one_stays_absent() {
     let ask = segment(
-        14,
-        "All outstanding transactions are detailed below. Unless payment of all          overdue invoices is received within 7 calendar days, we may commence          immediate legal action without further notice.",
+        2,
+        "Payment of the total is due by the date shown beside it.",
     );
     let segments = vec![
-        segment(6, "20/08/2026"),
-        segment(9, "Amount Due 41.21 GBP 009422"),
+        segment(0, "6 February 2026"),
+        segment(1, "Belwood Joinery"),
         ask.clone(),
-        segment(
-            18,
-            "Transaction Details (GBP) Original (GBP) Amount Due (GBP) Invoice Number              Invoice Type Invoice Date Invoice Age",
-        ),
-        segment(19, "EXPD 30/06/2026 51 41.21 41.21 396636183"),
+        segment(3, "Total £360.00"),
     ];
-    let mut asked = obligation("within 7 calendar days", "no particular date", ask);
-    asked.amount = runner::reading::Reading::absent(asked.amount.at);
-    let sorted = sort_timeline(vec![asked], &segments);
 
-    assert_eq!(sorted[0].amount.value, "41.21 GBP");
-    let priced_by = sorted[0]
-        .priced_by
-        .as_ref()
-        .expect("the row the sum was read out of");
-    assert_eq!(priced_by.ordinal, 9);
-    assert_eq!(
-        sorted[0].evidence.len(),
-        1,
-        "the passage the model answered about is the only one it asserted on"
+    let mut priced = obligation("within 14 days", "the date of this letter", ask.clone());
+    priced.amount = Reading::new(3, "£360.00");
+    let priced = sort_timeline(vec![priced], &segments);
+    assert_eq!(priced[0].amount.value, "£360.00");
+    assert_eq!(priced[0].priced_by.as_ref().map(|s| s.ordinal), Some(3));
+
+    let mut own = obligation("within 14 days", "the date of this letter", ask.clone());
+    own.amount = Reading::new(2, "£120.00");
+    let own = sort_timeline(vec![own], &segments);
+    assert!(own[0].priced_by.is_none(), "its own passage is not a row");
+
+    let absent = sort_timeline(
+        vec![obligation("within 14 days", "the date of this letter", ask)],
+        &segments,
     );
+    assert!(
+        absent[0].amount.is_absent(),
+        "no sum read, none found: {:?}",
+        absent[0].amount
+    );
+    assert!(absent[0].priced_by.is_none());
 }
 
-/// The refusals. A sum the passage prints itself is left alone; an ask
-/// that is not a payment gets no sum; a document whose best label names
-/// two different figures is ambiguous and stays blank; and the bed's
-/// invoice table, where the labels sit mid-text after the reader took
-/// each column in turn, gives the total and not the sub total.
-#[test]
-fn a_sum_is_read_off_a_row_only_where_the_page_labels_exactly_one() {
-    let total_row = |text: &str| segment(3, text);
-    let ask = || {
-        segment(
-            2,
-            "Payment of the total is due by the date shown beside it.",
-        )
-    };
-
-    // Printed in the passage: untouched.
-    let mut own = obligation("within 14 days", "the date of this letter", ask());
-    own.amount.value = "£120.00".to_owned();
-    let own = sort_timeline(vec![own], &[ask(), total_row("Total £360.00")]);
-    assert_eq!(own[0].amount.value, "£120.00");
-    assert!(own[0].priced_by.is_none());
-
-    // Not a payment: no sum is looked for.
-    let mut reply = obligation("within 14 days", "the date of this letter", ask());
-    reply.kind = "response".to_owned();
-    reply.amount = runner::reading::Reading::absent(reply.amount.at);
-    let reply = sort_timeline(vec![reply], &[ask(), total_row("Total £360.00")]);
-    assert!(reply[0].amount.is_absent());
-
-    // Two totals: ambiguous, so blank.
-    let mut two = obligation("within 14 days", "the date of this letter", ask());
-    two.amount = runner::reading::Reading::absent(two.amount.at);
-    let two = sort_timeline(
-        vec![two],
-        &[
-            ask(),
-            total_row("Total £360.00"),
-            segment(4, "Total £400.00"),
-        ],
-    );
-    assert!(two[0].amount.is_absent());
-    assert!(two[0].priced_by.is_none());
-
-    // The bed's invoice table, read column by column.
-    let mut invoice = obligation("within 14 days", "the date of this letter", ask());
-    invoice.amount = runner::reading::Reading::absent(invoice.amount.at);
-    let invoice = sort_timeline(
-        vec![invoice],
-        &[
-            ask(),
-            total_row("Due date 6 March 2026 Sub total £300.00 VAT £60.00 Total £360.00"),
-        ],
-    );
-    assert_eq!(invoice[0].amount.value, "£360.00");
-    assert_eq!(invoice[0].priced_by.as_ref().map(|s| s.ordinal), Some(3));
-}
-
-/// *Rust verifies; it never discovers* (CLAUDE.md, 4 September 2026).
-/// The model names the passage a value lives in; Rust checks the named
-/// passage and refuses a wrong naming. No label list is consulted when
-/// a passage is named.
 #[test]
 fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
     let ask = segment(
@@ -1181,7 +1254,7 @@ fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
         ask.clone(),
     ));
     pointed.amount = runner::reading::Reading::absent(14);
-    pointed.deadline = runner::reading::Reading::new(11, "by the date below");
+    pointed.deadline = runner::reading::Reading::new(11, "27/08/2026");
     let pointed = sort_timeline(vec![pointed], &segments)[0].clone();
     assert_eq!(
         pointed.due.as_ref().map(|r| (r.date, r.kind)),
@@ -1199,4 +1272,32 @@ fn a_claim_may_name_the_passage_its_value_lives_in_and_rust_checks_it() {
     own.amount = runner::reading::Reading::absent(14);
     let own = sort_timeline(vec![own], &segments)[0].clone();
     assert!(own.priced_by.is_none());
+}
+
+/// A sum is a payment's alone (6 September 2026): a response ask
+/// carrying the letter's sum keeps its ask and loses the figure.
+#[test]
+fn a_sum_on_a_response_ask_is_dropped_as_policy() {
+    let segments = vec![
+        segment(0, "3 March 2026"),
+        segment(1, "Please pay £480.00 within 14 days."),
+        segment(2, "Please return the slip within 28 days."),
+    ];
+    let mut reply = dated(
+        obligation(
+            "within 28 days",
+            "the date of this letter",
+            segments[2].clone(),
+        ),
+        "3 March 2026",
+    );
+    reply.kind = "response".to_owned();
+    reply.amount = Reading::new(1, "£480.00");
+    let sorted = sort_timeline(vec![reply], &segments);
+    assert!(sorted[0].amount.is_absent(), "{:?}", sorted[0].amount);
+    assert_eq!(
+        sorted[0].due.map(|d| d.date),
+        Some(date("2026-03-31")),
+        "the ask stands"
+    );
 }

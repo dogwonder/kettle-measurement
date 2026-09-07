@@ -9,7 +9,14 @@
         "deadline": "within 45 days",
         "due": "2026-05-04",
         "kind": "payment",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 45,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-upland-moss-06-payment-02",
       "segment": "The sum of £68.50 falls due within 45 days of 20 March 2026. Please quote FDP-8802 when you pay.",

@@ -5,11 +5,18 @@
     {
       "expect": {
         "amount": "£180.00",
-        "anchor": "the date given against it",
-        "deadline": "by the date given against it",
+        "anchor": "no particular date",
+        "deadline": "22 July 2026",
         "due": "2026-07-22",
         "kind": "payment",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": true,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "invoice_totals-wainscot-rail-12-payment-01",
       "segment": "Our invoice for the water account is set out below. The amount shown as due should reach us by the date given against it.",

@@ -16,7 +16,6 @@ pub mod exec;
 pub mod fmt;
 pub mod kinds;
 pub mod letter_report;
-pub mod modality;
 pub mod ocr;
 pub mod packs;
 pub mod parse;

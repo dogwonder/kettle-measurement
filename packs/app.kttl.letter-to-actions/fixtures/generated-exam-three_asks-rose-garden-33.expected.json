@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-03-11",
         "kind": "payment",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "three_asks-rose-garden-33-payment-01",
       "segment": "A payment of £214.60 towards your council tax account is due within 21 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "on 14 September 2026",
         "due": "2026-09-14",
         "kind": "attendance",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-rose-garden-33-attendance-02",
       "segment": "You are required to attend a case review at our offices on 14 September 2026.",
@@ -45,7 +59,14 @@
         "deadline": "by the end of the month",
         "due": "2026-02-28",
         "kind": "response",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-rose-garden-33-response-03",
       "segment": "Please confirm your attendance in writing by the end of the month.",

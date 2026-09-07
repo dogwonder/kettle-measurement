@@ -34,7 +34,7 @@ fn perf() -> Perf {
     }
 }
 
-fn found(anchor: &str, due: Option<NaiveDate>) -> RunOutcome {
+fn found(_anchor: &str, due: Option<NaiveDate>) -> RunOutcome {
     RunOutcome {
         input: InputSeen {
             rows: 0,
@@ -52,7 +52,9 @@ fn found(anchor: &str, due: Option<NaiveDate>) -> RunOutcome {
                 party: runner::reading::Reading::new(0, "Denholm Veterinary Group".to_owned()),
                 ask: "Settle the balance".to_owned(),
                 deadline: runner::reading::Reading::new(0, "by the end of the month".to_owned()),
-                anchor: anchor.to_owned(),
+                read: runner::run::When::new(0, "none", "none", "month_end"),
+                from: runner::reading::Reading::absent(0),
+                unresolved: None,
                 amount: runner::reading::Reading::absent(0),
                 refused: Vec::new(),
                 confidence: "high".to_owned(),
@@ -87,8 +89,10 @@ fn expected() -> Expected {
                         "party": "Denholm Veterinary Group",
                         "deadline": "by the end of the month",
                         "anchor": "the date of this letter",
-                        "due": "2026-09-30"
-                    }
+                        "due": "2026-09-30",
+                        "when": { "count": 0, "unit": "none", "qualifier": "none", "counts_from": "month_end" },
+                        "pointed": false
+                      }
                 }
             ]
         }"#,

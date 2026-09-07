@@ -5,11 +5,18 @@
     {
       "expect": {
         "amount": "£390.00",
-        "anchor": "the date given against it",
-        "deadline": "by the date given against it",
+        "anchor": "no particular date",
+        "deadline": "14 September 2026",
         "due": "2026-09-14",
         "kind": "payment",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": true,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "invoice_totals-newel-post-03-payment-01",
       "segment": "Our invoice for the energy account is set out below. The amount shown as due should reach us by the date given against it.",

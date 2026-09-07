@@ -70,9 +70,9 @@ fn letter_pack(name: &str, with_gate: bool) -> PathBuf {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
                     "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" }, "read": { "type": "object", "properties": { "count": { "type": "integer" }, "unit": { "enum": ["days", "weeks", "months", "none"] }, "qualifier": { "enum": ["calendar", "clear", "working", "none"] }, "counts_from": { "enum": ["letter_date", "receipt", "named_date", "month_end", "none"] } }, "required": ["count", "unit", "qualifier", "counts_from"] }, "from": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] } }, "required": ["at", "value", "read", "from"] },
                     "anchor": { "type": "string" }
-                }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
+                }, "required": ["kind", "party", "ask", "deadline"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
             "required": ["results"] }"#,
     );
@@ -93,7 +93,9 @@ fn letter_pack(name: &str, with_gate: bool) -> PathBuf {
                 "party": "Harborne Parking Services",
                 "deadline": "within 14 days",
                 "anchor": "the date of this letter",
-                "due": "2026-03-17"
+                "due": "2026-03-17",
+                "when": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" },
+                "pointed": false
               }
             },
             {
@@ -105,7 +107,9 @@ fn letter_pack(name: &str, with_gate: bool) -> PathBuf {
                 "party": "Harborne Parking Services",
                 "deadline": "by 28 March 2026",
                 "anchor": "28 March 2026",
-                "due": "2026-03-28"
+                "due": "2026-03-28",
+                "when": { "count": 0, "unit": "none", "qualifier": "none", "counts_from": "none" },
+                "pointed": false
               }
             },
             {

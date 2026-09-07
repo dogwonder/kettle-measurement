@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-10-04",
         "kind": "payment",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "controlled-must-to-may-payment_and_response-alpine-lake-04-payment-01",
       "segment": "Please settle £54.00 for your pet health plan within 21 days of the date of this letter.",
@@ -25,7 +32,6 @@
       "id": "controlled-must-to-may-payment_and_response-alpine-lake-04-response-02",
       "segment": "You may also write to confirm that payment has been made, within 35 days of the date of this letter.",
       "strata": [
-        "any-letter",
         "payment-and-response",
         "relative-deadline",
         "multiple-obligations",

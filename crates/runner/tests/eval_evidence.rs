@@ -112,9 +112,9 @@ fn letter_pack_with(name: &str, letter: &str, expected: &str) -> PathBuf {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
                     "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" }, "read": { "type": "object", "properties": { "count": { "type": "integer" }, "unit": { "enum": ["days", "weeks", "months", "none"] }, "qualifier": { "enum": ["calendar", "clear", "working", "none"] }, "counts_from": { "enum": ["letter_date", "receipt", "named_date", "month_end", "none"] } }, "required": ["count", "unit", "qualifier", "counts_from"] }, "from": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] } }, "required": ["at", "value", "read", "from"] },
                     "anchor": { "type": "string" }
-                }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
+                }, "required": ["kind", "party", "ask", "deadline"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
             "required": ["results"] }"#,
     );
@@ -145,7 +145,9 @@ const RELATIVE_EXPECTED: &str = r#"{
         "party": "Harborne Parking Services",
         "deadline": "within 28 days",
         "anchor": "the date of this letter",
-        "due": "2026-03-31"
+        "due": "2026-03-31",
+        "when": { "count": 28, "unit": "days", "qualifier": "none", "counts_from": "letter_date" },
+        "pointed": false
       }
     }
   ]
@@ -168,8 +170,7 @@ fn answer_naming_the_anchor_by_the_deadline() -> String {
                         "kind": "payment",
                         "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Pay the balance of £40.00",
-                        "deadline": { "at": 1, "value": "within 28 days" },
-                        "anchor": "within 28 days"
+                        "deadline": { "at": 1, "value": "within 28 days", "read": { "count": 28, "unit": "days", "qualifier": "none", "counts_from": "letter_date" }, "from": { "at": 0, "value": "3 March 2026" } }
                     }]
                 },
                 { "id": 2, "segment": segments[2], "confidence": "high", "obligations": [] }
@@ -233,6 +234,8 @@ fn a_deadline_carrying_its_own_anchor_is_the_same_assertion() {
             anchor: anchor.to_owned(),
             amount: "no amount".to_owned(),
             due: due.map(|d| NaiveDate::parse_from_str(d, "%Y-%m-%d").expect("a date")),
+            when: Some(support::authored_when(deadline, anchor).0),
+            pointed: support::authored_when(deadline, anchor).1,
         })
     };
 
@@ -282,6 +285,121 @@ fn a_deadline_carrying_its_own_anchor_is_the_same_assertion() {
     );
 }
 
+/// The substituted-anchor twin of 6 September 2026: "within 14 days of
+/// the invoice date" on a letter that prints no invoice date. The model
+/// read exactly the structure the bed authored — fourteen days, counted
+/// from a named day the page never gives — and was marked wrong on both
+/// backends because an undated deadline's identity compared the copied
+/// phrase, and the bed had written "within 14 days" where the model
+/// copied the fuller words the prompt's own example teaches. A period
+/// with structure on both sides is the same assertion by its count,
+/// unit, qualifier and base, whatever words it was copied in; the
+/// phrase check is `reading::check`'s job and stays there. A deadline
+/// with no period at all is still shown in the letter's words, so the
+/// words remain its identity.
+#[test]
+fn an_undated_period_is_the_same_assertion_by_its_structure_not_its_words() {
+    use chrono::NaiveDate;
+    use runner::eval::{ExpectedObligation, Extracted};
+    use runner::run::When;
+
+    let when = |count: u64, unit: &str, qualifier: &str, counts_from: &str| When {
+        count,
+        unit: unit.to_owned(),
+        qualifier: qualifier.to_owned(),
+        counts_from: counts_from.to_owned(),
+    };
+    let obligation = |deadline: &str, anchor: &str, due: Option<&str>, read: When| {
+        Extracted::Obligation(ExpectedObligation {
+            kind: "response".to_owned(),
+            party: "Harborne Parking Services".to_owned(),
+            deadline: deadline.to_owned(),
+            anchor: anchor.to_owned(),
+            amount: "no amount".to_owned(),
+            due: due.map(|d| NaiveDate::parse_from_str(d, "%Y-%m-%d").expect("a date")),
+            when: Some(read),
+            pointed: false,
+        })
+    };
+
+    // The bed's words and the model's words for one reading.
+    let authored = obligation(
+        "within 14 days",
+        "the invoice date",
+        None,
+        when(14, "days", "none", "named_date"),
+    );
+    let copied = obligation(
+        "within 14 days of the invoice date",
+        "",
+        None,
+        when(14, "days", "none", "named_date"),
+    );
+    assert!(
+        authored.same_assertion_as(&copied),
+        "the same period from the same base is one assertion in either wording"
+    );
+
+    // A changed count is a different deadline, undated or not.
+    let fifteen = obligation(
+        "within 15 days of the invoice date",
+        "",
+        None,
+        when(15, "days", "none", "named_date"),
+    );
+    assert!(
+        !authored.same_assertion_as(&fifteen),
+        "fifteen days is not fourteen, whatever the words"
+    );
+
+    // A changed base is a different deadline: the clean source counts
+    // from the letter's own date, the twin from a day the page never
+    // names, and that is exactly the change the twin exists to show.
+    let from_the_letter = obligation(
+        "within 14 days",
+        "the date of this letter",
+        None,
+        when(14, "days", "none", "letter_date"),
+    );
+    assert!(
+        !authored.same_assertion_as(&from_the_letter),
+        "the same count from a different base is a different assertion"
+    );
+
+    // A base the page dates but Rust refuses to count from (working
+    // days) is still compared by the day it names.
+    let monday = obligation(
+        "within 5 working days of 24 August 2026",
+        "",
+        None,
+        when(5, "days", "working", "named_date"),
+    );
+    let tuesday = obligation(
+        "within 5 working days",
+        "25 August 2026",
+        None,
+        when(5, "days", "working", "named_date"),
+    );
+    assert!(
+        !monday.same_assertion_as(&tuesday),
+        "a different named day is a different assertion, dated or not"
+    );
+
+    // No period at all: the words are what a person is shown, so the
+    // words stay the identity.
+    let soon = obligation(
+        "as soon as you can",
+        "",
+        None,
+        when(0, "none", "none", "none"),
+    );
+    let promptly = obligation("promptly", "", None, when(0, "none", "none", "none"));
+    assert!(
+        !soon.same_assertion_as(&promptly),
+        "an ask with no period is still shown, and compared, in the letter's words"
+    );
+}
+
 /// The model reads a payment obligation into the passage that says the
 /// account is settled, quoting the settled passage itself as evidence.
 fn answer_asserting_payment_from_the_negation() -> String {
@@ -298,8 +416,7 @@ fn answer_asserting_payment_from_the_negation() -> String {
                         "kind": "payment",
                         "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Pay your account",
-                        "deadline": { "at": 1, "value": "at this time" },
-                        "anchor": "the date of this letter"
+                        "deadline": { "at": 1, "value": "at this time", "read": { "count": 0, "unit": "none", "qualifier": "none", "counts_from": "none" }, "from": { "at": 1, "value": "" } }
                     }]
                 },
                 { "id": 2, "segment": segments[2], "confidence": "high", "obligations": [] }
@@ -760,9 +877,9 @@ fn derivation_pack(name: &str, days: u32) -> PathBuf {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
                     "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" }, "read": { "type": "object", "properties": { "count": { "type": "integer" }, "unit": { "enum": ["days", "weeks", "months", "none"] }, "qualifier": { "enum": ["calendar", "clear", "working", "none"] }, "counts_from": { "enum": ["letter_date", "receipt", "named_date", "month_end", "none"] } }, "required": ["count", "unit", "qualifier", "counts_from"] }, "from": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] } }, "required": ["at", "value", "read", "from"] },
                     "anchor": { "type": "string" }
-                }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
+                }, "required": ["kind", "party", "ask", "deadline"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
             "required": ["results"] }"#,
     );
@@ -781,8 +898,10 @@ fn derivation_pack(name: &str, days: u32) -> PathBuf {
                     "party": "Harborne Parking Services",
                     "deadline": "within 14 days",
                     "anchor": "the date of this letter",
-                    "due": "2026-03-17"
-                },
+                    "due": "2026-03-17",
+                    "when": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" },
+                    "pointed": false
+                  },
                 "evidence": {
                     "derivation": { "from": "2026-03-03", "op": "add_days", "days": days }
                 }
@@ -806,8 +925,7 @@ fn answer_reading_the_payment() -> String {
                     "kind": "payment",
                     "party": { "at": 1, "value": "Harborne Parking Services" },
                     "ask": "Pay £120.00",
-                    "deadline": { "at": 1, "value": "within 14 days" },
-                    "anchor": "the date of this letter"
+                    "deadline": { "at": 1, "value": "within 14 days", "read": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" }, "from": { "at": 0, "value": "3 March 2026" } }
                 }] },
                 { "id": 2, "segment": segments[2], "confidence": "high", "obligations": [] }
             ]

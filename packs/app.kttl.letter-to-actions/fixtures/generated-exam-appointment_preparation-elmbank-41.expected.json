@@ -9,7 +9,14 @@
         "deadline": "for 20 November 2026 at 10.40am",
         "due": "2026-11-20",
         "kind": "attendance",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-elmbank-41-attendance-01",
       "segment": "An appointment concerning your membership has been arranged with Eastvale Library Service for 20 November 2026 at 10.40am.",
@@ -34,7 +41,14 @@
         "deadline": "ahead of the visit",
         "due": null,
         "kind": "other",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-elmbank-41-other-03",
       "segment": "You must arrive ten minutes ahead of the stated time and prepare a written list of the points you want to raise ahead of the visit.",
@@ -59,7 +73,14 @@
         "deadline": "on arrival",
         "due": null,
         "kind": "other",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-elmbank-41-other-05",
       "segment": "You must use the side entrance and hand in the completed form on arrival.",

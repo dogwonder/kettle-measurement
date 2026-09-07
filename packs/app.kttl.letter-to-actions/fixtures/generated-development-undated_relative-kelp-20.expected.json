@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": null,
         "kind": "response",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-kelp-20-response-00",
       "segment": "Please return the enclosed form about your energy account within 42 days.",

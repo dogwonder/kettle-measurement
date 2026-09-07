@@ -55,6 +55,21 @@ pub fn write(
             path.display(),
         ));
     }
+    // A run that could not read part of the bed is not a measurement of
+    // the bed (#256), and a tier is the sentence the model-manager
+    // screen quotes about it. Refused here, before anything is written:
+    // on 6 September 2026 a run built without the `pdf` feature wrote a
+    // v19 row from 83 of 84 fixtures and only then refused its baseline.
+    let missing = super::baseline::unrunnable_in(reports);
+    if !missing.is_empty() {
+        return Err(format!(
+            "This run could not read {} of the bed's fixtures, so it is not a measurement of \
+             the bed and must not be recorded as a tier:\n  {}\nInstall what reads them (a PDF \
+             fixture needs the `pdf` feature and a pdfium directory) and record again.",
+            missing.len(),
+            missing.join("\n  ")
+        ));
+    }
 
     let mut file = match read(&path)? {
         Some(existing) => existing,

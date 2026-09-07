@@ -9,7 +9,14 @@
         "deadline": "within 28 days",
         "due": null,
         "kind": "response",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-saffron-28-response-00",
       "segment": "Please return the enclosed form about your estate matter within 28 days.",

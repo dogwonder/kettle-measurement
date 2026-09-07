@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-01-26",
         "kind": "payment",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "three_asks-quiet-river-08-payment-01",
       "segment": "A payment of £120.00 towards your parking charge is due within 21 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "on 19 February 2026",
         "due": "2026-02-19",
         "kind": "attendance",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-quiet-river-08-attendance-02",
       "segment": "You are required to attend a case review at our offices on 19 February 2026.",
@@ -45,7 +59,14 @@
         "deadline": "by the end of the month",
         "due": "2026-01-31",
         "kind": "response",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-quiet-river-08-response-03",
       "segment": "Please confirm your attendance in writing by the end of the month.",

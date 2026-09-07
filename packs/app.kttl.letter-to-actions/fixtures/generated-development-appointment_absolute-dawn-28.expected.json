@@ -9,7 +9,14 @@
         "deadline": "on 7 October 2026",
         "due": "2026-10-07",
         "kind": "attendance",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-dawn-28-attendance-01",
       "segment": "You have an appointment about your estate matter at Trentham & Yale Solicitors on 7 October 2026. Please arrive ten minutes early and bring this letter with you.",

@@ -76,10 +76,9 @@ fn letter_pack(name: &str) -> PathBuf {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
                     "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
-                    "anchor": { "type": "string" },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" }, "read": { "type": "object", "properties": { "count": { "type": "integer" }, "unit": { "enum": ["days", "weeks", "months", "none"] }, "qualifier": { "enum": ["calendar", "clear", "working", "none"] }, "counts_from": { "enum": ["letter_date", "receipt", "named_date", "month_end", "none"] } }, "required": ["count", "unit", "qualifier", "counts_from"] }, "from": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] } }, "required": ["at", "value", "read", "from"] },
                     "amount": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] }
-                }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
+                }, "required": ["kind", "party", "ask", "deadline"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
             "required": ["results"] }"#,
     );
@@ -110,8 +109,7 @@ fn obligations_answers() -> Vec<(&'static str, String)> {
                             "kind": "payment",
                             "party": { "at": first + 1, "value": party },
                             "ask": ask,
-                            "deadline": { "at": first + 1, "value": "within 14 days" },
-                            "anchor": "the date of this letter"
+                            "deadline": { "at": first + 1, "value": "within 14 days", "read": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" }, "from": { "at": first, "value": lines[0] } }
                         }]
                     }
                 ]
@@ -216,8 +214,7 @@ fn ordered_files_are_one_letter_and_keep_their_page_numbers() {
                         "kind": "payment",
                         "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Pay £120.00",
-                        "deadline": { "at": 1, "value": "within 14 days" },
-                        "anchor": "the date of this letter"
+                        "deadline": { "at": 1, "value": "within 14 days", "read": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" }, "from": { "at": 0, "value": "12 March 2026" } }
                     }] }
                 ]
             })
@@ -271,7 +268,9 @@ fn identical_asks_in_two_documents_are_both_shown_in_document_order() {
         party: runner::reading::Reading::new(0, "Harborne Parking Services".to_owned()),
         ask: "Pay £120.00".to_owned(),
         deadline: runner::reading::Reading::new(0, "by 12 August 2026".to_owned()),
-        anchor: "12 August 2026".to_owned(),
+        read: runner::run::When::default(),
+        from: runner::reading::Reading::new(0, "12 August 2026".to_owned()),
+        unresolved: None,
         amount: runner::reading::Reading::absent(0),
         refused: Vec::new(),
         confidence: "high".to_owned(),
@@ -436,7 +435,7 @@ fn a_named_passage_outside_the_batch_answered_is_refused() {
     let ask = |id: usize, segment: &str, party: &str, amount: serde_json::Value| {
         let mut obligation = serde_json::json!({
             "kind": "payment", "party": { "at": id, "value": party }, "ask": "Pay what is owed",
-            "deadline": { "at": id, "value": "within 14 days" }, "anchor": "the date of this letter",
+            "deadline": { "at": id, "value": "within 14 days", "read": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" }, "from": { "at": id - 1, "value": "20 June 2026" } },
         });
         for (field, value) in amount.as_object().expect("amount fields") {
             obligation[field] = value.clone();
@@ -591,7 +590,7 @@ fn ask_result(
 fn payment(ask: &str, amount_from: usize) -> serde_json::Value {
     serde_json::json!({
         "kind": "payment", "party": { "at": 1, "value": "Selly Oak Water" }, "ask": ask,
-        "deadline": { "at": 1, "value": "within 14 days" }, "anchor": "the date of this letter",
+        "deadline": { "at": 1, "value": "within 14 days", "read": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" }, "from": { "at": 0, "value": "20 June 2026" } },
         "amount": { "at": amount_from, "value": "£80.00" },
     })
 }
@@ -684,10 +683,15 @@ fn a_pairing_retry_answer_is_checked_against_the_retry_request() {
         "a sum read off a row the retry never showed"
     );
     assert!(water.priced_by.is_none());
-    assert_eq!(
-        water.due.map(|due| due.date.to_string()),
-        Some("2026-07-04".to_owned()),
-        "the ask itself is untouched"
+    // The base the period counts from is a reading too, and the retry
+    // never showed the dateline either: the ask stands, undated, with
+    // the refusal beside it — a cost of the window rule the re-ask
+    // design owes an answer to (review of #626, Task 5).
+    assert_eq!(water.due, None, "the ask itself stands, undated");
+    assert!(
+        water.refused.iter().any(|r| r.field == "from"),
+        "the base was refused, not invented: {:?}",
+        water.refused
     );
     assert_eq!(passage_shown(&outcome, 1, 3), Some(CheckOutcome::Failed));
 }

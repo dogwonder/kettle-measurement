@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": null,
         "kind": "response",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-maple-22-response-00",
       "segment": "Please return the enclosed form about your membership within 21 days.",

@@ -9,7 +9,14 @@
         "deadline": "for 10 February 2026 at 9.10am",
         "due": "2026-02-10",
         "kind": "attendance",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-nightshade-37-attendance-01",
       "segment": "Your appointment about your parking charge with Harborne Parking Services is booked for 10 February 2026 at 9.10am.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-nightshade-37-other-03",
       "segment": "Please arrive in good time and bring the item this enquiry concerns with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-nightshade-37-other-05",
       "segment": "Please come to the desk marked Appointments, and ask your bank for a statement covering the last three months before your appointment.",

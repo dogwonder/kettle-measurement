@@ -9,7 +9,14 @@
         "deadline": "on 9 December 2026",
         "due": "2026-12-09",
         "kind": "attendance",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-night-fern-13-attendance-01",
       "segment": "We have booked your tenancy account appointment with Ashcombe Housing Trust on 9 December 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

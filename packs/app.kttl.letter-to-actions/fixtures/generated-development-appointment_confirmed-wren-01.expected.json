@@ -9,7 +9,14 @@
         "deadline": "on 17 October 2026 at 9.10am",
         "due": "2026-10-17",
         "kind": "attendance",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-wren-01-attendance-01",
       "segment": "This letter confirms your appointment about your parking charge with Harborne Parking Services on 17 October 2026 at 9.10am.",

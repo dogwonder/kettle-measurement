@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-05-19",
         "kind": "payment",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-iron-gate-35-payment-01",
       "segment": "Please settle £480.00 for your estate matter within 21 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "within 35 days",
         "due": "2026-06-02",
         "kind": "response",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-iron-gate-35-response-02",
       "segment": "You must also write to confirm that payment has been made, within 35 days of the date of this letter.",

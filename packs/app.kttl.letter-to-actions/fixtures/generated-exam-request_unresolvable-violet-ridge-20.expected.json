@@ -9,7 +9,14 @@
         "deadline": "as soon as you are able",
         "due": null,
         "kind": "response",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-violet-ridge-20-response-01",
       "segment": "We would be grateful if you could send a meter reading for your parking charge as soon as you are able.",

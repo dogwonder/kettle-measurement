@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-08-30",
         "kind": "payment",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-saffron-32-payment-01",
       "segment": "Our records show that energy account of £142.75 remains outstanding. Please pay £142.75 within 14 days of the date of this letter.",

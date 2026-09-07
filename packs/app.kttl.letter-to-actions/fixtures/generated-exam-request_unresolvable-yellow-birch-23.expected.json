@@ -9,7 +9,14 @@
         "deadline": "as soon as you are able",
         "due": null,
         "kind": "response",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-yellow-birch-23-response-01",
       "segment": "We would be grateful if you could send a meter reading for your estate matter as soon as you are able.",

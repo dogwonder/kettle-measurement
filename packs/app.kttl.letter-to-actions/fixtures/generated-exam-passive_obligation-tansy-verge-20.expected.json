@@ -9,7 +9,14 @@
         "deadline": "within 49 days",
         "due": "2026-02-27",
         "kind": "response",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 49,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-tansy-verge-20-response-01",
       "segment": "Confirmation that the parking charge details are correct must be returned within 49 days of the date of this letter.",

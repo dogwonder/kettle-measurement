@@ -9,7 +9,14 @@
         "deadline": "on 11 February 2026",
         "due": "2026-02-11",
         "kind": "attendance",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-harbour-08-attendance-01",
       "segment": "You have an appointment about your energy account at Cranleigh Energy on 11 February 2026. Please arrive ten minutes early and bring this letter with you.",

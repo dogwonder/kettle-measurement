@@ -9,7 +9,14 @@
         "deadline": "for 16 August 2026 at 10.40am",
         "due": "2026-08-16",
         "kind": "attendance",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-eyebright-54-attendance-01",
       "segment": "Your appointment about your tenancy account with Ashcombe Housing Trust is booked for 16 August 2026 at 10.40am.",
@@ -34,7 +41,14 @@
         "deadline": "when you come in",
         "due": null,
         "kind": "other",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-eyebright-54-other-03",
       "segment": "Please come to the reception on the ground floor first, and bring your last three statements when you come in.",
@@ -59,7 +73,14 @@
         "deadline": "before you attend",
         "due": null,
         "kind": "other",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-eyebright-54-other-05",
       "segment": "Please switch your telephone off in the waiting area, and arrange an interpreter through the booking line before you attend.",

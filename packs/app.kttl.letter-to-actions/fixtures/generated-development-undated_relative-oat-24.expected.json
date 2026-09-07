@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": null,
         "kind": "response",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-oat-24-response-00",
       "segment": "Please return the enclosed form about your case file within 35 days.",

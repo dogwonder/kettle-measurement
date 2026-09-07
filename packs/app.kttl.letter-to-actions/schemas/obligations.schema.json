@@ -58,15 +58,68 @@
                     },
                     "value": {
                       "type": "string"
+                    },
+                    "read": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "unit": {
+                          "enum": [
+                            "days",
+                            "weeks",
+                            "months",
+                            "none"
+                          ]
+                        },
+                        "qualifier": {
+                          "enum": [
+                            "calendar",
+                            "clear",
+                            "working",
+                            "none"
+                          ]
+                        },
+                        "counts_from": {
+                          "enum": [
+                            "letter_date",
+                            "receipt",
+                            "named_date",
+                            "month_end",
+                            "none"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "count",
+                        "unit",
+                        "qualifier",
+                        "counts_from"
+                      ]
+                    },
+                    "from": {
+                      "type": "object",
+                      "properties": {
+                        "at": {
+                          "type": "integer"
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "at",
+                        "value"
+                      ]
                     }
                   },
                   "required": [
                     "at",
-                    "value"
+                    "value",
+                    "read",
+                    "from"
                   ]
-                },
-                "anchor": {
-                  "type": "string"
                 },
                 "amount": {
                   "type": "object",
@@ -89,7 +142,6 @@
                 "party",
                 "ask",
                 "deadline",
-                "anchor",
                 "amount"
               ]
             }

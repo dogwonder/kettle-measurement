@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-07-24",
         "kind": "payment",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "three_asks-kite-field-02-payment-01",
       "segment": "A payment of £188.20 towards your policy renewal is due within 21 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "on 15 August 2026",
         "due": "2026-08-15",
         "kind": "attendance",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-kite-field-02-attendance-02",
       "segment": "You are required to attend a case review at our offices on 15 August 2026.",
@@ -45,7 +59,14 @@
         "deadline": "by the end of the month",
         "due": "2026-07-31",
         "kind": "response",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-kite-field-02-response-03",
       "segment": "Please confirm your attendance in writing by the end of the month.",

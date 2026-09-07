@@ -9,7 +9,14 @@
         "deadline": "for 20 September 2026 at 12.00pm",
         "due": "2026-09-20",
         "kind": "attendance",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-coppice-27-attendance-01",
       "segment": "An appointment concerning your energy account has been arranged with Cranleigh Energy for 20 September 2026 at 12.00pm.",
@@ -34,7 +41,14 @@
         "deadline": "ahead of the visit",
         "due": null,
         "kind": "other",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-coppice-27-other-03",
       "segment": "You must make a note of the dates you spent away ahead of the visit.",
@@ -59,7 +73,14 @@
         "deadline": "on arrival",
         "due": null,
         "kind": "other",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-coppice-27-other-05",
       "segment": "You must hand over the completed consent form on arrival.",

@@ -9,7 +9,14 @@
         "deadline": "for 25 October 2026 at 2.15pm",
         "due": "2026-10-25",
         "kind": "attendance",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-dunlin-04-attendance-01",
       "segment": "An appointment concerning your pet health plan has been arranged with Denholm Veterinary Group for 25 October 2026 at 2.15pm.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-dunlin-04-other-03",
       "segment": "You must request a written summary from your previous provider before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-dunlin-04-other-05",
       "segment": "You must book an interpreter through the office in advance.",

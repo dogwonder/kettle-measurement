@@ -9,7 +9,14 @@
         "deadline": "for 17 February 2027 at 5.30pm",
         "due": "2027-02-17",
         "kind": "attendance",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-kingfern-60-attendance-01",
       "segment": "Your appointment about your case file with Grantley Legal Aid is booked for 17 February 2027 at 5.30pm.",
@@ -34,7 +41,14 @@
         "deadline": "when you come in",
         "due": null,
         "kind": "other",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-kingfern-60-other-03",
       "segment": "Please arrive promptly, and bring the completed consent form with you when you come in.",
@@ -59,7 +73,14 @@
         "deadline": "before you attend",
         "due": null,
         "kind": "other",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-kingfern-60-other-05",
       "segment": "Please allow extra time if you are travelling by bus, and make a note of the dates you were away before you attend.",

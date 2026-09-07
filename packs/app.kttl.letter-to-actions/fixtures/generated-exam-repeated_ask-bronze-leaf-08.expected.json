@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-01-26",
         "kind": "payment",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-bronze-leaf-08-payment-01",
       "segment": "Payment of £120.00 towards your parking charge is required within 21 days of the date of this letter.",
@@ -26,7 +33,14 @@
         "deadline": "within 21 days",
         "due": "2026-01-26",
         "kind": "payment",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-bronze-leaf-08-payment-02",
       "segment": "As a reminder, the sum of £120.00 must reach us within 21 days of the date of this letter.",

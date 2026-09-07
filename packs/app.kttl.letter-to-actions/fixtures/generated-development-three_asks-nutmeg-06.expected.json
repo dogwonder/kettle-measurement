@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-07-10",
         "kind": "payment",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "three_asks-nutmeg-06-payment-01",
       "segment": "Please pay £310.00 towards your tenancy account within 14 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "on 10 January 2026",
         "due": "2026-01-10",
         "kind": "attendance",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-nutmeg-06-attendance-02",
       "segment": "You must attend a review meeting at our offices on 10 January 2026.",
@@ -45,7 +59,14 @@
         "deadline": "by the end of the month",
         "due": "2026-06-30",
         "kind": "response",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-nutmeg-06-response-03",
       "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",

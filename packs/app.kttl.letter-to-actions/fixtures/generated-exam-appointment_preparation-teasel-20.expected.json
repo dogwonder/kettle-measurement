@@ -9,7 +9,14 @@
         "deadline": "for 6 February 2026 at 2.15pm",
         "due": "2026-02-06",
         "kind": "attendance",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-teasel-20-attendance-01",
       "segment": "An appointment concerning your parking charge has been arranged with Harborne Parking Services for 6 February 2026 at 2.15pm.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-teasel-20-other-03",
       "segment": "You must register for an online account before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-teasel-20-other-05",
       "segment": "You must order a replacement card in advance.",

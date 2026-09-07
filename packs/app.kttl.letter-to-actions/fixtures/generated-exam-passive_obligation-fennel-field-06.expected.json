@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-12-14",
         "kind": "payment",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-fennel-field-06-payment-01",
       "segment": "Payment of £68.50 must be received within 21 days of the date of this letter.",

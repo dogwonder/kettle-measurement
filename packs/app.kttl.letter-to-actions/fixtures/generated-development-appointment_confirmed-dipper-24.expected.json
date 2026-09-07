@@ -9,7 +9,14 @@
         "deadline": "on 2 March 2026 at 5.30pm",
         "due": "2026-03-02",
         "kind": "attendance",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-dipper-24-attendance-01",
       "segment": "This letter confirms your appointment about your case file with Grantley Legal Aid on 2 March 2026 at 5.30pm.",

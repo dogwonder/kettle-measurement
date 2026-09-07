@@ -9,7 +9,14 @@
         "deadline": "within 45 days",
         "due": "2026-03-12",
         "kind": "payment",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 45,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-silver-wood-28-payment-02",
       "segment": "The sum of £54.00 falls due within 45 days of 26 January 2026. Please quote DVG-1180 when you pay.",

@@ -9,7 +9,14 @@
         "deadline": "on 25 October 2026",
         "due": "2026-10-25",
         "kind": "attendance",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-lemon-grove-11-attendance-01",
       "segment": "We have booked your estate matter appointment with Trentham & Yale Solicitors on 25 October 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

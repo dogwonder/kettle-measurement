@@ -9,7 +9,14 @@
         "deadline": "for 21 March 2026 at 3.50pm",
         "due": "2026-03-21",
         "kind": "attendance",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-clover-26-attendance-01",
       "segment": "Your appointment about your council tax account with Kelsford Borough Council is booked for 21 March 2026 at 3.50pm.",
@@ -34,7 +41,14 @@
         "deadline": "when you come in",
         "due": null,
         "kind": "other",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-clover-26-other-03",
       "segment": "Please bring the original certificate rather than a photocopy when you come in.",
@@ -59,7 +73,14 @@
         "deadline": "before you attend",
         "due": null,
         "kind": "other",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-clover-26-other-05",
       "segment": "Please register for an online account before you attend.",

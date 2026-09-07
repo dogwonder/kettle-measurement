@@ -9,7 +9,14 @@
         "deadline": "as soon as you are able",
         "due": null,
         "kind": "response",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-dew-garden-27-response-01",
       "segment": "We would be grateful if you could send a meter reading for your energy account as soon as you are able.",

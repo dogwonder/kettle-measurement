@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-03-31",
         "kind": "payment",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-saffron-15-payment-01",
       "segment": "The balance on your annual review is £0.00. Please settle it by the end of the month.",

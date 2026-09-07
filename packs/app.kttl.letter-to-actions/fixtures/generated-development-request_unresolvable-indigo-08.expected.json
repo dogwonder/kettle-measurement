@@ -9,7 +9,14 @@
         "deadline": "at your earliest convenience",
         "due": null,
         "kind": "response",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-indigo-08-response-01",
       "segment": "Please send us a meter reading for your energy account at your earliest convenience.",

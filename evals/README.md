@@ -1,7 +1,9 @@
 # evals/
 
-The runner scores at version 17 (#581, 30 August 2026), and the
-`baseline-v17-*.json` files below are the floors recorded under it.
+The runner scores at version 19 (#625, 6 September 2026); the letter
+pack's floor under it is `baseline-v19-letter.json`, and the
+`baseline-v17-*.json` files below are the floors the assurance
+registry still cites.
 Before a prompt edit, write a fresh baseline under the current scoring
 version, then compare the edited prompt against that exact file — and
 on the same backend it was recorded on, since #596 (2 September 2026)
@@ -10,11 +12,25 @@ it refuses a scoring-version or bed mismatch.
 
 ## What is in this directory
 
-- `baseline-v17-letter.json` — the letter pack's current floor:
+- `baseline-v19-letter.json` — the letter pack's floor under scoring
+  v19: Qwen3.5-4B on the development bed, `--runs 3`, recorded
+  7 September 2026 on a rented RTX 4090 (CUDA; verdict **FAIL**,
+  pooled 0.84). The `no_obligation` ceiling clears, 0 of 100; the
+  `obligation` ceiling reads 5 of 251 against a bar that admits none:
+  three anchored payments whose named day the 4B copies as the
+  deadline, one zero balance returned with no sum, and one twin that
+  flipped between cards. Three-asks and undated-relative both 1.00.
+  The three repeats were byte-identical. Recorded on CUDA, so it
+  compares against pod runs only and never fills `tiers.json`; the
+  recording is `kettle-runs/2026-09-07-letter-qwen3.5-4b-v19-runs3-pod4090`,
+  with the two earlier v19 pod runs archived beside it.
+- `baseline-v18-letter.json` — the v18 floor, recorded 3 September
+  2026 on the M1 Pro (Metal; PASS, pooled 0.83). Refused by the runner
+  since v19; kept at its path.
+- `baseline-v17-letter.json` — the letter pack's v17 floor:
   Qwen3.5-4B on the development bed, scoring v17, recorded 31 August
-  2026 on the M1 Pro (Metal; verdict PASS). This is the file a prompt
-  edit is compared against, and the evidence `letter-harm-ceilings`
-  stands on. Recorded on Metal, so it compares against local runs; a
+  2026 on the M1 Pro (Metal; verdict PASS). Refused by the runner
+  since v18, and still the evidence `letter-harm-ceilings` cites. Recorded on Metal, so it compares against local runs; a
   pod run needs a pod-recorded baseline.
 - `baseline-v17-renewal.json` — the renewal pack's current floor:
   Qwen3.5-4B on the development bed, scoring v17, recorded 30 August
@@ -94,6 +110,17 @@ recordings go to the rented GPU; tiers stay local, being a sentence
 about somebody's own laptop; and the M1 Pro keeps what ships on it —
 the packaged app, real letters, and a local re-run against a local
 baseline as the double-check of a pod verdict that gates a claim.
+
+**The merge bar is the pod baseline; the tier is the release bar**
+(7 September 2026, #628). A scoring or prompt change merges on a pod
+run with `--runs 3` that clears the ceilings. The local `tiers.json`
+row is owed before the next app build, since the model-manager screen
+and a fresh install read it, and not before the merge; until it lands
+the floor is staged with a date in `declared_tiers.rs` and the app's
+committed-verdict test, and the stage fails the day a passing row
+appears. A withdrawn pack's floor is never required, and `--write-tiers`
+refuses a run that could not read the whole bed (a PDF fixture needs
+`--features pdf`), in the same voice as `--write-baseline`.
 
 Running a bed on rented hardware — which box, which credentials, and
 what a cross-machine measurement does and does not license — is

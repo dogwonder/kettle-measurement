@@ -9,7 +9,14 @@
         "deadline": "at your earliest convenience",
         "due": null,
         "kind": "response",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-cedar-02-response-01",
       "segment": "Please send us a meter reading for your council tax account at your earliest convenience.",

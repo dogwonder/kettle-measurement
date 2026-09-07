@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": null,
         "kind": "response",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-kite-field-19-response-00",
       "segment": "The enclosed form about your case file should be completed and returned within 42 days.",

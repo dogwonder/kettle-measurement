@@ -9,7 +9,14 @@
         "deadline": "within 28 days",
         "due": null,
         "kind": "response",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-iron-gate-17-response-00",
       "segment": "The enclosed form about your membership should be completed and returned within 28 days.",

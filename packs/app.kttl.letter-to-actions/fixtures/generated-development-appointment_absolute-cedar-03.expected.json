@@ -9,7 +9,14 @@
         "deadline": "on 12 March 2026",
         "due": "2026-03-12",
         "kind": "attendance",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-cedar-03-attendance-01",
       "segment": "You have an appointment about your annual review at Marlow Ridge Surgery on 12 March 2026. Please arrive ten minutes early and bring this letter with you.",

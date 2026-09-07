@@ -9,7 +9,14 @@
         "deadline": "for 8 May 2026 at 4.05pm",
         "due": "2026-05-08",
         "kind": "attendance",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-betony-51-attendance-01",
       "segment": "Your appointment about your annual review with Marlow Ridge Surgery is booked for 8 May 2026 at 4.05pm.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-betony-51-other-03",
       "segment": "Please arrive ten minutes early and bring a list of the questions you want to raise with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-betony-51-other-05",
       "segment": "Please use the side entrance, and obtain a copy of your last statement before your appointment.",

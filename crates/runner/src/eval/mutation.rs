@@ -885,8 +885,12 @@ fn apply(
                 "kind": "payment",
                 "party": { "at": own, "value": "An unnamed party" },
                 "ask": "Pay an amount this passage never asked for",
-                "deadline": { "at": own, "value": "within 7 days" },
-                "anchor": "the date of this letter",
+                "deadline": {
+                    "at": own,
+                    "value": "within 7 days",
+                    "read": { "count": 7, "unit": "days", "qualifier": "none", "counts_from": "letter_date" },
+                    "from": { "at": own, "value": "" }
+                },
                 "amount": { "at": own, "value": "" }
             });
             if let Some(obligations) =

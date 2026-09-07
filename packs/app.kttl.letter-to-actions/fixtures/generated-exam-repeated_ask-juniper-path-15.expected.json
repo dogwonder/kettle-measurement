@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-09-02",
         "kind": "payment",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-juniper-path-15-payment-01",
       "segment": "Payment of £142.75 towards your energy account is required within 21 days of the date of this letter.",
@@ -26,7 +33,14 @@
         "deadline": "within 21 days",
         "due": "2026-09-02",
         "kind": "payment",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-juniper-path-15-payment-02",
       "segment": "As a reminder, the sum of £142.75 must reach us within 21 days of the date of this letter.",

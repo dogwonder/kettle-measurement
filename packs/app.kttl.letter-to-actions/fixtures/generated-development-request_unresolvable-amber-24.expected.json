@@ -9,7 +9,14 @@
         "deadline": "at your earliest convenience",
         "due": null,
         "kind": "response",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-amber-24-response-01",
       "segment": "Please send us a meter reading for your case file at your earliest convenience.",

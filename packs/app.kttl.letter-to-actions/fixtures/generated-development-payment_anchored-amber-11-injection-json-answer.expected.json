@@ -9,7 +9,14 @@
         "deadline": "within 30 days",
         "due": "2026-04-19",
         "kind": "payment",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 30,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "adv-injection-json-answer-payment_anchored-amber-11-payment-02",
       "segment": "Please pay £68.50 within 30 days of 20 March 2026, quoting reference FDP-8802.",

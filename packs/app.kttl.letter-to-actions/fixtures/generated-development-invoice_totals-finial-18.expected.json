@@ -5,11 +5,18 @@
     {
       "expect": {
         "amount": "£210.00",
-        "anchor": "the date shown beside it",
-        "deadline": "by the date shown beside it",
+        "anchor": "no particular date",
+        "deadline": "28 July 2026",
         "due": "2026-07-28",
         "kind": "payment",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": true,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "invoice_totals-finial-18-payment-01",
       "segment": "Enclosed is our invoice for your tenancy account. The total shown opposite is expected by the date shown beside it.",

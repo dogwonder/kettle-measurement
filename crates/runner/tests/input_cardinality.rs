@@ -76,7 +76,7 @@ fn pack_with_role(name: &str, role_json: &str) -> PathBuf {
                         "deadline": { "type": "string" },
                         "anchor": { "type": "string" }
                     },
-                    "required": ["kind", "party", "ask", "deadline", "anchor"]
+                    "required": ["kind", "party", "ask", "deadline"]
                 } }
             },
             "required": ["id", "confidence", "obligations"]

@@ -9,7 +9,14 @@
         "deadline": "for 4 July 2026 at 9.10am",
         "due": "2026-07-04",
         "kind": "attendance",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-dropwort-53-attendance-01",
       "segment": "Your appointment about your water account with Northgate Water is booked for 4 July 2026 at 9.10am.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-dropwort-53-other-03",
       "segment": "Please arrive ten minutes early and bring photographic identification with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-dropwort-53-other-05",
       "segment": "Please follow the signs for the outpatient wing, and ask your previous provider for a written summary before your appointment.",

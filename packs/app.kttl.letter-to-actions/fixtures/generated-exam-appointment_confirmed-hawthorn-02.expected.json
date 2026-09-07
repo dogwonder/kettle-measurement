@@ -9,7 +9,14 @@
         "deadline": "on 21 April 2026 at 4.05pm",
         "due": "2026-04-21",
         "kind": "attendance",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-hawthorn-02-attendance-01",
       "segment": "We are writing to confirm your policy renewal appointment with Belwood Insurance on 21 April 2026 at 4.05pm.",

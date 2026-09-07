@@ -9,7 +9,14 @@
         "deadline": "on 9 December 2026",
         "due": "2026-12-09",
         "kind": "attendance",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-robin-18-attendance-01",
       "segment": "You have an appointment about your tenancy account at Ashcombe Housing Trust on 9 December 2026. Please arrive ten minutes early and bring this letter with you.",

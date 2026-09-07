@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": "2026-02-09",
         "kind": "response",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-hawthorn-vale-08-response-01",
       "segment": "A written response about the parking charge is required within 35 days of the date of this letter.",

@@ -9,7 +9,14 @@
         "deadline": "for 8 June 2026 at 12.00pm",
         "due": "2026-06-08",
         "kind": "attendance",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-kingcup-11-attendance-01",
       "segment": "An appointment concerning your estate matter has been arranged with Trentham & Yale Solicitors for 8 June 2026 at 12.00pm.",
@@ -34,7 +41,14 @@
         "deadline": "ahead of the visit",
         "due": null,
         "kind": "other",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-kingcup-11-other-03",
       "segment": "You must prepare a written list of the points you want to raise ahead of the visit.",
@@ -59,7 +73,14 @@
         "deadline": "on arrival",
         "due": null,
         "kind": "other",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-kingcup-11-other-05",
       "segment": "You must complete the enclosed form and hand it in on arrival.",

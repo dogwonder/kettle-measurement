@@ -410,8 +410,13 @@ fn project(projection: Projection, fixture: &FixtureResult) -> BTreeMap<String, 
                     .insert(obligation_entry(
                         &obligation.kind,
                         &obligation.party,
-                        &obligation.deadline,
-                        obligation.due.map(|due| due.to_string()).as_deref(),
+                        &super::deadline_key(
+                            &obligation.deadline,
+                            &obligation.anchor,
+                            obligation.due,
+                            obligation.when.as_ref(),
+                            obligation.pointed,
+                        ),
                     ));
             }
             (Projection::ObligationsWithAnchors, Extracted::Obligation(obligation)) => {
@@ -420,9 +425,18 @@ fn project(projection: Projection, fixture: &FixtureResult) -> BTreeMap<String, 
                     .insert(obligation_anchor_entry(
                         &obligation.kind,
                         &obligation.party,
-                        &obligation.deadline,
+                        &super::deadline_key(
+                            &obligation.deadline,
+                            &obligation.anchor,
+                            obligation.due,
+                            obligation.when.as_ref(),
+                            obligation.pointed,
+                        ),
+                        obligation
+                            .when
+                            .as_ref()
+                            .map_or("", |when| when.counts_from.as_str()),
                         &obligation.anchor,
-                        obligation.due.map(|due| due.to_string()).as_deref(),
                     ));
             }
             _ => {}
@@ -434,24 +448,31 @@ fn project(projection: Projection, fixture: &FixtureResult) -> BTreeMap<String, 
 /// An [`Projection::ObligationsSet`] entry, in the one format the judge
 /// compares. Public because the letter bed's controlled-change pass
 /// declares these entries verbatim, and a second formatter would be a
-/// second place for the two to disagree.
-pub fn obligation_entry(kind: &str, party: &str, deadline: &str, due: Option<&str>) -> String {
-    format!("{kind}/{party}/{deadline}/{}", due.unwrap_or("undated"))
+/// second place for the two to disagree. The deadline travels as
+/// [`super::deadline_key`] — the day and its route, the period as
+/// structure, or the words — never as the copied phrase, so a fuller
+/// copy of one deadline is not a second obligation here any more than
+/// it is in identity (6 September 2026).
+pub fn obligation_entry(kind: &str, party: &str, deadline_key: &str) -> String {
+    format!("{kind}/{party}/{deadline_key}")
 }
 
 /// An [`Projection::ObligationsWithAnchors`] entry — the same entry
-/// with the anchor the obligation was read against.
+/// with the base the obligation counts from: what the structure says
+/// it counts from and the day that names, never the anchor's words
+/// (review of #626, Task 5). A substituted dateless anchor moves this
+/// from `letter_date` to a `named_date` nothing dates.
 pub fn obligation_anchor_entry(
     kind: &str,
     party: &str,
-    deadline: &str,
+    deadline_key: &str,
+    counts_from: &str,
     anchor: &str,
-    due: Option<&str>,
 ) -> String {
-    format!(
-        "{kind}/{party}/{deadline}/{anchor}/{}",
-        due.unwrap_or("undated")
-    )
+    let base_day = crate::timeline::first_full_date(anchor)
+        .map(|date| date.to_string())
+        .unwrap_or_default();
+    format!("{kind}/{party}/{deadline_key}/{counts_from}:{base_day}")
 }
 
 /// The smallest element present on one side and not the other, named

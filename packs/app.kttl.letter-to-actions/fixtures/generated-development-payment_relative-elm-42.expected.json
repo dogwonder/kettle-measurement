@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-06-24",
         "kind": "payment",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-elm-42-payment-01",
       "segment": "Our records show that tenancy account of £310.00 remains outstanding. Please pay £310.00 within 14 days of the date of this letter.",

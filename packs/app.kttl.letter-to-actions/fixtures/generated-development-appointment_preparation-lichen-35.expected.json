@@ -9,7 +9,14 @@
         "deadline": "for 29 December 2026 at 4.05pm",
         "due": "2026-12-29",
         "kind": "attendance",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-lichen-35-attendance-01",
       "segment": "Your appointment about your check-up with Fenwick Dental Practice is booked for 29 December 2026 at 4.05pm.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-lichen-35-other-03",
       "segment": "Please allow fifteen minutes for parking, and bring your address history with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-lichen-35-other-05",
       "segment": "Please keep to the marked walkway from the car park, and obtain a copy of the agreement from the other party before your appointment.",

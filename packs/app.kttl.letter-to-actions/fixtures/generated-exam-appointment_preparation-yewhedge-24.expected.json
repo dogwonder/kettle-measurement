@@ -9,7 +9,14 @@
         "deadline": "for 26 June 2026 at 9.10am",
         "due": "2026-06-26",
         "kind": "attendance",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-yewhedge-24-attendance-01",
       "segment": "An appointment concerning your water account has been arranged with Northgate Water for 26 June 2026 at 9.10am.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-yewhedge-24-other-03",
       "segment": "You must request a written summary from your previous provider before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-yewhedge-24-other-05",
       "segment": "You must book an interpreter through the office in advance.",

@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": null,
         "kind": "response",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-fern-15-response-00",
       "segment": "Please return the enclosed form about your annual review within 42 days.",

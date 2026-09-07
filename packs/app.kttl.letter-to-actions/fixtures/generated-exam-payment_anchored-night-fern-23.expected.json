@@ -9,7 +9,14 @@
         "deadline": "within 45 days",
         "due": "2026-04-13",
         "kind": "payment",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 45,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-night-fern-23-payment-02",
       "segment": "The sum of £480.00 falls due within 45 days of 27 February 2026. Please quote TY-31882 when you pay.",

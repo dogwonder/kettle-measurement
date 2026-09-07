@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": null,
         "kind": "response",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "dateless_anchor-heron-creek-01-response-00",
       "segment": "We would ask you to send back the signed agreement for your tenancy account within 21 days of the date of this letter.",

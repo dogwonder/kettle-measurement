@@ -9,7 +9,14 @@
         "deadline": "on 12 May 2026",
         "due": "2026-05-12",
         "kind": "attendance",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-yellow-birch-24-attendance-01",
       "segment": "We have booked your water account appointment with Northgate Water on 12 May 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

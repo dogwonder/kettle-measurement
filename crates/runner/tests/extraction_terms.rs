@@ -176,6 +176,8 @@ fn an_obligation_recording_survives_the_decoupling() {
         anchor: "the date of this letter".to_owned(),
         amount: "no amount".to_owned(),
         due: None,
+        when: None,
+        pointed: false,
     };
 
     // The bytes an already-recorded item carries, field name and all.

@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-09-30",
         "kind": "payment",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-amber-21-payment-01",
       "segment": "The balance on your pet health plan is £54.00. Please settle it by the end of the month.",

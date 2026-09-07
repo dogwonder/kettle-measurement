@@ -9,7 +9,14 @@
         "deadline": "at your earliest convenience",
         "due": null,
         "kind": "response",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-kelp-10-response-01",
       "segment": "Please send us a meter reading for your membership at your earliest convenience.",

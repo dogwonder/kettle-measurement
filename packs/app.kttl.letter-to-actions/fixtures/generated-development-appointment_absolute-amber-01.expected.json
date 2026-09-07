@@ -9,7 +9,14 @@
         "deadline": "on 2 January 2026",
         "due": "2026-01-02",
         "kind": "attendance",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-amber-01-attendance-01",
       "segment": "You have an appointment about your parking charge at Harborne Parking Services on 2 January 2026. Please arrive ten minutes early and bring this letter with you.",

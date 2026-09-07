@@ -67,7 +67,7 @@ fn renewal_pack(name: &str) -> PathBuf {
                     "ask": { "type": "string" },
                     "deadline": { "type": "string" },
                     "anchor": { "type": "string" }
-                }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
+                }, "required": ["kind", "party", "ask", "deadline"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
             "required": ["results"] }"#,
     );

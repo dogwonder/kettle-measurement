@@ -9,7 +9,14 @@
         "deadline": "for 4 May 2026 at 11.20am",
         "due": "2026-05-04",
         "kind": "attendance",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-vervain-34-attendance-01",
       "segment": "An appointment concerning your annual review has been arranged with Marlow Ridge Surgery for 4 May 2026 at 11.20am.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-vervain-34-other-03",
       "segment": "You must visit the ground floor reception first, and request a written summary from your previous provider before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-vervain-34-other-05",
       "segment": "You must switch your telephone off in the waiting area and book an interpreter through the office in advance.",

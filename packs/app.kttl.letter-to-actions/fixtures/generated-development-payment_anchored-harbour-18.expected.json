@@ -9,7 +9,14 @@
         "deadline": "within 30 days",
         "due": "2026-05-03",
         "kind": "payment",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 30,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-harbour-18-payment-02",
       "segment": "Please pay £310.00 within 30 days of 3 April 2026, quoting reference AHT-7043.",

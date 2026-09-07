@@ -9,7 +9,14 @@
         "deadline": "within 28 days",
         "due": "2026-02-02",
         "kind": "response",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-marram-13-response-01",
       "segment": "A written response about the parking charge is required within 28 days of the date of this letter.",

@@ -9,7 +9,14 @@
         "deadline": "for 31 July 2026 at 11.20am",
         "due": "2026-07-31",
         "kind": "attendance",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-gable-07-attendance-01",
       "segment": "Your appointment about your policy renewal with Belwood Insurance is booked for 31 July 2026 at 11.20am.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-gable-07-other-03",
       "segment": "Please bring the item this enquiry concerns with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-gable-07-other-05",
       "segment": "Please ask your bank for a statement covering the last three months before your appointment.",

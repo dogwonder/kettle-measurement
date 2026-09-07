@@ -9,7 +9,14 @@
         "deadline": "for 13 February 2027 at 12.00pm",
         "due": "2027-02-13",
         "kind": "attendance",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-goosefoot-43-attendance-01",
       "segment": "An appointment concerning your case file has been arranged with Grantley Legal Aid for 13 February 2027 at 12.00pm.",
@@ -34,7 +41,14 @@
         "deadline": "ahead of the visit",
         "due": null,
         "kind": "other",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-goosefoot-43-other-03",
       "segment": "You must arrive punctually and locate the original certificate ahead of the visit.",
@@ -59,7 +73,14 @@
         "deadline": "on arrival",
         "due": null,
         "kind": "other",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-goosefoot-43-other-05",
       "segment": "You must follow the signs to the outpatient wing and produce a recent utility bill on arrival.",

@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-12-25",
         "kind": "payment",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-forest-gate-19-payment-01",
       "segment": "The sum of £0.00 for your case file is now overdue. Payment must reach us within 21 days of the date of this letter.",

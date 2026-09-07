@@ -9,7 +9,14 @@
         "deadline": "on 2 March 2026",
         "due": "2026-03-02",
         "kind": "attendance",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-winter-bay-22-attendance-01",
       "segment": "We have booked your annual review appointment with Marlow Ridge Surgery on 2 March 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

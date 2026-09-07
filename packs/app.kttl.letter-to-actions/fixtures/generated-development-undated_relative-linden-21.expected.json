@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": null,
         "kind": "response",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-linden-21-response-00",
       "segment": "Please return the enclosed form about your pet health plan within 14 days.",

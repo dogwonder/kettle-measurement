@@ -9,7 +9,14 @@
         "deadline": "for 8 June 2026 at 12.00pm",
         "due": "2026-06-08",
         "kind": "attendance",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-quarry-16-attendance-01",
       "segment": "Your appointment about your estate matter with Trentham & Yale Solicitors is booked for 8 June 2026 at 12.00pm.",
@@ -34,7 +41,14 @@
         "deadline": "when you come in",
         "due": null,
         "kind": "other",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-quarry-16-other-03",
       "segment": "Please bring the original certificate rather than a photocopy when you come in.",
@@ -59,7 +73,14 @@
         "deadline": "before you attend",
         "due": null,
         "kind": "other",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-quarry-16-other-05",
       "segment": "Please register for an online account before you attend.",

@@ -9,7 +9,14 @@
         "deadline": "for 12 August 2026 at 4.05pm",
         "due": "2026-08-12",
         "kind": "attendance",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-birchmoor-38-attendance-01",
       "segment": "An appointment concerning your policy renewal has been arranged with Belwood Insurance for 12 August 2026 at 4.05pm.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-birchmoor-38-other-03",
       "segment": "You must wait outside the room until you are invited in, and write down any change of circumstances before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-birchmoor-38-other-05",
       "segment": "You must allow for delays on the approach road and supply a passport-sized photograph in advance.",

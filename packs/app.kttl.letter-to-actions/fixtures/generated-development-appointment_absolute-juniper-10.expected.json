@@ -9,7 +9,14 @@
         "deadline": "on 21 April 2026",
         "due": "2026-04-21",
         "kind": "attendance",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-juniper-10-attendance-01",
       "segment": "You have an appointment about your membership at Eastvale Library Service on 21 April 2026. Please arrive ten minutes early and bring this letter with you.",

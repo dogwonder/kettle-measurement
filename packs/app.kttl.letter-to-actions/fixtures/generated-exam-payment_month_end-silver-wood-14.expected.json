@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-07-31",
         "kind": "payment",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-silver-wood-14-payment-01",
       "segment": "Your policy renewal stands at £188.20. We ask that this is cleared by the end of the month.",

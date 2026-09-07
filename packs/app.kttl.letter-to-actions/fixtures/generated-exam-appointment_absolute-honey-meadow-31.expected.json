@@ -9,7 +9,14 @@
         "deadline": "on 21 June 2026",
         "due": "2026-06-21",
         "kind": "attendance",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-honey-meadow-31-attendance-01",
       "segment": "We have booked your case file appointment with Grantley Legal Aid on 21 June 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

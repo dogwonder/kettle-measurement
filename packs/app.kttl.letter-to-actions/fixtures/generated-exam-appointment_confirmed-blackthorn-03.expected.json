@@ -9,7 +9,14 @@
         "deadline": "on 26 November 2026 at 5.30pm",
         "due": "2026-11-26",
         "kind": "attendance",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-blackthorn-03-attendance-01",
       "segment": "We are writing to confirm your energy account appointment with Cranleigh Energy on 26 November 2026 at 5.30pm.",

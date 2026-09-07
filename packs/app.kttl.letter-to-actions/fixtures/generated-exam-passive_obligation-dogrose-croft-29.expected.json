@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": "2026-12-07",
         "kind": "payment",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-dogrose-croft-29-payment-01",
       "segment": "Settlement of £12.00 must be received within 42 days of the date of this letter, or the matter is referred onward.",

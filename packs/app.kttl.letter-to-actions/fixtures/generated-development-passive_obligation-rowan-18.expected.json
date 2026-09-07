@@ -9,7 +9,14 @@
         "deadline": "within 28 days",
         "due": "2026-06-30",
         "kind": "response",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-rowan-18-response-01",
       "segment": "A written response about the tenancy account is required within 28 days of the date of this letter.",

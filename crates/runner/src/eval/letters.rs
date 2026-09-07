@@ -686,21 +686,33 @@ fn controlled_twin(
         .expect("a segment")
         .to_owned();
     let expect = items[edited]["expect"].clone();
+    // The deadline as the projection keys it: the same function the
+    // run's side is projected through, over the same authored fields.
+    let deadline_key = |value: &serde_json::Value| {
+        let when: Option<crate::run::When> = serde_json::from_value(value["when"].clone()).ok();
+        let due: Option<NaiveDate> = value["due"].as_str().and_then(|d| d.parse().ok());
+        super::deadline_key(
+            value["deadline"].as_str().expect("a deadline"),
+            value["anchor"].as_str().expect("an anchor"),
+            due,
+            when.as_ref(),
+            value["pointed"].as_bool().unwrap_or(false),
+        )
+    };
     let entry = |value: &serde_json::Value| {
         super::relations::obligation_entry(
             value["kind"].as_str().expect("a kind"),
             value["party"].as_str().expect("a party"),
-            value["deadline"].as_str().expect("a deadline"),
-            value["due"].as_str(),
+            &deadline_key(value),
         )
     };
     let anchor_entry = |value: &serde_json::Value| {
         super::relations::obligation_anchor_entry(
             value["kind"].as_str().expect("a kind"),
             value["party"].as_str().expect("a party"),
-            value["deadline"].as_str().expect("a deadline"),
+            &deadline_key(value),
+            value["when"]["counts_from"].as_str().unwrap_or(""),
             value["anchor"].as_str().expect("an anchor"),
-            value["due"].as_str(),
         )
     };
 
@@ -724,6 +736,10 @@ fn controlled_twin(
             let mut moved = expect.clone();
             moved["deadline"] = serde_json::Value::String(moved_deadline.clone());
             moved["due"] = serde_json::Value::String(moved_due);
+            // The structure moves with the words (review of #626,
+            // Task 5): a twin that says "within 15 days" and expects a
+            // count of 14 marks the model wrong for reading the page.
+            moved["when"]["count"] = serde_json::Value::from(days + 1);
             (
                 segment.replace(deadline, &moved_deadline),
                 moved.clone(),
@@ -754,6 +770,9 @@ fn controlled_twin(
             let stated = expect["anchor"].as_str().expect("an anchor").to_owned();
             let mut moved = expect.clone();
             moved["anchor"] = serde_json::Value::String(substitute.to_owned());
+            // A base the letter names and does not date: the structure
+            // moves with the words (review of #626, Task 5).
+            moved["when"]["counts_from"] = serde_json::Value::String("named_date".to_owned());
             (
                 segment.replace(&stated, substitute),
                 moved.clone(),
@@ -773,6 +792,17 @@ fn controlled_twin(
     items[edited]["segment"] = serde_json::Value::String(edited_segment.clone());
     items[edited]["expect"] = edited_expect;
     let strata = items[edited]["strata"].as_array_mut().expect("strata");
+    // The may-grant reading leaves the gate (7 September 2026). Review
+    // step 7 retired the Rust rule and made "may also confirm" a model
+    // judgement; the 4B then read it as a task on both backends through
+    // two statements of the principle and a permission example, and the
+    // no_obligation ceiling at n=101 carries no error. A gate encodes a
+    // settled judgement, and this one is measured open, so the edited
+    // passage is scored and never pooled until the manifest's promotion
+    // condition is met. Every other passage of the twin stays gated.
+    if family == "controlled-must-to-may" {
+        strata.retain(|stratum| stratum != EVERY_LETTER);
+    }
     strata.push(serde_json::json!("controlled-change"));
     strata.push(serde_json::json!(family));
     for item in items.iter_mut() {
@@ -932,6 +962,14 @@ struct Obligation {
     party: String,
     deadline: String,
     anchor: String,
+    /// The deadline's words as structure, authored from the shape's
+    /// own composition exactly as `due` is (review of #626, Task 5):
+    /// the route a day is arrived at by is what the scorer keys on,
+    /// and it is never parsed back out of the prose.
+    when: crate::run::When,
+    /// The words are printed at the due-date row the ask points at,
+    /// not at the ask's own passage (#544).
+    pointed: bool,
     /// The sum the passage prints, verbatim, or `no amount` (#612).
     amount: String,
     /// The date this obligation falls due, authored from the shape's
@@ -1171,6 +1209,8 @@ fn letter(
                 "anchor": o.anchor,
                 "amount": o.amount,
                 "due": o.due,
+                "when": o.when,
+                "pointed": o.pointed,
             })),
         }));
     }
@@ -1812,6 +1852,8 @@ fn passages(
                     kind: "attendance",
                     party: sender.name.clone(),
                     deadline: format!("on {when}"),
+                    when: crate::run::When::new(0, "none", "none", "none"),
+                    pointed: false,
                     anchor: when.clone(),
                     amount: "no amount".to_owned(),
                     due: Some(appointment_on(index)),
@@ -1855,6 +1897,8 @@ fn passages(
                     kind: "attendance",
                     party: sender.name.clone(),
                     deadline: format!("on {when} at {time}"),
+                    when: crate::run::When::new(0, "none", "none", "none"),
+                    pointed: false,
                     anchor: when.clone(),
                     amount: "no amount".to_owned(),
                     due: Some(appointment_on(index + 3)),
@@ -1920,6 +1964,8 @@ fn passages(
                     kind: "attendance",
                     party: sender.name.clone(),
                     deadline: format!("for {when} at {time}"),
+                    when: crate::run::When::new(0, "none", "none", "none"),
+                    pointed: false,
                     anchor: when.clone(),
                     amount: "no amount".to_owned(),
                     due: Some(day),
@@ -2020,6 +2066,8 @@ fn passages(
                         kind: "other",
                         party: sender.name.clone(),
                         deadline: deadline.to_owned(),
+                        when: crate::run::When::new(0, "none", "none", "none"),
+                        pointed: false,
                         anchor: "no particular date".to_owned(),
                         amount: "no amount".to_owned(),
                         due: None,
@@ -2058,6 +2106,8 @@ fn passages(
                     kind: "payment",
                     party: sender.name.clone(),
                     deadline: format!("within {days} days"),
+                    when: crate::run::When::new(days, "days", "none", "letter_date"),
+                    pointed: false,
                     anchor: from_letter.clone(),
                     amount: sender.amount.clone(),
                     due: Some(after(letter_on, days)),
@@ -2102,6 +2152,8 @@ fn passages(
                     kind: "payment",
                     party: sender.name.clone(),
                     deadline: format!("within {days} days"),
+                    when: crate::run::When::new(days, "days", "none", "named_date"),
+                    pointed: false,
                     anchor: hearing.clone(),
                     amount: sender.amount.clone(),
                     due: Some(after(appointment_on(index + 4), days)),
@@ -2136,6 +2188,8 @@ fn passages(
                     kind: "payment",
                     party: sender.name.clone(),
                     deadline: format!("within {pay_days} days"),
+                    when: crate::run::When::new(pay_days, "days", "none", "letter_date"),
+                    pointed: false,
                     anchor: from_letter.clone(),
                     amount: sender.amount.clone(),
                     due: Some(after(letter_on, pay_days)),
@@ -2159,6 +2213,8 @@ fn passages(
                     kind: "response",
                     party: sender.name.clone(),
                     deadline: format!("within {reply_days} days"),
+                    when: crate::run::When::new(reply_days, "days", "none", "letter_date"),
+                    pointed: false,
                     anchor: from_letter.clone(),
                     amount: "no amount".to_owned(),
                     due: Some(after(letter_on, reply_days)),
@@ -2194,6 +2250,8 @@ fn passages(
                     kind: "payment",
                     party: sender.name.clone(),
                     deadline: "by the end of the month".to_owned(),
+                    when: crate::run::When::new(0, "none", "none", "month_end"),
+                    pointed: false,
                     anchor: from_letter.clone(),
                     amount: sender.amount.clone(),
                     due: Some(end_of_month(letter_on)),
@@ -2234,6 +2292,8 @@ fn passages(
                     kind: "response",
                     party: sender.name.clone(),
                     deadline: phrase.to_owned(),
+                    when: crate::run::When::new(0, "none", "none", "none"),
+                    pointed: false,
                     anchor: "no particular date".to_owned(),
                     amount: "no amount".to_owned(),
                     due: None,
@@ -2281,6 +2341,8 @@ fn passages(
                     kind: "response",
                     party: sender.name.clone(),
                     deadline: format!("within {days} days"),
+                    when: crate::run::When::new(days as u64, "days", "none", "letter_date"),
+                    pointed: false,
                     anchor: from_letter.clone(),
                     amount: "no amount".to_owned(),
                     due: None,
@@ -2387,6 +2449,8 @@ fn passages(
                     kind,
                     party: sender.name.clone(),
                     deadline: format!("within {days} days"),
+                    when: crate::run::When::new(days, "days", "none", "letter_date"),
+                    pointed: false,
                     anchor: from_letter.clone(),
                     // Both money variants above print the sum.
                     amount: if kind == "payment" {
@@ -2467,6 +2531,8 @@ fn passages(
                     kind: "response",
                     party: sender.name.clone(),
                     deadline: format!("within {days} days"),
+                    when: crate::run::When::new(days as u64, "days", "none", "letter_date"),
+                    pointed: false,
                     anchor: from_letter.clone(),
                     amount: "no amount".to_owned(),
                     due: None,
@@ -2592,8 +2658,10 @@ fn passages(
                 expect: Some(Obligation {
                     kind: "payment",
                     party: sender.name.clone(),
-                    deadline: pointer.to_owned(),
-                    anchor: pointer.trim_start_matches("by ").to_owned(),
+                    deadline: when.clone(),
+                    when: crate::run::When::new(0, "none", "none", "none"),
+                    pointed: true,
+                    anchor: "no particular date".to_owned(),
                     // The total the ask points at, read off the table row (#612):
                     // the expectation carries where the sum lands, not
                     // what the pointing prose prints.
@@ -2768,6 +2836,8 @@ fn passages(
                 kind: "payment",
                 party: sender.name.clone(),
                 deadline: format!("within {days} days"),
+                when: crate::run::When::new(days, "days", "none", "letter_date"),
+                pointed: false,
                 anchor: from_letter.clone(),
                 amount: sender.amount.clone(),
                 due: Some(after(letter_on, days)),
@@ -2843,6 +2913,8 @@ fn passages(
                     kind: "payment",
                     party: sender.name.clone(),
                     deadline: format!("within {days} days"),
+                    when: crate::run::When::new(days, "days", "none", "letter_date"),
+                    pointed: false,
                     anchor: from_letter.clone(),
                     amount: sender.amount.clone(),
                     due: Some(after(letter_on, days)),
@@ -2860,6 +2932,8 @@ fn passages(
                     kind: "attendance",
                     party: sender.name.clone(),
                     deadline: format!("on {when}"),
+                    when: crate::run::When::new(0, "none", "none", "none"),
+                    pointed: false,
                     anchor: when.clone(),
                     amount: "no amount".to_owned(),
                     due: Some(appointment_on(index + 7)),
@@ -2879,6 +2953,8 @@ fn passages(
                     kind: "response",
                     party: sender.name.clone(),
                     deadline: "by the end of the month".to_owned(),
+                    when: crate::run::When::new(0, "none", "none", "month_end"),
+                    pointed: false,
                     anchor: from_letter.clone(),
                     amount: "no amount".to_owned(),
                     due: Some(end_of_month(letter_on)),

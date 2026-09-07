@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-08-31",
         "kind": "payment",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-honey-meadow-03-payment-01",
       "segment": "Your energy account stands at £142.75. We ask that this is cleared by the end of the month.",

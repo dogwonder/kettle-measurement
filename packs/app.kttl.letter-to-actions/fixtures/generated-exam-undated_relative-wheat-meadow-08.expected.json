@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": null,
         "kind": "response",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-wheat-meadow-08-response-00",
       "segment": "The enclosed form about your parking charge should be completed and returned within 35 days.",

@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-05-31",
         "kind": "payment",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-dew-garden-24-payment-01",
       "segment": "Your water account stands at £96.45. We ask that this is cleared by the end of the month.",

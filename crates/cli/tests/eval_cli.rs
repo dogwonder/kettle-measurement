@@ -282,6 +282,8 @@ fn obligation() -> ExpectedObligation {
         anchor: "You must respond within 14 days.".to_owned(),
         amount: "no amount".to_owned(),
         due: chrono::NaiveDate::from_ymd_opt(2026, 8, 14),
+        when: None,
+        pointed: false,
     }
 }
 
@@ -1952,6 +1954,33 @@ fn a_run_that_could_not_read_part_of_the_bed_is_not_evidence() {
 }
 
 #[test]
+fn a_run_that_could_not_read_part_of_the_bed_mints_no_tier_either() {
+    // 6 September 2026: the v19 subscription tiers run was built without
+    // the `pdf` feature, refused at the end to write a baseline over 83
+    // of 84 fixtures — and had already written a v19 FAIL row into the
+    // pack's tiers.json, because tiers were recorded pack by pack before
+    // the incomplete-bed check ran. A tier is the sentence the
+    // model-manager screen quotes, and a sentence about 83 of 84 is not
+    // the one it claims to be. Same refusal, same voice.
+    let dir = scratch("tiers-incomplete-bed");
+    let packs = packs_dir(&dir, &[PACK]);
+    let mut short = report(PACK, "qwen3.5-4b-q4_k_m.gguf");
+    short.unrunnable = vec!["statement-04.pdf".to_owned()];
+
+    let refusal = eval::tiers::write(&packs, PACK, &[short], 1, at("2026-09-06T23:15:00Z"))
+        .expect_err("a short run mints no tier");
+    assert!(refusal.contains("statement-04.pdf"), "{refusal}");
+    assert!(
+        refusal.contains("not a measurement of the bed"),
+        "{refusal}"
+    );
+    assert!(
+        !eval::tiers::path(&packs, PACK).exists(),
+        "nothing was written for a run that read less than the bed"
+    );
+}
+
+#[test]
 fn a_baseline_from_a_different_scoring_version_is_refused_not_compared() {
     let dir = scratch("baseline-scoring-version");
     let packs = packs_dir(&dir, &[PACK]);
@@ -1964,8 +1993,14 @@ fn a_baseline_from_a_different_scoring_version_is_refused_not_compared() {
     );
     assert_eq!(
         eval::baseline::SCORING_VERSION,
-        18,
-        "the sum is part of the obligation (#612, 3 September 2026). The \
+        19,
+        "the route a day is arrived at by is read from structure, not parsed \
+         from words (review of #626, Task 5; 5 September 2026): identity's \
+         shape comes from `deadline_route` over the bed's `when` and the \
+         model's `read`, a dated expectation without `when` is refused, and \
+         a pointing ask expects the date its row prints. Every dated \
+         identity moves, so 18 is refused. Before it, 18: \
+         the sum is part of the obligation (#612, 3 September 2026). The \
          first real letter through the packaged app demanded money and \
          Kettle reported the ask without the figure, because the schema \
          had nowhere to put it. `amount` now travels with every \

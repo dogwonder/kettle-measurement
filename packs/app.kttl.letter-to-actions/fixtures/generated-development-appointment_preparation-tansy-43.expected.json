@@ -9,7 +9,14 @@
         "deadline": "for 12 August 2026 at 4.05pm",
         "due": "2026-08-12",
         "kind": "attendance",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-tansy-43-attendance-01",
       "segment": "Your appointment about your policy renewal with Belwood Insurance is booked for 12 August 2026 at 4.05pm.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-tansy-43-other-03",
       "segment": "Please arrive ten minutes early and bring photographic identification with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-tansy-43-other-05",
       "segment": "Please follow the signs for the outpatient wing, and ask your previous provider for a written summary before your appointment.",

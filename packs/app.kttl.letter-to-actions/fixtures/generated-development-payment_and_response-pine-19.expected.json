@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-07-21",
         "kind": "payment",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-pine-19-payment-01",
       "segment": "Please pay £188.20 for your policy renewal within 14 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "within 28 days",
         "due": "2026-08-04",
         "kind": "response",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-pine-19-response-02",
       "segment": "You must also confirm in writing that you have made this payment, within 28 days of the date of this letter.",

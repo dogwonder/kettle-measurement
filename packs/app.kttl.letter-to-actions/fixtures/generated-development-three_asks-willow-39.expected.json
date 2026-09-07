@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-04-06",
         "kind": "payment",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "three_asks-willow-39-payment-01",
       "segment": "Please pay £0.00 towards your annual review within 14 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "on 19 April 2026",
         "due": "2026-04-19",
         "kind": "attendance",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-willow-39-attendance-02",
       "segment": "You must attend a review meeting at our offices on 19 April 2026.",
@@ -45,7 +59,14 @@
         "deadline": "by the end of the month",
         "due": "2026-03-31",
         "kind": "response",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-willow-39-response-03",
       "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",

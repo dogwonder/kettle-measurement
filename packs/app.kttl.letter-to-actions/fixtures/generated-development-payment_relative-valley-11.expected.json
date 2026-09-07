@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-12-07",
         "kind": "payment",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-valley-11-payment-01",
       "segment": "Our records show that check-up of £68.50 remains outstanding. Please pay £68.50 within 14 days of the date of this letter.",

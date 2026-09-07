@@ -9,7 +9,14 @@
         "deadline": "within 45 days",
         "due": "2027-02-08",
         "kind": "payment",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 45,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-wheat-meadow-33-payment-02",
       "segment": "The sum of £214.60 falls due within 45 days of 25 December 2026. Please quote KBC-90114 when you pay.",

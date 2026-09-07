@@ -9,7 +9,14 @@
         "deadline": "for 10 February 2026 at 9.10am",
         "due": "2026-02-10",
         "kind": "attendance",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-thrift-32-attendance-01",
       "segment": "An appointment concerning your parking charge has been arranged with Harborne Parking Services for 10 February 2026 at 9.10am.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-thrift-32-other-03",
       "segment": "You must remain in the waiting area until you are called, and obtain a copy of the most recent statement before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-thrift-32-other-05",
       "segment": "You must take the lift to the second floor and obtain proof of identity in advance.",

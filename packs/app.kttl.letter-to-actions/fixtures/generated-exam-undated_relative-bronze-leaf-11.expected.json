@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": null,
         "kind": "response",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-bronze-leaf-11-response-00",
       "segment": "The enclosed form about your estate matter should be completed and returned within 21 days.",

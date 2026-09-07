@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-05-22",
         "kind": "payment",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-lemon-grove-24-payment-01",
       "segment": "The sum of £96.45 for your water account is now overdue. Payment must reach us within 21 days of the date of this letter.",

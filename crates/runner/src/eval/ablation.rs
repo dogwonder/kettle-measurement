@@ -349,10 +349,23 @@ pub fn verdict_for(trace: &ClaimTrace, expected: Option<&Extracted>) -> Candidat
 fn disagrees_only_in_derived_fields(expected: &Extracted, proposed: &Extracted) -> bool {
     match (expected, proposed) {
         (Extracted::Obligation(want), Extracted::Obligation(got)) => {
+            // Everything the model said about when, before any
+            // resolution (#554): the words, their structure and the
+            // base — read from the structure and never re-parsed from
+            // the words (review of #626, Task 5).
+            // A counted deadline's identity is its day and route, not
+            // its words: the anchor left in the phrase is the same base
+            // by another route. An uncounted one is compared by its words.
+            let counted = want
+                .when
+                .as_ref()
+                .is_some_and(|w| w.unit != "none" || w.counts_from == "month_end");
             want.kind == got.kind
                 && want.party.eq_ignore_ascii_case(&got.party)
-                && crate::timeline::deadline_signature(&want.deadline, &want.anchor)
-                    == crate::timeline::deadline_signature(&got.deadline, &got.anchor)
+                && want.when == got.when
+                && (counted || want.deadline.eq_ignore_ascii_case(&got.deadline))
+                && crate::timeline::first_full_date(&want.anchor)
+                    == crate::timeline::first_full_date(&got.anchor)
         }
         _ => false,
     }
@@ -375,6 +388,10 @@ struct ProposedObligation {
     kind: String,
     party: Wire,
     deadline: Wire,
+    /// Gone from the wire with the reading shape (review of #626, Task
+    /// 5): the base is the deadline's `from`. Read where an old trace
+    /// still carries it.
+    #[serde(default)]
     anchor: String,
     /// Absent in recordings made before #612; the sentinel then, so an
     /// old trace still compares.
@@ -390,7 +407,19 @@ struct ProposedObligation {
 #[serde(untagged)]
 enum Wire {
     Text(String),
-    Reading { value: String },
+    Reading {
+        value: String,
+        #[serde(default)]
+        read: Option<crate::run::When>,
+        #[serde(default)]
+        from: Option<WireFrom>,
+    },
+}
+
+#[derive(serde::Deserialize)]
+struct WireFrom {
+    #[serde(default)]
+    value: String,
 }
 
 impl Default for Wire {
@@ -403,7 +432,16 @@ impl Wire {
     fn into_text(self) -> String {
         match self {
             Wire::Text(text) => text,
-            Wire::Reading { value } => value,
+            Wire::Reading { value, .. } => value,
+        }
+    }
+    /// The structure and base the deadline carried, if this wire did.
+    fn structure(&self) -> (Option<crate::run::When>, Option<String>) {
+        match self {
+            Wire::Text(_) => (None, None),
+            Wire::Reading { read, from, .. } => {
+                (read.clone(), from.as_ref().map(|from| from.value.clone()))
+            }
         }
     }
     /// An absent sum on the wire is the bed's sentinel.
@@ -433,13 +471,16 @@ fn proposed_assertion(trace: &ClaimTrace) -> Option<Extracted> {
             serde_json::from_value::<ProposedObligation>(trace.candidate.clone())
                 .ok()
                 .map(|proposed| {
+                    let (when, from) = proposed.deadline.structure();
                     Extracted::Obligation(ExpectedObligation {
                         kind: proposed.kind,
                         party: proposed.party.into_text(),
                         deadline: proposed.deadline.into_text(),
-                        anchor: proposed.anchor,
+                        anchor: from.unwrap_or(proposed.anchor),
                         amount: proposed.amount.into_amount(),
                         due: None,
+                        when,
+                        pointed: false,
                     })
                 })
         }

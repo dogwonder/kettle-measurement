@@ -87,9 +87,9 @@ fn letter_pack(name: &str) -> PathBuf {
                     "kind": { "enum": ["payment", "response", "attendance", "other"] },
                     "party": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
                     "ask": { "type": "string" },
-                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] },
+                    "deadline": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" }, "read": { "type": "object", "properties": { "count": { "type": "integer" }, "unit": { "enum": ["days", "weeks", "months", "none"] }, "qualifier": { "enum": ["calendar", "clear", "working", "none"] }, "counts_from": { "enum": ["letter_date", "receipt", "named_date", "month_end", "none"] } }, "required": ["count", "unit", "qualifier", "counts_from"] }, "from": { "type": "object", "properties": { "at": { "type": "integer" }, "value": { "type": "string" } }, "required": ["at", "value"] } }, "required": ["at", "value", "read", "from"] },
                     "anchor": { "type": "string" }
-                }, "required": ["kind", "party", "ask", "deadline", "anchor"] } }
+                }, "required": ["kind", "party", "ask", "deadline"] } }
             }, "required": ["id", "segment", "confidence", "obligations"] } } },
             "required": ["results"] }"#,
     );
@@ -110,7 +110,9 @@ fn letter_pack(name: &str) -> PathBuf {
                 "party": "Harborne Parking Services",
                 "deadline": "within 14 days",
                 "anchor": "the date of this letter",
-                "due": "2026-03-17"
+                "due": "2026-03-17",
+                "when": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" },
+                "pointed": false
               }
             },
             {
@@ -142,8 +144,7 @@ fn answer_inventing_from_the_closing() -> String {
                         "kind": "payment",
                         "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Pay £120.00",
-                        "deadline": { "at": 1, "value": "within 14 days" },
-                        "anchor": "the date of this letter"
+                        "deadline": { "at": 1, "value": "within 14 days", "read": { "count": 14, "unit": "days", "qualifier": "none", "counts_from": "letter_date" }, "from": { "at": 0, "value": "3 March 2026" } }
                     }]
                 },
                 {
@@ -154,8 +155,7 @@ fn answer_inventing_from_the_closing() -> String {
                         "kind": "response",
                         "party": { "at": 2, "value": "Harborne Parking Services" },
                         "ask": "Co-operate",
-                        "deadline": { "at": 2, "value": "as soon as possible" },
-                        "anchor": "the date of this letter"
+                        "deadline": { "at": 2, "value": "as soon as possible", "read": { "count": 0, "unit": "none", "qualifier": "none", "counts_from": "none" }, "from": { "at": 2, "value": "" } }
                     }]
                 }
             ]
@@ -422,8 +422,7 @@ fn answer_with_the_wrong_deadline() -> String {
                         "kind": "payment",
                         "party": { "at": 1, "value": "Harborne Parking Services" },
                         "ask": "Pay £120.00",
-                        "deadline": { "at": 1, "value": "within 15 days" },
-                        "anchor": "the date of this letter"
+                        "deadline": { "at": 1, "value": "within 15 days", "read": { "count": 15, "unit": "days", "qualifier": "none", "counts_from": "letter_date" }, "from": { "at": 0, "value": "3 March 2026" } }
                     }]
                 },
                 { "id": 2, "segment": segments[2], "confidence": "high", "obligations": [] }

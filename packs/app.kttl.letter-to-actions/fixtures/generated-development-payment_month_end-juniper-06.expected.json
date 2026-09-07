@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-06-30",
         "kind": "payment",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-juniper-06-payment-01",
       "segment": "The balance on your tenancy account is £310.00. Please settle it by the end of the month.",

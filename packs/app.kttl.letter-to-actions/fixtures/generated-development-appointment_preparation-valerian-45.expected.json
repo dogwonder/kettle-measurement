@@ -9,7 +9,14 @@
         "deadline": "for 6 November 2026 at 9.10am",
         "due": "2026-11-06",
         "kind": "attendance",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-valerian-45-attendance-01",
       "segment": "Your appointment about your pet health plan with Denholm Veterinary Group is booked for 6 November 2026 at 9.10am.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-valerian-45-other-03",
       "segment": "Please allow fifteen minutes for parking, and bring your address history with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-valerian-45-other-05",
       "segment": "Please keep to the marked walkway from the car park, and obtain a copy of the agreement from the other party before your appointment.",

@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-03-29",
         "kind": "payment",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-linden-15-payment-01",
       "segment": "Please pay £0.00 for your annual review within 14 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "within 28 days",
         "due": "2026-04-12",
         "kind": "response",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-linden-15-response-02",
       "segment": "You must also confirm in writing that you have made this payment, within 28 days of the date of this letter.",

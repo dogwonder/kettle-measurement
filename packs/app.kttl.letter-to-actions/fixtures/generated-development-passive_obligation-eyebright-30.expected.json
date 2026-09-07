@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": "2026-07-18",
         "kind": "response",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-eyebright-30-response-01",
       "segment": "Confirmation that the tenancy account details are correct must be returned within 42 days of the date of this letter.",

@@ -9,7 +9,14 @@
         "deadline": "on 5 August 2026",
         "due": "2026-08-05",
         "kind": "attendance",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-nutmeg-38-attendance-01",
       "segment": "You have an appointment about your council tax account at Kelsford Borough Council on 5 August 2026. Please arrive ten minutes early and bring this letter with you.",

@@ -9,7 +9,14 @@
         "deadline": "for 14 February 2026 at 2.15pm",
         "due": "2026-02-14",
         "kind": "attendance",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-zephyr-49-attendance-01",
       "segment": "Your appointment about your parking charge with Harborne Parking Services is booked for 14 February 2026 at 2.15pm.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-zephyr-49-other-03",
       "segment": "Please take a ticket from the machine as you come in, and bring a recent proof of your address with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-zephyr-49-other-05",
       "segment": "Please do not arrive more than half an hour early, and order a replacement card before your appointment.",

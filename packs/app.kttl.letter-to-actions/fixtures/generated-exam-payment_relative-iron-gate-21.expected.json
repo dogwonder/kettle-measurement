@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-03-07",
         "kind": "payment",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-iron-gate-21-payment-01",
       "segment": "The sum of £214.60 for your council tax account is now overdue. Payment must reach us within 21 days of the date of this letter.",

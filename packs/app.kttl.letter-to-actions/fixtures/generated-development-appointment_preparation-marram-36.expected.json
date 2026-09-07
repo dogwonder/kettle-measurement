@@ -9,7 +9,14 @@
         "deadline": "for 9 February 2027 at 5.30pm",
         "due": "2027-02-09",
         "kind": "attendance",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-marram-36-attendance-01",
       "segment": "Your appointment about your case file with Grantley Legal Aid is booked for 9 February 2027 at 5.30pm.",
@@ -34,7 +41,14 @@
         "deadline": "when you come in",
         "due": null,
         "kind": "other",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-marram-36-other-03",
       "segment": "Please ring the bell at the door if reception is unattended, and bring the original certificate rather than a photocopy when you come in.",
@@ -59,7 +73,14 @@
         "deadline": "before you attend",
         "due": null,
         "kind": "other",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-marram-36-other-05",
       "segment": "Please park in the visitor bays rather than the staff bays, and register for an online account before you attend.",

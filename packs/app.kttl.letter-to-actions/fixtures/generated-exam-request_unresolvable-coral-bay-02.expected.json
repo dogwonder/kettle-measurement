@@ -9,7 +9,14 @@
         "deadline": "as soon as you are able",
         "due": null,
         "kind": "response",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-coral-bay-02-response-01",
       "segment": "We would be grateful if you could send a meter reading for your policy renewal as soon as you are able.",

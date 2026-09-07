@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": null,
         "kind": "response",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "dateless_anchor-flint-01-response-00",
       "segment": "Please return the signed agreement for your parking charge within 14 days of the date of this letter.",

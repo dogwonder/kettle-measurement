@@ -755,6 +755,8 @@ fn deadline_expected(
     let due = due
         .map(|d| format!("\"{d}\""))
         .unwrap_or_else(|| "null".to_owned());
+    let (read, pointed) = support::authored_when(deadline, anchor);
+    let when = serde_json::to_string(&read).expect("structure");
     serde_json::from_str(&format!(
         r#"{{
             "fixture_id": "{fixture_id}",
@@ -768,7 +770,9 @@ fn deadline_expected(
                         "party": "Harborne Parking Services",
                         "deadline": "{deadline}",
                         "anchor": "{anchor}",
-                        "due": {due}
+                        "due": {due},
+                        "when": {when},
+                        "pointed": {pointed}
                     }}
                 }}
             ]
@@ -795,7 +799,13 @@ fn deadline_outcome(deadline: &str, anchor: &str, due: Option<&str>) -> RunOutco
                 party: runner::reading::Reading::new(0, "Harborne Parking Services".to_owned()),
                 ask: "Pay £120.00".to_owned(),
                 deadline: runner::reading::Reading::new(0, deadline.to_owned()),
-                anchor: anchor.to_owned(),
+                read: support::authored_when(deadline, anchor).0,
+                from: if runner::timeline::first_full_date(anchor).is_some() {
+                    runner::reading::Reading::new(0, anchor)
+                } else {
+                    runner::reading::Reading::absent(0)
+                },
+                unresolved: None,
                 amount: runner::reading::Reading::absent(0),
                 refused: Vec::new(),
                 confidence: "high".to_owned(),
@@ -826,10 +836,10 @@ fn one_day_declaration() -> Vec<relations::RelationDeclaration> {
                   "projection": "obligations_set",
                   "edit": "the payment deadline moves one day later",
                   "only_left": {
-                    "": ["payment/Harborne Parking Services/within 14 days/2026-03-17"]
+                    "": ["payment/Harborne Parking Services/2026-03-17 counted"]
                   },
                   "only_right": {
-                    "": ["payment/Harborne Parking Services/within 15 days/2026-03-18"]
+                    "": ["payment/Harborne Parking Services/2026-03-18 counted"]
                   }
                 }
               },
@@ -940,7 +950,7 @@ fn a_reading_that_does_not_move_with_the_edit_fails_the_controlled_change() {
     // first, which is the left's.
     assert!(
         smallest_diff.contains("the declared change never appeared")
-            && smallest_diff.contains("within 14 days"),
+            && smallest_diff.contains("2026-03-17"),
         "the failure names the declared difference that never appeared: {smallest_diff}"
     );
 }
@@ -976,7 +986,9 @@ fn a_reading_that_moves_more_than_the_edit_fails_the_controlled_change() {
             party: runner::reading::Reading::new(0, "Harborne Parking Services".to_owned()),
             ask: "Confirm in writing".to_owned(),
             deadline: runner::reading::Reading::new(0, "within 28 days".to_owned()),
-            anchor: "the date of this letter".to_owned(),
+            read: runner::run::When::new(28, "days", "none", "letter_date"),
+            from: runner::reading::Reading::absent(0),
+            unresolved: None,
             amount: runner::reading::Reading::absent(0),
             refused: Vec::new(),
             confidence: "high".to_owned(),
@@ -1029,10 +1041,10 @@ fn anchor_declaration() -> Vec<relations::RelationDeclaration> {
                   "projection": "obligations_with_anchors",
                   "edit": "the stated anchor changes from the letter's own date to an invoice nothing dates",
                   "only_left": {
-                    "": ["payment/Harborne Parking Services/within 14 days/the date of this letter/undated"]
+                    "": ["payment/Harborne Parking Services/14 days none from letter_date/letter_date:"]
                   },
                   "only_right": {
-                    "": ["payment/Harborne Parking Services/within 14 days/the invoice date/undated"]
+                    "": ["payment/Harborne Parking Services/14 days none from named_date/named_date:"]
                   }
                 }
               },
@@ -1110,7 +1122,7 @@ fn a_substituted_dateless_anchor_must_move_the_anchor_projection() {
     // per-item scoring cannot see.
     assert!(
         smallest_diff.contains("the declared change never appeared")
-            && smallest_diff.contains("the date of this letter"),
+            && smallest_diff.contains("letter_date"),
         "the failure names the anchor that never moved: {smallest_diff}"
     );
 }

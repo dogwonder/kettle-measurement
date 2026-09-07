@@ -9,7 +9,14 @@
         "deadline": "within 49 days",
         "due": "2026-05-03",
         "kind": "response",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 49,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-juniper-slope-10-response-01",
       "segment": "Confirmation that the annual review details are correct must be returned within 49 days of the date of this letter.",

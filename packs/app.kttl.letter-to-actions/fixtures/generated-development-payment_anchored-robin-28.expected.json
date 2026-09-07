@@ -9,7 +9,14 @@
         "deadline": "within 30 days",
         "due": "2026-03-29",
         "kind": "payment",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 30,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-robin-28-payment-02",
       "segment": "Please pay £480.00 within 30 days of 27 February 2026, quoting reference TY-31882.",

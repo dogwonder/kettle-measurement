@@ -9,7 +9,14 @@
         "deadline": "on 24 September 2026",
         "due": "2026-09-24",
         "kind": "attendance",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-quiet-river-16-attendance-01",
       "segment": "We have booked your pet health plan appointment with Denholm Veterinary Group on 24 September 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

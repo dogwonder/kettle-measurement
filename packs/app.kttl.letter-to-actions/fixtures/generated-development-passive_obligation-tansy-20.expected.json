@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": "2026-09-23",
         "kind": "response",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-tansy-20-response-01",
       "segment": "Confirmation that the energy account details are correct must be returned within 42 days of the date of this letter.",

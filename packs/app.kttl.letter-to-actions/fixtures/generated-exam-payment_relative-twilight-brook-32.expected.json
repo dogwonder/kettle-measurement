@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-02-03",
         "kind": "payment",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-twilight-brook-32-payment-01",
       "segment": "The sum of £120.00 for your parking charge is now overdue. Payment must reach us within 21 days of the date of this letter.",

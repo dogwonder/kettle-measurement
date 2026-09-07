@@ -367,9 +367,17 @@ fn both_voices_of_a_shape_ask_in_the_same_construction_unless_staged() {
             };
             let segment = item["segment"].as_str().expect("a segment");
 
+            // A pointing ask's deadline is the date its row prints, not
+            // words of the prose (review of #626, Task 5): the sentence
+            // that makes the ask is the one that points at the page.
+            let locate: &str = if item["expect"]["pointed"].as_bool() == Some(true) {
+                "the date"
+            } else {
+                deadline
+            };
             let carrying: Vec<&str> = sentences(segment)
                 .into_iter()
-                .filter(|s| s.contains(deadline))
+                .filter(|s| s.contains(locate))
                 .collect();
             assert_eq!(
                 carrying.len(),
@@ -1039,13 +1047,20 @@ fn an_invoice_scores_the_ask_where_it_is_made_and_the_row_as_asking_nothing() {
             "{}: an invoice asks for payment",
             letter.stem
         );
+        // The expected deadline is the date the row prints, read at
+        // the row (review of #626, Task 5): the ask is still scored
+        // where it is made, and its deadline is what the page vouches
+        // for beside it.
         let deadline = ask["deadline"].as_str().expect("a deadline phrase");
+        assert_eq!(
+            ask["pointed"].as_bool(),
+            Some(true),
+            "{}: the ask points at the page",
+            letter.stem
+        );
         assert!(
-            pointing[0]["segment"]
-                .as_str()
-                .expect("a segment")
-                .contains(deadline),
-            "{}: the expected deadline is the letter's own words: {deadline:?}",
+            letter.text.contains(deadline),
+            "{}: the expected deadline is a date the letter prints: {deadline:?}",
             letter.stem
         );
         assert!(
@@ -1192,11 +1207,19 @@ fn every_committed_invoice_resolves_its_pointer() {
                     want["party"].as_str().expect("a party").to_owned(),
                 ),
                 ask: "Pay the total".to_owned(),
-                deadline: runner::reading::Reading::new(
-                    evidence.ordinal,
-                    want["deadline"].as_str().expect("a deadline").to_owned(),
-                ),
-                anchor: want["anchor"].as_str().expect("an anchor").to_owned(),
+                // A pointing ask's deadline is read at the row that
+                // prints it (review of #626, Task 5).
+                deadline: {
+                    let words = want["deadline"].as_str().expect("a deadline");
+                    let at = segments
+                        .iter()
+                        .find(|s| s.ordinal != evidence.ordinal && s.text.contains(words))
+                        .map_or(evidence.ordinal, |row| row.ordinal);
+                    runner::reading::Reading::new(at, words.to_owned())
+                },
+                read: serde_json::from_value(want["when"].clone()).expect("authored structure"),
+                from: runner::reading::Reading::absent(0),
+                unresolved: None,
                 amount: runner::reading::Reading::absent(evidence.ordinal),
                 refused: Vec::new(),
                 confidence: "high".to_owned(),

@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-05-15",
         "kind": "payment",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "three_asks-honey-meadow-23-payment-01",
       "segment": "A payment of £480.00 towards your estate matter is due within 21 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "on 16 November 2026",
         "due": "2026-11-16",
         "kind": "attendance",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-honey-meadow-23-attendance-02",
       "segment": "You are required to attend a case review at our offices on 16 November 2026.",
@@ -45,7 +59,14 @@
         "deadline": "by the end of the month",
         "due": "2026-04-30",
         "kind": "response",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-honey-meadow-23-response-03",
       "segment": "Please confirm your attendance in writing by the end of the month.",

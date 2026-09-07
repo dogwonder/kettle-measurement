@@ -9,7 +9,14 @@
         "deadline": "within 28 days",
         "due": null,
         "kind": "response",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-rose-garden-02-response-00",
       "segment": "The enclosed form about your policy renewal should be completed and returned within 28 days.",

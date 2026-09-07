@@ -9,7 +9,14 @@
         "deadline": "within 45 days",
         "due": "2026-07-20",
         "kind": "payment",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 45,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-rose-garden-03-payment-02",
       "segment": "The sum of £142.75 falls due within 45 days of 5 June 2026. Please quote CE-40027 when you pay.",

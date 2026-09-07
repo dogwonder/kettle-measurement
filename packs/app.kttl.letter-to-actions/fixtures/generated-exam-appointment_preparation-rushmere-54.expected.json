@@ -9,7 +9,14 @@
         "deadline": "for 6 January 2027 at 4.05pm",
         "due": "2027-01-06",
         "kind": "attendance",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-rushmere-54-attendance-01",
       "segment": "An appointment concerning your check-up has been arranged with Fenwick Dental Practice for 6 January 2027 at 4.05pm.",
@@ -34,7 +41,14 @@
         "deadline": "before you are seen",
         "due": null,
         "kind": "other",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-rushmere-54-other-03",
       "segment": "You must visit the ground floor reception first, and request a written summary from your previous provider before you are seen.",
@@ -59,7 +73,14 @@
         "deadline": "in advance",
         "due": null,
         "kind": "other",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-rushmere-54-other-05",
       "segment": "You must switch your telephone off in the waiting area and book an interpreter through the office in advance.",

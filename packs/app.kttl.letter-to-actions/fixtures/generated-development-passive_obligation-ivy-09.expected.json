@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": "2026-10-18",
         "kind": "payment",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-ivy-09-payment-01",
       "segment": "Settlement of £54.00 must be received within 35 days of the date of this letter, or the matter is referred onward.",

@@ -69,6 +69,15 @@ fn same_tier(declared: &str, measured_params: &str) -> bool {
 /// thing this shape exists to prevent.
 const STAGED_STALE_FLOORS: &[(&str, &str, &str)] = &[
     (
+        "app.kttl.letter-to-actions",
+        "scoring 19 (#628): the merge bar is the pod baseline, three byte-identical passes \
+         on a rented CUDA card, and a pod score never fills tiers.json because a tier is a \
+         sentence about the hardware the product ships on. The local Metal row is a release \
+         requirement, owed before the next app build, not a merge requirement; its only v19 \
+         row so far is a FAIL from 6 September, before identity and the prompt moved.",
+        "2026-09-07",
+    ),
+    (
         "app.kttl.renewal-diff",
         "min_tier 7b and no tiers.json; its last measurement \
          (evals/baseline-v14-renewal.json) was a PASS on Qwen3.5-4B at scoring v14, \
@@ -76,16 +85,6 @@ const STAGED_STALE_FLOORS: &[(&str, &str, &str)] = &[
          declared before either pack had been measured on anything, and the guard \
          could not see them.",
         "2026-08-18",
-    ),
-    (
-        "app.kttl.subscription-audit",
-        "the Stage 3 bed (#252) re-scored classification under scoring v4 and no 7B build \
-     passes it; #253 changes what classify is asked before any re-measurement can be \
-     meaningful. The only 7B pass on record is scoring v2 against pack v1.0.0 — kept \
-     as history, no longer a floor. Re-measured at v15 on 23 August (#554): still a FAIL on \
-     Qwen3.5-4B (normalise 0.69), so the floor is stale for want of a pass, not \
-     for want of a current measurement.",
-        "2026-07-29",
     ),
 ];
 
@@ -100,6 +99,25 @@ fn a_declared_min_tier_needs_a_pass_under_the_current_scoring_version() {
         let staged = STAGED_STALE_FLOORS
             .iter()
             .find(|(staged_pack, ..)| *staged_pack == pack);
+
+        // A withdrawn pack is measured and never offered (#545), so its
+        // floor is a sentence about a lab bed and not about anything a
+        // person can choose: it needs no current pass and no stage. The
+        // subscription audit's stale floor blocked every scoring bump
+        // from 22 August to 6 September by demanding a fresh 40-minute
+        // run of a bed nobody ships, purely so this guard could watch
+        // it fail again. A stage for a withdrawn pack is dead the day
+        // the withdrawal lands, and says so.
+        if let Some(withdrawal) = &loaded.manifest.withdrawn {
+            assert!(
+                staged.is_none(),
+                "{pack} was withdrawn on {} ({}) and needs no stale-floor stage — remove it \
+                 from STAGED_STALE_FLOORS",
+                withdrawal.on,
+                withdrawal.record
+            );
+            continue;
+        }
 
         // No file at all is the emptiest version of a stale floor, and
         // the stage has to cover it or the guard cannot be turned on at

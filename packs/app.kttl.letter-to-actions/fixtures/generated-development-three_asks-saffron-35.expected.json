@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-11-17",
         "kind": "payment",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "three_asks-saffron-35-payment-01",
       "segment": "Please pay £68.50 towards your check-up within 14 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "on 25 December 2026",
         "due": "2026-12-25",
         "kind": "attendance",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-saffron-35-attendance-02",
       "segment": "You must attend a review meeting at our offices on 25 December 2026.",
@@ -45,7 +59,14 @@
         "deadline": "by the end of the month",
         "due": "2026-11-30",
         "kind": "response",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "three_asks-saffron-35-response-03",
       "segment": "Please reply to this letter by the end of the month to confirm that you will attend.",

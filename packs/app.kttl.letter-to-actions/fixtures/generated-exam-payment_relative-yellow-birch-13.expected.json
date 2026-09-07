@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-06-23",
         "kind": "payment",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-yellow-birch-13-payment-01",
       "segment": "The sum of £310.00 for your tenancy account is now overdue. Payment must reach us within 21 days of the date of this letter.",

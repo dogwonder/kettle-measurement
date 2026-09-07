@@ -1,6 +1,12 @@
 {
   "results": [
     {
+      "id": 899,
+      "segment": "Redhill District Council\nCouncil Offices, Station Road, Redhill\n2 May 2026",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
       "id": 900,
       "segment": "Please pay £84.00 for your garden waste licence within 14 days of the date of this letter.",
       "confidence": "high",
@@ -8,15 +14,24 @@
         {
           "kind": "payment",
           "party": {
-            "at": 900,
+            "at": 899,
             "value": "Redhill District Council"
           },
           "ask": "Pay £84.00 for the garden waste licence",
           "deadline": {
             "at": 900,
-            "value": "within 14 days"
+            "value": "within 14 days",
+            "read": {
+              "count": 14,
+              "unit": "days",
+              "qualifier": "none",
+              "counts_from": "letter_date"
+            },
+            "from": {
+              "at": 899,
+              "value": "2 May 2026"
+            }
           },
-          "anchor": "the date of this letter",
           "amount": {
             "at": 900,
             "value": "£84.00"
@@ -38,15 +53,24 @@
         {
           "kind": "attendance",
           "party": {
-            "at": 902,
+            "at": 899,
             "value": "Redhill District Council"
           },
           "ask": "Attend the tribunal hearing",
           "deadline": {
             "at": 902,
-            "value": "on 14 September 2026"
+            "value": "on 14 September 2026",
+            "read": {
+              "count": 0,
+              "unit": "none",
+              "qualifier": "none",
+              "counts_from": "none"
+            },
+            "from": {
+              "at": 902,
+              "value": ""
+            }
           },
-          "anchor": "14 September 2026",
           "amount": {
             "at": 902,
             "value": ""
@@ -62,15 +86,24 @@
         {
           "kind": "response",
           "party": {
-            "at": 903,
+            "at": 899,
             "value": "Redhill District Council"
           },
           "ask": "Send a meter reading",
           "deadline": {
             "at": 903,
-            "value": "at your earliest convenience"
+            "value": "at your earliest convenience",
+            "read": {
+              "count": 0,
+              "unit": "none",
+              "qualifier": "none",
+              "counts_from": "none"
+            },
+            "from": {
+              "at": 903,
+              "value": ""
+            }
           },
-          "anchor": "no particular date",
           "amount": {
             "at": 903,
             "value": ""
@@ -98,15 +131,24 @@
         {
           "kind": "attendance",
           "party": {
-            "at": 906,
+            "at": 899,
             "value": "Redhill District Council"
           },
           "ask": "Attend the appointment with the housing officer",
           "deadline": {
             "at": 906,
-            "value": "on 3 June 2026 at 10.30am"
+            "value": "on 3 June 2026 at 10.30am",
+            "read": {
+              "count": 0,
+              "unit": "none",
+              "qualifier": "none",
+              "counts_from": "none"
+            },
+            "from": {
+              "at": 906,
+              "value": ""
+            }
           },
-          "anchor": "3 June 2026",
           "amount": {
             "at": 906,
             "value": ""
@@ -119,6 +161,135 @@
       "segment": "If you have already paid this amount in full, please complete the enclosed form so that we can update our records.",
       "confidence": "high",
       "obligations": []
+    },
+    {
+      "id": 909,
+      "segment": "Payment of the total is due by the date shown beside it.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "payment",
+          "party": {
+            "at": 899,
+            "value": "Redhill District Council"
+          },
+          "ask": "Pay the total",
+          "deadline": {
+            "at": 910,
+            "value": "14 September 2026",
+            "read": {
+              "count": 0,
+              "unit": "none",
+              "qualifier": "none",
+              "counts_from": "none"
+            },
+            "from": {
+              "at": 909,
+              "value": ""
+            }
+          },
+          "amount": {
+            "at": 911,
+            "value": "£142.50"
+          }
+        }
+      ]
+    },
+    {
+      "id": 910,
+      "segment": "Due date 14 September 2026",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 911,
+      "segment": "Total £142.50",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 912,
+      "segment": "Please let us know by the end of the month whether you wish to keep the permit.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "response",
+          "party": {
+            "at": 899,
+            "value": "Redhill District Council"
+          },
+          "ask": "Say whether to keep the permit",
+          "deadline": {
+            "at": 912,
+            "value": "by the end of the month",
+            "read": {
+              "count": 0,
+              "unit": "none",
+              "qualifier": "none",
+              "counts_from": "month_end"
+            },
+            "from": {
+              "at": 899,
+              "value": "2 May 2026"
+            }
+          },
+          "amount": {
+            "at": 912,
+            "value": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": 913,
+      "segment": "Thank you for attending your review on 4 April; the notes are now on your file.",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 914,
+      "segment": "You may also send a copy of the form by email in the next few weeks if that is easier for you.",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 920,
+      "segment": "Ashby Parish Council\nThe Old School, Church Lane, Ashby",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 921,
+      "segment": "Please return the enclosed form within 17 days.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "response",
+          "party": {
+            "at": 920,
+            "value": "Ashby Parish Council"
+          },
+          "ask": "Return the enclosed form",
+          "deadline": {
+            "at": 921,
+            "value": "within 17 days",
+            "read": {
+              "count": 17,
+              "unit": "days",
+              "qualifier": "none",
+              "counts_from": "letter_date"
+            },
+            "from": {
+              "at": 921,
+              "value": ""
+            }
+          },
+          "amount": {
+            "at": 921,
+            "value": ""
+          }
+        }
+      ]
     }
   ]
 }

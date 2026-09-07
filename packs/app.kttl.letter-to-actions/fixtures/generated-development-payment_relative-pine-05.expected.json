@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-06-04",
         "kind": "payment",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-pine-05-payment-01",
       "segment": "Our records show that water account of £96.45 remains outstanding. Please pay £96.45 within 14 days of the date of this letter.",

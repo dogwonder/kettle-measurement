@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-12-31",
         "kind": "payment",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-dawn-24-payment-01",
       "segment": "The balance on your case file is £0.00. Please settle it by the end of the month.",

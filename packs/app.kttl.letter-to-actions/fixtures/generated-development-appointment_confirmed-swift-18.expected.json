@@ -9,7 +9,14 @@
         "deadline": "on 24 September 2026 at 10.40am",
         "due": "2026-09-24",
         "kind": "attendance",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-swift-18-attendance-01",
       "segment": "This letter confirms your appointment about your tenancy account with Ashcombe Housing Trust on 24 September 2026 at 10.40am.",

@@ -142,6 +142,24 @@ impl Expected {
         if !self.classify.is_empty() {
             validate_authored_id(&self.fixture_id, "fixture id")?;
         }
+        // Scoring version 19 (review of #626, Task 5): the route a day
+        // is arrived at by is read from authored structure, never
+        // parsed from the words, so a dated expectation must say what
+        // its words are. A bed without `when` is a bed from before the
+        // bump, refused rather than scored by a parser the scorer no
+        // longer has.
+        for item in &self.obligations {
+            if let Some(expect) = &item.expect {
+                if expect.due.is_some() && expect.when.is_none() {
+                    return Err(format!(
+                        "item {} expects a day and carries no `when`: a bed authored before \
+                         scoring version 19 — regenerate it (`kettle bed`, or the \
+                         kettle-examples generator)",
+                        item.id
+                    ));
+                }
+            }
+        }
 
         let mut item_ids = BTreeSet::new();
         for item in &self.classify {
@@ -2882,6 +2900,32 @@ fn scored(want: &[(&str, &str)], got: &[(&str, &str)], tolerance: Tolerance) -> 
 
 #[cfg(test)]
 mod tests {
+    /// The structure a bed author would give these phrases.
+    fn authored(deadline: &str, anchor: &str) -> (crate::run::When, bool) {
+        use crate::run::When;
+        let dated = |t: &str| crate::timeline::first_full_date(t).is_some();
+        if let Some(days) = deadline
+            .strip_prefix("within ")
+            .and_then(|r| r.split_whitespace().next())
+            .and_then(|n| n.parse::<u64>().ok())
+        {
+            let letters_own = anchor.is_empty()
+                || anchor == "the date of this letter"
+                || anchor == "no particular date"
+                || anchor == "14 days";
+            let base = if dated(anchor) || dated(deadline) || !letters_own {
+                "named_date"
+            } else {
+                "letter_date"
+            };
+            return (When::new(days, "days", "none", base), false);
+        }
+        if deadline.contains("end of the month") {
+            return (When::new(0, "none", "none", "month_end"), false);
+        }
+        (When::default(), deadline.contains("the date shown"))
+    }
+
     use super::*;
     use crate::claim_trace::{
         CheckOutcome, ClaimCheck, ClaimTrace, Guardrail, TerminalDisposition,
@@ -2916,6 +2960,8 @@ mod tests {
             anchor: anchor.to_owned(),
             amount: "no amount".to_owned(),
             due: due.map(date),
+            when: Some(authored(deadline, anchor).0),
+            pointed: authored(deadline, anchor).1,
         };
         let found =
             |party: &str, deadline: &str, anchor: &str, due: Option<&str>| crate::run::Obligation {
@@ -2923,7 +2969,13 @@ mod tests {
                 party: crate::reading::Reading::new(0, party.to_owned()),
                 ask: "Pay the arrears".to_owned(),
                 deadline: crate::reading::Reading::new(0, deadline.to_owned()),
-                anchor: anchor.to_owned(),
+                read: authored(deadline, anchor).0,
+                from: if crate::timeline::first_full_date(anchor).is_some() {
+                    crate::reading::Reading::new(0, anchor)
+                } else {
+                    crate::reading::Reading::absent(0)
+                },
+                unresolved: None,
                 amount: crate::reading::Reading::absent(0),
                 refused: Vec::new(),
                 confidence: "high".to_owned(),

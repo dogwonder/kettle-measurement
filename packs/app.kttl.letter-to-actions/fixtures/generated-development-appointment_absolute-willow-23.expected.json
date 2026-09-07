@@ -9,7 +9,14 @@
         "deadline": "on 8 November 2026",
         "due": "2026-11-08",
         "kind": "attendance",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-willow-23-attendance-01",
       "segment": "You have an appointment about your check-up at Fenwick Dental Practice on 8 November 2026. Please arrive ten minutes early and bring this letter with you.",

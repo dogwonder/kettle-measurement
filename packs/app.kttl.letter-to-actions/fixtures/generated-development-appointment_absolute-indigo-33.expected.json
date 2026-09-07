@@ -9,7 +9,14 @@
         "deadline": "on 6 September 2026",
         "due": "2026-09-06",
         "kind": "attendance",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-indigo-33-attendance-01",
       "segment": "You have an appointment about your pet health plan at Denholm Veterinary Group on 6 September 2026. Please arrive ten minutes early and bring this letter with you.",

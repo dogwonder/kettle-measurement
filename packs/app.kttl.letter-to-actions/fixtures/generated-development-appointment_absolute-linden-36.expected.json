@@ -9,7 +9,14 @@
         "deadline": "on 21 June 2026",
         "due": "2026-06-21",
         "kind": "attendance",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-linden-36-attendance-01",
       "segment": "You have an appointment about your case file at Grantley Legal Aid on 21 June 2026. Please arrive ten minutes early and bring this letter with you.",

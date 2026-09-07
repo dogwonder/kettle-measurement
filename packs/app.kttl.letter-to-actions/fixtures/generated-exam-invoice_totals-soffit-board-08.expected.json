@@ -5,11 +5,18 @@
     {
       "expect": {
         "amount": "£300.00",
-        "anchor": "the date given against it",
-        "deadline": "by the date given against it",
+        "anchor": "no particular date",
+        "deadline": "4 February 2026",
         "due": "2026-02-04",
         "kind": "payment",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": true,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "invoice_totals-soffit-board-08-payment-01",
       "segment": "Our invoice for the parking charge is set out below. The amount shown as due should reach us by the date given against it.",

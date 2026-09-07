@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": "2026-06-12",
         "kind": "payment",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-wren-thicket-24-payment-01",
       "segment": "Settlement of £96.45 must be received within 42 days of the date of this letter, or the matter is referred onward.",

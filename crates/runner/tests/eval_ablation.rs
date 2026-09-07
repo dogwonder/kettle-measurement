@@ -7,6 +7,7 @@
 //! intermediate ones are derived by re-reading the claim-lifecycle
 //! trace rather than by keeping unsafe modes alive to benchmark them.
 
+mod support;
 use runner::claim_trace::{
     CheckOutcome, ClaimCheck, ClaimKind, ClaimTrace, Guardrail, TerminalDisposition,
 };
@@ -64,6 +65,8 @@ fn obligation(party: &str) -> runner::eval::Extracted {
         anchor: "14 days".to_owned(),
         amount: "no amount".to_owned(),
         due: None,
+        when: None,
+        pointed: false,
     })
 }
 
@@ -71,9 +74,21 @@ fn obligation(party: &str) -> runner::eval::Extracted {
 /// no `due`, because the resolver never ran on it.
 fn stopped_candidate(deadline: &str, anchor: &str) -> ClaimTrace {
     let mut trace = wrong_claim_stopped_by_quote();
+    // The wire as the model answers it now: the words, their structure
+    // and the base they count from (review of #626, Task 5).
+    let (read, _) = support::authored_when(deadline, anchor);
+    let base = if runner::timeline::first_full_date(anchor).is_some() {
+        anchor.to_owned()
+    } else {
+        deadline
+            .split_once(" of ")
+            .map(|(_, rest)| rest.to_owned())
+            .filter(|rest| runner::timeline::first_full_date(rest).is_some())
+            .unwrap_or_default()
+    };
     trace.candidate = serde_json::json!({
-        "kind": "payment", "party": "Elmswood Lettings", "ask": "Clear the balance",
-        "deadline": deadline, "anchor": anchor
+        "kind": "payment", "party": { "at": 1, "value": "Elmswood Lettings" }, "ask": "Clear the balance",
+        "deadline": { "at": 1, "value": deadline, "read": read, "from": { "at": 1, "value": base } }
     });
     trace
 }
@@ -94,6 +109,8 @@ fn a_stopped_candidate_worded_like_the_letter_is_not_booked_as_prevented() {
         anchor: "23 August 2026".to_owned(),
         amount: "no amount".to_owned(),
         due: Some(chrono::NaiveDate::from_ymd_opt(2026, 10, 7).expect("a date")),
+        when: Some(runner::run::When::new(45, "days", "none", "named_date")),
+        pointed: false,
     });
     assert_eq!(
         verdict_for(
@@ -308,6 +325,8 @@ fn a_stopped_candidate_naming_the_wrong_party_is_wrong_without_any_derivation() 
         anchor: "14 days".to_owned(),
         amount: "no amount".to_owned(),
         due: None,
+        when: None,
+        pointed: false,
     });
 
     assert_eq!(

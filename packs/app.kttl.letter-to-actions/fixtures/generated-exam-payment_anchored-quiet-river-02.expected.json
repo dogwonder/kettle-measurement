@@ -9,7 +9,14 @@
         "deadline": "within 45 days",
         "due": "2027-01-10",
         "kind": "payment",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 45,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-quiet-river-02-payment-02",
       "segment": "The sum of £188.20 falls due within 45 days of 26 November 2026. Please quote BI-66319 when you pay.",

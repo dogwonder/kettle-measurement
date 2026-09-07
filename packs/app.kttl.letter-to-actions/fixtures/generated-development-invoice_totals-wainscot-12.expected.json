@@ -5,11 +5,18 @@
     {
       "expect": {
         "amount": "£270.00",
-        "anchor": "the date shown beside it",
-        "deadline": "by the date shown beside it",
+        "anchor": "no particular date",
+        "deadline": "22 February 2027",
         "due": "2027-02-22",
         "kind": "payment",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": true,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "invoice_totals-wainscot-12-payment-01",
       "segment": "Please find our invoice for your case file below. Payment of the total is due by the date shown beside it.",

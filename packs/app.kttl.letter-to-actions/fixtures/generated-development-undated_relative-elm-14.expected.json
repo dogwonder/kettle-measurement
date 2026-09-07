@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": null,
         "kind": "response",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-elm-14-response-00",
       "segment": "Please return the enclosed form about your council tax account within 35 days.",

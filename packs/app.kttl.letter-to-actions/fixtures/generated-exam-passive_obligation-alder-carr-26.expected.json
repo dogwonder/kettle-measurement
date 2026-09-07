@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-08-01",
         "kind": "payment",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-alder-carr-26-payment-01",
       "segment": "Payment of £188.20 must be received within 21 days of the date of this letter.",

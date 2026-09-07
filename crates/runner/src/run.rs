@@ -340,16 +340,29 @@ pub struct Obligation {
     /// What is being asked, for a person to read. Prose: a paraphrase
     /// for a person, marked as Kettle's words, never verified.
     pub ask: String,
-    /// The letter's words for when — a phrase, never a computed date —
-    /// with `at` the passage the date is printed in: the ask's own
-    /// passage, or the due-date row a pointing phrase names. The
-    /// phrase is verified against the ask's own passage and `at` for
-    /// itself (`reading::Site::Own`, the interim shape until Task 5).
+    /// The letter's words for when, verbatim, at the passage that
+    /// prints them (review of #626, Task 5; `app/METHOD.md` §3.2). A
+    /// phrase — "within 14 days", "on 3 March 2026" — read from the
+    /// ask's own passage; or, for an ask that points at the page ("by
+    /// the date shown beside it"), the date the due-date row prints,
+    /// at that row. Never a date the model worked out.
     pub deadline: crate::reading::Reading,
-    /// What the deadline counts from, as written ("the date of this
-    /// letter", "12 August 2026"). Becomes a reading (`from`) with the
-    /// deadline's structure in Task 5.
-    pub anchor: String,
+    /// The words of `deadline`, read into structure by the model and
+    /// checked by Rust against those words before anything is counted
+    /// (`timeline::resolve_structured`): the count as digits or as its
+    /// word, the unit as its word, the qualifier as its word, the base
+    /// as what the words say. A structure the words contradict is
+    /// refused, never repaired from a phrase parser.
+    #[serde(default)]
+    pub read: When,
+    /// The date a period counts from, as a reading of where the letter
+    /// prints it: the dateline for `counts_from: letter_date`, the
+    /// named day for `named_date`. Absent for a deadline that names its
+    /// own day or no day. Verified as a reading and parsed as one full
+    /// date; the letter's own date is therefore a closed question the
+    /// model answers, never a line Rust went looking for.
+    #[serde(default)]
+    pub from: crate::reading::Reading,
     /// The sum this ask is for, copied verbatim from the passage `at`
     /// ("£84.00" — a whole money token there, #460 rule one), verified
     /// by `reading::check`. Absent (`value: ""`) when the letter prints
@@ -378,6 +391,12 @@ pub struct Obligation {
     /// recorded what was shown.
     #[serde(default)]
     pub shown: std::collections::BTreeSet<usize>,
+    /// Why the deadline stayed undated, when it did (review of #626,
+    /// Task 5): the structure contradicted its words, the words ask
+    /// for a computation Kettle does not make, or no base was read.
+    /// The words stay visible beside it either way.
+    #[serde(default)]
+    pub unresolved: Option<crate::timeline::Unresolved>,
     /// The model's confidence about this segment's reading. Low means
     /// "check this yourself", exactly as it does for a classification.
     pub confidence: String,
@@ -445,6 +464,53 @@ pub const NO_AMOUNT: &str = "no amount";
 
 /// What a person is shown for a party the page could not vouch for.
 pub const THE_SENDER: &str = "the sender";
+
+/// A deadline's words read into fields (#622; review of #626, Task 5),
+/// enum-constrained by the pack's schema. Rust checks every field
+/// against the words it was read from, whether or not another field is
+/// `none`, and only then counts — still not maths, because fourteen is
+/// a number the letter wrote.
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub struct When {
+    /// The number the words give; 0 when they name a day or no period.
+    #[serde(default)]
+    pub count: u64,
+    /// `days`, `weeks`, `months`, or `none`.
+    #[serde(default = "none_word")]
+    pub unit: String,
+    /// `calendar`, `clear`, `working`, or `none`.
+    #[serde(default = "none_word")]
+    pub qualifier: String,
+    /// `letter_date`, `receipt`, `named_date`, `month_end`, or `none`.
+    #[serde(default = "none_word")]
+    pub counts_from: String,
+}
+
+fn none_word() -> String {
+    "none".to_owned()
+}
+
+impl Default for When {
+    fn default() -> Self {
+        When {
+            count: 0,
+            unit: none_word(),
+            qualifier: none_word(),
+            counts_from: none_word(),
+        }
+    }
+}
+
+impl When {
+    pub fn new(count: u64, unit: &str, qualifier: &str, counts_from: &str) -> Self {
+        When {
+            count,
+            unit: unit.to_owned(),
+            qualifier: qualifier.to_owned(),
+            counts_from: counts_from.to_owned(),
+        }
+    }
+}
 
 /// A reading the page contradicted, kept beside the obligation as
 /// diagnostic evidence (review of #626, Task 4).
@@ -2127,13 +2193,9 @@ fn run_segment_step(
 /// One thing routes an obligation to a person instead of into the
 /// timeline, and it is a checkable fact rather than a judgement:
 ///
-/// - **a passage that grants and requires nothing** — *"You may also
-///   confirm in writing…"* obliges nobody, and the v14 letter run
-///   reported it as a `response` action at high confidence (#406). The
-///   check is [`crate::modality::grants_without_requiring`], and it
-///   routes rather than drops: a permission wrongly surfaced costs a
-///   person a glance, where a requirement wrongly dropped is the harm
-///   with no headroom.
+/// - a passage that offers rather than asks is the model's judgement,
+///   measured by the `courtesy-only` stratum; Rust keeps no permission
+///   vocabulary of its own (review of #626, Task 5).
 fn segment_obligations(
     segment: &crate::document::Segment,
     segments: &[crate::document::Segment],
@@ -2142,9 +2204,8 @@ fn segment_obligations(
     trace: &SegmentTrace,
 ) -> (Vec<Obligation>, Vec<ReviewItem>) {
     let confidence = text(answer, "confidence");
-    let granted = crate::modality::grants_without_requiring(&segment.text);
     let mut read = Vec::new();
-    let mut review = Vec::new();
+    let review = Vec::new();
     for (index, obligation) in answer["obligations"]
         .as_array()
         .map(Vec::as_slice)
@@ -2152,47 +2213,6 @@ fn segment_obligations(
         .iter()
         .enumerate()
     {
-        if granted {
-            claim_ledger.push(
-                Some(trace.parent_id.clone()),
-                &trace.step,
-                trace.batch,
-                trace.item,
-                index + 1,
-                crate::claim_trace::ClaimKind::Obligation,
-                &segment.text,
-                obligation.clone(),
-                vec![
-                    crate::claim_trace::check(
-                        crate::claim_trace::Guardrail::Schema,
-                        crate::claim_trace::CheckOutcome::Passed,
-                    ),
-                    crate::claim_trace::check(
-                        crate::claim_trace::Guardrail::Pairing,
-                        crate::claim_trace::CheckOutcome::Passed,
-                    ),
-                    crate::claim_trace::check(
-                        crate::claim_trace::Guardrail::ReviewRouting,
-                        crate::claim_trace::CheckOutcome::Failed,
-                    ),
-                ],
-                crate::claim_trace::TerminalDisposition::NeedsReview,
-            );
-            // One entry per passage, not per claim: what a person is
-            // asked to look at is the passage, and two claims read out
-            // of one sentence are one thing to check.
-            if review.is_empty() {
-                review.push(ReviewItem {
-                    subject: segment.text.clone(),
-                    reason: "This passage offers something rather than asking for \
-                             it, so Kettle has not turned it into an action. Read \
-                             it and decide."
-                        .to_owned(),
-                    transactions: Vec::new(),
-                });
-            }
-            continue;
-        }
         let claim_id = claim_ledger.push(
             Some(trace.parent_id.clone()),
             &trace.step,
@@ -2264,17 +2284,27 @@ fn segment_obligations(
         let deadline = checked_reading(
             "deadline",
             crate::reading::Kind::Phrase,
-            crate::reading::Site::Own,
+            crate::reading::Site::Named,
             &mut refused,
         );
+        let from = checked_reading(
+            "from",
+            crate::reading::Kind::Date,
+            crate::reading::Site::Named,
+            &mut refused,
+        );
+        let when: When =
+            serde_json::from_value(obligation["deadline"]["read"].clone()).unwrap_or_default();
         read.push(Obligation {
             kind: text(obligation, "kind"),
             party,
             ask: text(obligation, "ask"),
             deadline,
-            anchor: text(obligation, "anchor"),
+            read: when,
+            from,
             amount,
             refused,
+            unresolved: None,
             shown: trace.shown.clone(),
             confidence: confidence.clone(),
             due: None,
@@ -2294,7 +2324,12 @@ fn segment_obligations(
 /// not that shape reads as absent at the obligation's own passage — the
 /// defined convention, checked against nothing.
 fn reading_of(obligation: &serde_json::Value, field: &str, own: usize) -> crate::reading::Reading {
-    let value = &obligation[field];
+    // `from` and `read` sit inside the deadline object on the wire
+    // (`deadline: {at, value, read, from}`), because they are about it.
+    let value = match field {
+        "from" => &obligation["deadline"]["from"],
+        _ => &obligation[field],
+    };
     match (value["at"].as_u64(), value["value"].as_str()) {
         (Some(at), Some(text)) => crate::reading::Reading::new(at as usize, text),
         _ => crate::reading::Reading::absent(own),

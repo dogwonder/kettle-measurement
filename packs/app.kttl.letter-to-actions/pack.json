@@ -283,7 +283,7 @@
       "classes": {}
     },
     "controlled-must-to-may": {
-      "description": "Controlled-change family (#465): must becomes may, so the obligation disappears and nothing else moves.",
+      "description": "Controlled-change family (#465): must becomes may, so the obligation disappears and nothing else moves. Ungated since 7 September 2026: the edited passage's decision does not join 'any-letter'. Review of #626 step 7 retired the Rust may-grant rule and left optional permission as a model judgement; the 4B then read 'You may also confirm in writing' as a task on both backends after two plain statements of the principle and a permission example, and the no_obligation ceiling at n=101 carries no error. The relation still judges the twin. Promotion condition: the 4B reads optional permission as no task on a bed whose sentences the prompt never names, on a full run of both sets.",
       "classes": {}
     },
     "controlled-anchor-substituted": {

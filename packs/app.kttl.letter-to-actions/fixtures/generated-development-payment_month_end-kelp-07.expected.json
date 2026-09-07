@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-07-31",
         "kind": "payment",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-kelp-07-payment-01",
       "segment": "The balance on your policy renewal is £188.20. Please settle it by the end of the month.",

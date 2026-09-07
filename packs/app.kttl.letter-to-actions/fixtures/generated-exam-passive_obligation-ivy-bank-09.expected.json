@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": "2026-03-24",
         "kind": "payment",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-ivy-bank-09-payment-01",
       "segment": "Settlement of £214.60 must be received within 42 days of the date of this letter, or the matter is referred onward.",

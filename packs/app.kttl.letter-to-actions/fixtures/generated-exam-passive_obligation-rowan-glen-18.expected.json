@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": "2027-01-01",
         "kind": "response",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-rowan-glen-18-response-01",
       "segment": "A written response about the check-up is required within 35 days of the date of this letter.",

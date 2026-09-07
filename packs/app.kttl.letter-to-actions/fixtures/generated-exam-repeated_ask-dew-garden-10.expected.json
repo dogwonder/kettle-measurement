@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-04-05",
         "kind": "payment",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-dew-garden-10-payment-01",
       "segment": "Payment of £0.00 towards your annual review is required within 21 days of the date of this letter.",
@@ -26,7 +33,14 @@
         "deadline": "within 21 days",
         "due": "2026-04-05",
         "kind": "payment",
-        "party": "Marlow Ridge Surgery"
+        "party": "Marlow Ridge Surgery",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-dew-garden-10-payment-02",
       "segment": "As a reminder, the sum of £0.00 must reach us within 21 days of the date of this letter.",

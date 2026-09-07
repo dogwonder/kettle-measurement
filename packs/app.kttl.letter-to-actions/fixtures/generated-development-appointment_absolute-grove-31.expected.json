@@ -9,7 +9,14 @@
         "deadline": "on 22 July 2026",
         "due": "2026-07-22",
         "kind": "attendance",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-grove-31-attendance-01",
       "segment": "You have an appointment about your policy renewal at Belwood Insurance on 22 July 2026. Please arrive ten minutes early and bring this letter with you.",

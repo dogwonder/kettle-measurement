@@ -5,11 +5,18 @@
     {
       "expect": {
         "amount": "£270.00",
-        "anchor": "the date given against it",
-        "deadline": "by the date given against it",
+        "anchor": "no particular date",
+        "deadline": "3 March 2027",
         "due": "2027-03-03",
         "kind": "payment",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": true,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "invoice_totals-rafter-end-07-payment-01",
       "segment": "Our invoice for the case file is set out below. The amount shown as due should reach us by the date given against it.",

@@ -9,7 +9,14 @@
         "deadline": "within 28 days",
         "due": "2027-01-25",
         "kind": "response",
-        "party": "Grantley Legal Aid"
+        "party": "Grantley Legal Aid",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-gorse-common-07-response-01",
       "segment": "The enclosed declaration is to be returned within 28 days of the date of this letter, quoting reference GLA-5527.",

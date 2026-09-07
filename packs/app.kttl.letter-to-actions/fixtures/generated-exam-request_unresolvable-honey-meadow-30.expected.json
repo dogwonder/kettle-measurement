@@ -9,7 +9,14 @@
         "deadline": "as soon as you are able",
         "due": null,
         "kind": "response",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "request_unresolvable-honey-meadow-30-response-01",
       "segment": "We would be grateful if you could send a meter reading for your check-up as soon as you are able.",

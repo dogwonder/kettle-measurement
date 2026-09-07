@@ -9,7 +9,14 @@
         "deadline": "for 16 August 2026 at 10.40am",
         "due": "2026-08-16",
         "kind": "attendance",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-mosswell-49-attendance-01",
       "segment": "An appointment concerning your tenancy account has been arranged with Ashcombe Housing Trust for 16 August 2026 at 10.40am.",
@@ -34,7 +41,14 @@
         "deadline": "ahead of the visit",
         "due": null,
         "kind": "other",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-mosswell-49-other-03",
       "segment": "You must take a ticket from the machine as you enter and package the item this enquiry concerns ahead of the visit.",
@@ -59,7 +73,14 @@
         "deadline": "on arrival",
         "due": null,
         "kind": "other",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-mosswell-49-other-05",
       "segment": "You must report to the main desk when you arrive, and write out a record of your previous addresses on arrival.",

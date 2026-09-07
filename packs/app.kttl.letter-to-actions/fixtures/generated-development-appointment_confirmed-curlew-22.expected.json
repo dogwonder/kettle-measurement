@@ -9,7 +9,14 @@
         "deadline": "on 18 January 2026 at 3.50pm",
         "due": "2026-01-18",
         "kind": "attendance",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-curlew-22-attendance-01",
       "segment": "This letter confirms your appointment about your membership with Eastvale Library Service on 18 January 2026 at 3.50pm.",

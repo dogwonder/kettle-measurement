@@ -9,7 +9,14 @@
         "deadline": "on 19 February 2026",
         "due": "2026-02-19",
         "kind": "attendance",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-pine-cottage-15-attendance-01",
       "segment": "We have booked your energy account appointment with Cranleigh Energy on 19 February 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

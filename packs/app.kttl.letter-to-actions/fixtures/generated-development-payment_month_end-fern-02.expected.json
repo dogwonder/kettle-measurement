@@ -9,7 +9,14 @@
         "deadline": "by the end of the month",
         "due": "2026-02-28",
         "kind": "payment",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "month_end",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "payment_month_end-fern-02-payment-01",
       "segment": "The balance on your council tax account is £214.60. Please settle it by the end of the month.",

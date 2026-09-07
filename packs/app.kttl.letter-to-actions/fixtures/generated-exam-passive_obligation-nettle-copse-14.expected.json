@@ -9,7 +9,14 @@
         "deadline": "within 42 days",
         "due": "2026-08-18",
         "kind": "payment",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 42,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-nettle-copse-14-payment-01",
       "segment": "Settlement of £188.20 must be received within 42 days of the date of this letter, or the matter is referred onward.",

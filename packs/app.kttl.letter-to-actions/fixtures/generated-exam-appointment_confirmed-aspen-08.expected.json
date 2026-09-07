@@ -9,7 +9,14 @@
         "deadline": "on 25 October 2026 at 2.15pm",
         "due": "2026-10-25",
         "kind": "attendance",
-        "party": "Harborne Parking Services"
+        "party": "Harborne Parking Services",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-aspen-08-attendance-01",
       "segment": "We are writing to confirm your parking charge appointment with Harborne Parking Services on 25 October 2026 at 2.15pm.",

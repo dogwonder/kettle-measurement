@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-11-16",
         "kind": "payment",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-bronze-leaf-29-payment-01",
       "segment": "Please settle £12.00 for your membership within 21 days of the date of this letter.",
@@ -27,7 +34,14 @@
         "deadline": "within 35 days",
         "due": "2026-11-30",
         "kind": "response",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_and_response-bronze-leaf-29-response-02",
       "segment": "You must also write to confirm that payment has been made, within 35 days of the date of this letter.",

@@ -247,12 +247,12 @@
           "edit": "one deadline moves one day later",
           "only_left": {
             "": [
-              "payment/Kelsford Borough Council/within 14 days/2026-02-24"
+              "payment/Kelsford Borough Council/2026-02-24 counted"
             ]
           },
           "only_right": {
             "": [
-              "payment/Kelsford Borough Council/within 15 days/2026-02-25"
+              "payment/Kelsford Borough Council/2026-02-25 counted"
             ]
           },
           "projection": "obligations_set"
@@ -268,7 +268,7 @@
           "edit": "must becomes may, so the obligation is no longer one",
           "only_left": {
             "": [
-              "response/Trentham & Yale Solicitors/within 28 days/2026-05-14"
+              "response/Trentham & Yale Solicitors/2026-05-14 counted"
             ]
           },
           "only_right": {},
@@ -285,12 +285,12 @@
           "edit": "the stated dateless anchor changes to one that is semantically false",
           "only_left": {
             "": [
-              "response/Harborne Parking Services/within 14 days/the date of this letter/undated"
+              "response/Harborne Parking Services/14 days none from letter_date/letter_date:"
             ]
           },
           "only_right": {
             "": [
-              "response/Harborne Parking Services/within 14 days/the invoice date/undated"
+              "response/Harborne Parking Services/14 days none from named_date/named_date:"
             ]
           },
           "projection": "obligations_with_anchors"
@@ -306,12 +306,12 @@
           "edit": "one deadline moves one day later",
           "only_left": {
             "": [
-              "payment/Belwood Insurance/within 21 days/2026-07-28"
+              "payment/Belwood Insurance/2026-07-28 counted"
             ]
           },
           "only_right": {
             "": [
-              "payment/Belwood Insurance/within 22 days/2026-07-29"
+              "payment/Belwood Insurance/2026-07-29 counted"
             ]
           },
           "projection": "obligations_set"
@@ -327,7 +327,7 @@
           "edit": "must becomes may, so the obligation is no longer one",
           "only_left": {
             "": [
-              "response/Denholm Veterinary Group/within 35 days/2026-10-18"
+              "response/Denholm Veterinary Group/2026-10-18 counted"
             ]
           },
           "only_right": {},
@@ -344,12 +344,12 @@
           "edit": "the stated dateless anchor changes to one that is semantically false",
           "only_left": {
             "": [
-              "response/Ashcombe Housing Trust/within 21 days/the date of this letter/undated"
+              "response/Ashcombe Housing Trust/21 days none from letter_date/letter_date:"
             ]
           },
           "only_right": {
             "": [
-              "response/Ashcombe Housing Trust/within 21 days/the date of the hearing/undated"
+              "response/Ashcombe Housing Trust/21 days none from named_date/named_date:"
             ]
           },
           "projection": "obligations_with_anchors"

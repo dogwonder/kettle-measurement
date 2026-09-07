@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": "2026-05-29",
         "kind": "response",
-        "party": "Trentham & Yale Solicitors"
+        "party": "Trentham & Yale Solicitors",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-willow-ait-23-response-01",
       "segment": "A written response about the estate matter is required within 35 days of the date of this letter.",

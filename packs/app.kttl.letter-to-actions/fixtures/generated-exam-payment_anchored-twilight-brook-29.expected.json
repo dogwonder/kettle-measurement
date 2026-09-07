@@ -9,7 +9,14 @@
         "deadline": "within 45 days",
         "due": "2026-09-19",
         "kind": "payment",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 45,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-twilight-brook-29-payment-02",
       "segment": "The sum of £12.00 falls due within 45 days of 5 August 2026. Please quote ELS-3391 when you pay.",

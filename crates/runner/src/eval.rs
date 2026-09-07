@@ -218,7 +218,23 @@ pub const MAX_REVIEW_RATE_KEY: &str = "max_review_rate";
 /// near miss — and a sum copied onto an ask whose passage prints none
 /// is an invention. Harm cells and verdicts move wherever a run misread
 /// or invented a figure, so version 17 baselines are refused.
-pub const SCORING_VERSION: u32 = 18;
+/// Version 19 (review of #626, Tasks 4 and 5; #625): the route a day
+/// is arrived at by is read from structure, not parsed from words.
+/// [`ObligationIdentity`]'s shape comes from `deadline_route` over the
+/// `when` the bed authors and the `read` the model gives, the same
+/// function on both sides, so the phrase parser is gone from the
+/// scorer; a dated expectation without `when` is refused at load. A
+/// pointing ask expects the date its row prints, read at that row,
+/// rather than the pointing words (#544 still holds: the ask is scored
+/// where it was made). `amount` is absent rather than a sentinel on
+/// the run's side and maps to the bed's sentinel. An undated period
+/// with structure on both sides is compared by that structure and the
+/// day its base names, never by the copied phrase (6 September 2026,
+/// before this version merged: the substituted-anchor twin's faithful
+/// reading was refused on both backends for copying more words than
+/// the bed wrote). Identity moves for every dated obligation, so
+/// version 18 baselines are refused.
+pub const SCORING_VERSION: u32 = 19;
 
 pub use crate::timeline::DeadlineShape;
 
@@ -1179,6 +1195,9 @@ pub struct ModelExchange {
 /// The metric-specific part of a scored item. The `metric` discriminator
 /// makes the record extensible without making identity, provenance,
 /// strata or raw exchanges classification concepts.
+// The extraction arm carries the deadline's authored structure since
+// scoring version 19; a box here would buy nothing a reader can see.
+#[allow(clippy::large_enum_variant)]
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "metric", rename_all = "snake_case")]
 pub enum ScoredDecision {
@@ -1322,6 +1341,18 @@ pub struct ExpectedObligation {
     /// one was there, is the honest reading.
     #[serde(default = "crate::run::no_amount_string")]
     pub amount: String,
+    /// The deadline's words as structure (review of #626, Task 5):
+    /// what the shape that wrote the phrase knows about it, so the
+    /// route a day is arrived at by is authored beside the day, never
+    /// parsed back out of the prose. Absent only on a bed authored
+    /// before scoring version 19, which the loader refuses where a
+    /// day is expected.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub when: Option<crate::run::When>,
+    /// The words were printed at a passage other than the ask's own —
+    /// a due-date row the ask points at (#544).
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub pointed: bool,
 }
 
 impl ExpectedObligation {
@@ -1335,6 +1366,8 @@ impl ExpectedObligation {
             &self.anchor,
             &self.amount,
             self.due,
+            self.when.as_ref(),
+            self.pointed,
         )
     }
 }
@@ -1356,8 +1389,16 @@ impl From<&crate::run::Obligation> for ExpectedObligation {
                 found.amount.value.clone()
             },
             deadline: found.deadline.value.clone(),
-            anchor: found.anchor.clone(),
+            // The base the words count from, as the bed writes it: the
+            // day read, or the letter's own date, or none.
+            anchor: match found.read.counts_from.as_str() {
+                "named_date" => found.from.value.clone(),
+                "letter_date" | "month_end" => "the date of this letter".to_owned(),
+                _ => "no particular date".to_owned(),
+            },
             due: found.due.map(|d| d.date),
+            when: Some(found.read.clone()),
+            pointed: found.dated_by.is_some(),
         }
     }
 }
@@ -1375,8 +1416,11 @@ impl From<&crate::run::Obligation> for ExpectedObligation {
 ///
 /// The rule: the same kind of ask, on the same party (as the merchant
 /// joins read names, case apart), **by the same day arrived at the same
-/// way** — and where no day resolved, in the letter's own words, because
-/// the words are what a person is shown. A dated deadline's wording and
+/// way** — where no day resolved but the words gave a period, by that
+/// period as structure (count, unit, qualifier, base) since the words
+/// it was copied in are `reading::check`'s question — and where the
+/// words gave no period at all, in the letter's own words, because the
+/// words are what a person is shown. A dated deadline's wording and
 /// its anchor are the working, not the claim: "within 45 days" counted
 /// from the anchor "23 August 2026" and "within 45 days of 23 August
 /// 2026" with no anchor are two faithful copies of one letter that
@@ -1403,6 +1447,21 @@ enum When {
         date: NaiveDate,
         shape: DeadlineShape,
     },
+    /// A period the words give and no day it resolved to: an undated
+    /// letter, a base the page names and never dates, a computation
+    /// Rust refuses. Compared by what the words say as structure —
+    /// count, unit, qualifier, base — and by the day the base names
+    /// if it names one, never by the words themselves: "within 14
+    /// days" and "within 14 days of the invoice date" are one reading
+    /// copied to two lengths, and which words were copied is
+    /// `reading::check`'s question, not identity's (6 September 2026).
+    Period {
+        count: u64,
+        unit: String,
+        qualifier: String,
+        counts_from: String,
+        anchor_date: Option<NaiveDate>,
+    },
     Words {
         words: String,
         anchor_date: Option<NaiveDate>,
@@ -1410,6 +1469,7 @@ enum When {
 }
 
 impl ObligationIdentity {
+    #[allow(clippy::too_many_arguments)]
     pub fn of(
         kind: &str,
         party: &str,
@@ -1417,13 +1477,40 @@ impl ObligationIdentity {
         anchor: &str,
         amount: &str,
         due: Option<NaiveDate>,
+        read: Option<&crate::run::When>,
+        pointed: bool,
     ) -> Self {
-        let when = match due {
-            Some(date) => When::Day {
-                date,
-                shape: crate::timeline::deadline_shape(deadline),
-            },
-            None => When::Words {
+        // The route from structure, never from the words (review of
+        // #626, Task 5): the same `deadline_route` the runtime reads.
+        // A dated obligation with no structure authored is a bed from
+        // before scoring version 19, and the loader refuses it; here
+        // it reads as undated so the mismatch is visible, not silent.
+        let route = read.map(|read| {
+            crate::timeline::deadline_route(
+                read,
+                pointed,
+                crate::timeline::first_full_date(deadline).is_some(),
+            )
+        });
+        let when = match (due, route) {
+            (Some(date), Some(shape)) => When::Day { date, shape },
+            // A period with structure on both sides and no day: its
+            // identity is the structure. Only a counted route counts —
+            // a deadline with no period at all ("at your earliest
+            // convenience") would otherwise collapse onto every other,
+            // and those are shown, and compared, in the letter's words.
+            (None, Some(DeadlineShape::Counted)) => {
+                let read = read.expect("a route was derived from a reading");
+                When::Period {
+                    count: read.count,
+                    unit: read.unit.clone(),
+                    qualifier: read.qualifier.clone(),
+                    counts_from: read.counts_from.clone(),
+                    anchor_date: crate::timeline::first_full_date(anchor)
+                        .or_else(|| crate::timeline::first_full_date(deadline)),
+                }
+            }
+            _ => When::Words {
                 words: deadline.to_lowercase(),
                 anchor_date: crate::timeline::first_full_date(anchor),
             },
@@ -1442,6 +1529,44 @@ impl ObligationIdentity {
     pub fn key(&self) -> String {
         format!("{self:?}")
     }
+
+    /// The deadline half of the identity as one readable token, for a
+    /// relation projection entry: the day and its route, or the period
+    /// as structure, or the words. The same three cases as equality,
+    /// so a projection cannot call two readings different that
+    /// identity calls the same (6 September 2026).
+    pub fn when_key(&self) -> String {
+        match &self.when {
+            When::Day { date, shape } => format!("{date} {}", format!("{shape:?}").to_lowercase()),
+            When::Period {
+                count,
+                unit,
+                qualifier,
+                counts_from,
+                anchor_date,
+            } => match anchor_date {
+                Some(day) => format!("{count} {unit} {qualifier} from {counts_from} {day}"),
+                None => format!("{count} {unit} {qualifier} from {counts_from}"),
+            },
+            When::Words { words, anchor_date } => match anchor_date {
+                Some(day) => format!("{words} ({day})"),
+                None => words.clone(),
+            },
+        }
+    }
+}
+
+/// [`ObligationIdentity::when_key`] for a deadline given as the bed
+/// writes one, so the bed's declared relation entries and the run's
+/// projected ones come from one function.
+pub fn deadline_key(
+    deadline: &str,
+    anchor: &str,
+    due: Option<NaiveDate>,
+    when: Option<&crate::run::When>,
+    pointed: bool,
+) -> String {
+    ObligationIdentity::of("", "", deadline, anchor, "", due, when, pointed).when_key()
 }
 
 /// A named value a document states (#66, #350): what it is, what it is

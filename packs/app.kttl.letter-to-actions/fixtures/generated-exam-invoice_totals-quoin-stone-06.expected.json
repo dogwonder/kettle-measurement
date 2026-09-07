@@ -5,11 +5,18 @@
     {
       "expect": {
         "amount": "£240.00",
-        "anchor": "the date given against it",
-        "deadline": "by the date given against it",
+        "anchor": "no particular date",
+        "deadline": "20 January 2027",
         "due": "2027-01-20",
         "kind": "payment",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": true,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "invoice_totals-quoin-stone-06-payment-01",
       "segment": "Our invoice for the check-up is set out below. The amount shown as due should reach us by the date given against it.",

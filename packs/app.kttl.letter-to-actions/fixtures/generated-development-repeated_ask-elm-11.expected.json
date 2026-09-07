@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-12-07",
         "kind": "payment",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-elm-11-payment-01",
       "segment": "Please pay £68.50 for your check-up within 14 days of the date of this letter.",
@@ -26,7 +33,14 @@
         "deadline": "within 14 days",
         "due": "2026-12-07",
         "kind": "payment",
-        "party": "Fenwick Dental Practice"
+        "party": "Fenwick Dental Practice",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-elm-11-payment-02",
       "segment": "We remind you that payment of £68.50 is due within 14 days of the date of this letter.",

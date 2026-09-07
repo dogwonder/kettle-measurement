@@ -9,7 +9,14 @@
         "deadline": "on 14 July 2026",
         "due": "2026-07-14",
         "kind": "attendance",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_absolute-ocean-path-14-attendance-01",
       "segment": "We have booked your policy renewal appointment with Belwood Insurance on 14 July 2026. Please allow fifteen minutes for parking, and bring photographic identification with you.",

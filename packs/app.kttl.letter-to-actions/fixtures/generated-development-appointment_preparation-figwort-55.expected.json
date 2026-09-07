@@ -9,7 +9,14 @@
         "deadline": "for 16 August 2026 at 11.20am",
         "due": "2026-08-16",
         "kind": "attendance",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-figwort-55-attendance-01",
       "segment": "Your appointment about your policy renewal with Belwood Insurance is booked for 16 August 2026 at 11.20am.",
@@ -34,7 +41,14 @@
         "deadline": "on the day",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-figwort-55-other-03",
       "segment": "Please allow fifteen minutes for parking, and bring your address history with you on the day.",
@@ -59,7 +73,14 @@
         "deadline": "before your appointment",
         "due": null,
         "kind": "other",
-        "party": "Belwood Insurance"
+        "party": "Belwood Insurance",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_preparation-figwort-55-other-05",
       "segment": "Please keep to the marked walkway from the car park, and obtain a copy of the agreement from the other party before your appointment.",

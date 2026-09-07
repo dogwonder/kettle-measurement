@@ -106,6 +106,7 @@ impl MockModel {
         MockModel { port, request }
     }
 
+    #[allow(dead_code)]
     pub fn endpoint(&self) -> Endpoint {
         Endpoint::local(self.port)
     }
@@ -175,4 +176,36 @@ pub fn per_batch(answer: &str, starts: &[usize]) -> Vec<(&'static str, String)> 
             )
         })
         .collect()
+}
+
+/// What a bed author knows about the phrases these tests use: the
+/// structure the model would read off them, authored here rather than
+/// parsed at scoring time (review of #626, Task 5). Returns the
+/// structure and whether the words are printed at a row the ask points
+/// at.
+#[allow(dead_code)]
+pub fn authored_when(deadline: &str, anchor: &str) -> (runner::run::When, bool) {
+    use runner::run::When;
+    let dated = |text: &str| runner::timeline::first_full_date(text).is_some();
+    if let Some(days) = deadline
+        .strip_prefix("within ")
+        .and_then(|rest| rest.split_whitespace().next())
+        .and_then(|n| n.parse::<u64>().ok())
+    {
+        let letters_own = anchor.is_empty()
+            || anchor == "the date of this letter"
+            || anchor == "no particular date"
+            || anchor == "14 days";
+        let base = if dated(anchor) || dated(deadline) || !letters_own {
+            "named_date"
+        } else {
+            "letter_date"
+        };
+        return (When::new(days, "days", "none", base), false);
+    }
+    if deadline.contains("end of the month") {
+        return (When::new(0, "none", "none", "month_end"), false);
+    }
+    let pointed = deadline.contains("the date shown") || deadline.contains("given against");
+    (When::default(), pointed)
 }

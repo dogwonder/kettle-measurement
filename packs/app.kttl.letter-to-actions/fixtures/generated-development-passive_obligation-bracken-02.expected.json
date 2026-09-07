@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-02-27",
         "kind": "response",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-bracken-02-response-01",
       "segment": "The enclosed declaration is to be returned within 21 days of the date of this letter, quoting reference KBC-90114.",

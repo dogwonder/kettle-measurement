@@ -9,7 +9,14 @@
         "deadline": "within 35 days",
         "due": "2026-10-26",
         "kind": "response",
-        "party": "Denholm Veterinary Group"
+        "party": "Denholm Veterinary Group",
+        "pointed": false,
+        "when": {
+          "count": 35,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-celandine-bay-28-response-01",
       "segment": "A written response about the pet health plan is required within 35 days of the date of this letter.",

@@ -9,7 +9,14 @@
         "deadline": "within 14 days",
         "due": "2026-02-28",
         "kind": "payment",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-thistle-26-payment-01",
       "segment": "Please pay £214.60 for your council tax account within 14 days of the date of this letter.",
@@ -26,7 +33,14 @@
         "deadline": "within 14 days",
         "due": "2026-02-28",
         "kind": "payment",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 14,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "repeated_ask-thistle-26-payment-02",
       "segment": "We remind you that payment of £214.60 is due within 14 days of the date of this letter.",

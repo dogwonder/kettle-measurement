@@ -9,7 +9,14 @@
         "deadline": "on 8 November 2026 at 12.00pm",
         "due": "2026-11-08",
         "kind": "attendance",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-kestrel-20-attendance-01",
       "segment": "This letter confirms your appointment about your energy account with Cranleigh Energy on 8 November 2026 at 12.00pm.",

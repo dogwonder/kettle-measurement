@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-03-07",
         "kind": "payment",
-        "party": "Kelsford Borough Council"
+        "party": "Kelsford Borough Council",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "passive_obligation-upton-heath-21-payment-01",
       "segment": "Payment of £214.60 must be received within 21 days of the date of this letter.",

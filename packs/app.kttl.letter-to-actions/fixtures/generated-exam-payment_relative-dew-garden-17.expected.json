@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": "2026-11-12",
         "kind": "payment",
-        "party": "Eastvale Library Service"
+        "party": "Eastvale Library Service",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_relative-dew-garden-17-payment-01",
       "segment": "The sum of £12.00 for your membership is now overdue. Payment must reach us within 21 days of the date of this letter.",

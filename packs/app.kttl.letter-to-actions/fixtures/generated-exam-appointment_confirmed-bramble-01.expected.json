@@ -9,7 +9,14 @@
         "deadline": "on 16 September 2026 at 3.50pm",
         "due": "2026-09-16",
         "kind": "attendance",
-        "party": "Ashcombe Housing Trust"
+        "party": "Ashcombe Housing Trust",
+        "pointed": false,
+        "when": {
+          "count": 0,
+          "counts_from": "none",
+          "qualifier": "none",
+          "unit": "none"
+        }
       },
       "id": "appointment_confirmed-bramble-01-attendance-01",
       "segment": "We are writing to confirm your tenancy account appointment with Ashcombe Housing Trust on 16 September 2026 at 3.50pm.",

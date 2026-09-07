@@ -9,7 +9,14 @@
         "deadline": "within 21 days",
         "due": null,
         "kind": "response",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 21,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-harbour-17-response-00",
       "segment": "Please return the enclosed form about your water account within 21 days.",

@@ -9,7 +9,14 @@
         "deadline": "within 45 days",
         "due": "2026-10-21",
         "kind": "payment",
-        "party": "Northgate Water"
+        "party": "Northgate Water",
+        "pointed": false,
+        "when": {
+          "count": 45,
+          "counts_from": "named_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "payment_anchored-ocean-path-24-payment-02",
       "segment": "The sum of £96.45 falls due within 45 days of 6 September 2026. Please quote NW-55210 when you pay.",

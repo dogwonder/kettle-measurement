@@ -9,7 +9,14 @@
         "deadline": "within 28 days",
         "due": null,
         "kind": "response",
-        "party": "Cranleigh Energy"
+        "party": "Cranleigh Energy",
+        "pointed": false,
+        "when": {
+          "count": 28,
+          "counts_from": "letter_date",
+          "qualifier": "none",
+          "unit": "days"
+        }
       },
       "id": "undated_relative-willow-08-response-00",
       "segment": "Please return the enclosed form about your energy account within 28 days.",

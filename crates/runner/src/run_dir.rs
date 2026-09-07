@@ -34,6 +34,10 @@ use std::path::{Component, Path, PathBuf};
 /// stop logging, not a reason to lose the answers. Errors are swallowed
 /// deliberately, which is why nothing here returns `Result`.
 pub trait RunLog {
+    /// The exact pooled passages emitted by document preprocessing.
+    /// Diagnostics may retain their coordinates without reading inputs twice.
+    fn document(&self, _segments: &[crate::document::Segment]) {}
+
     /// A request whose complete generation identity is known. Older custom
     /// loggers may still consume just the diagnostic prompt/answer pair.
     fn generation(

@@ -34,8 +34,8 @@
 # which is where an address is written and from which every page reads
 # one — and `bundle.resources` in `tauri.conf.json` does not contain it,
 # so nothing declared this way is in the packaged app at all. `a_printed_address_is_only_declared_where_
-# the_product_ships_nothing` fails on an entry outside those two
-# prefixes, which is what keeps `published_address` from becoming a
+# the_product_ships_nothing` fails on an entry outside that
+# prefix, which is what keeps `published_address` from becoming a
 # label somebody pastes onto a real call.
 #
 # This file is checked against *source*. It cannot prove what a packaged
@@ -112,10 +112,12 @@
 # `@font-face` for GDS Transport drops out because we never name it.
 #
 # **The sidecar.** `Sidecar::spawn` runs llama-server with `--port <the
-# port the OS just handed us on 127.0.0.1>`, `-m` and `--threads`, and
-# nothing else. `Endpoint::local` is the only constructor of an
-# endpoint, `base_url` is private, and no environment variable or
-# setting reaches either — so the desktop app cannot be pointed at a
+# port the OS just handed us on 127.0.0.1>`, `-m`, `--threads`, logging
+# verbosity and the explicit `SidecarRuntime::args()` policy (context,
+# reasoning and parallelism). `Endpoint::local` constructs the
+# network endpoint; `Endpoint::replaying` serves disk recordings without
+# a socket. `base_url` is private, and no host setting reaches it — so
+# the desktop app cannot be pointed at a
 # non-loopback model. What it does not do is pass `--host 127.0.0.1`:
 # the bind address is llama-server's default rather than our
 # instruction, which is a weaker guarantee than the rest of this file
@@ -149,7 +151,7 @@
 # compiled out, `crates/*/tests` are separate Cargo targets, and
 # `*.test.ts` is vitest only. Kettle's tests bind loopback sockets
 # constantly to stand up mock model servers, and declaring each one
-# would bury the seven entries that describe the application under
+# would bury the declared application and eval call sites under
 # dozens that describe its harness.
 #
 # Not scanned, and worth saying plainly: `scripts/*.sh`.
@@ -169,7 +171,7 @@ kind = "loopback"
 reason = """
 `Endpoint::local` builds the only base URL the runner ever posts to,
 from a port the OS allocated on 127.0.0.1 at spawn. It is the only
-constructor, `base_url` is private, and nothing reads a host from
+network constructor (`replaying` is disk-only), `base_url` is private, and nothing reads a host from
 configuration or the environment — so a run cannot be aimed elsewhere.
 """
 added = "2026-07-30"

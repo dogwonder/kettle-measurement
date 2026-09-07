@@ -66,7 +66,10 @@ Fixed the same day in the segmenter with no prompt edit: 14 → 21 of 29
 on photographs, text byte-identical. Every pack now states its user
 goal in its manifest, the subscription pack is withdrawn, and a pooled
 verdict reads only the gated strata (`SCORING_VERSION` 17, #581). The
-working list is `CHECKLIST.md`; the plan is `PLAN-2026-08-30.html`.
+working list was `CHECKLIST.md`, with `PLAN-2026-08-30.html` as its visual
+snapshot. Both are historical; [plan.md](plan.md) now tracks the current
+testing/corpus implementation, and [tests-review.md](tests-review.md) records
+which review findings remain open.
 What follows is the history that led here.
 
 **M1 — runner and CLI · M2 — eval harness · M3 — desktop app ·

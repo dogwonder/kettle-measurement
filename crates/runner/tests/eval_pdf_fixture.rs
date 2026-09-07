@@ -11,6 +11,118 @@ use runner::eval::MachineInfo;
 use runner::packs::load_pack;
 use runner::run::Answers;
 use std::path::{Path, PathBuf};
+mod support;
+
+/// Minimal synthetic PDFs with explicit blank pages, generated without
+/// depending on another reader or a platform drawing API.
+fn write_letter_pdf(path: &Path, texts: &[&str]) {
+    let kids = (0..texts.len())
+        .map(|i| format!("{} 0 R", 3 + i * 2))
+        .collect::<Vec<_>>()
+        .join(" ");
+    let mut objects = vec![
+        "<< /Type /Catalog /Pages 2 0 R >>".to_owned(),
+        format!("<< /Type /Pages /Count {} /Kids [{kids}] >>", texts.len()),
+    ];
+    for (i, text) in texts.iter().enumerate() {
+        let stream = if text.is_empty() {
+            String::new()
+        } else {
+            format!("BT /F1 12 Tf 72 720 Td ({text}) Tj ET\n")
+        };
+        objects.push(format!("<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> /Contents {} 0 R >>", 4 + i * 2));
+        objects.push(format!(
+            "<< /Length {} >>\nstream\n{stream}endstream",
+            stream.len()
+        ));
+    }
+    let mut pdf = String::from("%PDF-1.4\n");
+    let mut offsets = Vec::new();
+    for (i, object) in objects.iter().enumerate() {
+        offsets.push(pdf.len());
+        pdf.push_str(&format!("{} 0 obj\n{object}\nendobj\n", i + 1));
+    }
+    let xref = pdf.len();
+    pdf.push_str(&format!(
+        "xref\n0 {}\n0000000000 65535 f \n",
+        objects.len() + 1
+    ));
+    for offset in offsets {
+        pdf.push_str(&format!("{offset:010} 00000 n \n"));
+    }
+    pdf.push_str(&format!(
+        "trailer\n<< /Size {} /Root 1 0 R >>\nstartxref\n{xref}\n%%EOF\n",
+        objects.len() + 1
+    ));
+    std::fs::write(path, pdf).unwrap();
+}
+
+#[test]
+fn the_letter_limit_counts_pdf_pages_including_blank_pages_before_model_use() {
+    let sidecars = root().join("sidecars");
+    if !runner::pdf::library_present(&sidecars) {
+        eprintln!("skipping: no libpdfium in sidecars/ — see sidecars/README.md");
+        return;
+    }
+    let dir = std::env::temp_dir().join(format!("kettle-letter-page-limit-{}", std::process::id()));
+    std::fs::create_dir_all(&dir).unwrap();
+    write_letter_pdf(
+        &dir.join("three.pdf"),
+        &["10 March 2026", "A synthetic letter.", ""],
+    );
+    write_letter_pdf(
+        &dir.join("four.pdf"),
+        &["10 March 2026", "A synthetic letter.", "", ""],
+    );
+    std::fs::write(dir.join("extra.txt"), "Another page.").unwrap();
+    let pack = load_pack(&root().join("packs/app.kttl.letter-to-actions")).unwrap();
+    assert_eq!(pack.manifest.inputs[0].max_pages, Some(3));
+    let run = |paths: &[PathBuf], answers: &Answers| {
+        runner::run::run_pack_with_resources(
+            &pack,
+            paths,
+            answers,
+            runner::run::RunResources {
+                pdfium_dir: Some(&sidecars),
+            },
+            &std::sync::atomic::AtomicBool::new(false),
+            &mut |_| {},
+            &runner::run_dir::NoLog,
+        )
+    };
+    let read = runner::document::read_document_parts_limited(
+        &[dir.join("three.pdf").as_path()],
+        0,
+        Some(&sidecars),
+        Some(3),
+    )
+    .unwrap();
+    assert_eq!(
+        read.pages, 3,
+        "a blank final page counts even without a passage"
+    );
+    run(&[dir.join("three.pdf")], &Answers::WithoutModel)
+        .expect("three physical pages are accepted");
+    for paths in [
+        vec![dir.join("four.pdf")],
+        vec![dir.join("three.pdf"), dir.join("extra.txt")],
+    ] {
+        let mock = support::MockModel::respond_once(
+            "200 OK",
+            support::completion_envelope(r#"{"results":[]}"#),
+        );
+        let error = run(&paths, &Answers::FromModel(mock.endpoint())).unwrap_err();
+        assert!(
+            matches!(
+                error,
+                runner::run::RunError::Parse(runner::parse::ParseError::TooManyPages { max: 3 })
+            ),
+            "{error:?}"
+        );
+        mock.assert_no_request();
+    }
+    std::fs::remove_dir_all(dir).unwrap();
+}
 
 fn root() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../..")

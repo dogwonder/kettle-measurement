@@ -16,6 +16,300 @@ use runner::eval::MachineInfo;
 use runner::packs::load_pack;
 use runner::run::Answers;
 use std::path::{Path, PathBuf};
+mod support;
+use support::{completion_envelope, MockModel};
+
+fn payment_answer() -> String {
+    completion_envelope(&serde_json::json!({"results":[
+        {"id":0,"segment":"10 March 2026","confidence":"high","obligations":[]},
+        {"id":1,"segment":"Example Services","confidence":"high","obligations":[]},
+        {"id":2,"segment":"Please pay £120.00 within 14 days of the date of this letter.","confidence":"high","obligations":[{
+            "kind":"payment","party":{"at":1,"value":"Example Services"},"ask":"Pay £120.00",
+            "amount":{"at":2,"value":"£120.00"},
+            "deadline":{"at":2,"value":"within 14 days of the date of this letter",
+                "read":{"count":14,"unit":"days","qualifier":"none","counts_from":"letter_date"},
+                "from":{"at":0,"value":"10 March 2026"}}
+        }]}
+    ]}).to_string())
+}
+
+#[test]
+fn one_file_and_two_ordered_pages_preserve_the_ask_with_its_actual_evidence_page() {
+    let (dir, pack) = page_fixture("evidence-page");
+    let source = ["z-front.txt", "a-back.txt"]
+        .map(|file| std::fs::read_to_string(dir.join(file)).unwrap())
+        .join("\n\n");
+    std::fs::write(dir.join("whole.txt"), source).unwrap();
+    let mut readings = Vec::new();
+    for (input, page) in [
+        (serde_json::json!(["z-front.txt", "a-back.txt"]), 2),
+        (serde_json::json!("whole.txt"), 1),
+    ] {
+        std::fs::write(
+            dir.join("letter.expected.json"),
+            serde_json::json!({"inputs":{"letter":input}}).to_string(),
+        )
+        .unwrap();
+        let fixture =
+            runner::eval::fixture::fixtures_at_with_roles(&dir, &[], &pack.manifest.inputs)
+                .unwrap()
+                .remove(0);
+        let bound: Vec<_> = fixture
+            .inputs
+            .iter()
+            .map(|(role, path)| (role.as_str(), path.clone()))
+            .collect();
+        let mock = MockModel::respond_once("200 OK", payment_answer());
+        let outcome = runner::run::run_pack_bound(
+            &pack,
+            &bound,
+            &Answers::FromModel(mock.endpoint()),
+            &std::sync::atomic::AtomicBool::new(false),
+            &mut |_| {},
+            &runner::run_dir::NoLog,
+        )
+        .unwrap();
+        let runner::run::Payload::Extraction(extraction) = outcome.payload else {
+            panic!("letter extraction")
+        };
+        assert_eq!(extraction.obligations.len(), 1);
+        let ask = &extraction.obligations[0];
+        assert_eq!(ask.evidence[0].document, 0);
+        assert_eq!(ask.evidence[0].page, page);
+        assert_eq!(ask.from.at, 0);
+        assert_eq!(ask.due.unwrap().date.to_string(), "2026-03-24");
+        readings.push((ask.kind.clone(), ask.amount.value.clone(), ask.due));
+    }
+    assert_eq!(readings[0], readings[1]);
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn grouped_fixture_results_resume_only_for_identical_pages_order_and_policy() {
+    let (dir, mut pack) = page_fixture("resume");
+    let evaluator = FixtureEvaluator {
+        resume_dir: Some(dir.join("cache")),
+        ..page_evaluator(&dir)
+    };
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 0);
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 1);
+    std::fs::write(
+        dir.join("letter.expected.json"),
+        r#"{"inputs":{"letter":["a-back.txt","z-front.txt"]}}"#,
+    )
+    .unwrap();
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 0);
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 1);
+    std::fs::write(dir.join("a-back.txt"), "Please pay £140.00 within 14 days.").unwrap();
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 0);
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 1);
+    pack.manifest.inputs[0].max_pages = Some(2);
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 0);
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 1);
+    pack.manifest.inputs[0].file_semantics = runner::packs::FileSemantics::Documents;
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 0);
+    assert_eq!(evaluator.evaluate(&pack).unwrap().reused_fixtures, 1);
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn a_list_for_a_documents_role_does_not_turn_independent_letters_into_pages() {
+    let (dir, mut pack) = page_fixture("separate-documents");
+    pack.manifest.inputs[0].file_semantics = runner::packs::FileSemantics::Documents;
+    let fixture = runner::eval::fixture::fixtures_at_with_roles(&dir, &[], &pack.manifest.inputs)
+        .unwrap()
+        .remove(0);
+    let bound: Vec<_> = fixture
+        .inputs
+        .iter()
+        .map(|(role, path)| (role.as_str(), path.clone()))
+        .collect();
+    let mock = MockModel::respond_sequence(support::per_batch(&payment_answer(), &[0, 2]));
+    let outcome = runner::run::run_pack_bound(
+        &pack,
+        &bound,
+        &Answers::FromModel(mock.endpoint()),
+        &std::sync::atomic::AtomicBool::new(false),
+        &mut |_| {},
+        &runner::run_dir::NoLog,
+    )
+    .unwrap();
+    let runner::run::Payload::Extraction(extraction) = outcome.payload else {
+        panic!("letter extraction")
+    };
+    let ask = &extraction.obligations[0];
+    assert_eq!(ask.evidence[0].document, 1);
+    assert_eq!(ask.evidence[0].page, 1);
+    assert!(
+        ask.due.is_none(),
+        "the second document cannot borrow the first one's dateline"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+fn page_fixture(name: &str) -> (PathBuf, runner::packs::Pack) {
+    let dir =
+        std::env::temp_dir().join(format!("kettle-page-fixture-{}-{name}", std::process::id()));
+    std::fs::create_dir_all(&dir).unwrap();
+    // Filename order deliberately disagrees with authored page order.
+    std::fs::write(dir.join("z-front.txt"), "10 March 2026\n\nExample Services").unwrap();
+    std::fs::write(
+        dir.join("a-back.txt"),
+        "Please pay £120.00 within 14 days of the date of this letter.",
+    )
+    .unwrap();
+    std::fs::write(
+        dir.join("letter.expected.json"),
+        serde_json::json!({
+            "fixture_id": "ordered-letter-pages",
+            "inputs": {"letter": ["z-front.txt", "a-back.txt"]}
+        })
+        .to_string(),
+    )
+    .unwrap();
+    let pack = load_pack(
+        &Path::new(env!("CARGO_MANIFEST_DIR")).join("../../packs/app.kttl.letter-to-actions"),
+    )
+    .unwrap();
+    (dir, pack)
+}
+
+fn page_evaluator(dir: &Path) -> FixtureEvaluator {
+    FixtureEvaluator {
+        fixtures_dir: Some(dir.to_path_buf()),
+        ..floor_evaluator()
+    }
+}
+
+#[test]
+fn a_fixture_binds_ordered_pages_to_one_role_and_runs() {
+    let (dir, pack) = page_fixture("runs");
+    let fixtures =
+        runner::eval::fixture::fixtures_at_with_roles(&dir, &[], &pack.manifest.inputs).unwrap();
+    assert_eq!(fixtures.len(), 1);
+    assert_eq!(
+        fixtures[0].inputs,
+        vec![
+            ("letter".into(), dir.join("z-front.txt")),
+            ("letter".into(), dir.join("a-back.txt")),
+        ]
+    );
+    let report = page_evaluator(&dir).evaluate(&pack).unwrap();
+    assert_eq!(report.fixtures.len(), 1);
+    assert!(report.unrunnable.is_empty());
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn the_shipped_letter_accepts_three_files_and_refuses_four_without_a_model_request() {
+    let (dir, pack) = page_fixture("file-limit");
+    std::fs::write(dir.join("closing.txt"), "Yours faithfully.").unwrap();
+    std::fs::write(
+        dir.join("letter.expected.json"),
+        serde_json::json!({"inputs":{
+            "letter":["z-front.txt", "a-back.txt", "closing.txt"]
+        }})
+        .to_string(),
+    )
+    .unwrap();
+    assert_eq!(
+        page_evaluator(&dir).evaluate(&pack).unwrap().fixtures.len(),
+        1
+    );
+    std::fs::write(
+        dir.join("letter.expected.json"),
+        serde_json::json!({"inputs":{
+            "letter":["z-front.txt", "a-back.txt", "closing.txt", "closing.txt"]
+        }})
+        .to_string(),
+    )
+    .unwrap();
+    let mock = MockModel::respond_once("200 OK", payment_answer());
+    let evaluator = FixtureEvaluator {
+        answers: Answers::FromModel(mock.endpoint()),
+        ..page_evaluator(&dir)
+    };
+    let error = evaluator.evaluate(&pack).unwrap_err();
+    assert!(
+        error.contains("between one and three files") && error.contains("got 4"),
+        "{error}"
+    );
+    mock.assert_no_request();
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn every_page_and_its_order_contribute_to_the_loaded_fixture_identity() {
+    let (dir, pack) = page_fixture("identity");
+    let load = || {
+        runner::eval::fixture::fixtures_at_with_roles(&dir, &[], &pack.manifest.inputs)
+            .unwrap()
+            .remove(0)
+    };
+    let original = load();
+    let first = runner::eval::fixture::digest_of(&original);
+    // Same expectation bytes: the binding order alone must matter.
+    let mut reversed = original.clone();
+    reversed.inputs.reverse();
+    assert_ne!(first, runner::eval::fixture::digest_of(&reversed));
+    std::fs::write(dir.join("a-back.txt"), "Please pay £140.00 within 14 days.").unwrap();
+    assert_ne!(first, runner::eval::fixture::digest_of(&load()));
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn a_group_refuses_empty_missing_excess_and_wrong_type_inputs_before_evaluation() {
+    for (tag, input, expected) in [
+        ("empty", serde_json::json!([]), "letter"),
+        (
+            "missing",
+            serde_json::json!(["z-front.txt", "lost.txt"]),
+            "lost.txt",
+        ),
+        (
+            "excess",
+            serde_json::json!(["z-front.txt", "a-back.txt", "z-front.txt", "a-back.txt"]),
+            "letter",
+        ),
+        (
+            "directory",
+            serde_json::json!(["z-front.txt", "folder"]),
+            "folder",
+        ),
+        (
+            "wrong-type",
+            serde_json::json!(["z-front.txt", "data.csv"]),
+            "data.csv",
+        ),
+    ] {
+        let (dir, pack) = page_fixture(tag);
+        std::fs::create_dir_all(dir.join("folder")).unwrap();
+        std::fs::write(dir.join("data.csv"), "Date,Amount\n").unwrap();
+        std::fs::write(
+            dir.join("letter.expected.json"),
+            serde_json::json!({"inputs":{"letter":input}}).to_string(),
+        )
+        .unwrap();
+        let error = runner::eval::fixture::fixtures_at_with_roles(&dir, &[], &pack.manifest.inputs)
+            .unwrap_err();
+        assert!(error.contains(expected), "{tag}: {error}");
+        std::fs::remove_dir_all(dir).unwrap();
+    }
+}
+
+#[test]
+fn a_named_fixture_must_supply_every_declared_role() {
+    let dir = comparison_pack("missing-role");
+    std::fs::write(
+        dir.join("fixtures/renewal-01.expected.json"),
+        r#"{"inputs":{"previous":"renewal-01-previous.txt"}}"#,
+    )
+    .unwrap();
+    let pack = load_pack(&dir).unwrap();
+    let error = fixtures_in(&pack).unwrap_err();
+    assert!(error.contains("renewal"), "{error}");
+    std::fs::remove_dir_all(dir).unwrap();
+}
 
 /// A comparison pack (#350's shape) with a two-document fixture whose
 /// `expected.json` names its own inputs by role.

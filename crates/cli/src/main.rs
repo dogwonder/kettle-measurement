@@ -48,6 +48,8 @@ enum Command {
     },
     /// Measure how well a model does a pack's job, against its fixtures
     Eval(cli::eval::Options),
+    /// Diagnose raw readings and verified output against authored source facts
+    Corpus(cli::corpus::Options),
     /// Read a statement file and show the transactions Kettle found
     Parse {
         /// The statement to read (CSV recommended; PDF is best effort)
@@ -223,8 +225,8 @@ fn main() {
             print!("{}", plan::dry_run(&loaded, &inputs, cached.as_ref()));
         }
         Some(Command::Eval(options)) => {
-            // Every flag, the baseline check and the table are finished;
-            // the measuring itself is #25, which fills the seam.
+            // The shared CLI orchestration delegates execution to the
+            // sidecar evaluator, including its floor and replay routes.
             let evaluator = cli::eval::sidecar_evaluator::SidecarEvaluator {
                 sidecar_binary: options
                     .sidecar_binary
@@ -246,6 +248,24 @@ fn main() {
                 std::process::exit(outcome.code.as_i32());
             }
         }
+        Some(Command::Corpus(options)) => match cli::corpus::run(&options) {
+            Ok(report) => {
+                println!(
+                    "{} cases; {} scored asks; {} unscored cases. Report: {}",
+                    report.cases.len(),
+                    report.summary.items,
+                    report.unscored_cases,
+                    options.out.join("report.json").display()
+                );
+                if report.unscored_cases != 0 {
+                    std::process::exit(2);
+                }
+            }
+            Err(error) => {
+                eprintln!("{error}");
+                std::process::exit(2);
+            }
+        },
         Some(Command::Parse { file, sidecars_dir }) => {
             match runner::parse::parse_input_file(&file, Some(&sidecars_dir)) {
                 Ok(parsed) => print!("{}", table::render(&parsed)),

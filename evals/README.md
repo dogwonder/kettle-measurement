@@ -32,10 +32,11 @@ it refuses a scoring-version or bed mismatch.
   2026 on the M1 Pro (Metal; verdict PASS). Refused by the runner
   since v18, and still the evidence `letter-harm-ceilings` cites. Recorded on Metal, so it compares against local runs; a
   pod run needs a pod-recorded baseline.
-- `baseline-v17-renewal.json` — the renewal pack's current floor:
+- `baseline-v17-renewal.json` — the renewal pack's historical v17 floor:
   Qwen3.5-4B on the development bed, scoring v17, recorded 30 August
   2026 on the M1 Pro (Metal; verdict PASS). The evidence
-  `renewal-development-verdict` stands on.
+  `renewal-development-verdict` cites. It cannot be compared by the current
+  scoring-v19 runner.
 - `baseline-v16-letter.json`, `baseline-v16-renewal.json` — the v16
   floors, recorded 25 August 2026 on a rented RTX 3090 (CUDA; both
   PASS). Superseded by the v17 files and refused by the runner; kept
@@ -98,7 +99,7 @@ bytes is a poor trade.
 `baseline.json` deliberately stays put: it is the stable path
 `app/RELEASE-CHECKS.md`, `CLAUDE.md` and this file all name when a new
 subscription-audit baseline is written. Its present scoring-v5 contents
-are a historical record and cannot be compared under scoring v17.
+are a historical record and cannot be compared under scoring v19.
 
 **The pod is the default for full runs, compared against pod
 baselines** (31 August 2026, amended 2 September on #596). Aggregate

@@ -365,6 +365,29 @@ written before comparison packs is. A role the pack does not declare, or
 a file that is not there, is refused at discovery — before a sidecar is
 spawned and before the first fixtures are spent.
 
+**How does a fixture carry ordered pages of one letter?** Use a list
+for that role; the pack's `file_semantics: "pages"` gives it its meaning:
+
+```json
+{ "fixture_id": "appointment-letter-pages",
+  "inputs": { "letter": ["page-one.txt", "page-two.txt"] } }
+```
+
+Roles bind in manifest order and files within each role bind in list
+order, never filename order. A `documents` role keeps each listed file
+as a separate document. Existing filename values remain accepted.
+Every file contributes to the fixture digest in binding order; changes
+to the order or bytes invalidate resume. The effective manifest also
+identifies page limits and grouping policy.
+
+Discovery checks required roles, file counts, file types and named files
+using the runner's binding rules. Physical page limits are checked by
+the document reader before model requests, including blank PDF pages.
+An over-limit input is refused as an input error, not scored as a model
+reading failure. The current letter pack accepts at most three files
+and three physical pages. Longer diagnostic documents need a pack
+declaration that explicitly supports them.
+
 **Why is needs-review a cost and never a failure?** It is the appliance
 working as designed — saying "I am not sure" is the correct answer to
 an unclear input. It is reported (`eval_costs`) so the trade is visible,

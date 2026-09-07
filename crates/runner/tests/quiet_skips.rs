@@ -102,6 +102,18 @@ struct Declared {
 /// that has them, not a smaller skip.
 const DECLARED: &[Declared] = &[
     Declared {
+        file: "cli/tests/corpus_cli.rs",
+        test: "real_pdf_formats_preserve_words_and_report_unavailable_ask_attribution",
+        needs: Needs::Libpdfium,
+        why: "paired PDF diagnostics use the actual vendored reader; platforms without libpdfium retain the text checks (#256)",
+    },
+    Declared {
+        file: "runner/tests/eval_pdf_fixture.rs",
+        test: "the_letter_limit_counts_pdf_pages_including_blank_pages_before_model_use",
+        needs: Needs::Libpdfium,
+        why: "physical PDF page counts require the vendored reader; text-only checks cannot establish this boundary (#256)",
+    },
+    Declared {
         file: "runner/tests/eval_pdf_fixture.rs",
         test: "a_pdf_fixture_is_scored_through_pdfium_when_the_reader_is_named",
         needs: Needs::Libpdfium,

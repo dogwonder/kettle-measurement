@@ -1,0 +1,18 @@
+{
+  "format01-footer": {
+    "inputs": {
+      "letter": [
+        "format01-footer/letter.jpg"
+      ]
+    }
+  },
+  "format01-three-pages": {
+    "inputs": {
+      "letter": [
+        "format01-three-pages/letter-p1.jpg",
+        "format01-three-pages/letter-p2.jpg",
+        "format01-three-pages/letter-p3.jpg"
+      ]
+    }
+  }
+}

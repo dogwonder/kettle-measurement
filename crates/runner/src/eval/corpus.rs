@@ -35,6 +35,8 @@ use std::collections::{BTreeMap, BTreeSet};
 pub struct Corpus {
     pub schema_version: u32,
     pub slice: String,
+    #[serde(default)]
+    pub selection: Option<DiagnosticSelection>,
     pub facts: Vec<Fact>,
     #[serde(default)]
     pub relations: Vec<Relation>,
@@ -88,6 +90,26 @@ pub struct Case {
     pub passages: Vec<String>,
     pub spans: Vec<Span>,
     pub asks: Vec<Ask>,
+    #[serde(default)]
+    pub coverage: Vec<InventoryLink>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct DiagnosticSelection {
+    pub id: String,
+    pub purpose: String,
+    pub exposure: String,
+    pub fields: BTreeSet<Field>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct InventoryLink {
+    pub inventory_id: String,
+    pub inventory_file: String,
+    pub inventory_digest: String,
+    pub capability: String,
+    pub fields: BTreeSet<Field>,
+    pub scope: String,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -110,6 +132,10 @@ pub struct Ask {
     pub passage: usize,
     #[serde(default)]
     pub deadline_words: Option<String>,
+    /// Passage containing the raw deadline phrase; the resolved fact can
+    /// live elsewhere (for example a due-date row pointed to by prose).
+    #[serde(default)]
+    pub deadline_at: Option<usize>,
     /// The deadline's words as structure, authored beside them the way
     /// the letter bed authors `when` since scoring 19 (#628): what a
     /// faithful reading gives for `count`, `unit`, `qualifier` and
@@ -137,13 +163,43 @@ impl Corpus {
     /// Every span binds a known fact to text really in its passage;
     /// every ask field names a known fact; ids are unique.
     pub fn validate(&self) -> Result<(), String> {
+        if self.schema_version != 1 || self.cases.is_empty() {
+            return Err("corpus needs schema_version 1 and at least one case".into());
+        }
+        if let Some(selection) = &self.selection {
+            if selection.id.is_empty()
+                || selection.purpose != "diagnostic"
+                || selection.exposure != "development"
+                || selection.fields.is_empty()
+                || !selection.fields.is_subset(&Selection::letter_pack().fields)
+            {
+                return Err("this command requires an exposed diagnostic selection of supported obligations fields; a challenge needs its own workflow".into());
+            }
+        }
         let mut ids = BTreeSet::new();
         for fact in &self.facts {
             if !ids.insert(fact.id.as_str()) {
                 return Err(format!("duplicate fact id {}", fact.id));
             }
         }
+        let mut case_ids = BTreeSet::new();
         for case in &self.cases {
+            if case.id.is_empty() || !case_ids.insert(&case.id) {
+                return Err(format!("empty or duplicate case id {}", case.id));
+            }
+            let mut ask_ids = BTreeSet::new();
+            for link in &case.coverage {
+                if self.selection.is_none()
+                    || link.inventory_id.is_empty()
+                    || link.fields.is_empty()
+                    || link.scope.trim().is_empty()
+                {
+                    return Err(format!(
+                        "{}: inventory link needs a selection, id, fields and scope",
+                        case.id
+                    ));
+                }
+            }
             for span in &case.spans {
                 if !ids.contains(span.fact.as_str()) {
                     return Err(format!(
@@ -162,6 +218,9 @@ impl Corpus {
                 }
             }
             for ask in &case.asks {
+                if !ask_ids.insert(&ask.id) {
+                    return Err(format!("{}: duplicate ask id {}", case.id, ask.id));
+                }
                 for (field, fact) in &ask.fields {
                     if let Some(fact) = fact {
                         if !ids.contains(fact.as_str()) {
@@ -175,6 +234,22 @@ impl Corpus {
                 if ask.passage >= case.passages.len() {
                     return Err(format!("{}: ask {} passage out of range", case.id, ask.id));
                 }
+                if let Some(at) = ask.deadline_at {
+                    let passage = case
+                        .passages
+                        .get(at)
+                        .ok_or("deadline passage out of range")?;
+                    if ask
+                        .deadline_words
+                        .as_ref()
+                        .is_some_and(|words| !passage.contains(words))
+                    {
+                        return Err(format!(
+                            "{}: deadline words absent from authored passage",
+                            case.id
+                        ));
+                    }
+                }
             }
         }
         Ok(())
@@ -186,6 +261,58 @@ impl Corpus {
 
     pub fn case(&self, id: &str) -> Option<&Case> {
         self.cases.iter().find(|c| c.id == id)
+    }
+
+    /// An inventory link pins the authored document and the exact inventory
+    /// snapshot. A similar example cannot silently stand in for this case.
+    pub fn validate_inventory(&self, dir: &std::path::Path) -> Result<(), String> {
+        use sha2::{Digest, Sha256};
+        let mut files = BTreeMap::new();
+        for case in &self.cases {
+            for link in &case.coverage {
+                if !files.contains_key(&link.inventory_file) {
+                    let path = std::path::Path::new(&link.inventory_file);
+                    if path.components().count() != 1
+                        || !matches!(
+                            path.components().next(),
+                            Some(std::path::Component::Normal(_))
+                        )
+                    {
+                        return Err("inventory link must name a file directly inside the inventory directory".into());
+                    }
+                    let bytes = std::fs::read(dir.join(path)).map_err(|e| e.to_string())?;
+                    let digest = format!(
+                        "sha256:{}",
+                        Sha256::digest(&bytes)
+                            .iter()
+                            .map(|b| format!("{b:02x}"))
+                            .collect::<String>()
+                    );
+                    let inventory: serde_json::Value =
+                        serde_json::from_slice(&bytes).map_err(|e| e.to_string())?;
+                    files.insert(link.inventory_file.clone(), (digest, inventory));
+                }
+                let (digest, inventory) = &files[&link.inventory_file];
+                let source = inventory["cases"]
+                    .as_array()
+                    .and_then(|cases| cases.iter().find(|c| c["id"] == link.inventory_id))
+                    .ok_or_else(|| {
+                        format!("{}: unknown inventory id {}", case.id, link.inventory_id)
+                    })?;
+                if digest != &link.inventory_digest
+                    || inventory["capability"] != link.capability
+                    || source["model_reading"]["case_id"] != case.id
+                    || source["model_reading"]["document"].as_str().map(squash)
+                        != Some(squash(&case.passages.join("\n")))
+                {
+                    return Err(format!(
+                        "{}: stale or mismatched inventory link {}",
+                        case.id, link.inventory_id
+                    ));
+                }
+            }
+        }
+        Ok(())
     }
 }
 
@@ -377,6 +504,17 @@ pub struct CaseScore {
     /// matched: wrong assertions, counted apart from wrong fields.
     pub invented_raw: usize,
     pub invented_verified: usize,
+    /// Explicit negative sites; zero inventions is not a claim that a
+    /// model answered them. Execution traces retain missing/malformed answers.
+    #[serde(default)]
+    pub negative_sites: Vec<NegativeScore>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NegativeScore {
+    pub ask: String,
+    pub invented_raw: usize,
+    pub invented_verified: usize,
 }
 
 // ---------------------------------------------------------------------------
@@ -386,10 +524,47 @@ fn squash(s: &str) -> String {
     s.split_whitespace().collect::<Vec<_>>().join(" ")
 }
 
-fn money_digits(s: &str) -> String {
-    s.chars()
-        .filter(|c| c.is_ascii_digit() || *c == '.')
-        .collect()
+/// A deliberately bounded scoring interpretation, independent of the
+/// production token verifier. No currency is inferred from a bare sum
+/// or an ambiguous dollar sign; unsupported forms remain visible.
+fn interpreted_money(s: &str) -> Option<(rust_decimal::Decimal, &str)> {
+    let s = s.trim();
+    let (sign, s) = if s.starts_with(['-', '+']) {
+        s.split_at(1)
+    } else {
+        ("", s)
+    };
+    let (token, currency) = [
+        ("GBP", "GBP"),
+        ("EUR", "EUR"),
+        ("USD", "USD"),
+        ("£", "GBP"),
+        ("€", "EUR"),
+    ]
+    .into_iter()
+    .find(|(token, _)| s.starts_with(token))?;
+    let s = s.strip_prefix(token)?.trim_start();
+    let (inner_sign, s) = if s.starts_with(['-', '+']) {
+        s.split_at(1)
+    } else {
+        ("", s)
+    };
+    if !sign.is_empty() && !inner_sign.is_empty() {
+        return None;
+    }
+    let (whole, fraction) = s.split_once('.').map_or((s, None), |(w, f)| (w, Some(f)));
+    let digits = |v: &str| !v.is_empty() && v.bytes().all(|b| b.is_ascii_digit());
+    if fraction.is_some_and(|f| !digits(f) || f.len() > 2) {
+        return None;
+    }
+    let groups: Vec<_> = whole.split(',').collect();
+    if !groups.iter().all(|g| digits(g))
+        || (groups.len() > 1 && (groups[0].len() > 3 || groups[1..].iter().any(|g| g.len() != 3)))
+    {
+        return None;
+    }
+    let number = format!("{sign}{inner_sign}{}", s.replace(',', ""));
+    Some((number.parse().ok()?, currency))
 }
 
 /// Score one case: the truth's asks against a raw proposal and the
@@ -478,6 +653,20 @@ pub fn score_case(
         asks,
         invented_raw: proposal.asks.len() - used_raw.len(),
         invented_verified: verified.len() - used_verified.len(),
+        negative_sites: case
+            .asks
+            .iter()
+            .filter(|a| a.status == AskStatus::NoObligation)
+            .map(|a| NegativeScore {
+                ask: a.id.clone(),
+                invented_raw: proposal
+                    .asks
+                    .iter()
+                    .filter(|p| p.passage == a.passage)
+                    .count(),
+                invented_verified: verified.iter().filter(|v| v.passage == a.passage).count(),
+            })
+            .collect(),
     }
 }
 
@@ -531,11 +720,11 @@ fn judge_raw(
         // The document states nothing for this field: the right answer
         // is nothing, and a value is an invention.
         (None, None) => Outcome::Correct,
-        (Some((fact, _)), None) if fact.status != FactStatus::Stated => Outcome::Correct,
+        (Some((_, None)), None) => Outcome::Correct,
         (None, Some(r)) => Outcome::Wrong {
             got: r.value.clone(),
         },
-        (Some((fact, _)), Some(r)) if fact.status != FactStatus::Stated => Outcome::Wrong {
+        (Some((_, None)), Some(r)) => Outcome::Wrong {
             got: r.value.clone(),
         },
         (Some(_), None) => Outcome::Missing,
@@ -564,7 +753,7 @@ fn judge_raw(
     let evidence = match (expected, given) {
         (Some((_, Some(span))), Some(r)) => {
             let at = if field == Field::Deadline {
-                ask.passage
+                ask.deadline_at.unwrap_or(ask.passage)
             } else {
                 span.passage
             };
@@ -631,10 +820,21 @@ fn judge_verified(
         Field::Amount => {
             let absent = shown.amount.trim().is_empty();
             match expected.and_then(|f| f.value.as_ref()) {
-                Some(Value::Money { amount, .. }) if money_digits(&shown.amount) == *amount => {
-                    Outcome::Correct
-                }
                 Some(Value::Money { .. }) if absent => Outcome::Missing,
+                Some(Value::Money { amount, currency }) => {
+                    match (
+                        amount.parse::<rust_decimal::Decimal>(),
+                        interpreted_money(&shown.amount),
+                    ) {
+                        (Ok(wanted), Some((got, unit))) if wanted == got && currency == unit => {
+                            Outcome::Correct
+                        }
+                        (Ok(_), Some(_)) => Outcome::Wrong {
+                            got: shown.amount.clone(),
+                        },
+                        _ => Outcome::Unsupported,
+                    }
+                }
                 Some(_) => Outcome::Wrong {
                     got: shown.amount.clone(),
                 },
@@ -677,6 +877,8 @@ impl FieldCounts {
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct Summary {
     pub items: usize,
+    #[serde(default)]
+    pub no_obligation_sites: usize,
     pub whole_item_raw: usize,
     pub whole_item_verified: usize,
     pub missed_raw: usize,
@@ -691,6 +893,7 @@ pub struct Summary {
 pub fn summarise(scores: &[CaseScore]) -> Summary {
     let mut s = Summary::default();
     for case in scores {
+        s.no_obligation_sites += case.negative_sites.len();
         s.invented_raw += case.invented_raw;
         s.invented_verified += case.invented_verified;
         for ask in &case.asks {

@@ -112,10 +112,24 @@ impl MockModel {
     }
 
     #[allow(dead_code)]
+    pub fn port(&self) -> u16 {
+        self.port
+    }
+
+    #[allow(dead_code)]
     pub fn request_body(&self) -> String {
         self.request
             .recv_timeout(std::time::Duration::from_secs(5))
             .expect("mock never received a request")
+    }
+
+    /// A completed refusal must not have contacted the model at all.
+    #[allow(dead_code)]
+    pub fn assert_no_request(&self) {
+        assert!(
+            self.request.try_recv().is_err(),
+            "a refused input reached the model"
+        );
     }
 }
 

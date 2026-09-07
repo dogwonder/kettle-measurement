@@ -839,7 +839,7 @@ pub fn run_pack_bound_with_resources(
     progress: &mut dyn FnMut(Progress),
     log: &dyn RunLog,
 ) -> Result<RunOutcome, RunError> {
-    check_bindings(pack, inputs).map_err(RunError::InputBinding)?;
+    check_bindings(&pack.manifest.inputs, inputs).map_err(RunError::InputBinding)?;
     let paths: Vec<PathBuf> = inputs.iter().map(|(_, path)| path.clone()).collect();
     let bound = bound_inputs(inputs);
     run_bound(
@@ -873,11 +873,12 @@ fn bind_to_sole_role<'a>(
 /// Undeclared roles are checked first: a caller naming a role the pack
 /// has never heard of is confused about which pack it is running, and
 /// every count below it would be answering the wrong question.
-fn check_bindings(pack: &Pack, inputs: &[(&str, PathBuf)]) -> Result<(), InputBindingError> {
+pub(crate) fn check_bindings(
+    declared_inputs: &[InputSpec],
+    inputs: &[(&str, PathBuf)],
+) -> Result<(), InputBindingError> {
     for (role, _) in inputs {
-        if !pack
-            .manifest
-            .inputs
+        if !declared_inputs
             .iter()
             .any(|declared| declared.role == *role)
         {
@@ -886,7 +887,7 @@ fn check_bindings(pack: &Pack, inputs: &[(&str, PathBuf)]) -> Result<(), InputBi
             });
         }
     }
-    for declared in &pack.manifest.inputs {
+    for declared in declared_inputs {
         let given: Vec<&PathBuf> = inputs
             .iter()
             .filter(|(role, _)| *role == declared.role)
@@ -1119,6 +1120,7 @@ fn run_bound(
                     document_roles.push(given.role.clone());
                     logical_document += 1;
                 }
+                log.document(&segments);
             }
             PipelineStep::Preprocess { implementation } => {
                 if implementation != "builtin:statement-parse" {

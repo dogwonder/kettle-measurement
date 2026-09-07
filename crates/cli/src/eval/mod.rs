@@ -196,9 +196,8 @@ pub trait Evaluator {
     fn evaluate(&self, request: &EvalRequest) -> Result<EvalReport, String>;
 }
 
-/// The evaluator the shipped binary has until #25 lands: it explains
-/// itself and stops. Every flag, the baseline comparison and the table
-/// are finished and tested; only the measuring is missing.
+/// Explicit unavailable-evaluator stub for callers without execution.
+/// The shipped binary uses `sidecar_evaluator::SidecarEvaluator`.
 pub struct NotWiredUpYet;
 
 impl Evaluator for NotWiredUpYet {

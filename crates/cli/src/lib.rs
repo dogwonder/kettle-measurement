@@ -9,6 +9,7 @@
 pub mod ablate;
 pub mod bed;
 pub mod claims;
+pub mod corpus;
 pub mod eval;
 pub mod mutate;
 pub mod packs;

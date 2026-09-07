@@ -841,8 +841,7 @@ fn a_letter_over_the_page_limit_is_refused_before_any_model_call() {
         &NoLog,
     );
     let message = result
-        .err()
-        .expect("two pages exceed this pack's limit")
+        .expect_err("two pages exceed this pack's limit")
         .to_string();
     assert!(message.contains("page"), "{message}");
     assert!(

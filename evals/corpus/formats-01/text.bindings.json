@@ -1,0 +1,18 @@
+{
+  "format01-footer": {
+    "inputs": {
+      "letter": [
+        "format01-footer/page-1.txt"
+      ]
+    }
+  },
+  "format01-three-pages": {
+    "inputs": {
+      "letter": [
+        "format01-three-pages/page-1.txt",
+        "format01-three-pages/page-2.txt",
+        "format01-three-pages/page-3.txt"
+      ]
+    }
+  }
+}

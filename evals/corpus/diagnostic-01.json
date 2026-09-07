@@ -1,0 +1,3224 @@
+{
+  "schema_version": 1,
+  "slice": "diagnostic-01",
+  "selection": {
+    "id": "reading-diagnostic-01",
+    "purpose": "diagnostic",
+    "exposure": "development",
+    "fields": [
+      "kind",
+      "party",
+      "deadline",
+      "amount"
+    ]
+  },
+  "facts": [
+    {
+      "id": "date-form-001-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "date-form-001-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "date-form-001-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-06"
+      }
+    },
+    {
+      "id": "date-form-001-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "date-form-010-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "date-form-010-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "date-form-010-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-08-20"
+      }
+    },
+    {
+      "id": "date-form-010-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "date-form-014-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "date-form-014-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "date-form-014-deadline",
+      "field": "deadline",
+      "status": "ambiguous",
+      "value": null
+    },
+    {
+      "id": "date-form-014-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "date-form-017-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "date-form-017-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "date-form-017-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-24"
+      }
+    },
+    {
+      "id": "date-form-017-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "date-form-024-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "date-form-024-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "date-form-024-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-24"
+      }
+    },
+    {
+      "id": "date-form-024-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "date-form-028-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "date-form-028-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "date-form-028-deadline",
+      "field": "deadline",
+      "status": "ambiguous",
+      "value": null
+    },
+    {
+      "id": "date-form-028-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "date-form-029-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "date-form-029-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "date-form-029-deadline",
+      "field": "deadline",
+      "status": "ambiguous",
+      "value": null
+    },
+    {
+      "id": "date-form-029-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "date-form-031-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "date-form-031-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "date-form-031-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-31"
+      }
+    },
+    {
+      "id": "date-form-031-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "money-form-001-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "money-form-001-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "money-form-001-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "money-form-001-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "75.50",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "money-form-003-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "money-form-003-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "money-form-003-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "money-form-003-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "1250.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "money-form-005-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "money-form-005-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "money-form-005-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "money-form-005-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "41.21",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "money-form-013-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "money-form-013-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "money-form-013-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-04-03"
+      }
+    },
+    {
+      "id": "money-form-013-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "305.29",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "money-form-013-annual-total",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "3052.90",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "money-form-017-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "money-form-017-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "money-form-017-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "money-form-017-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "obligation-form-001-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "obligation-form-001-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "obligation-form-001-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-24"
+      }
+    },
+    {
+      "id": "obligation-form-001-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "120.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "obligation-form-004-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "obligation-form-004-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "obligation-form-006-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "obligation-form-006-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "obligation-form-007-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "obligation-form-007-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "obligation-form-009-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "obligation-form-009-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "obligation-form-010-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "obligation-form-010-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "obligation-form-012-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "obligation-form-012-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "obligation-form-013-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "obligation-form-013-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "obligation-form-013-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-24"
+      }
+    },
+    {
+      "id": "obligation-form-013-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "party-form-006-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "party-form-006-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "party-form-006-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-24"
+      }
+    },
+    {
+      "id": "party-form-006-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "120.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "party-form-007-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "party-form-007-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "party-form-007-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-24"
+      }
+    },
+    {
+      "id": "party-form-007-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "120.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "party-form-007-recipient",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Ms Okafor"
+      }
+    },
+    {
+      "id": "party-form-009-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "party-form-009-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "party-form-009-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-12"
+      }
+    },
+    {
+      "id": "party-form-009-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "party-form-009-place",
+      "field": "place",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Clinic 4, Level 2, Queen Elizabeth Hospital"
+      }
+    },
+    {
+      "id": "party-form-011-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "party-form-011-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "party-form-011-reference",
+      "field": "reference",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "BI-66319"
+      }
+    },
+    {
+      "id": "relation-form-001-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "relation-form-001-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "relation-form-001-deadline",
+      "field": "deadline",
+      "status": "ambiguous",
+      "value": null
+    },
+    {
+      "id": "relation-form-001-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "360.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "relation-form-001-subtotal",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "300.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "relation-form-001-vat",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "60.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "relation-form-002-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "relation-form-002-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "relation-form-002-hearing",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-06-01"
+      }
+    },
+    {
+      "id": "relation-form-002-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-06-15"
+      }
+    },
+    {
+      "id": "relation-form-002-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "relation-form-002-past-event",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-03"
+      }
+    },
+    {
+      "id": "relation-form-008-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "relation-form-008-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "relation-form-008-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-24"
+      }
+    },
+    {
+      "id": "relation-form-008-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "120.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "relation-form-008-past-event",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-03"
+      }
+    },
+    {
+      "id": "relation-form-010-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "relation-form-010-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "relation-form-010-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-04-06"
+      }
+    },
+    {
+      "id": "relation-form-010-amount",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "360.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "format-form-002-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "format-form-002-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "format-form-002-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-24"
+      }
+    },
+    {
+      "id": "format-form-002-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "format-form-005-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "format-form-005-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "format-form-005-deadline",
+      "field": "deadline",
+      "status": "ambiguous",
+      "value": null
+    },
+    {
+      "id": "format-form-005-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "time-form-001-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "time-form-001-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "time-form-001-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-12"
+      }
+    },
+    {
+      "id": "time-form-001-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "time-form-001-time",
+      "field": "time",
+      "status": "stated",
+      "value": {
+        "kind": "time",
+        "hhmm": "17:30"
+      }
+    },
+    {
+      "id": "time-form-011-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Example Services"
+      }
+    },
+    {
+      "id": "time-form-011-dateline",
+      "field": "date",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-10"
+      }
+    },
+    {
+      "id": "time-form-011-deadline",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-03-12"
+      }
+    },
+    {
+      "id": "time-form-011-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "time-form-011-time",
+      "field": "time",
+      "status": "stated",
+      "value": {
+        "kind": "time",
+        "hhmm": "14:30"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "id": "money-form-013-selection",
+      "kind": "selected-over-distractor",
+      "ask": "money-form-013-ask-1",
+      "field": "amount",
+      "selected": "money-form-013-amount",
+      "distractor": "money-form-013-annual-total"
+    },
+    {
+      "id": "party-form-007-selection",
+      "kind": "selected-over-distractor",
+      "ask": "party-form-007-ask-1",
+      "field": "party",
+      "selected": "party-form-007-sender",
+      "distractor": "party-form-007-recipient"
+    },
+    {
+      "id": "relation-form-001-subtotal-selection",
+      "kind": "selected-over-distractor",
+      "ask": "relation-form-001-ask-1",
+      "field": "amount",
+      "selected": "relation-form-001-amount",
+      "distractor": "relation-form-001-subtotal"
+    },
+    {
+      "id": "relation-form-001-vat-selection",
+      "kind": "selected-over-distractor",
+      "ask": "relation-form-001-ask-1",
+      "field": "amount",
+      "selected": "relation-form-001-amount",
+      "distractor": "relation-form-001-vat"
+    },
+    {
+      "id": "relation-form-002-selection",
+      "kind": "selected-over-distractor",
+      "ask": "relation-form-002-ask-1",
+      "field": "base",
+      "selected": "relation-form-002-hearing",
+      "distractor": "relation-form-002-past-event"
+    },
+    {
+      "id": "relation-form-008-selection",
+      "kind": "selected-over-distractor",
+      "ask": "relation-form-008-ask-1",
+      "field": "base",
+      "selected": "relation-form-008-dateline",
+      "distractor": "relation-form-008-past-event"
+    }
+  ],
+  "cases": [
+    {
+      "id": "date-form-001-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please respond on 6 March 2026."
+      ],
+      "spans": [
+        {
+          "fact": "date-form-001-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "date-form-001-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "date-form-001-deadline",
+          "passage": 2,
+          "text": "on 6 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "date-form-001-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "date-form-001-sender",
+            "base": null,
+            "deadline": "date-form-001-deadline",
+            "amount": "date-form-001-amount"
+          },
+          "deadline_words": "on 6 March 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "date-form-001",
+          "inventory_file": "date-forms.json",
+          "inventory_digest": "sha256:32be0e3d76490b9c70758e7a7d7539d8f4928f23ded01167ccd3ad37bd0ada92",
+          "capability": "dates-and-periods",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "day-first, month in words; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "date-form-010-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please respond on 20/08/2026."
+      ],
+      "spans": [
+        {
+          "fact": "date-form-010-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "date-form-010-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "date-form-010-deadline",
+          "passage": 2,
+          "text": "on 20/08/2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "date-form-010-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "date-form-010-sender",
+            "base": null,
+            "deadline": "date-form-010-deadline",
+            "amount": "date-form-010-amount"
+          },
+          "deadline_words": "on 20/08/2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "date-form-010",
+          "inventory_file": "date-forms.json",
+          "inventory_digest": "sha256:32be0e3d76490b9c70758e7a7d7539d8f4928f23ded01167ccd3ad37bd0ada92",
+          "capability": "dates-and-periods",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "all-numeric, day over twelve; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "date-form-014-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please respond on 06/03/2026."
+      ],
+      "spans": [
+        {
+          "fact": "date-form-014-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "date-form-014-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "date-form-014-deadline",
+          "passage": 2,
+          "text": "on 06/03/2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "date-form-014-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "date-form-014-sender",
+            "base": null,
+            "deadline": "date-form-014-deadline",
+            "amount": "date-form-014-amount"
+          },
+          "deadline_words": "on 06/03/2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "date-form-014",
+          "inventory_file": "date-forms.json",
+          "inventory_digest": "sha256:32be0e3d76490b9c70758e7a7d7539d8f4928f23ded01167ccd3ad37bd0ada92",
+          "capability": "dates-and-periods",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "all-numeric, both fields twelve or under; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "date-form-017-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please respond within 14 days. The period runs from the date of this letter."
+      ],
+      "spans": [
+        {
+          "fact": "date-form-017-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "date-form-017-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "date-form-017-deadline",
+          "passage": 2,
+          "text": "within 14 days. The period runs from the date of this letter"
+        }
+      ],
+      "asks": [
+        {
+          "id": "date-form-017-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "date-form-017-sender",
+            "base": "date-form-017-dateline",
+            "deadline": "date-form-017-deadline",
+            "amount": "date-form-017-amount"
+          },
+          "deadline_words": "within 14 days. The period runs from the date of this letter",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 14,
+            "unit": "days",
+            "qualifier": "none",
+            "counts_from": "letter_date"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "date-form-017",
+          "inventory_file": "date-forms.json",
+          "inventory_digest": "sha256:32be0e3d76490b9c70758e7a7d7539d8f4928f23ded01167ccd3ad37bd0ada92",
+          "capability": "dates-and-periods",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "plain days; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "date-form-024-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please respond within 2 weeks. The period runs from the date of this letter."
+      ],
+      "spans": [
+        {
+          "fact": "date-form-024-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "date-form-024-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "date-form-024-deadline",
+          "passage": 2,
+          "text": "within 2 weeks. The period runs from the date of this letter"
+        }
+      ],
+      "asks": [
+        {
+          "id": "date-form-024-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "date-form-024-sender",
+            "base": "date-form-024-dateline",
+            "deadline": "date-form-024-deadline",
+            "amount": "date-form-024-amount"
+          },
+          "deadline_words": "within 2 weeks. The period runs from the date of this letter",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 2,
+            "unit": "weeks",
+            "qualifier": "none",
+            "counts_from": "letter_date"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "date-form-024",
+          "inventory_file": "date-forms.json",
+          "inventory_digest": "sha256:32be0e3d76490b9c70758e7a7d7539d8f4928f23ded01167ccd3ad37bd0ada92",
+          "capability": "dates-and-periods",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "weeks; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "date-form-028-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please respond within 14 working days. The period runs from the date of this letter."
+      ],
+      "spans": [
+        {
+          "fact": "date-form-028-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "date-form-028-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "date-form-028-deadline",
+          "passage": 2,
+          "text": "within 14 working days. The period runs from the date of this letter"
+        }
+      ],
+      "asks": [
+        {
+          "id": "date-form-028-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "date-form-028-sender",
+            "base": "date-form-028-dateline",
+            "deadline": "date-form-028-deadline",
+            "amount": "date-form-028-amount"
+          },
+          "deadline_words": "within 14 working days. The period runs from the date of this letter",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 14,
+            "unit": "days",
+            "qualifier": "working",
+            "counts_from": "letter_date"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "date-form-028",
+          "inventory_file": "date-forms.json",
+          "inventory_digest": "sha256:32be0e3d76490b9c70758e7a7d7539d8f4928f23ded01167ccd3ad37bd0ada92",
+          "capability": "dates-and-periods",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "working days; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "date-form-029-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please respond within 28 days of receipt."
+      ],
+      "spans": [
+        {
+          "fact": "date-form-029-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "date-form-029-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "date-form-029-deadline",
+          "passage": 2,
+          "text": "within 28 days of receipt"
+        }
+      ],
+      "asks": [
+        {
+          "id": "date-form-029-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "date-form-029-sender",
+            "base": null,
+            "deadline": "date-form-029-deadline",
+            "amount": "date-form-029-amount"
+          },
+          "deadline_words": "within 28 days of receipt",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 28,
+            "unit": "days",
+            "qualifier": "none",
+            "counts_from": "receipt"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "date-form-029",
+          "inventory_file": "date-forms.json",
+          "inventory_digest": "sha256:32be0e3d76490b9c70758e7a7d7539d8f4928f23ded01167ccd3ad37bd0ada92",
+          "capability": "dates-and-periods",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "counted from receipt; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "date-form-031-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please respond by the end of this month."
+      ],
+      "spans": [
+        {
+          "fact": "date-form-031-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "date-form-031-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "date-form-031-deadline",
+          "passage": 2,
+          "text": "by the end of this month"
+        }
+      ],
+      "asks": [
+        {
+          "id": "date-form-031-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "date-form-031-sender",
+            "base": "date-form-031-dateline",
+            "deadline": "date-form-031-deadline",
+            "amount": "date-form-031-amount"
+          },
+          "deadline_words": "by the end of this month",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "month_end"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "date-form-031",
+          "inventory_file": "date-forms.json",
+          "inventory_digest": "sha256:32be0e3d76490b9c70758e7a7d7539d8f4928f23ded01167ccd3ad37bd0ada92",
+          "capability": "dates-and-periods",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "end of this month; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "money-form-001-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "The total due is £75.50."
+      ],
+      "spans": [
+        {
+          "fact": "money-form-001-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "money-form-001-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "money-form-001-amount",
+          "passage": 2,
+          "text": "£75.50"
+        }
+      ],
+      "asks": [
+        {
+          "id": "money-form-001-ask-1",
+          "passage": 2,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "money-form-001-sender",
+            "base": null,
+            "deadline": "money-form-001-deadline",
+            "amount": "money-form-001-amount"
+          },
+          "deadline_words": null,
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "money-form-001",
+          "inventory_file": "money-forms.json",
+          "inventory_digest": "sha256:3cd9fb271e9ba6e60a3eda465482c661c01cff69ba357e39f4f7ed07e747c4c8",
+          "capability": "money-and-quantities",
+          "fields": [
+            "amount"
+          ],
+          "scope": "pounds, pence; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "money-form-003-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "The balance of £1,250.00 is now overdue."
+      ],
+      "spans": [
+        {
+          "fact": "money-form-003-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "money-form-003-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "money-form-003-amount",
+          "passage": 2,
+          "text": "£1,250.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "money-form-003-ask-1",
+          "passage": 2,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "money-form-003-sender",
+            "base": null,
+            "deadline": "money-form-003-deadline",
+            "amount": "money-form-003-amount"
+          },
+          "deadline_words": null,
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "money-form-003",
+          "inventory_file": "money-forms.json",
+          "inventory_digest": "sha256:3cd9fb271e9ba6e60a3eda465482c661c01cff69ba357e39f4f7ed07e747c4c8",
+          "capability": "money-and-quantities",
+          "fields": [
+            "amount"
+          ],
+          "scope": "thousands comma; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "money-form-005-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Amount Due GBP 41.21"
+      ],
+      "spans": [
+        {
+          "fact": "money-form-005-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "money-form-005-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "money-form-005-amount",
+          "passage": 2,
+          "text": "GBP 41.21"
+        }
+      ],
+      "asks": [
+        {
+          "id": "money-form-005-ask-1",
+          "passage": 2,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "money-form-005-sender",
+            "base": null,
+            "deadline": "money-form-005-deadline",
+            "amount": "money-form-005-amount"
+          },
+          "deadline_words": null,
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "money-form-005",
+          "inventory_file": "money-forms.json",
+          "inventory_digest": "sha256:3cd9fb271e9ba6e60a3eda465482c661c01cff69ba357e39f4f7ed07e747c4c8",
+          "capability": "money-and-quantities",
+          "fields": [
+            "amount"
+          ],
+          "scope": "leading currency code; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "money-form-013-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Your council tax for the year is £3,052.90. Your first instalment of £305.29 is due by 3 April 2026."
+      ],
+      "spans": [
+        {
+          "fact": "money-form-013-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "money-form-013-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "money-form-013-deadline",
+          "passage": 2,
+          "text": "by 3 April 2026"
+        },
+        {
+          "fact": "money-form-013-amount",
+          "passage": 2,
+          "text": "£305.29"
+        },
+        {
+          "fact": "money-form-013-annual-total",
+          "passage": 2,
+          "text": "£3,052.90"
+        }
+      ],
+      "asks": [
+        {
+          "id": "money-form-013-ask-1",
+          "passage": 2,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "money-form-013-sender",
+            "base": null,
+            "deadline": "money-form-013-deadline",
+            "amount": "money-form-013-amount"
+          },
+          "deadline_words": "by 3 April 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "money-form-013",
+          "inventory_file": "money-forms.json",
+          "inventory_digest": "sha256:3cd9fb271e9ba6e60a3eda465482c661c01cff69ba357e39f4f7ed07e747c4c8",
+          "capability": "money-and-quantities",
+          "fields": [
+            "amount"
+          ],
+          "scope": "instalment beside annual total; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "money-form-017-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please pay the outstanding balance. There is no sum is printed here; see your statement."
+      ],
+      "spans": [
+        {
+          "fact": "money-form-017-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "money-form-017-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "money-form-017-ask-1",
+          "passage": 2,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "money-form-017-sender",
+            "base": null,
+            "deadline": "money-form-017-deadline",
+            "amount": "money-form-017-amount"
+          },
+          "deadline_words": null,
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "money-form-017",
+          "inventory_file": "money-forms.json",
+          "inventory_digest": "sha256:3cd9fb271e9ba6e60a3eda465482c661c01cff69ba357e39f4f7ed07e747c4c8",
+          "capability": "money-and-quantities",
+          "fields": [
+            "amount"
+          ],
+          "scope": "amount absent; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "obligation-form-001-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please pay £120.00 within 14 days of the date of this letter."
+      ],
+      "spans": [
+        {
+          "fact": "obligation-form-001-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "obligation-form-001-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "obligation-form-001-deadline",
+          "passage": 2,
+          "text": "within 14 days of the date of this letter"
+        },
+        {
+          "fact": "obligation-form-001-amount",
+          "passage": 2,
+          "text": "£120.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "obligation-form-001-ask-1",
+          "passage": 2,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "obligation-form-001-sender",
+            "base": "obligation-form-001-dateline",
+            "deadline": "obligation-form-001-deadline",
+            "amount": "obligation-form-001-amount"
+          },
+          "deadline_words": "within 14 days of the date of this letter",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 14,
+            "unit": "days",
+            "qualifier": "none",
+            "counts_from": "letter_date"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "obligation-form-001",
+          "inventory_file": "obligation-forms.json",
+          "inventory_digest": "sha256:97df87d24390e0966b7180be2c170874d22b784010034712ec34344eec76fe05",
+          "capability": "obligations",
+          "fields": [
+            "kind"
+          ],
+          "scope": "required, imperative; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "obligation-form-004-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "You may also confirm in writing that you have paid."
+      ],
+      "spans": [
+        {
+          "fact": "obligation-form-004-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "obligation-form-004-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "obligation-form-004-no-task",
+          "passage": 2,
+          "kind": "other",
+          "status": "no-obligation",
+          "reason": "an offer, not an ask",
+          "fields": {}
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "obligation-form-004",
+          "inventory_file": "obligation-forms.json",
+          "inventory_digest": "sha256:97df87d24390e0966b7180be2c170874d22b784010034712ec34344eec76fe05",
+          "capability": "obligations",
+          "fields": [
+            "kind"
+          ],
+          "scope": "permitted, not required; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "obligation-form-006-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "If you rent this property out, you must tell your tenants that the works are taking place."
+      ],
+      "spans": [
+        {
+          "fact": "obligation-form-006-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "obligation-form-006-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "obligation-form-006-no-task",
+          "passage": 2,
+          "kind": "other",
+          "status": "no-obligation",
+          "reason": "the condition is unsettled; nothing is asked of this reader now",
+          "fields": {}
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "obligation-form-006",
+          "inventory_file": "obligation-forms.json",
+          "inventory_digest": "sha256:97df87d24390e0966b7180be2c170874d22b784010034712ec34344eec76fe05",
+          "capability": "obligations",
+          "fields": [
+            "kind"
+          ],
+          "scope": "conditional on a fact the letter cannot settle; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "obligation-form-007-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "If you have already paid, please disregard this letter."
+      ],
+      "spans": [
+        {
+          "fact": "obligation-form-007-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "obligation-form-007-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "obligation-form-007-no-task",
+          "passage": 2,
+          "kind": "other",
+          "status": "no-obligation",
+          "reason": "whether they have paid is exactly what the letter cannot settle",
+          "fields": {}
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "obligation-form-007",
+          "inventory_file": "obligation-forms.json",
+          "inventory_digest": "sha256:97df87d24390e0966b7180be2c170874d22b784010034712ec34344eec76fe05",
+          "capability": "obligations",
+          "fields": [
+            "kind"
+          ],
+          "scope": "conditional already discharged; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "obligation-form-009-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Thank you for your payment of £120.00, received on 3 March 2026."
+      ],
+      "spans": [
+        {
+          "fact": "obligation-form-009-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "obligation-form-009-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "obligation-form-009-no-task",
+          "passage": 2,
+          "kind": "other",
+          "status": "no-obligation",
+          "reason": "the ask has been met; the date is a past event",
+          "fields": {}
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "obligation-form-009",
+          "inventory_file": "obligation-forms.json",
+          "inventory_digest": "sha256:97df87d24390e0966b7180be2c170874d22b784010034712ec34344eec76fe05",
+          "capability": "obligations",
+          "fields": [
+            "kind"
+          ],
+          "scope": "completed, nothing to do; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "obligation-form-010-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Your appointment on 12 May 2026 has been cancelled. We will write again with a new date."
+      ],
+      "spans": [
+        {
+          "fact": "obligation-form-010-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "obligation-form-010-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "obligation-form-010-no-task",
+          "passage": 2,
+          "kind": "other",
+          "status": "no-obligation",
+          "reason": "a cancelled event is not an ask; recording it would put a person at a clinic on the wrong day",
+          "fields": {}
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "obligation-form-010",
+          "inventory_file": "obligation-forms.json",
+          "inventory_digest": "sha256:97df87d24390e0966b7180be2c170874d22b784010034712ec34344eec76fe05",
+          "capability": "obligations",
+          "fields": [
+            "kind"
+          ],
+          "scope": "cancelled appointment; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "obligation-form-012-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Our finance team will refund the difference within 10 working days."
+      ],
+      "spans": [
+        {
+          "fact": "obligation-form-012-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "obligation-form-012-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "obligation-form-012-no-task",
+          "passage": 2,
+          "kind": "other",
+          "status": "no-obligation",
+          "reason": "the actor is the sender",
+          "fields": {}
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "obligation-form-012",
+          "inventory_file": "obligation-forms.json",
+          "inventory_digest": "sha256:97df87d24390e0966b7180be2c170874d22b784010034712ec34344eec76fe05",
+          "capability": "obligations",
+          "fields": [
+            "kind"
+          ],
+          "scope": "someone else must act; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "obligation-form-013-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please return the signed form and send a copy of your photo ID by 24 March 2026."
+      ],
+      "spans": [
+        {
+          "fact": "obligation-form-013-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "obligation-form-013-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "obligation-form-013-deadline",
+          "passage": 2,
+          "text": "by 24 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "obligation-form-013-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "obligation-form-013-sender",
+            "base": null,
+            "deadline": "obligation-form-013-deadline",
+            "amount": "obligation-form-013-amount"
+          },
+          "deadline_words": "by 24 March 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "obligation-form-013-ask-2",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "obligation-form-013-sender",
+            "base": null,
+            "deadline": "obligation-form-013-deadline",
+            "amount": "obligation-form-013-amount"
+          },
+          "deadline_words": "by 24 March 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "obligation-form-013",
+          "inventory_file": "obligation-forms.json",
+          "inventory_digest": "sha256:97df87d24390e0966b7180be2c170874d22b784010034712ec34344eec76fe05",
+          "capability": "obligations",
+          "fields": [
+            "kind"
+          ],
+          "scope": "two asks in one sentence; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "party-form-006-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Please pay £120.00 within 14 days of the date of this letter.",
+        "Yours sincerely,",
+        "Example Services"
+      ],
+      "spans": [
+        {
+          "fact": "party-form-006-sender",
+          "passage": 3,
+          "text": "Example Services"
+        },
+        {
+          "fact": "party-form-006-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "party-form-006-deadline",
+          "passage": 1,
+          "text": "within 14 days of the date of this letter"
+        },
+        {
+          "fact": "party-form-006-amount",
+          "passage": 1,
+          "text": "£120.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "party-form-006-ask-1",
+          "passage": 1,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "party-form-006-sender",
+            "base": "party-form-006-dateline",
+            "deadline": "party-form-006-deadline",
+            "amount": "party-form-006-amount"
+          },
+          "deadline_words": "within 14 days of the date of this letter",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 14,
+            "unit": "days",
+            "qualifier": "none",
+            "counts_from": "letter_date"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "party-form-006",
+          "inventory_file": "party-place-reference-forms.json",
+          "inventory_digest": "sha256:e3ab704aa50fbc8a5a6b0ff3310a2ebf0dadb7db27a8031577f0d9aa14a0f240",
+          "capability": "parties-places-and-references",
+          "fields": [
+            "party"
+          ],
+          "scope": "sender named only in the sign-off; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "party-form-007-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Dear Ms Okafor,",
+        "Please pay £120.00 within 14 days of the date of this letter."
+      ],
+      "spans": [
+        {
+          "fact": "party-form-007-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "party-form-007-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "party-form-007-deadline",
+          "passage": 3,
+          "text": "within 14 days of the date of this letter"
+        },
+        {
+          "fact": "party-form-007-amount",
+          "passage": 3,
+          "text": "£120.00"
+        },
+        {
+          "fact": "party-form-007-recipient",
+          "passage": 2,
+          "text": "Ms Okafor"
+        }
+      ],
+      "asks": [
+        {
+          "id": "party-form-007-ask-1",
+          "passage": 3,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "party-form-007-sender",
+            "base": "party-form-007-dateline",
+            "deadline": "party-form-007-deadline",
+            "amount": "party-form-007-amount"
+          },
+          "deadline_words": "within 14 days of the date of this letter",
+          "deadline_at": 3,
+          "deadline_read": {
+            "count": 14,
+            "unit": "days",
+            "qualifier": "none",
+            "counts_from": "letter_date"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "party-form-007",
+          "inventory_file": "party-place-reference-forms.json",
+          "inventory_digest": "sha256:e3ab704aa50fbc8a5a6b0ff3310a2ebf0dadb7db27a8031577f0d9aa14a0f240",
+          "capability": "parties-places-and-references",
+          "fields": [
+            "party"
+          ],
+          "scope": "recipient is not the party; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "party-form-009-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Your appointment is on 12 March 2026 at 2:30pm at Clinic 4, Level 2, Queen Elizabeth Hospital."
+      ],
+      "spans": [
+        {
+          "fact": "party-form-009-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "party-form-009-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "party-form-009-deadline",
+          "passage": 2,
+          "text": "12 March 2026"
+        },
+        {
+          "fact": "party-form-009-place",
+          "passage": 2,
+          "text": "Clinic 4, Level 2, Queen Elizabeth Hospital"
+        }
+      ],
+      "asks": [
+        {
+          "id": "party-form-009-ask-1",
+          "passage": 2,
+          "kind": "attendance",
+          "status": "obligation",
+          "fields": {
+            "party": "party-form-009-sender",
+            "base": null,
+            "deadline": "party-form-009-deadline",
+            "amount": "party-form-009-amount",
+            "place": "party-form-009-place"
+          },
+          "deadline_words": "12 March 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "party-form-009",
+          "inventory_file": "party-place-reference-forms.json",
+          "inventory_digest": "sha256:e3ab704aa50fbc8a5a6b0ff3310a2ebf0dadb7db27a8031577f0d9aa14a0f240",
+          "capability": "parties-places-and-references",
+          "fields": [
+            "place"
+          ],
+          "scope": "venue; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "party-form-011-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Quote reference BI-66319 when you call."
+      ],
+      "spans": [
+        {
+          "fact": "party-form-011-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "party-form-011-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "party-form-011-reference",
+          "passage": 2,
+          "text": "BI-66319"
+        }
+      ],
+      "asks": [
+        {
+          "id": "party-form-011-no-task",
+          "passage": 2,
+          "kind": "other",
+          "status": "no-obligation",
+          "reason": "quoting a reference when calling is conditional advice, not a current ask",
+          "fields": {}
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "party-form-011",
+          "inventory_file": "party-place-reference-forms.json",
+          "inventory_digest": "sha256:e3ab704aa50fbc8a5a6b0ff3310a2ebf0dadb7db27a8031577f0d9aa14a0f240",
+          "capability": "parties-places-and-references",
+          "fields": [
+            "reference"
+          ],
+          "scope": "reference to quote back; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "relation-form-001-letter",
+      "document_kind": "letter-with-table",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Sub total £300.00",
+        "VAT £60.00",
+        "Total £360.00",
+        "Payment of the total is due within 14 days."
+      ],
+      "spans": [
+        {
+          "fact": "relation-form-001-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "relation-form-001-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "relation-form-001-deadline",
+          "passage": 5,
+          "text": "within 14 days"
+        },
+        {
+          "fact": "relation-form-001-amount",
+          "passage": 4,
+          "text": "£360.00"
+        },
+        {
+          "fact": "relation-form-001-subtotal",
+          "passage": 2,
+          "text": "£300.00"
+        },
+        {
+          "fact": "relation-form-001-vat",
+          "passage": 3,
+          "text": "£60.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "relation-form-001-ask-1",
+          "passage": 5,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "relation-form-001-sender",
+            "base": null,
+            "deadline": "relation-form-001-deadline",
+            "amount": "relation-form-001-amount"
+          },
+          "deadline_words": "within 14 days",
+          "deadline_at": 5,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "relation-form-001",
+          "inventory_file": "relationship-forms.json",
+          "inventory_digest": "sha256:455fd070c50d240640d1799387e6340947a66cd7482f5afa192ab93ff928ca54",
+          "capability": "relationships",
+          "fields": [
+            "amount"
+          ],
+          "scope": "right value, wrong row; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "relation-form-002-letter",
+      "document_kind": "letter-with-table",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Further to our letter of 3 March 2026: you must reply within 14 days of the hearing on 1 June 2026."
+      ],
+      "spans": [
+        {
+          "fact": "relation-form-002-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "relation-form-002-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "relation-form-002-hearing",
+          "passage": 2,
+          "text": "1 June 2026"
+        },
+        {
+          "fact": "relation-form-002-deadline",
+          "passage": 2,
+          "text": "within 14 days of the hearing on 1 June 2026"
+        },
+        {
+          "fact": "relation-form-002-past-event",
+          "passage": 2,
+          "text": "3 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "relation-form-002-ask-1",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "relation-form-002-sender",
+            "base": "relation-form-002-hearing",
+            "deadline": "relation-form-002-deadline",
+            "amount": "relation-form-002-amount"
+          },
+          "deadline_words": "within 14 days of the hearing on 1 June 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 14,
+            "unit": "days",
+            "qualifier": "none",
+            "counts_from": "named_date"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "relation-form-002",
+          "inventory_file": "relationship-forms.json",
+          "inventory_digest": "sha256:455fd070c50d240640d1799387e6340947a66cd7482f5afa192ab93ff928ca54",
+          "capability": "relationships",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "right date, wrong event; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "relation-form-008-letter",
+      "document_kind": "letter-with-table",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Thank you for your form, received on 3 March 2026. Please pay £120.00 within 14 days of the date of this letter."
+      ],
+      "spans": [
+        {
+          "fact": "relation-form-008-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "relation-form-008-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "relation-form-008-deadline",
+          "passage": 2,
+          "text": "within 14 days of the date of this letter"
+        },
+        {
+          "fact": "relation-form-008-amount",
+          "passage": 2,
+          "text": "£120.00"
+        },
+        {
+          "fact": "relation-form-008-past-event",
+          "passage": 2,
+          "text": "3 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "relation-form-008-ask-1",
+          "passage": 2,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "relation-form-008-sender",
+            "base": "relation-form-008-dateline",
+            "deadline": "relation-form-008-deadline",
+            "amount": "relation-form-008-amount"
+          },
+          "deadline_words": "within 14 days of the date of this letter",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 14,
+            "unit": "days",
+            "qualifier": "none",
+            "counts_from": "letter_date"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "relation-form-008",
+          "inventory_file": "relationship-forms.json",
+          "inventory_digest": "sha256:455fd070c50d240640d1799387e6340947a66cd7482f5afa192ab93ff928ca54",
+          "capability": "relationships",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "date belongs to a past event; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "relation-form-010-letter",
+      "document_kind": "letter-with-table",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Payment of the total is due by the date shown beside it.",
+        "Due date 6 April 2026",
+        "Total £360.00"
+      ],
+      "spans": [
+        {
+          "fact": "relation-form-010-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "relation-form-010-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "relation-form-010-deadline",
+          "passage": 3,
+          "text": "6 April 2026"
+        },
+        {
+          "fact": "relation-form-010-amount",
+          "passage": 4,
+          "text": "£360.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "relation-form-010-ask-1",
+          "passage": 2,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "relation-form-010-sender",
+            "base": null,
+            "deadline": "relation-form-010-deadline",
+            "amount": "relation-form-010-amount"
+          },
+          "deadline_words": "by the date shown beside it",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "relation-form-010",
+          "inventory_file": "relationship-forms.json",
+          "inventory_digest": "sha256:455fd070c50d240640d1799387e6340947a66cd7482f5afa192ab93ff928ca54",
+          "capability": "relationships",
+          "fields": [
+            "deadline"
+          ],
+          "scope": "pointing phrase and the row it points at; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "format-form-002-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "By 24 March 2026 please:",
+        "- return the signed form",
+        "- send a copy of your photo ID"
+      ],
+      "spans": [
+        {
+          "fact": "format-form-002-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "format-form-002-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "format-form-002-deadline",
+          "passage": 2,
+          "text": "By 24 March 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "format-form-002-ask-1",
+          "passage": 3,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "format-form-002-sender",
+            "base": null,
+            "deadline": "format-form-002-deadline",
+            "amount": "format-form-002-amount"
+          },
+          "deadline_words": "By 24 March 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "format-form-002-ask-2",
+          "passage": 4,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "format-form-002-sender",
+            "base": null,
+            "deadline": "format-form-002-deadline",
+            "amount": "format-form-002-amount"
+          },
+          "deadline_words": "By 24 March 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "format-form-002",
+          "inventory_file": "format-forms.json",
+          "inventory_digest": "sha256:f3a412c62678987b320245411d8d9cb3c241301bc3b39e5a8b7d9554dafefcf1",
+          "capability": "formats",
+          "fields": [
+            "kind"
+          ],
+          "scope": "bulleted list of asks; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "format-form-005-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Your statement is enclosed.",
+        "— Example Services, PO Box 12. Quote your account number on all correspondence and pay by the date above."
+      ],
+      "spans": [
+        {
+          "fact": "format-form-005-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "format-form-005-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "format-form-005-deadline",
+          "passage": 3,
+          "text": "by the date above"
+        }
+      ],
+      "asks": [
+        {
+          "id": "format-form-005-ask-1",
+          "passage": 3,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "format-form-005-sender",
+            "base": null,
+            "deadline": "format-form-005-deadline",
+            "amount": "format-form-005-amount"
+          },
+          "deadline_words": "by the date above",
+          "deadline_at": 3,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "format-form-005",
+          "inventory_file": "format-forms.json",
+          "inventory_digest": "sha256:f3a412c62678987b320245411d8d9cb3c241301bc3b39e5a8b7d9554dafefcf1",
+          "capability": "formats",
+          "fields": [
+            "kind"
+          ],
+          "scope": "ask in the footer; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "time-form-001-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Your appointment is on 12 March 2026 at 5:30pm."
+      ],
+      "spans": [
+        {
+          "fact": "time-form-001-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "time-form-001-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "time-form-001-deadline",
+          "passage": 2,
+          "text": "12 March 2026"
+        },
+        {
+          "fact": "time-form-001-time",
+          "passage": 2,
+          "text": "5:30pm"
+        }
+      ],
+      "asks": [
+        {
+          "id": "time-form-001-ask-1",
+          "passage": 2,
+          "kind": "attendance",
+          "status": "obligation",
+          "fields": {
+            "party": "time-form-001-sender",
+            "base": null,
+            "deadline": "time-form-001-deadline",
+            "amount": "time-form-001-amount",
+            "time": "time-form-001-time"
+          },
+          "deadline_words": "12 March 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "time-form-001",
+          "inventory_file": "time-forms.json",
+          "inventory_digest": "sha256:58749d325fe604a2ed9abcf218a5ce7b451cbdcf7415a42f820b47b6d6f8e3ee",
+          "capability": "times",
+          "fields": [
+            "time"
+          ],
+          "scope": "12-hour, minutes, no space before pm; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    },
+    {
+      "id": "time-form-011-letter",
+      "document_kind": "letter",
+      "passages": [
+        "10 March 2026",
+        "Example Services",
+        "Please arrive by 2:15pm for your 2:30pm appointment on 12 March 2026."
+      ],
+      "spans": [
+        {
+          "fact": "time-form-011-sender",
+          "passage": 1,
+          "text": "Example Services"
+        },
+        {
+          "fact": "time-form-011-dateline",
+          "passage": 0,
+          "text": "10 March 2026"
+        },
+        {
+          "fact": "time-form-011-deadline",
+          "passage": 2,
+          "text": "12 March 2026"
+        },
+        {
+          "fact": "time-form-011-time",
+          "passage": 2,
+          "text": "2:30pm"
+        }
+      ],
+      "asks": [
+        {
+          "id": "time-form-011-ask-1",
+          "passage": 2,
+          "kind": "attendance",
+          "status": "obligation",
+          "fields": {
+            "party": "time-form-011-sender",
+            "base": null,
+            "deadline": "time-form-011-deadline",
+            "amount": "time-form-011-amount",
+            "time": "time-form-011-time"
+          },
+          "deadline_words": "12 March 2026",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "inventory_id": "time-form-011",
+          "inventory_file": "time-forms.json",
+          "inventory_digest": "sha256:58749d325fe604a2ed9abcf218a5ce7b451cbdcf7415a42f820b47b6d6f8e3ee",
+          "capability": "times",
+          "fields": [
+            "time"
+          ],
+          "scope": "arrival time beside appointment time; this authored text case and selected fields only; no independent-family or photograph claim"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "generator": "kettle-examples synth_letters.diagnostic",
+    "generator_revision": "2bdeaf482ce7c0d4772fa3ecc128bc549d0656d4",
+    "generator_source_digest": "sha256:b2d7939a92616b5a54a6ab0bd7a8ad0ff85a3ccf8098458b7696b2a575a64069",
+    "digest": "sha256:d07b2ad79c716e995dab3cc1fa745758ec655a9bc90854cd942e005ccde09ab5",
+    "synthetic": true,
+    "independent": false,
+    "selection": {
+      "date": [
+        1,
+        10,
+        14,
+        17,
+        24,
+        28,
+        29,
+        31
+      ],
+      "money": [
+        1,
+        3,
+        5,
+        13,
+        17
+      ],
+      "obligation": [
+        1,
+        4,
+        6,
+        7,
+        9,
+        10,
+        12,
+        13
+      ],
+      "party-place-reference": [
+        6,
+        7,
+        9,
+        11
+      ],
+      "relationship": [
+        1,
+        2,
+        8,
+        10
+      ],
+      "format": [
+        2,
+        5
+      ],
+      "time": [
+        1,
+        11
+      ]
+    }
+  }
+}

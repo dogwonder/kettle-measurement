@@ -92,7 +92,7 @@ pub fn bundle_identity(binary: &Path) -> Result<String, String> {
 /// The manifest in memory governs execution; hashing only pack.json could miss
 /// a caller's effective overrides. Debug is deterministic for these data-only,
 /// ordered types, and the executable digest versions its representation too.
-fn pipeline_identity(pack: &crate::packs::Pack) -> Result<String, String> {
+pub fn pipeline_identity(pack: &crate::packs::Pack) -> Result<String, String> {
     let mut hasher = blake3::Hasher::new();
     hash_part(&mut hasher, b"kettle-effective-pipeline-v1");
     hash_part(&mut hasher, format!("{:?}", pack.manifest).as_bytes());

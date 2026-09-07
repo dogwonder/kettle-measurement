@@ -441,8 +441,8 @@
   ],
   "provenance": {
     "generator": "kettle-examples synth_letters.corpus",
-    "generator_revision": "52a843c333b32cfd3521afd97005645dae8441a3",
-    "digest": "sha256:19e5043188f35521c9683554b1bfb64b1359ef363835758865a171df5570b838",
+    "generator_revision": "2bdeaf482ce7c0d4772fa3ecc128bc549d0656d4",
+    "digest": "sha256:395000d12bc852e741cdda1d8f8135c4fe88fc397244283a5e8ea48767080138",
     "synthetic": true
   }
 }

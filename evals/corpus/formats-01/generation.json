@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "purpose": "acquisition-diagnostic",
+  "exposure": "development",
+  "synthetic": true,
+  "independent": false,
+  "generator_revision": "2bdeaf482ce7c0d4772fa3ecc128bc549d0656d4",
+  "generator_source_digest": "sha256:d43f8d6fe73c3d40232e672ad2ff206e82cb1236b145596c8ea23a870b2fb2a0",
+  "photo_source_digest": "sha256:b803ba2ca1c58c2877596127e93f4183ad360b5a1d1fbc6a8ebd15aee8a020a4",
+  "options": {
+    "seed": 41,
+    "severity": 0.15,
+    "dpi": 150
+  },
+  "page_plans": {
+    "format01-footer": {
+      "pages": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "footer": 5
+    },
+    "format01-three-pages": {
+      "pages": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13,
+          14
+        ]
+      ],
+      "footer": 14
+    }
+  },
+  "dependencies": {
+    "weasyprint": "69.0",
+    "pdf2image": "1.17.0",
+    "opencv-python": "5.0.0.93",
+    "pillow": "12.3.0",
+    "numpy": "2.5.2"
+  },
+  "files": {
+    "corpus.json": "sha256:b58e0da7c71254ae78df1e6670393191a87941ebc579bf9a3e4a02618ed60127",
+    "format01-footer/letter.html": "sha256:2ce7eccf67daa1db64db9954613ef9f2508e2f576246b1f2a9cd18f4c3e1db29",
+    "format01-footer/letter.jpg": "sha256:8d4bf316ff4a9f5a5daf4959f8c4689f2687fa73812d0f25e1adc2a597a66b06",
+    "format01-footer/letter.pdf": "sha256:5ae3e1de2ebe0cb6a10c565f62750f0b9cc1046a27c6e46f5d0ad34d5b8a04b0",
+    "format01-footer/page-1.txt": "sha256:668b030bc1f34e454174a645f68f808857e338b90a21c6bcb88515bbe35299bd",
+    "format01-three-pages/letter-p1.jpg": "sha256:ad7cd7627b59428404a95051b6ebe724d29e6e3cf5b52ff74e8007eb0eeeb827",
+    "format01-three-pages/letter-p2.jpg": "sha256:2e689dba184851629871be7cbffd91b4a7ede37c321ce34d3461f2b8c71147f5",
+    "format01-three-pages/letter-p3.jpg": "sha256:06ae8438af573e0823efb7d9ed6f5fcb08b4608fef85155d7003521a07c093ff",
+    "format01-three-pages/letter.html": "sha256:cbd65b21ec61c28184a0b787c05d05eef933156f8aaccd7d9d0af560ca33b589",
+    "format01-three-pages/letter.pdf": "sha256:40e7c91cd5cdc6564e7acde460a593601309c806604d8d3ed64ed6124765e067",
+    "format01-three-pages/page-1.txt": "sha256:235db6b66e715fba6aad50427644c3759383fda91f40e5c21bf10bccfc89a830",
+    "format01-three-pages/page-2.txt": "sha256:d845cb5d3a98712571ff091c3764b2a3dec1960ecfe640b76bbdc4daadc90c7e",
+    "format01-three-pages/page-3.txt": "sha256:9cad94b9d16cd204a32ffdf6f33cc4b079001dbc190324d4eff26fb078603352",
+    "pdf.bindings.json": "sha256:0431584c44ab64c5b90d36913bc5676ba3350cc75d9df923180fc451ebe18b4a",
+    "photos.bindings.json": "sha256:de7a56f224a18aa44eeee3df5774995bbc398d476822a27c4a70c57415d62f42",
+    "text.bindings.json": "sha256:9a23ca62f1e7b88a46b0a5930132fabff33a8286266f6956b3a62382e3fc4e69"
+  }
+}

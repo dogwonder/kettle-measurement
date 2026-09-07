@@ -52,7 +52,9 @@ pub struct Expected {
     pub eval_set: EvalSet,
     /// The documents this fixture is made of, by the role each is
     /// supplied as (#354). File names, relative to the fixture's own
-    /// directory.
+    /// directory. Each role accepts a filename or an ordered list of
+    /// filenames; the manifest decides whether the files are pages of
+    /// one document or separate documents.
     ///
     /// Absent means the fixture is the single document beside this
     /// file, bound to the pack's sole role — which is every fixture
@@ -62,8 +64,8 @@ pub struct Expected {
     /// invisible at the call site and unverifiable afterwards, and a
     /// renewal diff run the wrong way round does not fail — it reports
     /// a price cut where there was a rise.
-    #[serde(default)]
-    pub inputs: BTreeMap<String, String>,
+    #[serde(default, deserialize_with = "deserialize_inputs")]
+    pub inputs: BTreeMap<String, Vec<String>>,
     /// Raw statement merchant to the name it should become.
     #[serde(default)]
     pub normalise: Vec<NormaliseExpectation>,
@@ -131,6 +133,34 @@ impl EvalSelection {
             Self::Audition => "audition",
         }
     }
+}
+
+/// Keep every existing filename-shaped expectation readable. Lists are
+/// retained in authored order, including singletons; discovery uses the
+/// runner's binding validation before any evaluation starts.
+fn deserialize_inputs<'de, D>(deserializer: D) -> Result<BTreeMap<String, Vec<String>>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    #[derive(Deserialize)]
+    #[serde(untagged)]
+    enum Files {
+        One(String),
+        Many(Vec<String>),
+    }
+    let inputs = BTreeMap::<String, Files>::deserialize(deserializer)?;
+    Ok(inputs
+        .into_iter()
+        .map(|(role, files)| {
+            (
+                role,
+                match files {
+                    Files::One(file) => vec![file],
+                    Files::Many(files) => files,
+                },
+            )
+        })
+        .collect())
 }
 
 impl Expected {
@@ -1210,7 +1240,7 @@ pub fn fixtures_at_with_retired(
 ///   the pack's sole role, which is the binding `run_pack` made for
 ///   itself. Its name and its digest are unchanged, deliberately: both
 ///   are recorded in baselines.
-/// - **An `expected.json` naming its own `inputs`**, one file per role.
+/// - **An `expected.json` naming its own `inputs`**, a file or ordered files per role.
 ///   The fixture is named after the expectations, because no one of its
 ///   documents is the fixture.
 ///
@@ -1335,19 +1365,27 @@ fn multi_document_fixtures(dir: &Path, roles: &[InputSpec]) -> Result<Vec<Fixtur
             named(role)?;
         }
         for declared in roles {
-            let Some(file) = expected.inputs.get(&declared.role) else {
+            let Some(files) = expected.inputs.get(&declared.role) else {
                 continue;
             };
-            let path = dir.join(file);
-            if !path.exists() {
-                return Err(format!(
-                    "{} names {file}, which is not in {}",
-                    expectations.display(),
-                    dir.display()
-                ));
+            for file in files {
+                let path = dir.join(file);
+                if !path.is_file() {
+                    return Err(format!(
+                        "{} names {file}, which is not a file in {}",
+                        expectations.display(),
+                        dir.display()
+                    ));
+                }
+                inputs.push((declared.role.clone(), path));
             }
-            inputs.push((declared.role.clone(), path));
         }
+        let bound: Vec<_> = inputs
+            .iter()
+            .map(|(role, path)| (role.as_str(), path.clone()))
+            .collect();
+        crate::run::check_bindings(roles, &bound)
+            .map_err(|error| format!("{}: {error}", expectations.display()))?;
         validate_term_roles(&expected, &expectations, roles)?;
         let name = expectations
             .file_name()

@@ -93,6 +93,35 @@ unknown vocabulary, duplicate ids, stale check claims and misreads labelled
 supported. This describes executable checks; it does not run them or report
 capability passes. Run the owning Rust tests to validate those expectations.
 
+The report also lists the 33 selected cases in
+`evals/corpus/diagnostic-01.json` and four unsupported field scopes. Selection
+alone never counts as measurement. A `measured` label without compatible
+recorded evidence is rejected; inventory files are not rewritten by a run.
+
+To check a scheduled model recording against the current corpus and pipeline:
+
+```sh
+cargo build -p kettle --release
+python3 scripts/capability-coverage.py \
+  --recording evals/runs/diagnostic-model-01 --kettle target/release/kettle
+```
+
+The adapter replays through the named Kettle executable into a temporary
+new directory, with no inference. It requires current inventory/document
+links, exact generation requests, identified weights and generation
+machine/runtime/sidecar provenance. It recomputes scores from current truth;
+it never trusts old report scores. Request/schema mismatches, missing answers,
+acquisition failures, unscored cases, controlled endpoints and deterministic
+floor runs cannot establish positive model coverage. Build the executable from
+the checkout being assessed; the report names its scoring identity.
+
+Successful recorded attempts derive `measured` coverage for their supported
+scopes, including wrong or missing answers, with the scores beside the claim.
+They do not establish a passing capability or fill the time/place/reference
+gaps. This validates compatibility of trusted local recordings, not their
+origin through a cryptographic attestation. No real model run was made while
+implementing this adapter.
+
 After reconciling #628 on 7 September: **53 cases have executable checks**
 (33 date and 20 money/name cases), **59 do not**. The checks expect 27
 resolved dates, six cases deriving no date, eight parsable readings, one
@@ -108,8 +137,7 @@ Validate this report's claims with
 `python3 -m unittest discover -s scripts -p 'test_capability_coverage.py'`.
 CI runs these checks beside the owning Rust tests.
 
-Further families, pack-specific selections and the shared corpus that
-would put a model in front of these documents belong to subsequent
-slices of #595/#432.
+Further distinctions, independent wording/layout families and input-format
+pairs remain subsequent slices of #595/#432/#428/#256.
 
 The shared corpus that reuses these capabilities across document kinds lives in `evals/corpus/` (work package 4); `fourth-batch.md` records its first slice.

@@ -23,6 +23,207 @@ fn corpus() -> Corpus {
         .expect("valid corpus")
 }
 
+fn diagnostic() -> Corpus {
+    Corpus::parse(include_str!("../../../evals/corpus/diagnostic-01.json")).unwrap()
+}
+
+#[test]
+fn diagnostic_links_and_negative_sites_have_explicit_denominators() {
+    let corpus = diagnostic();
+    corpus
+        .validate_inventory(&Path::new(env!("CARGO_MANIFEST_DIR")).join("../../evals/capabilities"))
+        .unwrap();
+    assert_eq!(corpus.cases.len(), 33);
+    let scores: Vec<_> = corpus
+        .cases
+        .iter()
+        .map(|case| {
+            let proposed = faithful(&corpus, case);
+            let score = score_case(
+                &corpus,
+                case,
+                &proposed,
+                &verify(case, &proposed),
+                &Selection::letter_pack(),
+            );
+            for ask in &score.asks {
+                for field in &Selection::letter_pack().fields {
+                    assert_eq!(
+                        ask.raw[field],
+                        Outcome::Correct,
+                        "{} {} {field:?}",
+                        case.id,
+                        ask.ask
+                    );
+                }
+            }
+            score
+        })
+        .collect();
+    let summary = summarise(&scores);
+    assert_eq!(summary.items, 28);
+    assert_eq!(summary.no_obligation_sites, 7);
+    assert_eq!(summary.invented_raw, 0);
+    let mut changed = corpus.clone();
+    changed.cases[0].coverage[0].inventory_digest = "sha256:stale".into();
+    assert!(changed
+        .validate_inventory(&Path::new(env!("CARGO_MANIFEST_DIR")).join("../../evals/capabilities"))
+        .is_err());
+    changed = corpus.clone();
+    changed.selection.as_mut().unwrap().purpose = "challenge".into();
+    assert!(changed.validate().is_err());
+}
+
+#[test]
+fn copied_unresolved_words_and_pointed_dates_keep_their_distinct_evidence() {
+    let corpus = diagnostic();
+    for ident in [
+        "date-form-014",
+        "date-form-028",
+        "date-form-029",
+        "relation-form-010",
+        "format-form-002",
+    ] {
+        let case = corpus
+            .cases
+            .iter()
+            .find(|c| c.coverage[0].inventory_id == ident)
+            .unwrap();
+        let mut proposed = faithful(&corpus, case);
+        let verified = verify(case, &proposed);
+        let score = score_case(
+            &corpus,
+            case,
+            &proposed,
+            &verified,
+            &Selection::letter_pack(),
+        );
+        assert_eq!(
+            score.asks[0].raw[&Field::Deadline],
+            Outcome::Correct,
+            "{ident}"
+        );
+        assert_eq!(
+            score.asks[0].evidence[&Field::Deadline],
+            Evidence::Attached,
+            "{ident}"
+        );
+        if ident.starts_with("date-") {
+            assert_eq!(
+                score.asks[0].verified[&Field::Deadline],
+                Outcome::Correct,
+                "unresolved {ident}"
+            );
+        }
+        proposed.asks[0].deadline.at = 0;
+        let score = score_case(
+            &corpus,
+            case,
+            &proposed,
+            &verified,
+            &Selection::letter_pack(),
+        );
+        assert_eq!(
+            score.asks[0].evidence[&Field::Deadline],
+            Evidence::Misattached
+        );
+    }
+}
+
+#[test]
+fn inventions_on_cancelled_or_completed_asks_stay_visible_by_site() {
+    let corpus = diagnostic();
+    for ident in [
+        "obligation-form-006",
+        "obligation-form-009",
+        "obligation-form-010",
+    ] {
+        let case = corpus
+            .cases
+            .iter()
+            .find(|c| c.coverage[0].inventory_id == ident)
+            .unwrap();
+        let proposal = Proposal {
+            case: case.id.clone(),
+            asks: vec![ProposedAsk {
+                passage: 2,
+                kind: "payment".into(),
+                party: Reading::new(1, "Example Services"),
+                deadline: Reading::absent(2),
+                amount: Reading::absent(2),
+                read: None,
+                from: None,
+                time: None,
+                place: None,
+                reference: None,
+                confidence: "high".into(),
+            }],
+        };
+        let score = score_case(
+            &corpus,
+            case,
+            &proposal,
+            &verify(case, &proposal),
+            &Selection::letter_pack(),
+        );
+        assert!(score.asks.is_empty());
+        assert_eq!(score.invented_raw, 1);
+        assert_eq!(score.negative_sites[0].invented_raw, 1);
+        assert_eq!(score.negative_sites[0].invented_verified, 1);
+    }
+}
+
+#[test]
+fn verified_money_preserves_currency_and_sign_and_names_unsupported_forms() {
+    for (truth, currency, shown, expected) in [
+        ("305.29", "GBP", "£305.29", "correct"),
+        ("305.29", "GBP", "EUR 305.29", "wrong"),
+        ("305.29", "GBP", "-£305.29", "wrong"),
+        ("-305.29", "GBP", "£-305.29", "correct"),
+        ("-305.29", "GBP", "£305.29", "wrong"),
+        ("3052.90", "GBP", "GBP 3,052.9", "correct"),
+        ("305.29", "USD", "$305.29", "unsupported"),
+        ("305.29", "GBP", "305.29", "unsupported"),
+        ("305.29", "GBP", "£3,05.29", "unsupported"),
+        ("305.29", "GBP", "", "missing"),
+    ] {
+        let mut corpus = corpus();
+        corpus
+            .facts
+            .iter_mut()
+            .find(|f| f.id == "fact-instalment")
+            .unwrap()
+            .value = Some(runner::eval::corpus::Value::Money {
+            amount: truth.into(),
+            currency: currency.into(),
+        });
+        let case = corpus.case("slice01-letter").unwrap();
+        let proposal = faithful(&corpus, case);
+        let mut verified = verify(case, &proposal);
+        verified
+            .iter_mut()
+            .find(|a| a.kind == "payment")
+            .unwrap()
+            .amount = shown.into();
+        let score = score_case(
+            &corpus,
+            case,
+            &proposal,
+            &verified,
+            &Selection::letter_pack(),
+        );
+        let (_, result) = outcome(&score, "ask-pay", Field::Amount);
+        let label = match result {
+            Outcome::Correct => "correct",
+            Outcome::Wrong { .. } => "wrong",
+            Outcome::Missing => "missing",
+            Outcome::Unsupported => "unsupported",
+            Outcome::Uncertain { .. } => "uncertain",
+        };
+        assert_eq!(label, expected, "{truth} {currency}, shown {shown:?}");
+    }
+}
+
 fn segments(case: &Case) -> Vec<Segment> {
     case.passages
         .iter()
@@ -96,7 +297,7 @@ fn ask<'a>(case: &'a Case, id: &str) -> &'a runner::eval::corpus::Ask {
 
 /// A faithful proposal for a case: each obligation read at the passage
 /// that makes it, every field copied as the document words it.
-fn faithful(corpus: &Corpus, case: &Case) -> Proposal {
+fn faithful(_corpus: &Corpus, case: &Case) -> Proposal {
     let asks = case
         .asks
         .iter()
@@ -108,20 +309,16 @@ fn faithful(corpus: &Corpus, case: &Case) -> Proposal {
                     .cloned()
                     .flatten()
                     .and_then(|fact| case.span(&fact))
-                    .filter(|_| {
-                        corpus
-                            .fact(a.fields[field].as_deref().unwrap())
-                            .unwrap()
-                            .status
-                            == runner::eval::corpus::FactStatus::Stated
-                    })
                     .map(|s| Reading::new(s.passage, s.text.clone()))
             };
             ProposedAsk {
                 passage: a.passage,
                 kind: a.kind.clone(),
                 party: span("party").unwrap(),
-                deadline: Reading::new(a.passage, a.deadline_words.clone().unwrap()),
+                deadline: Reading::new(
+                    a.deadline_at.unwrap_or(a.passage),
+                    a.deadline_words.clone().unwrap_or_default(),
+                ),
                 // The structure the corpus authors beside the words, and
                 // the base fact's span where the period counts from one.
                 read: a.deadline_read.clone(),

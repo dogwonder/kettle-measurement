@@ -54,9 +54,12 @@ The money/name checks exercise containment and parseability of a supplied
 reading, not semantic selection or every typed source fact. A general
 test of a related boundary does not count as executing an inventory case.
 
-`model_reading.coverage` is `not-measured` for every case. No model has
-read any of these documents; a synthetic example beside a case is a
-question that can be asked, not an answer.
+Source `model_reading.coverage` labels remain `not-measured`; positive
+coverage is derived from a supplied recording. The [first incumbent
+measurement](../corpus/measurement-01.md), on 7 September, now supplies
+29 validated attempted scopes out of 112. Four selected time/place/reference
+scopes remain unsupported. A recorded attempt, including a wrong answer,
+does not establish that a capability passes.
 
 ## Provenance
 
@@ -127,7 +130,8 @@ After reconciling #628 on 7 September: **53 cases have executable checks**
 resolved dates, six cases deriving no date, eight parsable readings, one
 absence, six unparsed money readings and five accepted misreads. The last
 two categories retain their known limitations; a passing regression test
-does not remove them. All 112 cases remain unmeasured by a model.
+does not remove them. Those deterministic counts are unchanged by the first
+incumbent model run; its 29 attempted scopes are a separate coverage axis.
 
 Ten formerly `main-check` cases had no inventory-consuming test and now
 say `not-exercised`, as does the previously pending wrong-event relationship.

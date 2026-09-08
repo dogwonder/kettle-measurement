@@ -24,6 +24,9 @@ pub struct Options {
     /// JSON mapping case ids to {"inputs":{"role":"file or list"}}
     #[arg(long)]
     pub bindings: Option<PathBuf>,
+    /// Explicit challenge attempt: consume this frozen lifecycle before execution
+    #[arg(long)]
+    pub challenge_record: Option<PathBuf>,
     #[arg(long, conflicts_with_all = ["replay", "mock_port", "no_model"])]
     pub model: Option<PathBuf>,
     /// Exact recorded answers from a previous corpus output directory
@@ -55,7 +58,12 @@ pub fn run(options: &Options) -> Result<Report, String> {
         return Err("use a new --out directory; existing evidence is never replaced".into());
     }
     let text = std::fs::read_to_string(&options.corpus).map_err(|e| e.to_string())?;
-    Corpus::parse(&text)?.validate_inventory(&options.inventory_dir)?;
+    let corpus = if options.challenge_record.is_some() {
+        runner::eval::challenge::validate(&text)?
+    } else {
+        Corpus::parse(&text)?
+    };
+    corpus.validate_inventory(&options.inventory_dir)?;
     let pack = runner::packs::load_pack(&options.pack_dir).map_err(|e| e.to_string())?;
     let mut bindings = Bindings::new();
     if let Some(path) = &options.bindings {
@@ -91,6 +99,24 @@ pub fn run(options: &Options) -> Result<Report, String> {
     let mut sidecar_info = None;
     let mut runtime_identity = None;
     let mut sidecar_guard = None;
+    let mut challenge_attempt = None;
+    if let Some(record) = &options.challenge_record {
+        if options.replay.is_none() {
+            let source = if options.model.is_some() {
+                "model"
+            } else if options.mock_port.is_some() {
+                "controlled-endpoint"
+            } else {
+                "deterministic-floor"
+            };
+            challenge_attempt = Some(runner::eval::challenge::Attempt::start(
+                &text,
+                record,
+                &options.out,
+                source,
+            )?);
+        }
+    }
     let answers = if let Some(root) = &options.replay {
         let recording = Recording::from_run_dirs(root)?;
         if recording.compatibility().legacy_prompt_only_requests != 0 {
@@ -103,6 +129,23 @@ pub fn run(options: &Options) -> Result<Report, String> {
         .map_err(|e| e.to_string())?;
         if previous.schema != runner::eval::corpus_execution::SCHEMA || previous.model != model {
             return Err("recording and corpus report identities disagree".into());
+        }
+        match (&options.challenge_record, &previous.challenge) {
+            (Some(path), Some(record)) => {
+                if previous.corpus_digest
+                    != format!("blake3:{}", blake3::hash(text.as_bytes()).to_hex())
+                {
+                    return Err("replay challenge corpus identity differs from its report".into());
+                }
+                challenge_attempt = Some(runner::eval::challenge::Attempt::replay(
+                    &text, path, record,
+                )?);
+            }
+            (None, None) => {}
+            _ => return Err(
+                "challenge replay requires its original lifecycle and explicit --challenge-record"
+                    .into(),
+            ),
         }
         runtime_identity = previous.runtime;
         generation_machine = previous.generation_machine;
@@ -157,7 +200,7 @@ pub fn run(options: &Options) -> Result<Report, String> {
     } else {
         Answers::WithoutModel
     };
-    let report = Evaluation {
+    let evaluation = Evaluation {
         pack: &pack,
         corpus_text: &text,
         bindings: &bindings,
@@ -169,8 +212,11 @@ pub fn run(options: &Options) -> Result<Report, String> {
         runtime: runtime_identity,
         output: &options.out,
         pdfium_dir: Some(&options.sidecars_dir),
-    }
-    .evaluate();
+    };
+    let report = match challenge_attempt {
+        Some(attempt) => evaluation.evaluate_challenge(attempt),
+        None => evaluation.evaluate(),
+    };
     drop(sidecar_guard);
     report
 }

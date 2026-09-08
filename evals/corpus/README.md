@@ -1,5 +1,14 @@
 # Shared capability corpus
 
+Current local product follow-up: [amount selection and list attribution](product-defects.md),
+with a ten-document exposed regression selection in `product-regressions-01.json`.
+This file is explicitly authored source truth, not generator output; it is not
+covered by the generated `slice-01.json` regeneration rule below. Its prompt
+patch is unmeasured. [Issue dispositions](issue-review-2026-09-08.md) retain the
+outstanding model, format and independent-challenge requirements.
+The [prepared old/new comparison](measurement-02.md) freezes those inputs;
+it has not been authorised or run.
+
 One set of typed source facts rendered into more than one document
 kind, so the same reading capabilities can be asked of a model across
 layouts and judged by one scorer (plan work package 4; #595, #432).
@@ -57,8 +66,11 @@ through the real `reading::check` and timeline. What it found is in
 
 The original two-case slice establishes the scorer. The additional 33-case
 `diagnostic-01.json` selection adds named distinctions, not a statistically
-sufficient harm-ceiling denominator. No model has read these diagnostic cases; `model_reading` coverage for every form in
-the inventory is still `not-measured`. The verified column exercises
+sufficient harm-ceiling denominator. The [first incumbent measurement](measurement-01.md)
+completed all 33 cases on 7 September, with exact replay and 29 recording-backed
+inventory scopes; four selected scopes remain unsupported. Source inventory
+labels remain `not-measured` because positive evidence is derived by validating
+a supplied recording. The verified column exercises
 the boundary on `main` (scoring 19), including #628's authored deadline
 structure and base reading. The corpus tests use controlled proposals;
 the `kettle corpus` command now connects actual execution and recordings.
@@ -75,8 +87,12 @@ cargo run -p kettle -- corpus --no-model --out evals/runs/corpus-floor-01
 Every case in `--corpus` (default `slice-01.json`) runs through the pack's
 ordinary obligations pipeline. The default input is the case's passages
 rendered as text. `--out` must be new: existing evidence is never replaced.
-The report uses its own `corpus-fields-v4` scoring identity; it does not
+The report uses its own `corpus-fields-v6` scoring identity; it does not
 write pack baselines or tiers, or change the pack's scoring version.
+
+V6 separates source facts from explicit pack deadline expectations and task
+slot counts. See [SCORING.md](SCORING.md) for the field meanings, preserved
+legacy counts and the limits of semantic action scoring.
 
 For a scheduled measurement, replace `--no-model` with `--model` and a
 local GGUF path, optionally naming `--context` and `--sidecar-binary`.
@@ -117,10 +133,13 @@ relative to the bindings file; omitted cases use generated text. For example:
 
 This uses the fixture filename/list syntax and the pack's file grouping and
 limits. Recordings include ordered input hashes and actual document/page/
-passage coordinates. Source passages align to an ordered sequence of acquired
-segments; a split sign-off is supported. Missing or ambiguous alignment,
-or a fact/ask that cannot map to one segment, produces an acquisition error
-and an explicitly unscored case. It is never repaired using a gold value or
+passage coordinates. The complete ordered source text aligns to acquired segments after
+whitespace normalisation, preserving both split sign-offs and merged source
+passages. Missing/extra/reordered text, or a fact/ask that cannot map to one
+segment, produces an acquisition error and an explicitly unscored case.
+Merged ask sites use distinct declared action kinds for attribution; colliding
+kinds or conflicting candidates stay unscored with separate attribution
+errors. [FORMATS.md](FORMATS.md) states the contract and its limits. It is never repaired using a gold value or
 reported as an ordinary model omission. Independent documents require a
 manifest declaring `documents`; the shipped letter role declares `pages`.
 
@@ -154,8 +173,10 @@ The selection is named `reading-diagnostic-01`, purpose `diagnostic`,
 exposure `development`. Each case pins its inventory id, file digest,
 source document and narrow field scope. The command validates those links
 against `--inventory-dir` (default `evals/capabilities`) before execution.
-Changed inventories require regeneration. No challenge selection is accepted
-by this command; independent authoring and the holdout workflow remain slice 4.
+Changed inventories require regeneration. Challenge selections require the
+explicit [`--challenge-record` lifecycle workflow](CHALLENGE.md); ordinary
+diagnostic execution and inventory coverage refuse them. Separately authored
+challenge cases remain outstanding.
 
 ```sh
 cargo run -p kettle -- corpus --corpus evals/corpus/diagnostic-01.json \
@@ -168,7 +189,14 @@ unsupported even if the pack answers other fields correctly. The 29
 supported scopes can become measured attempts only through compatible
 recorded model evidence, checked by `scripts/capability-coverage.py`.
 A wrong answer is still an attempted measurement, never a capability pass.
-All 112 inventory cases currently remain unmeasured by a model.
+The first incumbent recording now establishes 29 attempted scopes out of 112.
+Reproduce that coverage from the locally committed synthetic archive:
+
+```sh
+python3 -B scripts/capability-coverage.py --corpus evals/corpus/diagnostic-01.json \
+  --recording ../kettle-runs/2026-09-07-corpus-diagnostic01-qwen35-4b-v5-metal/run1 \
+  --kettle target/debug/kettle
+```
 
 Corpus scoring v3 judges copied unresolved deadline wording independently
 of whether a date can be derived. `deadline_at` identifies the raw phrase's
@@ -178,8 +206,9 @@ deadline above them. Explicit `negative_sites` count inventions on authored
 no-obligation passages. A zero there does not establish that a model was
 asked; recorded exchanges establish attempted measurement.
 
-Independent challenge families, equivalent PDF/photo inputs and fresh model
-comparisons remain in `plan.md`. No prompt, pack ceiling, baseline or tier
+Independent challenge families, broader PDF/photo coverage and fresh model
+comparisons remain in `plan.md`. The two paired acquisition cases and challenge
+execution contract are implemented. No prompt, pack ceiling, baseline or tier
 has changed in this slice.
 
 The paired acquisition bundle and reader findings are in [FORMATS.md](FORMATS.md).

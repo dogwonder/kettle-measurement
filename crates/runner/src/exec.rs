@@ -1215,7 +1215,9 @@ fn split_truncated(
 /// of the letter bed's segments are non-unique across letters, so this
 /// case is ordinary rather than exotic.
 fn pairs(echoed: &str, item: &BatchItem, batch: &[BatchItem]) -> bool {
-    if echoed.is_empty() || !item.raw.starts_with(echoed) {
+    let echoed = &fold_quotes(echoed);
+    let raw = fold_quotes(&item.raw);
+    if echoed.is_empty() || !raw.starts_with(echoed.as_str()) {
         return false;
     }
     // An exact echo is conclusive on its own, and does not have to be
@@ -1229,12 +1231,39 @@ fn pairs(echoed: &str, item: &BatchItem, batch: &[BatchItem]) -> bool {
     // needs uniqueness because it is weak evidence about which item was
     // read; an exact match is not a prefix of the item, it *is* the
     // item.
-    if echoed == item.raw {
+    if *echoed == raw {
         return true;
     }
-    !batch
-        .iter()
-        .any(|other| other.raw.starts_with(echoed) && other.raw != item.raw)
+    !batch.iter().any(|other| {
+        let other = fold_quotes(&other.raw);
+        other.starts_with(echoed.as_str()) && other != raw
+    })
+}
+
+/// Read the four typographic quote marks as their ASCII cousins, for
+/// pairing only.
+///
+/// 8 September 2026, five arms on a rented 4090: a letter printed "this
+/// year’s annual charge", every model echoed it with a straight
+/// apostrophe, and the exact check above sent a correct £960.00 payment
+/// to review on every prompt and every model size. Real letters print
+/// curly quotes as a matter of course, and a tokenizer that reads them
+/// and writes `'` is not confusing one passage with another.
+///
+/// This is safe only because the echo is never data: `item.raw` is
+/// Rust's own copy of the passage throughout, and the echo exists to say
+/// which item an answer is about. So the fold applies to the comparison
+/// and to nothing downstream. It is deliberately narrow — four
+/// characters, no case, no whitespace, nothing else — because every
+/// further relaxation is a new way for a wrong pairing to pass.
+fn fold_quotes(text: &str) -> String {
+    text.chars()
+        .map(|c| match c {
+            '\u{2018}' | '\u{2019}' => '\'',
+            '\u{201C}' | '\u{201D}' => '"',
+            other => other,
+        })
+        .collect()
 }
 
 /// Match results back to batch items by id (brief §3): missing,

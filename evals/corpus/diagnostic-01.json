@@ -2661,10 +2661,15 @@
           "deadline_words": "within 14 days",
           "deadline_at": 5,
           "deadline_read": {
-            "count": 0,
-            "unit": "none",
+            "count": 14,
+            "unit": "days",
             "qualifier": "none",
-            "counts_from": "none"
+            "counts_from": "letter_date"
+          },
+          "deadline_resolution": {
+            "policy": "letter-date-default",
+            "base": "relation-form-001-dateline",
+            "due": "2026-03-24"
           }
         }
       ],
@@ -2872,6 +2877,10 @@
             "unit": "none",
             "qualifier": "none",
             "counts_from": "none"
+          },
+          "deadline_reading": {
+            "at": 3,
+            "value": "6 April 2026"
           }
         }
       ],
@@ -3166,9 +3175,9 @@
   ],
   "provenance": {
     "generator": "kettle-examples synth_letters.diagnostic",
-    "generator_revision": "2bdeaf482ce7c0d4772fa3ecc128bc549d0656d4",
-    "generator_source_digest": "sha256:b2d7939a92616b5a54a6ab0bd7a8ad0ff85a3ccf8098458b7696b2a575a64069",
-    "digest": "sha256:d07b2ad79c716e995dab3cc1fa745758ec655a9bc90854cd942e005ccde09ab5",
+    "generator_revision": "90e41a69f15bbf6b18e9e8a424f61a142d5d9e65",
+    "generator_source_digest": "sha256:953b7c330225b1ed1217d6d4da76dfb52bd4c4cb088bf279abe0ebef2d7f2eaa",
+    "digest": "sha256:0e1612c4a72b4810ffeefdf47951a57feae5c16ba9356d2d4264920c8be95b8d",
     "synthetic": true,
     "independent": false,
     "selection": {

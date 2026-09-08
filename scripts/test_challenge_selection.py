@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from concurrent.futures import ThreadPoolExecutor
+from threading import Barrier
 
 SPEC = importlib.util.spec_from_file_location("challenge", Path(__file__).with_name("challenge-selection.py"))
 challenge = importlib.util.module_from_spec(SPEC)
@@ -68,3 +70,34 @@ class ChallengeLifecycle(unittest.TestCase):
             challenge.freeze(self.corpus, self.record)
         with self.assertRaisesRegex(ValueError, "invalid challenge lifecycle"):
             challenge.status({"schema": "kettle/challenge-lifecycle@1", "events": [{"event": "frozen", "at": "test"}, {"event": "exposed", "at": "test"}]})
+
+    def test_pending_execution_and_changed_authoring_cannot_appear_fresh(self):
+        challenge.freeze(self.corpus, self.record)
+        original = self.record.read_text()
+        pending = self.record.with_name(self.record.name + ".pending")
+        pending.write_text("interrupted execution reservation")
+        with self.assertRaisesRegex(ValueError, "pending write"):
+            challenge.check(self.corpus, self.record)
+        with self.assertRaises(FileExistsError):
+            challenge.expose(self.record, "competing exposure", "test-only")
+        self.assertEqual(self.record.read_text(), original)
+        pending.unlink()
+        changed = json.loads(original)
+        changed["authoring"]["author"] = "a different declaration"
+        self.record.write_text(json.dumps(changed))
+        with self.assertRaisesRegex(ValueError, "changed after freezing"):
+            challenge.check(self.corpus, self.record)
+
+    def test_competing_freezes_cannot_create_two_fresh_records_in_one_ledger(self):
+        barrier = Barrier(2)
+
+        def attempt(name):
+            barrier.wait()
+            try:
+                challenge.freeze(self.corpus, self.root / name)
+                return True
+            except (ValueError, FileExistsError):
+                return False
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            self.assertEqual(sum(pool.map(attempt, ["first.json", "second.json"])), 1)

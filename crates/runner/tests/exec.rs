@@ -1286,3 +1286,80 @@ fn review_entries_carry_the_request_that_produced_them() {
         );
     }
 }
+
+/// 8 September 2026, five arms on a rented 4090: the letter printed
+/// "this year’s annual charge" with a typographic apostrophe, every
+/// model echoed it with a straight one, and the exact echo check sent a
+/// correct £960.00 payment to review on every prompt and every model
+/// size. Real letters print curly quotes routinely. The echo exists only
+/// to confirm which item an answer is about, never as data (`item.raw`
+/// is Rust's copy throughout), so pairing may read the four typographic
+/// quote marks as their ASCII cousins. Nothing else is folded: not
+/// case, not whitespace, not any other character.
+#[test]
+fn a_straight_apostrophe_echoes_a_curly_one() {
+    let straight = r#"{"results": [
+        {"id": 0, "raw": "Please pay this year's annual charge of £960.00 in full.", "name": "Cedar", "recognised": true}
+    ]}"#;
+    let mock = MockModel::respond_sequence(vec![("200 OK", completion_envelope(straight))]);
+    let endpoint = mock.endpoint();
+
+    let batch = vec![BatchItem::new(
+        0,
+        "Please pay this year\u{2019}s annual charge of £960.00 in full.",
+    )];
+    let outcome = run_batch(
+        &endpoint,
+        "Sort these:\n{{ batch_json }}",
+        None,
+        &results_schema(),
+        &batch,
+        "raw",
+        &BatchContext::none(),
+    )
+    .expect("a curly-quoted batch still returns");
+
+    assert!(
+        outcome.needs_review.is_empty(),
+        "a straight apostrophe for a curly one is the same passage: {:?}",
+        outcome.needs_review
+    );
+    assert!(outcome.answers.contains_key(&0));
+    // No re-ask was needed: the mock served exactly one response.
+    assert_eq!(endpoint.take_metrics().retries.rejoin, 0);
+}
+
+/// The fold is narrow on purpose. A prefix that differs in a letter is
+/// still a mismatch, and so is one that differs only in case.
+#[test]
+fn the_quote_fold_folds_nothing_else() {
+    let wrong_case = r#"{"results": [
+        {"id": 0, "raw": "please pay this year's annual charge", "name": "Cedar", "recognised": true}
+    ]}"#;
+    let mock = MockModel::respond_sequence(vec![
+        ("200 OK", completion_envelope(wrong_case)),
+        ("200 OK", completion_envelope(r#"{"results": []}"#)),
+    ]);
+    let endpoint = mock.endpoint();
+
+    let batch = vec![BatchItem::new(
+        0,
+        "Please pay this year\u{2019}s annual charge of £960.00 in full.",
+    )];
+    let outcome = run_batch(
+        &endpoint,
+        "Sort these:\n{{ batch_json }}",
+        None,
+        &results_schema(),
+        &batch,
+        "raw",
+        &BatchContext::none(),
+    )
+    .expect("a mismatched batch still returns");
+
+    assert!(outcome.answers.is_empty());
+    assert!(matches!(
+        outcome.needs_review[0].reason,
+        ReviewReason::MismatchedEcho { .. }
+    ));
+}

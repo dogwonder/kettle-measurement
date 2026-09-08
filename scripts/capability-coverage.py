@@ -32,7 +32,7 @@ DATE_OWNER = ("crates/runner/tests/reading_vocabulary.rs",
 READING_OWNER = ("crates/runner/tests/inventory_verifier.rs",
                  "every_checked_case_comes_out_as_the_inventory_says")
 SCHEMA = "kettle/corpus-evaluation@1"
-SCORING = "corpus-fields-v4"
+SCORING = "corpus-fields-v6"
 
 
 def diagnostic_links(path, inventory_dir=ROOT):
@@ -99,7 +99,7 @@ def checked_evidence(corpus, links, report, recording):
         result = actual[case["id"]]
         if (result.get("coverage") != case.get("coverage", [])
                 or result.get("score") is None or result.get("execution_error")
-                or result.get("acquisition_errors") or not result.get("exchanges")
+                or result.get("acquisition_errors") or result.get("attribution_errors") or not result.get("exchanges")
                 or any(not e.get("generation") for e in result["exchanges"])):
             raise ValueError(f"{case['id']}: no complete compatible recorded attempt")
     return {ident: {

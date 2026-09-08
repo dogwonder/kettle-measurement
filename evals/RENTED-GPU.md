@@ -7,7 +7,10 @@ justify an absolute duration carried into a later sitting. Everything
 here is what that attempt hit, in the order it hit it.
 
 `scripts/pod-eval.sh` automates the happy path. This file is why each
-step is what it is, and what to do when it is not happy.
+step is what it is, and what to do when it is not happy. A bounded
+`kettle corpus` comparison is a different job with its own script,
+`scripts/corpus-pod.sh` (`evals/corpus/measurement-02-pod.md`); the
+box-level lessons below apply to it unchanged.
 
 ## Before anything: is it worth it?
 

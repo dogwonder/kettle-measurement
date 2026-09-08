@@ -67,6 +67,8 @@ def run(bundle, out, kettle, sidecars):
             raise ValueError("acquisition check must retain a deterministic floor report")
         results[arm] = {"report": f"{arm}/report.json", "unscored_cases": report["unscored_cases"],
                        "cases": [{"case": c["case"], "acquisition_errors": c["acquisition_errors"],
+                                  "attribution_errors": c.get("attribution_errors", []),
+                                  "kind_matched_segments": c.get("kind_matched_segments", []),
                                   "execution_error": c["execution_error"], "scored": c["score"] is not None,
                                   "pages_with_text": sorted({s["page"] for s in c["segments"]})} for c in report["cases"]]}
     report = {"schema": "kettle/acquisition-diagnostic@1", "selection": corpus["selection"],

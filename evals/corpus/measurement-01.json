@@ -1,0 +1,122 @@
+{
+  "schema": "kettle/corpus-measurement-plan@1",
+  "id": "reading-diagnostic-01-qwen35-4b-metal-2026-09-07",
+  "prepared_at": "2026-09-07T20:44:18.588641+00:00",
+  "status": "scheduled; no answers observed when prepared",
+  "question": "Which selected source fields and ask sites does the incumbent read correctly, and which raw errors does verification preserve, refuse or turn into review?",
+  "implementation_commit": "70c2a1a8e7b62232d1ffa04f9961cb00dea8655e",
+  "selection": {
+    "id": "reading-diagnostic-01",
+    "purpose": "diagnostic",
+    "exposure": "development",
+    "fields": [
+      "kind",
+      "party",
+      "deadline",
+      "amount"
+    ]
+  },
+  "corpus": {
+    "path": "evals/corpus/diagnostic-01.json",
+    "digest": "sha256:15d7accc6a5dfe15bc57a2eef69314232f609e3bb0c9be8f3b00cc7846ebfbc9",
+    "case_ids": [
+      "date-form-001-letter",
+      "date-form-010-letter",
+      "date-form-014-letter",
+      "date-form-017-letter",
+      "date-form-024-letter",
+      "date-form-028-letter",
+      "date-form-029-letter",
+      "date-form-031-letter",
+      "money-form-001-letter",
+      "money-form-003-letter",
+      "money-form-005-letter",
+      "money-form-013-letter",
+      "money-form-017-letter",
+      "obligation-form-001-letter",
+      "obligation-form-004-letter",
+      "obligation-form-006-letter",
+      "obligation-form-007-letter",
+      "obligation-form-009-letter",
+      "obligation-form-010-letter",
+      "obligation-form-012-letter",
+      "obligation-form-013-letter",
+      "party-form-006-letter",
+      "party-form-007-letter",
+      "party-form-009-letter",
+      "party-form-011-letter",
+      "relation-form-001-letter",
+      "relation-form-002-letter",
+      "relation-form-008-letter",
+      "relation-form-010-letter",
+      "format-form-002-letter",
+      "format-form-005-letter",
+      "time-form-001-letter",
+      "time-form-011-letter"
+    ]
+  },
+  "acquisition": "authored text, one document per case; no substituted inputs",
+  "model": {
+    "path": "models/qwen3.5-4b-q4_k_m.gguf",
+    "digest": "sha256:13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983",
+    "bytes": 3013027808
+  },
+  "sidecar": {
+    "path": "sidecars/macos-arm64/llama-server",
+    "build": "b10145",
+    "files": {
+      "libggml-base.0.dylib": "sha256:3e5a9004f87c029afc6d1788811b66321953c2a95a05919d430f6d1db6d2459b",
+      "libggml-blas.0.dylib": "sha256:c12c6eb9c317a91b4018235f2e86be7e00ef85ddd164e90f325c8c66444b89ee",
+      "libggml-cpu.0.dylib": "sha256:86cec8a069cb50cf3a355ea9cd403cb57009c5326e7699544b5c41c2da524d1f",
+      "libggml-metal.0.dylib": "sha256:5fd9bcb9eecb07ad58b1187da5b30210f9d5ce960443a8981070711faa67b095",
+      "libggml-rpc.0.dylib": "sha256:6bca38b002d59704c4a67ed8793e358498b12d409546f6938eced73cecb26815",
+      "libggml.0.dylib": "sha256:85acdf1924c48cfc25d74ac5fe7d40040ef31bddda82d0dd70adc55d325b914b",
+      "libllama-common.0.dylib": "sha256:ffb3731fc9525787249a467c86b9a5193ed4300d6828c589185c364024bdd478",
+      "libllama-server-impl.dylib": "sha256:053a4493c0ad539c54de04d37987deea9423e9e165a978048b682e667ab58ac6",
+      "libllama.0.dylib": "sha256:61c83244a7d485a341e7e6c2b0f9b8ec326364e2d6e4d210c45934cde3c4b4be",
+      "libmtmd.0.dylib": "sha256:b6459b40246f6dbc980a72476a50d22ec81ab0ce699b36b64361f67b84b67452",
+      "llama-server": "sha256:a4998768a70ba2be02617ec9d8773accc2952516f4f5a8f38f621ece54cbf04b"
+    }
+  },
+  "pack_files": {
+    "packs/app.kttl.letter-to-actions/examples/obligations.examples.json": "sha256:885f569ea746592880edb3d875cba2f4b12e7bb2f21316cbfeac0778fba2a96b",
+    "packs/app.kttl.letter-to-actions/pack.json": "sha256:f0c715f9911eade708641bfbafd7574f4e1477b8bd541d13ec8c725c7db95166",
+    "packs/app.kttl.letter-to-actions/prompts/obligations.md": "sha256:6be9c2885bf944a6ea963af49fe407e99f601a4925325b31680a0f37f099ccd2",
+    "packs/app.kttl.letter-to-actions/report.html.tera": "sha256:47dc17c4de72943e8ebe00bf4895ad1e267c66a075f00352b7d47ec45c3d2c67",
+    "packs/app.kttl.letter-to-actions/schemas/obligations.schema.json": "sha256:6f137684ff87754d10a7c6b633682f0a20f44742d74330551dac09e86be36795"
+  },
+  "executable": {
+    "path": "target/debug/kettle",
+    "digest": "sha256:d99b203b43676e3cc3ae827840991ad9e03be09299ac413f396c1a9e120bf85b"
+  },
+  "policy": {
+    "context": 8192,
+    "temperature": 0,
+    "reasoning": "off",
+    "parallel": 1,
+    "max_answer_tokens": 4096,
+    "retries": "unchanged shipped schema/rejoin/truncation policy; record all exchanges"
+  },
+  "budget": {
+    "whole_selection_runs": 1,
+    "wall_clock_limit_seconds": 1200,
+    "paid_compute": false,
+    "automatic_reruns": 0,
+    "additional_models": 0
+  },
+  "scoring": "corpus-fields-v5",
+  "pack_scoring": 19,
+  "scope_limits": [
+    "Exposed diagnostic; no holdout or generalisation claim",
+    "Four time/place/reference scopes remain unsupported",
+    "No tier, baseline or harm-ceiling promotion",
+    "No format or cross-runtime comparison"
+  ],
+  "post_run": [
+    "retain complete run including failures",
+    "exact replay into a new directory",
+    "derive inventory attempts using capability-coverage.py",
+    "archive synthetic recordings before citing findings"
+  ],
+  "output": "evals/runs/reading-diagnostic-01-qwen35-4b-metal-2026-09-07"
+}

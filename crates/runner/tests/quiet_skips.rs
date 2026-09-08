@@ -103,7 +103,7 @@ struct Declared {
 const DECLARED: &[Declared] = &[
     Declared {
         file: "cli/tests/corpus_cli.rs",
-        test: "real_pdf_formats_preserve_words_and_report_unavailable_ask_attribution",
+        test: "real_pdf_formats_resolve_distinct_kinds_in_merged_passages",
         needs: Needs::Libpdfium,
         why: "paired PDF diagnostics use the actual vendored reader; platforms without libpdfium retain the text checks (#256)",
     },

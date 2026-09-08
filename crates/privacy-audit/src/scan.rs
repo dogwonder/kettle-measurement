@@ -63,6 +63,8 @@ const WEB_MARKERS: &[&str] = &[
 /// schemas there, and their documentation examples are full of
 /// `https://mydomain.dev` — a boundary file explaining a placeholder in
 /// a generated schema is a boundary file nobody believes.
+/// `app/mini-templates` is a starter for a separate local application,
+/// with its own tested boundary; it is not Kettle's packaged frontend.
 const NOT_SOURCE: &[&str] = &[
     ".git",
     "target",
@@ -76,6 +78,9 @@ const NOT_SOURCE: &[&str] = &[
     "runs",
     "crates/privacy-audit",
     "reference",
+    // Starter for a separate generated application; not bundled in Kettle.
+    // Its runtime/download boundary is documented and tested in the template.
+    "app/mini-templates",
 ];
 
 /// How a file's comments are written, so a URL in prose is not read as
@@ -431,10 +436,11 @@ mod tests {
     /// hypothetical — the study harness's first build turned the
     /// boundary test red locally while CI would have stayed green.
     #[test]
-    fn a_frontend_build_is_not_scanned() {
+    fn non_runtime_frontend_trees_are_not_scanned() {
         for (built_dir, source_dir) in [
             ("app/dist-demo/assets", "app/demo"),
             ("app/dist-study/assets", "app/study"),
+            ("app/mini-templates/image-descriptions/web", "app/src"),
         ] {
             let root =
                 std::env::temp_dir().join(format!("kettle-scan-{}", built_dir.replace('/', "-")));

@@ -28,6 +28,187 @@ fn diagnostic() -> Corpus {
 }
 
 #[test]
+fn pack_deadline_default_is_separate_from_source_truth_and_period_reading() {
+    let corpus = diagnostic();
+    let case = corpus.case("relation-form-001-letter").unwrap();
+    let mut proposal = faithful(&corpus, case);
+    proposal.asks[0].from = Some(Reading::new(0, "10 March 2026"));
+    let shown = verify(case, &proposal);
+    assert_eq!(shown[0].due.unwrap().to_string(), "2026-03-24");
+    let score = score_case(&corpus, case, &proposal, &shown, &Selection::letter_pack());
+    let a = &score.asks[0];
+    assert!(matches!(
+        a.verified[&Field::Deadline],
+        Outcome::Wrong { .. }
+    ));
+    let contract = a.deadline_contract.as_ref().unwrap();
+    assert_eq!(contract.reading, Outcome::Correct);
+    assert_eq!(contract.structure, Some(Outcome::Correct));
+    assert_eq!(contract.resolution, Outcome::Correct);
+    assert!(contract.policy.is_some());
+    assert_eq!(
+        corpus.fact("relation-form-001-deadline").unwrap().status,
+        runner::eval::corpus::FactStatus::Ambiguous
+    );
+    // A right calendar date cannot conceal misread structure, nor a wrong
+    // calendar date be accepted merely because the right policy was declared.
+    proposal.asks[0].read.as_mut().unwrap().count = 15;
+    let mut wrong = shown.clone();
+    wrong[0].due = Some("2026-03-25".parse().unwrap());
+    let score = score_case(&corpus, case, &proposal, &wrong, &Selection::letter_pack());
+    let contract = score.asks[0].deadline_contract.as_ref().unwrap();
+    assert!(matches!(contract.structure, Some(Outcome::Wrong { .. })));
+    assert!(matches!(contract.resolution, Outcome::Wrong { .. }));
+}
+
+#[test]
+fn pointer_contract_and_strict_source_copy_keep_distinct_evidence() {
+    let corpus = diagnostic();
+    let case = corpus.case("relation-form-010-letter").unwrap();
+    let mut proposal = faithful(&corpus, case);
+    proposal.asks[0].deadline = Reading::new(3, "6 April 2026");
+    let shown = verify(case, &proposal);
+    let score = score_case(&corpus, case, &proposal, &shown, &Selection::letter_pack());
+    let a = &score.asks[0];
+    assert!(matches!(a.raw[&Field::Deadline], Outcome::Wrong { .. }));
+    assert_eq!(a.evidence[&Field::Deadline], Evidence::Misattached);
+    let contract = a.deadline_contract.as_ref().unwrap();
+    assert_eq!(contract.reading, Outcome::Correct);
+    assert_eq!(contract.evidence, Evidence::Attached);
+    proposal.asks[0].deadline.at = 0;
+    let score = score_case(&corpus, case, &proposal, &shown, &Selection::letter_pack());
+    assert_eq!(
+        score.asks[0].deadline_contract.as_ref().unwrap().evidence,
+        Evidence::Misattached
+    );
+    proposal.asks[0].deadline = Reading::new(3, "7 April 2026");
+    let score = score_case(&corpus, case, &proposal, &shown, &Selection::letter_pack());
+    assert!(matches!(
+        score.asks[0].deadline_contract.as_ref().unwrap().reading,
+        Outcome::Wrong { .. }
+    ));
+
+    // No implicit list of benign wording edits is inferred from one run.
+    let case = corpus.case("date-form-001-letter").unwrap();
+    let mut proposal = faithful(&corpus, case);
+    proposal.asks[0].deadline.value = "6 March 2026".into();
+    let score = score_case(
+        &corpus,
+        case,
+        &proposal,
+        &verify(case, &proposal),
+        &Selection::letter_pack(),
+    );
+    assert!(matches!(
+        score.asks[0].deadline_contract.as_ref().unwrap().reading,
+        Outcome::Wrong { .. }
+    ));
+    assert_eq!(score.asks[0].verified[&Field::Deadline], Outcome::Correct);
+}
+
+#[test]
+fn task_slot_mismatches_never_claim_to_judge_action_meaning() {
+    use runner::eval::corpus::{CandidateSite, SemanticCoverage};
+    let corpus = diagnostic();
+    let case = corpus.case("obligation-form-013-letter").unwrap();
+    let mut proposal = faithful(&corpus, case);
+    proposal.asks.truncate(1);
+    for wording in [
+        "Return the form and send photo ID",
+        "Return the form",
+        "Something unrelated",
+    ] {
+        proposal.asks[0].text = Some(wording.into());
+        let score = score_case(
+            &corpus,
+            case,
+            &proposal,
+            &verify(case, &proposal),
+            &Selection::letter_pack(),
+        );
+        let slots = score.task_slots.as_ref().unwrap();
+        assert_eq!(
+            (
+                slots.expected,
+                slots.raw_candidates,
+                slots.missing_raw_slots
+            ),
+            (2, 1, 1)
+        );
+        assert!(matches!(
+            slots.semantic_action_coverage,
+            SemanticCoverage::NotAssessed
+        ));
+        assert_eq!(score.asks[0].raw_candidate, Some(0));
+        assert_eq!(score.asks[1].raw_candidate, None);
+    }
+    let case = corpus.case("format-form-002-letter").unwrap();
+    let mut proposal = faithful(&corpus, case);
+    let mut extra = proposal.asks[0].clone();
+    extra.passage = 2;
+    extra.text = Some("Return the form and send photo ID".into());
+    proposal.asks.push(extra);
+    let score = score_case(
+        &corpus,
+        case,
+        &proposal,
+        &verify(case, &proposal),
+        &Selection::letter_pack(),
+    );
+    let unmatched = &score.task_slots.as_ref().unwrap().unmatched_raw;
+    assert_eq!(unmatched.len(), 1);
+    assert_eq!(unmatched[0].index, 2);
+    assert_eq!(
+        unmatched[0].text.as_deref(),
+        Some("Return the form and send photo ID")
+    );
+    assert!(matches!(
+        unmatched[0].site,
+        CandidateSite::NoAuthoredAskSite
+    ));
+}
+
+#[test]
+fn authored_policy_and_reading_expectations_are_validated_before_execution() {
+    let original: serde_json::Value =
+        serde_json::from_str(include_str!("../../../evals/corpus/diagnostic-01.json")).unwrap();
+    for (field, value) in [
+        ("due", serde_json::json!("2026-03-25")),
+        ("base", serde_json::json!("unknown-fact")),
+        ("policy", serde_json::json!("guess-any-date")),
+    ] {
+        let mut changed = original.clone();
+        let case = changed["cases"]
+            .as_array_mut()
+            .unwrap()
+            .iter_mut()
+            .find(|c| c["id"] == "relation-form-001-letter")
+            .unwrap();
+        case["asks"][0]["deadline_resolution"][field] = value;
+        assert!(Corpus::parse(&changed.to_string()).is_err());
+    }
+    let mut changed = original.clone();
+    let case = changed["cases"]
+        .as_array_mut()
+        .unwrap()
+        .iter_mut()
+        .find(|c| c["id"] == "relation-form-010-letter")
+        .unwrap();
+    case["asks"][0]["deadline_reading"]["at"] = serde_json::json!(0);
+    assert!(Corpus::parse(&changed.to_string()).is_err());
+    let mut changed = original;
+    let case = changed["cases"]
+        .as_array_mut()
+        .unwrap()
+        .iter_mut()
+        .find(|c| c["id"] == "relation-form-001-letter")
+        .unwrap();
+    case["asks"][0]["deadline_read"]["count"] = serde_json::json!(u64::MAX);
+    case["asks"][0]["deadline_read"]["unit"] = serde_json::json!("weeks");
+    assert!(Corpus::parse(&changed.to_string()).is_err());
+}
+
+#[test]
 fn diagnostic_links_and_negative_sites_have_explicit_denominators() {
     let corpus = diagnostic();
     corpus
@@ -146,6 +327,7 @@ fn inventions_on_cancelled_or_completed_asks_stay_visible_by_site() {
         let proposal = Proposal {
             case: case.id.clone(),
             asks: vec![ProposedAsk {
+                text: None,
                 passage: 2,
                 kind: "payment".into(),
                 party: Reading::new(1, "Example Services"),
@@ -312,6 +494,7 @@ fn faithful(_corpus: &Corpus, case: &Case) -> Proposal {
                     .map(|s| Reading::new(s.passage, s.text.clone()))
             };
             ProposedAsk {
+                text: None,
                 passage: a.passage,
                 kind: a.kind.clone(),
                 party: span("party").unwrap(),
@@ -534,6 +717,7 @@ fn an_ask_asserted_on_the_conditional_passage_is_invented_not_a_wrong_field() {
     let tenants = ask(case, "ask-tenants");
     let mut proposal = faithful(&corpus, case);
     proposal.asks.push(ProposedAsk {
+        text: None,
         passage: tenants.passage,
         kind: "response".to_owned(),
         party: Reading::new(1, "Redhill District Council"),

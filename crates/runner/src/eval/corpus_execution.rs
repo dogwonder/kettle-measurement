@@ -16,7 +16,7 @@ use std::path::{Path, PathBuf};
 use std::sync::atomic::AtomicBool;
 
 pub const SCHEMA: &str = "kettle/corpus-evaluation@1";
-pub const SCORING: &str = "corpus-fields-v4";
+pub const SCORING: &str = "corpus-fields-v6";
 pub type Bindings = BTreeMap<String, Vec<(String, PathBuf)>>;
 
 pub struct Evaluation<'a> {
@@ -48,6 +48,9 @@ pub struct Report {
     pub fields: Vec<corpus::Field>,
     #[serde(default)]
     pub selection: Option<corpus::DiagnosticSelection>,
+    /// Consumed challenge lifecycle, retained unchanged during exact replay.
+    #[serde(default)]
+    pub challenge: Option<serde_json::Value>,
     pub model: Option<super::ModelInfo>,
     pub scoring_machine: super::MachineInfo,
     pub generation_machine: Option<super::MachineInfo>,
@@ -77,6 +80,11 @@ pub struct CaseReport {
     /// Authored passage index -> actual pooled model item ids, in order.
     pub passage_map: BTreeMap<usize, Vec<usize>>,
     pub acquisition_errors: Vec<String>,
+    /// Shared segments whose distinct source ask sites are paired by kind.
+    #[serde(default)]
+    pub kind_matched_segments: std::collections::BTreeSet<usize>,
+    #[serde(default)]
+    pub attribution_errors: Vec<String>,
     pub execution_error: Option<String>,
     pub raw: Proposal,
     pub verified: Vec<VerifiedAsk>,
@@ -148,6 +156,21 @@ impl RunLog for Capture<'_> {
 impl Evaluation<'_> {
     pub fn evaluate(&self) -> Result<Report, String> {
         let corpus = Corpus::parse(self.corpus_text)?;
+        self.evaluate_corpus(corpus, None)
+    }
+
+    pub fn evaluate_challenge(&self, attempt: super::challenge::Attempt) -> Result<Report, String> {
+        let replay =
+            matches!(self.answers, Answers::FromModel(e) if e.replay_compatibility().is_some());
+        let corpus = attempt.corpus(self.corpus_text, replay)?;
+        self.evaluate_corpus(corpus, Some(attempt.record()))
+    }
+
+    fn evaluate_corpus(
+        &self,
+        corpus: Corpus,
+        challenge: Option<serde_json::Value>,
+    ) -> Result<Report, String> {
         // This adapter judges one closed obligations question, not a mixture
         // of model roles whose candidates cannot share the same denominator.
         let models: Vec<_> = self
@@ -183,6 +206,13 @@ impl Evaluation<'_> {
             .map_err(|e| format!("use a new output directory {}: {e}", self.output.display()))?;
         std::fs::write(self.output.join("corpus.json"), self.corpus_text)
             .map_err(|e| e.to_string())?;
+        if let Some(record) = &challenge {
+            std::fs::write(
+                self.output.join("challenge-lifecycle.json"),
+                serde_json::to_vec_pretty(record).map_err(|e| e.to_string())?,
+            )
+            .map_err(|e| e.to_string())?;
+        }
         let selection = corpus
             .selection
             .as_ref()
@@ -248,6 +278,8 @@ impl Evaluation<'_> {
                 segments,
                 passage_map,
                 acquisition_errors,
+                kind_matched_segments: Default::default(),
+                attribution_errors: Vec::new(),
                 execution_error: None,
                 raw: Proposal {
                     case: case.id.clone(),
@@ -283,12 +315,19 @@ impl Evaluation<'_> {
                                 report.verified.push(shown);
                             }
                             if report.acquisition_errors.is_empty() {
-                                report.score = Some(corpus::score_case(
+                                (report.kind_matched_segments, report.attribution_errors) =
+                                    attribution(case, &mapped, &report.raw, &report.verified);
+                            }
+                            if report.acquisition_errors.is_empty()
+                                && report.attribution_errors.is_empty()
+                            {
+                                report.score = Some(corpus::score_case_with_attribution(
                                     &corpus,
                                     &mapped,
                                     &report.raw,
                                     &report.verified,
                                     &selection,
+                                    &report.kind_matched_segments,
                                 ));
                             }
                         }
@@ -345,6 +384,7 @@ impl Evaluation<'_> {
             executable_digest,
             fields: selection.fields.into_iter().collect(),
             selection: corpus.selection.clone(),
+            challenge,
             model: self.model.clone(),
             scoring_machine: self.machine.clone(),
             generation_machine: self.generation_machine.clone(),
@@ -367,120 +407,110 @@ impl Evaluation<'_> {
     }
 }
 
-/// Align whole authored passages against ordered runs of acquired segments.
-/// The reader can split a sign-off; source order disambiguates its repeated
-/// organisation name from the letterhead. More than one complete alignment,
-/// missing prose, or a fact spanning segments stays an acquisition limitation.
+/// Align the complete ordered token stream, independently of reader paragraph
+/// boundaries. Offsets are only for attribution after execution, never input
+/// repair. Added, lost or reordered words cannot acquire a fabricated score.
 fn map_case(case: &Case, segments: &[Segment]) -> (Case, BTreeMap<usize, Vec<usize>>, Vec<String>) {
-    let squash = |s: &str| s.split_whitespace().collect::<Vec<_>>().join(" ");
-    let actual: Vec<_> = segments.iter().map(|s| squash(&s.text)).collect();
-    let candidates: Vec<Vec<(usize, usize)>> = case
-        .passages
-        .iter()
-        .map(|p| {
-            let wanted = squash(p);
-            let mut ranges = Vec::new();
-            for start in 0..actual.len() {
-                let mut joined = String::new();
-                for (end, part) in actual.iter().enumerate().skip(start) {
-                    if end > start {
-                        joined.push(' ');
-                    }
-                    joined.push_str(part);
-                    if joined == wanted {
-                        ranges.push((start, end + 1));
-                    }
-                    if joined.len() >= wanted.len() {
-                        break;
-                    }
+    fn ranges(parts: &[String]) -> (String, Vec<std::ops::Range<usize>>) {
+        let mut text = String::new();
+        let mut ranges = Vec::new();
+        for part in parts {
+            let normalised = part.split_whitespace().collect::<Vec<_>>().join(" ");
+            if !text.is_empty() && !normalised.is_empty() {
+                text.push(' ');
+            }
+            let start = text.len();
+            text.push_str(&normalised);
+            ranges.push(start..text.len());
+        }
+        (text, ranges)
+    }
+    let actual: Vec<_> = segments.iter().map(|s| s.text.clone()).collect();
+    let (source_words, source_ranges) = ranges(&case.passages);
+    let (acquired_words, acquired_ranges) = ranges(&actual);
+    let mut mapped = case.clone();
+    mapped.passages = actual;
+    let mut errors = Vec::new();
+    let mut mapping = BTreeMap::new();
+    if source_words != acquired_words {
+        errors.push("acquisition differs from the complete ordered source: missing, reordered or text outside the authored passages".into());
+        return (mapped, mapping, errors);
+    }
+    for (i, source) in source_ranges.iter().enumerate() {
+        let ids = acquired_ranges
+            .iter()
+            .enumerate()
+            .filter(|(_, acquired)| source.start < acquired.end && acquired.start < source.end)
+            .map(|(id, _)| id)
+            .collect();
+        mapping.insert(i, ids);
+    }
+    // A reading's source occurrence must fit inside one acquired segment.
+    // Locate it in the authored passage, not elsewhere in the document where
+    // an identical value could be a different event or a distractor.
+    let location = |at: usize, words: &str| -> Option<usize> {
+        let source = source_ranges.get(at)?;
+        let wanted = words.split_whitespace().collect::<Vec<_>>().join(" ");
+        if wanted.is_empty() {
+            return None;
+        }
+        let mut found = std::collections::BTreeSet::new();
+        for (offset, _) in source_words[source.clone()].match_indices(&wanted) {
+            let start = source.start + offset;
+            let end = start + wanted.len();
+            for (id, range) in acquired_ranges.iter().enumerate() {
+                if range.start <= start && end <= range.end {
+                    found.insert(id);
                 }
             }
-            ranges
-        })
-        .collect();
-    // Count complete ordered alignments, capped at two. This avoids greedy
-    // matching of repeated passages and exponential search on repeated prose.
-    let mut ways = vec![vec![0usize; actual.len() + 1]; candidates.len() + 1];
-    ways[candidates.len()].fill(1);
-    for i in (0..candidates.len()).rev() {
-        for position in 0..=actual.len() {
-            ways[i][position] = candidates[i]
-                .iter()
-                .filter(|(start, _)| *start >= position)
-                .fold(0usize, |count, (_, end)| (count + ways[i + 1][*end]).min(2));
         }
-    }
-    let mut mapping = BTreeMap::new();
-    let mut errors = Vec::new();
-    if ways[0][0] != 1 {
-        errors.push(format!(
-            "source passages have {} complete ordered acquisition mappings (2 means multiple)",
-            ways[0][0]
-        ));
-        if ways[0][0] == 0 && squash(&case.passages.join(" ")) == actual.join(" ") {
-            errors.push(
-                "reader merged authored passage boundaries; per-ask attribution is unavailable"
-                    .into(),
-            );
-        }
-    } else {
-        let mut position = 0;
-        for (i, ranges) in candidates.iter().enumerate() {
-            let &(start, end) = ranges
-                .iter()
-                .find(|(start, end)| *start >= position && ways[i + 1][*end] > 0)
-                .expect("one complete alignment");
-            mapping.insert(i, (start..end).collect::<Vec<_>>());
-            position = end;
-        }
-        let mapped_segments: std::collections::BTreeSet<_> =
-            mapping.values().flatten().copied().collect();
-        if mapped_segments.len() != segments.len() {
-            errors.push("acquisition contains text outside the authored passages; adjudicate extra rendered prose before scoring".into());
-        }
-    }
-    let mut mapped = case.clone();
-    mapped.passages = segments.iter().map(|s| s.text.clone()).collect();
-    for span in &mut mapped.spans {
-        let found: Vec<_> = mapping
-            .get(&span.passage)
-            .into_iter()
-            .flatten()
-            .copied()
-            .filter(|id| actual[*id].contains(&squash(&span.text)))
-            .collect();
-        span.passage = if let [id] = found.as_slice() {
-            *id
+        if found.len() == 1 {
+            found.first().copied()
         } else {
+            None
+        }
+    };
+    for span in &mut mapped.spans {
+        span.passage = location(span.passage, &span.text).unwrap_or_else(|| {
             errors.push(format!(
                 "fact {} does not map to one acquired segment",
                 span.fact
             ));
             usize::MAX
-        };
+        });
     }
     for ask in &mut mapped.asks {
-        if let Some(at) = ask.deadline_at {
-            let found: Vec<_> = mapping
-                .get(&at)
-                .into_iter()
-                .flatten()
-                .copied()
-                .filter(|id| {
-                    ask.deadline_words
-                        .as_ref()
-                        .is_none_or(|words| actual[*id].contains(&squash(words)))
-                })
-                .collect();
-            ask.deadline_at = Some(if let [id] = found.as_slice() {
-                *id
-            } else {
+        if let Some(reading) = &mut ask.deadline_reading {
+            reading.at = location(reading.at, &reading.value).unwrap_or_else(|| {
                 errors.push(format!(
-                    "ask {} deadline words do not map to one acquired segment",
+                    "ask {} reading contract does not map to one acquired segment",
                     ask.id
                 ));
                 usize::MAX
             });
+        }
+        if let Some(at) = ask.deadline_at {
+            ask.deadline_at = Some(
+                ask.deadline_words
+                    .as_deref()
+                    .filter(|w| !w.is_empty())
+                    .and_then(|words| location(at, words))
+                    .or_else(|| {
+                        mapping
+                            .get(&at)
+                            .and_then(|ids: &Vec<usize>| match ids.as_slice() {
+                                [id] => Some(*id),
+                                _ => None,
+                            })
+                    })
+                    .unwrap_or_else(|| {
+                        errors.push(format!(
+                            "ask {} deadline words do not map to one acquired segment",
+                            ask.id
+                        ));
+                        usize::MAX
+                    }),
+            );
         }
         ask.passage = match mapping.get(&ask.passage).map(Vec::as_slice) {
             Some([id]) => *id,
@@ -496,6 +526,72 @@ fn map_case(case: &Case, segments: &[Segment]) -> (Case, BTreeMap<usize, Vec<usi
     (mapped, mapping, errors)
 }
 
+/// A reader can merge a valid ask and a negative site. Only distinct declared
+/// kinds provide an independent discriminator on the current wire contract.
+/// Never choose a pairing because its money/date happens to score better.
+fn attribution(
+    case: &Case,
+    mapped: &Case,
+    raw: &Proposal,
+    verified: &[VerifiedAsk],
+) -> (std::collections::BTreeSet<usize>, Vec<String>) {
+    let mut sites: BTreeMap<usize, Vec<(&corpus::Ask, &corpus::Ask)>> = BTreeMap::new();
+    for (source, acquired) in case.asks.iter().zip(&mapped.asks) {
+        sites
+            .entry(acquired.passage)
+            .or_default()
+            .push((source, acquired));
+    }
+    let mut kind_only = std::collections::BTreeSet::new();
+    let mut errors = Vec::new();
+    for (segment, asks) in sites {
+        let original: std::collections::BTreeSet<_> = asks.iter().map(|(a, _)| a.passage).collect();
+        if original.len() <= 1 {
+            continue;
+        }
+        kind_only.insert(segment);
+        let kinds: std::collections::BTreeSet<_> =
+            asks.iter().map(|(a, _)| a.kind.as_str()).collect();
+        if kinds.len() != asks.len()
+            || asks
+                .iter()
+                .any(|(a, _)| a.status == corpus::AskStatus::NoObligation && a.kind == "other")
+        {
+            errors.push(format!(
+                "segment {segment}: merged ask sites have overlapping or unspecified kinds"
+            ));
+            continue;
+        }
+        for (label, candidates) in [
+            (
+                "raw",
+                raw.asks
+                    .iter()
+                    .filter(|a| a.passage == segment)
+                    .map(|a| a.kind.as_str())
+                    .collect::<Vec<_>>(),
+            ),
+            (
+                "verified",
+                verified
+                    .iter()
+                    .filter(|a| a.passage == segment)
+                    .map(|a| a.kind.as_str())
+                    .collect::<Vec<_>>(),
+            ),
+        ] {
+            let mut seen = std::collections::BTreeSet::new();
+            for kind in candidates {
+                if !kinds.contains(kind) || !seen.insert(kind) {
+                    errors.push(format!("segment {segment}: {label} candidates do not identify distinct declared ask kinds"));
+                    break;
+                }
+            }
+        }
+    }
+    (kind_only, errors)
+}
+
 #[derive(Deserialize)]
 struct Decision {
     confidence: String,
@@ -503,6 +599,8 @@ struct Decision {
 }
 #[derive(Deserialize)]
 struct WireAsk {
+    #[serde(default)]
+    ask: Option<String>,
     kind: String,
     party: Reading,
     deadline: Deadline,
@@ -538,6 +636,7 @@ fn proposals(case: &Case, claims: &[ClaimTrace]) -> (Proposal, Vec<Diagnostic>) 
             Ok(decision) => {
                 for ask in decision.obligations {
                     proposal.asks.push(ProposedAsk {
+                        text: ask.ask,
                         passage: if paired { claim.item } else { usize::MAX },
                         kind: ask.kind,
                         party: ask.party,

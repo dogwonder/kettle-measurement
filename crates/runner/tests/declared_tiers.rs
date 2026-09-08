@@ -70,12 +70,10 @@ fn same_tier(declared: &str, measured_params: &str) -> bool {
 const STAGED_STALE_FLOORS: &[(&str, &str, &str)] = &[
     (
         "app.kttl.letter-to-actions",
-        "scoring 19 (#628): the merge bar is the pod baseline, three byte-identical passes \
-         on a rented CUDA card, and a pod score never fills tiers.json because a tier is a \
-         sentence about the hardware the product ships on. The local Metal row is a release \
-         requirement, owed before the next app build, not a merge requirement; its only v19 \
-         row so far is a FAIL from 6 September, before identity and the prompt moved.",
-        "2026-09-07",
+        "pack 0.3.1: amount/list prompt fixes are unmeasured (evals/corpus/product-defects.md). \
+         The 0.3.0 v19 FAIL remains archived but is not current evidence. A local Metal \
+         row is still owed before the next app build; no diagnostic promotes this floor.",
+        "2026-09-08",
     ),
     (
         "app.kttl.renewal-diff",

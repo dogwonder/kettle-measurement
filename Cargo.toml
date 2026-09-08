@@ -25,7 +25,15 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 semver = "1"
 num_cpus = "1"
-chrono = { version = "0.4", default-features = false, features = ["alloc", "serde"] }
+# `now` because `eval/challenge.rs` stamps a lifecycle with `Utc::now()`
+# (70c2a1a8). Without it a default-feature build of the CLI fails: only
+# `pdfium-render`, behind the `pdf` feature, pulled chrono's clock in, so
+# `cargo test --all-features` and `cargo test` (dev-dependencies unify)
+# both passed while CI's `no-features` job and the public-tree
+# projection went red for a day (8 September 2026). `now` and not
+# `clock`: the wall clock is all that is read, and `clock` would add the
+# IANA time-zone crate for a local-time conversion nothing performs.
+chrono = { version = "0.4", default-features = false, features = ["alloc", "serde", "now"] }
 strsim = "0.11"
 toml = "1"
 tera = { version = "2", default-features = false }

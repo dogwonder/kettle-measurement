@@ -144,6 +144,26 @@ pub struct Ask {
     /// `base` field's fact.
     #[serde(default)]
     pub deadline_read: Option<crate::run::When>,
+    /// Pack reading expectation when it differs from the source phrase (a
+    /// pointer's target row, for example). Never replaces source truth.
+    #[serde(default)]
+    pub deadline_reading: Option<Reading>,
+    /// An explicitly authored pack-policy result, distinct from a source date.
+    #[serde(default)]
+    pub deadline_resolution: Option<DeadlineResolution>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct DeadlineResolution {
+    pub policy: ResolutionPolicy,
+    pub base: String,
+    pub due: NaiveDate,
+}
+
+#[derive(Debug, Clone, Copy, Deserialize, Serialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum ResolutionPolicy {
+    LetterDateDefault,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
@@ -163,18 +183,35 @@ impl Corpus {
     /// Every span binds a known fact to text really in its passage;
     /// every ask field names a known fact; ids are unique.
     pub fn validate(&self) -> Result<(), String> {
+        self.validate_selection(false)
+    }
+
+    pub(crate) fn parse_challenge(text: &str) -> Result<Self, String> {
+        let corpus: Corpus = serde_json::from_str(text).map_err(|e| e.to_string())?;
+        corpus.validate_selection(true)?;
+        Ok(corpus)
+    }
+
+    fn validate_selection(&self, challenge: bool) -> Result<(), String> {
         if self.schema_version != 1 || self.cases.is_empty() {
             return Err("corpus needs schema_version 1 and at least one case".into());
         }
         if let Some(selection) = &self.selection {
             if selection.id.is_empty()
-                || selection.purpose != "diagnostic"
-                || selection.exposure != "development"
+                || selection.purpose != if challenge { "challenge" } else { "diagnostic" }
+                || selection.exposure
+                    != if challenge {
+                        "unexposed"
+                    } else {
+                        "development"
+                    }
                 || selection.fields.is_empty()
                 || !selection.fields.is_subset(&Selection::letter_pack().fields)
             {
                 return Err("this command requires an exposed diagnostic selection of supported obligations fields; a challenge needs its own workflow".into());
             }
+        } else if challenge {
+            return Err("challenge requires an explicit selection".into());
         }
         let mut ids = BTreeSet::new();
         for fact in &self.facts {
@@ -233,6 +270,62 @@ impl Corpus {
                 }
                 if ask.passage >= case.passages.len() {
                     return Err(format!("{}: ask {} passage out of range", case.id, ask.id));
+                }
+                if let Some(reading) = &ask.deadline_reading {
+                    if !case
+                        .passages
+                        .get(reading.at)
+                        .is_some_and(|p| p.contains(&reading.value))
+                    {
+                        return Err(format!(
+                            "{}: deadline reading contract is absent from its passage",
+                            case.id
+                        ));
+                    }
+                }
+                if let Some(resolution) = &ask.deadline_resolution {
+                    let source = ask
+                        .fields
+                        .get("deadline")
+                        .and_then(|f| f.as_deref())
+                        .and_then(|f| self.fact(f));
+                    if !source
+                        .is_some_and(|f| f.status == FactStatus::Ambiguous && f.value.is_none())
+                        || ask.fields.get("base").is_some_and(|f| f.is_some())
+                    {
+                        return Err("a default deadline policy requires ambiguous source truth without a stated base".into());
+                    }
+                    let base = self.fact(&resolution.base).and_then(|f| f.value.as_ref());
+                    let Some(Value::Date { iso }) = base else {
+                        return Err("deadline policy requires a dated base fact".into());
+                    };
+                    let Some(period) = &ask.deadline_read else {
+                        return Err("deadline policy requires an authored period".into());
+                    };
+                    // This named policy supports bare calendar-day/week periods.
+                    // Other anchor/qualifier policies need their own declaration.
+                    if period.count == 0
+                        || period.counts_from != "letter_date"
+                        || period.qualifier != "none"
+                        || !matches!(period.unit.as_str(), "days" | "weeks")
+                        || case.span(&resolution.base).is_none()
+                    {
+                        return Err("unsupported letter-date-default policy basis".into());
+                    }
+                    let days = period
+                        .count
+                        .checked_mul(if period.unit == "weeks" { 7 } else { 1 })
+                        .ok_or("deadline policy period overflows")?;
+                    if iso
+                        .parse::<NaiveDate>()
+                        .ok()
+                        .and_then(|base| base.checked_add_days(chrono::Days::new(days)))
+                        != Some(resolution.due)
+                    {
+                        return Err(
+                            "authored policy date disagrees with its base and period".into()
+                        );
+                    }
                 }
                 if let Some(at) = ask.deadline_at {
                     let passage = case
@@ -401,6 +494,9 @@ pub struct Proposal {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProposedAsk {
+    /// Retained for inspection; semantic action coverage is not scored.
+    #[serde(default)]
+    pub text: Option<String>,
     /// The passage the answer was given for.
     pub passage: usize,
     pub kind: String,
@@ -432,6 +528,8 @@ fn high() -> String {
 /// What the verified pipeline finally shows for one ask.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VerifiedAsk {
+    #[serde(default)]
+    pub text: Option<String>,
     pub passage: usize,
     pub kind: String,
     pub party: String,
@@ -443,6 +541,7 @@ pub struct VerifiedAsk {
 impl From<&crate::run::Obligation> for VerifiedAsk {
     fn from(obligation: &crate::run::Obligation) -> Self {
         VerifiedAsk {
+            text: Some(obligation.ask.clone()),
             passage: obligation.evidence.first().map_or(0, |s| s.ordinal),
             kind: obligation.kind.clone(),
             party: obligation.party_shown().to_owned(),
@@ -485,13 +584,21 @@ pub enum Evidence {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AskScore {
     pub ask: String,
+    #[serde(default)]
+    pub raw_candidate: Option<usize>,
+    #[serde(default)]
+    pub verified_candidate: Option<usize>,
+    #[serde(default)]
+    pub deadline_contract: Option<DeadlineAssessment>,
     pub raw: BTreeMap<Field, Outcome>,
     pub verified: BTreeMap<Field, Outcome>,
     pub evidence: BTreeMap<Field, Evidence>,
-    /// Every selected field correct, at full confidence.
+    /// Every selected source field correct, at full confidence. Does not
+    /// certify action meaning, evidence attachment or absence of extra tasks.
     pub whole_item_raw: bool,
     pub whole_item_verified: bool,
-    /// The truth ask had no proposal at all.
+    /// An authored slot has no matched candidate; not proof of missing action
+    /// content (one candidate may contain multiple actions).
     pub missed_raw: bool,
     pub missed_verified: bool,
 }
@@ -500,14 +607,61 @@ pub struct AskScore {
 pub struct CaseScore {
     pub case: String,
     pub asks: Vec<AskScore>,
-    /// Proposals on passages that ask nothing, or that no truth ask
-    /// matched: wrong assertions, counted apart from wrong fields.
+    /// Legacy key: unmatched candidates. These may be duplicates or different
+    /// task groupings, not necessarily invented instructions. See task_slots.
     pub invented_raw: usize,
     pub invented_verified: usize,
     /// Explicit negative sites; zero inventions is not a claim that a
     /// model answered them. Execution traces retain missing/malformed answers.
     #[serde(default)]
     pub negative_sites: Vec<NegativeScore>,
+    #[serde(default)]
+    pub task_slots: Option<TaskSlots>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DeadlineAssessment {
+    pub reading: Outcome,
+    pub evidence: Evidence,
+    /// None means no authored structure expectation, not a successful reading.
+    pub structure: Option<Outcome>,
+    pub resolution: Outcome,
+    /// None means compare against source facts, without a pack-policy override.
+    pub policy: Option<ResolutionPolicy>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TaskSlots {
+    pub expected: usize,
+    pub raw_candidates: usize,
+    pub verified_candidates: usize,
+    pub missing_raw_slots: usize,
+    pub missing_verified_slots: usize,
+    pub unmatched_raw: Vec<UnmatchedCandidate>,
+    pub unmatched_verified: Vec<UnmatchedCandidate>,
+    pub semantic_action_coverage: SemanticCoverage,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum SemanticCoverage {
+    NotAssessed,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UnmatchedCandidate {
+    pub index: usize,
+    pub passage: usize,
+    pub text: Option<String>,
+    pub site: CandidateSite,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum CandidateSite {
+    NegativeSite,
+    AdditionalCandidateAtAskSite,
+    NoAuthoredAskSite,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -576,6 +730,28 @@ pub fn score_case(
     verified: &[VerifiedAsk],
     selection: &Selection,
 ) -> CaseScore {
+    score_case_with_attribution(
+        corpus,
+        case,
+        proposal,
+        verified,
+        selection,
+        &BTreeSet::new(),
+    )
+}
+
+/// Merged source sites may be paired only by their distinct declared kinds.
+/// The execution adapter refuses overlapping kinds/conflicting candidates
+/// before calling this scorer. Existing single-site scoring retains its
+/// wrong-kind fallback.
+pub fn score_case_with_attribution(
+    corpus: &Corpus,
+    case: &Case,
+    proposal: &Proposal,
+    verified: &[VerifiedAsk],
+    selection: &Selection,
+    kind_only: &BTreeSet<usize>,
+) -> CaseScore {
     let mut used_raw = BTreeSet::new();
     let mut used_verified = BTreeSet::new();
     let mut asks = Vec::new();
@@ -589,6 +765,9 @@ pub fn score_case(
             .enumerate()
             .find(|(i, p)| !used_raw.contains(i) && p.passage == ask.passage && p.kind == ask.kind)
             .or_else(|| {
+                if kind_only.contains(&ask.passage) {
+                    return None;
+                }
                 proposal
                     .asks
                     .iter()
@@ -605,6 +784,9 @@ pub fn score_case(
                 !used_verified.contains(i) && v.passage == ask.passage && v.kind == ask.kind
             })
             .or_else(|| {
+                if kind_only.contains(&ask.passage) {
+                    return None;
+                }
                 verified
                     .iter()
                     .enumerate()
@@ -639,6 +821,17 @@ pub fn score_case(
         };
         asks.push(AskScore {
             ask: ask.id.clone(),
+            raw_candidate: proposed.map(|(i, _)| i),
+            verified_candidate: shown.map(|(i, _)| i),
+            deadline_contract: selection.fields.contains(&Field::Deadline).then(|| {
+                deadline_contract(
+                    corpus,
+                    case,
+                    ask,
+                    proposed.map(|(_, p)| p),
+                    shown.map(|(_, v)| v),
+                )
+            }),
             whole_item_raw: whole(&raw),
             whole_item_verified: whole(&ver),
             missed_raw: proposed.is_none(),
@@ -648,8 +841,54 @@ pub fn score_case(
             evidence,
         });
     }
+    let candidate = |index, passage, kind: &str, text| {
+        // This classifies only authored sites, never the meaning of task prose.
+        let site = if case.asks.iter().any(|a| {
+            a.passage == passage
+                && a.status == AskStatus::NoObligation
+                && (!kind_only.contains(&passage) || a.kind == kind)
+        }) {
+            CandidateSite::NegativeSite
+        } else if case
+            .asks
+            .iter()
+            .any(|a| a.passage == passage && a.status == AskStatus::Obligation)
+        {
+            CandidateSite::AdditionalCandidateAtAskSite
+        } else {
+            CandidateSite::NoAuthoredAskSite
+        };
+        UnmatchedCandidate {
+            index,
+            passage,
+            text,
+            site,
+        }
+    };
+    let task_slots = TaskSlots {
+        expected: asks.len(),
+        raw_candidates: proposal.asks.len(),
+        verified_candidates: verified.len(),
+        missing_raw_slots: asks.iter().filter(|a| a.missed_raw).count(),
+        missing_verified_slots: asks.iter().filter(|a| a.missed_verified).count(),
+        unmatched_raw: proposal
+            .asks
+            .iter()
+            .enumerate()
+            .filter(|(i, _)| !used_raw.contains(i))
+            .map(|(i, p)| candidate(i, p.passage, &p.kind, p.text.clone()))
+            .collect(),
+        unmatched_verified: verified
+            .iter()
+            .enumerate()
+            .filter(|(i, _)| !used_verified.contains(i))
+            .map(|(i, p)| candidate(i, p.passage, &p.kind, p.text.clone()))
+            .collect(),
+        semantic_action_coverage: SemanticCoverage::NotAssessed,
+    };
     CaseScore {
         case: case.id.clone(),
+        task_slots: Some(task_slots),
         asks,
         invented_raw: proposal.asks.len() - used_raw.len(),
         invented_verified: verified.len() - used_verified.len(),
@@ -662,11 +901,99 @@ pub fn score_case(
                 invented_raw: proposal
                     .asks
                     .iter()
-                    .filter(|p| p.passage == a.passage)
+                    .enumerate()
+                    .filter(|(i, p)| {
+                        !used_raw.contains(i)
+                            && p.passage == a.passage
+                            && (!kind_only.contains(&a.passage) || p.kind == a.kind)
+                    })
                     .count(),
-                invented_verified: verified.iter().filter(|v| v.passage == a.passage).count(),
+                invented_verified: verified
+                    .iter()
+                    .enumerate()
+                    .filter(|(i, v)| {
+                        !used_verified.contains(i)
+                            && v.passage == a.passage
+                            && (!kind_only.contains(&a.passage) || v.kind == a.kind)
+                    })
+                    .count(),
             })
             .collect(),
+    }
+}
+
+fn deadline_contract(
+    corpus: &Corpus,
+    case: &Case,
+    ask: &Ask,
+    proposed: Option<&ProposedAsk>,
+    shown: Option<&VerifiedAsk>,
+) -> DeadlineAssessment {
+    let (reading, evidence) = if let Some(expected) = &ask.deadline_reading {
+        match proposed {
+            None => (Outcome::Missing, Evidence::NotJudged),
+            Some(p) => {
+                let outcome = if squash(&p.deadline.value) == squash(&expected.value) {
+                    Outcome::Correct
+                } else if p.deadline.is_absent() {
+                    Outcome::Missing
+                } else {
+                    Outcome::Wrong {
+                        got: p.deadline.value.clone(),
+                    }
+                };
+                let evidence = if p.deadline.is_absent() {
+                    Evidence::NotJudged
+                } else if p.deadline.at == expected.at {
+                    Evidence::Attached
+                } else {
+                    Evidence::Misattached
+                };
+                (confidence(outcome, p), evidence)
+            }
+        }
+    } else {
+        judge_raw(corpus, case, ask, Field::Deadline, proposed)
+    };
+    let structure = ask.deadline_read.as_ref().map(|expected| match proposed {
+        None => Outcome::Missing,
+        Some(p) => confidence(
+            match &p.read {
+                Some(got) if got == expected => Outcome::Correct,
+                Some(got) => Outcome::Wrong {
+                    got: serde_json::to_string(got).unwrap(),
+                },
+                None => Outcome::Missing,
+            },
+            p,
+        ),
+    });
+    let resolution = match &ask.deadline_resolution {
+        Some(expected) => match shown {
+            Some(v) if v.due == Some(expected.due) => Outcome::Correct,
+            Some(v) if v.due.is_some() => Outcome::Wrong {
+                got: v.due.unwrap().to_string(),
+            },
+            _ => Outcome::Missing,
+        },
+        None => judge_verified(corpus, case, ask, Field::Deadline, shown),
+    };
+    DeadlineAssessment {
+        reading,
+        evidence,
+        structure,
+        resolution,
+        policy: ask.deadline_resolution.as_ref().map(|e| e.policy),
+    }
+}
+
+fn confidence(outcome: Outcome, proposed: &ProposedAsk) -> Outcome {
+    if proposed.confidence == "low" {
+        Outcome::Uncertain {
+            correct: outcome == Outcome::Correct,
+        }
+    } else {
+        outcome
     }
 }
 
@@ -876,6 +1203,14 @@ impl FieldCounts {
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct Summary {
+    #[serde(default)]
+    pub deadline_reading_misattached: usize,
+    #[serde(default)]
+    pub deadline_reading_contract: FieldCounts,
+    #[serde(default)]
+    pub deadline_structure_contract: FieldCounts,
+    #[serde(default)]
+    pub deadline_resolution_contract: FieldCounts,
     pub items: usize,
     #[serde(default)]
     pub no_obligation_sites: usize,
@@ -897,6 +1232,15 @@ pub fn summarise(scores: &[CaseScore]) -> Summary {
         s.invented_raw += case.invented_raw;
         s.invented_verified += case.invented_verified;
         for ask in &case.asks {
+            if let Some(contract) = &ask.deadline_contract {
+                s.deadline_reading_misattached +=
+                    usize::from(contract.evidence == Evidence::Misattached);
+                s.deadline_reading_contract.add(&contract.reading);
+                if let Some(structure) = &contract.structure {
+                    s.deadline_structure_contract.add(structure);
+                }
+                s.deadline_resolution_contract.add(&contract.resolution);
+            }
             s.items += 1;
             s.whole_item_raw += usize::from(ask.whole_item_raw);
             s.whole_item_verified += usize::from(ask.whole_item_verified);

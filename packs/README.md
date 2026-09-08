@@ -3,8 +3,9 @@
 A pack is data: a manifest, prompts, schemas, fixtures and a template.
 What a pack may *do* is limited to composing the builtin steps below —
 the runner's standard library, each one generic, tested and versioned
-with the runner (`reference/packs/kettle-plugin-architecture.md`, tier
-2). A pack needing a step that is not here is a runner change with unit
+with the runner (tier 2 in the
+[historical architecture proposal](../reference/archive/kettle-plugin-architecture.md)).
+A pack needing a step that is not here is a runner change with unit
 tests, never pack-specific runner code (#51's bar).
 
 This is the patterns note the design philosophy doc asks for (Part 5.3):

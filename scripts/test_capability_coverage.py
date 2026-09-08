@@ -129,6 +129,7 @@ class RecordedDiagnostics(unittest.TestCase):
                     self.evidence()
         for key, bad in [("exchanges", []), ("coverage", []), ("score", None),
                          ("execution_error", "missing answer"), ("acquisition_errors", ["unmapped"]),
+                         ("attribution_errors", ["overlapping ask kinds"]),
                          ("exchanges", [{"generation": None}])]:
             with self.subTest(key=key), patch.dict(self.report["cases"][0], {key: bad}):
                 with self.assertRaises(ValueError):

@@ -290,6 +290,117 @@
           }
         }
       ]
+    },
+    {
+      "id": 930,
+      "segment": "Larch Community Trust",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 931,
+      "segment": "The membership year costs £468.00; the quarterly payment now requested is £117.00.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "payment",
+          "party": {
+            "at": 930,
+            "value": "Larch Community Trust"
+          },
+          "ask": "Pay the quarterly membership payment",
+          "amount": {
+            "at": 931,
+            "value": "£117.00"
+          },
+          "deadline": {
+            "at": 931,
+            "value": "",
+            "read": {
+              "count": 0,
+              "unit": "none",
+              "qualifier": "none",
+              "counts_from": "none"
+            },
+            "from": {
+              "at": 931,
+              "value": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 932,
+      "segment": "By 8 December 2026, complete these steps:",
+      "confidence": "high",
+      "obligations": []
+    },
+    {
+      "id": 933,
+      "segment": "1. Post the access-card application.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "response",
+          "party": {
+            "at": 930,
+            "value": "Larch Community Trust"
+          },
+          "ask": "Post the access-card application",
+          "amount": {
+            "at": 933,
+            "value": ""
+          },
+          "deadline": {
+            "at": 932,
+            "value": "By 8 December 2026",
+            "read": {
+              "count": 0,
+              "unit": "none",
+              "qualifier": "none",
+              "counts_from": "none"
+            },
+            "from": {
+              "at": 933,
+              "value": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 934,
+      "segment": "2. Email your emergency contact details.",
+      "confidence": "high",
+      "obligations": [
+        {
+          "kind": "response",
+          "party": {
+            "at": 930,
+            "value": "Larch Community Trust"
+          },
+          "ask": "Email your emergency contact details",
+          "amount": {
+            "at": 934,
+            "value": ""
+          },
+          "deadline": {
+            "at": 932,
+            "value": "By 8 December 2026",
+            "read": {
+              "count": 0,
+              "unit": "none",
+              "qualifier": "none",
+              "counts_from": "none"
+            },
+            "from": {
+              "at": 934,
+              "value": ""
+            }
+          }
+        }
+      ]
     }
   ]
 }

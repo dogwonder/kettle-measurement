@@ -1,0 +1,986 @@
+{
+  "schema_version": 1,
+  "slice": "product-regressions-01",
+  "selection": {
+    "id": "product-regressions-01",
+    "purpose": "diagnostic",
+    "exposure": "development",
+    "fields": [
+      "kind",
+      "party",
+      "deadline",
+      "amount"
+    ]
+  },
+  "facts": [
+    {
+      "id": "instalment-after-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "instalment-after-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "instalment-after-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "instalment-after-total",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "972.60",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "instalment-after-due",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "81.05",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "instalment-before-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "instalment-before-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "instalment-before-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "instalment-before-due",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "137.40",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "instalment-before-total",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "1648.80",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "instalment-table-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "instalment-table-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "instalment-table-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "instalment-table-total",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "1200.00",
+        "currency": "EUR"
+      }
+    },
+    {
+      "id": "instalment-table-due",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "200.00",
+        "currency": "EUR"
+      }
+    },
+    {
+      "id": "annual-total-due-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "annual-total-due-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "annual-total-due-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "annual-total-due-old-instalment",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "80.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "annual-total-due-due",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "960.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "instalment-not-printed-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "instalment-not-printed-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "instalment-not-printed-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "instalment-not-printed-total",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "726.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "already-paid-no-task-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "already-paid-no-task-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "already-paid-no-task-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "already-paid-no-task-total",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "660.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "already-paid-no-task-instalment",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "55.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "split-list-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "split-list-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "split-list-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "split-list-due-date",
+      "field": "deadline",
+      "status": "stated",
+      "value": {
+        "kind": "date",
+        "iso": "2026-11-19"
+      }
+    },
+    {
+      "id": "active-heading-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "active-heading-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "active-heading-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "active-heading-due",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "62.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "merged-list-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "merged-list-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "merged-list-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "merged-list-due",
+      "field": "amount",
+      "status": "stated",
+      "value": {
+        "kind": "money",
+        "amount": "47.00",
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "footer-task-sender",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Cedar Account Services"
+      }
+    },
+    {
+      "id": "footer-task-no-amount",
+      "field": "amount",
+      "status": "absent",
+      "value": null
+    },
+    {
+      "id": "footer-task-no-deadline",
+      "field": "deadline",
+      "status": "absent",
+      "value": null
+    }
+  ],
+  "relations": [
+    {
+      "id": "instalment-after-selection",
+      "kind": "selected-over-distractor",
+      "ask": "instalment-after-ask-1",
+      "field": "amount",
+      "selected": "instalment-after-due",
+      "distractor": "instalment-after-total"
+    },
+    {
+      "id": "instalment-before-selection",
+      "kind": "selected-over-distractor",
+      "ask": "instalment-before-ask-1",
+      "field": "amount",
+      "selected": "instalment-before-due",
+      "distractor": "instalment-before-total"
+    },
+    {
+      "id": "instalment-table-selection",
+      "kind": "selected-over-distractor",
+      "ask": "instalment-table-ask-1",
+      "field": "amount",
+      "selected": "instalment-table-due",
+      "distractor": "instalment-table-total"
+    }
+  ],
+  "cases": [
+    {
+      "id": "instalment-after",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "Your yearly charge is £972.60. Please pay the next instalment of £81.05."
+      ],
+      "spans": [
+        {
+          "fact": "instalment-after-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        },
+        {
+          "fact": "instalment-after-total",
+          "passage": 1,
+          "text": "£972.60"
+        },
+        {
+          "fact": "instalment-after-due",
+          "passage": 1,
+          "text": "£81.05"
+        }
+      ],
+      "asks": [
+        {
+          "id": "instalment-after-ask-1",
+          "passage": 1,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "instalment-after-sender",
+            "amount": "instalment-after-due",
+            "deadline": "instalment-after-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "instalment-before",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "The next payment of £137.40 must reach us. The annual charge for this account is £1,648.80."
+      ],
+      "spans": [
+        {
+          "fact": "instalment-before-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        },
+        {
+          "fact": "instalment-before-due",
+          "passage": 1,
+          "text": "£137.40"
+        },
+        {
+          "fact": "instalment-before-total",
+          "passage": 1,
+          "text": "£1,648.80"
+        }
+      ],
+      "asks": [
+        {
+          "id": "instalment-before-ask-1",
+          "passage": 1,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "instalment-before-sender",
+            "amount": "instalment-before-due",
+            "deadline": "instalment-before-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "instalment-table",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "Please pay the instalment shown below.",
+        "Annual charge €1,200.00",
+        "Instalment €200.00"
+      ],
+      "spans": [
+        {
+          "fact": "instalment-table-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        },
+        {
+          "fact": "instalment-table-total",
+          "passage": 2,
+          "text": "€1,200.00"
+        },
+        {
+          "fact": "instalment-table-due",
+          "passage": 3,
+          "text": "€200.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "instalment-table-ask-1",
+          "passage": 1,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "instalment-table-sender",
+            "amount": "instalment-table-due",
+            "deadline": "instalment-table-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "instalment-table-ask-2",
+          "passage": 2,
+          "kind": "payment",
+          "status": "no-obligation",
+          "fields": {
+            "party": "instalment-table-sender",
+            "amount": "instalment-table-no-amount",
+            "deadline": "instalment-table-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "instalment-table-ask-3",
+          "passage": 3,
+          "kind": "payment",
+          "status": "no-obligation",
+          "fields": {
+            "party": "instalment-table-sender",
+            "amount": "instalment-table-no-amount",
+            "deadline": "instalment-table-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 3,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "annual-total-due",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "Last year your monthly instalment was £80.00. Please pay this year’s annual charge of £960.00 in full."
+      ],
+      "spans": [
+        {
+          "fact": "annual-total-due-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        },
+        {
+          "fact": "annual-total-due-old-instalment",
+          "passage": 1,
+          "text": "£80.00"
+        },
+        {
+          "fact": "annual-total-due-due",
+          "passage": 1,
+          "text": "£960.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "annual-total-due-ask-1",
+          "passage": 1,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "annual-total-due-sender",
+            "amount": "annual-total-due-due",
+            "deadline": "annual-total-due-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "instalment-not-printed",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "The annual charge is £726.00. Please pay your first instalment; its amount will be sent separately."
+      ],
+      "spans": [
+        {
+          "fact": "instalment-not-printed-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        },
+        {
+          "fact": "instalment-not-printed-total",
+          "passage": 1,
+          "text": "£726.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "instalment-not-printed-ask-1",
+          "passage": 1,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "instalment-not-printed-sender",
+            "amount": "instalment-not-printed-no-amount",
+            "deadline": "instalment-not-printed-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "already-paid-no-task",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "Annual charge £660.00. If you have already paid the £55.00 instalment, please send the receipt."
+      ],
+      "spans": [
+        {
+          "fact": "already-paid-no-task-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        },
+        {
+          "fact": "already-paid-no-task-total",
+          "passage": 1,
+          "text": "£660.00"
+        },
+        {
+          "fact": "already-paid-no-task-instalment",
+          "passage": 1,
+          "text": "£55.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "already-paid-no-task-ask-1",
+          "passage": 1,
+          "kind": "response",
+          "status": "no-obligation",
+          "fields": {
+            "party": "already-paid-no-task-sender",
+            "amount": "already-paid-no-task-no-amount",
+            "deadline": "already-paid-no-task-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "split-list",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "Before 19 November 2026 please:",
+        "- return the permit application",
+        "- send the meter photograph"
+      ],
+      "spans": [
+        {
+          "fact": "split-list-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        },
+        {
+          "fact": "split-list-due-date",
+          "passage": 1,
+          "text": "Before 19 November 2026"
+        }
+      ],
+      "asks": [
+        {
+          "id": "split-list-ask-1",
+          "passage": 1,
+          "kind": "response",
+          "status": "no-obligation",
+          "fields": {
+            "party": "split-list-sender",
+            "amount": "split-list-no-amount",
+            "deadline": "split-list-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "split-list-ask-2",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "split-list-sender",
+            "amount": "split-list-no-amount",
+            "deadline": "split-list-due-date",
+            "base": null
+          },
+          "deadline_words": "Before 19 November 2026",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "split-list-ask-3",
+          "passage": 3,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "split-list-sender",
+            "amount": "split-list-no-amount",
+            "deadline": "split-list-due-date",
+            "base": null
+          },
+          "deadline_words": "Before 19 November 2026",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "active-heading",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "Please pay the £62.00 fee and then:",
+        "- return the signed consent form"
+      ],
+      "spans": [
+        {
+          "fact": "active-heading-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        },
+        {
+          "fact": "active-heading-due",
+          "passage": 1,
+          "text": "£62.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "active-heading-ask-1",
+          "passage": 1,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "active-heading-sender",
+            "amount": "active-heading-due",
+            "deadline": "active-heading-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "active-heading-ask-2",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "active-heading-sender",
+            "amount": "active-heading-no-amount",
+            "deadline": "active-heading-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "merged-list",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "Please complete both steps: - pay the £47.00 renewal fee - send the inspection certificate"
+      ],
+      "spans": [
+        {
+          "fact": "merged-list-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        },
+        {
+          "fact": "merged-list-due",
+          "passage": 1,
+          "text": "£47.00"
+        }
+      ],
+      "asks": [
+        {
+          "id": "merged-list-ask-1",
+          "passage": 1,
+          "kind": "payment",
+          "status": "obligation",
+          "fields": {
+            "party": "merged-list-sender",
+            "amount": "merged-list-due",
+            "deadline": "merged-list-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "merged-list-ask-2",
+          "passage": 1,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "merged-list-sender",
+            "amount": "merged-list-no-amount",
+            "deadline": "merged-list-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "footer-task",
+      "document_kind": "letter",
+      "passages": [
+        "Cedar Account Services",
+        "This is your account statement.",
+        "Please detach and return the acknowledgement slip."
+      ],
+      "spans": [
+        {
+          "fact": "footer-task-sender",
+          "passage": 0,
+          "text": "Cedar Account Services"
+        }
+      ],
+      "asks": [
+        {
+          "id": "footer-task-ask-1",
+          "passage": 1,
+          "kind": "response",
+          "status": "no-obligation",
+          "fields": {
+            "party": "footer-task-sender",
+            "amount": "footer-task-no-amount",
+            "deadline": "footer-task-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 1,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        },
+        {
+          "id": "footer-task-ask-2",
+          "passage": 2,
+          "kind": "response",
+          "status": "obligation",
+          "fields": {
+            "party": "footer-task-sender",
+            "amount": "footer-task-no-amount",
+            "deadline": "footer-task-no-deadline",
+            "base": null
+          },
+          "deadline_words": "",
+          "deadline_at": 2,
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          }
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "author": "Codex, local product-defect review, 8 September 2026",
+    "synthetic": true,
+    "independent": false,
+    "method": "Source passages and expected facts authored explicitly before the prompt patch; no Kettle parser or model output used to derive truth. Exposed regression material, not a challenge."
+  }
+}

@@ -52,6 +52,18 @@ def now():
 
 
 def freeze(corpus_path, record_path, development=PROJECT / "evals/corpus"):
+    record_path.parent.mkdir(parents=True, exist_ok=True)
+    lock = record_path.parent / ".challenge-freeze.pending"
+    # Serialise new records across the ledger, including different filenames.
+    # A crash leaves the lock for investigation rather than a fresh identity.
+    with lock.open("x"):
+        try:
+            return freeze_locked(corpus_path, record_path, development)
+        finally:
+            lock.unlink()
+
+
+def freeze_locked(corpus_path, record_path, development):
     corpus, digest = read_challenge(corpus_path, development)
     if record_path.exists():
         raise FileExistsError(f"lifecycle record already exists: {record_path}")
@@ -65,7 +77,6 @@ def freeze(corpus_path, record_path, development=PROJECT / "evals/corpus"):
     record = {"schema": "kettle/challenge-lifecycle@1", "corpus_digest": digest,
               "selection": corpus["selection"], "authoring": corpus["provenance"]["authoring"],
               "cases": len(corpus["cases"]), "events": [{"event": "frozen", "at": now()}]}
-    record_path.parent.mkdir(parents=True, exist_ok=True)
     with record_path.open("x") as out:
         out.write(json.dumps(record, indent=2) + "\n")
     return record
@@ -83,22 +94,31 @@ def status(record):
 
 
 def check(corpus_path, record_path, development=PROJECT / "evals/corpus"):
+    if record_path.with_name(record_path.name + ".pending").exists():
+        raise ValueError("challenge lifecycle has a pending write; investigate before continuing")
     corpus, digest = read_challenge(corpus_path, development)
     record = json.loads(record_path.read_text())
-    if digest != record.get("corpus_digest") or corpus["selection"] != record.get("selection"):
+    if (digest != record.get("corpus_digest") or corpus["selection"] != record.get("selection")
+            or corpus["provenance"]["authoring"] != record.get("authoring")
+            or len(corpus["cases"]) != record.get("cases")):
         raise ValueError("challenge content or selection changed after freezing")
     return status(record)
 
 
 def expose(record_path, reason, evidence):
-    record = json.loads(record_path.read_text())
-    if status(record) != "unexposed":
-        raise ValueError("this selection is already regression material; a fresh challenge is required")
     if not reason.strip() or not evidence.strip():
         raise ValueError("exposure needs a reason and a decision/recording locator")
-    record["events"].append({"event": "exposed", "at": now(), "reason": reason, "evidence": evidence})
     temporary = record_path.with_name(record_path.name + ".pending")
     with temporary.open("x") as out:
+        # Read under the same exclusive lock used by challenge execution.
+        try:
+            record = json.loads(record_path.read_text())
+            if status(record) != "unexposed":
+                raise ValueError("this selection is already regression material; a fresh challenge is required")
+        except (ValueError, OSError):
+            temporary.unlink()
+            raise
+        record["events"].append({"event": "exposed", "at": now(), "reason": reason, "evidence": evidence})
         out.write(json.dumps(record, indent=2) + "\n")
     temporary.replace(record_path)
     return record

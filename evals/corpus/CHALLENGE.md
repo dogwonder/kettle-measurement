@@ -71,8 +71,60 @@ reused digest or selection id already in that ledger, even under a new filename.
 create a fresh selection before another held-out claim. The record contains
 metadata and a digest, not the challenge's documents or answers.
 
-`kettle corpus` and the inventory coverage command deliberately refuse a
-challenge. A dedicated scheduled challenge execution/review path remains to
-be connected before measurement. Do not bypass that boundary by relabelling
-an unexposed challenge as a diagnostic. No challenge score is owed to ordinary
-CI; its tests use visibly synthetic contract examples only.
+## Explicit execution and replay
+
+Ordinary `kettle corpus` calls and inventory coverage still refuse challenges.
+The explicit `--challenge-record` path accepts the original frozen corpus,
+validates its facts/spans/asks and authoring declaration, and consumes the
+lifecycle before starting a sidecar or sending a request. For a separately
+scheduled measurement, use:
+
+```sh
+target/debug/kettle corpus --corpus /path/to/separate-challenge.json \
+  --challenge-record /path/to/lifecycle.json \
+  --model /path/to/approved-model.gguf --out /path/to/new-challenge-run
+```
+
+Choose the model, runtime, question and run budget before scheduling this.
+No real challenge or model measurement has been supplied by this implementation.
+The existing ordered `--bindings` contract is also available; acquisition
+mismatches and ambiguous attribution remain explicitly unscored.
+
+Execution takes a conservative one-attempt policy: reservation itself appends
+the exposure event, recording the intended output directory and answer source.
+Failed model startup and later failures also consume the selection; the output
+directory may not exist if startup failed. A mock or `--no-model` attempt consumes
+it too and never establishes model evidence. Use exposed synthetic contract
+fixtures when testing the workflow. A second fresh attempt is refused.
+
+The report retains the unchanged challenge selection and the consumed lifecycle
+as `challenge`; `challenge-lifecycle.json` is saved beside the source snapshot
+and exchanges. The source's frozen `exposure: unexposed` describes its authoring
+state, while the lifecycle records that the attempt has consumed it. Existing
+model, weights, runtime, machine, pipeline and executable identities accompany
+the report. These results do not promote inventory coverage, tiers or ceilings.
+
+```sh
+target/debug/kettle corpus --corpus /path/to/new-challenge-run/corpus.json \
+  --challenge-record /path/to/new-challenge-run/challenge-lifecycle.json \
+  --replay /path/to/new-challenge-run --out /path/to/new-challenge-replay
+```
+
+Replay requires exact recorded requests and the original consumed lifecycle
+and corpus identity. It retains that lifecycle and reports `answer_source:
+replay`; it neither launches a model nor becomes a fresh challenge. Modified
+truth, changed lifecycle metadata and legacy prompt-only recordings are refused.
+
+Freezing serialises creation across the ledger with `.challenge-freeze.pending`.
+Execution and the Python exposure command share an exclusive `.pending` file,
+so competing launches cannot both reserve the same lifecycle. An interrupted
+write blocks subsequent execution/checking; investigate the ledger and any
+recordings before recovery rather than resetting a selection to unexposed.
+Keep one authoritative ledger: these local records cannot prevent someone
+restoring an old copy or making false authoring declarations.
+
+No challenge score is owed to ordinary CI. The tests exercise consumption,
+concurrent attempts, failed startup, metadata changes and exact replay using
+visibly synthetic contract examples only. Once consumed, retain the selection
+as regression evidence and obtain fresh separately authored cases before
+another held-out claim.

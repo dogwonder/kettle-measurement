@@ -146,6 +146,11 @@
 # mock-ups and learning guides, never built and never bundled, which
 # load React from a CDN on purpose. Everything on that list bar the
 # last two is gitignored: generated output, vendored binaries, scratch.
+# `app/mini-templates/` is also excluded: source templates for independently
+# generated Mini applications, never imported or bundled by Kettle. The image
+# Mini owns its loopback server and explicit model download in setup. Its README
+# and runtime tests describe that separate boundary; Kettle's audit does not
+# establish the generated application's privacy claims.
 #
 # Not shipped, so not scanned: test code. `#[cfg(test)]` items are
 # compiled out, `crates/*/tests` are separate Cargo targets, and

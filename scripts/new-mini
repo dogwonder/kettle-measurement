@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""Create a single-purpose local Mini; never overwrite a project."""
+import argparse
+import json
+from pathlib import Path
+import shlex
+import shutil
+import subprocess
+import tempfile
+
+RUNTIMES = {"image-descriptions": "transformers", "appointments": "llama-server"}
+PORTS = {"image-descriptions": 8788, "appointments": 8787}
+PAGES = {
+    "appointments": {
+        "title": "Appointments", "task": "appointments",
+        "head": '<script type="module" src="/src/main.js"></script>',
+        "wordmark": "",
+        "footer": "A proof of concept · one letter at a time · stays on this device",
+        "output": "index.html",
+    },
+    "image-descriptions": {
+        "title": "Image descriptions", "task": "image descriptions",
+        "head": '<link rel="stylesheet" href="/style.css">\n    <script type="module" src="/app.js"></script>',
+        "wordmark": 'src="/wordmark.svg" ',
+        "footer": "A proof of concept · one photograph at a time · stays on this device",
+        "output": "web/index.html",
+    },
+}
+
+
+def render_page(project, task):
+    """Assemble the common shell and task content into ordinary local HTML."""
+    page = (project / "layout.html").read_text()
+    values = {**PAGES[task], "content": (project / "main.html").read_text().rstrip()}
+    for name, value in values.items():
+        page = page.replace("{{" + name + "}}", value)
+    (project / PAGES[task]["output"]).write_text(page)
+
+
+def scaffold(destination, kettle, task):
+    if destination.exists() or destination.is_symlink():
+        raise ValueError(f"Destination already exists: {destination}")
+    if not destination.parent.is_dir():
+        raise ValueError(f"Parent directory does not exist: {destination.parent}")
+    if task == "appointments" and destination.parent.resolve() != kettle.parent.resolve():
+        raise ValueError("Appointments must be generated beside Kettle; it reuses the sibling runner, model and styles.")
+    template = kettle / "app/mini-templates" / task
+    common = kettle / "app/mini-templates/common"
+    if not template.is_dir() or not common.is_dir():
+        raise ValueError("This scaffold requires Kettle's private app/mini-templates; they are outside the public measurement projection.")
+    sass = kettle / "app/node_modules/.bin/sass"
+    if task == "image-descriptions" and not sass.is_file():
+        raise ValueError("Install Kettle's app dependencies first (cd app && npm ci).")
+    # Build beside the destination; publish only a complete scaffold.
+    with tempfile.TemporaryDirectory(prefix=".new-mini-", dir=destination.parent) as temporary:
+        stage = Path(temporary) / "project"
+        shutil.copytree(template, stage, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+        package = json.loads((stage / "package.json").read_text())
+        shared = json.loads((common / "package.json").read_text())
+        shutil.copytree(common, stage, dirs_exist_ok=True)
+        render_page(stage, task)
+        for key, value in shared.items():
+            package[key] = {**package.get(key, {}), **value} if isinstance(value, dict) else value
+        (stage / "package.json").write_text(json.dumps(package, indent=2) + "\n")
+        if task == "image-descriptions":
+            subprocess.run([
+                str(sass), "--no-source-map", "--style=compressed", "--quiet-deps",
+                f"--load-path={kettle / 'app/src/styles'}",
+                f"--load-path={kettle / 'app/node_modules'}",
+                str(stage / "web/style.scss"), str(stage / "web/style.css"),
+            ], check=True)
+            shutil.copyfile(kettle / "reference/logo/kttl-lowercase-spout-right-on-navy.svg", stage / "web/wordmark.svg")
+            shutil.copyfile(kettle / "reference/icons/kettle-steeping-animated.svg", stage / "web/kettle-steeping-animated.svg")
+        (stage / "scaffold.json").write_text(json.dumps({
+            "template": task, "runtime": RUNTIMES[task], "version": 2, "port": PORTS[task],
+            "styles": "Kettle's GOV.UK bridge and tokens; compiled at scaffold time for images, during setup for appointments.",
+        }, indent=2) + "\n")
+        for path in (stage / "scripts").iterdir():
+            if path.suffix == ".sh":
+                path.chmod(0o755)
+        # mkdir is exclusive, including when another invocation won the race.
+        destination.mkdir()
+        try:
+            for path in stage.iterdir():
+                path.rename(destination / path.name)
+        except BaseException:
+            shutil.rmtree(destination)
+            raise
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("task", choices=list(RUNTIMES))
+    parser.add_argument("--runtime", choices=list(RUNTIMES.values()), help="Defaults to the task's runtime.")
+    parser.add_argument("--output", type=Path, help="Default: sibling kettle-mini-<task>. Appointments must remain beside Kettle.")
+    args = parser.parse_args()
+    kettle = Path(__file__).resolve().parent.parent
+    if args.runtime and args.runtime != RUNTIMES[args.task]:
+        parser.error(f"{args.task} uses --runtime {RUNTIMES[args.task]}")
+    destination = (args.output or kettle.parent / f"kettle-mini-{args.task}").absolute()
+    try:
+        scaffold(destination, kettle, args.task)
+    except (ValueError, OSError, subprocess.CalledProcessError) as error:
+        parser.exit(1, f"new-mini: {error}\n")
+    print(f"Created {destination}\nNo packages or weights downloaded.\n\n"
+          f"cd {shlex.quote(str(destination))}\nnpm run setup\nnpm start")
+
+
+if __name__ == "__main__":
+    main()

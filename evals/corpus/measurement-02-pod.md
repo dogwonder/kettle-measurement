@@ -1,6 +1,21 @@
-# Amount/list comparison on a rented CUDA pod — prepared 8 September 2026
+# Amount/list comparison on a rented CUDA pod — plan and completed status
 
-**Prepared, not frozen, not authorised, not run.** This is the Linux/CUDA
+**Completed 8 September 2026.** The authorised sitting expanded to five
+corpus arms and then three full-bed passes. [All four result stages](measurement-02-pod-results.md)
+record the outcome: 0.3.1 and 0.3.2 were withdrawn and `main` was restored
+to 0.3.0. Recordings are archived in `dogwonder/kettle-runs` at `d8d94223`.
+The initial procedure below is historical; it is not authorisation to rent
+or run again. Any next amount/list attempt changes one thing and is measured
+on the full pod bed before consulting these 43 exposed corpus cases.
+
+The JSON pins are retained as recorded. Current sources and pack bytes
+have changed, so a new bundle from `main` cannot satisfy the old pins.
+The Metal executable at `target/debug/kettle` was also overwritten; a Metal
+run needs a fresh freeze. The chrono build defect described below was fixed
+in `eb53e255`; the historical pod executable used `--features pdf`, which
+remains the required build feature for pod work.
+
+**Original preparation, before authorisation.** This is the Linux/CUDA
 plan for the comparison [measurement 2](measurement-02.md) froze for Metal.
 The Metal freeze and its JSON are unchanged; [`measurement-02-pod.json`](measurement-02-pod.json)
 reuses its source, corpus, inventory, pack and weight pins and leaves every
@@ -35,7 +50,7 @@ different workflow (a full pack bed and a baseline) and is not used.
 
 | Step | Where | Spends | Refuses |
 |---|---|---|---|
-| `bundle` | home | nothing | a dirty tree; any `*.private.*`, `.gguf`, `fixtures/` or `tests/` path; any byte that differs from the plan pins |
+| `bundle` | home | nothing | a modified bundled path (other checkout changes are noted and excluded); any `*.private.*`, `.gguf`, `fixtures/` or `tests/` path; any byte that differs from the plan pins |
 | `check-bundle` | home | a local build | a manifest mismatch; a no-model run that exits non-zero or leaves a case unscored |
 | `preflight` | pod | two 512 MB write probes | not being on a GPU box; a llama-server already running |
 | `setup` | pod | CUDA build, one weights download, CLI build, four no-model runs | no CUDA backend built; weights digest or byte count mismatch |
@@ -123,7 +138,7 @@ merge-policy conflict is still a decision, not something a diagnostic run
 settles. Archive only synthetic evidence, and only with separate
 authorisation for `kettle-runs`.
 
-## Local check of this preparation
+## Local check of this preparation — before the chrono fix
 
 `check-bundle` extracted the bundle into a scratch directory, verified its
 manifest, built the CLI and ran the four no-model acquisition checks (each

@@ -1,5 +1,17 @@
 # Amount/list comparison on a rented RTX 4090 — run 8 September 2026
 
+**Final status, after all four stages below:** 0.3.1 and 0.3.2 are withdrawn;
+`main` carries 0.3.0 again (`3f47790f`). The full bed supersedes the first
+two dispositions recommending further prompt sentences. The two product
+defects remain open; any next attempt changes one thing and is measured on
+the full pod bed before consulting the 43 exposed corpus cases. The quote
+pairing defect was fixed separately in `875ce950`.
+
+The five corpus arms and three bed passes are archived in
+`dogwonder/kettle-runs` at `d8d94223`: [corpus recordings](https://github.com/dogwonder/kettle-runs/tree/d8d94223/2026-09-08-corpus-amount-list-old-new-032-4b-9b-27b-pod4090)
+and [bed recordings](https://github.com/dogwonder/kettle-runs/tree/d8d94223/2026-09-08-letter-qwen3.5-4b-v19-pack031-032-development-exam-pod4090).
+The observations below retain the order in which they were made.
+
 **Run and read; nothing promoted.** Both arms of the
 [pod plan](measurement-02-pod.md) ran freshly on RunPod pod
 `dhqfsu8me9r380` (RTX 4090, driver 580.126.20, CUDA 12.8 toolkit, Ubuntu
@@ -22,7 +34,7 @@ identity: 33 and 11 exact requests per arm, zero legacy matches. The
 recordings are under `evals/runs/amount-list-old-new-qwen35-4b-cuda-02/`
 (gitignored) with receipts, sidecar logs, `nvidia-smi` readings,
 `exchanges.json` and `replay-check.json`; the tarball digest is
-`25dafaad…`. Nothing has been archived to `kettle-runs`.
+`25dafaad…`. These were subsequently archived with the later arms above.
 
 ## The question: did the patch fix amount selection and list attribution?
 
@@ -91,7 +103,7 @@ stays `not-assessed`; the table above is a reviewer's reading of the
 retained action text, not a scorer. Runtime figures are the pod's for
 this sitting only.
 
-## Disposition
+## Disposition after the first sitting — superseded by the full bed below
 
 The patch is not ready to merge as it stands: it fixes the prose
 instalment selection and the split-list duplicate, leaves the table-row
@@ -156,7 +168,7 @@ exposed cases and names no tier.
 **The apostrophe echo failure holds on all four arms**, 9B included:
 £960.00 is chosen every time and discarded to review every time.
 
-## Disposition after the second sitting
+## Disposition after the second sitting — superseded by the full bed below
 
 None of the three prompts is merge-ready. 0.3.2 is the best of the 4B
 arms on list attribution (no duplicates on either selection) and on the
@@ -279,7 +291,7 @@ and each does something the bed did not ask for:
 0.3.0 remains the best prompt Kettle has. The two real product defects
 the corpus found — the annual-total selection and the list duplicate —
 are worth about 2 decisions on the bed and cost 60 to fix this way. Any
-next attempt should change **one** paragraph, be measured on the full
+next attempt should change **one thing**, be measured on the full
 bed before the 43 cases are consulted at all, and treat a corpus case as
 a way to see a failure, never as the surface a prompt is fitted to. The
 apostrophe echo failure in `exec.rs` was fixed the same evening: pairing

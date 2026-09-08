@@ -1,12 +1,19 @@
-# Amount selection and list attribution — local patch, 8 September 2026
+# Amount selection and list attribution — withdrawn patch, 8 September 2026
 
-The letter prompt now explicitly selects the amount required by the particular
-payment, including an instalment beside an annual charge. It also attributes
-list actions to their own passages, with a shared deadline read at the
-introduction. A deadline-only introduction receives no combined task; an
-introduction that itself requests an action retains it. Several actions in
-one acquired passage are each requested once. Headings and footers are not
-blanket exclusions.
+**Current status:** `main` carries 0.3.0. Annual-total selection beside an
+instalment and the list-heading duplicate remain open; `instalment-table`
+did not improve under any measured 4B prompt. Together they account for
+about two bed decisions. Do not add another paragraph to the same prompt:
+any future attempt changes one thing and is measured on the full pod bed
+before the 43 exposed corpus cases are consulted. No new run is authorised.
+
+The historical 0.3.1 patch instructed the model to select the amount required
+by the particular payment, including an instalment beside an annual charge.
+It also instructed the model to attribute list actions to their own passages,
+with a shared deadline read at the introduction. A deadline-only introduction
+was to receive no combined task; an introduction that itself requested an
+action was to retain it. Several actions in one acquired passage were each
+requested once. Headings and footers were not blanket exclusions.
 
 This was measured on 8 September 2026 on a rented RTX 4090; see [the results](measurement-02-pod-results.md). It fixes the prose instalment selection and the split-list duplicate, leaves the table-row selection and the heading duplicate, and once drops "within" from a copied deadline. The full bed then found it costs eleven points of pooled recall against 0.3.0; this patch is **withdrawn as a merge candidate**, and the pack on `main` was restored to 0.3.0 the same evening. The prompt and examples described below exist only in history (`0da1fa4e` for 0.3.1, `71646aa8` for 0.3.2) and in the archived recordings. It was an **unmeasured prompt fix** when written, motivated by `money-form-013-letter` and
 `format-form-002-letter` in [measurement 1](measurement-01.md). Containment
@@ -16,8 +23,9 @@ task wording and a heading. Adding a money-label finder or a punctuation-based
 task filter would obscure that limitation and violate the current method.
 Rust, source-truth scoring and semantic-action status are unchanged.
 
-Pack version is 0.3.1, invalidating version-keyed product results for the new
-prompt/examples. Pack scoring remains 19 and corpus scoring remains v6. The
+The patch used version 0.3.1, invalidating version-keyed product results for
+its prompt/examples; `main` was subsequently restored to 0.3.0. Pack scoring
+remains 19 and corpus scoring remains v6. The
 existing failing v19 baseline/tier records remain historical evidence for
 their recorded identities; they neither validate this prompt nor become passes.
 No pack strata, ceilings, source inventory or old corpus facts were changed.
@@ -83,7 +91,7 @@ The command tests additionally change a prompt, require exact replay to refuse
 its requests, then restore that prompt and require the original reports back.
 Old recordings must never be presented as answers to the new instructions.
 
-## Local validation
+## Local validation before measurement — historical
 
 Passed: 1,072 root Rust tests; 148 app Rust tests with one existing local-model
 ignore; 20 Python checks; formatting and all-target/all-feature Clippy in both workspaces. The
@@ -93,13 +101,21 @@ the existing dated floor-stage tests now allow that absence while still
 failing when a new passing row makes the stage obsolete. No tier data changed.
 
 Replay and controlled-answer results above establish instrument behaviour
-only. The original annual-total failure and heading duplicate remain the
-latest real model observations.
+only. The later model observations and withdrawal are recorded in
+[all four stages of the pod results](measurement-02-pod-results.md).
 
-## Separate measurement proposal — awaiting authorisation
+## Original Metal proposal — superseded by the completed pod comparison
+
+The proposal below records the pre-run design. The authorised CUDA sitting
+and subsequent full bed completed on 8 September; recordings were archived
+at `dogwonder/kettle-runs` commit `d8d94223`. The Metal measurement did not
+run, and its pinned `target/debug/kettle` has since been overwritten. A
+Metal run needs a fresh freeze and explicit authorisation. This historical
+proposal does not schedule another comparison or override the full-bed-first
+condition above.
 
 The [prepared comparison](measurement-02.md) and its [pinned inputs](measurement-02.json)
-now make this proposal reviewable. No model run is scheduled to execute automatically. The next proposed sitting
+made this proposal reviewable. No model run was scheduled to execute automatically. The proposed sitting
 compares the original `53124ce8` pack with this patch on the installed
 Qwen3.5-4B Q4_K_M and existing b10145 Metal runtime. Before execution, commit
 or freeze both pack identities, both corpus digests, executable/weights/sidecar

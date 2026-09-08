@@ -6,11 +6,16 @@ rented wall clock both move with ambient conditions, and neither can
 justify an absolute duration carried into a later sitting. Everything
 here is what that attempt hit, in the order it hit it.
 
-`scripts/pod-eval.sh` automates the happy path. This file is why each
-step is what it is, and what to do when it is not happy. A bounded
-`kettle corpus` comparison is a different job with its own script,
-`scripts/corpus-pod.sh` (`evals/corpus/measurement-02-pod.md`); the
-box-level lessons below apply to it unchanged.
+**Current hand-off, 8 September 2026:** full-bed work uses the by-hand
+recipe below, built with `--features pdf`; corpus work uses
+`scripts/corpus-pod.sh` (`evals/corpus/measurement-02-pod.md`). Use the
+exposed TCP host and port from `runpodctl pod get <id>` (`.ssh.ip`,
+`.ssh.port`), never the `ssh.runpod.io` proxy. Renting or running requires
+explicit authorisation. The completed 8 September comparison and its
+frozen identities do not authorise another sitting.
+
+`scripts/pod-eval.sh` is the historical full-bed automation referenced in
+the lessons below. This file explains those lessons and the by-hand route.
 
 ## Before anything: is it worth it?
 
@@ -222,7 +227,7 @@ run lost 326 of 794 fixtures that way.
 ```sh
 tmux new -s eval
 . "$HOME/.cargo/env"
-cargo run --locked -p kettle -- eval <pack> --model <weights> \
+cargo run --locked -p kettle --features pdf -- eval <pack> --model <weights> \
   --resume --write-baseline pod-baseline.json 2>&1 | tee -a pod-eval.log
 # Ctrl-B then D to detach; tmux attach -t eval to return
 ```

@@ -8,7 +8,7 @@ introduction that itself requests an action retains it. Several actions in
 one acquired passage are each requested once. Headings and footers are not
 blanket exclusions.
 
-This was measured on 8 September 2026 on a rented RTX 4090; see [the results](measurement-02-pod-results.md). It fixes the prose instalment selection and the split-list duplicate, leaves the table-row selection and the heading duplicate, and once drops "within" from a copied deadline. The full bed then found it costs eleven points of pooled recall against 0.3.0; this patch is **withdrawn as a merge candidate**. It was an **unmeasured prompt fix** when written, motivated by `money-form-013-letter` and
+This was measured on 8 September 2026 on a rented RTX 4090; see [the results](measurement-02-pod-results.md). It fixes the prose instalment selection and the split-list duplicate, leaves the table-row selection and the heading duplicate, and once drops "within" from a copied deadline. The full bed then found it costs eleven points of pooled recall against 0.3.0; this patch is **withdrawn as a merge candidate**, and the pack on `main` was restored to 0.3.0 the same evening. The prompt and examples described below exist only in history (`0da1fa4e` for 0.3.1, `71646aa8` for 0.3.2) and in the archived recordings. It was an **unmeasured prompt fix** when written, motivated by `money-form-013-letter` and
 `format-form-002-letter` in [measurement 1](measurement-01.md). Containment
 cannot establish that one of two faithfully copied sums belongs to the ask,
 and the current schema does not attest the relationship between free-form

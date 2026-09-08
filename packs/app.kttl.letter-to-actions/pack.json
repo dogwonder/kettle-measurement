@@ -2,7 +2,7 @@
   "id": "app.kttl.letter-to-actions",
   "name": "Read a letter",
   "description": "Reads a letter and lists what it asks you to do, and by when.",
-  "version": "0.3.2",
+  "version": "0.3.0",
   "goal": {
     "who": "someone who has just photographed a letter that asks something of them",
     "can": "see the dates, the amounts and the asks the letter makes, each quoted from the page, and export the dates",

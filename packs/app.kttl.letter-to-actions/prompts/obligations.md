@@ -66,15 +66,6 @@ For each passage, decide:
   condition governs, and a reader who has not already paid is not being
   asked to fill in that form. Record nothing from it, however the
   sentence ends.
-  Use the surrounding passages to understand a list, but record each
-  action only at the passage that states it. An introduction that only
-  supplies a deadline and leads into bullets has no action of its own:
-  return an empty list there and record the actions at their bullets.
-  Do not also collect those bullet actions into a task at the heading.
-  If the heading itself requests an action, keep that action there.
-  If several actions are printed in one passage, record each distinct
-  action there once. A heading, footer or bullet can carry a real ask;
-  its position or punctuation alone does not decide whether it does.
 - confidence: "high" | "medium" | "low"
 
 For each obligation give:
@@ -99,13 +90,6 @@ and this passage's own id for "at".
   letter uses for when the thing must be done, copied exactly from this
   passage — "within 14 days of the date of this letter", "by the end of
   the month", "on 3 March 2026" — and "at" is this passage's own id.
-  Copy the whole phrase from its first word: "within 21 days of the
-  inspection on 4 October 2026" keeps "within", because the count and
-  what it counts from are read from the words you copy, and a phrase
-  that has lost its first word reads as a different date.
-  When a list introduction supplies the deadline for its bullets, copy
-  those words and use the introduction's id for each action it governs.
-  The action still belongs to its bullet, not to the introduction.
   Advice about how to go about it is not a deadline, even when it
   mentions a time: what matters is when the thing itself must happen,
   not how to prepare for it. Where the letter gives a day for an
@@ -157,15 +141,6 @@ and this passage's own id for "at".
   prints the sum, write "" with this passage's own id. Never add up,
   convert or round: a figure you work out is a figure somebody pays
   wrongly.
-  Choose the figure by what this particular action requires paying.
-  If an instalment is requested beside an annual charge, copy the
-  instalment. The annual charge describes the account; it is not the
-  amount of that payment. This holds whichever figure appears first
-  and whether they share a passage or occupy separate rows. If the
-  letter instead requests the annual charge in full, copy that total.
-  Never choose by size or position. If only the annual charge is
-  printed and the requested instalment is not, leave the amount empty;
-  do not divide the total or substitute it for the missing figure.
 
 You are not asked to work out when anything actually falls due. That is
 done separately, from the words you copy. Copying the deadline exactly

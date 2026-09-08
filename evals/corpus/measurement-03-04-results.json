@@ -1,0 +1,2295 @@
+{
+  "formats": {
+    "text": {
+      "schema": "kettle/corpus-evaluation@1",
+      "scoring": "corpus-fields-v6",
+      "corpus_digest": "blake3:0c88d50139408496641391459a44dd2076219dde8ffeff4be69ec8944fd207b1",
+      "pipeline_digest": "blake3:5060ab2f9e537f8d54b64f6c547ca18a72a019696a1d48739ebe73dcfa3e845f",
+      "model": {
+        "weights_digest": "blake3:fe7ad96fac5c979c790dc2a8ae06cf85ddf1ffd5a4d4f83d1fdaddc350d17980",
+        "file": "qwen3.5-4b-q4_k_m.gguf",
+        "params": "4B",
+        "quant": "Q4_K_M",
+        "context": 8192
+      },
+      "sidecar": {
+        "version": "10145 (ad256ded3)",
+        "file": "llama-server",
+        "device": "MTL0 (Apple M1 Pro)"
+      },
+      "runtime": {
+        "sidecar_digest": "blake3:f497459a12169bffbbb34b206f2b573264589bca9b64fd20be5c2ffc03a5986c",
+        "policy": {
+          "context": 8192,
+          "parallel": 1,
+          "reasoning": "off",
+          "max_answer_tokens": 4096
+        },
+        "threads": 5,
+        "environment_digest": "blake3:014e95e3d01b42e242ed38987feae0162f5c12e085d886188ca9c1dd488607c2"
+      },
+      "generation_machine": {
+        "cpu": "Apple M1 Pro",
+        "ram_gb": 32,
+        "os": "macOS 26.6.2"
+      },
+      "summary": {
+        "deadline_reading_misattached": 0,
+        "deadline_reading_contract": {
+          "correct": 0,
+          "wrong": 4,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "deadline_structure_contract": {
+          "correct": 2,
+          "wrong": 2,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "deadline_resolution_contract": {
+          "correct": 4,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "items": 4,
+        "no_obligation_sites": 2,
+        "whole_item_raw": 0,
+        "whole_item_verified": 4,
+        "missed_raw": 0,
+        "missed_verified": 0,
+        "invented_raw": 1,
+        "invented_verified": 1,
+        "misattached": 0,
+        "raw": {
+          "kind": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "party": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "deadline": {
+            "correct": 0,
+            "wrong": 4,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "amount": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "time": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "place": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "reference": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          }
+        },
+        "verified": {
+          "kind": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "party": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "deadline": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "amount": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "time": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "place": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "reference": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          }
+        }
+      },
+      "unscored_cases": 0,
+      "challenge": null,
+      "cases": [
+        {
+          "case": "format01-footer",
+          "score": {
+            "case": "format01-footer",
+            "asks": [
+              {
+                "ask": "format01-footer-pay",
+                "raw_candidate": 0,
+                "verified_candidate": 1,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "wrong",
+                    "got": "2 June 2026"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "wrong",
+                    "got": "{\"count\":0,\"unit\":\"none\",\"qualifier\":\"none\",\"counts_from\":\"named_date\"}"
+                  },
+                  "resolution": {
+                    "outcome": "correct"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "wrong",
+                    "got": "2 June 2026"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "attached",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": false,
+                "whole_item_verified": true,
+                "missed_raw": false,
+                "missed_verified": false
+              },
+              {
+                "ask": "format01-footer-return",
+                "raw_candidate": 1,
+                "verified_candidate": 0,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "wrong",
+                    "got": "28 May 2026"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "wrong",
+                    "got": "{\"count\":0,\"unit\":\"none\",\"qualifier\":\"none\",\"counts_from\":\"named_date\"}"
+                  },
+                  "resolution": {
+                    "outcome": "correct"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "wrong",
+                    "got": "28 May 2026"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "not-judged",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": false,
+                "whole_item_verified": true,
+                "missed_raw": false,
+                "missed_verified": false
+              }
+            ],
+            "invented_raw": 0,
+            "invented_verified": 0,
+            "negative_sites": [
+              {
+                "ask": "format01-footer-cancelled",
+                "invented_raw": 0,
+                "invented_verified": 0
+              }
+            ],
+            "task_slots": {
+              "expected": 2,
+              "raw_candidates": 2,
+              "verified_candidates": 2,
+              "missing_raw_slots": 0,
+              "missing_verified_slots": 0,
+              "unmatched_raw": [],
+              "unmatched_verified": [],
+              "semantic_action_coverage": "not-assessed"
+            }
+          },
+          "acquisition_errors": [],
+          "attribution_errors": [],
+          "execution_error": null
+        },
+        {
+          "case": "format01-three-pages",
+          "score": {
+            "case": "format01-three-pages",
+            "asks": [
+              {
+                "ask": "format01-three-pages-pay",
+                "raw_candidate": 1,
+                "verified_candidate": 1,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "wrong",
+                    "got": "2 June 2026"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "correct"
+                  },
+                  "resolution": {
+                    "outcome": "correct"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "wrong",
+                    "got": "2 June 2026"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "attached",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": false,
+                "whole_item_verified": true,
+                "missed_raw": false,
+                "missed_verified": false
+              },
+              {
+                "ask": "format01-three-pages-return",
+                "raw_candidate": 2,
+                "verified_candidate": 0,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "wrong",
+                    "got": "28 May 2026"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "correct"
+                  },
+                  "resolution": {
+                    "outcome": "correct"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "wrong",
+                    "got": "28 May 2026"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "not-judged",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": false,
+                "whole_item_verified": true,
+                "missed_raw": false,
+                "missed_verified": false
+              }
+            ],
+            "invented_raw": 1,
+            "invented_verified": 1,
+            "negative_sites": [
+              {
+                "ask": "format01-three-pages-cancelled",
+                "invented_raw": 0,
+                "invented_verified": 0
+              }
+            ],
+            "task_slots": {
+              "expected": 2,
+              "raw_candidates": 3,
+              "verified_candidates": 3,
+              "missing_raw_slots": 0,
+              "missing_verified_slots": 0,
+              "unmatched_raw": [
+                {
+                  "index": 0,
+                  "passage": 2,
+                  "text": "Pay the annual service charge",
+                  "site": "no-authored-ask-site"
+                }
+              ],
+              "unmatched_verified": [
+                {
+                  "index": 2,
+                  "passage": 2,
+                  "text": "Pay the annual service charge",
+                  "site": "no-authored-ask-site"
+                }
+              ],
+              "semantic_action_coverage": "not-assessed"
+            }
+          },
+          "acquisition_errors": [],
+          "attribution_errors": [],
+          "execution_error": null
+        }
+      ],
+      "exchanges": 2
+    },
+    "pdf": {
+      "schema": "kettle/corpus-evaluation@1",
+      "scoring": "corpus-fields-v6",
+      "corpus_digest": "blake3:0c88d50139408496641391459a44dd2076219dde8ffeff4be69ec8944fd207b1",
+      "pipeline_digest": "blake3:5060ab2f9e537f8d54b64f6c547ca18a72a019696a1d48739ebe73dcfa3e845f",
+      "model": {
+        "weights_digest": "blake3:fe7ad96fac5c979c790dc2a8ae06cf85ddf1ffd5a4d4f83d1fdaddc350d17980",
+        "file": "qwen3.5-4b-q4_k_m.gguf",
+        "params": "4B",
+        "quant": "Q4_K_M",
+        "context": 8192
+      },
+      "sidecar": {
+        "version": "10145 (ad256ded3)",
+        "file": "llama-server",
+        "device": "MTL0 (Apple M1 Pro)"
+      },
+      "runtime": {
+        "sidecar_digest": "blake3:f497459a12169bffbbb34b206f2b573264589bca9b64fd20be5c2ffc03a5986c",
+        "policy": {
+          "context": 8192,
+          "parallel": 1,
+          "reasoning": "off",
+          "max_answer_tokens": 4096
+        },
+        "threads": 5,
+        "environment_digest": "blake3:014e95e3d01b42e242ed38987feae0162f5c12e085d886188ca9c1dd488607c2"
+      },
+      "generation_machine": {
+        "cpu": "Apple M1 Pro",
+        "ram_gb": 32,
+        "os": "macOS 26.6.2"
+      },
+      "summary": {
+        "deadline_reading_misattached": 0,
+        "deadline_reading_contract": {
+          "correct": 2,
+          "wrong": 2,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "deadline_structure_contract": {
+          "correct": 2,
+          "wrong": 2,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "deadline_resolution_contract": {
+          "correct": 2,
+          "wrong": 0,
+          "missing": 2,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "items": 4,
+        "no_obligation_sites": 2,
+        "whole_item_raw": 2,
+        "whole_item_verified": 2,
+        "missed_raw": 0,
+        "missed_verified": 0,
+        "invented_raw": 0,
+        "invented_verified": 0,
+        "misattached": 0,
+        "raw": {
+          "kind": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "party": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "deadline": {
+            "correct": 2,
+            "wrong": 2,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "amount": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "time": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "place": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "reference": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          }
+        },
+        "verified": {
+          "kind": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "party": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "deadline": {
+            "correct": 2,
+            "wrong": 0,
+            "missing": 2,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "amount": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "time": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "place": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "reference": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          }
+        }
+      },
+      "unscored_cases": 0,
+      "challenge": null,
+      "cases": [
+        {
+          "case": "format01-footer",
+          "score": {
+            "case": "format01-footer",
+            "asks": [
+              {
+                "ask": "format01-footer-pay",
+                "raw_candidate": 0,
+                "verified_candidate": 0,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "correct"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "wrong",
+                    "got": "{\"count\":19,\"unit\":\"days\",\"qualifier\":\"none\",\"counts_from\":\"letter_date\"}"
+                  },
+                  "resolution": {
+                    "outcome": "missing"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "missing"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "attached",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": true,
+                "whole_item_verified": false,
+                "missed_raw": false,
+                "missed_verified": false
+              },
+              {
+                "ask": "format01-footer-return",
+                "raw_candidate": 1,
+                "verified_candidate": 1,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "correct"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "wrong",
+                    "got": "{\"count\":14,\"unit\":\"days\",\"qualifier\":\"none\",\"counts_from\":\"letter_date\"}"
+                  },
+                  "resolution": {
+                    "outcome": "missing"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "missing"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "not-judged",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": true,
+                "whole_item_verified": false,
+                "missed_raw": false,
+                "missed_verified": false
+              }
+            ],
+            "invented_raw": 0,
+            "invented_verified": 0,
+            "negative_sites": [
+              {
+                "ask": "format01-footer-cancelled",
+                "invented_raw": 0,
+                "invented_verified": 0
+              }
+            ],
+            "task_slots": {
+              "expected": 2,
+              "raw_candidates": 2,
+              "verified_candidates": 2,
+              "missing_raw_slots": 0,
+              "missing_verified_slots": 0,
+              "unmatched_raw": [],
+              "unmatched_verified": [],
+              "semantic_action_coverage": "not-assessed"
+            }
+          },
+          "acquisition_errors": [],
+          "attribution_errors": [],
+          "execution_error": null
+        },
+        {
+          "case": "format01-three-pages",
+          "score": {
+            "case": "format01-three-pages",
+            "asks": [
+              {
+                "ask": "format01-three-pages-pay",
+                "raw_candidate": 0,
+                "verified_candidate": 1,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "wrong",
+                    "got": "2 June 2026"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "correct"
+                  },
+                  "resolution": {
+                    "outcome": "correct"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "wrong",
+                    "got": "2 June 2026"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "attached",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": false,
+                "whole_item_verified": true,
+                "missed_raw": false,
+                "missed_verified": false
+              },
+              {
+                "ask": "format01-three-pages-return",
+                "raw_candidate": 1,
+                "verified_candidate": 0,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "wrong",
+                    "got": "28 May 2026"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "correct"
+                  },
+                  "resolution": {
+                    "outcome": "correct"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "wrong",
+                    "got": "28 May 2026"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "not-judged",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": false,
+                "whole_item_verified": true,
+                "missed_raw": false,
+                "missed_verified": false
+              }
+            ],
+            "invented_raw": 0,
+            "invented_verified": 0,
+            "negative_sites": [
+              {
+                "ask": "format01-three-pages-cancelled",
+                "invented_raw": 0,
+                "invented_verified": 0
+              }
+            ],
+            "task_slots": {
+              "expected": 2,
+              "raw_candidates": 2,
+              "verified_candidates": 2,
+              "missing_raw_slots": 0,
+              "missing_verified_slots": 0,
+              "unmatched_raw": [],
+              "unmatched_verified": [],
+              "semantic_action_coverage": "not-assessed"
+            }
+          },
+          "acquisition_errors": [],
+          "attribution_errors": [],
+          "execution_error": null
+        }
+      ],
+      "exchanges": 2
+    },
+    "photos": {
+      "schema": "kettle/corpus-evaluation@1",
+      "scoring": "corpus-fields-v6",
+      "corpus_digest": "blake3:0c88d50139408496641391459a44dd2076219dde8ffeff4be69ec8944fd207b1",
+      "pipeline_digest": "blake3:5060ab2f9e537f8d54b64f6c547ca18a72a019696a1d48739ebe73dcfa3e845f",
+      "model": {
+        "weights_digest": "blake3:fe7ad96fac5c979c790dc2a8ae06cf85ddf1ffd5a4d4f83d1fdaddc350d17980",
+        "file": "qwen3.5-4b-q4_k_m.gguf",
+        "params": "4B",
+        "quant": "Q4_K_M",
+        "context": 8192
+      },
+      "sidecar": {
+        "version": "10145 (ad256ded3)",
+        "file": "llama-server",
+        "device": "MTL0 (Apple M1 Pro)"
+      },
+      "runtime": {
+        "sidecar_digest": "blake3:f497459a12169bffbbb34b206f2b573264589bca9b64fd20be5c2ffc03a5986c",
+        "policy": {
+          "context": 8192,
+          "parallel": 1,
+          "reasoning": "off",
+          "max_answer_tokens": 4096
+        },
+        "threads": 5,
+        "environment_digest": "blake3:014e95e3d01b42e242ed38987feae0162f5c12e085d886188ca9c1dd488607c2"
+      },
+      "generation_machine": {
+        "cpu": "Apple M1 Pro",
+        "ram_gb": 32,
+        "os": "macOS 26.6.2"
+      },
+      "summary": {
+        "deadline_reading_misattached": 0,
+        "deadline_reading_contract": {
+          "correct": 2,
+          "wrong": 2,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "deadline_structure_contract": {
+          "correct": 2,
+          "wrong": 2,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "deadline_resolution_contract": {
+          "correct": 2,
+          "wrong": 0,
+          "missing": 2,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "items": 4,
+        "no_obligation_sites": 2,
+        "whole_item_raw": 2,
+        "whole_item_verified": 2,
+        "missed_raw": 0,
+        "missed_verified": 0,
+        "invented_raw": 0,
+        "invented_verified": 0,
+        "misattached": 0,
+        "raw": {
+          "kind": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "party": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "deadline": {
+            "correct": 2,
+            "wrong": 2,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "amount": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "time": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "place": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "reference": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          }
+        },
+        "verified": {
+          "kind": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "party": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "deadline": {
+            "correct": 2,
+            "wrong": 0,
+            "missing": 2,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "amount": {
+            "correct": 4,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 0
+          },
+          "time": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "place": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          },
+          "reference": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 0,
+            "uncertain": 0,
+            "unsupported": 4
+          }
+        }
+      },
+      "unscored_cases": 0,
+      "challenge": null,
+      "cases": [
+        {
+          "case": "format01-footer",
+          "score": {
+            "case": "format01-footer",
+            "asks": [
+              {
+                "ask": "format01-footer-pay",
+                "raw_candidate": 0,
+                "verified_candidate": 0,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "correct"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "wrong",
+                    "got": "{\"count\":19,\"unit\":\"days\",\"qualifier\":\"none\",\"counts_from\":\"letter_date\"}"
+                  },
+                  "resolution": {
+                    "outcome": "missing"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "missing"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "attached",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": true,
+                "whole_item_verified": false,
+                "missed_raw": false,
+                "missed_verified": false
+              },
+              {
+                "ask": "format01-footer-return",
+                "raw_candidate": 1,
+                "verified_candidate": 1,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "correct"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "wrong",
+                    "got": "{\"count\":14,\"unit\":\"days\",\"qualifier\":\"none\",\"counts_from\":\"letter_date\"}"
+                  },
+                  "resolution": {
+                    "outcome": "missing"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "missing"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "not-judged",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": true,
+                "whole_item_verified": false,
+                "missed_raw": false,
+                "missed_verified": false
+              }
+            ],
+            "invented_raw": 0,
+            "invented_verified": 0,
+            "negative_sites": [
+              {
+                "ask": "format01-footer-cancelled",
+                "invented_raw": 0,
+                "invented_verified": 0
+              }
+            ],
+            "task_slots": {
+              "expected": 2,
+              "raw_candidates": 2,
+              "verified_candidates": 2,
+              "missing_raw_slots": 0,
+              "missing_verified_slots": 0,
+              "unmatched_raw": [],
+              "unmatched_verified": [],
+              "semantic_action_coverage": "not-assessed"
+            }
+          },
+          "acquisition_errors": [],
+          "attribution_errors": [],
+          "execution_error": null
+        },
+        {
+          "case": "format01-three-pages",
+          "score": {
+            "case": "format01-three-pages",
+            "asks": [
+              {
+                "ask": "format01-three-pages-pay",
+                "raw_candidate": 0,
+                "verified_candidate": 1,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "wrong",
+                    "got": "2 June 2026"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "correct"
+                  },
+                  "resolution": {
+                    "outcome": "correct"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "wrong",
+                    "got": "2 June 2026"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "attached",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": false,
+                "whole_item_verified": true,
+                "missed_raw": false,
+                "missed_verified": false
+              },
+              {
+                "ask": "format01-three-pages-return",
+                "raw_candidate": 1,
+                "verified_candidate": 0,
+                "deadline_contract": {
+                  "reading": {
+                    "outcome": "wrong",
+                    "got": "28 May 2026"
+                  },
+                  "evidence": "attached",
+                  "structure": {
+                    "outcome": "correct"
+                  },
+                  "resolution": {
+                    "outcome": "correct"
+                  },
+                  "policy": null
+                },
+                "raw": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "wrong",
+                    "got": "28 May 2026"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "verified": {
+                  "kind": {
+                    "outcome": "correct"
+                  },
+                  "party": {
+                    "outcome": "correct"
+                  },
+                  "deadline": {
+                    "outcome": "correct"
+                  },
+                  "amount": {
+                    "outcome": "correct"
+                  },
+                  "time": {
+                    "outcome": "unsupported"
+                  },
+                  "place": {
+                    "outcome": "unsupported"
+                  },
+                  "reference": {
+                    "outcome": "unsupported"
+                  }
+                },
+                "evidence": {
+                  "kind": "not-judged",
+                  "party": "attached",
+                  "deadline": "attached",
+                  "amount": "not-judged",
+                  "time": "not-judged",
+                  "place": "not-judged",
+                  "reference": "not-judged"
+                },
+                "whole_item_raw": false,
+                "whole_item_verified": true,
+                "missed_raw": false,
+                "missed_verified": false
+              }
+            ],
+            "invented_raw": 0,
+            "invented_verified": 0,
+            "negative_sites": [
+              {
+                "ask": "format01-three-pages-cancelled",
+                "invented_raw": 0,
+                "invented_verified": 0
+              }
+            ],
+            "task_slots": {
+              "expected": 2,
+              "raw_candidates": 2,
+              "verified_candidates": 2,
+              "missing_raw_slots": 0,
+              "missing_verified_slots": 0,
+              "unmatched_raw": [],
+              "unmatched_verified": [],
+              "semantic_action_coverage": "not-assessed"
+            }
+          },
+          "acquisition_errors": [],
+          "attribution_errors": [],
+          "execution_error": null
+        }
+      ],
+      "exchanges": 2
+    }
+  },
+  "challenge": {
+    "schema": "kettle/corpus-evaluation@1",
+    "scoring": "corpus-fields-v6",
+    "corpus_digest": "blake3:886ff47aafa275acceb513faf61d4174455907e4d507eae4e098b86b8002b4ac",
+    "pipeline_digest": "blake3:5060ab2f9e537f8d54b64f6c547ca18a72a019696a1d48739ebe73dcfa3e845f",
+    "model": {
+      "weights_digest": "blake3:fe7ad96fac5c979c790dc2a8ae06cf85ddf1ffd5a4d4f83d1fdaddc350d17980",
+      "file": "qwen3.5-4b-q4_k_m.gguf",
+      "params": "4B",
+      "quant": "Q4_K_M",
+      "context": 8192
+    },
+    "sidecar": {
+      "version": "10145 (ad256ded3)",
+      "file": "llama-server",
+      "device": "MTL0 (Apple M1 Pro)"
+    },
+    "runtime": {
+      "sidecar_digest": "blake3:f497459a12169bffbbb34b206f2b573264589bca9b64fd20be5c2ffc03a5986c",
+      "policy": {
+        "context": 8192,
+        "parallel": 1,
+        "reasoning": "off",
+        "max_answer_tokens": 4096
+      },
+      "threads": 5,
+      "environment_digest": "blake3:014e95e3d01b42e242ed38987feae0162f5c12e085d886188ca9c1dd488607c2"
+    },
+    "generation_machine": {
+      "cpu": "Apple M1 Pro",
+      "ram_gb": 32,
+      "os": "macOS 26.6.2"
+    },
+    "summary": {
+      "deadline_reading_misattached": 0,
+      "deadline_reading_contract": {
+        "correct": 0,
+        "wrong": 2,
+        "missing": 0,
+        "uncertain": 0,
+        "unsupported": 0
+      },
+      "deadline_structure_contract": {
+        "correct": 2,
+        "wrong": 0,
+        "missing": 0,
+        "uncertain": 0,
+        "unsupported": 0
+      },
+      "deadline_resolution_contract": {
+        "correct": 2,
+        "wrong": 0,
+        "missing": 0,
+        "uncertain": 0,
+        "unsupported": 0
+      },
+      "items": 2,
+      "no_obligation_sites": 36,
+      "whole_item_raw": 0,
+      "whole_item_verified": 0,
+      "missed_raw": 0,
+      "missed_verified": 0,
+      "invented_raw": 0,
+      "invented_verified": 0,
+      "misattached": 0,
+      "raw": {
+        "kind": {
+          "correct": 0,
+          "wrong": 2,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "party": {
+          "correct": 2,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "deadline": {
+          "correct": 0,
+          "wrong": 2,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "amount": {
+          "correct": 2,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "time": {
+          "correct": 0,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 2
+        },
+        "place": {
+          "correct": 0,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 2
+        },
+        "reference": {
+          "correct": 0,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 2
+        }
+      },
+      "verified": {
+        "kind": {
+          "correct": 0,
+          "wrong": 2,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "party": {
+          "correct": 2,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "deadline": {
+          "correct": 2,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "amount": {
+          "correct": 2,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 0
+        },
+        "time": {
+          "correct": 0,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 2
+        },
+        "place": {
+          "correct": 0,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 2
+        },
+        "reference": {
+          "correct": 0,
+          "wrong": 0,
+          "missing": 0,
+          "uncertain": 0,
+          "unsupported": 2
+        }
+      }
+    },
+    "unscored_cases": 1,
+    "challenge": {
+      "authoring": {
+        "author": "UK Health Security Agency (letter wording); Codex (placeholder adaptation, annotations and rendering)",
+        "relationship": "separate-author",
+        "source_families": [
+          {
+            "id": "ukhsa-childhood-vaccination-invitations",
+            "locator": "UKHSA published invitation templates, 24 December 2025 / 27 January 2026; original DOCX files pinned in generation.json",
+            "relationship": "external-source"
+          }
+        ]
+      },
+      "cases": 3,
+      "corpus_digest": "sha256:34825d0c75eb7b4f76fd0f19b17ab09147a941f2fb23584900561a6802fe762a",
+      "events": [
+        {
+          "at": "2026-09-08T20:56:06.513150+00:00",
+          "event": "frozen"
+        },
+        {
+          "answer_source": "model",
+          "at": "2026-09-08T21:00:13.446289+00:00",
+          "event": "exposed",
+          "evidence": "/Users/richholman/Localhost/app/kettle/evals/runs/issues-256-428-measurement/challenge",
+          "reason": "challenge execution reserved; failures also consume this selection"
+        }
+      ],
+      "schema": "kettle/challenge-lifecycle@1",
+      "selection": {
+        "exposure": "unexposed",
+        "fields": [
+          "kind",
+          "party",
+          "deadline",
+          "amount"
+        ],
+        "id": "external-ukhsa-invitations-2026-09-08",
+        "purpose": "challenge"
+      }
+    },
+    "cases": [
+      {
+        "case": "ukhsa-12-months",
+        "score": {
+          "case": "ukhsa-12-months",
+          "asks": [
+            {
+              "ask": "ukhsa-12-months-book",
+              "raw_candidate": 0,
+              "verified_candidate": 0,
+              "deadline_contract": {
+                "reading": {
+                  "outcome": "wrong",
+                  "got": "to book an appointment"
+                },
+                "evidence": "not-judged",
+                "structure": {
+                  "outcome": "correct"
+                },
+                "resolution": {
+                  "outcome": "correct"
+                },
+                "policy": null
+              },
+              "raw": {
+                "kind": {
+                  "outcome": "wrong",
+                  "got": "attendance"
+                },
+                "party": {
+                  "outcome": "correct"
+                },
+                "deadline": {
+                  "outcome": "wrong",
+                  "got": "to book an appointment"
+                },
+                "amount": {
+                  "outcome": "correct"
+                },
+                "time": {
+                  "outcome": "unsupported"
+                },
+                "place": {
+                  "outcome": "unsupported"
+                },
+                "reference": {
+                  "outcome": "unsupported"
+                }
+              },
+              "verified": {
+                "kind": {
+                  "outcome": "wrong",
+                  "got": "attendance"
+                },
+                "party": {
+                  "outcome": "correct"
+                },
+                "deadline": {
+                  "outcome": "correct"
+                },
+                "amount": {
+                  "outcome": "correct"
+                },
+                "time": {
+                  "outcome": "unsupported"
+                },
+                "place": {
+                  "outcome": "unsupported"
+                },
+                "reference": {
+                  "outcome": "unsupported"
+                }
+              },
+              "evidence": {
+                "kind": "not-judged",
+                "party": "attached",
+                "deadline": "not-judged",
+                "amount": "not-judged",
+                "time": "not-judged",
+                "place": "not-judged",
+                "reference": "not-judged"
+              },
+              "whole_item_raw": false,
+              "whole_item_verified": false,
+              "missed_raw": false,
+              "missed_verified": false
+            }
+          ],
+          "invented_raw": 0,
+          "invented_verified": 0,
+          "negative_sites": [
+            {
+              "ask": "ukhsa-12-months-negative-0",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-1",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-2",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-4",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-5",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-6",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-7",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-8",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-9",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-10",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-11",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-12",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-13",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-14",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-15",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-16",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-17",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-18",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-12-months-negative-19",
+              "invented_raw": 0,
+              "invented_verified": 0
+            }
+          ],
+          "task_slots": {
+            "expected": 1,
+            "raw_candidates": 1,
+            "verified_candidates": 1,
+            "missing_raw_slots": 0,
+            "missing_verified_slots": 0,
+            "unmatched_raw": [],
+            "unmatched_verified": [],
+            "semantic_action_coverage": "not-assessed"
+          }
+        },
+        "acquisition_errors": [],
+        "attribution_errors": [],
+        "execution_error": null
+      },
+      {
+        "case": "ukhsa-18-months",
+        "score": {
+          "case": "ukhsa-18-months",
+          "asks": [
+            {
+              "ask": "ukhsa-18-months-book",
+              "raw_candidate": 0,
+              "verified_candidate": 0,
+              "deadline_contract": {
+                "reading": {
+                  "outcome": "wrong",
+                  "got": "to book an appointment"
+                },
+                "evidence": "not-judged",
+                "structure": {
+                  "outcome": "correct"
+                },
+                "resolution": {
+                  "outcome": "correct"
+                },
+                "policy": null
+              },
+              "raw": {
+                "kind": {
+                  "outcome": "wrong",
+                  "got": "attendance"
+                },
+                "party": {
+                  "outcome": "correct"
+                },
+                "deadline": {
+                  "outcome": "wrong",
+                  "got": "to book an appointment"
+                },
+                "amount": {
+                  "outcome": "correct"
+                },
+                "time": {
+                  "outcome": "unsupported"
+                },
+                "place": {
+                  "outcome": "unsupported"
+                },
+                "reference": {
+                  "outcome": "unsupported"
+                }
+              },
+              "verified": {
+                "kind": {
+                  "outcome": "wrong",
+                  "got": "attendance"
+                },
+                "party": {
+                  "outcome": "correct"
+                },
+                "deadline": {
+                  "outcome": "correct"
+                },
+                "amount": {
+                  "outcome": "correct"
+                },
+                "time": {
+                  "outcome": "unsupported"
+                },
+                "place": {
+                  "outcome": "unsupported"
+                },
+                "reference": {
+                  "outcome": "unsupported"
+                }
+              },
+              "evidence": {
+                "kind": "not-judged",
+                "party": "attached",
+                "deadline": "not-judged",
+                "amount": "not-judged",
+                "time": "not-judged",
+                "place": "not-judged",
+                "reference": "not-judged"
+              },
+              "whole_item_raw": false,
+              "whole_item_verified": false,
+              "missed_raw": false,
+              "missed_verified": false
+            }
+          ],
+          "invented_raw": 0,
+          "invented_verified": 0,
+          "negative_sites": [
+            {
+              "ask": "ukhsa-18-months-negative-0",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-1",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-2",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-4",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-5",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-6",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-7",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-8",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-9",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-10",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-11",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-12",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-13",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-14",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-15",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-16",
+              "invented_raw": 0,
+              "invented_verified": 0
+            },
+            {
+              "ask": "ukhsa-18-months-negative-17",
+              "invented_raw": 0,
+              "invented_verified": 0
+            }
+          ],
+          "task_slots": {
+            "expected": 1,
+            "raw_candidates": 1,
+            "verified_candidates": 1,
+            "missing_raw_slots": 0,
+            "missing_verified_slots": 0,
+            "unmatched_raw": [],
+            "unmatched_verified": [],
+            "semantic_action_coverage": "not-assessed"
+          }
+        },
+        "acquisition_errors": [],
+        "attribution_errors": [],
+        "execution_error": null
+      },
+      {
+        "case": "ukhsa-preschool",
+        "score": null,
+        "acquisition_errors": [
+          "acquisition differs from the complete ordered source: missing, reordered or text outside the authored passages"
+        ],
+        "attribution_errors": [],
+        "execution_error": "\u201cukhsa-preschool-page-1.png\u201d is not a kind of file this pack can read for \u201cletter\u201d (text/plain, text/markdown, application/pdf, image/jpeg, image/heic)"
+      }
+    ],
+    "exchanges": 2
+  },
+  "large": {
+    "schema": "kettle/large-acquisition@1",
+    "synthetic": true,
+    "rows": 2400,
+    "pages": 60,
+    "credits": 120,
+    "debits": 2280,
+    "net_pence": 613600,
+    "scope": "Statement parsing, no model accuracy or duration prediction; letter pack still limited to three pages",
+    "generator": "sha256:ad4e3f9ab85154fccbab7189ba2d856cb0126266885a538845a3f7ccc8b41946",
+    "files": {
+      "busy-year.csv": "sha256:8016b9b88ce445bb6cfc6d31f9bef1608a5cad70dd25f3f079f02941987d435e",
+      "busy-year.pdf": "sha256:04702aa516ae5b16864c9c01226cf3959bbcb2d1c9c47335cd77c0fd3d8cc46d"
+    }
+  }
+}

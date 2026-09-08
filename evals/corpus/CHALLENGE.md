@@ -1,9 +1,13 @@
 # Independent challenge hand-off
 
-Updated 7 September 2026. No independent challenge has been authored, frozen
-or measured yet. The diagnostic and format bundles are exposed development
-material. The lifecycle script below records authoring declarations and
-exposure; it does not certify independence or run a model.
+Updated 8 September 2026. [The first external-wording challenge](challenge-01/README.md)
+uses three UKHSA invitation templates, with authoring, annotation and rendering
+relationships stated separately. Its plan is `measurement-04-challenge.json`;
+the authoritative exposure state is `challenge-01/lifecycle.json`. The ordinary
+diagnostic and format bundles remain exposed development material. The
+lifecycle script records declarations and exposure; it does not certify
+independence. [Private field adjudication and exports](FIELD-EVIDENCE.md) now
+have a separate local workflow.
 
 ## Source inventory
 
@@ -86,7 +90,7 @@ target/debug/kettle corpus --corpus /path/to/separate-challenge.json \
 ```
 
 Choose the model, runtime, question and run budget before scheduling this.
-No real challenge or model measurement has been supplied by this implementation.
+The first supplied external challenge and its execution identity are linked above.
 The existing ordered `--bindings` contract is also available; acquisition
 mismatches and ambiguous attribution remain explicitly unscored.
 

@@ -70,9 +70,10 @@ fn same_tier(declared: &str, measured_params: &str) -> bool {
 const STAGED_STALE_FLOORS: &[(&str, &str, &str)] = &[
     (
         "app.kttl.letter-to-actions",
-        "pack 0.3.1: amount/list prompt fixes are unmeasured (evals/corpus/product-defects.md). \
-         The 0.3.0 v19 FAIL remains archived but is not current evidence. A local Metal \
-         row is still owed before the next app build; no diagnostic promotes this floor.",
+        "pack 0.3.0 restored after 0.3.1 and 0.3.2 failed the full pod bed \
+         (evals/corpus/measurement-02-pod-results.md). The committed v19 Metal row \
+         remains FAIL. Passing local evidence is still owed before the next app build; \
+         no diagnostic promotes this floor.",
         "2026-09-08",
     ),
     (

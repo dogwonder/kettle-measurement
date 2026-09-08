@@ -1,0 +1,40 @@
+{
+  "authoring": {
+    "author": "UK Health Security Agency (letter wording); Codex (placeholder adaptation, annotations and rendering)",
+    "relationship": "separate-author",
+    "source_families": [
+      {
+        "id": "ukhsa-childhood-vaccination-invitations",
+        "locator": "UKHSA published invitation templates, 24 December 2025 / 27 January 2026; original DOCX files pinned in generation.json",
+        "relationship": "external-source"
+      }
+    ]
+  },
+  "cases": 3,
+  "corpus_digest": "sha256:34825d0c75eb7b4f76fd0f19b17ab09147a941f2fb23584900561a6802fe762a",
+  "events": [
+    {
+      "at": "2026-09-08T20:56:06.513150+00:00",
+      "event": "frozen"
+    },
+    {
+      "answer_source": "model",
+      "at": "2026-09-08T21:00:13.446289+00:00",
+      "event": "exposed",
+      "evidence": "/Users/richholman/Localhost/app/kettle/evals/runs/issues-256-428-measurement/challenge",
+      "reason": "challenge execution reserved; failures also consume this selection"
+    }
+  ],
+  "schema": "kettle/challenge-lifecycle@1",
+  "selection": {
+    "exposure": "unexposed",
+    "fields": [
+      "kind",
+      "party",
+      "deadline",
+      "amount"
+    ],
+    "id": "external-ukhsa-invitations-2026-09-08",
+    "purpose": "challenge"
+  }
+}

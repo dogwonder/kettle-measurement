@@ -9,6 +9,35 @@ fn repo_root() -> PathBuf {
 }
 
 #[test]
+fn external_challenge_addresses_are_data_but_adjacent_code_is_scanned() {
+    let root =
+        std::env::temp_dir().join(format!("kettle-challenge-addresses-{}", std::process::id()));
+    let fixtures = root.join("evals/corpus/challenge-01/fixtures");
+    std::fs::create_dir_all(&fixtures).unwrap();
+    for name in ["corpus.json", "generation.json", "unexpected.json"] {
+        std::fs::write(
+            fixtures.join(name),
+            r#"{"url":"https://example.org/source"}"#,
+        )
+        .unwrap();
+    }
+    std::fs::write(
+        fixtures.join("client.ts"),
+        "fetch('https://example.org/data')",
+    )
+    .unwrap();
+    let found = call_sites(&root);
+    assert_eq!(
+        found.len(),
+        2,
+        "only the two named non-runtime data files are exempt: {found:?}"
+    );
+    assert!(found.iter().any(|s| s.file.ends_with("client.ts")));
+    assert!(found.iter().any(|s| s.file.ends_with("unexpected.json")));
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
 fn all_network_paths_are_declared_by_the_privacy_contract() {
     // The guard itself. Every network call site in source must appear
     // in `privacy-boundary.toml`, with a reason and a date — so adding

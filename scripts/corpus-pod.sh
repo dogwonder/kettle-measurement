@@ -644,7 +644,8 @@ PY
 # Exact replay of each selection with the arm's own pack into new
 # directories, then a comparison that requires identical per-case
 # scores, identical summaries, one exact request per recorded exchange
-# and zero legacy matches.
+# and zero legacy matches. Both selections must have nonempty original
+# and replay reports; missing evidence cannot establish exact replay.
 replay() {
   local arm="${1:?replay <arm>}"
   [[ -f "$FROZEN_REL" ]] || die "no frozen plan"
@@ -674,11 +675,13 @@ import json, os, sys
 armdir = sys.argv[1]; result = {}; ok = True
 for sel in ('diagnostic-01', 'product-regressions-01'):
     a = os.path.join(armdir, sel, 'report.json'); b = os.path.join(armdir, sel + '-replay', 'report.json')
-    if not (os.path.exists(a) and os.path.exists(b)): result[sel] = 'absent'; continue
+    if not (os.path.exists(a) and os.path.exists(b)):
+        result[sel] = 'absent'; ok = False; continue
     A = json.load(open(a)); B = json.load(open(b))
     diffs = []
+    if not A['cases'] or not B['cases']: diffs.append('no cases')
     for ca, cb in zip(A['cases'], B['cases']):
-        for k in ('score', 'raw', 'verified', 'acquisition_errors', 'attribution_errors', 'execution_error', 'coverage'):
+        for k in ('case', 'score', 'raw', 'verified', 'acquisition_errors', 'attribution_errors', 'execution_error', 'coverage'):
             if ca.get(k) != cb.get(k): diffs.append('%s.%s' % (ca['case'], k))
     if len(A['cases']) != len(B['cases']): diffs.append('case count')
     if A['summary'] != B['summary']: diffs.append('summary')

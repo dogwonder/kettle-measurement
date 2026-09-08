@@ -1,0 +1,15 @@
+{
+  "schema": "kettle/large-acquisition@1",
+  "synthetic": true,
+  "rows": 2400,
+  "pages": 60,
+  "credits": 120,
+  "debits": 2280,
+  "net_pence": 613600,
+  "scope": "Statement parsing, no model accuracy or duration prediction; letter pack still limited to three pages",
+  "generator": "sha256:ad4e3f9ab85154fccbab7189ba2d856cb0126266885a538845a3f7ccc8b41946",
+  "files": {
+    "busy-year.csv": "sha256:8016b9b88ce445bb6cfc6d31f9bef1608a5cad70dd25f3f079f02941987d435e",
+    "busy-year.pdf": "sha256:04702aa516ae5b16864c9c01226cf3959bbcb2d1c9c47335cd77c0fd3d8cc46d"
+  }
+}

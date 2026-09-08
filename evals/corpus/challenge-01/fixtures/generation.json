@@ -1,0 +1,39 @@
+{
+  "schema": "kettle/external-template-generation@1",
+  "generator": "sha256:8bc50c268873bbf227330aa1160f77c5fb217b302e0d5e4c2d5802f09a79571f",
+  "sources": [
+    {
+      "file": "ukhsa-12-months.docx",
+      "url": "https://assets.publishing.service.gov.uk/media/6978aad6d6ab92f1d3a4d685/Invitation_letter_to_children_aged_12_months_template.docx",
+      "digest": "sha256:f752450d132a6657c660c587449f046df7e2cfbb4c72dc0e4da7f49b40ea13bd"
+    },
+    {
+      "file": "ukhsa-18-months.docx",
+      "url": "https://assets.publishing.service.gov.uk/media/694ac8f93022cdf03a0eb92e/Vaccination_invitation_letter_children_aged_18_months_old_template_final.docx",
+      "digest": "sha256:120554cc8ace98c312eca283945e1d06361b146b604c0c6a42692eeb11258404"
+    },
+    {
+      "file": "ukhsa-preschool.docx",
+      "url": "https://assets.publishing.service.gov.uk/media/694ac91f1a2e540ccd8a551f/Pre-school_invitation_letter_children_aged_3_years_four_months_old_template.docx",
+      "digest": "sha256:949252909c2a674ed6cc4e53e91e873c747503c062804ce73b215aaebaddb935"
+    }
+  ],
+  "licence": "UKHSA Crown copyright, Open Government Licence v3.0; no logos reproduced",
+  "dependencies": {
+    "reportlab": "4.4.10",
+    "pypdfium2": "5.2.0"
+  },
+  "files": {
+    "bindings.json": "sha256:7e85866acfdefd1854bded46643f643976d15dffa2d6560d2a06522719714895",
+    "corpus.json": "sha256:34825d0c75eb7b4f76fd0f19b17ab09147a941f2fb23584900561a6802fe762a",
+    "ukhsa-12-months-page-1.png": "sha256:89e17638364d80e4bfce37eb0e2fa30d53cdabc65238ca574c1b15efa30a5baf",
+    "ukhsa-12-months.pdf": "sha256:b161ad85a8b2e5897aee841481fa6416702dac4f83577c509249eb31fbab50dd",
+    "ukhsa-12-months.txt": "sha256:3e1dbe696d8a27673e3d96b1414a1be4dd8a7eada9f30ec0493c75619ba76a2f",
+    "ukhsa-18-months-page-1.png": "sha256:6f65dcfeec731b24d8aa78a818c2dcd81f363aac8aa1916a62b97192ec4ca667",
+    "ukhsa-18-months.pdf": "sha256:deba13e28498d3a20a59fa49f47a4b98376814894c0e8c93422c447abfe3cf21",
+    "ukhsa-18-months.txt": "sha256:2c21394ae45a768c62277d41e332a18a9adb51511a74643c6e8e8edb5eca0dc5",
+    "ukhsa-preschool-page-1.png": "sha256:4732e6c2e061c020353e939de8e726fccd39e16e5eeab0547f0dec0e97196457",
+    "ukhsa-preschool.pdf": "sha256:0e8b131b030c1b5458e16baffdb5a097f685e618a82ffb28e83d9cce914bc114",
+    "ukhsa-preschool.txt": "sha256:1de74e923c533707ea077389bafbd97b7236d66f0eb00b9c04140f78ebba6998"
+  }
+}

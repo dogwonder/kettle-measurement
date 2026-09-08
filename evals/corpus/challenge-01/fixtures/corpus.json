@@ -1,0 +1,618 @@
+{
+  "schema_version": 1,
+  "slice": "external-ukhsa-01",
+  "selection": {
+    "id": "external-ukhsa-invitations-2026-09-08",
+    "purpose": "challenge",
+    "exposure": "unexposed",
+    "fields": [
+      "kind",
+      "party",
+      "deadline",
+      "amount"
+    ]
+  },
+  "facts": [
+    {
+      "id": "practice",
+      "field": "party",
+      "status": "stated",
+      "value": {
+        "kind": "text",
+        "text": "Brookmere Practice"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "ukhsa-12-months",
+      "document_kind": "letter",
+      "passages": [
+        "Brookmere Practice",
+        "8 September 2026",
+        "Dear Alex",
+        "Robin’s 12-month vaccinations are now due. Please phone 01632 960123 to book an appointment.",
+        "Vaccines are the best and safest way to protect your child from a range of infectious diseases. It’s important that your child has all the recommended vaccines at the right time to offer them the best protection.",
+        "Your child needs three vaccinations now:",
+        "The MenB booster vaccine. This vaccine protects against meningococcal group B bacteria (germs) which cause meningitis and septicaemia. The MenB vaccine is called Bexsero; further information is available in the Patient Information Leaflet.",
+        "The PCV booster vaccine. This vaccine protects against pneumococcal bacteria which cause meningitis, septicaemia (blood poisoning), pneumonia (lung infection), and ear infections. The PCV vaccine is called Prevenar 13; further information is available in the Patient Information Leaflet.",
+        "The first dose of MMRV vaccine. This vaccine protects against measles, mumps, rubella and chickenpox (also called varicella). There are 2 MMRV vaccines which work equally well, called ProQuad and Priorix Tetra. ProQuad contains porcine gelatine and Priorix Tetra does not. If you want your child to have the vaccine without porcine gelatine, ask your practice nurse or GP. Further information is available in the patient information leaflets:",
+        "ProQuad",
+        "Priorix Tetra",
+        "If your child missed any of their routine vaccine appointments so far, please contact your GP practice who will check what they have missed and explain how they will bring your child up to date as soon as possible.",
+        "The vaccinations are free of charge.",
+        "We look forward to seeing Robin soon.",
+        "Yours sincerely,",
+        "Rowan Vale",
+        "Practice Manager",
+        "For more information please read https://www.gov.uk/government/publications/immunisations-between-12-and-13-months-of-age",
+        "As a reminder, you can use this section to record the date and time of your child’s vaccination appointment:",
+        "on: _____/_____/_____ at _________am/pm"
+      ],
+      "spans": [
+        {
+          "fact": "practice",
+          "passage": 0,
+          "text": "Brookmere Practice"
+        }
+      ],
+      "asks": [
+        {
+          "id": "ukhsa-12-months-book",
+          "kind": "response",
+          "status": "obligation",
+          "passage": 3,
+          "deadline_at": 3,
+          "deadline_words": "",
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          },
+          "fields": {
+            "party": "practice",
+            "deadline": null,
+            "amount": null
+          }
+        },
+        {
+          "id": "ukhsa-12-months-negative-0",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 0,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-1",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 1,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-2",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 2,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-4",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 4,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-5",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 5,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-6",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 6,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-7",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 7,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-8",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 8,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-9",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 9,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-10",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 10,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-11",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 11,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-12",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 12,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-13",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 13,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-14",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 14,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-15",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 15,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-16",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 16,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-17",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 17,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-18",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 18,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-12-months-negative-19",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 19,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        }
+      ]
+    },
+    {
+      "id": "ukhsa-18-months",
+      "document_kind": "letter",
+      "passages": [
+        "Brookmere Practice",
+        "8 September 2026",
+        "Dear Alex",
+        "Robin’s18 months vaccinations are now due. Please phone 01632 960123 to book an appointment.",
+        "Vaccines are the best and safest way to protect your child from a range of infectious diseases. Its important that your child has all the recommended vaccines at the right time to offer them the best protection.",
+        "Your child needs two vaccinations now:",
+        "The combined 6 in 1 vaccine. This vaccine protects against diphtheria, pertussis, polio, tetanus, Haemophilus influenzae B (Hib) and hepatitis B. There are two vaccines which work equally well. Further information is available in the Patient Information Leaflets.",
+        "A second dose of MMRV vaccine. This vaccine protects against measles, mumps, rubella and chickenpox (also called varicella). There are two MMRV vaccines which work equally well, called ProQuad and Priorix Tetra. ProQuad contains porcine gelatine and Priorix Tetra does not. If you want your child to have the vaccine without porcine gelatine, ask your practice nurse or GP. Further information is available in the patient information leaflets:",
+        "You can read the guide to the MMRV vaccine here: https://www.gov.uk/government/publications/mmrv-vaccination",
+        "If your child missed any of their routine vaccine appointments so far please contact your GP practice who will check what they have missed and explain how they will bring your child up to date as soon as possible.",
+        "The vaccinations are free of charge.",
+        "We look forward to seeing Robin soon.",
+        "Yours sincerely,",
+        "Rowan Vale",
+        "Practice Manager",
+        "For more information please read https://www.gov.uk/government/publications/vaccinations-for-children-aged-18-months",
+        "As a reminder, you can use this section to record the date and time of your child’s vaccination appointment:",
+        "on: _____/_____/_____ at _________am/pm"
+      ],
+      "spans": [
+        {
+          "fact": "practice",
+          "passage": 0,
+          "text": "Brookmere Practice"
+        }
+      ],
+      "asks": [
+        {
+          "id": "ukhsa-18-months-book",
+          "kind": "response",
+          "status": "obligation",
+          "passage": 3,
+          "deadline_at": 3,
+          "deadline_words": "",
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          },
+          "fields": {
+            "party": "practice",
+            "deadline": null,
+            "amount": null
+          }
+        },
+        {
+          "id": "ukhsa-18-months-negative-0",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 0,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-1",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 1,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-2",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 2,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-4",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 4,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-5",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 5,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-6",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 6,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-7",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 7,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-8",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 8,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-9",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 9,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-10",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 10,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-11",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 11,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-12",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 12,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-13",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 13,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-14",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 14,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-15",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 15,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-16",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 16,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-18-months-negative-17",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 17,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        }
+      ]
+    },
+    {
+      "id": "ukhsa-preschool",
+      "document_kind": "letter",
+      "passages": [
+        "Brookmere Practice",
+        "8 September 2026",
+        "Dear Alex",
+        "Robin’s pre-school vaccinations are now due. Please phone 01632 960123 to book an appointment.",
+        "Vaccines are the best and safest way to protect your child from a range of infectious diseases. Its important that your child has all the recommended vaccines at the right time to offer them the best protection. Your child needs two pre-school vaccinations:",
+        "the combined vaccine that protects your child against diphtheria, tetanus, pertussis and polio. This vaccine is called Repevax and does not contain gelatine. Further information is available in the guide to vaccinations for pre-school children l",
+        "A dose of MMRV vaccine. This vaccine protects against measles, mumps, rubella and chickenpox (also called varicella). In the UK we have two MMRV vaccines which work equally well. ProQuad contains porcine gelatine (gelatine from pigs) and Priorix Tetra does not. If you want your child to have the vaccine without porcine gelatine, ask your practice nurse or GP.",
+        "For more information please read https://www.gov.uk/government/publications/pre-school-vaccinations-a-guide-to-vaccinations-from-2-to-5-years",
+        "If your child missed any of their routine vaccine appointments so far please contact your GP practice who will check what they have missed and explain how they will bring your child up to date as soon as possible.",
+        "The vaccinations are free of charge.",
+        "We look forward to seeing Robin soon.",
+        "Yours sincerely,",
+        "Rowan Vale",
+        "Practice Manager",
+        "For more information please read https://www.gov.uk/government/publications/pre-school-vaccinations-a-guide-to-vaccinations-from-2-to-5-years",
+        "As a reminder, you can use this section to record the date and time of your child’s vaccination appointment:",
+        "on: _____/_____/_____ at _________am/pm"
+      ],
+      "spans": [
+        {
+          "fact": "practice",
+          "passage": 0,
+          "text": "Brookmere Practice"
+        }
+      ],
+      "asks": [
+        {
+          "id": "ukhsa-preschool-book",
+          "kind": "response",
+          "status": "obligation",
+          "passage": 3,
+          "deadline_at": 3,
+          "deadline_words": "",
+          "deadline_read": {
+            "count": 0,
+            "unit": "none",
+            "qualifier": "none",
+            "counts_from": "none"
+          },
+          "fields": {
+            "party": "practice",
+            "deadline": null,
+            "amount": null
+          }
+        },
+        {
+          "id": "ukhsa-preschool-negative-0",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 0,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-1",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 1,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-2",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 2,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-4",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 4,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-5",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 5,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-6",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 6,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-7",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 7,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-8",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 8,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-9",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 9,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-10",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 10,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-11",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 11,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-12",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 12,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-13",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 13,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-14",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 14,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-15",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 15,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        },
+        {
+          "id": "ukhsa-preschool-negative-16",
+          "kind": "response",
+          "status": "no-obligation",
+          "passage": 16,
+          "fields": {},
+          "reason": "Background, optional information/conditional advice, signature or a blank reminder; no additional current ask."
+        }
+      ]
+    }
+  ],
+  "relations": [],
+  "provenance": {
+    "synthetic": true,
+    "independent": true,
+    "authoring": {
+      "author": "UK Health Security Agency (letter wording); Codex (placeholder adaptation, annotations and rendering)",
+      "relationship": "separate-author",
+      "source_families": [
+        {
+          "id": "ukhsa-childhood-vaccination-invitations",
+          "relationship": "external-source",
+          "locator": "UKHSA published invitation templates, 24 December 2025 / 27 January 2026; original DOCX files pinned in generation.json"
+        }
+      ]
+    },
+    "limitations": "One external wording family, three related templates. Kettle's developer authors the annotations and plain layout; not independent adjudication, a new camera layout family or proof of generalisation. Blank reminders normalised to one wording; no clinical recommendations evaluated."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "ukhsa-12-months": {
+    "inputs": {
+      "letter": [
+        "ukhsa-12-months.txt"
+      ]
+    }
+  },
+  "ukhsa-18-months": {
+    "inputs": {
+      "letter": [
+        "ukhsa-18-months.pdf"
+      ]
+    }
+  },
+  "ukhsa-preschool": {
+    "inputs": {
+      "letter": [
+        "ukhsa-preschool-page-1.png"
+      ]
+    }
+  }
+}

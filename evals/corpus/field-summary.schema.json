@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Privacy-minimised field evidence aggregates; no content, identifiers or timing",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "observations",
+    "unreviewed",
+    "missing_claims",
+    "discoveries_without_reproducer",
+    "discoveries_without_issue",
+    "outcomes",
+    "formats",
+    "structures",
+    "coverage"
+  ],
+  "properties": {
+    "schema": {
+      "const": "kettle/field-summary@1"
+    },
+    "observations": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unreviewed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "missing_claims": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "discoveries_without_reproducer": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "discoveries_without_issue": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "outcomes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "correct": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "wrong": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "incomplete": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unsupported": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "uncheckable": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "correct",
+        "wrong",
+        "incomplete",
+        "unsupported",
+        "uncheckable"
+      ]
+    },
+    "formats": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pdf": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "photo": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mixed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "structures": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "prose": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "table": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "list": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "multi-page": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mixed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ask-presence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conditional-ask": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "amount-selection": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "date-reading": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "party-reading": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidence-location": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "page-order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "acquisition": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "other": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

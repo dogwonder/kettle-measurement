@@ -51,6 +51,9 @@ pod-*.tgz
 *.private.pdf
 *.private.txt
 *.private.md
+*.private.json
+# Field observations include paths, adjudications and private run provenance.
+*.private/
 *.private.jpg
 *.private.jpeg
 *.private.png

@@ -163,6 +163,14 @@
 # `vendor-sidecar.sh` downloads llama-server from GitHub releases, on a
 # developer's machine, and is never packaged. #233 puts development-only
 # tooling out of scope; that is the entry it would otherwise have.
+#
+# Two exact non-runtime data files, added 8 September 2026 for #428:
+# `evals/corpus/challenge-01/fixtures/corpus.json` contains public UKHSA
+# letter wording, including printed information URLs; `generation.json`
+# beside it records the source download locators. The corpus reader does
+# not fetch those addresses, and neither file is in the Tauri bundle.
+# The exclusion names only these files, not the directory. A regression
+# check requires adjacent code and other JSON files to remain scanned.
 
 
 # ---------------------------------------------------------------------

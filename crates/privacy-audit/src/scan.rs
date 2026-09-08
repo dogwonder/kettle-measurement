@@ -83,6 +83,15 @@ const NOT_SOURCE: &[&str] = &[
     "app/mini-templates",
 ];
 
+// Non-runtime data, not a directory exclusion. The corpus reader consumes
+// authored passages/facts; it never fetches their printed addresses. The
+// generation receipt is provenance only. Neither file is bundled by Tauri.
+// Keep neighbouring code and new files in this directory subject to scanning.
+const EXTERNAL_CHALLENGE_DATA: &[&str] = &[
+    "evals/corpus/challenge-01/fixtures/corpus.json",
+    "evals/corpus/challenge-01/fixtures/generation.json",
+];
+
 /// How a file's comments are written, so a URL in prose is not read as
 /// a URL the application fetches.
 #[derive(Clone, Copy)]
@@ -166,6 +175,9 @@ fn walk(root: &Path, dir: &Path, found: &mut Vec<CallSite>) {
         let Some(rel) = relative(root, &path) else {
             continue;
         };
+        if path.is_file() && EXTERNAL_CHALLENGE_DATA.contains(&rel.as_str()) {
+            continue;
+        }
         if NOT_SOURCE.iter().any(|skip| {
             rel == *skip
                 || rel.starts_with(&format!("{skip}/"))
